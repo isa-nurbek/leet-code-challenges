@@ -26,7 +26,11 @@ def isPalindrome(string):
     return string == reversed_string
 
 
-print(isPalindrome("abcdcba"))  # True
+print(isPalindrome("madam"))  # True
+print(isPalindrome("hello"))  # False
+print(isPalindrome("a"))  # True
+print(isPalindrome(""))  # True
+print(isPalindrome("Madam"))  # False
 
 
 # Big O:
