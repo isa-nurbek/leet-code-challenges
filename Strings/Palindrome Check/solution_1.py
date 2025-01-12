@@ -19,6 +19,7 @@ Optimal Space & Time Complexity:
 """
 
 
+# O(n^2)time | O(n) space
 def isPalindrome(string):
     reversed_string = ""
     for i in reversed(range(len(string))):
@@ -26,6 +27,7 @@ def isPalindrome(string):
     return string == reversed_string
 
 
+print(isPalindrome("abcdcba"))  # True
 print(isPalindrome("madam"))  # True
 print(isPalindrome("hello"))  # False
 print(isPalindrome("a"))  # True
