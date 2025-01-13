@@ -27,7 +27,6 @@ def isPalindrome(string):
     return string == reversed_string
 
 
-print(isPalindrome("abcdcba"))  # True
 print(isPalindrome("madam"))  # True
 print(isPalindrome("hello"))  # False
 print(isPalindrome("a"))  # True
@@ -49,6 +48,16 @@ print(isPalindrome("Madam"))  # False
    - The function is case-sensitive; for example, `"Madam"` and `"madam"` are not considered palindromes.
    - Whitespace and punctuation are also taken into account, so `"A man, a plan, a canal,
    Panama"` will not be considered a palindrome unless pre-processed.
+
+---
+
+3. ### Improvements
+Instead of building `reversed_string` manually, Python provides a more concise way to reverse a string:
+```
+def isPalindrome(string):
+    return string == string[::-1]
+```
+This uses slicing with a step of `-1` to reverse the string, making the code more efficient and readable.
 
 """
 
