@@ -36,11 +36,11 @@ print(isPalindrome("Madam"))  # False
 """
 
 ### Complexity Analysis
-#### **Time Complexity**: (O(n)
+#### **Time Complexity**: O(n)
 - Each recursive call compares a pair of characters and increments `i` by 1.
 - In the worst case, the function makes n/2 recursive calls, where `n` is the length of the string.
 
-#### **Space Complexity**: (O(n)
+#### **Space Complexity**: O(n)
 - The recursive calls are stored on the call stack, and in the worst case, there are n/2 calls.
 
 ### Key Points
@@ -55,14 +55,14 @@ print(isPalindrome("Madam"))  # False
 ### Explanation of the Code:
 
 #### 1. **Function Definition and Base Case**
-```python
+```
 def isPalindrome(string, i=0):
 ```
 - This function checks if a given `string` is a palindrome using recursion.
 - The optional parameter `i` starts at 0 and tracks the current index being checked from the start of the string.
 
 #### 2. **Logic to Determine Corresponding Characters**
-```python
+```
 j = len(string) - 1 - i
 ```
 - `j` is the index of the character being checked from the end of the string. It is computed by subtracting `i` from `len(string) - 1`.
@@ -71,14 +71,14 @@ j = len(string) - 1 - i
   - When `i = 1`, `j = 3` (comparing second and second-to-last characters).
 
 #### 3. **Base Case for Recursion**
-```python
+```
 return True if i >= j
 ```
 - If `i` is greater than or equal to `j`, all characters have been compared, and the function concludes the string is a palindrome.
 - For example, in the case of `"madam"`, the recursion stops after comparing characters at indices `2` and `2` (middle of the string).
 
 #### 4. **Recursive Step**
-```python
+```
 else string[i] == string[j] and isPalindrome(string, i + 1)
 ```
 - The function checks if the characters at indices `i` and `j` are equal:
