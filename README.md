@@ -6,9 +6,9 @@ Welcome to my LeetCode and AlgoExpert solutions repository! 🎯 This repository
 
 The purpose of this repository is to:
 
--   Track my progress in solving problems from **LeetCode** and **AlgoExpert**.
--   Share solutions with clear explanations and well-commented code.
--   Serve as a resource for others preparing for technical interviews.
+- Track my progress in solving problems from **LeetCode** and **AlgoExpert**.
+- Share solutions with clear explanations and well-commented code.
+- Serve as a resource for others preparing for technical interviews.
 
 ## 🗂️ Structure
 
@@ -16,39 +16,114 @@ The repository is organized as follows:
 
 ```
 📂 LeetCode/AlgoExpert
-  ├── Strings/
-  ├── Arrays/
-  ├── Recursion/
-  ├── Linked Lists/
-  ├── Stacks/
-  ├── Graphs/
-  ├── Heaps/
-  ├── Dynamic Programming/
-  ├── Searching/
-  ├── Sorting/
-  ├── Binary Trees/
-  ├── Binary Search Trees/
-  ├── Greedy Algorithms/
-  ├── Famous Algorithms/
-  ├── Tries/
+├── Strings
+    ├── Problem Name
+        ├── Problem_Description.md
+        ├── solution_1.py
+        ├── solution_2.py
+        ├── solution_3.py
+├── Arrays
+    ├── Problem Name
+        ├── Problem_Description.md
+        ├── solution_1.py
+        ├── solution_2.py
+        ├── solution_3.py
+├── Recursion
+    ├── Problem Name
+        ├── Problem_Description.md
+        ├── solution_1.py
+        ├── solution_2.py
+        ├── solution_3.py
+├── Linked Lists
+    ├── Problem Name
+        ├── Problem_Description.md
+        ├── solution_1.py
+        ├── solution_2.py
+        ├── solution_3.py
+├── Stacks
+    ├── Problem Name
+        ├── Problem_Description.md
+        ├── solution_1.py
+        ├── solution_2.py
+        ├── solution_3.py
+├── Graphs
+    ├── Problem Name
+        ├── Problem_Description.md
+        ├── solution_1.py
+        ├── solution_2.py
+        ├── solution_3.py
+├── Heaps
+    ├── Problem Name
+        ├── Problem_Description.md
+        ├── solution_1.py
+        ├── solution_2.py
+        ├── solution_3.py
+├── Dynamic Programming
+    ├── Problem Name
+        ├── Problem_Description.md
+        ├── solution_1.py
+        ├── solution_2.py
+        ├── solution_3.py
+├── Searching
+    ├── Problem Name
+        ├── Problem_Description.md
+        ├── solution_1.py
+        ├── solution_2.py
+        ├── solution_3.py
+├── Sorting
+    ├── Problem Name
+        ├── Problem_Description.md
+        ├── solution_1.py
+        ├── solution_2.py
+        ├── solution_3.py
+├── Binary Trees
+    ├── Problem Name
+        ├── Problem_Description.md
+        ├── solution_1.py
+        ├── solution_2.py
+        ├── solution_3.py
+├── Binary Search Trees
+    ├── Problem Name
+        ├── Problem_Description.md
+        ├── solution_1.py
+        ├── solution_2.py
+        ├── solution_3.py
+├── Greedy Algorithms
+    ├── Problem Name
+        ├── Problem_Description.md
+        ├── solution_1.py
+        ├── solution_2.py
+        ├── solution_3.py
+├── Famous Algorithms
+    ├── Problem Name
+        ├── Problem_Description.md
+        ├── solution_1.py
+        ├── solution_2.py
+        ├── solution_3.py
+├── Tries
+    ├── Problem Name
+        ├── Problem_Description.md
+        ├── solution_1.py
+        ├── solution_2.py
+        ├── solution_3.py
 README.md
 ```
 
 Each folder contains solutions categorized by group. Each solution file includes:
 
--   Problem description (brief overview).
--   Time and space complexity analysis.
--   Solution approach.
+- Problem description (brief overview).
+- Time and space complexity analysis.
+- Several solution approach (from worst case to best case).
 
 ## 🛠️ Technologies Used
 
--   **Programming Languages:** Python
--   **Tools:** Visual Studio Code, Git, LeetCode, AlgoExpert
+- **Programming Languages:** Python
+- **Tools:** Visual Studio Code, Git, LeetCode, AlgoExpert
 
 ## 📝 Features
 
--   📚 **Comprehensive Solutions**: Detailed solutions to problems with comments for better understanding.
--   📊 **Complexity Analysis**: Analysis of the time and space complexity for each solution.
+- 📚 **Comprehensive Solutions**: Detailed solutions to problems with comments for better understanding.
+- 📊 **Complexity Analysis**: Analysis of the time and space complexity for each solution.
 
 ## 🤝 Contributions
 
@@ -68,6 +143,6 @@ Feel free to fork this repository, submit pull requests, or open issues to sugge
 
 ## 🔗 Resources
 
--   [LeetCode](https://leetcode.com/)
--   [AlgoExpert](https://www.algoexpert.io/)
--   [Big-O Complexity Cheat Sheet](https://www.bigocheatsheet.com/)
+- [LeetCode](https://leetcode.com/)
+- [AlgoExpert](https://www.algoexpert.io/)
+- [Big-O Complexity Cheat Sheet](https://www.bigocheatsheet.com/)
