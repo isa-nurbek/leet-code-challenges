@@ -13,7 +13,7 @@ string = "abcdcba"
 ## Sample Output
 
 ```plaintext
-true // it's written the same forward and backward
+true // it's written the same forward and backward.
 ```
 
 ## Optimal Space & Time Complexity
