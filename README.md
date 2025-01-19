@@ -123,7 +123,7 @@ Feel free to fork this repository, submit pull requests, or open issues to sugge
     - Dynamic Programming
     - Backtracking
     - Recursion
-    - System Design
+    - Greedy Algorithms and etc.
 3. Write clean, efficient, and maintainable code.
 
 ## 🔗 Resources
