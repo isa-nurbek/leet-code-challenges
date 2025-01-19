@@ -36,11 +36,11 @@ def get_new_letter(letter, key):
     )
 
 
-def caesar_cipher_encryptor(string, key):
+def caesar_cipher_encryptor(str, key):
     new_letters = []
     new_key = key % 26
 
-    for letter in string:
+    for letter in str:
         new_letters.append(get_new_letter(letter, new_key))
     return "".join(new_letters)
 
@@ -69,7 +69,7 @@ and the `caesar_cipher_encryptor` function.
    - Modulo operation takes **O(1)** time.
 
 2. **Iterating through the string**:
-   - The function iterates through each character in the input `string`. If the string has `n` characters,
+   - The function iterates through each character in the input `str`. If the string has `n` characters,
    this loop runs `n` times.
    - For each character, it calls `get_new_letter`, which takes **O(1)** time.
 
@@ -129,11 +129,11 @@ wraps around to the start of the alphabet if it exceeds `'z'`.
 ### **Function 2: `caesar_cipher_encryptor`**
 
 ```
-def caesar_cipher_encryptor(string, key):
+def caesar_cipher_encryptor(str, key):
     new_letters = []
     new_key = key % 26
 
-    for letter in string:
+    for letter in str:
         new_letters.append(get_new_letter(letter, new_key))
     return "".join(new_letters)
 ```
@@ -142,7 +142,7 @@ def caesar_cipher_encryptor(string, key):
 This function applies the Caesar cipher to an entire string, shifting all characters by a specified key.
 
 - **Input Parameters:**
-  - `string`: A string of lowercase letters to be encrypted.
+  - `str`: A string of lowercase letters to be encrypted.
   - `key`: An integer representing how many positions to shift the letters.
 
 - **Explanation of Logic:**
