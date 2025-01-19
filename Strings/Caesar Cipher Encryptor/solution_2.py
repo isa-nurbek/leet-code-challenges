@@ -33,12 +33,12 @@ def get_new_letter(letter, key, alphabet):
     return alphabet[new_letter_code % 26]
 
 
-def caesar_cipher_encryptor(string, key):
+def caesar_cipher_encryptor(str, key):
     new_letters = []
     new_key = key % 26
     alphabet = list("abcdefghijklmnopqrstuvwxyz")
 
-    for letter in string:
+    for letter in str:
         new_letters.append(get_new_letter(letter, new_key, alphabet))
     return "".join(new_letters)
 
@@ -96,10 +96,10 @@ in the alphabet by a fixed number of places. Here's an in-depth explanation of h
 
 ---
 
-#### 2. **`caesar_cipher_encryptor(string, key)`**
+#### 2. **`caesar_cipher_encryptor(str, key)`**
    - **Purpose:** Encrypts a string using the Caesar cipher with the given key.
    - **Parameters:**
-     - `string`: The input string to be encrypted.
+     - `str`: The input string to be encrypted.
      - `key`: The shift value for the cipher.
 
    - **Process:**
