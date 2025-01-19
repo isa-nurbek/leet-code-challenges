@@ -19,93 +19,78 @@ The repository is organized as follows:
 ├── Strings
     ├── Problem Name
         ├── Problem_Description.md
-        ├── solution_1.py
-        ├── solution_2.py
-        ├── solution_3.py
+        ├── solution.py
+
 ├── Arrays
     ├── Problem Name
         ├── Problem_Description.md
-        ├── solution_1.py
-        ├── solution_2.py
-        ├── solution_3.py
+        ├── solution.py
+
 ├── Recursion
     ├── Problem Name
         ├── Problem_Description.md
-        ├── solution_1.py
-        ├── solution_2.py
-        ├── solution_3.py
+        ├── solution.py
+
 ├── Linked Lists
     ├── Problem Name
         ├── Problem_Description.md
-        ├── solution_1.py
-        ├── solution_2.py
-        ├── solution_3.py
+        ├── solution.py
+
 ├── Stacks
     ├── Problem Name
         ├── Problem_Description.md
-        ├── solution_1.py
-        ├── solution_2.py
-        ├── solution_3.py
+        ├── solution.py
+
 ├── Graphs
     ├── Problem Name
         ├── Problem_Description.md
-        ├── solution_1.py
-        ├── solution_2.py
-        ├── solution_3.py
+        ├── solution.py
+
 ├── Heaps
     ├── Problem Name
         ├── Problem_Description.md
-        ├── solution_1.py
-        ├── solution_2.py
-        ├── solution_3.py
+        ├── solution.py
+
 ├── Dynamic Programming
     ├── Problem Name
         ├── Problem_Description.md
-        ├── solution_1.py
-        ├── solution_2.py
-        ├── solution_3.py
+        ├── solution.py
+
 ├── Searching
     ├── Problem Name
         ├── Problem_Description.md
-        ├── solution_1.py
-        ├── solution_2.py
-        ├── solution_3.py
+        ├── solution.py
+
 ├── Sorting
     ├── Problem Name
         ├── Problem_Description.md
-        ├── solution_1.py
-        ├── solution_2.py
-        ├── solution_3.py
+        ├── solution.py
+
 ├── Binary Trees
     ├── Problem Name
         ├── Problem_Description.md
-        ├── solution_1.py
-        ├── solution_2.py
-        ├── solution_3.py
+        ├── solution.py
+
 ├── Binary Search Trees
     ├── Problem Name
         ├── Problem_Description.md
-        ├── solution_1.py
-        ├── solution_2.py
-        ├── solution_3.py
+        ├── solution.py
+
 ├── Greedy Algorithms
     ├── Problem Name
         ├── Problem_Description.md
-        ├── solution_1.py
-        ├── solution_2.py
-        ├── solution_3.py
+        ├── solution.py
+
 ├── Famous Algorithms
     ├── Problem Name
         ├── Problem_Description.md
-        ├── solution_1.py
-        ├── solution_2.py
-        ├── solution_3.py
+        ├── solution.py
+
 ├── Tries
     ├── Problem Name
         ├── Problem_Description.md
-        ├── solution_1.py
-        ├── solution_2.py
-        ├── solution_3.py
+        ├── solution.py
+
 README.md
 ```
 
