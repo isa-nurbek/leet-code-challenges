@@ -150,6 +150,6 @@ one by one, incrementing `seq_idx` every time a match is found.
 
 ### Conclusion:
 The function effectively checks if a given `sequence` is a subsequence of the `array` by iterating through the
-array and matching elements in order. The time complexity is linear, O(n), and the space complexity is constant, O(1).
+array and matching elements in order. The time complexity is linear - O(n), and the space complexity is constant - O(1).
 
 """
