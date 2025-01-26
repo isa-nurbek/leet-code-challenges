@@ -549,7 +549,7 @@ If `string` contains no characters in `potential_common_characters`, all charact
 
 ---
 
-### **Code Walkthrough**
+### **Test Cases**
 
 #### **Input 1: `common_characters(["abc", "bcd", "cbad"])`**
 1. **Find smallest string:**  
