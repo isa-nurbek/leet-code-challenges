@@ -48,6 +48,8 @@ results = [0, 0, 1]
 `O(n)` time | `O(k)` space - where `n` is the number of competitions and `k` is the number of teams.
 
 """
+# Code:
+
 
 HOME_TEAM_WON = 1  # Constant indicating that the home team won the match
 
