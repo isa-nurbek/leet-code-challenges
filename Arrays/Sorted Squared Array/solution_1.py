@@ -25,6 +25,8 @@ array = [1, 2, 3, 5, 6, 8, 9]
 
 """
 
+# Code:
+
 
 # O(n log n) time | O(n) space
 def sorted_squared_array(array):
