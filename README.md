@@ -26,6 +26,11 @@ The repository is organized as follows:
         ├── Problem_Description.md
         ├── solution.py
 
+├── Dictionaries 
+    ├── Problem Name
+        ├── Problem_Description.md
+        ├── solution.py
+
 ├── Recursion
     ├── Problem Name
         ├── Problem_Description.md
