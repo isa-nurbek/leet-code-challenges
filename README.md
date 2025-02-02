@@ -16,6 +16,7 @@ The repository is organized as follows:
 
 ```
 📂 LeetCode/AlgoExpert
+
 ├── Strings
     ├── Problem Name
         ├── Problem_Description.md
