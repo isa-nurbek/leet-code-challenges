@@ -108,8 +108,8 @@ Each folder contains solutions categorized by group. Each solution file includes
 
 ## 🛠️ Technologies Used
 
-- **Programming Languages:** Python
-- **Tools:** Visual Studio Code, Git, LeetCode, AlgoExpert
+- **Programming Languages:** Python.
+- **Tools:** Visual Studio Code, Git, LeetCode, AlgoExpert.
 
 ## 📝 Features
 
