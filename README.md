@@ -22,12 +22,12 @@ The repository is organized as follows:
         ├── Problem_Description.md
         ├── solution.py
 
-├── Arrays
+├── Arrays:
     ├── Problem Name
         ├── Problem_Description.md
         ├── solution.py
 
-├── Dictionaries 
+├── Dictionaries:
     ├── Problem Name
         ├── Problem_Description.md
         ├── solution.py
