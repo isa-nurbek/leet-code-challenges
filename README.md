@@ -42,12 +42,12 @@ The repository is organized as follows:
         ├── Problem_Description.md
         ├── solution.py
 
-├── Stacks
+├── Stacks:
     ├── Problem Name
         ├── Problem_Description.md
         ├── solution.py
 
-├── Graphs
+├── Graphs:
     ├── Problem Name
         ├── Problem_Description.md
         ├── solution.py
