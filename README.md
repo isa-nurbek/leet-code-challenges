@@ -32,12 +32,12 @@ The repository is organized as follows:
         ├── Problem_Description.md
         ├── solution.py
 
-├── Recursion
+├── Recursion:
     ├── Problem Name
         ├── Problem_Description.md
         ├── solution.py
 
-├── Linked Lists
+├── Linked Lists:
     ├── Problem Name
         ├── Problem_Description.md
         ├── solution.py
