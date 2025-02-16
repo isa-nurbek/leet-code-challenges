@@ -17,37 +17,37 @@ The repository is organized as follows:
 ```
 📂 LeetCode/AlgoExpert
 
-├── Strings:
+├── Strings
     ├── Problem Name
         ├── Problem_Description.md
         ├── solution.py
 
-├── Arrays:
+├── Arrays
     ├── Problem Name
         ├── Problem_Description.md
         ├── solution.py
 
-├── Dictionaries:
+├── Dictionaries
     ├── Problem Name
         ├── Problem_Description.md
         ├── solution.py
 
-├── Recursion:
+├── Recursion
     ├── Problem Name
         ├── Problem_Description.md
         ├── solution.py
 
-├── Linked Lists:
+├── Linked Lists
     ├── Problem Name
         ├── Problem_Description.md
         ├── solution.py
 
-├── Stacks:
+├── Stacks
     ├── Problem Name
         ├── Problem_Description.md
         ├── solution.py
 
-├── Graphs:
+├── Graphs
     ├── Problem Name
         ├── Problem_Description.md
         ├── solution.py
