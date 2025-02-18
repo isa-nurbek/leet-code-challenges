@@ -6,9 +6,9 @@ Welcome to my LeetCode and AlgoExpert solutions repository! 🎯 This repository
 
 The purpose of this repository is to:
 
-- Track my progress in solving problems from **LeetCode** and **AlgoExpert**.
-- Share solutions with clear explanations and well-commented code.
-- Serve as a resource for others preparing for technical interviews.
+- Track my progress in solving problems from **LeetCode** and **AlgoExpert**...
+- Share solutions with clear explanations and well-commented code...
+- Serve as a resource for others preparing for technical interviews...
 
 ## 🗂️ Structure
 
