@@ -1,14 +1,14 @@
-# LeetCode & AlgoExpert Solutions Repository....
+# LeetCode & AlgoExpert Solutions Repository
 
 Welcome to my LeetCode and AlgoExpert solutions repository! 🎯 This repository is dedicated to solving algorithmic and coding problems to improve problem-solving skills, prepare for coding interviews, and deepen my understanding of data structures and algorithms.
 
-## 📌 Purpose.....
+## 📌 Purpose
 
 The purpose of this repository is to:
 
-- Track my progress in solving problems from **LeetCode** and **AlgoExpert**...
-- Share solutions with clear explanations and well-commented code...
-- Serve as a resource for others preparing for technical interviews...
+- Track my progress in solving problems from **LeetCode** and **AlgoExpert**
+- Share solutions with clear explanations and well-commented code
+- Serve as a resource for others preparing for technical interviews
 
 ## 🗂️ Structure
 
