@@ -6,9 +6,9 @@ Welcome to my LeetCode and AlgoExpert solutions repository! 🎯 This repository
 
 The purpose of this repository is to:
 
-- Track my progress in solving problems from **LeetCode** and **AlgoExpert**.
-- Share solutions with clear explanations and well-commented code.
-- Serve as a resource for others preparing for technical interviews.
+- Track my progress in solving problems from **LeetCode** and **AlgoExpert**
+- Share solutions with clear explanations and well-commented code
+- Serve as a resource for others preparing for technical interviews
 
 ## 🗂️ Structure
 
@@ -16,12 +16,18 @@ The repository is organized as follows:
 
 ```
 📂 LeetCode/AlgoExpert
+
 ├── Strings
     ├── Problem Name
         ├── Problem_Description.md
         ├── solution.py
 
 ├── Arrays
+    ├── Problem Name
+        ├── Problem_Description.md
+        ├── solution.py
+
+├── Dictionaries
     ├── Problem Name
         ├── Problem_Description.md
         ├── solution.py
@@ -102,8 +108,8 @@ Each folder contains solutions categorized by group. Each solution file includes
 
 ## 🛠️ Technologies Used
 
-- **Programming Languages:** Python
-- **Tools:** Visual Studio Code, Git, LeetCode, AlgoExpert
+- **Programming Languages:** Python.
+- **Tools:** Visual Studio Code, Git, LeetCode, AlgoExpert.
 
 ## 📝 Features
 
