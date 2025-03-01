@@ -14,7 +14,7 @@ The purpose of this repository is to:
 
 The repository is organized as follows:
 
-```
+```plaintext
 📂 LeetCode/AlgoExpert
 
 ├── Strings
