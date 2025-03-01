@@ -59,11 +59,20 @@ print(isPalindrome("Madam"))  # False
 """
 ### Time and Space Complexity
 
-1. **Time Complexity: O(n)**  
-   - The loop runs at most `n/2` iterations (where `n` is the length of the string), which is **O(n)** in terms of complexity.
+### Time Complexity:
+The time complexity of the `isPalindrome` function is **O(n)**, where `n` is the length of the input string.
+Here's why:
+- The function uses a `while` loop that iterates from the start (`left_idx`) and end (`right_idx`) of the string towards the center.
+- In each iteration, it compares two characters and adjusts the indices (`left_idx` and `right_idx`).
+- The loop runs until the two indices meet or cross each other, which happens after approximately `n/2` iterations.
+- Since each comparison and index adjustment takes constant time (**O(1)**), the overall time complexity is linear with
+respect to the length of the string.
 
-2. **Space Complexity: O(1)**  
-   - The function uses only two variables (`left_idx` and `right_idx`) regardless of the size of the input string.
+### Space Complexity:
+The space complexity of the `isPalindrome` function is **O(1)**. Here's why:
+- The function uses a constant amount of extra space, regardless of the input size. It only stores a few
+variables (`left_idx`, `right_idx`, and the input string itself).
+- No additional data structures (like arrays or stacks) are used that grow with the input size.
 
 """
 
