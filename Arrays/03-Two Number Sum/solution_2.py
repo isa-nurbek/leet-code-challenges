@@ -28,9 +28,12 @@ targetSum = 10
 
 ## Optimal Space & Time Complexity:
 
+```
 `O(n)` time | `O(n)` space - where `n` is the length of the input array
+```
 
 """
+# Solution:
 
 
 # O (n) time | O(n) space
