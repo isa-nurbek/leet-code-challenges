@@ -109,19 +109,6 @@ Thus, the overall space complexity is **O(n)**.
 
 ---
 
-### Explanation of the Code
-
-The function works as follows:
-
-1. It initializes an empty list `encoded_str_characters` to store the encoded result and a variable `current_run_length` to keep track of the length of the current run of characters.
-2. It iterates through the input string starting from the second character (index 1).
-   - If the current character is different from the previous character or the run length reaches 9 (the maximum allowed for a single run), it appends the run length and the previous character to the list and resets the run length.
-   - Otherwise, it increments the run length.
-3. After the loop, it handles the last run by appending its length and the last character to the list.
-4. Finally, it joins the list of characters into a single string and returns it.
-
----
-
 ### Key Observations
 
 - The function handles runs of up to 9 characters. If a run exceeds 9 characters, it splits it into multiple runs (e.g., "AAAAAAAAAA" becomes "9A1A").
