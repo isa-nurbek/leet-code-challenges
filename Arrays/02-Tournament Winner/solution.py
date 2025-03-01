@@ -47,6 +47,9 @@ results = [0, 0, 1]
 `O(n)` time | `O(k)` space - where `n` is the number of competitions and `k` is the number of teams.
 
 """
+
+# =============================================================================================== #
+
 # Solution:
 
 
@@ -88,7 +91,7 @@ def update_scores(team, points, scores):
     scores[team] += points  # Add the points to the team's current score
 
 
-# Example test cases to check the function's behavior
+# Test Cases
 print(
     tournament_winner([["HTML", "C#"], ["C#", "Python"], ["Python", "HTML"]], [0, 0, 1])
 )  # Output: Python
@@ -123,6 +126,7 @@ print(
 print(tournament_winner([["Bulls", "Eagles"]], [1]))  # Output: Bulls
 # Explanation: Bulls beat Eagles in the only match, earning 3 points and becoming the winner.
 
+# =============================================================================================== #
 
 # Big O:
 
