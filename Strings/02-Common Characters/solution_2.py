@@ -11,20 +11,28 @@ Note that the strings are not guaranteed to only contain alphanumeric characters
 
 
 ## Sample Input:
+
 ```
 strings = ["abc", "bcd", "cbaccd"]
 ```
 
 ## Sample Output:
+
 ```
 ["b", "c"] // The characters could be ordered differently.
 ```
 
 ## Optimal Space & Time Complexity:
 
+```
 `O(n * m)` time | `O(m)` space - where `n` is the number of strings, and `m` is the length of the longest string.
+```
 
 """
+
+# =============================================================================================== #
+
+# Solution
 
 
 # O(n * m) time | O(m) space - where `n`` is the number of strings, and `m` is the
@@ -56,6 +64,7 @@ def remove_nonexistent_characters(string, potential_common_characters):
             potential_common_characters.remove(character)
 
 
+# Test Cases
 print(common_characters(["abc", "bcd", "cbad"]))  # Output: ['b', 'c']
 print(common_characters(["a", "b", "c"]))  # Output: []
 print(common_characters(["aaaa", "a"]))  # Output: ['a']
@@ -63,6 +72,7 @@ print(
     common_characters(["*abc!d", "de!f*", "**!!!****d*****"])
 )  # Output: ['d', '!', '*']
 
+# =============================================================================================== #
 
 # Big O:
 
@@ -80,7 +90,6 @@ print(
 - **Sets:** The `potential_common_characters` set stores at most `m` characters.
 - **Other variables:** Constant space for intermediate calculations.
 - **Total:** O(m).
-
 
 """
 
