@@ -21,10 +21,12 @@ array = [1, 2, 3, 5, 6, 8, 9]
 
 ## Optimal Space & Time Complexity:
 
+```
 `O(n)` time | `O(n)` space - where `n` is the length of the input array
+```
 
 """
-# Code:
+# Solution:
 
 
 # O(n) time | O(n) space
@@ -67,7 +69,6 @@ print(sorted_squared_array([0]))  # Output: [0]
    - The `sorted_squares` array of size `n` is created.
 
 """
-
 
 # Code Explanation:
 
