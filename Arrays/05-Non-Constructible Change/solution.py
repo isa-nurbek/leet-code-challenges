@@ -30,6 +30,9 @@ coins = [5, 7, 1, 1, 2, 3, 22]
 ```
 
 """
+
+# =============================================================================================== #
+
 # Solution:
 
 
@@ -48,11 +51,13 @@ def non_constructible_change(coins):
     return current_change_created + 1
 
 
+# Test Cases
 print(non_constructible_change([5, 7, 1, 1, 2, 3, 22]))  # 20
 print(non_constructible_change([1, 1, 1, 1, 1]))  # 6
 print(non_constructible_change([1, 5, 1, 1, 1, 10, 15, 20, 100]))  # 55
 print(non_constructible_change([]))  # 1
 
+# =============================================================================================== #
 
 # Big O:
 
