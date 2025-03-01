@@ -25,7 +25,7 @@ array = [1, 2, 3, 5, 6, 8, 9]
 
 """
 
-# Code:
+# Solution:
 
 
 # O(n log n) time | O(n) space
@@ -71,7 +71,6 @@ print(sorted_squared_array([0]))  # Output: [0]
   - The overall space complexity is **`O(n)`** due to the `sorted_squares` list.
 
 """
-
 
 # Code Explanation:
 
