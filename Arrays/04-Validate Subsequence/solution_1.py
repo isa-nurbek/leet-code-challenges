@@ -30,6 +30,9 @@ true
 ```
 
 """
+
+# =============================================================================================== #
+
 # Solution:
 
 
@@ -45,6 +48,7 @@ def is_valid_subsequence(array, sequence):
     return seq_idx == len(sequence)
 
 
+# Test Cases
 print(
     is_valid_subsequence([5, 1, 22, 25, 6, -1, 8, 10], [1, 6, -1, 10])
 )  # Output: True
@@ -55,6 +59,7 @@ print(
     is_valid_subsequence([5, 1, 22, 25, 6, -1, 8, 10], [1, 6, 10, -1])
 )  # Output: False
 
+# =============================================================================================== #
 
 # Big O:
 
