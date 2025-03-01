@@ -26,6 +26,9 @@ array = [1, 2, 3, 5, 6, 8, 9]
 ```
 
 """
+
+# =============================================================================================== #
+
 # Solution:
 
 
@@ -50,11 +53,13 @@ def sorted_squared_array(array):
     return sorted_squares
 
 
+# Test Cases
 print(sorted_squared_array([-5, -4, -3, -2, -1]))  # Output: [1, 4, 9, 16, 25]
 print(sorted_squared_array([1, 2, 3, 5, 6, 8, 9]))  # Output: [1, 4, 9, 25, 36, 64, 81]
 print(sorted_squared_array([-10, -5, 0, 5, 10]))  # Output: [0, 25, 25, 100, 100]
 print(sorted_squared_array([0]))  # Output: [0]
 
+# =============================================================================================== #
 
 # Big O:
 
