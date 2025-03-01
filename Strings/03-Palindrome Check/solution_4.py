@@ -1,4 +1,5 @@
 # Description:
+
 """
                                          Palindrome Check
 
@@ -6,17 +7,29 @@ Write a function that takes in a non-empty string and that returns a boolean rep
 
 A palindrome is defined as a string that's written the same forward and backward. Note that single-character strings are palindromes.
 
-Sample Input:
+## Sample Input:
+
+```
 string = "abcdcba"
+```
 
-Sample Output:
+## Sample Output:
+
+```
 true // it's written the same forward and backward
+```
 
+## Optimal Space & Time Complexity:
 
-Optimal Space & Time Complexity:
+```
 `O(n)` time | `O(1)` space - where `n` is the length of the input string.
+```
 
 """
+
+# =============================================================================================== #
+
+# Solution
 
 
 # O(n)time | O(1) space
@@ -32,14 +45,17 @@ def isPalindrome(string):
     return True
 
 
+# Test Cases
 print(isPalindrome("madam"))  # True
 print(isPalindrome("hello"))  # False
 print(isPalindrome("a"))  # True
 print(isPalindrome(""))  # True
 print(isPalindrome("Madam"))  # False
 
+# =============================================================================================== #
 
 # Big O:
+
 """
 ### Time and Space Complexity
 
@@ -52,6 +68,7 @@ print(isPalindrome("Madam"))  # False
 """
 
 # Code Explanation:
+
 """
 Here's a detailed explanation of the provided code and how it works:
 
