@@ -25,9 +25,12 @@ true
 
 ## Optimal Space & Time Complexity:
 
+```
 `O(n)` time | `O(1)` space - where `n` is the length of the array
+```
 
 """
+# Solution:
 
 
 # O (n) time | O(1) space
