@@ -1,7 +1,6 @@
 # Description:
 
 """
-
                                          Tournament Winner
 
 There's an algorithms tournament taking place in which teams of programmers compete against each other to solve
@@ -48,7 +47,7 @@ results = [0, 0, 1]
 `O(n)` time | `O(k)` space - where `n` is the number of competitions and `k` is the number of teams.
 
 """
-# Code:
+# Solution:
 
 
 HOME_TEAM_WON = 1  # Constant indicating that the home team won the match
@@ -139,7 +138,6 @@ print(tournament_winner([["Bulls", "Eagles"]], [1]))  # Output: Bulls
    - Stores scores for at most `k` teams in the `scores` dictionary, where `k` is the number of unique teams.
 
 """
-
 
 # Code Explanation:
 
