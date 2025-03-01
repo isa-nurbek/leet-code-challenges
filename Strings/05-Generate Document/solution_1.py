@@ -43,7 +43,7 @@ True
 # Solution
 
 
-# O(m* (n + m)) time | O(1) space - where `n` is the number
+# O(m * (n + m)) time | O(1) space - where `n` is the number
 # of characters, `m` is the length of the document
 def generate_document(characters, document):
     for character in document:
