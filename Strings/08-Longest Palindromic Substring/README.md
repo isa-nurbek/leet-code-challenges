@@ -18,6 +18,6 @@ string = "abaxyzzyxf"
 "xyzzyx"
 ```
 
-## Optimal Space & Time Complexity
+## Optimal Time & Space Complexity
 
 `O(n^2)` time | `O(n)` space - where `n` is the length of the input string.
