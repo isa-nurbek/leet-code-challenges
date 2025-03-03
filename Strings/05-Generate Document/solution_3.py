@@ -111,7 +111,6 @@ print(generate_document("", "hello"))  # False
 
 """
 
-
 # Code Explanation:
 
 """
