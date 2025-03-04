@@ -82,12 +82,6 @@ print(longest_palindromic_substring("abaxyzzyxf"))  # Output: "xyzzyx"
 print(longest_palindromic_substring("it's highnoon"))  # Output: "noon"
 print(longest_palindromic_substring("aca"))  # Output: "aca"
 
-
-# Test Cases
-print(longest_palindromic_substring("abaxyzzyxf"))  # xyzzyx
-print(longest_palindromic_substring("it's highnoon"))  # noon
-print(longest_palindromic_substring("aca"))  # aca
-
 # =============================================================================================== #
 
 # Big O:
