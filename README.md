@@ -18,93 +18,291 @@ The repository is organized as follows:
 📂 LeetCode/AlgoExpert
 
 ├── Strings
-    ├── Problem Name
-        ├── Problem_Description.md
-        ├── solution.py
+
+    01-Easy
+        ├── Problem Name
+            ├── Problem_Description.md
+            ├── solution.py
+
+    02-Medium
+        ├── Problem Name
+            ├── Problem_Description.md
+            ├── solution.py
+
+    03-Hard
+        ├── Problem Name
+            ├── Problem_Description.md
+            ├── solution.py
 
 ├── Arrays
-    ├── Problem Name
-        ├── Problem_Description.md
-        ├── solution.py
+
+    01-Easy
+        ├── Problem Name
+            ├── Problem_Description.md
+            ├── solution.py
+
+    02-Medium
+        ├── Problem Name
+            ├── Problem_Description.md
+            ├── solution.py
+
+    03-Hard
+        ├── Problem Name
+            ├── Problem_Description.md
+            ├── solution.py
 
 ├── Dictionaries
-    ├── Problem Name
-        ├── Problem_Description.md
-        ├── solution.py
+
+    01-Easy
+        ├── Problem Name
+            ├── Problem_Description.md
+            ├── solution.py
+
+    02-Medium
+        ├── Problem Name
+            ├── Problem_Description.md
+            ├── solution.py
+            
+    03-Hard
+        ├── Problem Name
+            ├── Problem_Description.md
+            ├── solution.py
 
 ├── Recursion
-    ├── Problem Name
-        ├── Problem_Description.md
-        ├── solution.py
+
+    01-Easy
+        ├── Problem Name
+            ├── Problem_Description.md
+            ├── solution.py
+
+    02-Medium
+        ├── Problem Name
+            ├── Problem_Description.md
+            ├── solution.py
+            
+    03-Hard
+        ├── Problem Name
+            ├── Problem_Description.md
+            ├── solution.py
 
 ├── Linked Lists
-    ├── Problem Name
-        ├── Problem_Description.md
-        ├── solution.py
+
+    01-Easy
+        ├── Problem Name
+            ├── Problem_Description.md
+            ├── solution.py
+
+    02-Medium
+        ├── Problem Name
+            ├── Problem_Description.md
+            ├── solution.py
+            
+    03-Hard
+        ├── Problem Name
+            ├── Problem_Description.md
+            ├── solution.py
 
 ├── Stacks
-    ├── Problem Name
-        ├── Problem_Description.md
-        ├── solution.py
+
+    01-Easy
+        ├── Problem Name
+            ├── Problem_Description.md
+            ├── solution.py
+
+    02-Medium
+        ├── Problem Name
+            ├── Problem_Description.md
+            ├── solution.py
+            
+    03-Hard
+        ├── Problem Name
+            ├── Problem_Description.md
+            ├── solution.py
 
 ├── Graphs
-    ├── Problem Name
-        ├── Problem_Description.md
-        ├── solution.py
+
+    01-Easy
+        ├── Problem Name
+            ├── Problem_Description.md
+            ├── solution.py
+
+    02-Medium
+        ├── Problem Name
+            ├── Problem_Description.md
+            ├── solution.py
+            
+    03-Hard
+        ├── Problem Name
+            ├── Problem_Description.md
+            ├── solution.py
 
 ├── Heaps
-    ├── Problem Name
-        ├── Problem_Description.md
-        ├── solution.py
+
+    01-Easy
+        ├── Problem Name
+            ├── Problem_Description.md
+            ├── solution.py
+
+    02-Medium
+        ├── Problem Name
+            ├── Problem_Description.md
+            ├── solution.py
+            
+    03-Hard
+        ├── Problem Name
+            ├── Problem_Description.md
+            ├── solution.py
 
 ├── Dynamic Programming
-    ├── Problem Name
-        ├── Problem_Description.md
-        ├── solution.py
+
+    01-Easy
+        ├── Problem Name
+            ├── Problem_Description.md
+            ├── solution.py
+
+    02-Medium
+        ├── Problem Name
+            ├── Problem_Description.md
+            ├── solution.py
+            
+    03-Hard
+        ├── Problem Name
+            ├── Problem_Description.md
+            ├── solution.py
 
 ├── Searching
-    ├── Problem Name
-        ├── Problem_Description.md
-        ├── solution.py
+
+    01-Easy
+        ├── Problem Name
+            ├── Problem_Description.md
+            ├── solution.py
+
+    02-Medium
+        ├── Problem Name
+            ├── Problem_Description.md
+            ├── solution.py
+            
+    03-Hard
+        ├── Problem Name
+            ├── Problem_Description.md
+            ├── solution.py
 
 ├── Sorting
-    ├── Problem Name
-        ├── Problem_Description.md
-        ├── solution.py
+
+    01-Easy
+        ├── Problem Name
+            ├── Problem_Description.md
+            ├── solution.py
+
+    02-Medium
+        ├── Problem Name
+            ├── Problem_Description.md
+            ├── solution.py
+            
+    03-Hard
+        ├── Problem Name
+            ├── Problem_Description.md
+            ├── solution.py
 
 ├── Binary Trees
-    ├── Problem Name
-        ├── Problem_Description.md
-        ├── solution.py
+
+    01-Easy
+        ├── Problem Name
+            ├── Problem_Description.md
+            ├── solution.py
+
+    02-Medium
+        ├── Problem Name
+            ├── Problem_Description.md
+            ├── solution.py
+            
+    03-Hard
+        ├── Problem Name
+            ├── Problem_Description.md
+            ├── solution.py
 
 ├── Binary Search Trees
-    ├── Problem Name
-        ├── Problem_Description.md
-        ├── solution.py
+
+    01-Easy
+        ├── Problem Name
+            ├── Problem_Description.md
+            ├── solution.py
+
+    02-Medium
+        ├── Problem Name
+            ├── Problem_Description.md
+            ├── solution.py
+            
+    03-Hard
+        ├── Problem Name
+            ├── Problem_Description.md
+            ├── solution.py
 
 ├── Greedy Algorithms
-    ├── Problem Name
-        ├── Problem_Description.md
-        ├── solution.py
+
+    01-Easy
+        ├── Problem Name
+            ├── Problem_Description.md
+            ├── solution.py
+
+    02-Medium
+        ├── Problem Name
+            ├── Problem_Description.md
+            ├── solution.py
+            
+    03-Hard
+        ├── Problem Name
+            ├── Problem_Description.md
+            ├── solution.py
 
 ├── Famous Algorithms
-    ├── Problem Name
-        ├── Problem_Description.md
-        ├── solution.py
+
+    01-Easy
+        ├── Problem Name
+            ├── Problem_Description.md
+            ├── solution.py
+
+    02-Medium
+        ├── Problem Name
+            ├── Problem_Description.md
+            ├── solution.py
+            
+    03-Hard
+        ├── Problem Name
+            ├── Problem_Description.md
+            ├── solution.py
 
 ├── Tries
-    ├── Problem Name
-        ├── Problem_Description.md
-        ├── solution.py
 
+    01-Easy
+        ├── Problem Name
+            ├── Problem_Description.md
+            ├── solution.py
+
+    02-Medium
+        ├── Problem Name
+            ├── Problem_Description.md
+            ├── solution.py
+            
+    03-Hard
+        ├── Problem Name
+            ├── Problem_Description.md
+            ├── solution.py
 README.md
 ```
 
-Each folder contains solutions categorized by group. Each solution file includes:
+**Coding problems contains Grouped by Difficulty:**
+
+- 01-Easy
+- 01-Medium
+- 01-Hard
+
+Each solution file includes:
 
 - Problem description (brief overview).
 - Time and space complexity analysis.
-- Several solution approach (from worst case to best case).
+- Code explanations
+- Several solution approach (from inefficient to efficient).
 
 ## 🛠️ Technologies Used
 
