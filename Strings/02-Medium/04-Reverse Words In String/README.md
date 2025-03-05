@@ -1,4 +1,4 @@
-# Valid IP Addresses
+# Reverse Words In String
 
 Write a function that takes in a string of words separated by one or more whitespaces and returns a string that has these words in reverse order. For example, given the string `"tim is great"`, your function should return `"great is tim"`.
 
