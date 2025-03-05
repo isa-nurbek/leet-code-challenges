@@ -92,7 +92,7 @@ print(reverse_words_in_string("AlgoExpert is the best!"))
 print(reverse_words_in_string("Reverse These Words"))
 # Output: "Words These Reverse"
 
-# Test Case 2
+# Test Case 3
 print(reverse_words_in_string("his      string     has a     lot of   whitespace"))
 # Output: "whitespace   of lot     a has     string      his"
 
