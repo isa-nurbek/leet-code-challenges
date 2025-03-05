@@ -8,7 +8,7 @@ The purpose of this repository is to:
 
 - Track my progress in solving problems from **LeetCode** and **AlgoExpert**.
 - Share solutions with clear explanations and well-commented code.
-- Serve as a resource for others preparing for technical interviews.
+- Serve as a resource for preparing technical interviews.
 
 ## 🗂️ Structure
 
