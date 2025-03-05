@@ -40,31 +40,47 @@ string = "AlgoExpert is the best!"
 
 # `O(n)` time | `O(n)` space - where `n` is the length of the string.
 def reverse_words_in_string(string):
+    # Initialize an empty list to store individual words and spaces
     words = []
+    # Track the starting index of the current word
     start_of_word = 0
 
+    # Iterate through each character in the string
     for idx in range(len(string)):
         character = string[idx]
 
+        # If the current character is a space, it means we've reached the end of a word
         if character == " ":
+            # Append the word (from start_of_word to idx) to the words list
             words.append(string[start_of_word:idx])
+            # Update start_of_word to the current index (start of the next word or space)
             start_of_word = idx
+        # If the character at start_of_word is a space, it means we've encountered a new word
         elif string[start_of_word] == " ":
+            # Append the space to the words list
             words.append(" ")
+            # Update start_of_word to the current index (start of the new word)
             start_of_word = idx
 
+    # Append the last word (or space) to the words list
     words.append(string[start_of_word:])
 
+    # Reverse the order of words in the list
     reverse_list(words)
+    # Join the reversed list into a single string and return it
     return "".join(words)
 
 
 def reverse_list(my_list):
+    # Initialize two pointers: start at the beginning and end at the end of the list
     start, end = 0, len(my_list) - 1
 
+    # Swap elements from the start and end until the pointers meet in the middle
     while start < end:
         my_list[start], my_list[end] = my_list[end], my_list[start]
+        # Move the start pointer forward
         start += 1
+        # Move the end pointer backward
         end -= 1
 
 
