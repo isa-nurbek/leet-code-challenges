@@ -38,7 +38,7 @@ True // A single replace at index 1 of either string can make the strings equal
 # Solution
 
 
-# `O(n + m)` time | `O(n + m)` space - where `n` is the length of stringOne, and
+# `O(n + m)` time | `O(1)` space - where `n` is the length of stringOne, and
 # `m` is the length of stringTwo
 def one_edit(string_one, string_two):
     # Get the lengths of both strings
