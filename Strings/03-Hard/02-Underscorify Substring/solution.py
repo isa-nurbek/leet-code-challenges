@@ -235,7 +235,7 @@ Let's analyze the time and space complexity of the `underscorify_substring` func
 
    - **Time Complexity**: `O(n * m + k + n)`, which simplifies to O(n * m) in the worst case (since `k` can be up to `n/m`).
    
-   - **Space Complexity**: \(O(n + k)\), where:
+   - **Space Complexity**: `O(n + k)`, where:
      - `O(k)` comes from storing the locations.
      - `O(n)` comes from storing the final output.
 
