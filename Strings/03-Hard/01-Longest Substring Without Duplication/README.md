@@ -7,13 +7,13 @@ You can assume that there will only be one longest substring without duplication
 ## Sample Input
 
 ```plaintext
-string = "isradin"
+string = "kilimandjaro"
 ```
 
 ## Sample Output
 
 ```plaintext
-"radin"
+"limandj"
 ```
 
 ## Optimal Time & Space Complexity
