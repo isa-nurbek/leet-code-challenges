@@ -194,3 +194,188 @@ print(underscorify_substring(string_2, substring_2))
 
 print(underscorify_substring(string_3, substring_3))
 # Output: "_a_b_a_b_a_b_a_b_a_b_a_b_a_b_a_b_a_b_a_b_a_b"
+
+# =============================================================================================== #
+
+# Big O:
+
+"""
+## Time and Space Complexity Analysis
+
+Let's analyze the time and space complexity of the `underscorify_substring` function and its helper functions.
+
+### 1. **`get_locations` Function**
+   - **Time Complexity**: `O(n * m)`, where:
+     - `n` is the length of the `string`.
+     - `m` is the length of the `substring`.
+     - This is because `string.find(substring, start_idx)` is called in a loop, and each call to `find` can
+     take up to `O(m)` time in the worst case.
+     
+   - **Space Complexity**: `O(k)`, where `k` is the number of occurrences of the `substring` in the `string`.
+   This is because we store the start and end indices of each occurrence in the `locations` list.
+
+---
+
+### 2. **`collapse` Function**
+   - **Time Complexity**: `O(k)`, where `k` is the number of locations (occurrences of the `substring`).
+   This is because we iterate through the `locations` list once.
+   - **Space Complexity**: `O(k)`, as we create a new list `new_locations` to store the collapsed ranges.
+
+---
+
+### 3. **`underscorify` Function**
+   - **Time Complexity**: `O(n)`, where `n` is the length of the `string`. This is because we iterate through
+   the `string` once and append characters to the `final_chars` list.
+   - **Space Complexity**: `O(n)`, as we store the final result in the `final_chars` list, which can grow up
+   to the size of the input `string` plus the added underscores.
+
+---
+
+### 4. **Overall `underscorify_substring` Function**
+
+   - **Time Complexity**: `O(n * m + k + n)`, which simplifies to O(n * m) in the worst case (since `k` can be up to `n/m`).
+   
+   - **Space Complexity**: \(O(n + k)\), where:
+     - `O(k)` comes from storing the locations.
+     - `O(n)` comes from storing the final output.
+
+---
+
+### Summary
+- **Time Complexity**: `O(n * m)`
+- **Space Complexity**: `O(n + k)`
+
+Where:
+- `n` = length of the input `string`
+- `m` = length of the `substring`
+- `k` = number of occurrences of the `substring` in the `string` (can be up to `n/m`).
+
+"""
+
+# Code Explanation:
+
+"""
+This code defines a function, `underscorify_substring`, which takes a string and a substring as input and
+returns a new string where all occurrences of the substring are surrounded by underscores (`_`).
+The implementation follows a structured approach, breaking the problem into three main steps:
+
+1. **Find all occurrences of the substring in the string.**
+2. **Merge overlapping or adjacent occurrences.**
+3. **Insert underscores at the correct positions.**
+
+---
+
+## **Detailed Breakdown of Each Function**
+### **1. `underscorify_substring(string, substring)`**
+This is the main function that orchestrates the process.
+
+- **Step 1:** Calls `get_locations(string, substring)` to get all occurrences of `substring` within `string`.
+- **Step 2:** Calls `collapse(locations)` to merge overlapping or adjacent occurrences.
+- **Step 3:** Calls `underscorify(string, locations)` to insert underscores around the occurrences.
+
+### **2. `get_locations(string, substring)`**
+This function finds all starting and ending indices of `substring` in `string`.
+
+#### **How It Works:**
+- **It uses `string.find(substring, start_idx)`** to find occurrences of `substring`, starting from `start_idx`.
+- **Each occurrence is stored as a list `[start, end]`** where:
+  - `start`: index of the first character of `substring`
+  - `end`: index of the last character of `substring` + 1
+- **Moves `start_idx` forward by 1** to find overlapping occurrences.
+
+#### **Example:**
+For `string = "testtest"` and `substring = "test"`, this function finds:
+```
+[[0, 4], [4, 8]]
+```
+This means "test" appears at positions `[0:4]` and `[4:8]`.
+
+---
+
+### **3. `collapse(locations)`**
+This function merges overlapping or adjacent occurrences of `substring`.
+
+#### **How It Works:**
+- If two intervals overlap or touch (i.e., `current[0] <= previous[1]`), they are merged into one.
+- Otherwise, the interval is added separately.
+
+#### **Example:**
+For `[[0, 4], [4, 8], [10, 14]]`, after merging:
+```
+[[0, 8], [10, 14]]
+```
+- `[0,4]` and `[4,8]` are merged because `4 == 4`.
+- `[10,14]` remains separate.
+
+---
+
+### **4. `underscorify(string, locations)`**
+This function constructs the final string with underscores.
+
+#### **How It Works:**
+- Iterates through `string`, keeping track of `locations`.
+- **When reaching `start` of a substring, inserts `_`.**
+- **When reaching `end` of a substring, inserts another `_`.**
+- Adds characters from `string` into `final_chars` (a list).
+- Joins `final_chars` into a string.
+
+#### **Example:**
+For `string = "testthis is a testtest to see"` and `locations = [[0, 4], [14, 22]]`, output is:
+```
+"_test_this is a _testtest_ to see"
+```
+
+---
+
+## **Example Walkthrough**
+### **Example 1**
+```
+string = "testthis is a testtest to see if testestest it works"
+substring = "test"
+print(underscorify_substring(string, substring))
+```
+#### **Step 1: `get_locations()`**
+Find occurrences:
+```
+[[0, 4], [14, 18], [18, 22], [26, 30], [30, 34], [32, 36]]
+```
+#### **Step 2: `collapse()`**
+Merge overlapping/adjacent:
+```
+[[0, 4], [14, 22], [26, 36]]
+```
+#### **Step 3: `underscorify()`**
+Insert underscores:
+```
+"_test_this is a _testtest_ to see if _testestest_ it works"
+```
+
+### **Example 2**
+```
+string = "ttttttttttttttbtttttctatawtatttttastvb"
+substring = "ttt"
+print(underscorify_substring(string, substring))
+```
+#### **Step 1: `get_locations()`**
+Find occurrences:
+```
+[[0, 3], [1, 4], [2, 5], ..., [28, 31]]
+```
+#### **Step 2: `collapse()`**
+Merge:
+```
+[[0, 14], [16, 19], [25, 31]]
+```
+#### **Step 3: `underscorify()`**
+Output:
+```
+"_tttttttttttttt_b_ttttt_ctatawta_ttttt_astvb"
+```
+
+---
+
+## **Conclusion**
+
+This code efficiently finds and underscores substrings while handling overlaps, making it a useful text-processing algorithm.
+
+"""
