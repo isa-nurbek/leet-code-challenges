@@ -39,48 +39,67 @@ and `c` is the number of unique characters across all words.
 # `l` is the length of the longest word,
 # and `c` is the number of unique characters across all words.
 def minimum_characters_for_words(words):
+    # Dictionary to store the maximum frequency of each character across all words
     maximum_character_frequencies = {}
 
+    # Iterate through each word in the list
     for word in words:
+        # Calculate the frequency of each character in the current word
         character_frequencies = count_character_frequencies(word)
+
+        # Update the global maximum frequencies with the frequencies from the current word
         update_maximum_frequencies(character_frequencies, maximum_character_frequencies)
 
+    # Convert the maximum frequencies dictionary into a list of characters
     return make_array_from_character_frequencies(maximum_character_frequencies)
 
 
 def count_character_frequencies(string):
+    # Dictionary to store the frequency of each character in the given string
     character_frequencies = {}
 
+    # Iterate through each character in the string
     for character in string:
+        # If the character is not in the dictionary, initialize its frequency to 0
         if character not in character_frequencies:
             character_frequencies[character] = 0
 
+        # Increment the frequency of the current character
         character_frequencies[character] += 1
 
+    # Return the dictionary containing character frequencies
     return character_frequencies
 
 
 def update_maximum_frequencies(frequencies, maximum_frequencies):
+    # Iterate through each character in the frequencies dictionary
     for character in frequencies:
         frequency = frequencies[character]
 
+        # If the character is already in the maximum frequencies dictionary,
+        # update its frequency to the maximum between the current and new frequency
         if character in maximum_frequencies:
             maximum_frequencies[character] = max(
                 frequency, maximum_frequencies[character]
             )
         else:
+            # If the character is not in the maximum frequencies dictionary, add it
             maximum_frequencies[character] = frequency
 
 
 def make_array_from_character_frequencies(character_frequencies):
+    # List to store the final characters based on their frequencies
     characters = []
 
+    # Iterate through each character in the frequencies dictionary
     for character in character_frequencies:
         frequency = character_frequencies[character]
 
+        # Append the character to the list as many times as its frequency
         for _ in range(frequency):
             characters.append(character)
 
+    # Return the list of characters
     return characters
 
 
