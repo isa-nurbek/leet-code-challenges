@@ -20,7 +20,7 @@ stringTwo = "hollo"
 ## Sample Output
 
 ```plaintext
-True // A single replace at index 1 of either string can make the strings equal
+True // A single replace at index 1 of either string can make the strings equal.
 ```
 
 ## Optimal Time & Space Complexity
