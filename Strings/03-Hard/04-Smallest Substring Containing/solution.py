@@ -177,7 +177,6 @@ print(smallest_substring_containing(big_string_3, small_string_3))
 
 # =============================================================================================== #
 
-
 # Big O:
 
 """
@@ -424,7 +423,8 @@ to efficiently find the smallest such substring.
    the current window in `big_string`.
    - It also initializes `substring_char_counts` to keep track of the character counts in the current window.
    - The function iterates over `big_string` using the `right_idx` pointer, expanding the window to include more characters.
-   - For each character, it updates the `substring_char_counts` and checks if the current window contains all characters of `small_string` with the required counts.
+   - For each character, it updates the `substring_char_counts` and checks if the current window contains all characters
+   of `small_string` with the required counts.
    - When the current window contains all required characters, the function tries to contract the window from the left
    to find a smaller valid substring.
 
