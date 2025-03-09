@@ -23,10 +23,10 @@ string = "abcdcaf"
 1 // The first non-repeating character is "b" and is found at index 1.
 ```
 
-## Optimal Space & Time Complexity
+## Optimal Time & Space Complexity
 
 ```
-`O(n)` time | `O(1)` space - where `n` is the length of the input string The constant space is 
+`O(n)` time | `O(1)` space - where `n` is the length of the input string The constant space is
 because the input string only has lowercase English-alphabet letters; thus, our hash table will
 never have more than 26 character frequencies.
 ```
@@ -35,7 +35,7 @@ never have more than 26 character frequencies.
 
 # =============================================================================================== #
 
-# Solution
+# Solution:
 
 
 # O(n^2) time | O(1) space - where `n` is the length of the input string
@@ -66,7 +66,7 @@ print(first_non_repeating_character(""))  # -1
 # Big O:
 
 """
-## Time and Space Complexity
+## Time and Space Complexity Analysis
 
 ### **Time Complexity Analysis**
 
