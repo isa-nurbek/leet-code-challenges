@@ -29,14 +29,16 @@ true // it's written the same forward and backward
 
 # =============================================================================================== #
 
-# Solution
+# Solution:
 
 
-# O(n^2)time | O(n) space
+# O(n)time | O(n) space
 def isPalindrome(string):
     reversed_string = ""
+
     for i in reversed(range(len(string))):
         reversed_string += string[i]
+
     return string == reversed_string
 
 
@@ -52,40 +54,35 @@ print(isPalindrome("Madam"))  # False
 # Big O:
 
 """
+## Time and Space Complexity Analysis
 
-## Time and Space Complexity:
+### **Time Complexity**
+1. The `reversed(range(len(string)))` operation iterates over the indices of the string in reverse order.
+This takes `O(n)` time, where `n` is the length of the string.
 
-### Time Complexity:
-The time complexity of the `isPalindrome` function is **O(n)**, where `n` is the length of the input string. Here's why:
+2. The `for` loop iterates `n` times, and in each iteration, it appends a character to `reversed_string`.
+Appending to a string in Python is `O(1)` on average, but in the worst case (due to string immutability and
+potential reallocation), it can be `O(n)` for the entire loop.
 
-1. **Reversing the string**: The `for` loop iterates over the string in reverse order, which takes **O(n)** time because
-it processes each character once.
-2. **String concatenation**: In Python, strings are immutable, so each concatenation (`reversed_string += string[i]`)
-creates a new string. This operation takes **O(n)** time in total across all iterations.
-3. **Comparison**: The final comparison `string == reversed_string` also takes **O(n)** time because it compares each
-character of the two strings.
+3. The final comparison `string == reversed_string` takes `O(n)` time, as it compares each character of the two strings.
 
-Thus, the overall time complexity is **O(n)**.
+Thus, the **time complexity** is:
 
----
-
-### Space Complexity:
-The space complexity of the `isPalindrome` function is **O(n)**, where `n` is the length of the input string. Here's why:
-
-1. **Reversed string storage**: The `reversed_string` variable stores a copy of the reversed input string, which requires
-**O(n)** space.
-2. **Auxiliary space**: The function uses a constant amount of additional space for variables like `i`, but this is negligible
-compared to the space used by `reversed_string`.
-
-Thus, the overall space complexity is **O(n)**.
+    O(n) + O(n) + O(n) = `O(n)`
 
 ---
 
-### Optimized Approach:
-You can optimize the function to use **O(1)** additional space by comparing characters directly without creating a reversed string. 
+### **Space Complexity**
+1. The `reversed_string` variable stores a copy of the reversed string, which requires `O(n)` space.
+2. No other significant additional space is used.
 
-### Time Complexity: **O(n)** (same as before, but more efficient in practice due to fewer operations).  
-### Space Complexity: **O(1)** (no additional space is used apart from a few variables).
+Thus, the **space complexity** is: `O(n)`
+
+---
+
+### **Final Answer**
+- **Time Complexity**: `O(n)`
+- **Space Complexity**: `O(n)` (can be optimized to O(1))
 
 """
 
