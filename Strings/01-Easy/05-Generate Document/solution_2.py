@@ -41,7 +41,7 @@ and `c` is the number of unique characters in the characters string
 
 # =============================================================================================== #
 
-# Solution
+# Solution:
 
 
 # O(c * (n + m)) time | O(c) space - where `n` is the number of characters, `m` is
@@ -85,7 +85,7 @@ print(generate_document("", "hello"))  # False
 # Big O:
 
 """
-## Time and Space Complexity
+## Time and Space Complexity Analysis
 
 #### **Time Complexity**
 
@@ -105,7 +105,7 @@ In the worst case:
 Since `generate_document()` calls `count_character_frequency()` twice per unique character in `document`,
 and in the worst case, every character in `document` is unique, the total worst-case time complexity is:
 
-    O(m * (n + m)) = O(mn + m^2)
+    O(m * (n + m)) = `O(mn + m^2)`
 
 
 This is inefficient, especially for large inputs.
