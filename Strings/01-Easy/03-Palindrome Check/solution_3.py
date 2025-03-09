@@ -29,7 +29,7 @@ true // it's written the same forward and backward
 
 # =============================================================================================== #
 
-# Solution
+# Solution:
 
 
 # O(n)time | O(n) space
@@ -50,20 +50,26 @@ print(isPalindrome("Madam"))  # False
 # Big O:
 
 """
+## Time and Space Complexity Analysis
 
-### Complexity Analysis
+### Time Complexity
+- **Base Case:** The recursion stops when `i >= j`, which happens after approximately `n/2` comparisons,
+where `n` is the length of the string.
 
-#### **Time Complexity**: O(n)
-- Each recursive call compares a pair of characters and increments `i` by 1.
-- In the worst case, the function makes n/2 recursive calls, where `n` is the length of the string.
+- **Recursive Case:** In each recursive call, the function performs a constant amount of work (comparing two
+characters and making a recursive call).
 
-#### **Space Complexity**: O(n)
-- The recursive calls are stored on the call stack, and in the worst case, there are n/2 calls.
+- **Total Work:** Since there are `n/2` recursive calls, and each call does constant work, the time complexity is **O(n)**.
 
-### Key Points
-- The function uses recursion to simplify the palindrome check by reducing the problem size at each step.
-- It's case-sensitive, so `"Madam"` is not considered a palindrome.
-- Empty strings and single-character strings are considered palindromes.
+### Space Complexity
+- **Recursive Call Stack:** Each recursive call adds a new frame to the call stack. The maximum depth of the recursion is `n/2`,
+so the space complexity is **O(n)** due to the call stack.
+
+- **Auxiliary Space:** No additional data structures are used, so the auxiliary space is **O(1)**.
+
+### Summary
+- **Time Complexity:** O(n)
+- **Space Complexity:** O(n) (due to the call stack)
 
 """
 
