@@ -32,7 +32,7 @@ strings = ["abc", "bcd", "cbaccd"]
 
 # =============================================================================================== #
 
-# Solution
+# Solution:
 
 
 # O(n * m) time | O(c) space - where `n`` is the number of strings, `m` is the
@@ -70,19 +70,55 @@ print(
 # Big O:
 
 """
+## Time and Space Complexity Analysis
 
-### Complexity Analysis
+### Time Complexity:
 
-#### Time Complexity:
-- **O(n * m)**:  
-  - `n` is the number of strings.
-  - `m` is the length of the longest string.
-  - Each string is iterated over and processed, resulting in this complexity.
+1. **Loop through each string**: The outer loop iterates over each string in the `strings` list.
+If there are `n` strings, this loop runs `n` times.
 
-#### Space Complexity:
-- **O(c)**:  
-  - `c` is the number of unique characters across all strings. 
-  - Space is used to store the `character_counts` dictionary.
+2. **Convert each string to a set**: For each string, converting it to a set takes `O(m)` time,
+where `m` is the length of the string. This is because each character in the string needs to be added to the set.
+
+3. **Loop through unique characters in the set**: For each unique character in the set, the inner loop runs.
+In the worst case, this could be `O(m)` times if all characters in the string are unique.
+
+4. **Update character counts**: The operation of checking if a character is in the `character_counts` dictionary and
+updating its count is `O(1)` on average, thanks to the hash table implementation of Python dictionaries.
+
+5. **Final loop to find common characters**: The final loop iterates over the `character_counts` dictionary, which has
+at most `k` entries, where `k` is the number of unique characters across all strings. This loop runs in `O(k)` time.
+
+### Overall Time Complexity:
+- The dominant part of the time complexity comes from the nested loops. For each string (of length `m`), we perform `O(m)`
+operations to convert it to a set and then `O(m)` operations to update the character counts. Since this is done
+for `n` strings, the total time complexity is:
+  
+    `O(n * m)`
+  
+where `n` is the number of strings and `m` is the average length of the strings.
+
+### Space Complexity:
+
+1. **`character_counts` dictionary**: This dictionary stores counts for each unique character across all strings.
+In the worst case, if all characters in all strings are unique, this dictionary could have up to `k` entries,
+where `k` is the total number of unique characters across all strings.
+
+2. **`final_characters` list**: This list stores the characters that are common to all strings. In the worst case,
+this list could have up to `k` entries, but typically it will be much smaller.
+
+### Overall Space Complexity:
+- The space complexity is dominated by the `character_counts` dictionary, which can have up to `k` entries. Therefore,
+the space complexity is: `O(k)`
+  
+where `k` is the number of unique characters across all strings.
+
+### Summary:
+- **Time Complexity**: `O(n * m)`
+- **Space Complexity**: `O(k)`
+
+Here, `n` is the number of strings, `m` is the average length of the strings, and `k` is the number of unique characters
+across all strings.
 
 """
 
