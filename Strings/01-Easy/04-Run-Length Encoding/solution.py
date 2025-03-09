@@ -33,15 +33,14 @@ string = "AAAAAAAAAAAAABBCCCCDD"
 ```
 `O(n)` time | `O(n)` space - where `n` is the length of the input string.
 ```
-
 """
 
 # =============================================================================================== #
 
-# Solution
+# Solution:
 
 
-# O (n) time | O(n) space
+# O(n) time | O(n) space
 def run_length_encoding(strings):
     # The input string is guaranteed to be non-empty,
     # so our first run will be of at least length 1
@@ -78,50 +77,32 @@ print(run_length_encoding("A"))  # Output: "1A"
 # Big O:
 
 """
-## Time and Space Complexity
+## Time and Space Complexity Analysis
 
-### Time Complexity Analysis
+### Time Complexity:
+The time complexity of the `run_length_encoding` function is **O(n)**, where `n` is the length of the input string `strings`.
 
-The time complexity of the `run_length_encoding` function is **O(n)**, where **n** is the length of the input string.
-Here's why:
-
-1. The function iterates through the input string exactly once using a `for` loop.
-2. Inside the loop, the operations performed (comparisons, appending to the list, and updating the run length) are
-all constant-time operations, i.e., **O(1)**.
-3. The final step of joining the list of characters into a string using `"".join(encoded_str_characters)` also 
-takes **O(n)** time, as it needs to concatenate all the characters in the list.
-
-Thus, the overall time complexity is **O(n)**.
+- The function iterates through the input string once, comparing each character with the previous one.
+- The operations inside the loop (comparison, appending to the list, and resetting the run length) are all
+constant time operations, **O(1)**.
+- Therefore, the overall time complexity is linear with respect to the length of the input string.
 
 ---
 
-### Space Complexity Analysis
+### Space Complexity:
+The space complexity of the `run_length_encoding` function is **O(n)** in the worst case.
 
-The space complexity of the `run_length_encoding` function is **O(n)**, where **n** is the length of the input string.
-Here's why:
-
-1. The `encoded_str_characters` list stores the encoded characters and their counts. In the worst case, if there are no
-consecutive repeating characters (e.g., "ABC"), the list will store **2n** elements (each character preceded by its count,
-which is always 1).
-2. The space required for the output string is proportional to the length of the input string.
-
-Thus, the overall space complexity is **O(n)**.
-
----
-
-### Key Observations
-
-- The function handles runs of up to 9 characters. If a run exceeds 9 characters, it splits it into multiple runs (e.g., "AAAAAAAAAA" becomes "9A1A").
-- The space complexity is dominated by the output string, which can be up to twice the length of the input string in the worst case.
-- The time complexity is linear, making the function efficient for large input strings.
+- The `encoded_str_characters` list stores the encoded characters and their counts. In the worst case, if there are
+no consecutive repeating characters, the size of this list will be proportional to the length of the input string.
+- For example, if the input string is `"abcdef"`, the encoded output will be `"1a1b1c1d1e1f"`, 
+which is twice the length of the input string.
+- Therefore, the space complexity is linear with respect to the length of the input string.
 
 """
-
 
 # Code Explanation:
 
 """
-
 The provided code implements **run-length encoding**, a simple form of data compression. It encodes a string
 by replacing sequences of the same character with the character followed by its count.
 
