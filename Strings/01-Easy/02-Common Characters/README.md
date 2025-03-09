@@ -16,6 +16,6 @@ strings = ["abc", "bcd", "cbaccd"]
 ["b", "c"] // The characters could be ordered differently.
 ```
 
-## Optimal Space & Time Complexity
+## Optimal Time & Space Complexity
 
 `O(n * m)` time | `O(m)` space - where `n` is the number of strings, and `m` is the length of the longest string.
