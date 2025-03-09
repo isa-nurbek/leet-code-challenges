@@ -32,7 +32,7 @@ key = 2
 
 # =============================================================================================== #
 
-# Solution
+# Solution:
 
 
 # O(n)time | O(n) space
@@ -64,19 +64,62 @@ print(caesar_cipher_encryptor("z", 1))  # Outputs: "a"
 # Big O:
 
 """
+## Time and Space Complexity Analysis
 
-### **Time and Space Complexity**
+Let's analyze the time and space complexity of the provided `caesar_cipher_encryptor` function.
 
-- **Time Complexity:**
-  - Processing each letter in the string takes O(1) for indexing and shifting.
-  - Total time is O(n), where `n` is the length of the string.
+---
 
-- **Space Complexity:**
-  - The `alphabet` list takes O(26), which is constant.
-  - The `new_letters` list takes O(n) to store the result.
-  - Total space complexity is O(n).
+### **Time Complexity**
+1. **`alphabet.index(letter)`**:
+   - This operation searches for the index of `letter` in the `alphabet` list. Since `alphabet` is a list of 26 characters,
+   this operation takes **O(1)** time because the size of the alphabet is fixed and small.
 
-This implementation is both time and space efficient for the Caesar cipher.
+2. **`new_letter_code % 26`**:
+   - The modulo operation is a constant-time operation, so this also takes **O(1)** time.
+
+3. **Loop over `str`**:
+   - The loop iterates over each character in the input string `str`. If the length of `str` is `n`, this loop runs **n times**.
+
+4. **`alphabet[new_letter_code % 26]`**:
+   - Accessing an element in a list by index is a constant-time operation, so this takes **O(1)** time.
+
+5. **`"".join(new_letters)`**:
+   - Joining a list of `n` characters into a string takes **O(n)** time.
+
+---
+
+#### **Overall Time Complexity**:
+- The loop runs `n` times, and each iteration performs **O(1)** operations.
+- The final `join` operation takes **O(n)** time.
+- Therefore, the total time complexity is **O(n)**.
+
+---
+
+### **Space Complexity**
+1. **`alphabet` list**:
+   - The `alphabet` list has a fixed size of 26 characters, so it takes **O(1)** space.
+
+2. **`new_letters` list**:
+   - The `new_letters` list stores `n` characters, where `n` is the length of the input string `str`.
+   This takes **O(n)** space.
+
+3. **Other variables**:
+   - Variables like `new_key`, `letter`, and `new_letter_code` use **O(1)** space.
+
+---
+
+#### **Overall Space Complexity**:
+- The dominant space usage comes from the `new_letters` list, which takes **O(n)** space.
+- Therefore, the total space complexity is **O(n)**.
+
+---
+
+### **Summary**
+- **Time Complexity**: **O(n)**
+- **Space Complexity**: **O(n)**
+
+Where `n` is the length of the input string `str`.
 
 """
 
