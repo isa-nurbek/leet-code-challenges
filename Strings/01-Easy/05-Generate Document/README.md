@@ -21,6 +21,6 @@ document = "AlgoExpert is the Best!"
 True
 ```
 
-## Optimal Space & Time Complexity
+## Optimal Time & Space Complexity
 
 `O(n + m)` time | `O(c)` space - where `n` is the number of characters, `m` is the length of the document, and `c` is the number of unique characters in the characters string
