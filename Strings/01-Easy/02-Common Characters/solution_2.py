@@ -32,7 +32,7 @@ strings = ["abc", "bcd", "cbaccd"]
 
 # =============================================================================================== #
 
-# Solution
+# Solution:
 
 
 # O(n * m) time | O(m) space - where `n`` is the number of strings, and `m` is the
@@ -77,19 +77,51 @@ print(
 # Big O:
 
 """
+## Time and Space Complexity Analysis
 
-### Complexity Analysis
+Let's analyze the time and space complexity of the `common_characters` function and its helper functions.
 
-#### **Time Complexity:**  
-- **Outer loop:** Iterates through `n` strings.  
-- **Inner loop (removing characters):** For each string, it iterates through at most `m` characters
-(length of the smallest string).  
-- **Total:** O(n * m), where `n` is the number of strings and `m` is the length of the smallest string.
+### 1. `get_smallest_string(strings)`:
 
-#### **Space Complexity:**  
-- **Sets:** The `potential_common_characters` set stores at most `m` characters.
-- **Other variables:** Constant space for intermediate calculations.
-- **Total:** O(m).
+- **Time Complexity**: This function iterates through the list of strings once to find the smallest string.
+If there are `n` strings and the average length of the strings is `m`, the time complexity is `O(n * m)`.
+
+- **Space Complexity**: This function only stores the smallest string, so the space complexity is `O(m)`.
+
+### 2. `remove_nonexistent_characters(string, potential_common_characters)`:
+
+- **Time Complexity**: This function iterates through the `potential_common_characters` set and checks if each character
+exists in the `unique_string_characters` set. The size of `potential_common_characters` is at most `m`
+(the length of the smallest string), and checking membership in a set is `O(1)`. Therefore, the time complexity is `O(m)`.
+
+- **Space Complexity**: This function creates a set `unique_string_characters` from the input string, which takes `O(k)`
+space where `k` is the length of the string. However, since this set is temporary, the overall space complexity is `O(1)`
+if we consider the input and output space.
+
+### 3. `common_characters(strings)`:
+
+- **Time Complexity**:
+  - `get_smallest_string` takes `O(n * m)`.
+  - The `remove_nonexistent_characters` function is called `n` times, and each call takes `O(m)`. Therefore,
+  the total time complexity for this part is `O(n * m)`.
+  - Overall, the time complexity is `O(n * m)`.
+  
+- **Space Complexity**:
+  - The `potential_common_characters` set takes `O(m)` space.
+  - The `unique_string_characters` set in `remove_nonexistent_characters` is temporary and does not add
+  to the overall space complexity.
+  - Therefore, the space complexity is `O(m)`.
+
+### Summary
+- **Time Complexity**: `O(n * m)`
+- **Space Complexity**: `O(m)`
+
+Where:
+- `n` is the number of strings in the input list.
+- `m` is the length of the smallest string in the list.
+
+This analysis assumes that the operations on sets (like membership checks and removals) are `O(1)`, 
+which is generally true for Python's set implementation.
 
 """
 
