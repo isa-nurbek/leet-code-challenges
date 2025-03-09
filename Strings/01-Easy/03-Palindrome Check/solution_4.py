@@ -29,7 +29,7 @@ true // it's written the same forward and backward
 
 # =============================================================================================== #
 
-# Solution
+# Solution:
 
 
 # O(n)time | O(1) space
@@ -40,8 +40,10 @@ def isPalindrome(string):
     while left_idx < right_idx:
         if string[left_idx] != string[right_idx]:
             return False
+
         left_idx += 1
         right_idx -= 1
+
     return True
 
 
@@ -57,22 +59,21 @@ print(isPalindrome("Madam"))  # False
 # Big O:
 
 """
-### Time and Space Complexity
+## Time and Space Complexity Analysis
 
 ### Time Complexity:
 The time complexity of the `isPalindrome` function is **O(n)**, where `n` is the length of the input string.
-Here's why:
-- The function uses a `while` loop that iterates from the start (`left_idx`) and end (`right_idx`) of the string towards the center.
-- In each iteration, it compares two characters and adjusts the indices (`left_idx` and `right_idx`).
-- The loop runs until the two indices meet or cross each other, which happens after approximately `n/2` iterations.
-- Since each comparison and index adjustment takes constant time (**O(1)**), the overall time complexity is linear with
-respect to the length of the string.
+This is because the function iterates through the string from both ends (left and right) towards the center,
+comparing characters at each step. In the worst case, it will perform `n/2` comparisons, which simplifies to **O(n)**.
 
 ### Space Complexity:
-The space complexity of the `isPalindrome` function is **O(1)**. Here's why:
-- The function uses a constant amount of extra space, regardless of the input size. It only stores a few
-variables (`left_idx`, `right_idx`, and the input string itself).
-- No additional data structures (like arrays or stacks) are used that grow with the input size.
+The space complexity of the `isPalindrome` function is **O(1)**. This is because the function uses a constant 
+amount of extra space (variables like `left_idx`, `right_idx`, and the input string itself) regardless of the
+size of the input string. No additional data structures or memory allocations are used that depend on the input size.
+
+### Summary:
+- **Time Complexity:** `O(n)`
+- **Space Complexity:** `O(1)`
 
 """
 
