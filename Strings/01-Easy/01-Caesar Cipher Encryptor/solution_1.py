@@ -32,7 +32,7 @@ key = 2
 
 # =============================================================================================== #
 
-# Solution
+# Solution:
 
 
 # O(n)time | O(n) space
@@ -67,37 +67,45 @@ print(caesar_cipher_encryptor("hello", 0))  # Output: "hello"
 # Big O:
 
 """
-To determine the Big O complexity of the provided code, we analyze both the `get_new_letter` function
-and the `caesar_cipher_encryptor` function.
+## Time and Space Complexity Analysis
 
-### **`get_new_letter` function:**
-- The function takes constant time to:
-  - Convert a letter to its ASCII code using `ord`.
-  - Perform arithmetic operations.
-  - Convert the result back to a character using `chr`.
-- The overall time complexity of `get_new_letter` is **O(1)**.
+Let's analyze the time and space complexity of the `caesar_cipher_encryptor` function.
 
-### **`caesar_cipher_encryptor` function:**
-1. **Key calculation (`key % 26`)**:
-   - Modulo operation takes **O(1)** time.
+### Time Complexity:
+1. **Loop through the input string**: The function iterates over each character in the input string `str`.
+If the length of the string is `n`, this loop runs `n` times.
+2. **`get_new_letter` function**: Inside the loop, the `get_new_letter` function is called for each character.
+This function performs a constant amount of work:
+   - It calculates the new character code using `ord(letter) + key`.
+   - It checks if the new character code is within the range of lowercase letters (97 to 122) and adjusts it if necessary.
+   - It converts the new character code back to a character using `chr()`.
+   
+   All these operations are constant time, so the time complexity of `get_new_letter` is `O(1)`.
 
-2. **Iterating through the string**:
-   - The function iterates through each character in the input `str`. If the string has `n` characters,
-   this loop runs `n` times.
-   - For each character, it calls `get_new_letter`, which takes **O(1)** time.
+3. **Appending to the list**: Appending each new character to the `new_letters` list is also a constant time operation, `O(1)`.
 
-3. **String concatenation (`"".join(new_letters)`)**:
-   - Joining a list of `n` characters into a string takes **O(n)** time.
+4. **Joining the list into a string**: After the loop, the list `new_letters` is joined into a single string using `"".join
+(new_letters)`. This operation takes `O(n)` time, where `n` is the length of the string.
 
-### **Total Time Complexity**:
-- The loop iterates `n` times, and each iteration involves an **O(1)** operation from `get_new_letter`.
-- The final string join also takes **O(n)** time.
-- Therefore, the overall time complexity is:
+**Overall Time Complexity**: 
+- The loop runs `n` times, and each iteration takes `O(1)` time.
+- The final join operation takes `O(n)` time.
+- Therefore, the total time complexity is `O(n)`.
 
-  O(n) + O(n) = O(n)
+### Space Complexity:
+1. **List `new_letters`**: The function creates a list `new_letters` to store the new characters. This list will have
+the same length as the input string, so it requires `O(n)` space.
+2. **Other variables**: The variables `new_key`, `letter`, and the return value of `get_new_letter` all use constant space, `O(1)`.
 
-### **Big O Complexity**:
-The time complexity of the `caesar_cipher_encryptor` function is **O(n)**, where `n` is the length of the input string.
+**Overall Space Complexity**: 
+- The dominant space usage is the `new_letters` list, which requires `O(n)` space.
+- Therefore, the total space complexity is `O(n)`.
+
+### Summary:
+- **Time Complexity**: `O(n)`
+- **Space Complexity**: `O(n)`
+
+Where `n` is the length of the input string `str`.
 
 """
 
