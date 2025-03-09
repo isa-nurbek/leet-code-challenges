@@ -41,7 +41,7 @@ and `c` is the number of unique characters in the characters string
 
 # =============================================================================================== #
 
-# Solution
+# Solution:
 
 
 # O(n + m) time | O(c) space - where `n` is the number of characters, `m` is
@@ -75,7 +75,7 @@ print(generate_document("", "hello"))  # False
 # Big O:
 
 """
-## Time and Space Complexity
+## Time and Space Complexity Analysis
 
 ### **Time Complexity Analysis:**
 1. **First Loop (Building `character_counts`)**  
