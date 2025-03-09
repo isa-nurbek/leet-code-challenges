@@ -41,7 +41,7 @@ and `c` is the number of unique characters in the characters string
 
 # =============================================================================================== #
 
-# Solution
+# Solution:
 
 
 # O(m * (n + m)) time | O(1) space - where `n` is the number
@@ -78,47 +78,57 @@ print(generate_document("", "hello"))  # False
 # Big O:
 
 """
-## Time and Space Complexity
+## Time and Space Complexity Analysis
+
+Let's analyze the time and space complexity of the provided code.
+
+### Code Breakdown
+
+1. **`count_character_frequency(character, target)`**:
+   - This function iterates through the `target` string and counts how many times the `character` appears.
+   - Time Complexity: `O(n)`, where `n` is the length of the `target` string.
+   - Space Complexity: `O(1)`, as it only uses a single integer variable (`frequency`) to store the count.
+
+2. **`generate_document(characters, document)`**:
+   - This function iterates through each character in the `document` string.
+   - For each character, it calls `count_character_frequency` twice:
+     - Once to count the frequency of the character in the `document`.
+     - Once to count the frequency of the character in the `characters`.
+   - It then compares the two frequencies and returns `False` if the frequency in the `document` is greater than
+   the frequency in `characters`.
+   - If all characters pass the check, it returns `True`.
 
 ### Time Complexity
 
-1. **`count_character_frequency` function**:
-   - This function iterates through the `target` string to count the frequency of a given `character`.
-   - Time complexity: **O(n)**, where `n` is the length of the `target` string.
-
-2. **`generate_document` function**:
-   - For each character in the `document` string, the function calls `count_character_frequency` twice:
-     - Once for the `document` string.
-     - Once for the `characters` string.
-   - If the length of the `document` is `m` and the length of the `characters` is `n`, the total time complexity is:
-     - **O(m * (m + n))**, because for each character in `document`, we iterate through both `document` and `characters`.
+- Let `n` be the length of the `document` string.
+- Let `m` be the length of the `characters` string.
+- For each character in the `document`:
+  - `count_character_frequency(character, document)` takes `O(n)` time.
+  - `count_character_frequency(character, characters)` takes `O(m)` time.
+- Since these operations are performed for each character in the `document`, the total time complexity is:
+  
+    `O(n * (n + m))`
+  
+- In the worst case, this simplifies to `O(n^2 + nm)`.
 
 ### Space Complexity
 
-1. **`count_character_frequency` function**:
-   - This function uses a single integer variable (`frequency`) to store the count.
-   - Space complexity: **O(1)**.
+- The space complexity is determined by the additional space used by the functions.
+- Both `count_character_frequency` and `generate_document` use a constant amount of extra space (e.g., the `frequency` variable).
+- Therefore, the space complexity is `O(1)`.
 
-2. **`generate_document` function**:
-   - The function does not use any additional data structures that grow with input size.
-   - Space complexity: **O(1)**.
+### Summary
 
-### Optimized Approach
+- **Time Complexity**: `O(n^2 + nm)`
+- **Space Complexity**: `O(1)`
 
-The current implementation is inefficient because it repeatedly counts character frequencies. A more efficient approach
-would be to precompute the frequency of each character in both `characters` and `document` using a hash map (dictionary).
-This reduces the time complexity significantly.
+### Optimization Consideration
 
-
-### Final Answer
-- **Time Complexity of Original Code**: **O(m * (m + n))**.
-- **Space Complexity of Original Code**: **O(1)**.
-
-- **Optimized Time Complexity would be**: **O(n + m)**.
-- **Optimized Space Complexity would be**: **O(k)**.
+The current implementation is inefficient because it repeatedly counts the frequency of characters in the `document` and 
+`characters` strings. A more efficient approach would be to precompute the frequency of each character in both strings 
+using a hash map (dictionary), which would reduce the time complexity to `O(n + m)`.
 
 """
-
 
 # Code Explanation:
 
