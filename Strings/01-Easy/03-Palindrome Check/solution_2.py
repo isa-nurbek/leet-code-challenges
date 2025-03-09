@@ -29,14 +29,16 @@ true // it's written the same forward and backward
 
 # =============================================================================================== #
 
-# Solution
+# Solution:
 
 
 # O(n)time | O(n) space
 def isPalindrome(string):
     reversed_chars = []
+
     for i in reversed(range(len(string))):
         reversed_chars.append(string[i])
+
     return string == "".join(reversed_chars)
 
 
@@ -52,27 +54,31 @@ print(isPalindrome("Madam"))  # False
 # Big O:
 
 """
-## Time and Space Complexity:
+## Time and Space Complexity Analysis
 
-### **Time Complexity**
-- The loop iterates through all `n` characters of the input string, where `n` is the length of the string.
-- The `.join()` operation also takes O(n) time to construct the reversed string.
-- Total Time Complexity: **O(n)**.
+### Time Complexity:
+1. **Reversing the string**: The `for` loop iterates over the string in reverse order, which takes `O(n)` time,
+where `n` is the length of the string.
+2. **Appending characters**: Appending each character to the `reversed_chars` list also takes `O(n)` time in total.
+3. **Joining the list**: The `"".join(reversed_chars)` operation concatenates the characters in the list, which takes `O(n)` time.
+4. **Comparison**: The final comparison `string == "".join(reversed_chars)` takes `O(n)` time.
 
-### **Space Complexity**
-- The `reversed_chars` list requires space proportional to the input string’s length, i.e., O(n).
-- Total Space Complexity: **O(n)**.
+Thus, the overall time complexity is:
 
----
+    O(n) + O(n) + O(n) + O(n) = `O(n)`
 
-### **Important Notes**
-1. **Case-Sensitivity:** 
-   The comparison is case-sensitive, meaning `"Madam"` is not considered a palindrome, as `"M"` and `"m"` are different.
+### Space Complexity:
+1. **Reversed characters list**: The `reversed_chars` list stores all the characters of the string, which requires `O(n)` space.
+2. **Joined string**: The `"".join(reversed_chars)` operation creates a new string, which also requires `O(n)` space.
 
-2. **Optimization:** 
-   This implementation is simple but can be optimized to use O(1) space. For example, you could compare characters
-   directly by iterating from both ends toward the center without building an extra list.
-   
+Thus, the overall space complexity is:
+
+    O(n) + O(n) = `O(n)`
+
+### **Final Answer**
+- **Time Complexity**: `O(n)`
+- **Space Complexity**: `O(n)`
+
 """
 
 # Code Explanation:
