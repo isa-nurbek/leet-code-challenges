@@ -26,9 +26,9 @@ and `a` is the length of the character alphabet represented in the input string.
 
 """
 
-# =============================================================================================== #
+# =========================================================================================================================== #
 
-# Solution
+# Solution:
 
 
 # `O(n)` time | `O(1)` space - where `n` is the length of shorter string
@@ -71,7 +71,7 @@ print(longest_substring_without_duplication("abacacacaaabacaaaeaaafa"))  # Outpu
 # Test Case 3
 print(longest_substring_without_duplication("a"))  # Output: a
 
-# =============================================================================================== #
+# =========================================================================================================================== #
 
 # Big O:
 
@@ -118,6 +118,8 @@ The space complexity of the function is **O(min(n, m))**, where:
 - **Space Complexity**: **O(min(n, m))**
 
 """
+
+# =========================================================================================================================== #
 
 # Code Explanation:
 
