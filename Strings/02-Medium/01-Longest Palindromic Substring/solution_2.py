@@ -31,9 +31,9 @@ string = "abaxyzzyxf"
 
 """
 
-# =============================================================================================== #
+# =========================================================================================================================== #
 
-# Solution
+# Solution:
 
 
 # O(n^2) time | O(n) space
@@ -82,7 +82,7 @@ print(longest_palindromic_substring("abaxyzzyxf"))  # Output: "xyzzyx"
 print(longest_palindromic_substring("it's highnoon"))  # Output: "noon"
 print(longest_palindromic_substring("aca"))  # Output: "aca"
 
-# =============================================================================================== #
+# =========================================================================================================================== #
 
 # Big O:
 
@@ -111,6 +111,8 @@ moderate length. For very large strings, more optimized algorithms (like Manache
 achieve O(n) time complexity.
 
 """
+
+# =========================================================================================================================== #
 
 # Code Explanation:
 
