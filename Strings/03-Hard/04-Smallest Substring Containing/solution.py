@@ -37,7 +37,7 @@ and `s` is the length of the small input string.
 
 """
 
-# =============================================================================================== #
+## =========================================================================================================================== #
 
 # Solution:
 
@@ -175,7 +175,7 @@ print(smallest_substring_containing(big_string_2, small_string_2))
 print(smallest_substring_containing(big_string_3, small_string_3))
 # Output: "affa+a$Affab+a+a+$a"
 
-# =============================================================================================== #
+# =========================================================================================================================== #
 
 # Big O:
 
@@ -233,6 +233,8 @@ print(smallest_substring_containing(big_string_3, small_string_3))
 - **Space Complexity**: **O(M)**, where `M` is the number of unique characters in `small_string`.
 
 """
+
+# =========================================================================================================================== #
 
 # Code Explanation:
 
