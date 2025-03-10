@@ -30,12 +30,12 @@ and `c` is the number of unique characters across all words.
 
 """
 
-# =============================================================================================== #
+# =========================================================================================================================== #
 
-# Solution
+# Solution:
 
 
-# `O(n * l)` time | `O(c)` space - where `n` is the number of words,
+# O(n * l) time | O(c) space - where `n` is the number of words,
 # `l` is the length of the longest word,
 # and `c` is the number of unique characters across all words.
 def minimum_characters_for_words(words):
@@ -115,7 +115,7 @@ print(minimum_characters_for_words(["a", "abc", "ab", "boo"]))
 print(minimum_characters_for_words(["!!!2", "234", "222", "432"]))
 # Output: ['!', '!', '!', '2', '2', '2', '3', '4']
 
-# =============================================================================================== #
+# =========================================================================================================================== #
 
 # Big O:
 
@@ -188,6 +188,8 @@ This analysis assumes that the number of unique characters `M` is relatively sma
 number of characters `N`, which is typically the case for most natural languages.
 
 """
+
+# =========================================================================================================================== #
 
 # Code Explanation:
 
