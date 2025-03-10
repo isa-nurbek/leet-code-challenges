@@ -31,9 +31,9 @@ string = "abaxyzzyxf"
 
 """
 
-# =============================================================================================== #
+# =========================================================================================================================== #
 
-# Solution
+# Solution:
 
 
 # O(n^3) time | O(n) space
@@ -81,7 +81,7 @@ print(longest_palindromic_substring("abaxyzzyxf"))  # xyzzyx
 print(longest_palindromic_substring("it's highnoon"))  # noon
 print(longest_palindromic_substring("aca"))  # aca
 
-# =============================================================================================== #
+# =========================================================================================================================== #
 
 # Big O:
 
@@ -105,6 +105,7 @@ print(longest_palindromic_substring("aca"))  # aca
    - The outer loop runs `n` times.
    - The inner loop runs `n` times for each outer loop iteration.
    - For each substring, the palindrome check takes `O(n)` time.
+   
    - Therefore, the total time complexity is:
      
         O(n) * O(n) * O(n) = O(n^3)
@@ -137,6 +138,8 @@ The above solution is not efficient for large inputs. A more efficient approach 
 using **dynamic programming** or **Manacher's algorithm**, which can reduce the time complexity to O(n^2) or O(n), respectively.
 
 """
+
+# =========================================================================================================================== #
 
 # Code Explanation:
 
