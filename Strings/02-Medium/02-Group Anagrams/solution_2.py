@@ -29,12 +29,12 @@ and `n` is the length of the longest word.
 
 """
 
-# =============================================================================================== #
+# =========================================================================================================================== #
 
-# Solution
+# Solution:
 
 
-# O(w * n * log(n) time | O(w * n) space - where `w` is the number of words
+# O(w * n * log(n)) time | O(w * n) space - where `w` is the number of words
 # and `n` is the length of the longest word
 def group_anagrams(words):
     # Create a dictionary to store groups of anagrams.
@@ -77,7 +77,7 @@ print(group_anagrams(words_2))
 print(group_anagrams(words_3))
 # Expected Output: []
 
-# =============================================================================================== #
+# =========================================================================================================================== #
 
 # Big O:
 
@@ -119,6 +119,8 @@ print(group_anagrams(words_3))
 - **Space Complexity**: `O(n * k)`
 
 """
+
+# =========================================================================================================================== #
 
 # Code Explanation:
 
