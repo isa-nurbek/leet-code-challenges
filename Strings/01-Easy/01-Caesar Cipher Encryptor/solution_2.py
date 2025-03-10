@@ -25,12 +25,12 @@ key = 2
 ## Optimal Space & Time Complexity:
 
 ```
-`O(n)` time | `O(n)` space - where `n` is the length of the input string.
+O(n) time | O(n) space - where `n` is the length of the input string.
 ```
 
 """
 
-# =============================================================================================== #
+# =========================================================================================================================== #
 
 # Solution:
 
@@ -59,7 +59,7 @@ print(caesar_cipher_encryptor("abc", 0))  # Outputs: "abc"
 print(caesar_cipher_encryptor("a", 1))  # Outputs: "b"
 print(caesar_cipher_encryptor("z", 1))  # Outputs: "a"
 
-# =============================================================================================== #
+# =========================================================================================================================== #
 
 # Big O:
 
@@ -92,6 +92,7 @@ Let's analyze the time and space complexity of the provided `caesar_cipher_encry
 #### **Overall Time Complexity**:
 - The loop runs `n` times, and each iteration performs **O(1)** operations.
 - The final `join` operation takes **O(n)** time.
+
 - Therefore, the total time complexity is **O(n)**.
 
 ---
@@ -111,6 +112,7 @@ Let's analyze the time and space complexity of the provided `caesar_cipher_encry
 
 #### **Overall Space Complexity**:
 - The dominant space usage comes from the `new_letters` list, which takes **O(n)** space.
+
 - Therefore, the total space complexity is **O(n)**.
 
 ---
@@ -122,6 +124,8 @@ Let's analyze the time and space complexity of the provided `caesar_cipher_encry
 Where `n` is the length of the input string `str`.
 
 """
+
+# =========================================================================================================================== #
 
 # Code Explanation:
 
