@@ -30,15 +30,14 @@ True // A single replace at index 1 of either string can make the strings equal
 ```
 `O(n)` time | `O(1)` space - where `n` is the length of the shorter string.
 ```
-
 """
 
-# =============================================================================================== #
+# =========================================================================================================================== #
 
-# Solution
+# Solution:
 
 
-# `O(n)` time | `O(1)` space - where `n` is the length of shorter string
+# O(n) time | O(1) space - where `n` is the length of shorter string
 def one_edit(string_one, string_two):
     # Get the lengths of both strings
     length_one, length_two = len(string_one), len(string_two)
@@ -93,7 +92,7 @@ print(one_edit("abc", "b"))  # Output: False
 # Test Case 3
 print(one_edit("abcdefghijk", "abcdefghijk"))  # Output: True
 
-# =============================================================================================== #
+# =========================================================================================================================== #
 
 # Big O:
 
@@ -139,6 +138,8 @@ Since the space used by the function does not scale with the input size, the spa
 - **Space Complexity**: **O(1)**, constant space.
 
 """
+
+# =========================================================================================================================== #
 
 # Code Explanation:
 
