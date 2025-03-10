@@ -22,12 +22,12 @@ true // it's written the same forward and backward
 ## Optimal Space & Time Complexity:
 
 ```
-`O(n)` time | `O(1)` space - where `n` is the length of the input string.
+O(n) time | O(1) space - where `n` is the length of the input string.
 ```
 
 """
 
-# =============================================================================================== #
+# =========================================================================================================================== #
 
 # Solution:
 
@@ -54,7 +54,7 @@ print(isPalindrome("a"))  # True
 print(isPalindrome(""))  # True
 print(isPalindrome("Madam"))  # False
 
-# =============================================================================================== #
+# =========================================================================================================================== #
 
 # Big O:
 
@@ -76,6 +76,8 @@ size of the input string. No additional data structures or memory allocations ar
 - **Space Complexity:** `O(1)`
 
 """
+
+# =========================================================================================================================== #
 
 # Code Explanation:
 
