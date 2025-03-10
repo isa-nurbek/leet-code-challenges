@@ -22,12 +22,12 @@ true // it's written the same forward and backward
 ## Optimal Space & Time Complexity:
 
 ```
-`O(n)` time | `O(1)` space - where `n` is the length of the input string.
+O(n) time | O(1) space - where `n` is the length of the input string.
 ```
 
 """
 
-# =============================================================================================== #
+# =========================================================================================================================== #
 
 # Solution:
 
@@ -45,7 +45,7 @@ print(isPalindrome("a"))  # True
 print(isPalindrome(""))  # True
 print(isPalindrome("Madam"))  # False
 
-# =============================================================================================== #
+# =========================================================================================================================== #
 
 # Big O:
 
@@ -72,6 +72,8 @@ so the space complexity is **O(n)** due to the call stack.
 - **Space Complexity:** O(n) (due to the call stack)
 
 """
+
+# =========================================================================================================================== #
 
 # Code Explanation:
 
