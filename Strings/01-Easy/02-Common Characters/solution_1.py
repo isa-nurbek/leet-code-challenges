@@ -25,12 +25,12 @@ strings = ["abc", "bcd", "cbaccd"]
 ## Optimal Space & Time Complexity:
 
 ```
-`O(n * m)` time | `O(m)` space - where `n` is the number of strings, and `m` is the length of the longest string.
+O(n * m) time | O(m) space - where `n` is the number of strings, and `m` is the length of the longest string.
 ```
 
 """
 
-# =============================================================================================== #
+# =========================================================================================================================== #
 
 # Solution:
 
@@ -65,7 +65,7 @@ print(
     common_characters(["*abc!d", "de!f*", "**!!!****d*****"])
 )  # Output: ['d', '!', '*']
 
-# =============================================================================================== #
+# =========================================================================================================================== #
 
 # Big O:
 
@@ -121,6 +121,8 @@ Here, `n` is the number of strings, `m` is the average length of the strings, an
 across all strings.
 
 """
+
+# =========================================================================================================================== #
 
 # Code Explanation:
 
