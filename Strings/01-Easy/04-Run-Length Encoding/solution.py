@@ -31,11 +31,11 @@ string = "AAAAAAAAAAAAABBCCCCDD"
 ## Optimal Space & Time Complexity
 
 ```
-`O(n)` time | `O(n)` space - where `n` is the length of the input string.
+O(n) time | O(n) space - where `n` is the length of the input string.
 ```
 """
 
-# =============================================================================================== #
+# =========================================================================================================================== #
 
 # Solution:
 
@@ -72,7 +72,7 @@ print(run_length_encoding("AABB"))  # Output: "2A2B"
 print(run_length_encoding("ABC"))  # Output: "1A1B1C"
 print(run_length_encoding("A"))  # Output: "1A"
 
-# =============================================================================================== #
+# =========================================================================================================================== #
 
 # Big O:
 
@@ -83,9 +83,11 @@ print(run_length_encoding("A"))  # Output: "1A"
 The time complexity of the `run_length_encoding` function is **O(n)**, where `n` is the length of the input string `strings`.
 
 - The function iterates through the input string once, comparing each character with the previous one.
+
 - The operations inside the loop (comparison, appending to the list, and resetting the run length) are all
 constant time operations, **O(1)**.
-- Therefore, the overall time complexity is linear with respect to the length of the input string.
+
+- Therefore, the overall time complexity is O(n) linear with respect to the length of the input string.
 
 ---
 
@@ -94,11 +96,15 @@ The space complexity of the `run_length_encoding` function is **O(n)** in the wo
 
 - The `encoded_str_characters` list stores the encoded characters and their counts. In the worst case, if there are
 no consecutive repeating characters, the size of this list will be proportional to the length of the input string.
+
 - For example, if the input string is `"abcdef"`, the encoded output will be `"1a1b1c1d1e1f"`, 
 which is twice the length of the input string.
+
 - Therefore, the space complexity is linear with respect to the length of the input string.
 
 """
+
+# =========================================================================================================================== #
 
 # Code Explanation:
 
