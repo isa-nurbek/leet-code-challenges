@@ -33,12 +33,12 @@ True // A single replace at index 1 of either string can make the strings equal
 
 """
 
-# =============================================================================================== #
+# =========================================================================================================================== #
 
-# Solution
+# Solution:
 
 
-# `O(n + m)` time | `O(1)` space - where `n` is the length of stringOne, and
+# O(n + m) time | O(1) space - where `n` is the length of stringOne, and
 # `m` is the length of stringTwo
 def one_edit(string_one, string_two):
     # Get the lengths of both strings
@@ -75,8 +75,7 @@ print(one_edit("abc", "b"))  # Output: False
 # Test Case 3
 print(one_edit("abcdefghijk", "abcdefghijk"))  # Output: True
 
-
-# =============================================================================================== #
+# =========================================================================================================================== #
 
 # Big O:
 
@@ -121,6 +120,8 @@ Thus, the space complexity is constant, **O(1)**.
 This implementation is efficient for checking if two strings are one edit apart.
 
 """
+
+# =========================================================================================================================== #
 
 # Code Explanation:
 
