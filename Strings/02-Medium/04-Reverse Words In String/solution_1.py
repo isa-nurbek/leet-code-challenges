@@ -33,12 +33,12 @@ string = "AlgoExpert is the best!"
 
 """
 
-# =============================================================================================== #
+# =========================================================================================================================== #
 
-# Solution
+# Solution:
 
 
-# `O(n)` time | `O(n)` space - where `n` is the length of the string.
+# O(n) time | O(n) space - where `n` is the length of the string.
 def reverse_words_in_string(string):
     # Initialize an empty list to store individual words and spaces
     words = []
@@ -96,7 +96,7 @@ print(reverse_words_in_string("Reverse These Words"))
 print(reverse_words_in_string("his      string     has a     lot of   whitespace"))
 # Output: "whitespace   of lot     a has     string      his"
 
-# =============================================================================================== #
+# =========================================================================================================================== #
 
 # Big O:
 
@@ -136,6 +136,8 @@ proportional to the input size.
 - **Space Complexity**: `O(n)`
 
 """
+
+# =========================================================================================================================== #
 
 # Code Explanation:
 
