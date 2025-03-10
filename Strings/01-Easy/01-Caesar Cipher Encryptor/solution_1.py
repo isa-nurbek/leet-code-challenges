@@ -25,12 +25,12 @@ key = 2
 ## Optimal Space & Time Complexity:
 
 ```
-`O(n)` time | `O(n)` space - where `n` is the length of the input string.
+O(n) time | O(n) space - where `n` is the length of the input string.
 ```
 
 """
 
-# =============================================================================================== #
+# =========================================================================================================================== #
 
 # Solution:
 
@@ -62,7 +62,7 @@ print(caesar_cipher_encryptor("abcdefghijklmnopqrstuvwxyz", 1))
 # Output: "bcdefghijklmnopqrstuvwxyza"
 print(caesar_cipher_encryptor("hello", 0))  # Output: "hello"
 
-# =============================================================================================== #
+# =========================================================================================================================== #
 
 # Big O:
 
@@ -74,6 +74,7 @@ Let's analyze the time and space complexity of the `caesar_cipher_encryptor` fun
 ### Time Complexity:
 1. **Loop through the input string**: The function iterates over each character in the input string `str`.
 If the length of the string is `n`, this loop runs `n` times.
+
 2. **`get_new_letter` function**: Inside the loop, the `get_new_letter` function is called for each character.
 This function performs a constant amount of work:
    - It calculates the new character code using `ord(letter) + key`.
@@ -90,11 +91,13 @@ This function performs a constant amount of work:
 **Overall Time Complexity**: 
 - The loop runs `n` times, and each iteration takes `O(1)` time.
 - The final join operation takes `O(n)` time.
+
 - Therefore, the total time complexity is `O(n)`.
 
 ### Space Complexity:
 1. **List `new_letters`**: The function creates a list `new_letters` to store the new characters. This list will have
 the same length as the input string, so it requires `O(n)` space.
+
 2. **Other variables**: The variables `new_key`, `letter`, and the return value of `get_new_letter` all use constant space, `O(1)`.
 
 **Overall Space Complexity**: 
@@ -108,6 +111,8 @@ the same length as the input string, so it requires `O(n)` space.
 Where `n` is the length of the input string `str`.
 
 """
+
+# =========================================================================================================================== #
 
 # Code Explanation:
 
