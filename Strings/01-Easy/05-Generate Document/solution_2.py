@@ -33,13 +33,13 @@ True
 ## Optimal Space & Time Complexity
 
 ```
-`O(n + m)` time | `O(c)` space - where `n` is the number of characters, `m` is the length of the document,
+O(n + m) time | O(c) space - where `n` is the number of characters, `m` is the length of the document,
 and `c` is the number of unique characters in the characters string
 ```
 
 """
 
-# =============================================================================================== #
+# =========================================================================================================================== #
 
 # Solution:
 
@@ -47,30 +47,43 @@ and `c` is the number of unique characters in the characters string
 # O(c * (n + m)) time | O(c) space - where `n` is the number of characters, `m` is
 # the length of the document, and `c` is the number of unique characters in the document
 def generate_document(characters, document):
+    # A set to keep track of characters that have already been counted
     alreadyCounted = set()
 
+    # Iterate through each character in the document
     for character in document:
+        # If the character has already been counted, skip it
         if character in alreadyCounted:
             continue
 
+        # Count the frequency of the current character in the document
         document_frequency = count_character_frequency(character, document)
+        # Count the frequency of the current character in the characters string
         characters_frequency = count_character_frequency(character, characters)
 
+        # If the character appears more frequently in the document than in the characters string,
+        # it means we don't have enough characters to generate the document, so return False
         if document_frequency > characters_frequency:
             return False
 
+        # Mark the character as counted by adding it to the set
         alreadyCounted.add(character)
 
+    # If all characters in the document can be generated from the characters string, return True
     return True
 
 
 def count_character_frequency(character, target):
+    # Initialize a counter for the frequency of the character
     frequency = 0
 
+    # Iterate through each character in the target string
     for char in target:
+        # If the current character matches the target character, increment the frequency counter
         if char == character:
             frequency += 1
 
+    # Return the total count of the character in the target string
     return frequency
 
 
@@ -80,7 +93,7 @@ print(generate_document("A", "a"))  # False
 print(generate_document("a hsgalhsa sanbjksbdkjba kjx", ""))  # True
 print(generate_document("", "hello"))  # False
 
-# =============================================================================================== #
+# =========================================================================================================================== #
 
 # Big O:
 
@@ -113,6 +126,7 @@ This is inefficient, especially for large inputs.
 #### **Space Complexity**
 - The `alreadyCounted` set stores unique characters from `document`, which takes at most `O(m)` space.
 - `count_character_frequency()` uses only a few integer variables (constant space, `O(1)`).
+
 - Overall, the function uses **`O(m)` additional space** for `alreadyCounted`.
 
 Thus, the space complexity is: `O(m)`
@@ -123,6 +137,7 @@ This would reduce the time complexity to `O(n + m)`, making it much more scalabl
 
 """
 
+# =========================================================================================================================== #
 
 # Code Explanation:
 
