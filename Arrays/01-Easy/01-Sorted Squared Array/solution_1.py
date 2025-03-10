@@ -19,9 +19,9 @@ array = [1, 2, 3, 5, 6, 8, 9]
 [1, 4, 9, 25, 36, 64, 81]
 ```
 
-## Optimal Space & Time Complexity:
+## Optimal Time & Space Complexity:
 
-`O(n)` time | `O(n)` space - where `n` is the length of the input array
+`O(n)` time | `O(n)` space - where `n` is the length of the input array.
 
 """
 
@@ -54,25 +54,27 @@ print(sorted_squared_array([0]))  # Output: [0]
 
 """
 
-### Time and Space Complexity
+### Time and Space Complexity Analysis
 
-### **Time Complexity**
-- **Squaring Values:** 
-  - Computing the square of each element in the array requires `O(n)` time, where `n` is the size of the input array.
-- **Sorting:** 
-  - The `sort()` method has a time complexity of `O(n log n)`.
-- **Overall Complexity:** 
-  - The dominant factor is the sorting step, so the overall time complexity is **`O(n log n)`**.
+### Time Complexity:
+1. **Squaring each element**: The loop that iterates over the array and squares each element runs in `O(n)` time,
+where `n` is the length of the array.
+2. **Sorting the squared array**: The `sort()` function in Python uses the Timsort algorithm, which has a
+time complexity of `O(n log n)`.
 
----
+Thus, the overall time complexity is:
 
-### **Space Complexity**
-- **Space for `sorted_squares`:**
-  - The `sorted_squares` list requires `O(n)` space to store the squared values.
-- **Sort Space (if in-place sorting is implemented):**
-  - In most Python implementations, the `sort()` method operates in-place, using `O(1)` auxiliary space.
-- **Overall Space Complexity:** 
-  - The overall space complexity is **`O(n)`** due to the `sorted_squares` list.
+    O(n) + O(n log n) = `O(n log n)`
+
+### Space Complexity:
+1. **Creating the `sorted_squares` array**: This requires `O(n)` space to store the squared values.
+2. **Sorting**: The `sort()` function in Python sorts the array in-place, so it does not require additional space.
+
+Thus, the overall space complexity is: `O(n)`
+
+### Summary:
+- **Time Complexity**: `O(n log n)`
+- **Space Complexity**: `O(n)`
 
 """
 
