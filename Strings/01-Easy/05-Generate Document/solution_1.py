@@ -47,23 +47,35 @@ and `c` is the number of unique characters in the characters string
 # O(m * (n + m)) time | O(1) space - where `n` is the number
 # of characters, `m` is the length of the document
 def generate_document(characters, document):
+    # Iterate through each character in the document
     for character in document:
+        # Count how many times the current character appears in the document
         document_frequency = count_character_frequency(character, document)
+        
+        # Count how many times the current character appears in the given characters
         character_frequency = count_character_frequency(character, characters)
 
+        # If the character appears more frequently in the document than in the given characters,
+        # it means we don't have enough characters to generate the document
         if document_frequency > character_frequency:
-            return False
+            return False  # Return False, indicating the document cannot be generated
 
+    # If all characters in the document have sufficient frequency in the given characters,
+    # return True, indicating the document can be generated
     return True
 
 
+# Helper function to count the frequency of a specific character in a target string
 def count_character_frequency(character, target):
-    frequency = 0
+    frequency = 0  # Initialize frequency counter
 
+    # Iterate through each character in the target string
     for char in target:
+        # If the current character matches the one we're counting, increment the frequency
         if char == character:
             frequency += 1
 
+    # Return the total count of the character in the target string
     return frequency
 
 
