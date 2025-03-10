@@ -22,12 +22,12 @@ true // it's written the same forward and backward
 ## Optimal Space & Time Complexity:
 
 ```
-`O(n)` time | `O(1)` space - where `n` is the length of the input string.
+O(n) time | O(1) space - where `n` is the length of the input string.
 ```
 
 """
 
-# =============================================================================================== #
+# =========================================================================================================================== #
 
 # Solution:
 
@@ -49,7 +49,7 @@ print(isPalindrome("a"))  # True
 print(isPalindrome(""))  # True
 print(isPalindrome("Madam"))  # False
 
-# =============================================================================================== #
+# =========================================================================================================================== #
 
 # Big O:
 
@@ -68,7 +68,7 @@ potential reallocation), it can be `O(n)` for the entire loop.
 
 Thus, the **time complexity** is:
 
-    O(n) + O(n) + O(n) = `O(n)`
+    O(n) + O(n) + O(n) = O(n)
 
 ---
 
@@ -85,6 +85,8 @@ Thus, the **space complexity** is: `O(n)`
 - **Space Complexity**: `O(n)` (can be optimized to O(1))
 
 """
+
+# =========================================================================================================================== #
 
 # Code Explanation:
 
