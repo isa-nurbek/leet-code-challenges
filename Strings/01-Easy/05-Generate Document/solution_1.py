@@ -33,13 +33,13 @@ True
 ## Optimal Space & Time Complexity
 
 ```
-`O(n + m)` time | `O(c)` space - where `n` is the number of characters, `m` is the length of the document,
+O(n + m) time | O(c) space - where `n` is the number of characters, `m` is the length of the document,
 and `c` is the number of unique characters in the characters string
 ```
 
 """
 
-# =============================================================================================== #
+# =========================================================================================================================== #
 
 # Solution:
 
@@ -73,7 +73,7 @@ print(generate_document("A", "a"))  # False
 print(generate_document("a hsgalhsa sanbjksbdkjba kjx", ""))  # True
 print(generate_document("", "hello"))  # False
 
-# =============================================================================================== #
+# =========================================================================================================================== #
 
 # Big O:
 
@@ -86,6 +86,7 @@ Let's analyze the time and space complexity of the provided code.
 
 1. **`count_character_frequency(character, target)`**:
    - This function iterates through the `target` string and counts how many times the `character` appears.
+   
    - Time Complexity: `O(n)`, where `n` is the length of the `target` string.
    - Space Complexity: `O(1)`, as it only uses a single integer variable (`frequency`) to store the count.
 
@@ -105,6 +106,7 @@ Let's analyze the time and space complexity of the provided code.
 - For each character in the `document`:
   - `count_character_frequency(character, document)` takes `O(n)` time.
   - `count_character_frequency(character, characters)` takes `O(m)` time.
+  
 - Since these operations are performed for each character in the `document`, the total time complexity is:
   
     `O(n * (n + m))`
@@ -115,6 +117,7 @@ Let's analyze the time and space complexity of the provided code.
 
 - The space complexity is determined by the additional space used by the functions.
 - Both `count_character_frequency` and `generate_document` use a constant amount of extra space (e.g., the `frequency` variable).
+
 - Therefore, the space complexity is `O(1)`.
 
 ### Summary
@@ -129,6 +132,8 @@ The current implementation is inefficient because it repeatedly counts the frequ
 using a hash map (dictionary), which would reduce the time complexity to `O(n + m)`.
 
 """
+
+# =========================================================================================================================== #
 
 # Code Explanation:
 
