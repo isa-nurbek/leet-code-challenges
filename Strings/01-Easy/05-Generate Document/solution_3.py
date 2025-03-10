@@ -33,13 +33,13 @@ True
 ## Optimal Space & Time Complexity
 
 ```
-`O(n + m)` time | `O(c)` space - where `n` is the number of characters, `m` is the length of the document,
+O(n + m) time | O(c) space - where `n` is the number of characters, `m` is the length of the document,
 and `c` is the number of unique characters in the characters string
 ```
 
 """
 
-# =============================================================================================== #
+# =========================================================================================================================== #
 
 # Solution:
 
@@ -47,20 +47,30 @@ and `c` is the number of unique characters in the characters string
 # O(n + m) time | O(c) space - where `n` is the number of characters, `m` is
 # the length of the document, and `c` is the number of unique characters in the characters string
 def generate_document(characters, document):
+    # Initialize a dictionary to keep track of the count of each character in the `characters` string.
     character_counts = {}
 
+    # Iterate over each character in the `characters` string.
     for character in characters:
+        # If the character is not already in the dictionary, add it with a count of 0.
         if character not in character_counts:
             character_counts[character] = 0
 
+        # Increment the count of the current character in the dictionary.
         character_counts[character] += 1
 
+    # Iterate over each character in the `document` string.
     for character in document:
+        # If the character is not in the dictionary or its count is 0, 
+        # it means we cannot generate the document, so return False.
         if character not in character_counts or character_counts[character] == 0:
             return False
 
+        # Decrement the count of the current character in the dictionary.
         character_counts[character] -= 1
 
+    # If we successfully iterate through the entire document without returning False,
+    # it means we can generate the document using the characters provided, so return True.
     return True
 
 
@@ -70,7 +80,7 @@ print(generate_document("A", "a"))  # False
 print(generate_document("a hsgalhsa sanbjksbdkjba kjx", ""))  # True
 print(generate_document("", "hello"))  # False
 
-# =============================================================================================== #
+## =========================================================================================================================== #
 
 # Big O:
 
@@ -94,6 +104,7 @@ print(generate_document("", "hello"))  # False
 ### **Space Complexity Analysis:**
 1. **Dictionary `character_counts` Storage**  
    - Stores counts for unique characters in `characters`.  
+   
    - In the worst case (all unique characters), this takes **O(k)** space, where `k` is the number of unique characters.  
    - Since `k ≤ m` (bounded by the length of `characters`), the space complexity is **O(m)**.
 
@@ -110,6 +121,8 @@ print(generate_document("", "hello"))  # False
 - **Space Complexity:** `O(m)`
 
 """
+
+# =========================================================================================================================== #
 
 # Code Explanation:
 
