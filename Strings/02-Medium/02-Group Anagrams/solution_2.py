@@ -1,4 +1,4 @@
-# Description:
+# Problem Description:
 
 """
                             Group Anagrams
@@ -23,7 +23,7 @@ words = ["yo", "act", "flop", "tac", "foo", "cat", "oy", "olfp"]
 
 ## Optimal Time & Space Complexity:
 ```
-`O(w * n * log(n))` time | `O(wn)` space - where `w` is the number of words
+O(w * n * log(n)) time | O(wn) space - where `w` is the number of words
 and `n` is the length of the longest word.
 ```
 
@@ -79,7 +79,7 @@ print(group_anagrams(words_3))
 
 # =========================================================================================================================== #
 
-# Big O:
+# Big O Analysis:
 
 """
 ## Time and Space Complexity Analysis
@@ -122,7 +122,7 @@ print(group_anagrams(words_3))
 
 # =========================================================================================================================== #
 
-# Code Explanation:
+# Detailed Code Explanation:
 
 """
 ### Explanation of the `group_anagrams` Function
