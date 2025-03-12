@@ -1,4 +1,4 @@
-# Description:
+# Problem Description:
 
 """
                                     Smallest Substring Containing
@@ -31,7 +31,7 @@ smallString = "$$abf"
 
 ## Optimal Time & Space Complexity:
 ```
-`O(b + s)` time | `O(b + s)` space - where `b` is the length of the big input string
+O(b + s) time | O(b + s) space - where `b` is the length of the big input string
 and `s` is the length of the small input string.
 ```
 
@@ -42,7 +42,7 @@ and `s` is the length of the small input string.
 # Solution:
 
 
-# `O(b + s)` time | `O(b + s)` space - where `b` is the length of the big
+# O(b + s) time | O(b + s) space - where `b` is the length of the big
 # input string and `s` is the length of the small input string
 def smallest_substring_containing(big_string, small_string):
     # Step 1: Get the character counts for the small string
@@ -177,7 +177,7 @@ print(smallest_substring_containing(big_string_3, small_string_3))
 
 # =========================================================================================================================== #
 
-# Big O:
+# Big O Analysis:
 
 """
 ## Time and Space Complexity Analysis
@@ -236,7 +236,7 @@ print(smallest_substring_containing(big_string_3, small_string_3))
 
 # =========================================================================================================================== #
 
-# Code Explanation:
+# Detailed Code Explanation:
 
 """
 ### Explanation of the Code
