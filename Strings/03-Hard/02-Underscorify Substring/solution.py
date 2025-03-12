@@ -1,4 +1,4 @@
-# Description:
+# Problem Description:
 
 """
                                         Underscorify Substring
@@ -197,7 +197,7 @@ print(underscorify_substring(string_3, substring_3))
 
 # =========================================================================================================================== #
 
-# Big O:
+# Big O Analysis:
 
 """
 ## Time and Space Complexity Analysis
@@ -254,7 +254,7 @@ Where:
 
 # =========================================================================================================================== #
 
-# Code Explanation:
+# Detailed Code Explanation:
 
 """
 This code defines a function, `underscorify_substring`, which takes a string and a substring as input and
