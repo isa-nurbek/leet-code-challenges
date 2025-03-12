@@ -12,28 +12,25 @@ If the input string doesn't have any non-repeating characters, your function sho
 
 
 ## Sample Input:
-
 ```
 string = "abcdcaf"
 ```
 
 ## Sample Output:
-
 ```
 1 // The first non-repeating character is "b" and is found at index 1.
 ```
 
 ## Optimal Time & Space Complexity
-
 ```
-`O(n)` time | `O(1)` space - where `n` is the length of the input string The constant space is
+O(n) time | O(1) space - where `n` is the length of the input string The constant space is
 because the input string only has lowercase English-alphabet letters; thus, our hash table will
 never have more than 26 character frequencies.
 ```
 
 """
 
-# =============================================================================================== #
+# =========================================================================================================================== #
 
 # Solution:
 
@@ -43,17 +40,27 @@ never have more than 26 character frequencies.
 # English-alphabet letters; thus, our hash table will never have more
 # than 26 character frequencies.
 def first_non_repeating_character(string):
+    # Create a dictionary to store the frequency of each character in the string
     character_frequencies = {}
 
+    # Iterate through each character in the string to populate the frequency dictionary
     for character in string:
+        # Use the get() method to retrieve the current count of the character.
+        # If the character is not in the dictionary, return 0 as the default value.
+        # Then, increment the count by 1 and store it back in the dictionary.
         character_frequencies[character] = character_frequencies.get(character, 0) + 1
 
+    # Iterate through the string again, this time by index
     for idx in range(len(string)):
+        # Get the character at the current index
         character = string[idx]
 
+        # Check if the frequency of this character is 1 (i.e., it's non-repeating)
         if character_frequencies[character] == 1:
+            # If it is, return the current index as it's the first non-repeating character
             return idx
 
+    # If no non-repeating character is found, return -1
     return -1
 
 
@@ -63,7 +70,7 @@ print(first_non_repeating_character("faadabcbbebdf"))  # 6
 print(first_non_repeating_character("a"))  # 0
 print(first_non_repeating_character(""))  # -1
 
-# =============================================================================================== #
+# =========================================================================================================================== #
 
 # Big O:
 
@@ -102,6 +109,8 @@ print(first_non_repeating_character(""))  # -1
 - **Space Complexity:** **O(n)**
 
 """
+
+# =========================================================================================================================== #
 
 # Code Explanation:
 
