@@ -1,4 +1,4 @@
-# Description:
+# Problem Description:
 
 """
                             Longest Palindromic Substring
@@ -12,21 +12,18 @@ You can assume that there will only be one longest palindromic substring.
 
 
 ## Sample Input:
-
 ```
 string = "abaxyzzyxf"
 ```
 
 ## Sample Output:
-
 ```
 "xyzzyx"
 ```
 
 ## Optimal Time & Space Complexity:
-
 ```
-`O(n^2)` time | `O(n)` space - where `n` is the length of the input string.
+O(n^2) time | O(n) space - where `n` is the length of the input string.
 ```
 
 """
@@ -36,7 +33,7 @@ string = "abaxyzzyxf"
 # Solution:
 
 
-# O(n^2) time | O(n) space
+# O(n^2) time | O(1) space
 def longest_palindromic_substring(string):
     # Initialize the current longest palindrome substring indices.
     # The default is the first character, which is a palindrome of length 1.
@@ -84,7 +81,7 @@ print(longest_palindromic_substring("aca"))  # Output: "aca"
 
 # =========================================================================================================================== #
 
-# Big O:
+# Big O Analysis:
 
 """
 ## Time and Space Complexity Analysis
@@ -114,7 +111,7 @@ achieve O(n) time complexity.
 
 # =========================================================================================================================== #
 
-# Code Explanation:
+# Detailed Code Explanation:
 
 """
 This Python program efficiently finds the **longest palindromic substring** in a given string using the
