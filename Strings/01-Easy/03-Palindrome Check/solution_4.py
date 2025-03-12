@@ -1,4 +1,4 @@
-# Description:
+# Problem Description:
 
 """
                                          Palindrome Check
@@ -7,20 +7,18 @@ Write a function that takes in a non-empty string and that returns a boolean rep
 
 A palindrome is defined as a string that's written the same forward and backward. Note that single-character strings are palindromes.
 
-## Sample Input:
 
+## Sample Input:
 ```
 string = "abcdcba"
 ```
 
 ## Sample Output:
-
 ```
 true // it's written the same forward and backward
 ```
 
-## Optimal Space & Time Complexity:
-
+## Optimal Time & Space Complexity:
 ```
 O(n) time | O(1) space - where `n` is the length of the input string.
 ```
@@ -34,16 +32,27 @@ O(n) time | O(1) space - where `n` is the length of the input string.
 
 # O(n)time | O(1) space
 def isPalindrome(string):
+    # Initialize two pointers:
+    # - left_idx starts at the beginning of the string (index 0)
+    # - right_idx starts at the end of the string (index len(string) - 1)
     left_idx = 0
     right_idx = len(string) - 1
 
+    # Loop while the left pointer is less than the right pointer
+    # This ensures we only compare each pair of characters once
     while left_idx < right_idx:
+        # If the characters at the current left and right pointers are not the same,
+        # the string is not a palindrome, so return False
         if string[left_idx] != string[right_idx]:
             return False
 
+        # Move the left pointer one step to the right
         left_idx += 1
+        # Move the right pointer one step to the left
         right_idx -= 1
 
+    # If the loop completes without finding any mismatches,
+    # the string is a palindrome, so return True
     return True
 
 
@@ -56,7 +65,7 @@ print(isPalindrome("Madam"))  # False
 
 # =========================================================================================================================== #
 
-# Big O:
+# Big O Analysis:
 
 """
 ## Time and Space Complexity Analysis
@@ -79,7 +88,7 @@ size of the input string. No additional data structures or memory allocations ar
 
 # =========================================================================================================================== #
 
-# Code Explanation:
+# Detailed Code Explanation:
 
 """
 Here's a detailed explanation of the provided code and how it works:
