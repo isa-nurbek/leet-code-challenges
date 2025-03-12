@@ -1,4 +1,4 @@
-# Description:
+# Problem Description:
 
 """
 
@@ -16,20 +16,18 @@ the run "AAAAAAAAAAAA" (12 As), can't naively be encoded as "12A", since this st
 or "1AA". Thus, long runs (runs of 10 or more characters) should be encoded in a split fashion; the aforementioned run
 should be encoded as "9A3A".
 
-## Sample Input:
 
+## Sample Input:
 ```
 string = "AAAAAAAAAAAAABBCCCCDD"
 ```
 
 ## Sample Output:
-
 ```
 "9A4A2B4C2D"
 ```
 
-## Optimal Space & Time Complexity
-
+## Optimal Time & Space Complexity
 ```
 O(n) time | O(n) space - where `n` is the length of the input string.
 ```
@@ -42,26 +40,36 @@ O(n) time | O(n) space - where `n` is the length of the input string.
 
 # O(n) time | O(n) space
 def run_length_encoding(strings):
-    # The input string is guaranteed to be non-empty,
-    # so our first run will be of at least length 1
+    # Initialize an empty list to store the encoded characters and their counts
     encoded_str_characters = []
+
+    # Initialize a counter to keep track of the current run length
     current_run_length = 1
 
+    # Loop through the input string starting from the second character
     for i in range(1, len(strings)):
+        # Get the current character and the previous character
         current_character = strings[i]
         previous_character = strings[i - 1]
 
+        # If the current character is different from the previous character,
+        # or if the current run length has reached the maximum allowed (9),
+        # append the run length and the previous character to the encoded list
         if current_character != previous_character or current_run_length == 9:
             encoded_str_characters.append(str(current_run_length))
             encoded_str_characters.append(previous_character)
+            # Reset the run length counter for the new character
             current_run_length = 0
 
+        # Increment the run length counter for the current character
         current_run_length += 1
 
-    # Handle the last run
+    # After the loop ends, append the last run length and the last character
+    # to the encoded list
     encoded_str_characters.append(str(current_run_length))
     encoded_str_characters.append(strings[len(strings) - 1])
 
+    # Join the list of encoded characters into a single string and return it
     return "".join(encoded_str_characters)
 
 
@@ -74,7 +82,7 @@ print(run_length_encoding("A"))  # Output: "1A"
 
 # =========================================================================================================================== #
 
-# Big O:
+# Big O Analysis:
 
 """
 ## Time and Space Complexity Analysis
@@ -102,11 +110,15 @@ which is twice the length of the input string.
 
 - Therefore, the space complexity is linear with respect to the length of the input string.
 
+### Summary:
+- **Time Complexity:** O(n)
+- **Space Complexity:** O(n)
+
 """
 
 # =========================================================================================================================== #
 
-# Code Explanation:
+# Detailed Code Explanation:
 
 """
 The provided code implements **run-length encoding**, a simple form of data compression. It encodes a string
