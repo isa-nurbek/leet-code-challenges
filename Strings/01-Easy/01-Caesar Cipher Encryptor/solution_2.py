@@ -1,4 +1,4 @@
-# Description:
+# Problem Description:
 
 """
                                     Caesar Cipher Encryptor
@@ -9,21 +9,19 @@ in the alphabet, where k is the key.
 
 Note that letters should "wrap" around the alphabet; in other words, the letter `z` shifted by one returns the letter `a`.
 
-## Sample Input:
 
+## Sample Input:
 ```
 string = "xyz"
 key = 2
 ```
 
 ## Sample Output:
-
 ```
 "zab"
 ```
 
-## Optimal Space & Time Complexity:
-
+## Optimal Time & Space Complexity:
 ```
 O(n) time | O(n) space - where `n` is the length of the input string.
 ```
@@ -36,18 +34,35 @@ O(n) time | O(n) space - where `n` is the length of the input string.
 
 
 # O(n)time | O(n) space
+# Function to calculate the new letter after shifting by the key
 def get_new_letter(letter, key, alphabet):
-    new_letter_code = alphabet.index(letter) + key
+    # Find the index of the current letter in the alphabet
+    current_index = alphabet.index(letter)
+
+    # Calculate the new index by adding the key (shift) to the current index
+    new_letter_code = current_index + key
+
+    # Use modulo 26 to wrap around the alphabet if the new index exceeds 25
     return alphabet[new_letter_code % 26]
 
 
+# Function to encrypt a string using the Caesar Cipher
 def caesar_cipher_encryptor(str, key):
+    # List to store the new encrypted letters
     new_letters = []
+
+    # Normalize the key to ensure it's within the range of 0-25
     new_key = key % 26
+
+    # Define the alphabet as a list of lowercase letters
     alphabet = list("abcdefghijklmnopqrstuvwxyz")
 
+    # Iterate over each letter in the input string
     for letter in str:
+        # Get the new letter after shifting by the key and add it to the list
         new_letters.append(get_new_letter(letter, new_key, alphabet))
+
+    # Join the list of new letters into a single string and return it
     return "".join(new_letters)
 
 
@@ -61,7 +76,7 @@ print(caesar_cipher_encryptor("z", 1))  # Outputs: "a"
 
 # =========================================================================================================================== #
 
-# Big O:
+# Big O Analysis:
 
 """
 ## Time and Space Complexity Analysis
@@ -127,7 +142,7 @@ Where `n` is the length of the input string `str`.
 
 # =========================================================================================================================== #
 
-# Code Explanation:
+# Detailed Code Explanation:
 
 """
 
