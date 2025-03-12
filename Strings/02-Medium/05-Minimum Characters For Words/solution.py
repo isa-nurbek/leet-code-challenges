@@ -1,4 +1,4 @@
-# Description:
+# Problem Description:
 
 """
                                        Minimum Characters For Words
@@ -24,7 +24,7 @@ words = ["this", "that", "did", "deed", "them!", "a"]
 
 ## Optimal Time & Space Complexity:
 ```
-`O(n * l)` time | `O(c)` space - where `n` is the number of words, `l` is the length of the longest word,
+O(n * l) time | O(c) space - where `n` is the number of words, `l` is the length of the longest word,
 and `c` is the number of unique characters across all words.
 ```
 
@@ -117,7 +117,7 @@ print(minimum_characters_for_words(["!!!2", "234", "222", "432"]))
 
 # =========================================================================================================================== #
 
-# Big O:
+# Big O Analysis:
 
 """
 ## Time and Space Complexity Analysis
@@ -182,6 +182,7 @@ print(minimum_characters_for_words(["!!!2", "234", "222", "432"]))
 
 - **Time Complexity**: `O(N + M)`, where `N` is the total number of characters across all words, and `M`
 is the total number of unique characters across all words.
+
 - **Space Complexity**: `O(M)`, where `M` is the total number of unique characters across all words.
 
 This analysis assumes that the number of unique characters `M` is relatively small compared to the total
@@ -191,7 +192,7 @@ number of characters `N`, which is typically the case for most natural languages
 
 # =========================================================================================================================== #
 
-# Code Explanation:
+# Detailed Code Explanation:
 
 """
 This Python program determines the minimum set of characters needed to construct all words from a given list.
