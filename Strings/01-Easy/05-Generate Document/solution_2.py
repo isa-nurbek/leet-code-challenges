@@ -1,4 +1,4 @@
-# Description:
+# Problem Description:
 
 """
 
@@ -17,21 +17,19 @@ and spaces.
 
 Note: you can always generate the empty string (`""`).
 
-## Sample Input:
 
+## Sample Input:
 ```
 characters = "Bste!hetsi ogEAxpelrt x "
 document = "AlgoExpert is the Best!"
 ```
 
 ## Sample Output:
-
 ```
 True
 ```
 
-## Optimal Space & Time Complexity
-
+## Optimal Time & Space Complexity
 ```
 O(n + m) time | O(c) space - where `n` is the number of characters, `m` is the length of the document,
 and `c` is the number of unique characters in the characters string
@@ -95,7 +93,7 @@ print(generate_document("", "hello"))  # False
 
 # =========================================================================================================================== #
 
-# Big O:
+# Big O Analysis:
 
 """
 ## Time and Space Complexity Analysis
@@ -120,7 +118,6 @@ and in the worst case, every character in `document` is unique, the total worst-
 
     O(m * (n + m)) = `O(mn + m^2)`
 
-
 This is inefficient, especially for large inputs.
 
 #### **Space Complexity**
@@ -131,7 +128,13 @@ This is inefficient, especially for large inputs.
 
 Thus, the space complexity is: `O(m)`
 
+### Summary
+
+- **Time Complexity**: O(mn + m^2)
+- **Space Complexity**: O(m)
+
 ### **Optimized Approach**
+
 A more efficient approach would be to precompute character frequencies using hash maps (dictionaries).
 This would reduce the time complexity to `O(n + m)`, making it much more scalable.
 
@@ -139,7 +142,7 @@ This would reduce the time complexity to `O(n + m)`, making it much more scalabl
 
 # =========================================================================================================================== #
 
-# Code Explanation:
+# Detailed Code Explanation:
 
 """
 
