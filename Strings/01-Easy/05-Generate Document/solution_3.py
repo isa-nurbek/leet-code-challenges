@@ -1,4 +1,4 @@
-# Description:
+# Problem Description:
 
 """
 
@@ -17,21 +17,19 @@ and spaces.
 
 Note: you can always generate the empty string (`""`).
 
-## Sample Input:
 
+## Sample Input:
 ```
 characters = "Bste!hetsi ogEAxpelrt x "
 document = "AlgoExpert is the Best!"
 ```
 
 ## Sample Output:
-
 ```
 True
 ```
 
-## Optimal Space & Time Complexity
-
+## Optimal Time & Space Complexity
 ```
 O(n + m) time | O(c) space - where `n` is the number of characters, `m` is the length of the document,
 and `c` is the number of unique characters in the characters string
@@ -61,7 +59,7 @@ def generate_document(characters, document):
 
     # Iterate over each character in the `document` string.
     for character in document:
-        # If the character is not in the dictionary or its count is 0, 
+        # If the character is not in the dictionary or its count is 0,
         # it means we cannot generate the document, so return False.
         if character not in character_counts or character_counts[character] == 0:
             return False
@@ -82,7 +80,7 @@ print(generate_document("", "hello"))  # False
 
 ## =========================================================================================================================== #
 
-# Big O:
+# Big O Analysis:
 
 """
 ## Time and Space Complexity Analysis
@@ -124,7 +122,7 @@ print(generate_document("", "hello"))  # False
 
 # =========================================================================================================================== #
 
-# Code Explanation:
+# Detailed Code Explanation:
 
 """
 ### **Detailed Explanation of the Code**
