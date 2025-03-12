@@ -1,4 +1,4 @@
-# Description:
+# Problem Description:
 
 """
                                         Pattern Matcher
@@ -31,7 +31,7 @@ string = "gogopowerrangergogopowerranger"
 
 ## Optimal Time & Space Complexity:
 ```
-`O(n^2 + m)` time | `O(n + m)` space - where `n` is the length of the main string and
+O(n^2 + m) time | O(n + m) space - where `n` is the length of the main string and
 `m` is the length of the pattern.
 ```
 
@@ -156,7 +156,7 @@ print(pattern_matcher(pattern_3, string_3))
 
 # =========================================================================================================================== #
 
-# Big O:
+# Big O Analysis:
 
 """
 ## Time and Space Complexity Analysis
@@ -210,7 +210,7 @@ and concatenation are efficient.
 
 # =========================================================================================================================== #
 
-# Code Explanation:
+# Detailed Code Explanation:
 
 """
 ### **Pattern Matcher: Detailed Explanation**
