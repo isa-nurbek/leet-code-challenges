@@ -1,29 +1,27 @@
-# Description:
+# Problem Description:
 
 """
                                     Caesar Cipher Encryptor
 
 Given a non-empty string of lowercase letters and a non-negative integer representing a key, write
-a function that returns a new string obtained by shifting every letter in the input string by k positions
-in the alphabet, where k is the key.
+a function that returns a new string obtained by shifting every letter in the input string by `k` positions
+in the alphabet, where `k` is the key.
 
 Note that letters should "wrap" around the alphabet; in other words, the letter `z` shifted by one returns the letter `a`.
 
-## Sample Input:
 
+## Sample Input:
 ```
 string = "xyz"
 key = 2
 ```
 
 ## Sample Output:
-
 ```
 "zab"
 ```
 
-## Optimal Space & Time Complexity:
-
+## Optimal Time & Space Complexity:
 ```
 O(n) time | O(n) space - where `n` is the length of the input string.
 ```
@@ -36,8 +34,13 @@ O(n) time | O(n) space - where `n` is the length of the input string.
 
 
 # O(n)time | O(n) space
+# Function to calculate the new letter after shifting by the key
 def get_new_letter(letter, key):
+    # Calculate the ASCII code of the new letter by adding the key to the current letter's ASCII code
     new_letter_code = ord(letter) + key
+
+    # If the new letter's code is within the lowercase alphabet range (97-122), return the character
+    # Otherwise, wrap around using modulo operation to stay within the alphabet range
     return (
         chr(new_letter_code)
         if new_letter_code <= 122
@@ -45,12 +48,20 @@ def get_new_letter(letter, key):
     )
 
 
+# Function to encrypt a string using the Caesar Cipher algorithm
 def caesar_cipher_encryptor(str, key):
+    # Initialize an empty list to store the new (encrypted) letters
     new_letters = []
+
+    # Normalize the key to ensure it is within the range of 0-25 (to handle large keys)
     new_key = key % 26
 
+    # Iterate over each letter in the input string
     for letter in str:
+        # Get the new letter after shifting by the key and add it to the list
         new_letters.append(get_new_letter(letter, new_key))
+
+    # Join the list of new letters into a single string and return it
     return "".join(new_letters)
 
 
@@ -64,7 +75,7 @@ print(caesar_cipher_encryptor("hello", 0))  # Output: "hello"
 
 # =========================================================================================================================== #
 
-# Big O:
+# Big O Analysis:
 
 """
 ## Time and Space Complexity Analysis
@@ -114,7 +125,7 @@ Where `n` is the length of the input string `str`.
 
 # =========================================================================================================================== #
 
-# Code Explanation:
+# Detailed Code Explanation:
 
 """
 The given code implements a **Caesar cipher encryptor**, a basic encryption technique where each letter
