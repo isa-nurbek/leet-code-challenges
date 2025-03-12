@@ -1,4 +1,4 @@
-# Description:
+# Problem Description:
 
 """
                                     One Edit
@@ -26,9 +26,9 @@ stringTwo = "hollo"
 True // A single replace at index 1 of either string can make the strings equal
 ```
 
-## Optimal Time & Space Complexity:
+## Optimal Time and Space Complexity:
 ```
-`O(n)` time | `O(1)` space - where `n` is the length of the shorter string.
+O(n) time | O(1) space - where `n` is the length of the shorter string.
 ```
 
 """
@@ -77,7 +77,7 @@ print(one_edit("abcdefghijk", "abcdefghijk"))  # Output: True
 
 # =========================================================================================================================== #
 
-# Big O:
+# Big O Analysis:
 
 """
 ## Time and Space Complexity Analysis
@@ -123,7 +123,7 @@ This implementation is efficient for checking if two strings are one edit apart.
 
 # =========================================================================================================================== #
 
-# Code Explanation:
+# Detailed Code Explanation:
 
 """
 This function `one_edit` checks whether two strings are at most **one edit apart**. An edit can be:
