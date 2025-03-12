@@ -1,4 +1,4 @@
-# Description:
+# Problem Description:
 
 """
 
@@ -17,24 +17,22 @@ and spaces.
 
 Note: you can always generate the empty string (`""`).
 
-## Sample Input:
 
+## Sample Input:
 ```
 characters = "Bste!hetsi ogEAxpelrt x "
 document = "AlgoExpert is the Best!"
 ```
 
 ## Sample Output:
-
 ```
 True
 ```
 
 ## Optimal Space & Time Complexity
-
 ```
 O(n + m) time | O(c) space - where `n` is the number of characters, `m` is the length of the document,
-and `c` is the number of unique characters in the characters string
+and `c` is the number of unique characters in the characters string.
 ```
 
 """
@@ -51,7 +49,7 @@ def generate_document(characters, document):
     for character in document:
         # Count how many times the current character appears in the document
         document_frequency = count_character_frequency(character, document)
-        
+
         # Count how many times the current character appears in the given characters
         character_frequency = count_character_frequency(character, characters)
 
@@ -87,7 +85,7 @@ print(generate_document("", "hello"))  # False
 
 # =========================================================================================================================== #
 
-# Big O:
+# Big O Analysis:
 
 """
 ## Time and Space Complexity Analysis
@@ -147,7 +145,7 @@ using a hash map (dictionary), which would reduce the time complexity to `O(n + 
 
 # =========================================================================================================================== #
 
-# Code Explanation:
+# Detailed Code Explanation:
 
 """
 ### Explanation of the Code
