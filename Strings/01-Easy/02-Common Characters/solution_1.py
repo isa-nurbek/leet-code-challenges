@@ -1,4 +1,4 @@
-# Description:
+# Problem Description:
 
 """
 
@@ -11,19 +11,16 @@ Note that the strings are not guaranteed to only contain alphanumeric characters
 
 
 ## Sample Input:
-
 ```
 strings = ["abc", "bcd", "cbaccd"]
 ```
 
 ## Sample Output:
-
 ```
 ["b", "c"] // The characters could be ordered differently.
 ```
 
-## Optimal Space & Time Complexity:
-
+## Optimal Time & Space Complexity:
 ```
 O(n * m) time | O(m) space - where `n` is the number of strings, and `m` is the length of the longest string.
 ```
@@ -39,21 +36,33 @@ O(n * m) time | O(m) space - where `n` is the number of strings, and `m` is the 
 # length of the longest string, and `c` is the number of unique characters across
 # all strings
 def common_characters(strings):
+    # Initialize a dictionary to keep track of how many strings each character appears in
     character_counts = {}
 
+    # Iterate over each string in the list of strings
     for string in strings:
+        # Convert the string to a set of unique characters to avoid counting duplicates
         unique_string_characters = set(string)
 
+        # Iterate over each unique character in the current string
         for character in unique_string_characters:
+            # If the character is not already in the dictionary, initialize its count to 0
             if character not in character_counts:
                 character_counts[character] = 0
+            # Increment the count for the character since it appears in the current string
             character_counts[character] += 1
 
+    # Initialize a list to store characters that appear in all strings
     final_characters = []
+
+    # Iterate over the dictionary to find characters that appear in all strings
     for character, count in character_counts.items():
+        # If the count of the character is equal to the number of strings, it appears in all strings
         if count == len(strings):
+            # Add the character to the final list
             final_characters.append(character)
 
+    # Return the list of characters that are common to all strings
     return final_characters
 
 
@@ -67,7 +76,7 @@ print(
 
 # =========================================================================================================================== #
 
-# Big O:
+# Big O Analysis:
 
 """
 ## Time and Space Complexity Analysis
@@ -124,7 +133,7 @@ across all strings.
 
 # =========================================================================================================================== #
 
-# Code Explanation:
+# Detailed Code Explanation:
 
 """
 
