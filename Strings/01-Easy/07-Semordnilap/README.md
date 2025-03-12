@@ -20,4 +20,4 @@ words = ["diaper", "abc", "test", "cba", "repaid"]
 
 ## Optimal Time & Space Complexity
 
-`O(n * m)` time | `O(n * m)` space - where `n` is the number of words and `m` is the length of the longest word.
+`O(n * m)` time | `O(n)` space - where `n` is the number of words and `m` is the length of the longest word.
