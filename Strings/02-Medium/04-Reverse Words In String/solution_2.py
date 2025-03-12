@@ -1,4 +1,4 @@
-# Description:
+# Problem Description:
 
 """
                                        Reverse Words In String
@@ -98,7 +98,7 @@ print(reverse_words_in_string("his      string     has a     lot of   whitespace
 
 # =========================================================================================================================== #
 
-# Big O:
+# Big O Analysis:
 
 """
 ## Time and Space Complexity Analysis
@@ -156,7 +156,7 @@ print(reverse_words_in_string("his      string     has a     lot of   whitespace
 
 # =========================================================================================================================== #
 
-# Code Explanation:
+# Detailed Code Explanation:
 
 """
 This function `reverse_words_in_string(string)` reverses the order of words in a given string while keeping
