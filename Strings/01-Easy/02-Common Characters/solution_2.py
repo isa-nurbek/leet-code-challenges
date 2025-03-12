@@ -1,4 +1,4 @@
-# Description:
+# Problem Description:
 
 """
 
@@ -11,19 +11,16 @@ Note that the strings are not guaranteed to only contain alphanumeric characters
 
 
 ## Sample Input:
-
 ```
 strings = ["abc", "bcd", "cbaccd"]
 ```
 
 ## Sample Output:
-
 ```
 ["b", "c"] // The characters could be ordered differently.
 ```
 
-## Optimal Space & Time Complexity:
-
+## Optimal Time & Space Complexity:
 ```
 O(n * m) time | O(m) space - where `n` is the number of strings, and `m` is the length of the longest string.
 ```
@@ -38,28 +35,47 @@ O(n * m) time | O(m) space - where `n` is the number of strings, and `m` is the 
 # O(n * m) time | O(m) space - where `n`` is the number of strings, and `m` is the
 # length of the longest string
 def common_characters(strings):
+    # Step 1: Find the smallest string in the list of strings.
+    # This is done to minimize the number of potential common characters we need to check.
     smallest_string = get_smallest_string(strings)
+
+    # Step 2: Convert the smallest string into a set of characters.
+    # This gives us the initial set of potential common characters.
     potential_common_characters = set(smallest_string)
 
+    # Step 3: Iterate through each string in the list.
+    # For each string, we will remove characters from the potential_common_characters set
+    # that are not present in the current string.
     for string in strings:
         remove_nonexistent_characters(string, potential_common_characters)
 
+    # Step 4: After processing all strings, the remaining characters in the set
+    # are the common characters across all strings.
     return list(potential_common_characters)
 
 
 def get_smallest_string(strings):
+    # Initialize the smallest string as the first string in the list.
     smallest_string = strings[0]
+
+    # Iterate through each string in the list to find the smallest one.
     for string in strings:
         if len(string) < len(smallest_string):
             smallest_string = string
 
+    # Return the smallest string found.
     return smallest_string
 
 
 def remove_nonexistent_characters(string, potential_common_characters):
+    # Convert the current string into a set of unique characters.
     unique_string_characters = set(string)
 
+    # Iterate through a copy of the potential_common_characters set.
+    # We use list() to create a copy because we cannot modify a set while iterating over it.
     for character in list(potential_common_characters):
+        # If the character is not in the current string's set of characters,
+        # remove it from the potential_common_characters set.
         if character not in unique_string_characters:
             potential_common_characters.remove(character)
 
@@ -74,7 +90,7 @@ print(
 
 # =========================================================================================================================== #
 
-# Big O:
+# Big O Analysis:
 
 """
 ## Time and Space Complexity Analysis
@@ -132,7 +148,7 @@ which is generally true for Python's set implementation.
 
 # =========================================================================================================================== #
 
-# Code Explanation:
+# Detailed Code Explanation:
 
 """
 
