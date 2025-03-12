@@ -1,4 +1,4 @@
-# Description:
+# Problem Description:
 
 """
                                 Longest Substring Without Duplication
@@ -20,7 +20,7 @@ string = "kilimandjaro"
 
 ## Optimal Time & Space Complexity:
 ```
-`O(n)` time | `O(min(n, a))` space - where `n` is the length of the input string
+O(n) time | O(min(n, a)) space - where `n` is the length of the input string
 and `a` is the length of the character alphabet represented in the input string.
 ```
 
@@ -73,7 +73,7 @@ print(longest_substring_without_duplication("a"))  # Output: a
 
 # =========================================================================================================================== #
 
-# Big O:
+# Big O Analysis:
 
 """
 ## Time and Space Complexity Analysis
@@ -121,7 +121,7 @@ The space complexity of the function is **O(min(n, m))**, where:
 
 # =========================================================================================================================== #
 
-# Code Explanation:
+# Detailed Code Explanation:
 
 """
 ### Explanation of the `longest_substring_without_duplication` Function
