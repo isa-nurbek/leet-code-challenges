@@ -1,4 +1,4 @@
-# Description:
+# Problem Description:
 
 """
                                         Semordnilap
@@ -13,44 +13,51 @@ The order of the returned pairs and the order of the strings within each pair do
 
 
 ## Sample Input:
-
 ```
 words = ["diaper", "abc", "test", "cba", "repaid"]
 ```
 
 ## Sample Output:
-
 ```
 [["diaper", "repaid"], ["abc", "cba"]]
 ```
 
-## Optimal Time & Space Complexity
-
+## Optimal Time & Space Complexity:
 ```
-`O(n * m)` time | `O(n * m)` space - where `n` is the number of words and `m` is the length of the longest word.
+O(n * m) time | O(n) space - where `n` is the number of words and `m` is the length of the longest word.
 ```
 
 """
 
-# =============================================================================================== #
+# =========================================================================================================================== #
 
 # Solution:
 
 
-# O(n * m) time | O(n * m) space - where `n` is the number of words and
+# O(n * m) time | O(n) space - where `n` is the number of words and
 # `m` is the length of the longest word
 def semordnilap(words):
+    # Convert the list of words to a set for O(1) look-up times
     words_set = set(words)
+
+    # Initialize an empty list to store the semordnilap pairs
     semordnilap_pairs = []
 
+    # Iterate through each word in the original list
     for word in words:
+        # Reverse the current word
         reverse = word[::-1]
 
+        # Check if the reversed word exists in the set and is not the same as the original word
         if reverse in words_set and reverse != word:
+            # If it is a valid semordnilap pair, add it to the list
             semordnilap_pairs.append([word, reverse])
+
+            # Remove both the original word and its reverse from the set to avoid duplicate pairs
             words_set.remove(word)
             words_set.remove(reverse)
 
+    # Return the list of semordnilap pairs
     return semordnilap_pairs
 
 
@@ -63,9 +70,9 @@ print(semordnilap(words_1))  # [['diaper', 'repaid'], ['abc', 'cba']]
 print(semordnilap(words_2))  # []
 print(semordnilap(words_3))  # [['dog', 'god'], ['desserts', 'stressed']]
 
-# =============================================================================================== #
+# =========================================================================================================================== #
 
-# Big O:
+# Big O Analysis:
 
 """
 ## Time and Space Complexity Analysis
@@ -118,8 +125,8 @@ the overall space complexity is: `O(n)`
   
 
 ### Summary
-- **Time Complexity**: `O(n * m)`
-- **Space Complexity**: `O(n)`
+- **Time Complexity**: O(n * m)
+- **Space Complexity**: O(n)
 
 Where:
 - `n` is the number of words in the input list.
@@ -127,7 +134,9 @@ Where:
 
 """
 
-# Code Explanation:
+# =========================================================================================================================== #
+
+# Detailed Code Explanation:
 
 """
 The function `semordnilap(words)` finds all **semordnilap** word pairs in a given list of words. A **semordnilap**
