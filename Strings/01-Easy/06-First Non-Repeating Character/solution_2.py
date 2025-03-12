@@ -1,4 +1,4 @@
-# Description:
+# Problem Description:
 
 """
                                         First Non-Repeating Character
@@ -72,7 +72,7 @@ print(first_non_repeating_character(""))  # -1
 
 # =========================================================================================================================== #
 
-# Big O:
+# Big O Analysis:
 
 """
 ## Time and Space Complexity Analysis
@@ -112,7 +112,7 @@ print(first_non_repeating_character(""))  # -1
 
 # =========================================================================================================================== #
 
-# Code Explanation:
+# Detailed Code Explanation:
 
 """
 ### Explanation of the Code
