@@ -1,4 +1,4 @@
-# Description:
+# Problem Description:
 
 """
                                     One Edit
@@ -28,7 +28,7 @@ True // A single replace at index 1 of either string can make the strings equal
 
 ## Optimal Time & Space Complexity:
 ```
-`O(n)` time | `O(1)` space - where `n` is the length of the shorter string.
+O(n) time | O(1) space - where `n` is the length of the shorter string.
 ```
 """
 
@@ -94,7 +94,7 @@ print(one_edit("abcdefghijk", "abcdefghijk"))  # Output: True
 
 # =========================================================================================================================== #
 
-# Big O:
+# Big O Analysis:
 
 """
 ## Time and Space Complexity Analysis
@@ -141,7 +141,7 @@ Since the space used by the function does not scale with the input size, the spa
 
 # =========================================================================================================================== #
 
-# Code Explanation:
+# Detailed Code Explanation:
 
 """
 ### **Explanation of `one_edit` Function**
