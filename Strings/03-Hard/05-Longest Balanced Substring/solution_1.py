@@ -1,4 +1,4 @@
-# Description:
+# Problem Description:
 
 """
                                     Longest Balanced Substring
@@ -23,7 +23,7 @@ string = "(()))("
 
 ## Optimal Time & Space Complexity:
 ```
-`O(n)` time | `O(1)` space - where `n` is the length of the input string.
+O(n) time | O(1) space - where `n` is the length of the input string.
 ```
 
 """
@@ -32,11 +32,12 @@ string = "(()))("
 
 # Solution:
 
+
 # O(n^3) time | O(n) space - where `n` is the length of the input string.
 def longest_balanced_substring(string):
     # Initialize the maximum length of a balanced substring to 0
     max_length = 0
-    
+
     # Iterate over all possible starting positions of a substring
     for i in range(len(string)):
         # Iterate over all possible ending positions of a substring, starting from i + 2
@@ -46,18 +47,18 @@ def longest_balanced_substring(string):
             if is_balanced(string[i:j]):
                 # If it is balanced, calculate its length
                 current_length = j - i
-                
+
                 # Update the maximum length if the current substring is longer
                 max_length = max(max_length, current_length)
-                
+
     # Return the length of the longest balanced substring found
     return max_length
 
-            
+
 def is_balanced(string):
     # Initialize a stack to keep track of open parentheses
     open_parens_stack = []
-    
+
     # Iterate over each character in the string
     for char in string:
         # If the character is an open parenthesis, push it onto the stack
@@ -70,9 +71,10 @@ def is_balanced(string):
         else:
             # If there's no matching open parenthesis, the string is not balanced
             return False
-        
+
     # The string is balanced if the stack is empty (all open parentheses have been matched)
     return len(open_parens_stack) == 0
+
 
 # Test Cases:
 
@@ -87,7 +89,7 @@ print(longest_balanced_substring("(("))
 
 # =========================================================================================================================== #
 
-# Big O:
+# Big O Analysis:
 
 """
 ## Time and Space Complexity Analysis
@@ -136,7 +138,7 @@ We will use it in future examples.
 
 # =========================================================================================================================== #
 
-# Code Explanation:
+# Detailed Code Explanation:
 
 """
 ### Explanation of the Code
