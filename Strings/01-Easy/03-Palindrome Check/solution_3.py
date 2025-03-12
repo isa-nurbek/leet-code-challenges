@@ -1,4 +1,4 @@
-# Description:
+# Problem Description:
 
 """
                                          Palindrome Check
@@ -7,20 +7,18 @@ Write a function that takes in a non-empty string and that returns a boolean rep
 
 A palindrome is defined as a string that's written the same forward and backward. Note that single-character strings are palindromes.
 
-## Sample Input:
 
+## Sample Input:
 ```
 string = "abcdcba"
 ```
 
 ## Sample Output:
-
 ```
 true // it's written the same forward and backward
 ```
 
-## Optimal Space & Time Complexity:
-
+## Optimal Time & Space Complexity:
 ```
 O(n) time | O(1) space - where `n` is the length of the input string.
 ```
@@ -34,7 +32,15 @@ O(n) time | O(1) space - where `n` is the length of the input string.
 
 # O(n)time | O(n) space
 def isPalindrome(string, i=0):
+    # Calculate the index of the character at the opposite end of the string.
+    # For example, if i is 0, j will be the last index of the string.
     j = len(string) - 1 - i
+
+    # Base case: If i >= j, it means we've checked all character pairs (or there's only one character left).
+    # In this case, the string is a palindrome, so return True.
+    # Recursive case: Check if the characters at positions i and j are the same.
+    # If they are, recursively check the next pair of characters (i+1 and j-1).
+    # If they're not the same, the string is not a palindrome, so return False.
     return True if i >= j else string[i] == string[j] and isPalindrome(string, i + 1)
 
 
@@ -47,7 +53,7 @@ print(isPalindrome("Madam"))  # False
 
 # =========================================================================================================================== #
 
-# Big O:
+# Big O Analysis:
 
 """
 ## Time and Space Complexity Analysis
@@ -75,7 +81,7 @@ so the space complexity is **O(n)** due to the call stack.
 
 # =========================================================================================================================== #
 
-# Code Explanation:
+# Detailed Code Explanation:
 
 """
 ### Explanation of the Code:
