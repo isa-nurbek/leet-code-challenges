@@ -12,46 +12,52 @@ If the input string doesn't have any non-repeating characters, your function sho
 
 
 ## Sample Input:
-
 ```
 string = "abcdcaf"
 ```
 
 ## Sample Output:
-
 ```
 1 // The first non-repeating character is "b" and is found at index 1.
 ```
 
 ## Optimal Time & Space Complexity
-
 ```
-`O(n)` time | `O(1)` space - where `n` is the length of the input string The constant space is
+O(n) time | O(1) space - where `n` is the length of the input string The constant space is
 because the input string only has lowercase English-alphabet letters; thus, our hash table will
 never have more than 26 character frequencies.
 ```
 
 """
 
-# =============================================================================================== #
+# =========================================================================================================================== #
 
 # Solution:
 
 
 # O(n^2) time | O(1) space - where `n` is the length of the input string
 def first_non_repeating_character(string):
+    # Initialize a flag to track if a duplicate character is found
     found_duplicate = False
 
+    # Outer loop: Iterate through each character in the string by index
     for idx in range(len(string)):
+        # Reset the flag for each new character
         found_duplicate = False
 
+        # Inner loop: Compare the current character with every other character in the string
         for idx_2 in range(len(string)):
+            # Check if the characters are the same and the indices are different
             if string[idx] == string[idx_2] and idx != idx_2:
+                # If a duplicate is found, set the flag to True and break out of the inner loop
                 found_duplicate = True
+                break
 
+        # If no duplicate was found for the current character, return its index
         if not found_duplicate:
             return idx
 
+    # If no non-repeating character is found, return -1
     return -1
 
 
@@ -61,7 +67,7 @@ print(first_non_repeating_character("faadabcbbebdf"))  # 6
 print(first_non_repeating_character("a"))  # 0
 print(first_non_repeating_character(""))  # -1
 
-# =============================================================================================== #
+# =========================================================================================================================== #
 
 # Big O:
 
@@ -73,6 +79,7 @@ print(first_non_repeating_character(""))  # -1
 The function consists of a nested loop:
 1. The **outer loop** iterates through each character in `string` → **O(n)**
 2. The **inner loop** iterates through the entire string again to check for duplicates → **O(n)**
+
 3. This results in a total time complexity of **O(n²)** in the worst case.
 
 ### **Space Complexity Analysis**
@@ -88,6 +95,8 @@ A more efficient way to solve this problem would be to use a **hash map (diction
 which reduces the time complexity to **O(n)**.
 
 """
+
+# =========================================================================================================================== #
 
 # Code Explanation:
 
