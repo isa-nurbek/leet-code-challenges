@@ -1,4 +1,4 @@
-# Description:
+# Problem Description:
 
 """
                                         First Non-Repeating Character
@@ -69,7 +69,7 @@ print(first_non_repeating_character(""))  # -1
 
 # =========================================================================================================================== #
 
-# Big O:
+# Big O Analysis:
 
 """
 ## Time and Space Complexity Analysis
@@ -89,6 +89,10 @@ The function consists of a nested loop:
 
 Thus, the space complexity is **O(1)**.
 
+### **Final Complexity:**
+- **Time Complexity:** O(n²)
+- **Space Complexity:** O(1)
+
 ### **Optimized Approach**
 
 A more efficient way to solve this problem would be to use a **hash map (dictionary)** to store character frequencies,
@@ -98,7 +102,7 @@ which reduces the time complexity to **O(n)**.
 
 # =========================================================================================================================== #
 
-# Code Explanation:
+# Detailed Code Explanation:
 
 """
 ### Explanation of the Code
