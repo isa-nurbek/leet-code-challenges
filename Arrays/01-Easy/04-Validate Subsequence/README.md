@@ -17,6 +17,6 @@ sequence = [1, 6, -1, 10]
 True
 ```
 
-## Optimal Space & Time Complexity
+## Optimal Time & Space Complexity
 
 `O(n)` time | `O(1)` space - where `n` is the length of the array
