@@ -27,6 +27,6 @@ results = [0, 0, 1]
 // Python -  6 points
 ```
 
-## Optimal Space & Time Complexity
+## Optimal Time & Space Complexity
 
 `O(n)` time | `O(k)` space - where `n` is the number of competitions and `k` is the number of teams.
