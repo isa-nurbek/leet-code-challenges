@@ -1,4 +1,4 @@
-# Description:
+# Problem Description:
 
 """
 
@@ -10,41 +10,48 @@ A subsequence of an array is a set of numbers that aren't necessarily adjacent i
 appear in the array. For instance, the numbers [1, 3, 4] form a subsequence of the array [1, 2, 3, 4], and so do the numbers [2, 4].
 Note that a single number in an array and the array itself are both valid subsequences of the array.
 
-## Sample Input:
 
+## Sample Input:
 ```
 array = [5, 1, 22, 25, 6, -1, 8, 10]
 sequence = [1, 6, -1, 10]
 ```
 
 ## Sample Output:
-
 ```
 true
 ```
 
-## Optimal Space & Time Complexity:
-
+## Optimal Time & Space Complexity:
 ```
-`O(n)` time | `O(1)` space - where `n` is the length of the array
+O(n) time | O(1) space - where `n` is the length of the array
 ```
 
 """
 
-# =============================================================================================== #
+# =========================================================================================================================== #
 
 # Solution:
 
 
 # O (n) time | O(1) space
 def is_valid_subsequence(array, sequence):
+    # Initialize a pointer for the sequence
     seq_idx = 0
 
+    # Iterate through each element in the array
     for value in array:
+        # If we've matched all elements in the sequence, exit the loop early
         if seq_idx == len(sequence):
             break
+
+        # If the current element in the array matches the current element in the sequence,
+        # move the sequence pointer to the next element
         if sequence[seq_idx] == value:
             seq_idx += 1
+
+    # After iterating through the array, check if we've matched all elements in the sequence
+    # If seq_idx equals the length of the sequence, it means all elements were found in order
     return seq_idx == len(sequence)
 
 
@@ -59,25 +66,45 @@ print(
     is_valid_subsequence([5, 1, 22, 25, 6, -1, 8, 10], [1, 6, 10, -1])
 )  # Output: False
 
-# =============================================================================================== #
+# =========================================================================================================================== #
 
-# Big O:
+# Big O Analysis:
 
 """
-### Time and Space Complexity
+## Time and Space Complexity Analysis:
 
 ### Time Complexity:
-- **O(n)** where `n` is the length of the `array`. We iterate through the array once, and for each element,
-we check if it matches the current element of the sequence. Once we've found all elements of the sequence, we stop.
 
-#### **Space Complexity**:
-- **O(1)** space because we only use a single integer (`seq_idx`) for tracking the index of the `sequence` and 
-no additional space that grows with input size.
+The time complexity of the `is_valid_subsequence` function is **O(n)**, where **n** is the length of the `array`.
+This is because the function iterates through each element of the `array` exactly once in the worst case. The operations
+inside the loop (comparison and increment) are constant time operations, so they do not affect the overall linear time complexity.
+
+### Space Complexity:
+
+The space complexity of the function is **O(1)**, which means it uses constant extra space. The only additional memory used
+is for the `seq_idx` variable, which does not depend on the size of the input arrays.
+
+### Explanation:
+
+- **Time Complexity - O(n)**: The loop runs once for each element in the `array`, so the time complexity is linear with
+respect to the size of the `array`.
+
+- **Space Complexity - O(1)**: No additional data structures are used that grow with the input size. Only a single integer
+variable (`seq_idx`) is used to track progress through the `sequence`.
+
+---
+
+### Summary:
+- **Time Complexity:** O(n)
+- **Space Complexity:** O(1)
+
+This makes the function efficient for checking if one array is a subsequence of another.
 
 """
 
+# =========================================================================================================================== #
 
-# Code Explanation:
+# Detailed Code Explanation:
 
 """
 
