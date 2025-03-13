@@ -111,7 +111,8 @@ print(longest_balanced_substring("(("))
 
 ### Time Complexity
 
-The time complexity of the `longest_balanced_substring` function is determined by the two calls to `get_longest_balanced_in_direction`, which scans the string in both directions (left-to-right and right-to-left).
+The time complexity of the `longest_balanced_substring` function is determined by the two calls to
+`get_longest_balanced_in_direction`, which scans the string in both directions (left-to-right and right-to-left).
 
 1. **Scanning the string in one direction**: The `get_longest_balanced_in_direction` function iterates through the string once,
 either from left to right or from right to left. This operation takes O(n) time, where `n` is the length of the string.
