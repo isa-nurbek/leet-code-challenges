@@ -62,6 +62,6 @@ matrix = [
 ]
 ```
 
-## Optimal Space & Time Complexity
+## Optimal Time & Space Complexity
 
-`O(w*h)` time | `O(w*h)` space - where `w` is the width of the matrix and `h` is the height
+`O(w * h)` time | `O(w * h)` space - where `w` is the width of the matrix and `h` is the height.
