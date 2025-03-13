@@ -19,6 +19,6 @@ targetSum = 10
 [-1, 11] // the numbers could be in reverse order
 ```
 
-## Optimal Space & Time Complexity
+## Optimal Time & Space Complexity
 
 `O(n)` time | `O(n)` space - where `n` is the length of the input array
