@@ -1,4 +1,4 @@
-# Description:
+# Problem Description:
 
 """
 
@@ -7,38 +7,48 @@
 Write a function that takes in a non-empty array of integers that are sorted in ascending order and returns
 a new array of the same length with the squares of the original integers also sorted in ascending order.
 
-## Sample Input:
 
+## Sample Input:
 ```
 array = [1, 2, 3, 5, 6, 8, 9]
 ```
 
 ## Sample Output:
-
 ```
 [1, 4, 9, 25, 36, 64, 81]
 ```
 
 ## Optimal Time & Space Complexity:
-
-`O(n)` time | `O(n)` space - where `n` is the length of the input array.
-
+```
+O(n) time | O(n) space - where `n` is the length of the input array.
+```
 """
 
-# =============================================================================================== #
+# =========================================================================================================================== #
 
 # Solution:
 
 
 # O(n log n) time | O(n) space
 def sorted_squared_array(array):
+    # Initialize a new array called 'sorted_squares' with the same length as the input array.
+    # This array will store the squared values of the input array.
     sorted_squares = [0 for _ in array]
 
+    # Iterate over each element in the input array using a for loop.
     for idx in range(len(array)):
+        # Get the current element from the input array.
         value = array[idx]
+
+        # Square the current element and store it in the corresponding position
+        # in the 'sorted_squares' array.
         sorted_squares[idx] = value * value
 
+    # Sort the 'sorted_squares' array in ascending order.
+    # This ensures that the squared values are returned in sorted order.
     sorted_squares.sort()
+
+    # Return the sorted array of squared values.
     return sorted_squares
 
 
@@ -48,17 +58,19 @@ print(sorted_squared_array([-5, -4, -3, -2, -1]))  # Output: [1, 4, 9, 16, 25]
 print(sorted_squared_array([-10, -5, 0, 5, 10]))  # Output: [0, 25, 25, 100, 100]
 print(sorted_squared_array([0]))  # Output: [0]
 
-# =============================================================================================== #
+# =========================================================================================================================== #
 
-# Big O:
+# Big O Analysis:
 
 """
 
 ### Time and Space Complexity Analysis
 
 ### Time Complexity:
+
 1. **Squaring each element**: The loop that iterates over the array and squares each element runs in `O(n)` time,
 where `n` is the length of the array.
+
 2. **Sorting the squared array**: The `sort()` function in Python uses the Timsort algorithm, which has a
 time complexity of `O(n log n)`.
 
@@ -66,7 +78,9 @@ Thus, the overall time complexity is:
 
     O(n) + O(n log n) = `O(n log n)`
 
+
 ### Space Complexity:
+
 1. **Creating the `sorted_squares` array**: This requires `O(n)` space to store the squared values.
 2. **Sorting**: The `sort()` function in Python sorts the array in-place, so it does not require additional space.
 
@@ -78,7 +92,7 @@ Thus, the overall space complexity is: `O(n)`
 
 """
 
-# Code Explanation:
+# Detailed Code Explanation:
 
 """
 
