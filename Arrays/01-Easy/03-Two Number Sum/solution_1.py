@@ -1,4 +1,4 @@
-# Description:
+# Problem Description:
 
 """
 
@@ -13,41 +13,48 @@ to itself in order to obtain the target sum.
 
 You can assume that there will be at most one pair of numbers summing up to the target sum.
 
-## Sample Input:
 
+## Sample Input:
 ```
 array = [3, 5, -4, 8, 11, 1, -1, 6]
 targetSum = 10
 ```
 
 ## Sample Output:
-
 ```
 [-1, 11] // the numbers could be in reverse order
 ```
 
-## Optimal Space & Time Complexity:
-
+## Optimal Time & Space Complexity:
 ```
-`O(n)` time | `O(n)` space - where `n` is the length of the input array
+O(n) time | O(n) space - where `n` is the length of the input array
 ```
 
 """
 
-# =============================================================================================== #
+# =========================================================================================================================== #
 
 # Solution:
 
 
 # O (n^2) time | O(1) space
 def two_number_sum(array, target_sum):
+    # Loop through the array from the first element to the second-to-last element
     for i in range(len(array) - 1):
+        # Store the current element as the first number
         first_num = array[i]
+
+        # Loop through the array from the element immediately after the first number to the end of the array
         for j in range(i + 1, len(array)):
+            # Store the current element as the second number
             second_num = array[j]
 
+            # Check if the sum of the first number and the second number equals the target sum
             if first_num + second_num == target_sum:
+                # If they do, return the pair of numbers as a list
                 return [first_num, second_num]
+
+    # If no pair is found that adds up to the target sum, return an empty list
     return []
 
 
@@ -57,25 +64,38 @@ print(two_number_sum([4, 6, 1, -3, 7], 3))  # Output: [6, -3]
 print(two_number_sum([5, 1, 4, 7, 9], 10))  # Output: [1, 9]
 print(two_number_sum([7], 7))  # Output: []
 
-# =============================================================================================== #
+# =========================================================================================================================== #
 
-# Big O:
+# Big O Analysis:
+
+"""
+## Time and Space Complexity Analysis:
+
+### Time Complexity:
+- The function uses two nested loops:
+  - The outer loop runs from `i = 0` to `i = len(array) - 1`.
+  - The inner loop runs from `j = i + 1` to `j = len(array)`.
+  
+- For each iteration of the outer loop, the inner loop runs `n - i - 1` times, where `n` is the length of the array.
+- The total number of iterations is approximately: O(n^2)
+
+- So the time complexity is **O(n^2)**.
+
+### Space Complexity:
+- The function uses a constant amount of extra space (variables like `first_num`, `second_num`, and the returned list).
+- No additional data structures are used that grow with the input size.
+
+- Therefore, the space complexity is **O(1)**.
+
+### Summary:
+- **Time Complexity:** O(n^2)
+- **Space Complexity:** O(1)
 
 """
 
-### Complexity Analysis:
-1. **Time Complexity: O(n²)**:
-   - The outer loop runs `n - 1` iterations, and the inner loop runs approximately `n / 2` iterations on average.
-   - This leads to an approximate total of `n² / 2` iterations, which simplifies to O(n²).
-   
-2. **Space Complexity: O(1)**:
-   - The function uses a constant amount of additional space (two variables `first_num` and `second_num`)
-   regardless of the input size.
+# =========================================================================================================================== #
 
-"""
-
-
-# Code Explanation:
+# Detailed Code Explanation:
 
 """
 
