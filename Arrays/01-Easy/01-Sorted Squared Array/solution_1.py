@@ -64,7 +64,7 @@ print(sorted_squared_array([0]))  # Output: [0]
 
 """
 
-### Time and Space Complexity Analysis
+## Time and Space Complexity Analysis
 
 ### Time Complexity:
 
