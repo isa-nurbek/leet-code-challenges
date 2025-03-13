@@ -1,8 +1,8 @@
-# Description:
+# Problem Description:
 
 """
 
-                                        Two Number Sum
+                                                Two Number Sum
 
 Write a function that takes in a non-empty array of distinct integers and an integer representing a target sum. If any two
 numbers in the input array sum up to the target sum, the function should return them in an array, in any order. If no two
@@ -13,46 +13,61 @@ to itself in order to obtain the target sum.
 
 You can assume that there will be at most one pair of numbers summing up to the target sum.
 
-## Sample Input:
 
+## Sample Input:
 ```
 array = [3, 5, -4, 8, 11, 1, -1, 6]
 targetSum = 10
 ```
 
 ## Sample Output:
-
 ```
 [-1, 11] // the numbers could be in reverse order
 ```
 
-## Optimal Space & Time Complexity:
-
+## Optimal Time & Space Complexity:
 ```
-`O(n)` time | `O(n)` space - where `n` is the length of the input array
+O(n) time | O(n) space - where `n` is the length of the input array
 ```
 
 """
 
-# =============================================================================================== #
+# =========================================================================================================================== #
 
 # Solution:
 
 
-# O (n log(n)) time | O(1) space
+# O(n log n) time | O(n) space
 def two_number_sum(array, target_sum):
+    # Step 1: Sort the array in ascending order.
+    # This allows us to use the two-pointer technique to find the pair.
     array.sort()
+
+    # Step 2: Initialize two pointers, one at the start (left) and one at the end (right) of the array.
     left = 0
     right = len(array) - 1
 
+    # Step 3: Use a while loop to iterate until the two pointers meet.
     while left < right:
+        # Step 4: Calculate the current sum of the elements at the left and right pointers.
         current_sum = array[left] + array[right]
+
+        # Step 5: Check if the current sum equals the target sum.
         if current_sum == target_sum:
+            # If it does, return the pair of numbers.
             return [array[left], array[right]]
+
+        # Step 6: If the current sum is less than the target sum, move the left pointer to the right.
+        # This increases the current sum because the array is sorted.
         elif current_sum < target_sum:
             left += 1
+
+        # Step 7: If the current sum is greater than the target sum, move the right pointer to the left.
+        # This decreases the current sum because the array is sorted.
         elif current_sum > target_sum:
             right -= 1
+
+    # Step 8: If no pair is found that adds up to the target sum, return an empty list.
     return []
 
 
@@ -62,24 +77,43 @@ print(two_number_sum([4, 6, 1, -3, 7], 3))  # Output: [6, -3]
 print(two_number_sum([3, 5, -4, 8, 11, 1, -1, 6], 10))  # Output: [11, -1]
 print(two_number_sum([7], 7))  # Output: []
 
-# =============================================================================================== #
+# =========================================================================================================================== #
 
-# Big O:
+# Big O Analysis:
+
+"""
+## Time and Space Complexity Analysis:
+
+### Time Complexity:
+
+1. **Sorting the array**: The sorting step dominates the time complexity. Sorting an array of `n` elements typically
+takes O(n log n) time.
+
+2. **Two-pointer traversal**: After sorting, the two-pointer approach traverses the array once, which takes O(n) time.
+
+Therefore, the overall time complexity is: O(n log n) + O(n) = O(n log n)
+
+
+### Space Complexity:
+
+1. **Sorting**: The space complexity of the sorting algorithm depends on the implementation. For example,
+Python's `sort()` method uses Timsort, which has a space complexity of O(n) in the worst case.
+
+2. **Two-pointer traversal**: The two-pointer approach uses a constant amount of extra space, O(1).
+
+Therefore, the overall space complexity is: O(n)
+
+### Summary:
+- **Time Complexity**: O(n log n)
+- **Space Complexity**: O(n)
+
+This makes the algorithm efficient for finding two numbers that sum to a target value, especially when the array is not too large.
 
 """
 
-1. **Time Complexity**:
-   - Sorting: O(n log(n)).
-   - Two-pointer traversal: O(n).
-   - Overall: O(n log(n)).
+# =========================================================================================================================== #
 
-2. **Space Complexity**:
-   - Sorting is in-place, so it uses O(1) additional space.
-
-"""
-
-
-# Code Explanation:
+# Detailed Code Explanation:
 
 """
 
