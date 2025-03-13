@@ -1,4 +1,4 @@
-# Description:
+# Problem Description:
 
 """
 
@@ -13,42 +13,49 @@ to itself in order to obtain the target sum.
 
 You can assume that there will be at most one pair of numbers summing up to the target sum.
 
-## Sample Input:
 
+## Sample Input:
 ```
 array = [3, 5, -4, 8, 11, 1, -1, 6]
 targetSum = 10
 ```
 
 ## Sample Output:
-
 ```
 [-1, 11] // the numbers could be in reverse order
 ```
 
-## Optimal Space & Time Complexity:
-
+## Optimal Time & Space Complexity:
 ```
-`O(n)` time | `O(n)` space - where `n` is the length of the input array
+O(n) time | O(n) space - where `n` is the length of the input array
 ```
 
 """
 
-# =============================================================================================== #
+# =========================================================================================================================== #
 
 # Solution:
 
 
 # O (n) time | O(n) space
 def two_number_sum(array, target_sum):
+    # Create a dictionary to keep track of the numbers we've seen so far
     nums = {}
 
+    # Iterate through each number in the array
     for num in array:
+        # Calculate the potential match that would add up to the target sum
         potential_match = target_sum - num
+
+        # Check if the potential match is already in the dictionary
         if potential_match in nums:
+            # If it is, return the pair of numbers that add up to the target sum
             return [potential_match, num]
         else:
+            # If not, add the current number to the dictionary and continue
             nums[num] = True
+
+    # If no pair is found, return an empty list
     return []
 
 
@@ -58,23 +65,34 @@ print(two_number_sum([3, 5, -4, 8, 11, 1, -1, 6], 10))  # Output: [11, -1]
 print(two_number_sum([5, 1, 4, 7, 9], 10))  # Output: [1, 9]
 print(two_number_sum([7], 7))  # Output: []
 
-# =============================================================================================== #
+# =========================================================================================================================== #
 
-# Big O:
+# Big O Analysis:
 
 """
+## Time and Space Complexity Analysis:
 
-### Complexity Analysis
+### Time Complexity:
+- **O(n)**: The function iterates through the array once, where `n` is the number of elements in the array.
+For each element, it performs a constant-time operation (checking if `potential_match` exists in the `nums`
+dictionary and inserting the current number into the dictionary). Since dictionary lookups and insertions
+are on average O(1), the overall time complexity is O(n).
+
+### Space Complexity:
+- **O(n)**: In the worst case, the function stores all elements of the array in the `nums` dictionary if no pair
+is found until the last element. Therefore, the space complexity is O(n).
+
+### Summary:
 - **Time Complexity**: O(n)
-  - The algorithm loops through the array once O(n) and performs O(1) operations (dictionary lookups and inserts) for each number.
-  
 - **Space Complexity**: O(n)
-  - The `nums` dictionary can hold up to `n` elements in the worst case, where `n` is the length of the array.
+
+This implementation is efficient for finding two numbers that sum to the target value in linear time and space.
 
 """
 
+# =========================================================================================================================== #
 
-# Code Explanation:
+# Detailed Code Explanation:
 
 """
 
