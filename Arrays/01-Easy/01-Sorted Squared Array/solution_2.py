@@ -1,4 +1,4 @@
-# Description:
+# Problem Description:
 
 """
 
@@ -7,49 +7,56 @@
 Write a function that takes in a non-empty array of integers that are sorted in ascending order and returns
 a new array of the same length with the squares of the original integers also sorted in ascending order.
 
-## Sample Input:
 
+## Sample Input:
 ```
 array = [1, 2, 3, 5, 6, 8, 9]
 ```
 
 ## Sample Output:
-
 ```
 [1, 4, 9, 25, 36, 64, 81]
 ```
 
-## Optimal Space & Time Complexity:
-
+## Optimal Time & Space Complexity:
 ```
-`O(n)` time | `O(n)` space - where `n` is the length of the input array
+O(n) time | O(n) space - where `n` is the length of the input array.
 ```
-
 """
 
-# =============================================================================================== #
+# =========================================================================================================================== #
 
 # Solution:
 
 
 # O(n) time | O(n) space
 def sorted_squared_array(array):
+    # Initialize a list to store the sorted squares, filled with zeros initially
     sorted_squares = [0 for _ in array]
+
+    # Pointers for the smallest and largest values in the input array
     smaller_value_idx = 0
     larger_value_idx = len(array) - 1
 
+    # Iterate over the array in reverse order to fill the sorted_squares array
     for idx in reversed(range(len(array))):
+        # Get the smallest and largest values using the pointers
         smaller_value = array[smaller_value_idx]
         larger_value = array[larger_value_idx]
 
-        # abs() - returns the absolute value of the argument.
+        # Compare the absolute values of the smallest and largest elements
         if abs(smaller_value) > abs(larger_value):
+            # If the smallest value's absolute value is larger, square it and place it at the current index
             sorted_squares[idx] = smaller_value * smaller_value
+            # Move the smaller value pointer to the right
             smaller_value_idx += 1
         else:
+            # If the largest value's absolute value is larger or equal, square it and place it at the current index
             sorted_squares[idx] = larger_value * larger_value
+            # Move the larger value pointer to the left
             larger_value_idx -= 1
 
+    # Return the sorted array of squares
     return sorted_squares
 
 
@@ -59,23 +66,40 @@ print(sorted_squared_array([1, 2, 3, 5, 6, 8, 9]))  # Output: [1, 4, 9, 25, 36, 
 print(sorted_squared_array([-10, -5, 0, 5, 10]))  # Output: [0, 25, 25, 100, 100]
 print(sorted_squared_array([0]))  # Output: [0]
 
-# =============================================================================================== #
+# =========================================================================================================================== #
 
-# Big O:
-
-"""
-
-### Time and Space Complexity:
-
-1. **Time Complexity: O(n):**
-   - Each element in the input array is processed once.
-
-2. **Space Complexity: O(n):**
-   - The `sorted_squares` array of size `n` is created.
+# Big O Analysis:
 
 """
 
-# Code Explanation:
+## Time and Space Complexity Analysis:
+
+### **Time Complexity: O(n)**
+- The function iterates through the input array **once** using two pointers (`smaller_value_idx` and `larger_value_idx`).
+- The loop runs for `n` iterations, where `n` is the length of the input array.
+- Each iteration performs a constant amount of work (comparisons, squaring, and updating indices).
+- Thus, the time complexity is **O(n)**.
+
+---
+
+### **Space Complexity: O(n)**
+- The function creates a new array `sorted_squares` of the same size as the input array to store the squared values.
+- No additional data structures are used that grow with the input size.
+- Thus, the space complexity is **O(n)**.
+
+---
+
+### **Summary**
+- **Time Complexity:** O(n)
+- **Space Complexity:** O(n)  
+
+This is an optimal solution for the problem.
+
+"""
+
+# =========================================================================================================================== #
+
+# Detailed Code Explanation:
 
 """
 
