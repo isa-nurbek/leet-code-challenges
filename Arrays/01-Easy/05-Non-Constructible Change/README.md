@@ -16,6 +16,6 @@ coins = [5, 7, 1, 1, 2, 3, 22]
 20
 ```
 
-## Optimal Space & Time Complexity
+## Optimal Time & Space Complexity
 
-`O(n log n)` time | `O(1)` space - where `n` is the number of coins
+`O(n log n)` time | `O(1)` space - where `n` is the number of coins.
