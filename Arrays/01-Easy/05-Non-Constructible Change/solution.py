@@ -1,108 +1,110 @@
-# Description:
+# Problem Description:
 
 """
 
                                         Non-Constructible Change
 
 Given an array of positive integers representing the values of coins in your possession, write a function that returns
-the minimum amount of change (the minimum sum of money) that you cannot create. The given coins can have any positive 
+the minimum amount of change (the minimum sum of money) that you cannot create. The given coins can have any positive
 integer value and aren't necessarily unique (i.e., you can have multiple coins of the same value).
 
 For example, if you're given `coins = [1, 2, 5]`, the minimum amount of change that you can't create is `4`. If you're given
 no coins, the minimum amount of change that you can't create is `1`.
 
-## Sample Input:
 
+## Sample Input:
 ```
 coins = [5, 7, 1, 1, 2, 3, 22]
 ```
 
 ## Sample Output:
-
 ```
 20
 ```
 
-## Optimal Space & Time Complexity:
-
+## Optimal Time & Space Complexity:
 ```
-`O(n log n)` time | `O(1)` space - where `n` is the number of coins
+O(n log n) time | O(1) space - where `n` is the number of coins.
 ```
 
 """
 
-# =============================================================================================== #
+# =========================================================================================================================== #
 
 # Solution:
 
 
 # O(n log n) time | O(1) space - where `n` is the number of coins
 def non_constructible_change(coins):
+    # Sort the coins in ascending order to process them from smallest to largest
     coins.sort()
 
+    # Initialize a variable to keep track of the maximum change we can create so far
     current_change_created = 0
 
+    # Iterate through each coin in the sorted list
     for coin in coins:
+        # If the current coin is greater than the maximum change we can create + 1,
+        # then we cannot create the amount `current_change_created + 1`
         if coin > current_change_created + 1:
             return current_change_created + 1
 
+        # Otherwise, add the current coin to the maximum change we can create
         current_change_created += coin
 
+    # If we can create all amounts up to the sum of all coins,
+    # then the smallest amount we cannot create is the sum of all coins + 1
     return current_change_created + 1
 
 
 # Test Cases
-print(non_constructible_change([5, 7, 1, 1, 2, 3, 22]))  # 20
-print(non_constructible_change([1, 1, 1, 1, 1]))  # 6
-print(non_constructible_change([1, 5, 1, 1, 1, 10, 15, 20, 100]))  # 55
-print(non_constructible_change([]))  # 1
+print(non_constructible_change([5, 7, 1, 1, 2, 3, 22]))  # Output: 20
+print(non_constructible_change([1, 1, 1, 1, 1]))  # Output: 6
+print(non_constructible_change([1, 5, 1, 1, 1, 10, 15, 20, 100]))  # Output: 55
+print(non_constructible_change([]))  # Output: 1
 
-# =============================================================================================== #
+# =========================================================================================================================== #
 
-# Big O:
+# Big O Analysis:
+
+"""
+## Time and Space Complexity Analysis:
+
+### **Time Complexity**
+
+1. **Sorting**: The function starts by sorting the `coins` array. Sorting typically takes O(n log n) time,
+where `n` is the number of coins.
+
+2. **Iteration**: After sorting, the function iterates through the sorted array once. This iteration takes O(n) time.
+
+Thus, the overall time complexity is dominated by the sorting step:
+
+    O(n log n) + O(n) = O(n log n)
+
+---
+
+### **Space Complexity**
+
+1. The function uses a constant amount of extra space (e.g., `current_change_created`). It does not use any additional
+data structures that grow with the input size.
+
+2. Sorting is typically done in-place, so no extra space is required for sorting.
+
+Thus, the space complexity is: O(1)
+
+---
+
+### **Summary**
+- **Time Complexity**: O(n log n)
+- **Space Complexity**: O(1)
+
+This is an efficient solution for the problem.
 
 """
 
-## Time and Space Complexity:
+# =========================================================================================================================== #
 
-The function `non_constructible_change` is designed to find the smallest amount of change that cannot be created using
-the given coins. Let's break down the function and analyze its time and space complexity.
-
-### Function Explanation:
-1. **Sorting**: The function starts by sorting the list of coins in ascending order.
-2. **Iterating through coins**: It then iterates through the sorted list, maintaining a running total of the change that
-can be created so far (`current_change_created`).
-3. **Check for the smallest non-constructible change**: For each coin, it checks if the coin's value is greater than
-`current_change_created + 1`. If it is, then `current_change_created + 1` is the smallest amount of change that cannot be created.
-4. **Update the running total**: If the coin's value is not greater than `current_change_created + 1`, it adds the coin's
-value to `current_change_created`.
-5. **Return the result**: If the loop completes without finding a non-constructible change, the function returns
-`current_change_created + 1`.
-
-### Time Complexity:
-- **Sorting**: The sorting step takes `O(n log n)` time, where `n` is the number of coins.
-- **Iterating through the list**: The iteration through the list takes `O(n)` time.
-
-Therefore, the overall time complexity is dominated by the sorting step, which is - O`(n log n)`.
-
-### Space Complexity:
-- **Sorting**: The space complexity of the sorting step depends on the sorting algorithm used. Python's built-in `sort()`
-method uses Timsort, which has a space complexity of `O(n)` in the worst case.
-- **Other variables**: The function uses a constant amount of additional space (e.g., `current_change_created`).
-
-Therefore, the overall space complexity is `O(n)` due to the sorting step.
-
-### Edge Case:
-- **Empty list**: If the list of coins is empty, the function returns `1`, which is the smallest amount of change
-that cannot be created with no coins.
-
-### Summary:
-- **Time Complexity**: `O(n log n)`
-- **Space Complexity**: `O(n)`
-
-"""
-
-# Code Explanation:
+# Detailed Code Explanation:
 
 """
 ### Explanation of the Code
