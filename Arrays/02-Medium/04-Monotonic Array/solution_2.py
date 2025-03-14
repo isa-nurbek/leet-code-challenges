@@ -73,3 +73,28 @@ print(is_monotonic([7]))
 # Output: True
 
 # =========================================================================================================================== #
+
+# Big O Analysis:
+
+"""
+## Time and Space Complexity Analysis:
+
+### Time Complexity:
+
+- The function iterates through the array once, comparing each element with the previous one.
+- This results in a single pass over the array, so the time complexity is **O(n)**, where `n` is the length of the array.
+
+### Space Complexity:
+
+- The function uses a constant amount of extra space (two boolean variables, `is_non_decreasing` and `is_non_increasing`).
+- No additional space is used that scales with the input size, so the space complexity is **O(1)**.
+
+---
+
+### Summary:
+- **Time Complexity:** O(n)
+- **Space Complexity:** O(1)
+
+"""
+
+# =========================================================================================================================== #
