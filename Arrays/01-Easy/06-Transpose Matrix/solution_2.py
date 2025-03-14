@@ -242,15 +242,6 @@ Output:
 
 ---
 
-### **Time Complexity Analysis**
-- The function iterates through all elements of the matrix exactly once.
-- If the matrix has `m` rows and `n` columns, the function runs in **O(m * n) time complexity**.
-
-### **Space Complexity Analysis**
-- The function creates a new transposed matrix of size `n * m`, so it uses **O(n * m) space**.
-
----
-
 ### **Alternative Approach using `zip()`**
 
 A more Pythonic way to transpose a matrix:
