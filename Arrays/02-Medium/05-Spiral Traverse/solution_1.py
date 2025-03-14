@@ -144,3 +144,154 @@ Where **N** is the total number of elements in the 2D array.
 """
 
 # =========================================================================================================================== #
+
+# Detailed Code Explanation:
+
+"""
+### **Explanation of `spiral_traverse` Function**
+
+The function `spiral_traverse` takes a 2D list (matrix) as input and returns a list of its elements traversed
+in a spiral order (clockwise). 
+
+#### **Step-by-Step Execution**
+
+1. **Initialize Variables**
+   ```
+   result = []
+   start_row, end_row = 0, len(array) - 1
+   start_col, end_col = 0, len(array[0]) - 1
+   ```
+   - `result`: This will store the elements in spiral order.
+   - `start_row` and `end_row`: Define the range of rows to traverse.
+   - `start_col` and `end_col`: Define the range of columns to traverse.
+
+2. **Traverse the Matrix in a Spiral Manner**
+   The traversal continues while `start_row ≤ end_row` and `start_col ≤ end_col`.
+
+   #### **Step 1: Traverse the Top Row (Left to Right)**
+   ```
+   for col in range(start_col, end_col + 1):
+       result.append(array[start_row][col])
+   ```
+   - Iterate over the columns from `start_col` to `end_col`.
+   - Append the elements in the first row.
+
+   #### **Step 2: Traverse the Right Column (Top to Bottom)**
+   ```
+   for row in range(start_row + 1, end_row + 1):
+       result.append(array[row][end_col])
+   ```
+   - Iterate over the rows from `start_row + 1` to `end_row`.
+   - Append the elements in the last column.
+
+   #### **Step 3: Traverse the Bottom Row (Right to Left)**
+   ```
+   for col in reversed(range(start_col, end_col)):
+       if start_row == end_row:
+           break
+       result.append(array[end_row][col])
+   ```
+   - Iterate over the columns from `end_col - 1` to `start_col`.
+   - Append the elements in the last row.
+   - **Edge case**: If `start_row == end_row`, the row was already processed, so we `break`.
+
+   #### **Step 4: Traverse the Left Column (Bottom to Top)**
+   ```
+   for row in reversed(range(start_row + 1, end_row)):
+       if start_col == end_col:
+           break
+       result.append(array[row][start_col])
+   ```
+   - Iterate over the rows from `end_row - 1` to `start_row + 1`.
+   - Append the elements in the first column.
+   - **Edge case**: If `start_col == end_col`, the column was already processed, so we `break`.
+
+3. **Move to the Inner Layer**
+   ```
+   start_row += 1
+   end_row -= 1
+   start_col += 1
+   end_col -= 1
+   ```
+   - The boundaries of the matrix are updated to move inward.
+
+4. **Return the Result**
+   ```
+   return result
+   ```
+   - The function returns the `result` list containing elements in spiral order.
+
+---
+
+### **Example Walkthrough**
+
+#### **Example 1**
+```
+array = [
+    [1,  2,  3,  4],
+    [12, 13, 14, 5],
+    [11, 16, 15, 6],
+    [10,  9,  8, 7],
+]
+print(spiral_traverse(array))
+```
+
+**Iteration 1:**
+- Top row: `[1, 2, 3, 4]`
+- Right column: `[5, 6, 7]`
+- Bottom row (reverse): `[8, 9, 10]`
+- Left column (reverse): `[11, 12]`
+- Update boundaries.
+
+**Iteration 2:**
+- Top row: `[13, 14]`
+- Right column: `[15]`
+- Bottom row (reverse): `[16]`
+- Left column: (Skipped because only one row remains)
+
+Final Output:  
+```
+[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]
+```
+
+---
+
+#### **Example 2**
+```
+array_2 = [
+    [1, 2, 3],
+    [8, 9, 4],
+    [7, 6, 5],
+]
+print(spiral_traverse(array_2))
+```
+Steps:
+1. Top row: `[1, 2, 3]`
+2. Right column: `[4, 5]`
+3. Bottom row (reverse): `[6, 7]`
+4. Left column (reverse): `[8]`
+5. Center: `[9]`
+
+Final Output:  
+```
+[1, 2, 3, 4, 5, 6, 7, 8, 9]
+```
+
+---
+
+#### **Example 3**
+```
+array_3 = [
+    [1],
+]
+print(spiral_traverse(array_3))
+```
+Only one element in the matrix, so the output is:
+```
+[1]
+```
+
+This method efficiently retrieves matrix elements in a **spiral order** using simple boundary updates
+and avoids redundant operations. 
+
+"""
