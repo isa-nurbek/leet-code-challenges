@@ -120,3 +120,144 @@ This is optimal for transposing a matrix, as you need to visit every element at 
 """
 
 # =========================================================================================================================== #
+
+# Detailed Code Explanation:
+
+"""
+The function `transpose_matrix(matrix)` takes a 2D list (matrix) as input and returns its **transpose**. The transpose
+of a matrix is obtained by flipping it over its diagonal, meaning the rows become columns and the columns become rows.
+
+---
+
+### **Code Breakdown**
+
+```
+def transpose_matrix(matrix):
+    return [[matrix[row][col] for row in range(len(matrix))] for col in range(len(matrix[0]))]
+```
+
+#### **Understanding the Transposition Logic**
+1. The function uses **list comprehension** to create the transposed matrix.
+2. **Outer List Comprehension (`for col in range(len(matrix[0]))`)**:
+   - `matrix[0]` represents the first row.
+   - `len(matrix[0])` gives the number of columns in the original matrix.
+   
+   - This loop iterates over **columns** of the original matrix.
+   - Each iteration forms a new row in the transposed matrix.
+
+3. **Inner List Comprehension (`for row in range(len(matrix))`)**:
+   - `len(matrix)` gives the number of rows in the original matrix.
+   - This loop iterates over the rows of the original matrix.
+   - It extracts elements from each row at the **same column index**.
+
+4. **Matrix Transposition Rule**:
+   - The element at position `(i, j)` in the original matrix moves to position `(j, i)` in the transposed matrix.
+
+---
+
+### **Example Walkthrough**
+
+#### **Test Case 1: `matrix_1`**
+```
+matrix_1 = [
+    [1, 2, 3],
+    [4, 5, 6],
+    [7, 8, 9],
+]
+```
+Original:
+```
+1  2  3
+4  5  6
+7  8  9
+```
+Transposed:
+```
+1  4  7
+2  5  8
+3  6  9
+```
+#### **Step-by-Step Execution**
+- First iteration (`col = 0`): `[matrix[0][0], matrix[1][0], matrix[2][0]]` → `[1, 4, 7]`
+
+- Second iteration (`col = 1`): `[matrix[0][1], matrix[1][1], matrix[2][1]]` → `[2, 5, 8]`
+
+- Third iteration (`col = 2`): `[matrix[0][2], matrix[1][2], matrix[2][2]]` → `[3, 6, 9]`
+
+Output:
+```
+[[1, 4, 7], [2, 5, 8], [3, 6, 9]]
+```
+
+---
+
+#### **Test Case 2: `matrix_2`**
+```
+matrix_2 = [
+    [0, 0, 0],
+    [1, 1, 1],
+]
+```
+Original:
+```
+0  0  0
+1  1  1
+```
+Transposed:
+```
+0  1
+0  1
+0  1
+```
+Output:
+```
+[[0, 1], [0, 1], [0, 1]]
+```
+
+---
+
+#### **Test Case 3: `matrix_3`**
+```
+matrix_3 = [
+    [-7, -7],
+    [100, 12],
+    [-33, 17],
+]
+```
+Original:
+```
+-7   -7
+100  12
+-33  17
+```
+Transposed:
+```
+-7   100  -33
+-7   12   17
+```
+Output:
+```
+[[-7, 100, -33], [-7, 12, 17]]
+```
+
+---
+
+### **Time Complexity Analysis**
+- The function iterates through all elements of the matrix exactly once.
+- If the matrix has `m` rows and `n` columns, the function runs in **O(m * n) time complexity**.
+
+### **Space Complexity Analysis**
+- The function creates a new transposed matrix of size `n * m`, so it uses **O(n * m) space**.
+
+---
+
+### **Alternative Approach using `zip()`**
+
+A more Pythonic way to transpose a matrix:
+```
+def transpose_matrix(matrix):
+    return [list(row) for row in zip(*matrix)]
+```
+This uses the `zip()` function to group elements column-wise, making it more concise.
+
+"""
