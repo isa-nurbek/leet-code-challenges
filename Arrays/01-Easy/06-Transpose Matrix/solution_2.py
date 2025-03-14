@@ -81,3 +81,42 @@ print(transpose_matrix(matrix_2))  # [[0, 1], [0, 1], [0, 1]]
 print(transpose_matrix(matrix_3))  # [[-7, 100, -33], [-7, 12, 17]]
 
 # =========================================================================================================================== #
+
+# Big O Analysis:
+
+"""
+## Time and Space Complexity Analysis:
+
+
+### **Time Complexity**
+
+The function uses a nested list comprehension:
+1. The outer loop iterates over the columns of the original matrix (`col` ranges from `0` to `len(matrix[0])`).
+2. The inner loop iterates over the rows of the original matrix (`row` ranges from `0` to `len(matrix)`).
+
+If the original matrix has dimensions (m * n) (where `m` is the number of rows and `n` is the number of columns):
+- The outer loop runs `n` times.
+- The inner loop runs `m` times for each iteration of the outer loop.
+
+Thus, the total number of iterations is (m * n), and the **time complexity is - O(m * n)**.
+
+---
+
+### **Space Complexity**
+
+The function constructs a new transposed matrix of size (n * m):
+- The transposed matrix stores (m * n) elements.
+
+Thus, the **space complexity is - O(m * n)**.
+
+---
+
+### **Summary**
+- **Time Complexity:** O(m * n)
+- **Space Complexity:** O(m * n)
+
+This is optimal for transposing a matrix, as you need to visit every element at least once and store the result in a new matrix.
+
+"""
+
+# =========================================================================================================================== #
