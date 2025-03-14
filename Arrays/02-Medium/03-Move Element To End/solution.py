@@ -73,3 +73,43 @@ print(move_element_to_end([], 4))
 # Output: []
 
 # =========================================================================================================================== #
+
+# Big O Analysis:
+
+"""
+## Time and Space Complexity Analysis:
+
+### Time Complexity:
+
+The time complexity of the `move_element_to_end` function is **O(n)**, where `n` is the length of the input array.
+
+Here's why:
+
+1. The function uses two pointers, `i` and `j`, which start at the beginning and end of the array, respectively.
+2. The outer `while` loop runs until `i` and `j` meet. In the worst case, this will happen after `n` iterations.
+3. The inner `while` loop decrements `j` only if `array[j]` is equal to `to_move`. This ensures that `j` only moves
+when necessary, and it doesn't add extra complexity because each element is checked at most once.
+
+4. The swapping operation (`array[i], array[j] = array[j], array[i]`) is performed in constant time, **O(1)**.
+
+Since each element is processed at most once, the overall time complexity is linear, **O(n)**.
+
+---
+
+### Space Complexity:
+
+The space complexity is **O(1)**, which means the algorithm uses constant extra space. This is because the function
+modifies the input array in place and only uses a few variables (`i`, `j`, and temporary variables for swapping).
+No additional data structures are used that grow with the input size.
+
+---
+
+### Summary:
+- **Time Complexity:** O(n)
+- **Space Complexity:** O(1)
+
+This is an efficient solution for moving all instances of a given element to the end of the array.
+
+"""
+
+# =========================================================================================================================== #
