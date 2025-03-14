@@ -38,7 +38,7 @@ the length of the second input array.
 # Solution:
 
 
-# O(n log(n) + m log(m)) time | O(1) space
+# O(n log n + m log m) time | O(log n + log m) space
 def smallest_difference(array_one, array_two):
     # Sort both arrays to make it easier to find the smallest difference
     array_one.sort()
@@ -91,5 +91,56 @@ print(smallest_difference([10, 0, 20, 25, 2200], [1005, 1006, 1014, 1032, 1031])
 
 print(smallest_difference([0, 20], [21, -2]))
 # Output: [20, 21]
+
+# =========================================================================================================================== #
+
+# Big O Analysis:
+
+"""
+## Time and Space Complexity Analysis:
+
+### Time Complexity:
+
+1. **Sorting**:
+   - Sorting `array_one` takes O(n log n) time, where `n` is the length of `array_one`.
+   - Sorting `array_two` takes O(m log m) time, where `m` is the length of `array_two`.
+
+2. **Two-pointer traversal**:
+   - After sorting, the two-pointer traversal takes O(n + m) time in the worst case, as each pointer
+   (`idx_one` and `idx_two`) traverses its respective array once.
+
+Thus, the **total time complexity** is:
+
+    O(n log n + m log m + n + m)
+
+Since `n log n` and `m log m` dominate `n` and `m`, the time complexity simplifies to:
+
+    O(n log n + m log m)
+
+---
+
+### Space Complexity:
+
+1. **Sorting**:
+   - The space complexity of the sorting algorithm depends on the implementation. For example, Python's `sort()` uses
+   Timsort, which has a space complexity of O(log n) for sorting `array_one` and O(log m) for sorting `array_two`.
+
+2. **Additional space**:
+   - The algorithm uses a constant amount of extra space for variables like `idx_one`, `idx_two`, `smallest`, `current`,
+   and `smallest_pair`. This is - O(1).
+
+Thus, the **total space complexity** is: O(log n + log m)
+
+This is due to the space required for sorting.
+
+---
+
+### Summary:
+- **Time Complexity**: O(n log n + m log m)
+- **Space Complexity**: O(log n + log m) (due to sorting)
+
+This is an efficient solution for finding the smallest difference between two arrays.
+
+"""
 
 # =========================================================================================================================== #
