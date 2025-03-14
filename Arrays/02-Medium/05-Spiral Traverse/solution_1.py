@@ -105,3 +105,42 @@ print(spiral_traverse(array_3))
 # Output: [1]
 
 # =========================================================================================================================== #
+
+# Big O Analysis:
+
+"""
+## Time and Space Complexity Analysis:
+
+### Time Complexity:
+
+The time complexity of the `spiral_traverse` function is **O(N)**, where **N** is the total number of elements in the 2D array.
+This is because the function visits each element of the array exactly once during the traversal.
+
+### Space Complexity:
+
+The space complexity of the `spiral_traverse` function is **O(N)** as well. This is because the `result` list stores all the
+elements of the 2D array in spiral order. The space required for the `result` list grows linearly with the number of elements
+in the array.
+
+### Explanation:
+
+1. **Time Complexity**:
+   - The function processes each element of the 2D array exactly once.
+   - The outer `while` loop runs until all layers of the spiral are traversed.
+   - The inner loops (for traversing rows and columns) ensure that each element is visited once.
+   - Therefore, the time complexity is linear with respect to the total number of elements in the array.
+
+2. **Space Complexity**:
+   - The `result` list stores all the elements of the array in spiral order.
+   - The size of the `result` list is equal to the total number of elements in the array.
+   - No additional space is used that grows with the input size, so the space complexity is **O(N)**.
+
+### Summary:
+- **Time Complexity**: **O(N)**
+- **Space Complexity**: **O(N)**
+
+Where **N** is the total number of elements in the 2D array.
+
+"""
+
+# =========================================================================================================================== #
