@@ -113,3 +113,122 @@ This is an efficient solution for moving all instances of a given element to the
 """
 
 # =========================================================================================================================== #
+
+# Detailed Code Explanation:
+
+"""
+### **Explanation of the Code**
+The function `move_element_to_end(array, to_move)` moves all occurrences of `to_move` to the end of the `array`,
+while preserving the relative order of the other elements as much as possible.
+
+---
+
+### **Step-by-Step Breakdown**
+1. **Initialize Two Pointers**  
+   - `i = 0`: Points to the start of the array.
+   - `j = len(array) - 1`: Points to the end of the array.
+
+2. **Loop Until the Pointers Cross (`i < j`)**  
+   - The goal is to swap elements such that all occurrences of `to_move` are moved to the end.
+
+3. **Move `j` Left if it Already Points to `to_move`**  
+   - While `j > i` and `array[j] == to_move`, decrement `j`.  
+   - This ensures that `j` points to an element that is **not** `to_move` before swapping.
+
+4. **Swap When `i` Points to `to_move`**  
+   - If `array[i] == to_move`, swap `array[i]` and `array[j]`, effectively moving `to_move` to the end.
+   - Then increment `i` to process the next element.
+
+5. **Continue Until `i` Meets `j`**  
+   - The loop runs until `i >= j`, meaning all `to_move` elements have been moved to the end.
+
+6. **Return the Modified Array**  
+   - The array is modified in-place and returned.
+
+---
+
+### **Code Walkthrough with Example**
+
+#### **Example 1**
+```
+move_element_to_end([2, 1, 2, 2, 2, 3, 4, 2], 2)
+```
+#### **Initial State:**
+```
+array = [2, 1, 2, 2, 2, 3, 4, 2]
+ i -> 0
+ j -> 7  (last index)
+```
+---
+#### **Iteration 1**
+- `array[j] == 2`, so `j` moves left:  
+  ```
+  j -> 6
+  ```
+- `array[i] == 2`, swap `array[i]` and `array[j]`:  
+  ```
+  array = [4, 1, 2, 2, 2, 3, 2, 2]
+  ```
+- Move `i` to the right:  
+  ```
+  i -> 1
+  ```
+---
+#### **Iteration 2**
+- `array[i] == 1` (not `to_move`), move `i` right:  
+  ```
+  i -> 2
+  ```
+---
+#### **Iteration 3**
+- `array[i] == 2`, swap `array[i]` and `array[j]`:  
+  ```
+  array = [4, 1, 3, 2, 2, 2, 2, 2]
+  ```
+- Move `i` right:  
+  ```
+  i -> 3
+  ```
+---
+#### **Further Iterations**
+- Since `i` and `j` meet, the loop ends.
+
+**Final Output:**
+```
+[4, 1, 3, 2, 2, 2, 2, 2]
+```
+
+---
+
+### **Edge Cases**
+
+#### **Case 1: No `to_move` Elements**
+```
+move_element_to_end([1, 2, 4, 5, 6], 3)
+```
+- `3` does not exist in the array.
+- No swaps needed, so the output is the same as the input.
+
+**Output:**  
+```
+[1, 2, 4, 5, 6]
+```
+
+---
+
+#### **Case 2: Empty Array**
+```
+move_element_to_end([], 4)
+```
+- The function handles an empty array gracefully.
+- The loop never runs because `i` is not less than `j`.
+- The function returns an empty list.
+
+**Output:**  
+```
+[]
+```
+
+This makes the function efficient for large arrays. 
+
+"""
