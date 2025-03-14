@@ -38,7 +38,7 @@ the length of the second input array.
 # Solution:
 
 
-# O(n log n + m log m) time | O(log n + log m) space
+# O(n log n + m log m) time | O(log n + log m) space due to the space required for sorting
 def smallest_difference(array_one, array_two):
     # Sort both arrays to make it easier to find the smallest difference
     array_one.sort()
