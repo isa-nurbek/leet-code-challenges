@@ -17,6 +17,6 @@ targetSum = 0
 [[-8, 2, 6], [-8, 3, 5], [-6, 1, 5]]
 ```
 
-## Optimal Space & Time Complexity
+## Optimal Time & Space Complexity
 
-`O(n^2)` time | `O(n)` space - where `n`  is the length of the input array
+`O(n^2)` time | `O(n)` space - where `n`  is the length of the input array.
