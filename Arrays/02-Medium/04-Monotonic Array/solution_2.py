@@ -98,3 +98,85 @@ print(is_monotonic([7]))
 """
 
 # =========================================================================================================================== #
+
+# Detailed Code Explanation:
+
+"""
+### Explanation of the `is_monotonic` function
+
+The function `is_monotonic(array)` checks whether a given list of numbers is **monotonic**. A sequence is 
+considered **monotonic** if it is entirely **non-decreasing** or **non-increasing**.
+
+### Step-by-Step Breakdown
+
+#### 1. **Initialize Flags**
+```
+is_non_decreasing = True
+is_non_increasing = True
+```
+- `is_non_decreasing`: Assumes that the array is increasing or remains constant.
+- `is_non_increasing`: Assumes that the array is decreasing or remains constant.
+
+#### 2. **Iterate Through the Array**
+```
+for i in range(1, len(array)):
+```
+- The loop starts from index `1` and iterates through the array, comparing each element with its previous element.
+
+#### 3. **Check for Violations**
+```
+if array[i] < array[i - 1]:
+    is_non_decreasing = False
+```
+- If the current element is **less than** the previous one, the array is **not non-decreasing**, so `is_non_decreasing`
+is set to `False`.
+
+```
+if array[i] > array[i - 1]:
+    is_non_increasing = False
+```
+- If the current element is **greater than** the previous one, the array is **not non-increasing**, so `is_non_increasing`
+is set to `False`.
+
+#### 4. **Return the Result**
+```
+return is_non_decreasing or is_non_increasing
+```
+- If either `is_non_decreasing` or `is_non_increasing` remains `True`, the array is monotonic.
+
+---
+
+### Example Walkthroughs
+
+#### 1. **Example: `[-1, -5, -10, -1100, -1100, -1101, -1102, -9001]`**
+```
+is_monotonic([-1, -5, -10, -1100, -1100, -1101, -1102, -9001])
+```
+- The values are either decreasing or staying the same.
+- `is_non_decreasing` will become `False` because elements are decreasing.
+- `is_non_increasing` remains `True`, so the function returns `True`.
+
+#### 2. **Example: `[2, 2, 2, 1, 4, 5]`**
+```
+is_monotonic([2, 2, 2, 1, 4, 5])
+```
+- The array **decreases** from `2 → 1` and then **increases** from `1 → 4 → 5`.
+- This breaks both monotonic conditions, so the function returns `False`.
+
+#### 3. **Example: `[]` (Empty Array)**
+```
+is_monotonic([])
+```
+- An empty list is trivially monotonic.
+- The loop does not execute, and both flags remain `True`, so the function returns `True`.
+
+#### 4. **Example: `[7]` (Single Element)**
+```
+is_monotonic([7])
+```
+- A single-element list is always monotonic.
+- The loop does not execute, and both flags remain `True`, so the function returns `True`.
+
+This implementation is efficient and easy to understand for checking monotonicity. 
+
+"""
