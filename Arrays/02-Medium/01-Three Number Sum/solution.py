@@ -1,4 +1,4 @@
-# Description:
+# Problem Description:
 
 """
 
@@ -11,28 +11,26 @@ should be ordered in ascending order with respect to the numbers they hold.
 
 If no three numbers sum up to the target sum, the function should return an empty array.
 
-## Sample Input:
 
+## Sample Input:
 ```
 array = [12, 3, 1, 2, -6, 5, -8, 6]
 targetSum = 0
 ```
 
 ## Sample Output:
-
 ```
 [[-8, 2, 6], [-8, 3, 5], [-6, 1, 5]]
 ```
 
-## Optimal Space & Time Complexity:
-
+## Optimal Time & Space Complexity:
 ```
-`O(n^2)` time | `O(n)` space - where `n`  is the length of the input array
+O(n^2) time | O(n) space - where `n`  is the length of the input array.
 ```
 
 """
 
-# =============================================================================================== #
+# =========================================================================================================================== #
 
 # Solution:
 
@@ -86,62 +84,53 @@ print(three_number_sum([1, 2, 3, 4, 5, 6, 7, 8, 9, 15], 18))
 #       [4, 6, 8], [5, 6, 7],
 #   ]
 
-# =============================================================================================== #
+# =========================================================================================================================== #
 
+# Big O Analysis:
 
-# Big O:
+"""
+## Time and Space Complexity Analysis:
+
+### Time Complexity:
+
+The time complexity of the `three_number_sum` function is **O(n^2)**, where `n` is the length of the input array.
+
+Here's why:
+
+1. **Sorting the array**: The initial sorting step takes **O(n log n)** time.
+2. **Nested loops**:
+   - The outer loop runs **O(n)** times (from `i = 0` to `i = len(array) - 2`).
+   - The inner `while` loop runs in **O(n)** time in the worst case (since `left` and `right` pointers traverse the array).
+   - Together, the nested loops contribute **O(n^2)** time complexity.
+
+Since **O(n^2)** dominates **O(n log n)**, the overall time complexity is **O(n^2)**.
+
+---
+
+### Space Complexity:
+
+The space complexity is **O(n)** in the worst case, where `n` is the length of the input array. Here's why:
+
+1. **Sorting**: Sorting typically uses **O(log n)** space (for the sorting algorithm's internal stack).
+
+2. **Output storage**: The `triplets` list can store up to **O(n)** triplets in the worst case (e.g., if all triplets
+sum to the target).
+
+Thus, the space complexity is **O(n)** due to the output storage.
+
+---
+
+### Summary:
+- **Time Complexity**: **O(n^2)**
+- **Space Complexity**: **O(n)** (due to the output storage)
+
+This algorithm is efficient for finding all triplets that sum to the target value.
 
 """
 
-## Time and Space Complexity:
+# =========================================================================================================================== #
 
-### Time Complexity Analysis
-
-The time complexity of the `three_number_sum` function can be broken down as follows:
-
-1. **Sorting the Array**: 
-   - The `array.sort()` operation sorts the array in place. The time complexity of sorting is `O(n log n)`,
-   where `n` is the number of elements in the array.
-
-2. **Nested Loop**:
-   - The outer loop runs from `i = 0` to `i = len(array) - 2`, which is `O(n)`.
-   - The inner `while` loop runs for each `i` and adjusts the `left` and `right` pointers. In the worst case,
-   the `while` loop runs `O(n)` times for each `i`.
-
-   Therefore, the nested loop structure has a time complexity of `O(n^2)`.
-
-3. **Overall Time Complexity**:
-   - The dominant term is `O(n^2)` from the nested loops, so the overall time complexity is `O(n^2)`.
-
-### Space Complexity Analysis
-
-1. **Sorting**:
-   - Sorting is done in place, so it does not require additional space beyond a constant amount of extra space.
-   Thus, the space complexity for sorting is `O(1)`.
-
-2. **Triplets List**:
-   - The `triplets` list stores the valid triplets. In the worst case, the number of valid triplets can be `O(n^2)`
-   (e.g., when the array contains many elements that form valid triplets).
-
-   Therefore, the space complexity for storing the triplets is `O(n^2)`.
-
-3. **Overall Space Complexity**:
-   - The overall space complexity is `O(n^2)` due to the storage of the triplets.
-
-### Summary
-
-- **Time Complexity**: `O(n^2)`
-- **Space Complexity**: `O(n^2)`
-
-### Conclusion
-
-The `three_number_sum` function efficiently finds all triplets in an array that sum up to a given target value.
-The time complexity is `O(n^2)` due to the nested loops, and the space complexity is O`(n^2)` due to the storage of the triplets.
-
-"""
-
-
-# Code Explanation:
+# Detailed Code Explanation:
 
 """
 The `three_number_sum` function is designed to find all unique triplets in an array that sum up to a given target value.
