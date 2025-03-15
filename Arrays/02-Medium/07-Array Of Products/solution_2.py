@@ -150,3 +150,177 @@ in linear time and linear space.
 """
 
 # =========================================================================================================================== #
+
+# Detailed Code Explanation:
+
+"""
+### **Explanation of `array_of_products` Function**
+
+The `array_of_products` function computes a new array where each element at index `i` is the product of all numbers in the input
+array **except** the number at index `i`. The function does **not** use division to avoid issues with zero division errors.
+
+---
+
+### **Step-by-Step Breakdown**
+
+#### **1. Initializing Arrays**
+```
+products = [1 for _ in range(len(array))]
+left_products = [1 for _ in range(len(array))]
+right_products = [1 for _ in range(len(array))]
+```
+- The function first initializes three lists of the same length as `array`:
+  - `products`: Stores the final result.
+  - `left_products`: Stores the product of all elements **to the left** of index `i`.
+  - `right_products`: Stores the product of all elements **to the right** of index `i`.
+
+Example for `array = [5, 1, 4, 2]`:
+```
+products       = [1, 1, 1, 1]
+left_products  = [1, 1, 1, 1]
+right_products = [1, 1, 1, 1]
+```
+
+---
+
+#### **2. Filling `left_products`**
+```
+left_running_product = 1
+for i in range(len(array)):
+    left_products[i] = left_running_product
+    left_running_product *= array[i]
+```
+- This loop iterates over the array from **left to right**.
+- It maintains `left_running_product`, which stores the cumulative product of elements before index `i`.
+
+##### **Step-by-step for `[5, 1, 4, 2]`**
+
+| Index  | `left_running_product` (before update) | `left_products[i]` | `left_running_product` (after update) |
+|--------|----------------------------------------|--------------------|---------------------------------------|
+| 0      | 1                                      | 1                  | 1 × 5 = 5                             |
+| 1      | 5                                      | 5                  | 5 × 1 = 5                             |
+| 2      | 5                                      | 5                  | 5 × 4 = 20                            |
+| 3      | 20                                     | 20                 | 20 × 2 = 40                           |
+
+After this step, `left_products` becomes:
+```
+[1, 5, 5, 20]
+```
+
+---
+
+#### **3. Filling `right_products`**
+```
+right_running_product = 1
+for i in reversed(range(len(array))):
+    right_products[i] = right_running_product
+    right_running_product *= array[i]
+```
+- This loop iterates from **right to left**.
+- It maintains `right_running_product`, which stores the cumulative product of elements after index `i`.
+
+##### **Step-by-step for `[5, 1, 4, 2]`**
+
+| Index  | `right_running_product` (before update) | `right_products[i]` | `right_running_product` (after update) |
+|--------|-----------------------------------------|---------------------|----------------------------------------|
+| 3      | 1                                       | 1                   | 1 × 2 = 2                              |
+| 2      | 2                                       | 2                   | 2 × 4 = 8                              |
+| 1      | 8                                       | 8                   | 8 × 1 = 8                              |
+| 0      | 8                                       | 8                   | 8 × 5 = 40                             |
+
+After this step, `right_products` becomes:
+```
+[8, 8, 2, 1]
+```
+
+---
+
+#### **4. Computing Final `products`**
+```
+for i in range(len(array)):
+    products[i] = left_products[i] * right_products[i]
+```
+- Each element at index `i` in `products` is calculated as:
+  products[i] = left_products[i] * right_products[i]
+
+##### **Final Computation for `[5, 1, 4, 2]`**
+
+| Index  | `left_products[i]` | `right_products[i]` | `products[i]` |
+|--------|--------------------|---------------------|---------------|
+| 0      | 1                  | 8                   | 1 × 8  = 8    |
+| 1      | 5                  | 8                   | 5 × 8  = 40   |
+| 2      | 5                  | 2                   | 5 × 2  = 10   |
+| 3      | 20                 | 1                   | 20 × 1 = 20   |
+
+Final `products` array:
+```
+[8, 40, 10, 20]
+```
+
+---
+
+### **Test Cases & Explanation**
+
+#### **Test Case 1: `[5, 1, 4, 2]`**
+Output:
+```
+[8, 40, 10, 20]
+```
+(Explained above)
+
+#### **Test Case 2: `[-5, 2, -4, 14, -6]`**
+
+##### **Step-by-step**
+1. `left_products`: `[1, -5, -10, 40, 560]`
+2. `right_products`: `[-672, 336, -84, -6, 1]`
+3. `products`: `left_products[i] * right_products[i]`
+   ```
+   [672, -1680, 840, -240, 560]
+   ```
+
+#### **Test Case 3: `[0, 0, 0, 0]`**
+
+- Any product that includes a zero is zero.
+- Every element has at least one zero in the array.
+- The output is:
+  ```
+  [0, 0, 0, 0]
+  ```
+
+---
+
+### **Alternative Optimization (Space Efficient)**
+Instead of using `left_products` and `right_products`, we can compute `products` in two passes using a single array:
+
+1. Compute **left running product** directly into `products`.
+2. Multiply it with a **right running product** in a second pass.
+
+```
+def optimized_array_of_products(array):
+    n = len(array)
+    products = [1] * n
+
+    left_running_product = 1
+    for i in range(n):
+        products[i] = left_running_product
+        left_running_product *= array[i]
+
+    right_running_product = 1
+    for i in reversed(range(n)):
+        products[i] *= right_running_product
+        right_running_product *= array[i]
+
+    return products
+```
+
+- **Space Complexity:** O(1) auxiliary space (excluding output array)
+- **Time Complexity:** O(n)
+
+---
+
+### **Conclusion**
+- The function effectively computes the product of all elements except the current one **without using division**.
+- It uses **left and right product arrays** to store intermediate values.
+- The optimized version reduces space usage to **O(1)**.
+
+"""
