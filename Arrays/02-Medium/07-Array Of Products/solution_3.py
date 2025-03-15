@@ -83,3 +83,44 @@ print(array_of_products([0, 0, 0, 0]))
 # Output: [0, 0, 0, 0]
 
 # =========================================================================================================================== #
+
+# Big O Analysis:
+
+"""
+## Time and Space Complexity Analysis:
+
+### **Time Complexity: O(n)**
+- The function iterates through the array twice:
+
+  1. **First pass (left to right):** This pass calculates the running product of all elements to the left of each index.
+  It takes **O(n)** time.
+  
+  2. **Second pass (right to left):** This pass calculates the running product of all elements to the right of each index
+  and multiplies it with the previously computed left product. It also takes **O(n)** time.
+  
+- Since both passes are sequential and independent, the total time complexity is **O(n)**.
+
+---
+
+### **Space Complexity: O(n)**
+
+- The function uses an additional array `products` of size `n` to store the results. This array is the only significant
+extra space used.
+
+- Apart from this, a few variables (`left_running_product`, `right_running_product`, and loop counters) are used,
+but they occupy constant space (**O(1)**).
+
+- Therefore, the total space complexity is **O(n)** due to the `products` array.
+
+---
+
+### **Summary**
+- **Time Complexity:** O(n)
+- **Space Complexity:** O(n)
+
+This is an optimal solution for the problem, as it avoids using nested loops (which would result in O(n²) time complexity)
+and achieves the result in linear time and space.
+
+"""
+
+# =========================================================================================================================== #
