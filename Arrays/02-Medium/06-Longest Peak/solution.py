@@ -87,3 +87,64 @@ print(longest_peak([]))
 # Output: 0
 
 # =========================================================================================================================== #
+
+# Big O Analysis:
+
+"""
+## Time and Space Complexity Analysis:
+
+### Time Complexity Analysis
+
+The time complexity of the `longest_peak` function can be analyzed as follows:
+
+1. **Outer Loop**: The outer `while` loop runs from `i = 1` to `i < len(array) - 1`. In the worst case, this loop
+iterates over the entire array, so it runs in O(n) time, where `n` is the length of the array.
+
+2. **Peak Check**: For each iteration of the outer loop, the function checks if the current element is a peak.
+This check is done in constant time O(1).
+
+3. **Left Expansion**: If a peak is found, the function expands to the left to find the start of the peak. This inner
+`while` loop runs until it finds an element that is not part of the increasing sequence. In the worst case, this could
+run up to O(n) times, but since each element is only processed once across all peaks, the total time for all
+left expansions across the entire array is O(n).
+
+4. **Right Expansion**: Similarly, the function expands to the right to find the end of the peak. This inner `while`
+loop also runs in O(n) time in total across all peaks.
+
+5. **Peak Length Calculation**: The calculation of the current peak length and updating the `longest_peak_length` is
+done in constant time O(1).
+
+6. **Update `i`**: After processing a peak, the outer loop skips to the end of the current peak by setting `i = right_idx`.
+This ensures that each element is processed at most once.
+
+### Overall Time Complexity
+
+Since each element in the array is processed at most once during the left and right expansions, and the outer loop
+runs in O(n) time, the overall time complexity of the function is: O(n)
+
+---
+
+### Space Complexity Analysis
+
+The space complexity of the function is determined by the amount of additional memory used:
+
+1. **Variables**: The function uses a few variables (`longest_peak_length`, `i`, `left_idx`, `right_idx`, `current_peak_length`,
+etc.), which require constant space O(1).
+
+2. **No Additional Data Structures**: The function does not use any additional data structures like arrays, stacks, or 
+queues that grow with the input size.
+
+### Overall Space Complexity
+
+Since the function uses only a constant amount of extra space, the space complexity is: O(1)
+
+---
+
+### Summary
+
+- **Time Complexity**: O(n)
+- **Space Complexity**: O(1)
+
+"""
+
+# =========================================================================================================================== #
