@@ -109,3 +109,49 @@ print(spiral_traverse(array_3))
 # Output: [1]
 
 # =========================================================================================================================== #
+
+# Big O Analysis:
+
+"""
+## Time and Space Complexity Analysis:
+
+### Time Complexity Analysis
+
+The time complexity of the `spiral_traverse` function is **O(N)**, where **N** is the total number of elements in the 2D array. Here's why:
+
+1. **Traversal of all elements**: The function visits every element in the 2D array exactly once. Each element is appended
+to the `result` list in a single pass.
+
+2. **Recursive calls**: The recursive calls (`spiral_fill`) reduce the problem size by moving inward (shrinking the boundaries
+of the spiral). However, each recursive call still processes a subset of the elements, and the total number of operations
+remains proportional to the total number of elements **N**.
+
+Thus, the time complexity is linear **O(N)** with respect to the total number of elements in the array.
+
+---
+
+### Space Complexity Analysis
+
+The space complexity of the `spiral_traverse` function is **O(N)** in the worst case, where **N** is the total number
+of elements in the 2D array. Here's why:
+
+1. **Output space**: The `result` list stores all **N** elements of the 2D array, contributing **O(N)** space.
+
+2. **Recursive call stack**: The recursion depth depends on the number of layers in the spiral. For a 2D array with
+dimensions **m x n**, the maximum recursion depth is approximately **min(m, n) / 2**. However, this is still **O(min(m, n))**,
+which is less than or equal to **O(N)** in the worst case.
+
+Thus, the dominant factor in space complexity is the `result` list, making the overall space complexity **O(N)**.
+
+---
+
+### Summary
+
+- **Time Complexity**: **O(N)**, where **N** is the total number of elements in the 2D array.
+- **Space Complexity**: **O(N)**, due to the `result` list storing all elements.
+
+This implementation is efficient for traversing a 2D array in spiral order.
+
+"""
+
+# =========================================================================================================================== #
