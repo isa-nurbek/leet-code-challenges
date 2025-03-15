@@ -78,3 +78,60 @@ print(array_of_products([0, 0, 0, 0]))
 # Output: [0, 0, 0, 0]
 
 # =========================================================================================================================== #
+
+# Big O Analysis:
+
+"""
+## Time and Space Complexity Analysis:
+
+### Time Complexity Analysis
+
+The given function `array_of_products` calculates the product of all elements in the input array except for the
+element at the current index. Let's break down the time complexity:
+
+1. **Outer Loop**: The outer loop runs `n` times, where `n` is the length of the array.
+2. **Inner Loop**: For each iteration of the outer loop, the inner loop also runs `n` times.
+3. **Operations Inside Inner Loop**: Inside the inner loop, a multiplication operation is performed if `i != j`.
+
+Since the inner loop runs `n` times for each iteration of the outer loop, the total number of operations is:
+
+    n * n = n^2
+
+Thus, the **time complexity** of the function is - O(n^2).
+
+---
+
+### Space Complexity Analysis
+
+The space complexity is determined by the additional space used by the algorithm, excluding the input and output.
+
+1. **Output Array**: The `products` array stores `n` elements, so it requires O(n) space.
+2. **Other Variables**: The variables `running_product`, `i`, and `j` use constant space, O(1).
+
+Since the dominant term is the `products` array, the **space complexity** is - O(n).
+
+---
+
+### Summary
+
+- **Time Complexity**: O(n^2)
+- **Space Complexity**: O(n)
+
+---
+
+### Optimized Approach
+
+The above solution can be optimized to O(n) time complexity by using a prefix and suffix product approach.
+Here's how:
+
+1. Calculate the prefix product for each element (product of all elements to the left of the current element).
+2. Calculate the suffix product for each element (product of all elements to the right of the current element).
+3. Multiply the prefix and suffix products to get the final result.
+
+This approach avoids the nested loops and reduces the time complexity to O(n).
+
+Next solutions (solution_2, solution_3) will be optimized.
+
+"""
+
+# =========================================================================================================================== #
