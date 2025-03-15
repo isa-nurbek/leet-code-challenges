@@ -92,3 +92,61 @@ print(array_of_products([0, 0, 0, 0]))
 # Output: [0, 0, 0, 0]
 
 # =========================================================================================================================== #
+
+# Big O Analysis:
+
+"""
+## Time and Space Complexity Analysis:
+
+### Time Complexity Analysis
+
+1. **Initialization of Arrays**:
+   - `products`, `left_products`, and `right_products` are all initialized with a size equal to the length of the input array.
+   This takes O(n) time.
+
+2. **Left Products Calculation**:
+   - The loop iterates over the array once to compute the left products. This takes O(n) time.
+
+3. **Right Products Calculation**:
+   - The loop iterates over the array once in reverse to compute the right products. This also takes O(n) time.
+
+4. **Final Products Calculation**:
+   - The loop iterates over the array once to compute the final products by multiplying the corresponding left and right products.
+   This takes O(n) time.
+
+**Total Time Complexity**:
+- The overall time complexity is the sum of the time complexities of the individual steps:
+  
+    O(n) + O(n) + O(n) + O(n) = O(n)
+  
+- Therefore, the time complexity is - O(n).
+
+---
+
+### Space Complexity Analysis
+
+1. **Auxiliary Space**:
+   - The algorithm uses three additional arrays (`products`, `left_products`, and `right_products`), each of size `n`.
+   This requires O(n) space.
+
+2. **Input Space**:
+   - The input array itself is not counted towards the auxiliary space complexity.
+
+**Total Space Complexity**:
+- The space complexity is dominated by the auxiliary space used: O(n)
+  
+- Therefore, the space complexity is - O(n).
+
+---
+
+### Summary
+
+- **Time Complexity**: O(n)
+- **Space Complexity**: O(n)
+
+This algorithm efficiently computes the product of all elements in the array except the current element
+in linear time and linear space.
+
+"""
+
+# =========================================================================================================================== #
