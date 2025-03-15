@@ -135,3 +135,96 @@ Next solutions (solution_2, solution_3) will be optimized.
 """
 
 # =========================================================================================================================== #
+
+# Detailed Code Explanation:
+
+"""
+### **Explanation of the `array_of_products` Function**
+
+The function `array_of_products` takes an array of integers as input and returns a new array where each element
+at index `i` is the product of all elements in the input array *except* the one at index `i`. 
+
+---
+
+### **Step-by-Step Breakdown**
+
+#### **Step 1: Initialize the `products` Array**
+```
+products = [1 for _ in range(len(array))]
+```
+- This creates a new list `products` of the same length as `array`, where each element is initially set to `1`. 
+- The purpose of this list is to store the final product values.
+
+#### **Step 2: Iterate Over Each Element of `array`**
+```
+for i in range(len(array)):
+    running_product = 1
+```
+- We iterate over each index `i` of the input `array`.
+- A variable `running_product` is initialized to `1`. This will store the cumulative product of all elements except `array[i]`.
+
+#### **Step 3: Compute the Product of All Elements Except `array[i]`**
+```
+for j in range(len(array)):
+    if i != j:
+        running_product *= array[j]
+```
+- A nested loop iterates over every index `j` of `array`.
+- If `j` is not equal to `i` (meaning we skip the current element at index `i`), we multiply `running_product` by `array[j]`.
+- This effectively calculates the product of all elements in `array` except `array[i]`.
+
+#### **Step 4: Store the Computed Product in `products`**
+```
+products[i] = running_product
+```
+- The computed `running_product` (excluding `array[i]`) is stored in `products[i]`.
+
+#### **Step 5: Return the Final `products` Array**
+```
+return products
+```
+- After iterating through all elements, the function returns the `products` array.
+
+---
+
+### **Example Walkthrough**
+
+#### **Input:** `[5, 1, 4, 2]`
+We need to compute:
+- `products[0] = 1 × 4 × 2 = 8`
+- `products[1] = 5 × 4 × 2 = 40`
+- `products[2] = 5 × 1 × 2 = 10`
+- `products[3] = 5 × 1 × 4 = 20`
+
+#### **Output:** `[8, 40, 10, 20]`
+
+---
+
+
+### **Edge Cases**
+
+1. **Array with Zeroes:**
+   ```
+   print(array_of_products([0, 0, 0, 0]))
+   ```
+   - Since multiplication by zero results in zero, every element in the output will be `0`.
+   - **Output:** `[0, 0, 0, 0]`
+
+2. **Array with Negative Numbers:**
+   ```
+   print(array_of_products([-5, 2, -4, 14, -6]))
+   ```
+   - It correctly computes the products, considering sign changes due to multiplication.
+
+---
+
+### **Optimization Idea**
+
+Instead of using **O(N²)** nested loops, we can optimize it to **O(N)** using:
+1. **Left product array**: Stores cumulative product of elements to the left of each index.
+2. **Right product array**: Stores cumulative product of elements to the right of each index.
+3. Multiply corresponding left and right products to get the final result.
+
+Next 2 solutions are optimized.
+
+"""
