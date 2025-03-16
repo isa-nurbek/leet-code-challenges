@@ -83,3 +83,42 @@ print(first_duplicate_value([1]))
 # Output: -1
 
 # =========================================================================================================================== #
+
+# Big O Analysis:
+
+"""
+## Time and Space Complexity Analysis:
+
+### Time Complexity:
+
+- The function iterates through the `array` once using a `for` loop.
+- For each element in the array, it checks if the element exists in the `seen` set using the `in` operator.
+Checking for membership in a set is on average - O(1).
+
+- If the element is not in the set, it adds the element to the set, which is also O(1) on average.
+- In the worst case, the loop runs through all elements of the array without finding a duplicate, resulting in O(n)
+operations, where `n` is the size of the array.
+
+Thus, the **time complexity is O(n)**, where `n` is the length of the array.
+
+---
+
+### Space Complexity:
+
+- The function uses a `set` called `seen` to store unique elements from the array.
+- In the worst case, if there are no duplicates, the set will store all `n` elements of the array.
+- Therefore, the space required by the `seen` set is proportional to the size of the array.
+
+Thus, the **space complexity is O(n)**, where `n` is the length of the array.
+
+---
+
+### Summary:
+- **Time Complexity:** O(n)
+- **Space Complexity:** O(n)
+
+This implementation is efficient for finding the first duplicate value in an array.
+
+"""
+
+# =========================================================================================================================== #
