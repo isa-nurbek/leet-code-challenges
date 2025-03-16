@@ -83,3 +83,48 @@ print(merge_overlapping_intervals_stack([[100, 105], [1, 104]]))
 # Output: [[1, 105]]
 
 # =========================================================================================================================== #
+
+# Big O Analysis:
+
+"""
+## Time and Space Complexity Analysis:
+
+### Time Complexity Analysis
+
+1. **Sorting**: 
+   - The first step is sorting the intervals based on their start times. Sorting a list of `n` intervals takes O(n log n) time.
+
+2. **Iterating through the intervals**:
+   - After sorting, the algorithm iterates through the list of intervals once. This iteration takes O(n) time.
+
+3. **Merging intervals**:
+   - During the iteration, each interval is either merged with the previous one or added to the stack. Merging or appending
+   to the stack takes O(1) time per interval.
+
+Thus, the overall time complexity is dominated by the sorting step, which is - O(n log n).
+
+---
+
+### Space Complexity Analysis
+
+1. **Stack**:
+   - The stack is used to store the merged intervals. In the worst case, if no intervals overlap, the stack will contain
+   all `n` intervals. Therefore, the space complexity is O(n).
+
+2. **Sorting**:
+   - Sorting typically requires O(n) additional space (for the sorting algorithm's internal data structures).
+
+Thus, the overall space complexity is - O(n).
+
+---
+
+### Summary
+
+- **Time Complexity**: O(n log n)
+- **Space Complexity**: O(n)
+
+This approach ensures that all overlapping intervals are merged efficiently, and the final list of intervals is non-overlapping.
+
+"""
+
+# =========================================================================================================================== #
