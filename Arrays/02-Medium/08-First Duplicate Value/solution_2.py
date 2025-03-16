@@ -122,3 +122,117 @@ This implementation is efficient for finding the first duplicate value in an arr
 """
 
 # =========================================================================================================================== #
+
+# Detailed Code Explanation:
+
+"""
+### Explanation of the Code
+
+The function `first_duplicate_value(array)` is designed to find the first duplicate value in a given array.
+If no duplicates are found, it returns `-1`. Here's a detailed breakdown of how the code works:
+
+---
+
+### Code Breakdown
+
+```
+def first_duplicate_value(array):
+    seen = set()  # Initialize an empty set to track seen values
+
+    for value in array:  # Iterate through each value in the array
+        if value in seen:  # Check if the value is already in the set
+            return value  # If yes, return the value as it's the first duplicate
+        seen.add(value)  # If not, add the value to the set
+
+    return -1  # If no duplicates are found, return -1
+```
+
+---
+
+### How It Works
+
+1. **Initialize a Set (`seen`)**:
+   - A set is used to store values that have been encountered so far in the array. Sets are ideal for this purpose
+   because they allow for O(1) average-time complexity for lookups and insertions.
+
+2. **Iterate Through the Array**:
+   - The function loops through each element (`value`) in the input array.
+
+3. **Check for Duplicates**:
+   - For each `value`, the function checks if it already exists in the `seen` set.
+     - If the value is found in the set, it means the value is a duplicate, and the function immediately returns that
+     value as the first duplicate.
+     - If the value is not in the set, it is added to the `seen` set for future reference.
+
+4. **Return -1 if No Duplicates**:
+   - If the loop completes without finding any duplicates, the function returns `-1` to indicate that no duplicates 
+   exist in the array.
+
+---
+
+### Example Walkthroughs
+
+#### Example 1:
+```
+print(first_duplicate_value([2, 1, 5, 2, 3, 3, 4]))
+```
+- **Step-by-Step**:
+  1. Start with an empty set: `seen = {}`.
+  2. Iterate through the array:
+     - `2` is not in `seen`, so add it: `seen = {2}`.
+     - `1` is not in `seen`, so add it: `seen = {2, 1}`.
+     - `5` is not in `seen`, so add it: `seen = {2, 1, 5}`.
+     - `2` is already in `seen`, so return `2`.
+     
+- **Output**: `2`.
+
+#### Example 2:
+```
+print(first_duplicate_value([2, 1, 5, 3, 3, 2, 4]))
+```
+- **Step-by-Step**:
+  1. Start with an empty set: `seen = {}`.
+  2. Iterate through the array:
+     - `2` is not in `seen`, so add it: `seen = {2}`.
+     - `1` is not in `seen`, so add it: `seen = {2, 1}`.
+     - `5` is not in `seen`, so add it: `seen = {2, 1, 5}`.
+     - `3` is not in `seen`, so add it: `seen = {2, 1, 5, 3}`.
+     - `3` is already in `seen`, so return `3`.
+     
+- **Output**: `3`.
+
+#### Example 3:
+```
+print(first_duplicate_value([6, 6, 5, 1, 3, 7, 7, 8]))
+```
+- **Step-by-Step**:
+  1. Start with an empty set: `seen = {}`.
+  2. Iterate through the array:
+     - `6` is not in `seen`, so add it: `seen = {6}`.
+     - `6` is already in `seen`, so return `6`.
+     
+- **Output**: `6`.
+
+#### Example 4:
+```
+print(first_duplicate_value([1]))
+```
+- **Step-by-Step**:
+  1. Start with an empty set: `seen = {}`.
+  2. Iterate through the array:
+     - `1` is not in `seen`, so add it: `seen = {1}`.
+  3. No duplicates are found, so return `-1`.
+  
+- **Output**: `-1`.
+
+---
+
+### Key Points
+
+- The function efficiently finds the first duplicate by leveraging the properties of sets.
+- It stops execution as soon as the first duplicate is found, making it optimal for large arrays.
+- If no duplicates are found, it returns `-1` to indicate this.
+
+This implementation is both simple and efficient for the problem at hand.
+
+"""
