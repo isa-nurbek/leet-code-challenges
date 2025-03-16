@@ -128,3 +128,152 @@ This approach ensures that all overlapping intervals are merged efficiently, and
 """
 
 # =========================================================================================================================== #
+
+# Detailed Code Explanation:
+
+"""
+### **Explanation of `merge_overlapping_intervals_stack` function**
+
+The function `merge_overlapping_intervals_stack(intervals)` takes a list of intervals (represented as pairs of numbers)
+and merges overlapping intervals. It uses a **stack-based approach** to efficiently merge intervals.
+
+---
+
+### **Step-by-Step Explanation**
+
+#### **1. Handling Edge Case**
+```
+if not intervals:
+    return []
+```
+- If the input list is empty, return an empty list immediately.
+
+#### **2. Sorting the Intervals**
+```
+sorted_intervals = sorted(intervals, key=lambda x: x[0])
+```
+- The intervals are **sorted by their start times** (`x[0]` ensures sorting by the first element of each interval).
+- This sorting step ensures that intervals are processed in increasing order.
+
+##### **Example Sorting**
+If the input is:
+```
+[[1, 2], [3, 5], [4, 7], [6, 8], [9, 10]]
+```
+After sorting:
+```
+[[1, 2], [3, 5], [4, 7], [6, 8], [9, 10]]
+```
+(Since they were already sorted, no change in order.)
+
+#### **3. Initialize Stack with the First Interval**
+```
+stack = [sorted_intervals[0]]
+```
+- The stack is initialized with the first interval since there is nothing to compare yet.
+
+#### **4. Iterating Through the Sorted Intervals**
+```
+for i in range(1, len(sorted_intervals)):
+    top = stack[-1]  # Get the last interval in the stack
+    current = sorted_intervals[i]  # Current interval
+```
+- The loop starts from the second interval (`i = 1`) and iterates over all intervals.
+
+- `top` is the last interval in the `stack`, and `current` is the interval being processed.
+
+#### **5. Merging Intervals**
+```
+if top[1] >= current[0]:
+    stack[-1] = [top[0], max(top[1], current[1])]
+```
+- If the **end time** of `top` (`top[1]`) **overlaps or touches** the **start time** of `current` (`current[0]`), merge them:
+  - Update the last interval in `stack` with:
+    - **Start time** remains the same (`top[0]`).
+    - **End time** is updated to the maximum of `top[1]` and `current[1]` to extend the range.
+
+##### **Example of Merging**
+
+Processing `[[3, 5], [4, 7]]`:
+- `top = [3, 5]`
+- `current = [4, 7]`
+- Since `5 >= 4`, we merge them into `[3, 7]`.
+
+```
+stack[-1] = [3, max(5, 7)]  # Updates stack to [[1, 2], [3, 7]]
+```
+
+#### **6. Pushing Non-Overlapping Intervals**
+```
+else:
+    stack.append(current)
+```
+- If no overlap, the current interval is added to the stack separately.
+
+##### **Example of Non-Merging**
+
+Processing `[9, 10]`:
+- `top = [3, 8]`
+- `current = [9, 10]`
+- Since `8 < 9`, no merge happens, and `[9, 10]` is pushed onto the stack.
+
+---
+
+### **Final Output**
+```
+return stack
+```
+- The stack now contains the merged intervals.
+
+---
+
+### **Example Walkthrough**
+
+#### **Test Case 1**
+```
+merge_overlapping_intervals_stack([[1, 2], [3, 5], [4, 7], [6, 8], [9, 10]])
+```
+1. Sort intervals: `[[1, 2], [3, 5], [4, 7], [6, 8], [9, 10]]`
+2. Stack initialized: `[[1, 2]]`
+3. Processing `[3, 5]`: Stack → `[[1, 2], [3, 5]]`
+4. Processing `[4, 7]`: Merge `[3, 5]` and `[4, 7]` → `[[1, 2], [3, 7]]`
+5. Processing `[6, 8]`: Merge `[3, 7]` and `[6, 8]` → `[[1, 2], [3, 8]]`
+6. Processing `[9, 10]`: No merge, Stack → `[[1, 2], [3, 8], [9, 10]]`
+
+7. **Final Output**: `[[1, 2], [3, 8], [9, 10]]`
+
+---
+
+#### **Test Case 2**
+```
+merge_overlapping_intervals_stack([[1, 3], [2, 8], [9, 10]])
+```
+1. Sort intervals: `[[1, 3], [2, 8], [9, 10]]`
+2. Stack initialized: `[[1, 3]]`
+3. Processing `[2, 8]`: Merge `[1, 3]` and `[2, 8]` → `[[1, 8]]`
+4. Processing `[9, 10]`: No merge, Stack → `[[1, 8], [9, 10]]`
+
+5. **Final Output**: `[[1, 8], [9, 10]]`
+
+---
+
+#### **Test Case 3**
+```
+merge_overlapping_intervals_stack([[100, 105], [1, 104]])
+```
+1. Sort intervals: `[[1, 104], [100, 105]]`
+2. Stack initialized: `[[1, 104]]`
+3. Processing `[100, 105]`: Merge `[1, 104]` and `[100, 105]` → `[[1, 105]]`
+
+4. **Final Output**: `[[1, 105]]`
+
+---
+
+### **Summary**
+- **Sort intervals** based on the start time.
+- **Use a stack** to store merged intervals.
+- **Iterate and merge overlapping intervals** using `max` for the end time.
+- **Push non-overlapping intervals** to the stack separately.
+- **Returns the merged intervals** as the final result.
+
+"""
