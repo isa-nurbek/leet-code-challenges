@@ -83,3 +83,49 @@ print(best_seat([1, 1, 1, 0, 1, 0, 1, 1, 1, 0, 1]))
 # Output: 3
 
 # =========================================================================================================================== #
+
+# Big O Analysis:
+
+"""
+## Time and Space Complexity Analysis:
+
+### Time Complexity Analysis
+
+The time complexity of the `best_seat` function is **O(n)**, where `n` is the number of elements in the `seats` list.
+
+#### Explanation:
+
+1. The outer `while` loop iterates through the `seats` list once. The `left` pointer starts at 0 and increments
+until it reaches the end of the list.
+
+2. The inner `while` loop increments the `right` pointer as long as the current seat is `0` (available). This loop also
+iterates through the list, but it does so in conjunction with the outer loop.
+
+3. The key observation is that each element in the `seats` list is visited at most twice: once by the `left` pointer and
+once by the `right` pointer. This results in a linear time complexity, **O(n)**.
+
+---
+
+### Space Complexity Analysis
+
+The space complexity of the `best_seat` function is **O(1)**.
+
+#### Explanation:
+
+1. The function uses a constant amount of extra space, regardless of the input size. Variables like `best_seat`, `max_space`,
+`left`, and `right` occupy a fixed amount of memory.
+
+2. No additional data structures (e.g., arrays, hash maps) are used that grow with the input size. 
+Thus, the space complexity is constant, **O(1)**.
+
+---
+
+### Summary
+- **Time Complexity:** O(n)
+- **Space Complexity:** O(1)
+
+This makes the algorithm efficient for large inputs.
+
+"""
+
+# =========================================================================================================================== #
