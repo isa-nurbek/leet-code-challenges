@@ -90,3 +90,66 @@ print(first_duplicate_value([1]))
 # Output: -1
 
 # =========================================================================================================================== #
+
+# Big O Analysis:
+
+"""
+## Time and Space Complexity Analysis:
+
+### Time Complexity Analysis
+
+The given function `first_duplicate_value` uses a nested loop to find the first duplicate value in the array.
+Let's break down the time complexity:
+
+1. **Outer Loop**: The outer loop runs from `i = 0` to `i = len(array) - 1`, which means it iterates `n` times,
+where `n` is the length of the array.
+
+2. **Inner Loop**: For each iteration of the outer loop, the inner loop runs from `j = i + 1` to `j = len(array) - 1`. 
+The number of iterations of the inner loop decreases as `i` increases:
+
+   - When `i = 0`, the inner loop runs `n - 1` times.
+   - When `i = 1`, the inner loop runs `n - 2` times.
+   - ...
+   - When `i = n - 1`, the inner loop runs `0` times.
+
+   The total number of iterations of the inner loop is approximately:
+   
+        (n - 1) + (n - 2) + ⋯ + 1 + 0 = n(n - 1) / 2
+   
+3. **Overall Time Complexity**: The total number of iterations is proportional to `n(n - 1) / 2`, which simplifies to - O(n^2).
+
+   Therefore, the **time complexity** of the function is - O(n^2) .
+
+---
+
+### Space Complexity Analysis
+
+The function uses a constant amount of additional space regardless of the input size:
+
+1. **Variables**: The function uses a few variables like `minimum_second_index`, `value`, and `value_to_compare`, 
+but these do not depend on the size of the input array. They use a constant amount of space.
+
+2. **No Additional Data Structures**: The function does not use any additional data structures (e.g., hash maps,
+sets, or arrays) that grow with the input size.
+
+   Therefore, the **space complexity** of the function is - O(1).
+
+---
+
+### Summary
+
+- **Time Complexity**: O(n^2) 
+- **Space Complexity**: O(1) 
+
+---
+
+### Optimization Suggestion
+
+The current implementation has a quadratic time complexity, which is inefficient for large arrays. We can optimize
+this to O(n) time complexity by using a **hash set** to track seen values. 
+
+We will implement optimized solution in (solution_2.py / solution_3.py)
+
+"""
+
+# =========================================================================================================================== #
