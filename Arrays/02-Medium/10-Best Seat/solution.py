@@ -1,0 +1,85 @@
+# Problem Description:
+
+"""
+
+                                         # Best Seat
+
+You walk into a theatre you're about to see a show in. The usher within the theatre walks you to your row and mentions you're
+allowed to sit anywhere within the given row. Naturally you'd like to sit in the seat that gives you the most space. You also
+would prefer this space to be evenly distributed on either side of you (e.g. if there are three empty seats in a row, you would
+prefer to sit in the middle of those three seats).
+
+Given the theatre row represented as an integer array, return the seat index of where you should sit. Ones represent occupied
+seats and zeroes represent empty seats.
+
+You may assume that someone is always sitting in the first and last seat of the row. Whenever there are two equally good seats,
+you should sit in the seat with the lower index. If there is no seat to sit in, return -1. The given array will always have
+a length of at least one and contain only ones and zeroes.
+
+
+## Sample Input:
+```
+seats = [1, 0, 1, 0, 0, 0, 1]
+```
+
+## Sample Output:
+```
+4
+```
+
+## Optimal Time & Space Complexity:
+```
+O(n) time | O(1) space - where `n` is the number of seats.
+```
+
+"""
+
+# =========================================================================================================================== #
+
+# Solution:
+
+
+# O(n) time | O(1) space - where `n` is the number of seats.
+def best_seat(seats):
+    # Initialize variables to track the best seat and the maximum available space
+    best_seat = -1  # Default value if no suitable seat is found
+    max_space = 0  # Tracks the largest continuous block of empty seats found
+
+    # Start from the leftmost seat
+    left = 0
+    while left < len(seats):
+        # Initialize the right pointer to the next seat
+        right = left + 1
+
+        # Move the right pointer as long as the seats are empty (0)
+        while right < len(seats) and seats[right] == 0:
+            right += 1
+
+        # Calculate the available space between the left and right pointers
+        # Subtract 1 because the space is between the seats, not including them
+        available_space = right - left - 1
+
+        # If this block of empty seats is larger than the previous maximum, update the best seat
+        if available_space > max_space:
+            best_seat = (left + right) // 2  # The middle seat in the block
+            max_space = available_space
+
+        # Move the left pointer to the current right pointer to check the next block
+        left = right
+
+    # Return the best seat found, or -1 if no suitable seat is available
+    return best_seat
+
+
+# Test Cases:
+
+print(best_seat([1, 0, 1, 0, 0, 0, 1]))
+# Output: 4
+
+print(best_seat([1]))
+# Output: -1
+
+print(best_seat([1, 1, 1, 0, 1, 0, 1, 1, 1, 0, 1]))
+# Output: 3
+
+# =========================================================================================================================== #
