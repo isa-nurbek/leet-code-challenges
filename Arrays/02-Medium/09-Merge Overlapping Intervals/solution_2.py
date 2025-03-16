@@ -42,22 +42,32 @@ O(n log(n)) time | O(n) space - where `n` is the length of the input array.
 
 # O(n log(n)) time | O(n) space - where `n` is the length of the input array.
 def merge_overlapping_intervals_stack(intervals):
+    # If the input list is empty, return an empty list
     if not intervals:
         return []
 
+    # Sort the intervals based on the start value of each interval
     sorted_intervals = sorted(intervals, key=lambda x: x[0])
 
+    # Initialize a stack with the first interval
     stack = [sorted_intervals[0]]
 
+    # Iterate through the sorted intervals starting from the second interval
     for i in range(1, len(sorted_intervals)):
+        # Get the top interval from the stack
         top = stack[-1]
+        # Get the current interval
         current = sorted_intervals[i]
 
+        # Check if the current interval overlaps with the top interval in the stack
         if top[1] >= current[0]:
+            # If they overlap, merge them by updating the end value of the top interval
             stack[-1] = [top[0], max(top[1], current[1])]
         else:
+            # If they don't overlap, push the current interval onto the stack
             stack.append(current)
 
+    # Return the merged intervals stored in the stack
     return stack
 
 
