@@ -86,3 +86,51 @@ print(first_duplicate_value([1]))
 # Output: -1
 
 # =========================================================================================================================== #
+
+# Big O Analysis:
+
+"""
+## Time and Space Complexity Analysis:
+
+### Time Complexity Analysis
+
+The time complexity of the `first_duplicate_value` function is **O(n)**, where `n` is the length of the input array.
+
+Here's why:
+
+1. **Loop through the array**: The function iterates through each element in the array exactly once. This is a single pass,
+so it takes **O(n)** time.
+
+2. **Operations inside the loop**:
+   - Calculating the absolute value (`abs(value)`) is a constant-time operation, **O(1)**.
+   - Accessing and updating the array at a specific index (`array[abs_value - 1]`) is also **O(1)**.
+   - The condition check (`if array[abs_value - 1] < 0`) is **O(1)**.
+
+Since all operations inside the loop are constant time, the overall time complexity remains **O(n)**.
+
+---
+
+### Space Complexity Analysis
+
+The space complexity of the function is **O(1)**, meaning it uses constant extra space.
+
+Here's why:
+
+1. **No additional data structures**: The function does not use any extra data structures (like hash tables or sets)
+that grow with the input size.
+
+2. **In-place modification**: The function modifies the input array in place by marking visited indices with negative values.
+This does not require additional space proportional to the input size.
+
+Thus, the space complexity is **O(1)**.
+
+---
+
+### Summary
+
+- **Time Complexity**: **O(n)** (linear time).
+- **Space Complexity**: **O(1)** (constant space).
+
+"""
+
+# =========================================================================================================================== #
