@@ -134,3 +134,111 @@ Thus, the space complexity is **O(1)**.
 """
 
 # =========================================================================================================================== #
+
+# Detailed Code Explanation:
+
+"""
+The function `first_duplicate_value(array)` finds the first duplicate value in the given list where the second occurrence has
+the smallest index. The function modifies the input list in place to keep track of visited values without using extra space.
+
+---
+
+## **Explanation of Code**
+```
+def first_duplicate_value(array):
+```
+- The function takes a list of integers `array` as input.
+
+---
+### **Step 1: Iterate Over the Array**
+```
+for value in array:
+```
+- The function iterates through each element of the array.
+
+---
+### **Step 2: Get Absolute Value**
+```
+abs_value = abs(value)
+```
+- Since the function modifies values by making them negative, the absolute value ensures that we work with the original number.
+
+---
+### **Step 3: Check If It's Already Marked Negative**
+```
+if array[abs_value - 1] < 0:
+    return abs_value
+```
+- The array uses a marking technique where:
+  - The value of an element determines the index to check (`abs_value - 1`).
+  - If the value at that index is already negative, it means the number has appeared before, so it's the first duplicate,
+  and we return it.
+
+---
+### **Step 4: Mark the Value as Visited**
+```
+array[abs_value - 1] *= -1
+```
+- If it's the first time encountering this value, mark it by multiplying it by `-1`.
+
+---
+### **Step 5: Return -1 If No Duplicates**
+```
+return -1
+```
+- If no duplicates are found, return `-1`.
+
+---
+
+## **Example Walkthrough**
+
+### **Test Case 1**
+```
+first_duplicate_value([2, 1, 5, 2, 3, 3, 4])
+```
+**Step-by-Step Execution:**
+
+1. `2` → Look at index `2-1 = 1`. Mark `array[1]` as negative → `[2, -1, 5, 2, 3, 3, 4]`
+2. `1` → Look at index `1-1 = 0`. Mark `array[0]` as negative → `[-2, -1, 5, 2, 3, 3, 4]`
+3. `5` → Look at index `5-1 = 4`. Mark `array[4]` as negative → `[-2, -1, 5, 2, -3, 3, 4]`
+4. `2` → Look at index `2-1 = 1`. `array[1]` is already negative → **Return `2`**.
+
+---
+### **Test Case 2**
+```
+first_duplicate_value([2, 1, 5, 3, 3, 2, 4])
+```
+**Execution:**
+1. `2` → Mark index `1`: `[-2, 1, 5, 3, 3, 2, 4]`
+2. `1` → Mark index `0`: `[-2, -1, 5, 3, 3, 2, 4]`
+3. `5` → Mark index `4`: `[-2, -1, 5, 3, -3, 2, 4]`
+4. `3` → Mark index `2`: `[-2, -1, -5, 3, -3, 2, 4]`
+5. `3` (again) → Index `2` is negative → **Return `3`**.
+
+---
+### **Test Case 3**
+```
+first_duplicate_value([6, 6, 5, 1, 3, 7, 7, 8])
+```
+**Execution:**
+1. `6` → Mark index `5`: `[6, 6, 5, 1, 3, -7, 7, 8]`
+2. `6` (again) → Index `5` is negative → **Return `6`**.
+
+---
+### **Test Case 4**
+```
+first_duplicate_value([1])
+```
+**Execution:**
+1. `1` → Mark index `0`: `[-1]`
+2. End of array → **Return `-1`** (No duplicate found).
+
+---
+
+## **Key Takeaways**
+
+✅ Uses **in-place modification** instead of extra space.  
+✅ **Efficiently finds the first duplicate** in one pass.  
+✅ Works only if numbers are in the range `1` to `n` (since it uses indexing).
+
+"""
