@@ -2,7 +2,7 @@
 
 """
 
-                                         # Best Seat
+                                                # Best Seat
 
 You walk into a theatre you're about to see a show in. The usher within the theatre walks you to your row and mentions you're
 allowed to sit anywhere within the given row. Naturally you'd like to sit in the seat that gives you the most space. You also
