@@ -129,3 +129,120 @@ This makes the algorithm efficient for large inputs.
 """
 
 # =========================================================================================================================== #
+
+# Detailed Code Explanation:
+
+"""
+The `best_seat` function determines the best seat in a row of seats based on maximizing the distance from occupied seats.
+
+---
+
+### **Understanding the Input and Output**
+- The function takes a list `seats`, where:
+  - `1` represents an **occupied** seat.
+  - `0` represents an **empty** seat.
+- The goal is to find the **index** of the seat that provides the **maximum** space from occupied seats.
+
+---
+
+### **Step-by-Step Explanation of the Code**
+
+#### **1. Initialize Variables**
+```
+best_seat = -1
+max_space = 0
+```
+- `best_seat`: Stores the index of the best seat found. Initialized to `-1`, meaning **no suitable seat** is found.
+- `max_space`: Keeps track of the **maximum number of consecutive empty seats** found so far.
+
+---
+
+#### **2. Loop Through the List**
+```
+left = 0
+while left < len(seats):
+```
+- `left` starts at **index 0** and moves through the list.
+
+---
+
+#### **3. Find the Right Boundary of an Empty Section**
+```
+right = left + 1
+while right < len(seats) and seats[right] == 0:
+    right += 1
+```
+- If `seats[right] == 0`, we **keep moving right** until we find a `1` (occupied seat).
+- This process finds a **block of empty seats**.
+
+---
+
+#### **4. Calculate Available Space**
+```
+available_space = right - left - 1
+```
+- `available_space` represents the number of **empty seats** between `left` and `right`.
+
+---
+
+#### **5. Update Best Seat if Current Space is Greater**
+```
+if available_space > max_space:
+    best_seat = (left + right) // 2
+    max_space = available_space
+```
+- If the current `available_space` is **larger than** `max_space`, update:
+  - `best_seat` to the **middle seat** of the empty block.
+  - `max_space` to store the **new maximum empty space**.
+
+---
+
+#### **6. Move Left Pointer**
+```
+left = right
+```
+- Move `left` to `right` to **start searching for the next empty section**.
+
+---
+
+### **Example Walkthrough**
+
+#### **Test Case 1**
+```
+seats = [1, 0, 1, 0, 0, 0, 1]
+```
+1. `left = 0`, `right = 1`, finds `available_space = 0` (ignored).
+2. `left = 2`, `right = 3 → 4 → 5 → 6` finds `available_space = 3`
+   - `best_seat = (2 + 6) // 2 = 4`
+3. `left = 6`, no more empty blocks.
+
+✅ **Output**: `4`
+
+---
+
+#### **Test Case 2**
+```
+seats = [1]
+```
+- No empty seats, so `best_seat` remains `-1`.
+
+✅ **Output**: `-1`
+
+---
+
+#### **Test Case 3**
+```
+seats = [1, 1, 1, 0, 1, 0, 1, 1, 1, 0, 1]
+```
+1. `left = 3`, `right = 4`, finds `available_space = 1`
+   - `best_seat = 3`
+2. `left = 5`, `right = 6`, finds `available_space = 1` (same as max).
+3. `left = 9`, `right = 10`, finds `available_space = 0`.
+
+✅ **Output**: `3`
+
+---
+
+This approach is **efficient and optimal** for finding the best seat in a row. 🚀
+
+"""
