@@ -92,3 +92,67 @@ print(missing_numbers([]))
 # Output: [1, 2]
 
 # =========================================================================================================================== #
+
+# Big O Analysis:
+
+"""
+## Time and Space Complexity Analysis:
+
+### Time Complexity Analysis
+
+The function `missing_numbers` can be broken down into the following steps:
+
+1. **First Loop (XOR Calculation):**
+   - This loop runs from `0` to `len(nums) + 2` (inclusive).
+   - The loop performs a constant number of operations (XOR) per iteration.
+   - The loop runs `len(nums) + 3` times.
+   
+   - Time complexity: **O(N)**, where `N` is the length of `nums`.
+
+2. **Second Loop (Partitioning and XOR Calculation):**
+   - This loop also runs from `0` to `len(nums) + 2` (inclusive).
+   - The loop performs a constant number of operations (XOR and bitwise AND) per iteration.
+   - The loop runs `len(nums) + 3` times.
+   
+   - Time complexity: **O(N)**, where `N` is the length of `nums`.
+
+3. **Sorting the Result:**
+   - The final step sorts the `solution` array, which contains exactly 2 elements.
+   - Sorting 2 elements is a constant-time operation.
+   
+   - Time complexity: **O(1)**.
+
+### Overall Time Complexity:
+- The dominant part of the algorithm is the two loops, each running in **O(N)** time.
+
+- Therefore, the overall time complexity is **O(N)**.
+
+---
+
+### Space Complexity Analysis
+
+1. **Variables:**
+   - `solution_XOR`, `set_bit`, and `solution` are the main variables used.
+   - These variables use a constant amount of space.
+   
+   - Space complexity: **O(1)**.
+
+2. **Input:**
+   - The input `nums` is not modified, so it does not contribute to additional space usage.
+
+### Overall Space Complexity:
+- The algorithm uses a constant amount of extra space.
+
+- Therefore, the space complexity is **O(1)**.
+
+---
+
+### Summary:
+- **Time Complexity:** **O(N)**
+- **Space Complexity:** **O(1)**
+
+This algorithm is efficient for finding the two missing numbers in a sequence of integers.
+
+"""
+
+# =========================================================================================================================== #
