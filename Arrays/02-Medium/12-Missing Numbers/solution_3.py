@@ -156,3 +156,190 @@ This algorithm is efficient for finding the two missing numbers in a sequence of
 """
 
 # =========================================================================================================================== #
+
+# Detailed Code Explanation:
+
+"""
+### **Explanation of the Code**
+This function finds the **two missing numbers** in an array of distinct numbers ranging from `1` to `n+2` using **XOR operations**.
+It follows an optimized approach with **O(n) time complexity** and **O(1) space complexity**.
+
+---
+
+### **Step-by-Step Breakdown**
+The function leverages **bitwise XOR properties** to efficiently determine the two missing numbers.
+
+#### **1. Compute XOR of all numbers (Expected and Given)**
+```
+solution_XOR = 0
+
+for i in range(0, len(nums) + 3):
+    solution_XOR ^= i
+
+    if i < len(nums):
+        solution_XOR ^= nums[i]
+```
+- This initializes `solution_XOR = 0`.
+- The loop runs from `0` to `(n+2)`, where `n = len(nums)`.
+- It XORs **all numbers in the full expected range**.
+- Then, it XORs **all numbers present in `nums`**.
+- The result `solution_XOR` will be the XOR of the two missing numbers.
+
+#### **Key XOR Property Used**
+- `a ^ a = 0` (same numbers cancel out)
+- `a ^ 0 = a` (XOR with zero leaves the number unchanged)
+
+Thus, after XORing everything, `solution_XOR = missing1 ^ missing2`.
+
+---
+
+#### **2. Find a Set Bit to Differentiate the Two Missing Numbers**
+```
+set_bit = solution_XOR & -solution_XOR
+```
+- `solution_XOR` contains `missing1 ^ missing2`.
+- The expression `solution_XOR & -solution_XOR` isolates the **rightmost set bit** in `solution_XOR`.
+- This helps differentiate the two missing numbers.
+
+Example:
+- Suppose `solution_XOR = 6` (binary: `110`).
+- `-solution_XOR` in two's complement is `010`.
+- `solution_XOR & -solution_XOR` gives `010` (i.e., the rightmost set bit).
+
+---
+
+#### **3. Separate Numbers into Two Groups**
+```
+solution = [0, 0]
+
+for i in range(0, len(nums) + 3):
+    if i & set_bit == 0:
+        solution[0] ^= i
+    else:
+        solution[1] ^= i
+
+    if i < len(nums):
+        if nums[i] & set_bit == 0:
+            solution[0] ^= nums[i]
+        else:
+            solution[1] ^= nums[i]
+```
+- We use `set_bit` to divide numbers into **two separate groups**:
+  - **Group 1:** Numbers where the rightmost set bit is **0**.
+  - **Group 2:** Numbers where the rightmost set bit is **1**.
+- Each group XORs all numbers within it.
+- Since each group is missing exactly **one number**, XORing cancels out all duplicates, leaving the missing numbers.
+
+---
+
+#### **4. Return Sorted Missing Numbers**
+```
+return sorted(solution)
+```
+- Sorting ensures a consistent output format.
+
+---
+
+### **Example Walkthrough**
+
+#### **Example 1: `missing_numbers([1, 4, 3])`**
+
+1. Expected range: `[1, 2, 3, 4, 5]`
+2. Given `nums = [1, 4, 3]`
+3. Compute XOR of all numbers:
+   ```
+   solution_XOR = 1 ^ 2 ^ 3 ^ 4 ^ 5 ^ 1 ^ 4 ^ 3
+                = (1 ^ 1) ^ (3 ^ 3) ^ (4 ^ 4) ^ 2 ^ 5
+                = 0 ^ 0 ^ 0 ^ 2 ^ 5
+                = 2 ^ 5 = 7
+   ```
+4. Find rightmost set bit:
+   ```
+   set_bit = 7 & -7 = 1  (binary: 011 & 101 = 001)
+   ```
+5. Separate into two groups:
+   - **Group 1 (bit = 0):** `[2]`
+   - **Group 2 (bit = 1):** `[5]`
+6. Missing numbers: `[2, 5]`
+
+**Output:** `[2, 5]`
+
+---
+
+#### **Example 2: `missing_numbers([1, 2, 7, 5, 4])`**
+
+1. Expected range: `[1, 2, 3, 4, 5, 6, 7]`
+2. Given `nums = [1, 2, 7, 5, 4]`
+3. Compute XOR of all numbers:
+   ```
+   solution_XOR = 1 ^ 2 ^ 3 ^ 4 ^ 5 ^ 6 ^ 7 ^ 1 ^ 2 ^ 7 ^ 5 ^ 4
+                = (1 ^ 1) ^ (2 ^ 2) ^ (4 ^ 4) ^ (5 ^ 5) ^ (7 ^ 7) ^ 3 ^ 6
+                = 0 ^ 0 ^ 0 ^ 0 ^ 0 ^ 3 ^ 6
+                = 3 ^ 6 = 5
+   ```
+4. Find rightmost set bit:
+   ```
+   set_bit = 5 & -5 = 1  (binary: 101 & 011 = 001)
+   ```
+5. Separate into two groups:
+   - **Group 1 (bit = 0):** `[3]`
+   - **Group 2 (bit = 1):** `[6]`
+6. Missing numbers: `[3, 6]`
+
+**Output:** `[3, 6]`
+
+---
+
+#### **Example 3: `missing_numbers([2])`**
+
+1. Expected range: `[1, 2, 3]`
+2. Given `nums = [2]`
+3. Compute XOR of all numbers:
+   ```
+   solution_XOR = 1 ^ 2 ^ 3 ^ 2
+                = (2 ^ 2) ^ 1 ^ 3
+                = 0 ^ 1 ^ 3
+                = 1 ^ 3 = 2
+   ```
+4. Find rightmost set bit:
+   ```
+   set_bit = 2 & -2 = 2  (binary: 010 & 110 = 010)
+   ```
+5. Separate into two groups:
+   - **Group 1 (bit = 0):** `[1]`
+   - **Group 2 (bit = 1):** `[3]`
+6. Missing numbers: `[1, 3]`
+
+**Output:** `[1, 3]`
+
+---
+
+#### **Example 4: `missing_numbers([])`**
+
+1. Expected range: `[1, 2]`
+2. Given `nums = []`
+3. Compute XOR of all numbers:
+   ```
+   solution_XOR = 1 ^ 2 = 3
+   ```
+4. Find rightmost set bit:
+   ```
+   set_bit = 3 & -3 = 1  (binary: 011 & 101 = 001)
+   ```
+5. Separate into two groups:
+   - **Group 1 (bit = 0):** `[2]`
+   - **Group 2 (bit = 1):** `[1]`
+6. Missing numbers: `[1, 2]`
+
+**Output:** `[1, 2]`
+
+---
+
+### **Conclusion**
+- Uses **XOR operations** for an efficient O(n) solution.
+- Avoids extra space, making it better than set-based approaches.
+- Ensures correctness by leveraging **bitwise separation**.
+
+This is an **optimal and clever** way to solve the missing numbers problem.
+
+"""
