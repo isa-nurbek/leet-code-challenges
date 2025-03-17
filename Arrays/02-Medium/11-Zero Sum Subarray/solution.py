@@ -75,3 +75,51 @@ print(zero_sum_subarray([2, 3, 4, -5, -3, 4, 5]))
 # Output: True
 
 # =========================================================================================================================== #
+
+# Big O Analysis:
+
+"""
+## Time and Space Complexity Analysis:
+
+### Time Complexity Analysis
+
+The time complexity of the `zero_sum_subarray` function is **O(n)**, where **n** is the number of elements in the 
+input list `nums`.
+
+Here's why:
+
+1. **Initialization**: The `sums` set is initialized with `{0}`, which is a constant-time operation.
+2. **Loop through `nums`**: The function iterates through the list `nums` exactly once. For each element:
+   - It updates `current_sum` (an O(1) operation).
+   - It checks if `current_sum` exists in the `sums` set (an O(1) operation on average for a set in Python).
+   - It adds `current_sum` to the `sums` set (an O(1) operation on average for a set in Python).
+
+Since all operations inside the loop are O(1), the total time complexity is **O(n)**.
+
+---
+
+### Space Complexity Analysis
+
+The space complexity of the `zero_sum_subarray` function is **O(n)**, where **n** is the number of elements in the
+input list `nums`.
+
+Here's why:
+
+1. **Set `sums`**: The `sums` set can grow up to the size of `n` in the worst case. For example:
+   - If there are no zero-sum subarrays, all prefix sums (`current_sum`) will be unique, and the set will store all `n` prefix sums.
+   - If there is a zero-sum subarray, the function will return early, but the worst-case space usage is still **O(n)**.
+
+Thus, the space complexity is **O(n)**.
+
+---
+
+### Summary
+
+- **Time Complexity**: **O(n)**
+- **Space Complexity**: **O(n)**
+
+This algorithm is efficient for finding whether a zero-sum subarray exists in a given list of numbers.
+
+"""
+
+# =========================================================================================================================== #
