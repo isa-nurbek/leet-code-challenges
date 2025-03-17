@@ -126,3 +126,114 @@ This implementation is efficient for finding the two missing numbers in the give
 """
 
 # =========================================================================================================================== #
+
+# Detailed Code Explanation:
+
+"""
+### **Explanation of the Code**
+The function `missing_numbers(nums)` finds the **two missing numbers** from an expected sequence of consecutive numbers
+starting from 1 up to (n + 2), where `n` is the length of `nums`. 
+
+#### **Key Observations**
+1. The given list `nums` contains `n` unique numbers within the range `[1, n+2]`.
+2. Since two numbers are missing from this sequence, our goal is to identify those missing numbers.
+3. The function efficiently finds them using a **set-based lookup**.
+
+---
+
+### **Step-by-Step Breakdown**
+
+#### **1. Store Given Numbers in a Set**
+```
+included_nums = set(nums)
+```
+- Convert `nums` into a **set** called `included_nums`. This allows for quick lookups when checking which numbers are missing.
+- Using a set lookup (`num in included_nums`) is **O(1)** on average.
+
+---
+
+#### **2. Find Missing Numbers**
+```
+solution = []
+for num in range(1, len(nums) + 3):
+    if not num in included_nums:
+        solution.append(num)
+```
+- The function iterates over the numbers **from 1 to (n + 2)** (where n = len(nums)).
+- If a number is **not** in `included_nums`, it is added to `solution`.
+- Since exactly **two numbers** will be missing, the function collects and returns them.
+
+---
+
+#### **3. Return the Missing Numbers**
+```
+return solution
+```
+- The function returns the list of **two missing numbers**.
+
+---
+
+### **Example Walkthrough**
+
+#### **Example 1**
+```
+missing_numbers([1, 4, 3])
+```
+- Given `nums = [1, 4, 3]`
+- Length of `nums` = **3**, so the range to check is **1 to 5**.
+- Numbers in the range: `{1, 2, 3, 4, 5}`
+- Present numbers: `{1, 3, 4}`
+- **Missing numbers:** `{2, 5}`
+
+- **Output:** `[2, 5]`
+
+---
+
+#### **Example 2**
+```
+missing_numbers([1, 2, 7, 5, 4])
+```
+- Given `nums = [1, 2, 7, 5, 4]`
+- Length of `nums` = **5**, so the range to check is **1 to 7**.
+- Numbers in the range: `{1, 2, 3, 4, 5, 6, 7}`
+- Present numbers: `{1, 2, 4, 5, 7}`
+- **Missing numbers:** `{3, 6}`
+
+- **Output:** `[3, 6]`
+
+---
+
+#### **Example 3**
+```
+missing_numbers([2])
+```
+- Given `nums = [2]`
+- Length of `nums` = **1**, so the range to check is **1 to 3**.
+- Numbers in the range: `{1, 2, 3}`
+- Present numbers: `{2}`
+- **Missing numbers:** `{1, 3}`
+
+- **Output:** `[1, 3]`
+
+---
+
+#### **Example 4**
+```
+missing_numbers([])
+```
+- Given `nums = []` (empty list)
+- Length of `nums` = **0**, so the range to check is **1 to 2**.
+- Numbers in the range: `{1, 2}`
+- Present numbers: `{}` (empty)
+- **Missing numbers:** `{1, 2}`
+
+- **Output:** `[1, 2]`
+
+---
+
+### **Conclusion**
+- The function correctly identifies the two missing numbers in a **range from 1 to (n+2)**.
+- Uses a **set for fast lookups**, making it efficient.
+- Runs in **O(n) time**, making it scalable for large lists.
+
+"""
