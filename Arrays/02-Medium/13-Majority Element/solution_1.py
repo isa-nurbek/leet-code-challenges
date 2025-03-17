@@ -73,3 +73,40 @@ print(majority_element([]))
 # Output: None
 
 # =========================================================================================================================== #
+
+# Big O Analysis:
+
+"""
+## Time and Space Complexity Analysis:
+
+### Time Complexity Analysis
+
+The time complexity of the `majority_element` function is **O(n)**, where **n** is the length of the input array.
+This is because the function iterates through the array exactly once, performing a constant amount of work
+(comparisons and updates) for each element.
+
+---
+
+### Space Complexity Analysis
+
+The space complexity of the `majority_element` function is **O(1)**. This is because the function uses only a constant
+amount of additional space (two variables: `count` and `answer`) regardless of the size of the input array.
+
+---
+
+### Summary
+- **Time Complexity:** O(n)
+- **Space Complexity:** O(1)
+
+---
+
+### Limitations
+
+This algorithm assumes that there is a majority element (i.e., an element that appears more than `n/2` times).
+If no such element exists, the function will still return a value, but it may not be the true majority element.
+To verify the result, we can add a second pass to count the occurrences of the returned element and confirm
+if it is indeed the majority.
+
+"""
+
+# =========================================================================================================================== #
