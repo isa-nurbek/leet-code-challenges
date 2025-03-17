@@ -110,3 +110,116 @@ if it is indeed the majority.
 """
 
 # =========================================================================================================================== #
+
+# Detailed Code Explanation:
+
+"""
+### **Explanation of the Code**
+
+The function **`majority_element`** finds the **majority element** in an array using **Boyer-Moore Voting Algorithm**.
+This algorithm efficiently finds the element that appears more than **n/2 times**, where `n` is the length of the array.
+The function operates in **O(n) time complexity** and **O(1) space complexity**.
+
+---
+
+### **Step-by-Step Breakdown**
+```
+def majority_element(array):
+    count = 0
+    answer = None
+```
+- Initializes:
+  - `count = 0` → Keeps track of votes for the current candidate.
+  - `answer = None` → Stores the candidate majority element.
+
+---
+
+### **1. Iterate Through the Array**
+```
+for value in array:
+    if count == 0:
+        answer = value
+```
+- If `count == 0`, we pick the **current number** as the new candidate for the majority element.
+- This works because if a majority element exists, it will eventually be selected.
+
+---
+
+### **2. Vote Counting**
+```
+if value == answer:
+    count += 1
+else:
+    count -= 1
+```
+- If the current number is **equal to** the `answer`, increase the `count`.
+- If the current number is **different**, decrease the `count`.
+
+---
+
+### **3. Return the Candidate**
+```
+return answer
+```
+- The function returns the majority candidate.
+- However, **this does not guarantee** the element is truly a majority; a second pass would be needed for verification.
+
+---
+
+## **Example Walkthrough**
+
+### **Example 1: `majority_element([1, 2, 3, 2, 2, 1, 2])`**
+
+1. **Initialization:** `count = 0`, `answer = None`
+2. **Iteration Process:**
+   ```
+   1 → count = 1 (answer = 1)
+   2 → count = 0
+   3 → count = 1 (answer = 3)
+   2 → count = 0
+   2 → count = 1 (answer = 2)
+   1 → count = 0
+   2 → count = 1 (answer = 2)
+   ```
+3. **Final Answer:** `2`
+
+**Output:** `2`
+
+---
+
+### **Example 2: `majority_element([-1, -1, -1, -1, -1, -5, -4, -3, -2])`**
+
+1. **Initialization:** `count = 0`, `answer = None`
+2. **Iteration Process:**
+   ```
+   -1 → count = 1 (answer = -1)
+   -1 → count = 2
+   -1 → count = 3
+   -1 → count = 4
+   -1 → count = 5
+   -5 → count = 4
+   -4 → count = 3
+   -3 → count = 2
+   -2 → count = 1
+   ```
+3. **Final Answer:** `-1`
+
+**Output:** `-1`
+
+---
+
+### **Example 3: `majority_element([])`**
+
+1. The loop does not execute.
+2. `answer = None` remains unchanged.
+3. **Output:** `None`
+
+---
+
+## **Conclusion**
+
+- The **Boyer-Moore algorithm** is efficient for finding a majority element **if it exists**.
+- This function assumes that a majority element is **guaranteed**; otherwise, additional verification is needed.
+- It works well in **O(n) time** and uses **O(1) space**, making it optimal for large datasets.
+
+"""
