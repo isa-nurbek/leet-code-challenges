@@ -153,3 +153,136 @@ The space complexity of the function is determined by the additional space used 
 """
 
 # =========================================================================================================================== #
+
+# Detailed Code Explanation:
+
+"""
+### **Explanation of the Code**
+
+The function `majority_element(array)` is designed to find the **majority element** in an array. A **majority element** is an
+element that appears **more than** `n/2` times in an array of size `n`. If no such element exists, the function returns `None`.
+
+---
+
+### **Step-by-Step Breakdown**
+
+#### **1. Handle Edge Case of an Empty Array**
+```
+if not array:
+    return None
+```
+- If the input `array` is empty, return `None` immediately, as there can't be a majority element.
+
+---
+
+#### **2. Initialize `answer` to Store the Majority Element**
+```
+answer = 0
+```
+- `answer` is used to reconstruct the majority element bit by bit.
+
+---
+
+#### **3. Iterate Over Each Bit Position (0 to 31)**
+```
+for current_bit in range(32):
+```
+- Since integers are stored in 32-bit representation (for both positive and negative numbers), we iterate from bit **0** to **31**.
+
+```
+current_bit_value = 1 << current_bit
+```
+- `1 << current_bit` creates a bitmask where only `current_bit` is set to 1.  
+  - Example:  
+    - If `current_bit = 0`, `current_bit_value = 1` (`0b0001`)
+    - If `current_bit = 1`, `current_bit_value = 2` (`0b0010`)
+    - If `current_bit = 2`, `current_bit_value = 4` (`0b0100`)
+    
+---
+
+#### **4. Count How Many Numbers Have the Current Bit Set**
+```
+ones_count = 0
+
+for num in array:
+    if (num & current_bit_value) != 0:
+        ones_count += 1
+```
+- `num & current_bit_value` checks if the bit at `current_bit` is set in `num`.  
+- If it is set, `ones_count` is incremented.
+
+---
+
+#### **5. Check If the Bit Should Be Set in `answer`**
+```
+if ones_count > len(array) / 2:
+    answer += current_bit_value
+```
+- If the number of `1`s in this bit position is **greater than half** the array size,
+this bit should be set in the majority element.
+
+---
+
+#### **6. Adjust for Negative Numbers**
+```
+if answer >= 2**31:
+    answer -= 2**32
+```
+- Since integers in Python are unbounded, but in a **32-bit signed integer**, the range is:
+  - **Positive numbers:** `0` to `2³¹ - 1` (`0` to `2147483647`)
+  - **Negative numbers:** `-2³¹` to `-1` (`-2147483648` to `-1`)
+  
+- If `answer` exceeds `2³¹`, it means it's actually negative in 32-bit representation, so we **adjust it**.
+
+---
+
+#### **7. Verify If `answer` is Actually a Majority Element**
+```
+count = 0
+for num in array:
+    if num == answer:
+        count += 1
+```
+- We count the occurrences of `answer` in the array.
+
+```
+if count > len(array) / 2:
+    return answer
+else:
+    return None
+```
+- If `answer` occurs **more than half** the time, return it.  
+- Otherwise, return `None` (meaning no majority element exists).
+
+---
+
+### **Test Cases and Outputs**
+
+```
+print(majority_element([1, 2, 3, 2, 2, 1, 2]))  # Output: 2
+```
+- `2` appears **4 times**, more than `7/2 = 3.5`, so it is the majority element.
+
+```
+print(majority_element([-1, -1, -1, -1, -1, -5, -4, -3, -2]))  # Output: -1
+```
+- `-1` appears **5 times**, more than `9/2 = 4.5`, so it is the majority element.
+
+```
+print(majority_element([]))  # Output: None
+```
+- The array is empty, so no majority element.
+
+```
+print(majority_element([1, 2, 3, 4, 5, 6, 7]))  # Output: None
+```
+- No number appears **more than 7/2 = 3.5** times.
+
+---
+
+### **Conclusion**
+
+The **bitwise approach** efficiently finds the majority element using **bit manipulation** but is more complex than
+Moore’s Voting Algorithm. It is useful for handling **negative numbers** correctly in a **32-bit integer context**.
+
+"""
