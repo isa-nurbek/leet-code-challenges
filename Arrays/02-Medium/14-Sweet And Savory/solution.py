@@ -157,3 +157,163 @@ The sorting step is the bottleneck, but the two-pointer traversal ensures that t
 """
 
 # =========================================================================================================================== #
+
+# Detailed Code Explanation:
+
+"""
+### **Explanation of the Code**
+
+The function `sweet_and_savory(dishes, target)` is designed to find the best combination of one **sweet** and one **savory**
+dish such that their sum is **as close as possible to the given target without exceeding it**.
+
+---
+
+### **Step-by-Step Breakdown**
+
+#### **1. Categorize Dishes into Sweet and Savory**
+```
+sweet_dishes = sorted([dish for dish in dishes if dish < 0], key=abs)
+savory_dishes = sorted([dish for dish in dishes if dish > 0])
+```
+- **Sweet dishes** (negative values) are extracted and sorted by absolute value.
+- **Savory dishes** (positive values) are extracted and sorted in ascending order.
+- The sorting ensures we start with the least absolute sweet dish and the smallest savory dish, making it easier
+to find the closest sum.
+
+**Example:**  
+
+For `dishes = [-3, -5, 1, 7]`, after sorting:  
+- `sweet_dishes = [-3, -5]`
+- `savory_dishes = [1, 7]`
+
+---
+
+#### **2. Initialize Best Pair and Best Difference**
+
+```
+best_pair = [0, 0]
+best_difference = float("inf")
+```
+- `best_pair`: Stores the best combination found.
+- `best_difference`: Tracks the smallest difference between `target` and the sum of the selected dishes.
+
+---
+
+#### **3. Use Two-Pointer Approach**
+
+```
+sweet_index, savory_index = 0, 0
+```
+- **`sweet_index`** starts at the first element of `sweet_dishes`.
+- **`savory_index`** starts at the first element of `savory_dishes`.
+
+```
+while sweet_index < len(sweet_dishes) and savory_index < len(savory_dishes):
+```
+- The loop continues as long as there are **both** sweet and savory dishes to consider.
+
+---
+
+#### **4. Calculate Current Sum and Update Best Pair**
+
+```
+current_sum = sweet_dishes[sweet_index] + savory_dishes[savory_index]
+```
+- Computes the sum of the current sweet and savory dish.
+
+##### **4.1. If the Sum is Within Target**
+
+```
+if current_sum <= target:
+    current_difference = target - current_sum
+
+    if current_difference < best_difference:
+        best_difference = current_difference
+        best_pair = [sweet_dishes[sweet_index], savory_dishes[savory_index]]
+
+    savory_index += 1
+```
+- If `current_sum` is **≤ target**, update `best_difference` and `best_pair` if it's the closest sum found.
+- Move the `savory_index` **right** (i.e., to a larger savory dish) to try and get closer to `target`.
+
+##### **4.2. If the Sum Exceeds the Target**
+
+```
+else:
+    sweet_index += 1
+```
+- If `current_sum` is **greater than target**, move the `sweet_index` **right** to use a sweeter dish with a smaller absolute value.
+
+---
+
+#### **5. Return the Best Found Pair**
+
+```
+return best_pair
+```
+- The loop continues until all possible dish pairs have been considered, and the best combination is returned.
+
+---
+
+### **Test Cases and Outputs**
+
+#### **1. Example Case: `[-3, -5, 1, 7]` with `target = 8`**
+```
+sweet_and_savory([-3, -5, 1, 7], 8)
+```
+- `sweet_dishes = [-3, -5]`
+- `savory_dishes = [1, 7]`
+- Best pair: `[-3, 7]` (sum = `4`, closest to `8` without exceeding it)
+
+**Output:** `[-3, 7]`
+
+---
+
+#### **2. No Sweet Dishes: `[3, 5, 7, 2, 6, 8, 1]` with `target = 10`**
+```
+sweet_and_savory([3, 5, 7, 2, 6, 8, 1], 10)
+```
+- No negative numbers, so `sweet_dishes = []`
+- Since a valid sweet & savory pair isn't possible, default `[0, 0]` is returned.
+
+**Output:** `[0, 0]`
+
+---
+
+#### **3. Example Case: `[2, 5, -4, -7, 12, 100, -25]` with `target = -20`**
+```
+sweet_and_savory([2, 5, -4, -7, 12, 100, -25], -20)
+```
+- `sweet_dishes = [-4, -7, -25]`
+- `savory_dishes = [2, 5, 12, 100]`
+- Best pair: `[-25, 5]` (sum = `-20`)
+
+**Output:** `[-25, 5]`
+
+---
+
+#### **4. Empty List: `[]` with `target = 10`**
+```
+sweet_and_savory([], 10)
+```
+- No dishes available, so return `[0, 0]`.
+
+**Output:** `[0, 0]`
+
+---
+
+### **Alternative Approach**
+If we assume a dish list always contains at least one sweet and one savory dish, we could **skip sorting** and use a **hash set**
+for lookup, reducing complexity to `O(n)`. But sorting ensures a clear approach for finding the closest sum efficiently.
+
+---
+
+### **Conclusion**
+
+- The function effectively finds the closest sum **without exceeding the target** using sorting and a **two-pointer** approach.
+- The approach is efficient and works well for different inputs, including edge cases.
+- If there are **no valid pairs**, it defaults to `[0, 0]`.
+
+This method balances **efficiency** and **clarity**, making it a strong solution for the problem. 
+
+"""
