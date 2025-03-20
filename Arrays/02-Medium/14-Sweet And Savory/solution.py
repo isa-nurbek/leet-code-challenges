@@ -114,3 +114,46 @@ print(sweet_and_savory(dishes_3, target_3))
 
 print(sweet_and_savory(dishes_4, target_4))
 # Output: [0, 0]
+
+# Big O Analysis:
+
+"""
+## Time and Space Complexity Analysis:
+
+### Time Complexity Analysis
+
+1. **Sorting the Dishes:**
+   - Sorting the `sweet_dishes` and `savory_dishes` lists takes O(n log n) time, where `n` is the number of dishes.
+   This is because sorting is the most expensive operation in the algorithm.
+
+2. **Two-pointer Traversal:**
+   - The while loop iterates over the `sweet_dishes` and `savory_dishes` lists using two pointers (`sweet_index` and
+   `savory_index`). In the worst case, this loop runs O(n) times, where `n` is the total number of dishes.
+
+Thus, the overall time complexity is dominated by the sorting step: O(n log n)
+
+---
+
+### Space Complexity Analysis
+
+1. **Additional Space for Sorting:**
+   - The `sweet_dishes` and `savory_dishes` lists require O(n) space in total, where `n` is the number of dishes.
+
+2. **Constant Space for Variables:**
+   - The variables `best_pair`, `best_difference`, `sweet_index`, and `savory_index` use O(1) space.
+
+Thus, the overall space complexity is: O(n)
+
+---
+
+### Summary
+
+- **Time Complexity:** O(n log n)
+- **Space Complexity:** O(n)
+
+This algorithm is efficient for finding the best sweet and savory dish pair that sums closest to the target value.
+The sorting step is the bottleneck, but the two-pointer traversal ensures that the search is linear after sorting.
+
+"""
+
+# =========================================================================================================================== #
