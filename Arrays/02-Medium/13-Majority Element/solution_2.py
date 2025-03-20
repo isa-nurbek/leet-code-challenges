@@ -98,3 +98,58 @@ print(majority_element([1, 2, 3, 4, 5, 6, 7]))
 # Output: None (no majority element)
 
 # =========================================================================================================================== #
+
+# Big O Analysis:
+
+"""
+## Time and Space Complexity Analysis:
+
+### Time Complexity Analysis
+
+The time complexity of the `majority_element` function can be broken down as follows:
+
+1. **Outer Loop (Bitwise Iteration):**
+   - The outer loop runs 32 times (since we are considering 32-bit integers). This is a constant factor, so it
+   contributes O(1) to the time complexity.
+
+2. **Inner Loop (Array Iteration):**
+   - The inner loop iterates over each element in the array. If the array has `n` elements, this loop runs `n`
+   times for each of the 32 bits. Therefore, the inner loop contributes O(n) for each bit.
+
+3. **Combining the Loops:**
+   - Since the outer loop runs 32 times and the inner loop runs `n` times for each iteration of the outer loop,
+   the total time complexity is O(32 * n), which simplifies to O(n).
+
+4. **Final Verification Loop:**
+   - After determining the candidate majority element, the function verifies it by iterating over the array once more.
+   This loop also runs in O(n) time.
+
+5. **Overall Time Complexity:**
+   - The overall time complexity is - O(n) + O(n) = O(n).
+
+---
+
+### Space Complexity Analysis
+
+The space complexity of the function is determined by the additional space used apart from the input array:
+
+1. **Variables:**
+   - The function uses a few variables (`answer`, `current_bit`, `current_bit_value`, `ones_count`, `count`),
+   all of which occupy constant space O(1).
+
+2. **No Additional Data Structures:**
+   - The function does not use any additional data structures that grow with the input size.
+
+3. **Overall Space Complexity:**
+   - The space complexity is O(1), as the function uses only a constant amount of extra space.
+
+---
+
+### Summary
+
+- **Time Complexity:** O(n) 
+- **Space Complexity:** O(1) 
+
+"""
+
+# =========================================================================================================================== #
