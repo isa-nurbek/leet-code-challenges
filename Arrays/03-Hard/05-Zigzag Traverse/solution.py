@@ -101,6 +101,7 @@ def zigzag_traverse(array):
 
 # Helper function to check if the current position is out of bounds
 def is_out_of_bounds(row, col, height, width):
+    # Ensures `(row, col)` stays within the matrix.
     return row < 0 or row > height or col < 0 or col > width
 
 
