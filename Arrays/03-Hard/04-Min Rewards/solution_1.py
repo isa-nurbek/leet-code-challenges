@@ -79,3 +79,47 @@ print(min_rewards([1]))
 # Output: 1
 
 # =========================================================================================================================== #
+
+# Big O Analysis:
+
+"""
+## Time and Space Complexity Analysis:
+
+### Time Complexity Analysis
+
+The time complexity of the `min_rewards` function can be analyzed as follows:
+
+1. **Initialization**: The initialization of the `rewards` array takes O(n) time, where `n` is the number of elements
+in the `scores` array.
+
+2. **First Pass (Left to Right)**:
+   - The first loop iterates through the `scores` array once, comparing each element with its previous element.
+   - This loop runs in O(n) time.
+
+3. **Second Pass (Right to Left)**:
+   - The second loop (inside the `else` block) iterates backward from the current index `i` to the start of the array.
+   - In the worst case, this inner loop could run O(n) times for each element, leading to a total time complexity of O(n^2).
+
+Thus, the **worst-case time complexity** of the function is O(n^2).
+
+---
+
+### Space Complexity Analysis
+
+1. **Auxiliary Space**:
+   - The `rewards` array is the only additional space used, which requires O(n) space.
+
+Thus, the **space complexity** of the function is O(n).
+
+---
+
+### Summary
+
+- **Time Complexity:** O(n^2)
+- **Space Complexity:** O(n)
+
+This is inefficient solution.
+
+"""
+
+# =========================================================================================================================== #
