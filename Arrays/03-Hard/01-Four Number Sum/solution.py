@@ -25,7 +25,7 @@ targetSum = 16
 ## Optimal Time & Space Complexity:
 ```
 Average: O(n^2) time | O(n^2) space - where `n` is the length of the input array.
-Worst: O(n^3) time | O(n^2) space - where `n` is the length of the input array.
+Worst: O(n^3) time | O(n^3) space - where `n` is the length of the input array.
 ```
 
 """
@@ -36,7 +36,7 @@ Worst: O(n^3) time | O(n^2) space - where `n` is the length of the input array.
 
 
 # Average: O(n^2) time | O(n^2) space
-# Worst: O(n^3) time | O(n^2) space
+# Worst: O(n^3) time | O(n^3) space
 def four_number_sum(array, target_sum):
     # Dictionary to store all possible pairs and their sums
     all_pairs_sums = {}
@@ -100,3 +100,61 @@ print(four_number_sum(array_3, target_sum_3))
 # Output: []
 
 # =========================================================================================================================== #
+
+# Big O Analysis:
+
+"""
+## Time and Space Complexity Analysis:
+
+### **Time Complexity**
+
+1. **Outer Loop (`i` loop)**:
+   - The outer loop runs from `i = 1` to `len(array) - 2`, which is approximately O(n), where `n` is the length of the array.
+
+2. **Inner Loop (`j` loop)**:
+   - For each `i`, the inner loop runs from `j = i + 1` to `len(array) - 1`, which is also approximately O(n).
+
+3. **Checking for Differences**:
+   - Inside the `j` loop, the function checks if `difference` exists in `all_pairs_sums`. This operation is O(1) on average
+   because it uses a dictionary for lookups.
+   
+   - If `difference` exists, it iterates over all pairs in `all_pairs_sums[difference]`. In the worst case, this could be
+   O(n^2) because there could be up to O(n^2) pairs stored in `all_pairs_sums`.
+
+4. **Storing Pairs**:
+   - After the `j` loop, the function iterates over `k` from `0` to `i - 1` to store pairs in `all_pairs_sums`.
+   This is O(n) for each `i`.
+
+Combining these:
+- The outer loop runs O(n) times.
+- For each `i`, the `j` loop runs O(n) times.
+- For each `j`, checking and storing pairs takes O(n^2) in the worst case.
+
+Thus, the **time complexity** is: O(n^3)
+
+---
+
+### **Space Complexity**
+
+1. **Dictionary (`all_pairs_sums`)**:
+   - The dictionary stores all possible pairs of elements and their sums. In the worst case, there are O(n^2) pairs.
+
+2. **Quadruplets List**:
+   - The `quadruplets` list stores all valid quadruplets. In the worst case, there could be O(n^3) quadruplets
+   (e.g., if all combinations sum to the target).
+
+Thus, the **space complexity** is: O(n^3)
+
+---
+
+### **Summary**
+- **Time Complexity**: O(n^3)
+- **Space Complexity**: O(n^3)
+
+- **Average-Case Time Complexity**: O(n^2)
+- **Average-Case Space Complexity**: O(n^2)
+
+This algorithm is efficient for small to medium-sized arrays but may become slow for very large arrays due to
+its cubic time complexity.
+
+"""
