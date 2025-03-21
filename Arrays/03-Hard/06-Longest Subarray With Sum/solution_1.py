@@ -124,3 +124,114 @@ Thus, the **space complexity** of the function is: O(1)
 """
 
 # =========================================================================================================================== #
+
+# Detailed Code Explanation:
+
+"""
+### **Explanation of `longest_subarray_with_sum` Function**
+
+The function `longest_subarray_with_sum` takes an **array** and a **target_sum** as input and returns the indices **[start, end]**
+of the longest contiguous subarray whose sum equals `target_sum`. If no such subarray exists, it returns an empty list `[]`.
+
+---
+
+### **Step-by-Step Breakdown**
+
+#### **1. Initializing `indices`**
+```
+indices = []
+```
+- This variable stores the **start** and **end** indices of the longest subarray found so far.
+
+#### **2. Outer Loop - Iterating Over Possible Starting Points**
+```
+for starting_index in range(len(array)):
+```
+- This loop sets different **starting points** for subarrays, iterating through the entire array.
+- Each iteration assumes `starting_index` as the start of a new subarray.
+
+#### **3. Inner Loop - Extending the Subarray**
+```
+current_subarray_sum = 0
+for ending_index in range(starting_index, len(array)):
+    current_subarray_sum += array[ending_index]
+```
+- We initialize `current_subarray_sum = 0` for each new `starting_index`.
+- The inner loop expands the subarray by adding elements one by one to `current_subarray_sum`.
+
+#### **4. Checking if the Current Subarray Sum Equals `target_sum`**
+```
+if current_subarray_sum == target_sum:
+```
+- Whenever the sum of the subarray `[starting_index, ending_index]` equals `target_sum`, we check if it's the **longest**
+subarray found so far.
+
+#### **5. Updating `indices` If the Current Subarray Is Longer**
+```
+if len(indices) == 0 or indices[1] - indices[0] < ending_index - starting_index:
+    indices = [starting_index, ending_index]
+```
+- If `indices` is empty (no valid subarray found yet), we store the current subarray indices.
+- If the current subarray is **longer** than the previously stored one, we update `indices`.
+
+#### **6. Returning the Longest Found Subarray**
+```
+return indices
+```
+- Finally, we return the indices of the longest valid subarray found.
+
+---
+
+## **Example Walkthroughs**
+
+### **Example 1**
+```
+longest_subarray_with_sum([1, 2, 3, 4, 3, 3, 1, 2, 1], 10)
+```
+**Array:** `[1, 2, 3, 4, 3, 3, 1, 2, 1]`  
+**Target Sum:** `10`  
+
+**Valid subarrays:**
+- `[2, 3, 4, 1]` → sum = 10 → indices `[1, 4]`
+- `[3, 4, 3]` → sum = 10 → indices `[2, 4]`
+- `[4, 3, 3]` → sum = 10 → indices `[3, 5]`
+- `[3, 3, 1, 2, 1]` → sum = 10 → indices `[4, 8]` **(longest one)**
+
+**Final Output:**  
+```
+[4, 8]
+```
+
+---
+
+### **Example 2**
+```
+longest_subarray_with_sum([1, 2, 3, 4, 0, 0, 0, 0, 0, 3, 3, 1, 2, 1], 7)
+```
+**Valid subarrays:**
+- `[3, 4]` → `[2, 3]`
+- `[4, 0, 0, 0, 0, 0, 3]` → `[3, 9]`
+- `[0, 0, 0, 0, 0, 3, 3, 1]` → `[4, 11]` **(longest one)**
+
+**Final Output:**  
+```
+[4, 11]
+```
+
+---
+
+### **Example 3**
+```
+longest_subarray_with_sum([61, 54, 1, 499, 2212, 4059, 1, 2, 3, 1, 3], 19)
+```
+**Valid subarrays:** None  
+**No contiguous subarray sums to `19`.**  
+
+**Final Output:**  
+```
+[]
+```
+
+The optimized O(n) solution we will use in the next solution_2.
+
+"""
