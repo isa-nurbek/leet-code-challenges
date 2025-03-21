@@ -49,7 +49,7 @@ O(n * m) time | O(n * m) space - where `n` is horizontal distance between the kn
 import math
 
 
-# O(n * m) time | O(n * m) space
+# O(n²) time | O(n²) space
 def knight_connection(knight_a, knight_b):
     # Define all possible moves a knight can make on a chessboard.
     # A knight moves in an "L" shape: 2 squares in one direction and 1 square in the other.
@@ -119,3 +119,53 @@ print(knight_connection([0, 0], [20, 20]))
 # Output: 7
 
 # =========================================================================================================================== #
+
+# Big O Analysis:
+
+"""
+## Time and Space Complexity Analysis:
+
+### **Time Complexity Analysis**
+
+1. **BFS Exploration**:
+   - Each position is processed at most once because we maintain a `visited` set.
+   - Each position can have **at most 8 neighbors** (since a knight has 8 possible moves).
+   - BFS expands outward in layers until it reaches `knight_b`.
+
+2. **Bounding the Number of States**:
+   - Since it's an infinite board, BFS continues until the destination is found.
+   - On an **n × n** board (or if we assume a bounded region around the starting point), BFS can visit at most **O(n²)**
+   positions in the worst case.
+   
+   - Each position takes **O(1)** time to process and enqueue neighbors.
+
+Thus, the overall **worst-case time complexity** is **O(n²)**, where **n** is the Manhattan distance between `knight_a`
+and `knight_b`.
+
+---
+
+### **Space Complexity Analysis**
+
+1. **Queue Storage**:
+   - BFS uses a queue to store nodes for exploration.
+   - The worst-case number of elements in the queue is proportional to the number of positions reached, **O(n²)** in the worst case.
+
+2. **Visited Set**:
+   - Stores each visited position as a string (e.g., `"x,y"`), consuming **O(n²)** space.
+
+Thus, the **worst-case space complexity** is **O(n²)**.
+
+---
+
+### **Final Complexity Summary**
+
+| Complexity            | Worst Case    |
+|-----------------------|---------------|
+| **Time Complexity**   | **O(n²)**     |
+| **Space Complexity**  | **O(n²)**     |
+
+This means that as the distance between `knight_a` and `knight_b` increases, the number of visited positions and memory
+usage grow quadratically. However, in practice, the knight's unique movement pattern ensures that BFS often finds the
+shortest path much faster than this worst-case bound.
+
+"""
