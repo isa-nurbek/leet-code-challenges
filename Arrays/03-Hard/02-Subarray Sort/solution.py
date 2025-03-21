@@ -97,3 +97,57 @@ print(subarray_sort([1, 2]))
 # Output: [-1, -1]
 
 # =========================================================================================================================== #
+
+# Big O Analysis:
+
+"""
+## Time and Space Complexity Analysis:
+
+### Time Complexity Analysis
+
+The time complexity of the `subarray_sort` function can be broken down as follows:
+
+1. **First Loop (Finding `min_out_of_order` and `max_out_of_order`):**
+   - The loop iterates over the entire array once, which takes O(n) time, where `n` is the length of the array.
+   - Inside the loop, the `is_out_of_order` function is called, which performs constant-time operations (comparisons).
+   Thus, the `is_out_of_order` function runs in O(1) time.
+   
+   - Therefore, the first loop runs in O(n) * O(1) = O(n)\) time.
+
+2. **Finding `subarray_left_idx`:**
+   - This loop iterates from the start of the array until it finds the correct position for `min_out_of_order`.
+   In the worst case, this could take O(n) time.
+
+3. **Finding `subarray_right_idx`:**
+   - This loop iterates from the end of the array until it finds the correct position for `max_out_of_order`.
+   In the worst case, this could also take O(n) time.
+
+4. **Overall Time Complexity:**
+   - The total time complexity is the sum of the time complexities of the three steps: O(n) + O(n) + O(n) = O(n).
+
+---
+
+### Space Complexity Analysis
+
+The space complexity of the `subarray_sort` function is determined by the additional space used by the algorithm:
+
+1. **Variables:**
+   - The algorithm uses a few variables (`min_out_of_order`, `max_out_of_order`, `subarray_left_idx`, `subarray_right_idx`),
+   which take constant space O(1).
+
+2. **No Additional Data Structures:**
+   - The algorithm does not use any additional data structures that grow with the input size.
+
+3. **Overall Space Complexity:**
+   - The space complexity is O(1), as the algorithm uses only a constant amount of extra space regardless of the input size.
+
+### Summary
+
+- **Time Complexity:** O(n)
+- **Space Complexity:** O(1)
+
+This makes the algorithm efficient for large inputs, as it processes the array in linear time and uses minimal extra space.
+
+"""
+
+# =========================================================================================================================== #
