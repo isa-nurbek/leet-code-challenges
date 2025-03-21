@@ -94,3 +94,51 @@ print(four_number_sum_sorted(array_3, target_sum_3))
 # Output: []
 
 # =========================================================================================================================== #
+
+# Big O Analysis:
+
+"""
+## Time and Space Complexity Analysis:
+
+### Time Complexity Analysis:
+
+The time complexity of the `four_number_sum_sorted` function can be broken down as follows:
+
+1. **Sorting the Array**:
+   - Sorting the array takes O(n log n)) time, where `n` is the length of the array.
+
+2. **Nested Loops**:
+   - The outer loop runs from i = 0 to i = n - 4, which is O(n).
+   - The middle loop runs from j = i + 1 to j = n - 3, which is also O(n).
+   - The inner while loop runs from `left = j + 1` to `right = n - 1`, which is O(n) in the worst case.
+
+   Therefore, the nested loops contribute O(n^3) time complexity.
+
+3. **Overall Time Complexity**:
+   - The dominant term is O(n^3), so the overall time complexity is:
+
+        O(n log n) + O(n^3) = O(n^3)
+
+---
+
+### Space Complexity Analysis:
+
+1. **Output Space**:
+   - The space required for the `quadruplets` list depends on the number of valid quadruplets found. In the worst case,
+   the number of quadruplets can be O(n^3), but this is rare and depends on the input.
+
+2. **Auxiliary Space**:
+   - The sorting is done in-place, so it uses O(1) additional space.
+   - The pointers (`i`, `j`, `left`, `right`) and temporary variables use O(1) space.
+
+3. **Overall Space Complexity**:
+   - If we ignore the space required for the output, the auxiliary space complexity is O(1).
+   - If we include the output space, the worst-case space complexity is O(n^3).
+
+### Summary:
+- **Time Complexity**: O(n^3)
+- **Space Complexity**: O(1) (excluding output) or O(n^3) (including output)
+
+"""
+
+# =========================================================================================================================== #
