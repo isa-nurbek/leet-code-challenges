@@ -77,3 +77,47 @@ print(min_rewards([1]))
 # Output: 1
 
 # =========================================================================================================================== #
+
+# Big O Analysis:
+
+"""
+## Time and Space Complexity Analysis:
+
+### Time Complexity Analysis
+
+1. **Initialization of `rewards` array**: 
+   - This step involves creating an array of size `n` (where `n` is the length of the `scores` array) and initializing
+   each element to 1. This operation takes O(n) time.
+
+2. **First pass (left to right)**:
+   - This loop iterates through the `scores` array from the second element to the last element. For each element, it
+   compares the current score with the previous one and updates the `rewards` array accordingly. This loop runs in O(n) time.
+
+3. **Second pass (right to left)**:
+   - This loop iterates through the `scores` array from the second-to-last element to the first element. For each element, it
+   compares the current score with the next one and updates the `rewards` array accordingly. This loop also runs in O(n) time.
+
+4. **Summing the `rewards` array**:
+   - This step involves summing all the elements in the `rewards` array, which takes O(n) time.
+
+**Overall Time Complexity**:
+- The time complexity is dominated by the three O(n) operations, so the total time complexity is O(n).
+
+---
+
+### Space Complexity Analysis
+
+1. **`rewards` array**:
+   - The `rewards` array is the only additional space used that scales with the input size. It requires O(n) space.
+
+**Overall Space Complexity**:
+- The space complexity is O(n) due to the `rewards` array.
+
+### Summary
+
+- **Time Complexity**: O(n)
+- **Space Complexity**: O(n)
+
+This algorithm efficiently computes the minimum number of rewards required in O(n) time and O(n) space.
+
+"""
