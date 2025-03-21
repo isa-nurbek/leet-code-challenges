@@ -47,6 +47,7 @@ O(n * m) time | O(n * m) space - where `n` is horizontal distance between the kn
 # =========================================================================================================================== #
 
 # Solution:
+
 import math
 
 
