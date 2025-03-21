@@ -128,3 +128,57 @@ print(zigzag_traverse(array_3))
 # Output: [1]
 
 # =========================================================================================================================== #
+
+# Big O Analysis:
+
+"""
+## Time and Space Complexity Analysis:
+
+### Time Complexity Analysis
+
+The time complexity of the `zigzag_traverse` function is determined by the number of elements in the 2D array.
+
+Let's break it down:
+
+- The 2D array has `n` rows and `m` columns, so the total number of elements is `n * m`.
+- The `while` loop runs until all elements are traversed, which means it will iterate exactly `n * m` times.
+- Inside the loop, each operation (appending to the result list, checking conditions, updating indices) takes constant time `O(1)`.
+
+Thus, the **time complexity** of the algorithm is:
+
+    O(n * m)
+
+where `n` is the number of rows and `m` is the number of columns in the 2D array.
+
+---
+
+### Space Complexity Analysis
+
+The space complexity is determined by the additional space used by the algorithm, excluding the input space:
+
+1. **Result List**:
+   - The `result` list stores all `n * m` elements of the 2D array.
+   - This contributes `O(n * m)` space.
+
+2. **Variables**:
+   - The variables `row`, `col`, `height`, `width`, and `going_down` use constant space `O(1)`.
+
+Thus, the **space complexity** of the algorithm is:
+
+    O(n * m)
+
+due to the space required for the `result` list.
+
+---
+
+### Summary
+
+- **Time Complexity**: O(n * m)
+- **Space Complexity**: O(n * m)
+
+This is optimal for this problem since you need to visit every element in the 2D array at least once, and you need
+to store all the elements in the result list.
+
+"""
+
+# =========================================================================================================================== #
