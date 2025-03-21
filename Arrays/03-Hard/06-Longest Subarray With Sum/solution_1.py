@@ -78,3 +78,49 @@ print(longest_subarray_with_sum([61, 54, 1, 499, 2212, 4059, 1, 2, 3, 1, 3], 19)
 # Output: []
 
 # =========================================================================================================================== #
+
+# Big O Analysis:
+
+"""
+## Time and Space Complexity Analysis:
+
+### Time Complexity Analysis
+
+1. **Outer Loop**: The outer loop runs from `starting_index = 0` to `starting_index = len(array) - 1`. This means
+it iterates `n` times, where `n` is the length of the array.
+
+2. **Inner Loop**: For each `starting_index`, the inner loop runs from `ending_index = starting_index` to
+`ending_index = len(array) - 1`. In the worst case, this inner loop also iterates `n` times.
+
+3. **Total Iterations**: Since the inner loop runs `n` times for each iteration of the outer loop, the total number
+of iterations is n * n = n^2.
+
+4. **Operations Inside the Loops**: Inside the inner loop, the function performs a constant number of operations
+(addition, comparison, and assignment). These operations do not depend on the size of the array and are O(1).
+
+Thus, the **time complexity** of the function is: O(n^2)
+
+---
+
+### Space Complexity Analysis
+
+The space complexity of the function is determined by the additional space used by the algorithm, excluding the input array.
+
+1. **Variables**: The function uses a few variables (`indices`, `starting_index`, `ending_index`, `current_subarray_sum`),
+all of which occupy constant space O(1).
+
+2. **Output**: The `indices` list stores at most two integers (the starting and ending indices of the subarray), which
+also occupies constant space O(1).
+
+Thus, the **space complexity** of the function is: O(1)
+
+---
+
+### Summary
+
+- **Time Complexity**: O(n^2) 
+- **Space Complexity**: O(1) 
+
+"""
+
+# =========================================================================================================================== #
