@@ -112,3 +112,48 @@ print(largest_range([0, 9, 19, -1, 18, 17, 2, -10, 3, 12, 5, -16, 4, 11, 8, 7, 6
 # Output: [2, 9]
 
 # =========================================================================================================================== #
+
+# Big O Analysis:
+
+"""
+## Time and Space Complexity Analysis:
+
+### Time Complexity Analysis
+
+1. **Initialization of the `nums` dictionary:**
+   - We iterate through the input array once to populate the `nums` dictionary. This operation takes O(n) time,
+   where `n` is the number of elements in the array.
+
+2. **Main loop to find the largest range:**
+   - We iterate through the array again. For each element, we check if it is still marked as `True` in the `nums` dictionary.
+   - If it is, we start expanding to the left and right to find the range of consecutive numbers.
+   - Each number is visited at most twice: once when it is the starting point of a range, and once when it is part of another range.
+   
+   This ensures that the inner `while` loops do not cause the time complexity to exceed O(n).
+
+3. **Overall Time Complexity:**
+   - The overall time complexity is O(n), where `n` is the number of elements in the array.
+
+---
+
+### Space Complexity Analysis
+
+1. **`nums` dictionary:**
+   - We store each element of the array in the `nums` dictionary. This requires O(n) space.
+
+2. **Other variables:**
+   - The variables `best_range`, `longest_length`, `current_length`, `left`, and `right` use constant space, O(1).
+
+3. **Overall Space Complexity:**
+   - The overall space complexity is O(n), where `n` is the number of elements in the array.
+
+### Summary
+
+- **Time Complexity:** O(n)
+- **Space Complexity:** O(n)
+
+This algorithm efficiently finds the largest range of consecutive numbers in the array with linear time and space complexity.
+
+"""
+
+# =========================================================================================================================== #
