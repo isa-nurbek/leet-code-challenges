@@ -12,7 +12,7 @@ The position of each knight is given as a list of 2 values, the x and y coordina
 
 A knight is able to capture the other knight when it is able to move onto the square currently occupied by the other knight.
 
-Each turn allows each knight to move up to one time. For example, if both knights moved towards each other once, and then knightA captures knightB on its next move, two turns would have been used (even though knightB never made its second move).
+Each turn allows each knight to move up to one time. For example, if both knights moved towards each other once, and then `knight_a` captures `knight_b` on its next move, two turns would have been used (even though knight_b never made its second move).
 
 ## Sample Input
 
