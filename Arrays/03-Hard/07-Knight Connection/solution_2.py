@@ -47,6 +47,7 @@ and `m` is the vertical distance between the knights.
 # =========================================================================================================================== #
 
 # Solution:
+
 from collections import deque
 
 
