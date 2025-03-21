@@ -25,7 +25,7 @@ targetSum = 16
 ## Optimal Time & Space Complexity:
 ```
 Average: O(n^2) time | O(n^2) space - where `n` is the length of the input array.
-Worst: O(n^3) time | O(n^3) space - where `n` is the length of the input array.
+Worst: O(n^3) time | O(n^2) space - where `n` is the length of the input array.
 ```
 
 """
@@ -156,5 +156,133 @@ Thus, the **space complexity** is: O(n^3)
 
 This algorithm is efficient for small to medium-sized arrays but may become slow for very large arrays due to
 its cubic time complexity.
+
+"""
+
+# =========================================================================================================================== #
+
+# Detailed Code Explanation:
+
+"""
+### **Explanation of the Code**
+
+The function `four_number_sum(array, target_sum)` finds all **unique quadruplets** (sets of four numbers) in `array` that sum to
+`target_sum`. It does this efficiently using a **hash table (dictionary)** to store pairs of sums encountered earlier in the array.
+
+---
+
+### **Step-by-Step Breakdown**
+
+#### **1. Initialize Storage**
+```
+all_pairs_sums = {}  
+quadruplets = []  
+```
+- `all_pairs_sums`: A dictionary that maps a **sum of two numbers** to a **list of pairs** that make that sum.
+- `quadruplets`: A list to store all valid quadruplets found.
+
+---
+
+#### **2. Iterate Over the Array**
+```
+for i in range(1, len(array) - 1):
+```
+- The loop starts at index `1` and stops at `len(array) - 1`. This ensures that:
+  - Previous elements (`0` to `i-1`) can be used for pair storage.
+  - Future elements (`i+1` to `end`) can be used to check for quadruplets.
+
+---
+
+#### **3. Check for Complementary Pairs**
+```
+for j in range(i + 1, len(array)):  
+    current_sum = array[i] + array[j]  
+    difference = target_sum - current_sum  
+```
+- The **sum** of `array[i]` and `array[j]` is stored in `current_sum`.
+- The **needed sum** for a valid quadruplet is `difference = target_sum - current_sum`.
+
+```
+if difference in all_pairs_sums:
+    for pair in all_pairs_sums[difference]:
+        quadruplets.append(pair + [array[i], array[j]])
+```
+- If `difference` is found in `all_pairs_sums`, it means there exists **a previously seen pair** that sums to `difference`. 
+- We retrieve those pairs and **combine them** with `[array[i], array[j]]` to form valid quadruplets.
+
+---
+
+#### **4. Store Pairs for Future Lookups**
+```
+for k in range(0, i):
+    current_sum = array[i] + array[k]
+
+    if current_sum not in all_pairs_sums:
+        all_pairs_sums[current_sum] = [[array[k], array[i]]]
+    else:
+        all_pairs_sums[current_sum].append([array[k], array[i]])
+```
+- Before moving to the next `i`, we store all possible **pairs** from the range `[0, i]` in `all_pairs_sums`.
+- This ensures that future numbers (`j`) can check for valid sums efficiently.
+
+---
+
+### **Example Walkthrough**
+
+#### **Test Case 1**
+```
+array = [7, 6, 4, -1, 1, 2]
+target_sum = 16
+```
+##### **Step 1: Storing Pairs**
+
+| `i` | `Pairs Stored (all_pairs_sums)`                                        |
+|-----|------------------------------------------------------------------------|
+| `1` | `{ [7, 6] → 13 }`                                                      |
+| `2` | `{ [7, 6] → 13, [7, 4] → 11, [6, 4] → 10 }`                            |
+| `3` | `{ ..., [7, -1] → 6, [6, -1] → 5, [4, -1] → 3 }`                       |
+| `4` | `{ ..., [7, 1] → 8, [6, 1] → 7, [4, 1] → 5, [-1, 1] → 0 }`             |
+| `5` | `{ ..., [7, 2] → 9, [6, 2] → 8, [4, 2] → 6, [-1, 2] → 1, [1, 2] → 3 }` |
+
+##### **Step 2: Checking for Quadruplets**
+
+| `i, j`          | `current_sum` | `difference` (needed) | `Pairs Found?`    | `Quadruplets Added`  |
+|-----------------|---------------|-----------------------|-------------------|----------------------|
+| `1,2` → `(6,4)` | `10`          | `6`                   | ✅ `[[7, -1]]`    | `[7, -1, 6, 4]`      |
+| `1,4` → `(6,1)` | `7`           | `9`                   | ❌                |                      |
+| `1,5` → `(6,2)` | `8`           | `8`                   | ✅ `[[7, 1]]`     | `[7, 1, 6, 2]`       |
+
+Final **Output:**
+```
+[[7, 6, 4, -1], [7, 6, 1, 2]]
+```
+
+---
+
+#### **Test Case 2**
+```
+array_2 = [1, 2, 3, 4, 5, 6, 7]
+target_sum_2 = 10
+```
+- **Valid quadruplet found:** `[1, 2, 3, 4]`
+
+**Output:**
+```
+[[1, 2, 3, 4]]
+```
+
+---
+
+#### **Test Case 3**
+```
+array_3 = [1, 2, 3, 4, 5]
+target_sum_3 = 100
+```
+- No valid quadruplets exist.
+
+**Output:**
+```
+[]
+```
 
 """
