@@ -38,7 +38,8 @@ knight_b = [4, 2]
 
 ## Optimal Time & Space Complexity:
 ```
-O(n * m) time | O(n * m) space - where `n` is horizontal distance between the knights and `m` is the vertical distance between the knights.
+O(n * m) time | O(n * m) space - where `n` is horizontal distance between the knights and
+`m` is the vertical distance between the knights.
 ```
 
 """
