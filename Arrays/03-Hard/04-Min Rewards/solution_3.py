@@ -121,3 +121,94 @@ print(min_rewards([1]))
 This algorithm efficiently computes the minimum number of rewards required in O(n) time and O(n) space.
 
 """
+
+# =========================================================================================================================== #
+
+# Detailed Code Explanation:
+
+"""
+### **Explanation of the `min_rewards` function**
+
+This function calculates the minimum number of rewards that should be distributed to students based on their scores.
+The main constraint is that a student with a higher score than their adjacent student should receive more rewards.
+
+---
+
+### **Approach Used**
+
+1. **Initialize Rewards**:  
+   - Every student gets at least **one** reward initially.
+   - We create a `rewards` array of the same length as `scores` and initialize all elements to `1`.
+
+2. **Left-to-Right Pass**:  
+   - We iterate **from left to right** (i.e., from index `1` to `n-1`).
+   - If the **current score** is greater than the **previous score**, the current student should get more rewards
+   than the previous student.
+   
+   - So, `rewards[i] = rewards[i - 1] + 1`.
+
+3. **Right-to-Left Pass**:  
+   - We iterate **from right to left** (i.e., from index `n-2` to `0`).
+   - If the **current score** is greater than the **next score**, the current student should get more rewards than the next student.
+   - To ensure correctness, we take the maximum of the existing reward and `rewards[i + 1] + 1`.
+   
+   - `rewards[i] = max(rewards[i], rewards[i + 1] + 1)`.
+
+4. **Summing Up Rewards**:  
+   - Finally, we return the sum of all elements in the `rewards` array.
+
+---
+
+### **Step-by-Step Execution**
+
+#### **Example 1: `scores = [8, 4, 2, 1, 3, 6, 7, 9, 5]`**
+1. **Initialize `rewards`**  
+   ```
+   scores:  [8, 4, 2, 1, 3, 6, 7, 9, 5]
+   rewards: [1, 1, 1, 1, 1, 1, 1, 1, 1]  (All initialized to 1)
+   ```
+
+2. **Left-to-Right Pass**
+   - If `scores[i] > scores[i-1]`, increase reward.
+   ```
+   scores:  [8, 4, 2, 1, 3, 6, 7, 9, 5]
+   rewards: [1, 1, 1, 1, 2, 3, 4, 5, 1]  (Increasing rewards for rising values)
+   ```
+
+3. **Right-to-Left Pass**
+   - If `scores[i] > scores[i+1]`, adjust reward.
+   ```
+   scores:  [8, 4, 2, 1, 3, 6, 7, 9, 5]
+   rewards: [4, 3, 2, 1, 2, 3, 4, 5, 1]  (Ensuring fairness for decreasing values)
+   ```
+
+4. **Final Sum**  
+   ```
+   4 + 3 + 2 + 1 + 2 + 3 + 4 + 5 + 1 = 25
+   ```
+   **Output: `25`**
+
+---
+
+### **Edge Cases**
+
+1. **Single Element (`scores = [1]`)**
+   - Output: `1` (only one student, gets one reward)
+
+2. **Already Increasing (`scores = [1, 2, 3, 4]`)**
+   - Output: `1 + 2 + 3 + 4 = 10`
+
+3. **Already Decreasing (`scores = [4, 3, 2, 1]`)**
+   - Output: `4 + 3 + 2 + 1 = 10`
+
+4. **All Equal Scores (`scores = [3, 3, 3, 3]`)**
+   - Output: `1 + 1 + 1 + 1 = 4`
+
+---
+
+### **Conclusion**
+
+- The function ensures fairness by making two passes over the `scores` array.
+- It guarantees the **minimum rewards** distribution while satisfying the given constraints.
+
+"""
