@@ -41,7 +41,7 @@ O(n) time | O(n) space - where `n` is the length of the input array.
 # Solution:
 
 
-# O(n) time | O(n) space - where `n` is the length of the input array
+# O(n^2) time | O(n) space - where `n` is the length of the input array
 def min_rewards(scores):
     # Initialize rewards array with 1 for each student
     rewards = [1 for _ in scores]
@@ -113,5 +113,57 @@ print(min_rewards([0, 4, 2, 1, 3]))
 
 print(min_rewards([1]))
 # Output: 1
+
+# =========================================================================================================================== #
+
+# Big O Analysis:
+
+"""
+## Time and Space Complexity Analysis:
+
+### Time Complexity Analysis
+
+1. **`get_local_min_idxs(array)`**:
+   - This function iterates through the entire array once to find local minima.
+   
+   - **Time Complexity**: O(n), where `n` is the length of the array.
+
+2. **`expand_from_local_min_idx(local_min_idx, scores, rewards)`**:
+   - This function expands from a local minimum to the left and right, updating the rewards.
+   - In the worst case, it could traverse the entire array (e.g., if the array is strictly increasing or decreasing).
+   
+   - **Time Complexity**: O(n) for each local minimum.
+
+3. **`min_rewards(scores)`**:
+   - The function first initializes the `rewards` array, which takes O(n) time.
+   - It then calls `get_local_min_idxs`, which takes O(n) time.
+   - For each local minimum, it calls `expand_from_local_min_idx`, which takes O(n) time.
+   - If there are `k` local minima, the total time complexity for this part is O(k * n).
+
+   - In the worst case, the number of local minima `k` could be proportional to `n` (e.g., alternating peaks and valleys), 
+   so the total time complexity becomes O(n^2).
+
+---
+
+### Space Complexity Analysis
+
+1. **`get_local_min_idxs(array)`**:
+   - This function uses a list to store the indices of local minima.
+   - **Space Complexity**: O(n) in the worst case (if every element is a local minimum).
+
+2. **`expand_from_local_min_idx(local_min_idx, scores, rewards)`**:
+   - This function uses a constant amount of extra space (for indices and temporary variables).
+   - **Space Complexity**: O(1).
+
+3. **`min_rewards(scores)`**:
+   - The function uses an additional `rewards` array of size `n`.
+   - **Space Complexity**: O(n).
+
+### Summary
+
+- **Time Complexity**: O(n^2) in the worst case.
+- **Space Complexity**: O(n).
+
+"""
 
 # =========================================================================================================================== #
