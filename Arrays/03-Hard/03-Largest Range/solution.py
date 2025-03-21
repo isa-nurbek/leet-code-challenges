@@ -157,3 +157,180 @@ This algorithm efficiently finds the largest range of consecutive numbers in the
 """
 
 # =========================================================================================================================== #
+
+# Detailed Code Explanation:
+
+"""
+### **Explanation of `largest_range` Algorithm**
+
+The `largest_range` function finds the longest consecutive sequence (range) of numbers in an unsorted array.
+The function returns a list containing the start and end of that range.
+
+---
+
+## **Step-by-Step Breakdown of the Code**
+
+Let's analyze the function line by line.
+
+### **Step 1: Initialize Variables**
+```
+best_range = []
+longest_length = 0
+```
+- `best_range`: Stores the **start and end** of the longest range found.
+- `longest_length`: Tracks the **length of the longest range**.
+
+---
+
+### **Step 2: Store Numbers in a Hash Table**
+```
+nums = {}
+for num in array:
+    nums[num] = True
+```
+- Creates a **hash table (dictionary)** `nums` where:
+  - Keys are numbers in the array.
+  - Values are `True`, indicating that the number has not been visited.
+
+##### **Example:**
+
+For `array = [1, 11, 3, 0, 15, 5, 2, 4, 10, 7, 12, 6]`,  
+The dictionary `nums` looks like:
+```
+{1: True, 11: True, 3: True, 0: True, 15: True, 5: True, 2: True,
+ 4: True, 10: True, 7: True, 12: True, 6: True}
+```
+
+---
+
+### **Step 3: Find the Longest Consecutive Range**
+```
+for num in array:
+    if not nums[num]:
+        continue
+```
+- **Iterates through each number in the array.**
+- **If the number was already visited (`False`), it skips processing** (avoids duplicate calculations).
+
+---
+
+### **Step 4: Expand Left and Right to Find the Range**
+```
+nums[num] = False
+current_length = 1
+
+left = num - 1
+right = num + 1
+```
+- **Marks `num` as visited** (`nums[num] = False`).
+- **Initializes `current_length = 1`** because a single number forms a range of length `1`.
+- **Sets `left` to `num - 1`** (to check the left side of the range).
+- **Sets `right` to `num + 1`** (to check the right side of the range).
+
+---
+
+### **Step 5: Expand Left**
+```
+while left in nums:
+    nums[left] = False
+    current_length += 1
+    left -= 1
+```
+- **If `left` exists in `nums`**, mark it as visited.
+- **Increase `current_length`** because we found another number in the range.
+- **Keep decreasing `left`** to expand the range as far as possible.
+
+---
+
+### **Step 6: Update Best Range**
+```
+if current_length > longest_length:
+    longest_length = current_length
+    best_range = [left + 1, right - 1]
+```
+- If we found a **longer range**, update:
+  - `longest_length`
+  - `best_range` (adjusting `left + 1` because `left` was decreased one extra step)
+
+---
+
+### **Step 7: Return the Result**
+```
+return best_range
+```
+- Returns the longest consecutive range found.
+
+---
+
+## **Example Test Cases**
+
+### **Test Case 1**
+```
+largest_range([1, 11, 3, 0, 15, 5, 2, 4, 10, 7, 12, 6])
+```
+#### **Step-by-Step Execution**
+
+1. **Dictionary `nums` Created:**
+   ```
+   {1: True, 11: True, 3: True, 0: True, 15: True, 5: True, 2: True,
+    4: True, 10: True, 7: True, 12: True, 6: True}
+   ```
+2. **Processing each number:**
+   - Starting from `1`, expands to `[0, 1, 2, 3, 4, 5, 6, 7]` → Length = `8`
+   - **Best range updated:** `[0, 7]`
+   - Other numbers processed but do not exceed length `8`.
+
+**Final Output:**
+```
+[0, 7]
+```
+
+---
+
+### **Test Case 2**
+```
+largest_range([-1, 0, 1])
+```
+1. **Dictionary `nums`:**
+   ```
+   {-1: True, 0: True, 1: True}
+   ```
+2. **Processing -1:**
+   - Expands to `[-1, 0, 1]` → Length = `3`
+   - **Best range updated:** `[-1, 1]`
+
+**Final Output:**
+```
+[-1, 1]
+```
+
+---
+
+### **Test Case 3**
+```
+largest_range([0, 9, 19, -1, 18, 17, 2, -10, 3, 12, 5, -16, 4, 11, 8, 7, 6, 15])
+```
+1. **Dictionary `nums`:**
+   ```
+   {0: True, 9: True, 19: True, -1: True, 18: True, 17: True, 2: True,
+    -10: True, 3: True, 12: True, 5: True, -16: True, 4: True,
+    11: True, 8: True, 7: True, 6: True, 15: True}
+   ```
+2. **Processing 2:**
+   - Expands to `[2, 3, 4, 5, 6, 7, 8, 9]` → Length = `8`
+   - **Best range updated:** `[2, 9]`
+
+**Final Output:**
+```
+[2, 9]
+```
+
+---
+
+## **Summary**
+- Uses a **hash table** to store numbers for **quick lookups**.
+- Iterates through numbers and **expands left and right** to find the **longest consecutive sequence**.
+- Runs in **O(n) time**, making it highly efficient.
+- Works well even for large inputs.
+
+"""
