@@ -167,3 +167,119 @@ print(min_rewards([1]))
 """
 
 # =========================================================================================================================== #
+
+# Detailed Code Explanation:
+
+"""
+This code is an implementation of the **Minimum Rewards Problem**, where students are given a score, and we need to assign
+rewards based on the given conditions:
+
+- Every student must get at least **one** reward.
+- A student with a **higher** score than an adjacent student must receive **more** rewards.
+
+### **Code Breakdown**
+
+#### **1. `min_rewards(scores)` Function**
+
+This is the main function that calculates the minimum total rewards required.
+
+- **Step 1**: Initialize a `rewards` list, where each student starts with **one reward**.
+- **Step 2**: Find the **local minima** (students with scores lower than their adjacent students).
+- **Step 3**: Expand from each local minimum to adjust the reward distribution.
+- **Step 4**: Return the total sum of rewards.
+
+---
+
+#### **2. `get_local_min_idxs(array)` Function**
+
+This function identifies the **local minima** in the given `scores` array.
+
+- **Local Minimum**: A student is a local minimum if their score is lower than their adjacent students.
+- **Edge Cases**:
+  - If there is only **one** student, they are a local minimum.
+  - The first element is a local minimum if it is smaller than the second element.
+  - The last element is a local minimum if it is smaller than the second-last element.
+  - Any other element is a local minimum if it is **smaller than both its neighbors**.
+
+Example:
+```
+scores = [8, 4, 2, 1, 3, 6, 7, 9, 5]
+```
+Local minima are:
+- `1` at index `3`
+- `5` at index `8`
+
+---
+
+#### **3. `expand_from_local_min_idx(local_min_idx, scores, rewards)` Function**
+
+This function ensures that all students get the correct number of rewards.
+
+- **Left Expansion**: It moves leftward from the `local_min_idx` and ensures students with higher scores than
+their right neighbors receive more rewards.
+
+- **Right Expansion**: It moves rightward from the `local_min_idx` and ensures students with higher scores than
+their left neighbors receive more rewards.
+
+**Example Walkthrough:**
+
+Let’s consider the input:
+```
+scores = [8, 4, 2, 1, 3, 6, 7, 9, 5]
+```
+1. Initially, `rewards = [1, 1, 1, 1, 1, 1, 1, 1, 1]`.
+2. **Identify Local Minima:** `{3, 8}`.
+3. **Expanding from index `3` (score 1):**
+   - Right expansion updates: `[1, 1, 1, 1, 2, 3, 4, 5, 1]`
+   - Left expansion updates: `[3, 2, 2, 1, 2, 3, 4, 5, 1]`
+4. **Expanding from index `8` (score 5):**
+   - No left expansion needed.
+   - Right expansion not needed as it’s the last element.
+
+Final rewards:
+```
+[3, 2, 2, 1, 2, 3, 4, 5, 1]
+```
+Sum: `25`
+
+---
+
+### **Test Cases**
+
+#### **Test Case 1**
+```
+print(min_rewards([8, 4, 2, 1, 3, 6, 7, 9, 5]))
+```
+**Output**:
+```
+25
+```
+---
+
+#### **Test Case 2**
+```
+print(min_rewards([0, 4, 2, 1, 3]))
+```
+**Explanation**:
+- Local minima: `{0, 3}`
+- Expanding rewards: `[1, 2, 1, 1, 2]`
+- Total: `9`
+
+**Output**:
+```
+9
+```
+---
+
+#### **Test Case 3**
+```
+print(min_rewards([1]))
+```
+**Explanation**:
+- Only one student, so the minimum reward is `1`.
+
+**Output**:
+```
+1
+```
+"""
