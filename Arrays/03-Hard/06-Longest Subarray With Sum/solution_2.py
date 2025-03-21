@@ -86,3 +86,51 @@ print(longest_subarray_with_sum([61, 54, 1, 499, 2212, 4059, 1, 2, 3, 1, 3], 19)
 # Output: []
 
 # =========================================================================================================================== #
+
+# Big O Analysis:
+
+"""
+## Time and Space Complexity Analysis:
+
+### Time Complexity Analysis
+
+The time complexity of the `longest_subarray_with_sum` function is **O(n)**, where **n** is the length of the input array.
+
+Here's why:
+
+1. **Outer Loop**: The `ending_index` iterates through the entire array once, from `0` to `len(array) - 1`.
+This contributes **O(n)** to the time complexity.
+
+2. **Inner Loop**: The `starting_index` is incremented only when the current subarray sum exceeds the `target_sum`.
+Since `starting_index` starts at `0` and can only move forward (it never goes backward), it will traverse the array
+at most once in total. This means the inner loop also contributes **O(n)** in total across all iterations of the outer loop.
+
+Combining these two, the overall time complexity is **O(n)**.
+
+---
+
+### Space Complexity Analysis
+
+The space complexity of the function is **O(1)**, which means it uses constant extra space.
+
+Here's why:
+
+1. The function uses a fixed number of variables (`indices`, `current_subarray_sum`, `starting_index`, and `ending_index`),
+regardless of the size of the input array.
+
+2. No additional data structures (like hash maps or arrays) are used that grow with the input size.
+
+Thus, the space complexity is **O(1)**.
+
+---
+
+### Summary
+
+- **Time Complexity**: **O(n)**
+- **Space Complexity**: **O(1)**
+
+This makes the algorithm efficient for large input sizes.
+
+"""
+
+# =========================================================================================================================== #
