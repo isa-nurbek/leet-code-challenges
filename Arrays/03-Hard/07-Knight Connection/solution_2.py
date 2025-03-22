@@ -51,7 +51,7 @@ and `m` is the vertical distance between the knights.
 from collections import deque
 
 
-# O(8^d/2) time | O(8^d/2) space
+# O(n²) time | O(n²) space
 def knight_connection(knight_a, knight_b):
     # If both knights are already at the same position, no moves are needed
     if knight_a == knight_b:
@@ -185,5 +185,176 @@ Thus, the **space complexity** is:
 
 This is significantly more efficient than a standard BFS, which would have a time and space complexity of O(8d).
 Bidirectional BFS reduces the search space by exploring from both ends simultaneously.
+
+"""
+
+# =========================================================================================================================== #
+
+# Detailed Code Explanation:
+
+"""
+### **Explanation of the Code:**
+
+This Python program implements **Bidirectional Breadth-First Search (BFS)** to determine the minimum number of knight moves
+required to move from a starting position to a target position on an infinite chessboard.
+
+---
+
+### **Understanding the Problem Statement:**
+
+A **knight** in chess moves in an **L-shape**:
+- Two squares in one direction and then one square perpendicular.
+- Or one square in one direction and then two squares perpendicular.
+
+The goal is to determine the **minimum number of moves** needed for a knight to move from `knight_a` to `knight_b`.
+
+---
+
+### **Step-by-Step Execution:**
+
+1. **Handle the Base Case:**
+   ```
+   if knight_a == knight_b:
+       return 0
+   ```
+   - If the starting position is the same as the target position, **0 moves** are required.
+
+2. **Define Possible Knight Moves:**
+   ```
+   possible_moves = [
+       (-2, 1), (-1, 2), (1, 2), (2, 1),
+       (2, -1), (1, -2), (-1, -2), (-2, -1)
+   ]
+   ```
+   - These are the **8 possible moves** a knight can make.
+
+3. **Initialize Two Queues for Bidirectional BFS:**
+   ```
+   queue_start = deque([(knight_a[0], knight_a[1], 0)])  # (x, y, steps)
+   queue_end = deque([(knight_b[0], knight_b[1], 0)])
+   ```
+   - `queue_start`: BFS starting from `knight_a`.
+   - `queue_end`: BFS starting from `knight_b`.
+   - Each queue stores `(x, y, steps)`, where `steps` is the number of moves taken so far.
+
+4. **Initialize Two Visited Sets:**
+   ```
+   visited_start = {tuple(knight_a)}
+   visited_end = {tuple(knight_b)}
+   ```
+   - `visited_start`: Tracks positions visited from `knight_a`.
+   - `visited_end`: Tracks positions visited from `knight_b`.
+   - Helps prevent revisiting the same position.
+
+5. **Bidirectional BFS:**
+   ```
+   while queue_start and queue_end:
+   ```
+   - The loop runs until **one of the queues is empty**.
+   - The search expands from both directions.
+
+6. **Expand One Level from `queue_start`:**
+   ```
+   result = expand(queue_start, visited_start, visited_end, possible_moves)
+   if result is not None:
+       return result
+   ```
+   - Calls `expand()`, which explores all possible moves for the current level.
+   - If a position from `queue_start` **intersects** with `visited_end`, the total move count is returned.
+
+7. **Expand One Level from `queue_end`:**
+   ```
+   result = expand(queue_end, visited_end, visited_start, possible_moves)
+   if result is not None:
+       return result
+   ```
+   - Similarly expands `queue_end`.
+   - If an intersection is found, return the move count.
+
+8. **`expand()` Function:**
+   ```
+   def expand(queue, visited_self, visited_other, possible_moves):
+   ```
+   - Expands the BFS for one step in a given direction.
+
+   **Processing Each Position in the Queue:**
+   ```
+   for _ in range(len(queue)):
+       x, y, steps = queue.popleft()
+   ```
+   - Dequeues all positions in the current level.
+
+   **Try All Possible Moves:**
+   ```
+   for dx, dy in possible_moves:
+       new_pos = (x + dx, y + dy)
+   ```
+   - Generates new possible positions.
+
+   **Check for Intersection:**
+   ```
+   if new_pos in visited_other:
+       return steps + 1
+   ```
+   - If `new_pos` is in `visited_other`, both searches have met, returning the total step count.
+
+   **Add New Positions to Queue:**
+   ```
+   if new_pos not in visited_self:
+       visited_self.add(new_pos)
+       queue.append((new_pos[0], new_pos[1], steps + 1))
+   ```
+   - If `new_pos` has not been visited, mark it as visited and add it to the queue.
+
+9. **Return -1 if No Path is Found (Not Expected):**
+   ```
+   return -1
+   ```
+   - This should not happen for valid inputs.
+
+---
+
+### **Time and Space Complexity Analysis:**
+
+- **Time Complexity: O(n²)** (since each new position expands in 8 directions and both BFS searches run simultaneously).
+- **Space Complexity: O(n²)** (because we store visited positions in sets).
+
+---
+
+### **Example Walkthrough:**
+
+#### **Example 1:**
+```
+knight_connection([0, 0], [4, 2])
+```
+- The knight moves:
+  ```
+  [0,0] → [2,1] → [4,2]
+  ```
+- **Output:** `1` (in just **one move**).
+
+#### **Example 2:**
+```
+knight_connection([15, -12], [15, -12])
+```
+- **Same start and end position**, so **0 moves** required.
+
+#### **Example 3:**
+```
+knight_connection([0, 0], [20, 20])
+```
+- The knight needs **7 moves** to reach `[20,20]` using optimal moves.
+
+---
+
+### **Why Use Bidirectional BFS?**
+- **Faster than Single BFS:** Instead of exploring all possible positions from the start, we meet in the middle.
+- **Reduces the Number of Explored Nodes:** Expanding from two directions reduces the search space compared to a single BFS.
+
+---
+
+### **Final Thoughts**
+This code efficiently finds the shortest path for a knight using **Bidirectional BFS**, improving performance over a traditional
+BFS approach. The implementation ensures that unnecessary moves are avoided, making it suitable for large chessboard problems. 
 
 """
