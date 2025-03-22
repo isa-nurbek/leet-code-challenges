@@ -131,3 +131,62 @@ print(count_squares(points_2))
 
 print(count_squares(points_3))
 # Output: 0.0
+
+# =========================================================================================================================== #
+
+# Big O Analysis:
+
+"""
+## Time and Space Complexity Analysis:
+
+### Time Complexity Analysis
+
+The time complexity of the `count_squares` function can be broken down as follows:
+
+1. **Building the `points_set`:**
+   - Iterating through the `points` list to add each point to the `points_set` takes O(n) time, where `n` is the number of points.
+
+2. **Nested loops to find squares:**
+   - The outer loop iterates over each point in the `points` list, which takes O(n) time.
+   - The inner loop also iterates over each point in the `points` list, which again takes O(n) time.
+   - Inside the inner loop, the operations (calculating the midpoint, distances, and checking if `point_c` and `point_d`
+   are in the `points_set`) are all constant time operations, O(1).
+
+   Therefore, the nested loops contribute O(n * n) = O(n²) time complexity.
+
+3. **Final division by 4:**
+   - The division by 4 is a constant time operation, O(1).
+
+Combining these, the overall time complexity is:
+
+    O(n) + O(n^2) + O(1) = O(n²)
+
+---
+
+### Space Complexity Analysis
+
+The space complexity of the `count_squares` function can be broken down as follows:
+
+1. **`points_set`:**
+   - The `points_set` stores all the points as strings. Since there are `n` points, the space required for the
+   `points_set` is O(n).
+
+2. **Other variables:**
+   - The variables `mid_point`, `x_distance_from_mid`, `y_distance_from_mid`, `point_c`, and `point_d` are all temporary
+   variables that use constant space, O(1).
+
+Therefore, the overall space complexity is:
+
+    O(n) + O(1) = O(n)
+
+---
+
+### Summary
+
+- **Time Complexity:** O(n²)
+- **Space Complexity:** O(n)
+
+This means that the function's runtime grows quadratically with the number of points, and the space required grows 
+linearly with the number of points.
+
+"""
