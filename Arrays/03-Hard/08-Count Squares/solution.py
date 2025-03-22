@@ -190,3 +190,153 @@ This means that the function's runtime grows quadratically with the number of po
 linearly with the number of points.
 
 """
+
+# Detailed Code Explanation:
+
+"""
+### **Understanding the Code in Detail**
+
+The function `count_squares(points)` takes a list of 2D points and determines how many unique squares can be formed
+using these points as vertices. Here's a detailed breakdown of how it works:
+
+---
+
+### **1. Initializing a Set to Store Points**
+```
+points_set = set()
+
+for point in points:
+    points_set.add(point_to_string(point))
+```
+- This initializes an empty set, `points_set`, which stores the given points in string format.
+- The `point_to_string(point)` function converts a point (list) into a string representation to allow quick lookups.
+
+---
+
+### **2. Checking All Possible Pairs of Points**
+```
+for point_a in points:
+    for point_b in points:
+        if point_a == point_b:
+            continue
+```
+- The function iterates through every pair of points `(point_a, point_b)`.
+- It skips cases where `point_a` and `point_b` are the same since a square requires four distinct points.
+
+---
+
+### **3. Finding the Midpoint**
+```
+mid_point = [(point_a[0] + point_b[0]) / 2, (point_a[1] + point_b[1]) / 2]
+```
+- The midpoint of the segment connecting `point_a` and `point_b` is calculated.
+- This midpoint helps determine the two remaining points needed to form a square.
+
+---
+
+### **4. Calculating the Other Two Square Points**
+```
+x_distance_from_mid = point_a[0] - mid_point[0]
+y_distance_from_mid = point_a[1] - mid_point[1]
+
+point_c = [
+    mid_point[0] + y_distance_from_mid,
+    mid_point[1] - x_distance_from_mid,
+]
+
+point_d = [
+    mid_point[0] - y_distance_from_mid,
+    mid_point[1] + x_distance_from_mid,
+]
+```
+- The distances from the midpoint to `point_a` (or `point_b`) along the x and y axes are calculated.
+- These distances are used to compute two additional points `point_c` and `point_d` that would complete the square.
+- The transformation applied ensures that `point_c` and `point_d` are 90 degrees rotated around the midpoint.
+
+---
+
+### **5. Checking if the Other Two Points Exist**
+```
+if (
+    point_to_string(point_c) in points_set
+    and point_to_string(point_d) in points_set
+):
+    count += 1
+```
+- If both `point_c` and `point_d` exist in `points_set`, it means a valid square is formed.
+- The `count` variable is incremented.
+
+---
+
+### **6. Returning the Final Count**
+```
+return count / 4
+```
+- Each square is counted **four times** due to different pairs of points being chosen as the base of the square.
+- To avoid overcounting, the final count is divided by 4.
+
+---
+
+### **Helper Function: `point_to_string(point)`**
+```
+def point_to_string(point):
+    if point[0] % 1 == 0 and point[1] % 1 == 0:
+        point = [int(coordinate) for coordinate in point]
+
+    return ",".join([str(coordinate) for coordinate in point])
+```
+- Converts a point from a list format to a string representation.
+- If both x and y coordinates are whole numbers, they are converted to integers to ensure consistency when stored in `points_set`.
+
+---
+
+### **Example Test Cases**
+
+#### **Case 1:**
+```
+points = [
+    [1, 1],
+    [0, 0],
+    [-4, 2],
+    [-2, -1],
+    [0, 1],
+    [1, 0],
+    [-1, 4],
+]
+```
+- The function finds **2 squares**, so the output is:
+```
+2.0
+```
+
+#### **Case 2:**
+```
+points_2 = [
+    [1, 1],
+    [0, 0],
+    [0, 1],
+    [1, 0],
+]
+```
+- The function finds **1 square**, so the output is:
+```
+1.0
+```
+
+#### **Case 3:**
+```
+points_3 = []
+```
+- Since there are no points, there can be no squares:
+```
+0.0
+```
+
+---
+
+### **Final Thoughts**
+- The function efficiently detects squares using geometric transformations and set lookups.
+- By leveraging midpoint properties and 90-degree rotations, it ensures correctness.
+- The division by 4 eliminates duplicate square counts.
+
+"""
