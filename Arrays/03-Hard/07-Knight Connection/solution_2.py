@@ -51,7 +51,7 @@ and `m` is the vertical distance between the knights.
 from collections import deque
 
 
-# O(n²) time | O(n²) space
+# O(8^d/2) time | O(8^d/2) space
 def knight_connection(knight_a, knight_b):
     # If both knights are already at the same position, no moves are needed
     if knight_a == knight_b:
@@ -131,3 +131,59 @@ print(knight_connection([0, 0], [20, 20]))  # Output: 7
 
 
 # =========================================================================================================================== #
+
+# Big O Analysis:
+
+"""
+## Time and Space Complexity Analysis:
+
+### Time Complexity Analysis
+
+The time complexity of the bidirectional BFS algorithm depends on the number of nodes (positions) explored during the search.
+
+Here's a breakdown:
+
+1. **Branching Factor**: A knight has 8 possible moves from any given position, so the branching factor `b` is 8.
+
+2. **Bidirectional BFS**: In bidirectional BFS, the search proceeds from both the start and the target positions simultaneously.
+The search stops when the two BFS frontiers meet.
+
+3. **Number of Levels Explored**: Let `d` be the minimum number of moves required to connect the two knights.
+In bidirectional BFS, each BFS explores roughly `d/2` levels before they meet.
+
+4. **Total Nodes Explored**: The total number of nodes explored by both BFS searches is approximately (2 * b^d/2).
+This is because each BFS explores (b^d/2) nodes.
+
+Thus, the **time complexity** is:
+
+    O(b^d/2)
+
+where `b = 8` (the branching factor) and `d` is the minimum number of moves required to connect the two knights.
+
+---
+
+### Space Complexity Analysis
+
+The space complexity is determined by the number of nodes stored in the queues and the visited sets during the BFS.
+
+1. **Queue Size**: At any level, the queue stores all nodes at the current level. Since each BFS explores (b^d/2)
+nodes, the maximum size of the queue is O(b^d/2).
+
+2. **Visited Sets**: The visited sets store all explored nodes. Since both BFS searches explore (b^d/2) nodes each,
+the total space required for the visited sets is O(b^d/2).
+
+Thus, the **space complexity** is:
+
+    O(b^d/2)
+
+---
+
+### Summary
+
+- **Time Complexity**: O(8^d/2), where `d` is the minimum number of moves required to connect the two knights.
+- **Space Complexity**: O(8^d/2), where `d` is the minimum number of moves required to connect the two knights.
+
+This is significantly more efficient than a standard BFS, which would have a time and space complexity of O(8d).
+Bidirectional BFS reduces the search space by exploring from both ends simultaneously.
+
+"""
