@@ -72,40 +72,55 @@ O(br) time | O(br) space - where `b` is the number of blocks and `r` is the numb
 
 # O(b² * r) time | O(b) space
 def apartment_hunting(blocks, reqs):
+    # Initialize an array to store the maximum distance needed for each block
     max_distances_at_blocks = [float("-inf") for block in blocks]
 
+    # For each block in the neighborhood
     for i in range(len(blocks)):
+        # For each requirement (gym, school, store, etc.)
         for req in reqs:
             closest_req_distance = float("inf")
 
+            # Find the closest block with this requirement
             for j in range(len(blocks)):
-                if blocks[j][req]:
+                if blocks[j][req]:  # If this block has the requirement
+                    # Calculate distance between current block and this block
                     closest_req_distance = min(
                         closest_req_distance, distance_between(i, j)
                     )
 
+            # Track the worst-case distance for this requirement
             max_distances_at_blocks[i] = max(
                 max_distances_at_blocks[i], closest_req_distance
             )
 
+    # Return the block with the smallest maximum distance
     return get_idx_at_min_value(max_distances_at_blocks)
 
 
 def get_idx_at_min_value(array):
-    idx_at_min_value = 0
+    # Initialize variables to track the minimum value and its index
+    idx_at_min_value = 0  # Start with index 0 as default
+
+    # Initialize with infinity (so any real number will be smaller)
     min_value = float("inf")
 
+    # Iterate through each element in the array
     for i in range(len(array)):
-        current_value = array[i]
+        current_value = array[i]  # Get the current element's value
 
+        # Check if current value is smaller than the smallest found so far
         if current_value < min_value:
-            min_value = current_value
-            idx_at_min_value = i
+            min_value = current_value  # Update the smallest value
+            idx_at_min_value = i  # Update the index of the smallest value
 
+    # Return the index where the minimum value was found
     return idx_at_min_value
 
 
 def distance_between(a, b):
+    # Returns the absolute difference between two positions (blocks)
+    # This represents the walking distance between them (Manhattan distance)
     return abs(a - b)
 
 
