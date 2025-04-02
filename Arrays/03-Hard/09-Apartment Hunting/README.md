@@ -14,32 +14,13 @@ If there are multiple most optimal blocks, your function can return the index of
 
 ```plaintext
 blocks = [
-  {
-    "gym": false,
-    "school": true,
-    "store": false,
-  },
-  {
-    "gym": true,
-    "school": false,
-    "store": false,
-  },
-  {
-    "gym": true,
-    "school": true,
-    "store": false,
-  },
-  {
-    "gym": false,
-    "school": true,
-    "store": false,
-  },
-  {
-    "gym": false,
-    "school": true,
-    "store": true,
-  },
+    {"gym": False, "school": True, "store": False},
+    {"gym": True, "school": False, "store": False},
+    {"gym": True, "school": True, "store": False},
+    {"gym": False, "school": True, "store": False},
+    {"gym": False, "school": True, "store": True},
 ]
+
 reqs = ["gym", "school", "store"]
 ```
 
