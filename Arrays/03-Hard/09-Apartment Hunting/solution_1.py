@@ -164,3 +164,153 @@ for each requirement using dynamic programming), which can reduce the time compl
 - The current approach recalculates distances redundantly, leading to the higher time complexity.
 
 """
+
+# =========================================================================================================================== #
+
+# Detailed Code Explanation:
+
+"""
+### **Detailed Explanation of the Code**
+
+This Python function, `apartment_hunting`, helps find the best apartment block to live in based on certain required amenities like
+a gym, school, or store. It does so by determining the block where the maximum walking distance to any required amenity is minimized.
+
+## **Code Walkthrough**
+
+### **Step 1: Understanding the Input**
+
+The function takes in:
+1. `blocks`: A list of dictionaries where each dictionary represents an apartment block. The keys in each dictionary are amenities
+(e.g., `"gym"`, `"school"`, `"store"`), and their values are `True` if the amenity is present and `False` otherwise.
+2. `reqs`: A list of required amenities that the person wants near their apartment.
+
+#### **Example Input**
+```
+blocks = [
+    {"gym": False, "school": True, "store": False},
+    {"gym": True, "school": False, "store": False},
+    {"gym": True, "school": True, "store": False},
+    {"gym": False, "school": True, "store": False},
+    {"gym": False, "school": True, "store": True},
+]
+
+reqs = ["gym", "school", "store"]
+```
+
+---
+### **Step 2: Initializing Maximum Distance Array**
+```
+max_distances_at_blocks = [float("-inf") for block in blocks]
+```
+- This array keeps track of the worst-case (maximum) distance for each block.
+- It is initially set to negative infinity (`-inf`) to ensure any real number will be larger.
+
+---
+### **Step 3: Iterating Over Each Block**
+
+The outer `for` loop iterates over each block `i`:
+```
+for i in range(len(blocks)):
+```
+For each block, we check every required amenity:
+
+---
+### **Step 4: Finding the Closest Requirement**
+```
+for req in reqs:
+    closest_req_distance = float("inf")  # Start with infinity
+```
+- We initialize `closest_req_distance` as positive infinity (`inf`) because we want to find the minimum distance to an amenity.
+
+Next, we iterate over all blocks `j` to find the closest one that has the required amenity:
+```
+for j in range(len(blocks)):
+    if blocks[j][req]:  # If this block has the required amenity
+        closest_req_distance = min(
+            closest_req_distance, distance_between(i, j)
+        )
+```
+- `blocks[j][req]` checks if block `j` has the required amenity (`True`).
+- If it does, we compute the walking distance `distance_between(i, j)` using:
+```
+def distance_between(a, b):
+    return abs(a - b)  # Manhattan distance between blocks
+```
+- We then update `closest_req_distance` to store the minimum distance encountered so far.
+
+---
+### **Step 5: Updating Maximum Distance**
+```
+max_distances_at_blocks[i] = max(
+    max_distances_at_blocks[i], closest_req_distance
+)
+```
+- For block `i`, we update `max_distances_at_blocks[i]` to store the **worst-case** distance for any required amenity.
+
+---
+### **Step 6: Finding the Optimal Block**
+
+After calculating the maximum distances for all blocks, we call:
+```
+return get_idx_at_min_value(max_distances_at_blocks)
+```
+This function finds the index of the block with the **smallest** maximum distance:
+```
+def get_idx_at_min_value(array):
+    idx_at_min_value = 0
+    min_value = float("inf")
+
+    for i in range(len(array)):
+        if array[i] < min_value:
+            min_value = array[i]
+            idx_at_min_value = i
+
+    return idx_at_min_value
+```
+- It iterates through the `max_distances_at_blocks` array to find the block with the smallest worst-case distance.
+
+---
+
+## **Example Walkthrough**
+
+### **Given Blocks and Requirements**
+```
+blocks = [
+    {"gym": False, "school": True, "store": False},  # Block 0
+    {"gym": True, "school": False, "store": False},  # Block 1
+    {"gym": True, "school": True, "store": False},   # Block 2
+    {"gym": False, "school": True, "store": False},  # Block 3
+    {"gym": False, "school": True, "store": True},   # Block 4
+]
+
+reqs = ["gym", "school", "store"]
+```
+
+### **Step-by-Step Calculation**
+
+| Block  | Distance to Gym | Distance to School | Distance to Store | Max Distance   |
+|--------|-----------------|--------------------|-------------------|----------------|
+| 0      | 1 (Block 1)     | 0 (Itself)         | 4 (Block 4)       | **4**          |
+| 1      | 0 (Itself)      | 1 (Block 0 or 2)   | 3 (Block 4)       | **3**          |
+| 2      | 0 (Itself)      | 0 (Itself)         | 2 (Block 4)       | **2**          |
+| 3      | 1 (Block 2)     | 0 (Itself)         | 1 (Block 4)       | **1**          |
+| 4      | 2 (Block 2)     | 0 (Itself)         | 0 (Itself)        | **2**          |
+
+### **Final Result**
+
+The block with the smallest maximum distance is **Block 3**, so the function returns `3`.
+
+---
+
+For large neighborhoods, this solution can be slow. Optimized solutions use **prefix sums or two-pass scanning** to reduce 
+complexity to O(B * R).
+
+## **Final Thoughts**
+The algorithm finds the most optimal apartment block by:
+1. **Checking the distance** to every required amenity for each block.
+2. **Tracking the worst-case distance** (max distance) for each block.
+3. **Selecting the block with the smallest worst-case distance.**
+
+This ensures that **the worst walk to any required place is as short as possible**, making it the best choice for living. 
+
+"""
