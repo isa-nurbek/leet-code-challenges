@@ -41,7 +41,7 @@ reqs = ["gym", "school", "store"]
 
 ## Optimal Time & Space Complexity:
 ```
-O(b * r) time | O(b * r) space - where `b` is the number of blocks and `r` is the number of requirements.
+O(b * r) time | O(b) space - where `b` is the number of blocks and `r` is the number of requirements.
 ```
 
 """
