@@ -129,3 +129,38 @@ reqs_2 = ["gym", "office", "school", "store"]
 
 print(apartment_hunting(blocks, reqs))  # Output: 3
 print(apartment_hunting(blocks_2, reqs_2))  # Output: 2
+
+# Big O Analysis:
+
+"""
+## Time and Space Complexity Analysis:
+
+### Time Complexity:
+
+1. **Outer Loop**: Iterates over each block (`for i in range(len(blocks))`). This runs `B` times, where `B` is the number of blocks.
+2. **Middle Loop**: For each block, it iterates over each requirement (`for req in reqs`). This runs `R` times, where `R` is the
+number of requirements.
+3. **Inner Loop**: For each requirement, it checks every block again (`for j in range(len(blocks))`) to find the closest block
+that satisfies the requirement. This runs `B` times.
+
+Thus, the total time complexity is:
+- **O(B * R * B) = O(B² * R)**.
+
+### Space Complexity:
+
+1. **max_distances_at_blocks**: This array stores one value per block, so it takes **O(B)** space.
+2. Other variables (`i`, `req`, `j`, `closest_req_distance`, etc.) use constant space **O(1)**.
+
+Thus, the total space complexity is:
+- **O(B)**.
+
+### Summary:
+- **Time Complexity**: **O(B² * R)**
+- **Space Complexity**: **O(B)**
+
+### Notes:
+- This is a brute-force approach. There are more optimized ways to solve this problem (e.g., precomputing closest distances
+for each requirement using dynamic programming), which can reduce the time complexity to **O(B * R)**.
+- The current approach recalculates distances redundantly, leading to the higher time complexity.
+
+"""
