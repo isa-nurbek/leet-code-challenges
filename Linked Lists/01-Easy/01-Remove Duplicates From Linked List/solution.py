@@ -136,3 +136,38 @@ result = remove_duplicates_from_linked_list(linked_list)
 
 print_linked_list(result)
 # Output: 1 -> 3 -> 4 -> 5 -> 6 -> None
+
+# =========================================================================================================================== #
+
+# Big O Analysis:
+
+"""
+## Time and Space Complexity Analysis:
+
+Let's analyze the time and space complexity of the `remove_duplicates_from_linked_list` function.
+
+### Time Complexity:
+
+The function processes each node in the linked list exactly once in the outer while loop. For each node, it may also
+traverse some subsequent nodes in the inner while loop to skip duplicates. 
+
+In the worst case (when all nodes are unique), the inner loop doesn't do any work (just one comparison per node),
+resulting in O(n) time. 
+
+In the case where there are many duplicates, each node is still only processed once by either the outer or inner loop. 
+For example, if all nodes are the same value, the inner loop will traverse all nodes once, and the outer loop will only run once.
+
+Thus, the time complexity is **O(n)**, where n is the number of nodes in the linked list.
+
+### Space Complexity:
+
+The function uses a constant amount of additional space (only a few pointers like `current_node` and `next_distinct_node` are used).
+It modifies the linked list in-place without using any additional data structures that grow with input size.
+
+Thus, the space complexity is **O(1)** (constant space).
+
+### Summary:
+- **Time Complexity:** O(n)
+- **Space Complexity:** O(1)
+
+"""
