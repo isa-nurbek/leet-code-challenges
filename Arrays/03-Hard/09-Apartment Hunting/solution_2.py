@@ -186,3 +186,255 @@ Where:
 - `B` = number of blocks (`len(blocks)`).
 
 """
+
+# =========================================================================================================================== #
+
+# Detailed Code Explanation:
+
+"""
+Let's walk through the `apartment_hunting` function step by step. The goal of this function is to find the **best block** to
+live in such that the **maximum distance** to any required building (like a gym, school, or store) is **minimized**.
+
+### 📌 Problem Definition
+
+Given:
+- `blocks`: A list of dictionaries where each dictionary represents a block and keys represent building types (e.g., "gym",
+"school") with boolean values (`True` = has the facility, `False` = doesn't).
+- `reqs`: A list of required buildings.
+
+We want to choose the **block index** such that the **furthest** you would have to walk to reach any required building is
+as short as possible.
+
+---
+
+### 🔍 Step-by-Step Explanation
+
+#### Step 1: Initialize `min_distances` Dictionary
+```
+min_distances = {req: [float("inf")] * num_blocks for req in reqs}
+```
+- We create a dictionary where each key is a requirement (e.g., "gym") and the value is a list of size `num_blocks`.
+- Each element of the list will eventually store the **minimum distance** from that block to the closest block that satisfies
+the requirement.
+
+Initially, we set all distances to infinity because we haven't done any calculations yet.
+
+---
+
+### ➡️ Forward Pass (Left to Right)
+
+```
+for req in reqs:
+    closest_req = float("inf")
+    for i in range(num_blocks):
+        if blocks[i][req]:
+            closest_req = i
+        min_distances[req][i] = abs(i - closest_req) if closest_req != float("inf") else float("inf")
+```
+
+For each requirement:
+- Walk through the blocks from **left to right**.
+- Keep track of the last block index `closest_req` that satisfied the requirement.
+- At each step, calculate how far the current block is from the nearest **seen-so-far** satisfying block.
+
+This gives us **minimum distances to the requirement when looking from the left side**.
+
+---
+
+### ⬅️ Backward Pass (Right to Left)
+
+```
+for req in reqs:
+    closest_req = float("inf")
+    for i in range(num_blocks - 1, -1, -1):
+        if blocks[i][req]:
+            closest_req = i
+        min_distances[req][i] = min(min_distances[req][i], abs(i - closest_req) if closest_req != float("inf") else float("inf"))
+```
+
+This does the same thing, but in **reverse**:
+- Walking from right to left.
+- Checks whether there's a closer requirement behind (to the right), and takes the **minimum** between both directions.
+
+After this step, `min_distances[req][i]` contains the **true shortest distance** from block `i` to the closest block that
+satisfies the requirement `req`.
+
+---
+
+### 🔢 Find Max Distance Per Block
+
+```
+max_distances_at_blocks = [max(min_distances[req][i] for req in reqs) for i in range(num_blocks)]
+```
+
+Now, for each block `i`, we:
+- Find the **maximum** distance among all requirements from that block.
+- Why max? Because we want to minimize the **worst-case distance** to any requirement.
+
+This gives us a list of "worst-case" distances from each block.
+
+---
+
+### ✅ Find Optimal Block
+
+```
+return max_distances_at_blocks.index(min(max_distances_at_blocks))
+```
+
+Finally:
+- We find the **block with the smallest worst-case distance**.
+- Return its index.
+
+---
+
+### 📦 Example Breakdown
+
+```
+blocks = [
+    {"gym": False, "school": True, "store": False},
+    {"gym": True, "school": False, "store": False},
+    {"gym": True, "school": True, "store": False},
+    {"gym": False, "school": True, "store": False},
+    {"gym": False, "school": True, "store": True},
+]
+
+reqs = ["gym", "school", "store"]
+```
+
+The result is `3`, because from block 3:
+- Closest gym is at block 2 (distance 1)
+- School is at block 3 (distance 0)
+- Store is at block 4 (distance 1)
+
+Max of those = 1 → Best worst-case!
+
+---
+
+### 🔄 Second Test Case
+
+```
+blocks_2 = [
+    {"gym": False, "office": True, "school": True, "store": False},
+    {"gym": True, "office": False, "school": False, "store": False},
+    {"gym": True, "office": False, "school": True, "store": False},
+    {"gym": False, "office": False, "school": True, "store": False},
+    {"gym": False, "office": False, "school": True, "store": True},
+]
+
+reqs_2 = ["gym", "office", "school", "store"]
+```
+
+The result is `2`, which again is the block with the lowest max distance to all requirements.
+
+### ✅ Summary
+
+This function uses **dynamic programming + two sweeps** (forward and backward) to efficiently calculate shortest distances to required buildings from each block. Then it selects the block where the worst distance to any requirement is minimized.
+
+---
+
+## Visual Diagram of an example
+
+Let’s go through a **step-by-step visual walkthrough** for the **first test case** with this input:
+
+### 🧱 Blocks
+
+Each block has three possible facilities: **gym**, **school**, and **store**.
+
+```
+blocks = [
+    {"gym": False, "school": True,  "store": False},  # 0
+    {"gym": True,  "school": False, "store": False},  # 1
+    {"gym": True,  "school": True,  "store": False},  # 2
+    {"gym": False, "school": True,  "store": False},  # 3
+    {"gym": False, "school": True,  "store": True},   # 4
+]
+
+reqs = ["gym", "school", "store"]
+```
+
+We want to find the best block where the **maximum distance to any requirement is minimized**.
+
+---
+
+## 🔍 Step 1: Distance Tables for Each Requirement
+
+### 🔹 Forward Pass: Left ➡️ Right
+
+Let’s compute the distances to the **nearest gym** from the left:
+
+| Block | Has Gym? | Closest Gym Index | Distance |
+|-------|----------|-------------------|----------|
+| 0     | ❌       | ∞                 | ∞        |
+| 1     | ✅       | 1                 | 0        |
+| 2     | ✅       | 2                 | 0        |
+| 3     | ❌       | 2                 | 1        |
+| 4     | ❌       | 2                 | 2        |
+
+Same for **school**:
+
+| Block | Has School? | Closest School Index | Distance |
+|-------|-------------|----------------------|----------|
+| 0     | ✅          | 0                    | 0        |
+| 1     | ❌          | 0                    | 1        |
+| 2     | ✅          | 2                    | 0        |
+| 3     | ✅          | 3                    | 0        |
+| 4     | ✅          | 4                    | 0        |
+
+And for **store**:
+
+| Block | Has Store? | Closest Store Index | Distance |
+|-------|------------|---------------------|----------|
+| 0     | ❌         | ∞                   | ∞        |
+| 1     | ❌         | ∞                   | ∞        |
+| 2     | ❌         | ∞                   | ∞        |
+| 3     | ❌         | ∞                   | ∞        |
+| 4     | ✅         | 4                   | 0        |
+
+---
+
+### 🔹 Backward Pass: Right ⬅️ Left
+
+Now we scan right to left and update distances **if closer**:
+
+#### For Gym:
+| Block | Closest Gym Index (Back) | Final Distance |
+|-------|---------------------------|----------------|
+| 4     | ∞                         | 2              |
+| 3     | 2                         | 1              |
+| 2     | 2                         | 0              |
+| 1     | 1                         | 0              |
+| 0     | 1                         | 1              |
+
+#### For School (already minimum in forward pass):
+Final: `[0, 1, 0, 0, 0]`
+
+#### For Store:
+| Block | Closest Store Index (Back) | Final Distance |
+|-------|-----------------------------|----------------|
+| 4     | 4                           | 0              |
+| 3     | 4                           | 1              |
+| 2     | 4                           | 2              |
+| 1     | 4                           | 3              |
+| 0     | 4                           | 4              |
+
+---
+
+## 📊 Step 2: Maximum Distance Per Block
+
+Now we combine the distances at each block:
+
+| Block | To Gym | To School | To Store | Max Distance |
+|-------|--------|-----------|----------|--------------|
+| 0     | 1      | 0         | 4        | **4**        |
+| 1     | 0      | 1         | 3        | **3**        |
+| 2     | 0      | 0         | 2        | **2**        |
+| 3     | 1      | 0         | 1        | **1** ✅     |
+| 4     | 2      | 0         | 0        | **2**        |
+
+✅ **Block 3 is optimal**, with the smallest max distance of 1.
+
+---
+
+## ✅ Final Answer: `3`
+
+"""
