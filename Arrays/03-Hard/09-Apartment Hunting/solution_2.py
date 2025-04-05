@@ -120,3 +120,69 @@ reqs_2 = ["gym", "office", "school", "store"]
 
 print(apartment_hunting(blocks, reqs))  # Output: 3
 print(apartment_hunting(blocks_2, reqs_2))  # Output: 2
+
+# =========================================================================================================================== #
+
+# Big O Analysis:
+
+"""
+## Time and Space Complexity Analysis:
+
+### **Time Complexity Analysis**
+
+1. **Initialization of `min_distances`:**
+   - We initialize a dictionary `min_distances` where each key is a requirement (`req`) and the value is a list of size
+   `num_blocks` (initialized to `inf`).
+   - This takes **O(R × B)** time, where:
+     - `R` = number of requirements (`len(reqs)`).
+     - `B` = number of blocks (`num_blocks`).
+
+2. **First Pass (Left to Right):**
+   - For each requirement (`req`), we iterate over all blocks (`B` times).
+   - For each block, we perform **O(1)** operations (checking if the requirement is present and updating `min_distances`).
+   - This pass takes **O(R × B)** time.
+
+3. **Second Pass (Right to Left):**
+   - Similar to the first pass, we iterate over each requirement and each block in reverse.
+   - Again, this takes **O(R × B)** time.
+
+4. **Compute `max_distances_at_blocks`:**
+   - For each block (`B` iterations), we compute the maximum distance across all requirements (`R` operations per block).
+   - This takes **O(B × R)** time.
+
+5. **Finding the Minimum Maximum Distance:**
+   - We find the index of the minimum value in `max_distances_at_blocks` (which is **O(B)** time).
+
+**Total Time Complexity**:
+- The dominant operations are the two passes and the computation of `max_distances_at_blocks`, each taking **O(R × B)** time.
+- Thus, the total time complexity is:
+  
+  O(R * B) + O(R * B) + O(R * B) + O(B) = O(R * B)
+  
+
+### **Space Complexity Analysis**
+
+1. **`min_distances` Dictionary:**
+   - Stores `R` keys, each mapping to a list of size `B`.
+   - This takes **O(R × B)** space.
+
+2. **`max_distances_at_blocks` List:**
+   - A list of size `B` (stores the maximum distance for each block).
+   - This takes **O(B)** space.
+
+3. **Other Variables:**
+   - `closest_req`, loop counters, etc., use **O(1)** space.
+
+**Total Space Complexity**:
+- The dominant term is the `min_distances` dictionary, which takes **O(R × B)** space.
+- Thus, the total space complexity is: O(R * B)
+
+### **Final Answer**
+- **Time Complexity:** **O(R × B)**
+- **Space Complexity:** **O(R × B)**
+
+Where:
+- `R` = number of requirements (`len(reqs)`).
+- `B` = number of blocks (`len(blocks)`).
+
+"""
