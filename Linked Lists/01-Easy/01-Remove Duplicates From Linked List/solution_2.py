@@ -84,7 +84,7 @@ def build_linked_list(data):
 
 
 # Function to remove duplicates
-# O(n) time | O(1) space
+# O(n) time | O(n) space
 def remove_duplicates_unsorted(linked_list):
     # Initialize a set to keep track of seen values
     seen = set()
@@ -156,3 +156,36 @@ deduped_unsorted_list = remove_duplicates_unsorted(unsorted_linked_list)
 # Print the result
 print_linked_list(deduped_unsorted_list)
 # Output: 3 -> 1 -> 4 -> 5 -> 2 -> None
+
+# =========================================================================================================================== #
+
+# Big O Analysis:
+
+"""
+## Time and Space Complexity Analysis:
+
+Let's analyze the time and space complexity of the `remove_duplicates_unsorted` function for an unsorted linked list.
+
+### Time Complexity:
+- The function iterates through each node of the linked list exactly once. If the linked list has `n` nodes,
+this is an `O(n)` operation.
+- For each node, it checks if the value exists in a set (`seen`). Set operations (`in` check and `add`) are
+average-case `O(1)` in Python (due to hashing).
+
+- Therefore, the total time complexity is **`O(n)`** (linear time).
+
+### Space Complexity:
+- The function uses a set (`seen`) to keep track of unique values encountered.
+- In the worst case, if all values in the linked list are unique, the set will store all `n` values.
+
+- Thus, the space complexity is **`O(n)`** (linear space).
+
+### Summary:
+- **Time Complexity:** `O(n)`
+- **Space Complexity:** `O(n)`
+
+This is optimal for an unsorted linked list since you need to track seen values to detect duplicates efficiently. If you were
+allowed to sort the list first, you could reduce the space complexity to `O(1)` (using an in-place algorithm), but that would
+require modifying the original list's order.
+
+"""
