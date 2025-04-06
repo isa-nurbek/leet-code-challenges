@@ -3,17 +3,16 @@
 """
                                             # Remove Duplicates From Linked List
 
-You're given the head of a Singly Linked List whose nodes are in sorted/unsorted order with respect to their values. Write a
-function that returns a modified version of the Linked List that doesn't contain any nodes with duplicate values. The Linked List
-should be modified in place (i.e., you shouldn't create a brand new list), and the modified Linked List should still have its
-nodes sorted/unsorted with respect to their values.
+You're given the head of a Singly Linked List whose nodes are in `sorted or unsorted order` with respect to their values. Write
+a function that returns a modified version of the linked list where `all nodes with duplicate values are removed`, leaving only
+distinct values. Modify the list in place (do not create a new list). The relative order of the remaining nodes should preserve
+their original order (whether sorted or unsorted).
 
 Each `LinkedList` node has an integer `value` as well as a `next` node pointing to the next node in the list or to `None` / `null`
 if it's the tail of the list.
 
 
-
-## Sample Input Sorted Linked List:
+## Sample Input With Sorted Linked List:
 ```
 sorted_linked_list_dict = {
     "head": "1",
@@ -34,7 +33,7 @@ sorted_linked_list_dict = {
 The List Looks Like: [1] -> [1] -> [3] -> [4] -> [4] -> [4] -> [5] -> [6] -> [6] -> None // the head node with value 1
 ```
 
-## Sample Output Sorted Linked List:
+## Sample Output With Sorted Linked List:
 ```
 1 -> 3 -> 4 -> 5 -> 6 -> None // the head node with value 1
 ```
