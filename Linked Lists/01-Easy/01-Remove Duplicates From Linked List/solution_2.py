@@ -83,7 +83,7 @@ def build_linked_list(data):
     return nodes[data["head"]]
 
 
-# Function to remove duplicates
+# Function to remove duplicates from unsorted list
 # O(n) time | O(n) space
 def remove_duplicates_unsorted(linked_list):
     # Initialize a set to keep track of seen values
@@ -187,5 +187,157 @@ average-case `O(1)` in Python (due to hashing).
 This is optimal for an unsorted linked list since you need to track seen values to detect duplicates efficiently. If you were
 allowed to sort the list first, you could reduce the space complexity to `O(1)` (using an in-place algorithm), but that would
 require modifying the original list's order.
+
+"""
+
+# =========================================================================================================================== #
+
+# Detailed Code Explanation:
+
+"""
+Let's go step-by-step through your code to understand exactly what's happening and how everything works together.
+
+### 📦 PART 1: The `LinkedList` Class
+
+```
+class LinkedList:
+    def __init__(self, value):
+        self.value = value
+        self.next = None
+```
+
+- This is a basic **node class** for a **singly linked list**.
+- Each node stores a `value` (like `3`, `1`, `5`, etc.) and a reference to the `next` node.
+- If `next` is `None`, it means it's the **last node** in the list.
+
+---
+
+### 🏗️ PART 2: Building a Linked List from a Dictionary
+
+```
+def build_linked_list(data):
+    if not data:
+        return None
+    
+    # Create all nodes first
+    nodes = {}
+    for node_data in data["nodes"]:
+        node = LinkedList(node_data["value"])
+        nodes[node_data["id"]] = node
+```
+
+This function takes a dictionary that describes a linked list and turns it into actual `LinkedList` objects.
+
+- `data["nodes"]` is a list of all nodes, each with:
+  - `id` (a name like `"a"` or `"f"`),
+  - `value` (like `3`, `1`, etc.),
+  - `next` (the `id` of the next node or `None` if it's the end).
+
+- It first creates all the node instances and stores them in a dictionary called `nodes` where keys are node
+IDs (`"a"`, `"b"`, etc.) and values are `LinkedList` objects.
+
+Next part:
+
+```
+# Connect the nodes
+for node_data in data["nodes"]:
+    if node_data["next"] is not None:
+        nodes[node_data["id"]].next = nodes[node_data["next"]]
+
+# Return the head node
+return nodes[data["head"]]
+```
+
+- This connects each node's `.next` property to the actual node instance.
+- Finally, it returns the **head node** (the starting point), using the ID stored in `data["head"]`.
+
+---
+
+### 🧹 PART 3: Removing Duplicates from an Unsorted Linked List
+
+```
+def remove_duplicates_unsorted(linked_list):
+    seen = set()
+    current = linked_list
+    prev = None
+
+    while current:
+        if current.value in seen:
+            prev.next = current.next  # skip the duplicate
+        else:
+            seen.add(current.value)
+            prev = current
+        current = current.next
+    return linked_list
+```
+
+This function removes duplicate **values** from an **unsorted linked list**.
+
+#### Here's how it works:
+- `seen` is a set that keeps track of values we've already seen.
+- `current` is the node we're currently looking at.
+- `prev` is the previous node (needed to rewire `prev.next` if we remove a duplicate).
+
+### Step-by-step:
+1. Loop through each node.
+2. If `current.value` is in `seen`, it's a duplicate → skip it by setting `prev.next = current.next`.
+3. If it's not in `seen`, add it and move `prev` to `current`.
+4. Always move `current` to the next node.
+
+This approach keeps the **first occurrence** of each value and removes later ones.
+
+---
+
+### 🔎 PART 4: Printing the List
+
+```
+def print_linked_list(linked_list):
+    current = linked_list
+    while current:
+        print(current.value, end=" -> ")
+        current = current.next
+    print("None")
+```
+
+- This walks through the linked list and prints values like:  
+  `3 -> 1 -> 4 -> 5 -> 2 -> None`
+
+---
+
+### 🧪 PART 5: Test Case
+
+```
+unsorted_linked_list_dict = {
+    "head": "a",
+    "nodes": [
+        {"id": "a", "next": "b", "value": 3},
+        {"id": "b", "next": "c", "value": 1},
+        {"id": "c", "next": "d", "value": 4},
+        {"id": "d", "next": "e", "value": 1},
+        {"id": "e", "next": "f", "value": 5},
+        {"id": "f", "next": "g", "value": 3},
+        {"id": "g", "next": None, "value": 2},
+    ],
+}
+```
+
+Initial linked list:  
+`3 -> 1 -> 4 -> 1 -> 5 -> 3 -> 2 -> None`
+
+After removing duplicates:  
+`3 -> 1 -> 4 -> 5 -> 2 -> None`
+
+✅ As expected! It removed the second `1` and second `3`.
+
+---
+
+### Summary:
+
+| Part                           | Purpose                                       |
+|--------------------------------|-----------------------------------------------|
+| `LinkedList`                   | Defines a node structure                      |
+| `build_linked_list()`          | Turns a dictionary into an actual linked list |
+| `remove_duplicates_unsorted()` | Removes duplicate values                      |
+| `print_linked_list()`          | Prints the list for human verification        |
 
 """
