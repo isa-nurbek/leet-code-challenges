@@ -86,7 +86,7 @@ def build_linked_list(data):
     return nodes[data["head"]]
 
 
-# Function to remove duplicates
+# Function to remove duplicates from sorted list
 # O(n) time | O(1) space
 def remove_duplicates_from_linked_list(linked_list):
     """Removes consecutive duplicate values from a sorted linked list in-place.
