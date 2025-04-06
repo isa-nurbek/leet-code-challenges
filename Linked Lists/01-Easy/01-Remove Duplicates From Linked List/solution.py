@@ -10,12 +10,28 @@ Each `LinkedList` node has an integer `value` as well as a `next` node pointing 
 
 ## Sample Input:
 ```
-linked_list = 1 -> 1 -> 3 -> 4 -> 4 -> 4 -> 5 -> 6 -> 6 // the head node with value 1
+linked_list = {
+    "head": "1",
+    "nodes": [
+        {"id": "1", "next": "1-2", "value": 1},
+        {"id": "1-2", "next": "1-3", "value": 1},
+        {"id": "1-3", "next": "2", "value": 1},
+        {"id": "2", "next": "3", "value": 3},
+        {"id": "3", "next": "3-2", "value": 4},
+        {"id": "3-2", "next": "3-3", "value": 4},
+        {"id": "3-3", "next": "4", "value": 4},
+        {"id": "4", "next": "5", "value": 5},
+        {"id": "5", "next": "5-2", "value": 6},
+        {"id": "5-2", "next": None, "value": 6},
+    ],
+}
+
+The List Looks Like: [1] -> [1] -> [3] -> [4] -> [4] -> [4] -> [5] -> [6] -> [6] -> None // the head node with value 1
 ```
 
 ## Sample Output:
 ```
-1 -> 3 -> 4 -> 5 -> 6 // the head node with value 1
+1 -> 3 -> 4 -> 5 -> 6 -> None // the head node with value 1
 ```
 
 ## Optimal Time & Space Complexity:
