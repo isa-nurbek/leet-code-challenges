@@ -1,6 +1,6 @@
 # String Challenges
 
-Welcome to the **String Challenges** repository! This project is dedicated to solving a variety of string manipulation problems to sharpen programming and problem-solving skills.
+Welcome to the **String Challenges** unit! This unit is dedicated to solving a variety of string manipulation problems to sharpen programming and problem-solving skills.
 
 ---
 
