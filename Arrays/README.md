@@ -1,6 +1,6 @@
 # Array Code Challenges
 
-Welcome to the **Array Code Challenges** repository! This project is dedicated to solving various programming challenges and exercises related to arrays. Arrays are fundamental data structures used in nearly every programming language, and mastering them is key to becoming a proficient programmer.
+Welcome to the **Array Code Challenges** unit! This unit is dedicated to solving various programming challenges and exercises related to arrays. Arrays are fundamental data structures used in nearly every programming language, and mastering them is key to becoming a proficient programmer.
 
 ---
 

@@ -268,10 +268,6 @@ Each solution file includes:
 - 📚 **Comprehensive Solutions**: Detailed solutions to problems with comments for better understanding.
 - 📊 **Complexity Analysis**: Analysis of the time and space complexity for each solution.
 
-## 🤝 Contributions
-
-Feel free to fork this repository, submit pull requests, or open issues to suggest improvements. Collaboration is always welcome! 😊
-
 ## 🚀 Goals
 
 1. Solve at least 300 problems from LeetCode and AlgoExpert combined.
