@@ -87,7 +87,7 @@ This is due to the maximum depth of the recursion stack.
 (e.g., `get_nth_fib(n)` → `get_nth_fib(n-1)` → ... → `get_nth_fib(1)`).
 - No additional space is used beyond the call stack, so the space complexity is linear with respect to `n`.
 
-### Why Not O(2^n) Space?
+### Why Not O(2ⁿ) Space?
 
 You might wonder why the space complexity isn't also exponential. This is because the recursion stack only keeps track
 of one path from the root to a leaf in the call tree at any given time. Once a branch is fully resolved, its stack frames
@@ -120,6 +120,8 @@ This recursive approach is highly inefficient. You can improve it using:
 3. **Matrix Exponentiation or Binet's Formula**: O(log n) time (advanced methods).
 
 """
+
+# =========================================================================================================================== #
 
 # Detailed Code Explanation:
 
