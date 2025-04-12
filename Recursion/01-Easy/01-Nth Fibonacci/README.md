@@ -30,8 +30,6 @@ n = 6
 
 ## Hints
 
-# Fibonacci Sequence Hints
-
 <details>
 <summary>Hint 1</summary>
 
