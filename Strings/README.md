@@ -8,10 +8,10 @@ Welcome to the **String Challenges** unit! This unit is dedicated to solving a v
 
 String manipulation is a core programming skill applicable in diverse areas such as text processing, data validation, and algorithm design. This repository includes problems of varying difficulty, including but not limited to:
 
-- Reversing strings
-- Finding substrings
-- Checking for palindromes
-- Regular expression problems
+- Reversing strings.
+- Finding substrings.
+- Checking for palindromes.
+- Regular expression problems.
 - Encoding and decoding challenges and etc.
 
 ---
@@ -28,5 +28,5 @@ The primary objectives of this repository are:
 
 ## Technologies Used
 
-- **Programming Language**: Python
+- **Programming Language**: Python 3.x
 
