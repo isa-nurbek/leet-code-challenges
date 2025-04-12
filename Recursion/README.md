@@ -23,7 +23,7 @@ This repository will cover a wide variety of recursion-related topics, including
 - Backtracking algorithms.
 - Divide and conquer strategies (e.g., Merge Sort, Quick Sort).
 - Recursion trees and time complexity analysis.
-- Memoization and dynamic programming basics using recursion.
+- Memoization and dynamic programming basics using recursion and etc.
 
 ---
 

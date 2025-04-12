@@ -29,4 +29,4 @@ This repository will cover a wide range of array-related topics, including:
 
 ## Technologies Used
 
-- **Programming Language**: Python
+- **Programming Language**: Python 3.x
