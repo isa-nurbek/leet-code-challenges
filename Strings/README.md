@@ -23,6 +23,7 @@ The primary objectives of this repository are:
 - Improve proficiency in string-related programming tasks.
 - Understand algorithms commonly used in string operations.
 - Practice writing clean, efficient, and testable code.
+- Prepare for coding interviews and algorithm challenges involving strings.
 
 ---
 
