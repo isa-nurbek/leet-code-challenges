@@ -120,3 +120,118 @@ This recursive approach is highly inefficient. You can improve it using:
 3. **Matrix Exponentiation or Binet's Formula**: O(log n) time (advanced methods).
 
 """
+
+# Detailed Code Explanation:
+
+"""
+Let’s break down the function `get_nth_fib(n)` step by step and understand how it works, especially for a few test
+cases like `get_nth_fib(6)` and `get_nth_fib(8)`.
+
+### 🔢 **What is the Fibonacci Sequence?**
+
+The **Fibonacci sequence** is a series of numbers where:
+
+```
+F(1) = 0
+F(2) = 1
+F(3) = 1
+F(4) = 2
+F(5) = 3
+F(6) = 5
+F(7) = 8
+F(8) = 13
+F(9) = 21
+...
+```
+
+Each number is the **sum of the two preceding ones**:
+```
+F(n) = F(n - 1) + F(n - 2)
+```
+
+### 🧠 **Code Explanation:**
+
+```
+def get_nth_fib(n):
+    if n == 2:
+        return 1
+    elif n == 1:
+        return 0
+    else:
+        return get_nth_fib(n - 1) + get_nth_fib(n - 2)
+```
+
+#### 🔍 How it works:
+
+- This is a **recursive function**, meaning it calls itself to solve smaller parts of the problem.
+- It has **base cases** to stop recursion:
+  - `if n == 2: return 1` → the second Fibonacci number is 1.
+  - `elif n == 1: return 0` → the first Fibonacci number is 0.
+- Otherwise, it uses:
+  - `get_nth_fib(n - 1) + get_nth_fib(n - 2)`
+  - This adds the previous two Fibonacci numbers, just like the mathematical formula.
+
+---
+
+### 🧪 Test Case: `get_nth_fib(6)`
+
+To find the 6th Fibonacci number:
+
+```
+get_nth_fib(6)
+= get_nth_fib(5) + get_nth_fib(4)
+= (get_nth_fib(4) + get_nth_fib(3)) + (get_nth_fib(3) + get_nth_fib(2))
+= ...
+```
+
+This continues breaking down recursively until it hits the base cases (`n == 1` or `n == 2`).
+
+Here’s what actually gets calculated:
+
+```
+get_nth_fib(6)
+= get_nth_fib(5) + get_nth_fib(4)
+= (get_nth_fib(4) + get_nth_fib(3)) + (get_nth_fib(3) + get_nth_fib(2))
+= ((get_nth_fib(3) + get_nth_fib(2)) + (get_nth_fib(2) + get_nth_fib(1))) + ((get_nth_fib(2) + get_nth_fib(1)) + 1)
+= ((1 + 1) + (1 + 0)) + ((1 + 0) + 1)
+= (2 + 1) + (1 + 1)
+= 3 + 2
+= 5
+```
+
+✅ So, `get_nth_fib(6)` returns `5`.
+
+---
+
+### 🧪 Test Case: `get_nth_fib(8)`
+
+```
+F(1) = 0  
+F(2) = 1  
+F(3) = 1  
+F(4) = 2  
+F(5) = 3  
+F(6) = 5  
+F(7) = 8  
+F(8) = 13
+```
+
+So the function will compute all the way down recursively until it reaches the base cases and adds them up.
+
+✅ So, `get_nth_fib(8)` returns `13`.
+
+---
+
+### ⚠️ **Performance Warning**
+
+This recursive solution is **inefficient for large `n`** because it **repeats the same calculations many times**.
+This is called **exponential time complexity**:  
+Time Complexity: **O(2ⁿ)**  
+Space Complexity: **O(n)** (due to call stack)
+
+---
+
+✅ More Efficient Version (Using Memoization).
+Memoization version stores already computed results to avoid recomputation.
+
+"""
