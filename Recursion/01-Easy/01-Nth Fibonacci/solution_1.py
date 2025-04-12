@@ -46,11 +46,14 @@ O(n) time | O(1) space - where `n` is the input number.
 
 # O(2ⁿ) time | O(n) space
 def get_nth_fib(n):
+    # Base case: when n is 2, return 1 (2nd Fibonacci number is 1)
     if n == 2:
         return 1
+    # Base case: when n is 1, return 0 (1st Fibonacci number is 0)
     elif n == 1:
         return 0
     else:
+        # Recursive case: Fibonacci number is sum of previous two Fibonacci numbers
         return get_nth_fib(n - 1) + get_nth_fib(n - 2)
 
 
