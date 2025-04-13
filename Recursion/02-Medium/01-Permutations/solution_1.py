@@ -131,6 +131,9 @@ This is optimal for generating all permutations, as the output itself is of size
 
 """
 
+# =========================================================================================================================== #
+
+# Detailed Code Explanation:
 
 """
 Let's walk through your `get_permutations` function step by step and break it down in detail.
