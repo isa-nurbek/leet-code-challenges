@@ -55,8 +55,8 @@ def permutations_helper(array, current_permutation, permutations):
         current_permutation: The permutation being built in the current recursion path
         permutations: The list that accumulates all complete permutations
     """
-    # Base case: if array is empty and current_permutation has elements
-    if not len(array) and len(current_permutation):
+    # Base case: if array is empty
+    if not len(array):
         # Add the completed permutation to our results
         permutations.append(current_permutation)
     else:
@@ -81,7 +81,7 @@ print(get_permutations([1]))
 # Output: [[1]]
 
 print(get_permutations([]))
-# Output: []
+# Output: [[]]
 
 # =========================================================================================================================== #
 
