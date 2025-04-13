@@ -76,3 +76,40 @@ def get_nth_fib(n):
 print(get_nth_fib(2))  # Output: 1
 print(get_nth_fib(6))  # Output: 5
 print(get_nth_fib(8))  # Output: 13
+
+# =========================================================================================================================== #
+
+# Big O Analysis:
+
+"""
+
+## Time and Space Complexity Analysis
+
+### Time Complexity:
+
+1. **Base Case (n == 1):** 
+   - The function returns 0 immediately. This is an O(1) operation.
+2. **Iterative Calculation (n > 1):**
+   - The function initializes `a` and `b` to 0 and 1, respectively.
+   - Then, it runs a loop from 3 to n (inclusive), performing constant-time operations (addition and assignment) in each iteration.
+   - The loop runs for `n - 2` iterations (since it starts at 3 and goes up to n).
+   
+   - Thus, the time complexity is O(n).
+
+### Space Complexity:
+
+1. The function uses a constant amount of additional space:
+   - Variables `a` and `b` to store the last two Fibonacci numbers.
+   - No additional data structures or recursive calls are used.
+   
+   - Thus, the space complexity is O(1) (constant space).
+
+### Summary:
+- **Time Complexity:** O(n) (linear time).
+- **Space Complexity:** O(1) (constant space).
+
+### Note:
+If the input `n` is 1 or 2, the function returns immediately (O(1) time), but in the worst case (n > 2),
+the time complexity is O(n). The space complexity is always O(1).
+
+"""
