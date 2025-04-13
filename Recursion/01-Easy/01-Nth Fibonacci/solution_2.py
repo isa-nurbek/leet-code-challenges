@@ -103,3 +103,113 @@ Time Complexity: **O(n)**
 Space Complexity: **O(n)**
 
 """
+
+# =========================================================================================================================== #
+
+# Detailed Code Explanation:
+
+"""
+Let's break this code down step by step and explain how it works.
+
+### ✅ Purpose:
+The function `get_nth_fib(n)` returns the **n-th Fibonacci number** using **recursion with memoization** (to make it efficient).
+
+---
+
+### 📌 What is the Fibonacci sequence?
+The Fibonacci sequence is:
+```
+0, 1, 1, 2, 3, 5, 8, 13, ...
+```
+It starts with:
+- `Fib(1) = 0`
+- `Fib(2) = 1`
+- From then on, each number is the sum of the previous two:
+  - `Fib(3) = 1` (0+1)
+  - `Fib(4) = 2` (1+1)
+  - `Fib(5) = 3` (1+2)
+  - `Fib(6) = 5` (2+3)
+  - and so on...
+
+---
+
+### 🧠 Function Definition:
+```
+def get_nth_fib(n, memoize=None):
+```
+- Takes two parameters:
+  - `n`: the position in the Fibonacci sequence.
+  - `memoize`: a dictionary used to remember previously computed values.
+
+---
+
+### 📦 Memoization Setup:
+```
+if memoize is None:
+    memoize = {1: 0, 2: 1}
+```
+- If no `memoize` dictionary is passed, we initialize it with:
+  - `Fib(1) = 0`
+  - `Fib(2) = 1`
+- This prevents re-computing the base cases over and over.
+
+---
+
+### 🔁 Recursive Computation:
+```
+if n not in memoize:
+    memoize[n] = get_nth_fib(n - 1, memoize) + get_nth_fib(n - 2, memoize)
+```
+- If `n` isn't already calculated:
+  - Recursively calculate `Fib(n-1)` and `Fib(n-2)`
+  - Add them together and store in `memoize[n]`
+
+---
+
+### 🔙 Return the result:
+```
+return memoize[n]
+```
+- Return the memoized value of `Fib(n)`
+
+---
+
+### 🧪 Test Cases:
+
+```
+print(get_nth_fib(2))  # Output: 1
+```
+- Already in the memo: returns `1`
+
+```
+print(get_nth_fib(6))  # Output: 5
+```
+- Calculates:
+  - Fib(6) = Fib(5) + Fib(4)
+  - Fib(5) = Fib(4) + Fib(3)
+  - ...
+  - Memoization avoids recalculating the same sub-problems.
+
+```
+print(get_nth_fib(8))  # Output: 13
+```
+- Uses previously stored values to quickly find the result.
+
+---
+
+### ⚡ Efficiency:
+
+Without memoization (just plain recursion), the function would re-calculate the same values many times, leading
+to **exponential time** O(2ⁿ).
+
+With memoization, each value is calculated only **once**, so time complexity is **O(n)**.
+
+---
+
+### ✅ Summary:
+
+- This is a **top-down recursive Fibonacci with memoization**.
+- Very efficient and readable.
+- Great for medium `n`, though for very large values, **iterative** solutions are often better for avoiding deep recursion limits.
+
+"""
