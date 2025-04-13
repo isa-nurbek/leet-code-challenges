@@ -109,3 +109,179 @@ This analysis assumes that checking `type(element) is list` and arithmetic opera
 which is reasonable in Python.
 
 """
+
+# =========================================================================================================================== #
+
+# Detailed Code Explanation:
+
+"""
+Let's go through the code step by step and understand how the `product_sum` function works.
+
+### 🔍 **Function Purpose:**
+
+The function `product_sum` **recursively sums a special array** that may contain **nested arrays (lists within lists)**. The key
+point is that the **deeper** the nesting level, the **more weight (multiplier)** that sub-array's sum contributes to the total sum.
+
+---
+
+### 📌 **Function Definition:**
+```
+def product_sum(array, multiplier=1):
+```
+- **`array`**: The input list which may include both integers and nested lists.
+- **`multiplier`**: Tracks how deep we are in the nesting. It starts at 1 for the top level and increases by 1 with each level
+of nesting.
+
+---
+
+### ⚙️ **Inside the function:**
+
+```
+sum = 0
+```
+- Initialize a local variable `sum` to keep the running total.
+
+```
+for element in array:
+```
+- Loop through every element in the input array.
+
+```
+if type(element) is list:
+    sum += product_sum(element, multiplier + 1)
+```
+- If the element is a **list**, it's a **nested structure**. So we **call `product_sum` recursively** on this sub-array.
+- We increase the `multiplier` by 1 because we're one level deeper.
+
+```
+else:
+    sum += element
+```
+- If the element is an **integer**, simply add it to the running total.
+
+```
+return sum * multiplier
+```
+- Once all elements are processed, return the `sum` multiplied by the current level's multiplier.
+
+---
+
+### 🔢 **Example 1:**
+```
+product_sum([5, 2, [7, -1], 3, [6, [-13, 8], 4]])
+```
+
+Let’s break it down step-by-step:
+
+**Level 1 (multiplier = 1):**
+- Elements: 5, 2, [7, -1], 3, [6, [-13, 8], 4]
+- Direct integers: 5 + 2 + 3 = 10
+- [7, -1] → Recurse into level 2
+- [6, [-13, 8], 4] → Recurse into level 2
+
+---
+
+**Level 2 (multiplier = 2):**
+- [7, -1] → 7 + (-1) = 6 → 6 × 2 = 12
+- [6, [-13, 8], 4] → 
+  - 6 and 4 → sum = 6 + 4 = 10
+  - [-13, 8] → Recurse into level 3
+
+---
+
+**Level 3 (multiplier = 3):**
+- [-13, 8] → -13 + 8 = -5 → -5 × 3 = -15
+
+Back to level 2:
+- sum for [6, [-13, 8], 4] = 10 + (-15) = -5 → -5 × 2 = -10
+
+---
+
+Final sum at level 1:
+- Direct elements: 10
+- From [7, -1] = 12
+- From [6, [-13, 8], 4] = -10
+
+→ Total = 10 + 12 + (-10) = **12**
+
+✅ Output: `12`
+
+---
+
+### ✅ **Other Examples:**
+
+#### Example 2:
+```
+product_sum([1, 2, 3, 4, 5])
+```
+No nested lists, so:
+1 + 2 + 3 + 4 + 5 = 15  
+→ 15 × 1 = ✅ `15`
+
+---
+
+#### Example 3:
+```
+product_sum([[1, 2], 3, [4, 5]])
+```
+
+**Level 1 (multiplier = 1):**
+- [1, 2] → Level 2 = 1 + 2 = 3 → 3 × 2 = 6
+- 3 → stays as 3
+- [4, 5] → Level 2 = 4 + 5 = 9 → 9 × 2 = 18
+
+Total: 6 + 3 + 18 = ✅ `27`
+
+---
+
+### 💡 Summary:
+
+- The function **recursively computes a weighted sum**.
+- **Deeper nested lists are multiplied** by a higher `multiplier`.
+- This is similar to a depth-weighted sum.
+
+---
+
+Let’s do a **visual breakdown** of this input:
+
+```
+product_sum([5, 2, [7, -1], 3, [6, [-13, 8], 4]])
+```
+
+We’ll show the **nesting levels** like a tree and annotate each level with its multiplier and intermediate sums.
+
+### 🌳 **Visual Tree Breakdown**
+
+```
+Level 1 (multiplier = 1)
+└── [5, 2, [7, -1], 3, [6, [-13, 8], 4]]
+     ├── 5                         → +5
+     ├── 2                         → +2
+     ├── [7, -1]         (Level 2, multiplier = 2)
+     │    ├── 7                   → +7
+     │    └── -1                  → -1
+     │    => subtotal = 6 × 2     → +12
+     ├── 3                         → +3
+     └── [6, [-13, 8], 4] (Level 2, multiplier = 2)
+          ├── 6                   → +6
+          ├── [-13, 8]   (Level 3, multiplier = 3)
+          │     ├── -13          → -13
+          │     └── 8            → +8
+          │     => subtotal = (-5) × 3 → -15
+          └── 4                   → +4
+          => subtotal = (6 + -15 + 4) = -5 × 2 → -10
+
+Final Calculation:
+→ Level 1: 5 + 2 + 3 = 10
+→ Level 2: +12 (from [7, -1]) + (-10) (from [6, [-13, 8], 4])
+→ Total = 10 + 12 - 10 = ✅ **12**
+```
+
+---
+
+### 🧠 Conceptual Analogy:
+You can think of each list as a **folder** that contains either:
+- Numbers (add them directly), or
+- Other folders (go inside, sum their contents, and multiply that sum based on how deep you are).
+
+"""
