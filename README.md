@@ -33,219 +33,28 @@ The repository is organized as follows:
             ├── Problem_Description.md
             ├── solution.py
 
+The rest Data Structures folder Grouped by Difficulty same as above
+
 ├── Arrays
-    01-Easy
-        ├── Problem Name
-            ├── Problem_Description.md
-            ├── solution.py
-    02-Medium
-        ├── Problem Name
-            ├── Problem_Description.md
-            ├── solution.py
-    03-Hard
-        ├── Problem Name
-            ├── Problem_Description.md
-            ├── solution.py
-
 ├── Dictionaries
-    01-Easy
-        ├── Problem Name
-            ├── Problem_Description.md
-            ├── solution.py
-    02-Medium
-        ├── Problem Name
-            ├── Problem_Description.md
-            ├── solution.py          
-    03-Hard
-        ├── Problem Name
-            ├── Problem_Description.md
-            ├── solution.py
-
 ├── Recursion
-    01-Easy
-        ├── Problem Name
-            ├── Problem_Description.md
-            ├── solution.py
-    02-Medium
-        ├── Problem Name
-            ├── Problem_Description.md
-            ├── solution.py          
-    03-Hard
-        ├── Problem Name
-            ├── Problem_Description.md
-            ├── solution.py
-
 ├── Linked Lists
-    01-Easy
-        ├── Problem Name
-            ├── Problem_Description.md
-            ├── solution.py
-    02-Medium
-        ├── Problem Name
-            ├── Problem_Description.md
-            ├── solution.py         
-    03-Hard
-        ├── Problem Name
-            ├── Problem_Description.md
-            ├── solution.py
-
 ├── Stacks
-    01-Easy
-        ├── Problem Name
-            ├── Problem_Description.md
-            ├── solution.py
-    02-Medium
-        ├── Problem Name
-            ├── Problem_Description.md
-            ├── solution.py          
-    03-Hard
-        ├── Problem Name
-            ├── Problem_Description.md
-            ├── solution.py
-
 ├── Graphs
-    01-Easy
-        ├── Problem Name
-            ├── Problem_Description.md
-            ├── solution.py
-    02-Medium
-        ├── Problem Name
-            ├── Problem_Description.md
-            ├── solution.py           
-    03-Hard
-        ├── Problem Name
-            ├── Problem_Description.md
-            ├── solution.py
-
 ├── Heaps
-    01-Easy
-        ├── Problem Name
-            ├── Problem_Description.md
-            ├── solution.py
-    02-Medium
-        ├── Problem Name
-            ├── Problem_Description.md
-            ├── solution.py          
-    03-Hard
-        ├── Problem Name
-            ├── Problem_Description.md
-            ├── solution.py
-
 ├── Dynamic Programming
-    01-Easy
-        ├── Problem Name
-            ├── Problem_Description.md
-            ├── solution.py
-    02-Medium
-        ├── Problem Name
-            ├── Problem_Description.md
-            ├── solution.py          
-    03-Hard
-        ├── Problem Name
-            ├── Problem_Description.md
-            ├── solution.py
-
 ├── Searching
-    01-Easy
-        ├── Problem Name
-            ├── Problem_Description.md
-            ├── solution.py
-    02-Medium
-        ├── Problem Name
-            ├── Problem_Description.md
-            ├── solution.py          
-    03-Hard
-        ├── Problem Name
-            ├── Problem_Description.md
-            ├── solution.py
-
 ├── Sorting
-    01-Easy
-        ├── Problem Name
-            ├── Problem_Description.md
-            ├── solution.py
-    02-Medium
-        ├── Problem Name
-            ├── Problem_Description.md
-            ├── solution.py         
-    03-Hard
-        ├── Problem Name
-            ├── Problem_Description.md
-            ├── solution.py
-
 ├── Binary Trees
-    01-Easy
-        ├── Problem Name
-            ├── Problem_Description.md
-            ├── solution.py
-    02-Medium
-        ├── Problem Name
-            ├── Problem_Description.md
-            ├── solution.py          
-    03-Hard
-        ├── Problem Name
-            ├── Problem_Description.md
-            ├── solution.py
-
 ├── Binary Search Trees
-    01-Easy
-        ├── Problem Name
-            ├── Problem_Description.md
-            ├── solution.py
-    02-Medium
-        ├── Problem Name
-            ├── Problem_Description.md
-            ├── solution.py           
-    03-Hard
-        ├── Problem Name
-            ├── Problem_Description.md
-            ├── solution.py
-
 ├── Greedy Algorithms
-    01-Easy
-        ├── Problem Name
-            ├── Problem_Description.md
-            ├── solution.py
-    02-Medium
-        ├── Problem Name
-            ├── Problem_Description.md
-            ├── solution.py          
-    03-Hard
-        ├── Problem Name
-            ├── Problem_Description.md
-            ├── solution.py
-
 ├── Famous Algorithms
-    01-Easy
-        ├── Problem Name
-            ├── Problem_Description.md
-            ├── solution.py
-    02-Medium
-        ├── Problem Name
-            ├── Problem_Description.md
-            ├── solution.py        
-    03-Hard
-        ├── Problem Name
-            ├── Problem_Description.md
-            ├── solution.py
-
 ├── Tries
-    01-Easy
-        ├── Problem Name
-            ├── Problem_Description.md
-            ├── solution.py
-    02-Medium
-        ├── Problem Name
-            ├── Problem_Description.md
-            ├── solution.py
-    03-Hard
-        ├── Problem Name
-            ├── Problem_Description.md
-            ├── solution.py
+
 README.md
 ```
 
-Coding problems contains Grouped by Difficulty:
+Each Data Structures folder Grouped by Difficulty:
 
 - 01-Easy
 - 01-Medium
