@@ -91,3 +91,43 @@ print(get_permutations([1]))
 
 print(get_permutations([]))
 # Output: []
+
+# =========================================================================================================================== #
+
+# Big O Analysis:
+
+"""
+
+## Time and Space Complexity Analysis
+
+### Time Complexity:
+
+The algorithm generates all permutations of the input array. For an array of length `n`, there are `n!` (n factorial) permutations.
+
+1. **Base Case**: When `i == len(array) - 1`, it copies the current array (O(n) time) and appends it to `permutations`.
+2. **Recursive Case**: For each index `i`, the algorithm swaps `array[i]` with `array[j]` for `j` from `i` to `n-1`, and 
+recursively generates permutations for `i+1`.
+
+- The recursion tree has `n!` leaves (one for each permutation).
+- Each leaf involves an O(n) operation (copying the array).
+- The total number of nodes in the recursion tree is roughly `n! + n!/1! + n!/2! + ... + n!/(n-1!)`, which is still O(n!).
+- Each recursive call does O(1) work (apart from the recursive calls and the base case).
+
+Thus, the total time complexity is **O(n! * n)**.
+
+### Space Complexity:
+
+1. **Output Space**: The `permutations` list stores `n!` permutations, each of size `n`, so this contributes O(n! * n) space.
+2. **Recursion Stack**: The recursion depth is `n` (since `i` goes from `0` to `n-1`), and each stack frame uses O(1) space
+(just storing `i`, `j`, and some pointers). Thus, the recursion stack contributes O(n) space.
+
+The dominant term is the output space, so the total space complexity is **O(n! * n)**.
+
+### Summary:
+- **Time Complexity**: O(n! * n)
+- **Space Complexity**: O(n! * n) (due to the output storage)
+
+This is optimal for generating all permutations because you can't do better than O(n!) time (since there are n! permutations)
+or O(n! * n) space (since you need to store n! permutations, each of size n).
+
+"""
