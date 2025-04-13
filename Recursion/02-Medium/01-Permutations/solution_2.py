@@ -131,3 +131,208 @@ This is optimal for generating all permutations because you can't do better than
 or O(n! * n) space (since you need to store n! permutations, each of size n).
 
 """
+
+# =========================================================================================================================== #
+
+# Detailed Code Explanation:
+
+"""
+Let's go through this Python code step by step to understand how it generates all permutations of an array.
+This is a classic backtracking algorithm.
+
+---
+
+### ✅ Goal:
+Generate **all permutations** of a list (e.g., `[1, 2, 3]`), which means all possible ways to arrange its elements.
+
+---
+
+### 🔧 Code Breakdown:
+
+#### 1. **`get_permutations(array)`**
+This is the **main function** that the user calls.
+
+```
+def get_permutations(array):
+    permutations = []
+    permutations_helper(0, array, permutations)
+    return permutations
+```
+
+- **Input**: an array (e.g., `[1, 2, 3]`)
+- **`permutations`**: a list that will store all the result permutations.
+- **It calls `permutations_helper()`**, starting from index `0`.
+
+---
+
+#### 2. **`permutations_helper(i, array, permutations)`**
+This is the **recursive backtracking function**.
+
+```
+def permutations_helper(i, array, permutations):
+    if i == len(array) - 1:
+        permutations.append(array[:])
+    else:
+        for j in range(i, len(array)):
+            swap(array, i, j)
+            permutations_helper(i + 1, array, permutations)
+            swap(array, i, j)
+```
+
+##### 📌 Let's explain each part:
+- `i`: current index (the position we are "fixing").
+- **Base case**:
+  ```
+  if i == len(array) - 1:
+      permutations.append(array[:])
+  ```
+  - If we've reached the last index, it means the array is a complete permutation. So we add a **copy** of it to the result list (`array[:]` makes a shallow copy).
+  
+- **Recursive case**:
+  ```
+  for j in range(i, len(array)):
+      swap(array, i, j)
+      permutations_helper(i + 1, array, permutations)
+      swap(array, i, j)
+  ```
+  - For each index `j` from `i` to end:
+    - Swap elements at `i` and `j` (this "fixes" one element at position `i`).
+    - Recursively call `permutations_helper(i + 1, ...)` to generate permutations of the remaining elements.
+    - **Swap back** (backtrack) to restore the original order for the next loop iteration.
+
+---
+
+#### 3. **`swap(array, i, j)`**
+A simple helper function to swap two elements in the array:
+
+```
+def swap(array, i, j):
+    array[i], array[j] = array[j], array[i]
+```
+
+---
+
+### 🔁 Example Walkthrough: `get_permutations([1, 2, 3])`
+
+Let’s look at the process:
+
+```
+Initial call: permutations_helper(0, [1, 2, 3])
+
+i = 0:
+  j = 0: swap(0,0) => [1,2,3]
+    i = 1:
+      j = 1: swap(1,1) => [1,2,3]
+        i = 2: add [1,2,3]
+      j = 2: swap(1,2) => [1,3,2]
+        i = 2: add [1,3,2]
+      backtrack
+  j = 1: swap(0,1) => [2,1,3]
+    i = 1:
+      j = 1: swap(1,1) => [2,1,3]
+        i = 2: add [2,1,3]
+      j = 2: swap(1,2) => [2,3,1]
+        i = 2: add [2,3,1]
+      backtrack
+  j = 2: swap(0,2) => [3,2,1]
+    i = 1:
+      j = 1: swap(1,1) => [3,2,1]
+        i = 2: add [3,2,1]
+      j = 2: swap(1,2) => [3,1,2]
+        i = 2: add [3,1,2]
+```
+
+So the output will be:
+```
+[[1, 2, 3],
+ [1, 3, 2],
+ [2, 1, 3],
+ [2, 3, 1],
+ [3, 2, 1],
+ [3, 1, 2]]
+```
+
+---
+
+### 🧠 Key Concepts Used:
+- **Recursion**: to explore each path of permutations.
+- **Backtracking**: after trying a swap, it "undoes" it to try another path.
+- **Swapping**: used to rearrange elements in-place (no extra space needed for subarrays).
+
+---
+
+### 📎 Edge Cases:
+```
+print(get_permutations([]))       # Output: []
+print(get_permutations([1]))      # Output: [[1]]
+```
+
+These are handled correctly because:
+- If array is empty → the recursive function doesn't run.
+- If array has 1 element → base case is triggered immediately.
+
+---
+
+Here's a **visual diagram** to help you see how the recursion tree and backtracking work for:
+
+### 🔄 `get_permutations([1, 2, 3])`
+
+We'll represent the **recursive tree** where each level is a deeper recursive call, and we use indentation to show the depth.
+Each arrow `→` means a swap happened.
+
+---
+
+```
+Start: [1, 2, 3]
+|
+|-- swap(0,0) → [1, 2, 3]
+|   |
+|   |-- swap(1,1) → [1, 2, 3]
+|   |   |
+|   |   |-- swap(2,2) → [1, 2, 3] ✅
+|   |
+|   |-- swap(1,2) → [1, 3, 2]
+|       |
+|       |-- swap(2,2) → [1, 3, 2] ✅
+|
+|-- swap(0,1) → [2, 1, 3]
+|   |
+|   |-- swap(1,1) → [2, 1, 3]
+|   |   |
+|   |   |-- swap(2,2) → [2, 1, 3] ✅
+|   |
+|   |-- swap(1,2) → [2, 3, 1]
+|       |
+|       |-- swap(2,2) → [2, 3, 1] ✅
+|
+|-- swap(0,2) → [3, 2, 1]
+    |
+    |-- swap(1,1) → [3, 2, 1]
+    |   |
+    |   |-- swap(2,2) → [3, 2, 1] ✅
+    |
+    |-- swap(1,2) → [3, 1, 2]
+        |
+        |-- swap(2,2) → [3, 1, 2] ✅
+```
+
+---
+
+### ✅ Final Permutations Collected:
+```
+[1, 2, 3]
+[1, 3, 2]
+[2, 1, 3]
+[2, 3, 1]
+[3, 2, 1]
+[3, 1, 2]
+```
+
+---
+
+### 🔁 Why swap back?
+
+After each recursive call, we **swap back** to undo the last change, so the next iteration can start from the original
+state of the array. That’s the **backtracking** part.
+
+"""
