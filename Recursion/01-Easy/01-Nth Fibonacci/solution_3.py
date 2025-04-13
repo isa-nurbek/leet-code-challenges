@@ -113,3 +113,119 @@ If the input `n` is 1 or 2, the function returns immediately (O(1) time), but in
 the time complexity is O(n). The space complexity is always O(1).
 
 """
+
+# =========================================================================================================================== #
+
+# Detailed Code Explanation:
+
+"""
+Let's break down the function `get_nth_fib(n)` and explain exactly how it works, step by step.
+
+### 🚀 Purpose of the Function:
+This function calculates the **n-th Fibonacci number**, using an **iterative approach**.
+
+### 🔢 What is the Fibonacci Sequence?
+The Fibonacci sequence is a series of numbers where:
+```
+F(1) = 0
+F(2) = 1
+F(3) = 1  => F(1) + F(2)
+F(4) = 2  => F(2) + F(3)
+F(5) = 3  => F(3) + F(4)
+F(6) = 5  => F(4) + F(5)
+...
+```
+
+Each number is the sum of the **two preceding ones**.
+
+---
+
+### 🧠 Function Breakdown
+
+```
+def get_nth_fib(n):
+```
+- This defines a function that takes one argument `n`, which represents the position in the Fibonacci sequence.
+
+---
+
+```
+if n == 1:
+    return 0
+```
+- If the input is `1`, it returns `0` immediately, because `F(1)` is `0`.
+
+---
+
+```
+a, b = 0, 1
+```
+- Initializes two variables:
+  - `a` is the first Fibonacci number → F(1) = 0
+  - `b` is the second Fibonacci number → F(2) = 1
+
+These two variables will keep track of the last two Fibonacci numbers.
+
+---
+
+```
+for _ in range(3, n + 1):
+    a, b = b, a + b
+```
+- This `for` loop starts from `3` and goes up to `n` (inclusive). Why start at 3?
+  - Because we already defined `F(1)` and `F(2)` in the previous step.
+
+**What happens in the loop?**
+- `a, b = b, a + b` is a **simultaneous update**:
+  - Set `a` to the old `b`
+  - Set `b` to the sum of the old `a + b`
+  - This is effectively sliding forward in the sequence.
+
+Let’s take an example: `n = 6`
+
+| Iteration | a   | b   | Explanation                   |
+|-----------|-----|-----|-------------------------------|
+| Start     | 0   | 1   | Initial values                |
+| i = 3     | 1   | 1   | a=1, b=0+1                    |
+| i = 4     | 1   | 2   | a=1, b=1+1                    |
+| i = 5     | 2   | 3   | a=2, b=1+2                    |
+| i = 6     | 3   | 5   | a=3, b=2+3                    |
+
+So for `n = 6`, it returns `5` — correct!
+
+---
+
+```
+return b
+```
+- After the loop, `b` will be the n-th Fibonacci number, so it returns that.
+
+---
+
+### ✅ Test Cases
+
+```
+print(get_nth_fib(2))  # Output: 1
+```
+- F(2) = 1 ✅
+
+```
+print(get_nth_fib(6))  # Output: 5
+```
+- F(6) = 5 ✅
+
+```
+print(get_nth_fib(8))  # Output: 13
+```
+- F(8) = 13 ✅
+
+---
+
+### 🧪 Summary
+
+- Efficient: O(n) time, O(1) space.
+- Uses iteration instead of recursion to save memory.
+- Handles base case (n == 1) correctly.
+- Great for computing Fibonacci numbers even for large `n`.
+
+"""
