@@ -40,14 +40,20 @@ and `d` is the greatest depth of "special" arrays in the array.
 
 # O(n) time | O(d) space
 def product_sum(array, multiplier=1):
+    # Initialize sum to accumulate all elements' values
     sum = 0
 
+    # Iterate through each element in the array
     for element in array:
+        # If the element is a list (nested array), recursively calculate its product sum
         if type(element) is list:
+            # For nested arrays, increment the multiplier (depth) by 1
             sum += product_sum(element, multiplier + 1)
         else:
+            # For regular numbers, simply add them to the sum
             sum += element
 
+    # Multiply the accumulated sum by the current depth level
     return sum * multiplier
 
 
