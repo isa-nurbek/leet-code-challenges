@@ -10,83 +10,82 @@ The purpose of this repository is to:
 
 - Track my progress in solving problems from **LeetCode** and **AlgoExpert**.
 - Share solutions with clear explanations and well-commented code.
-- Serve as a resource for preparing technical interviews.
+- Serve as a resource for preparing for technical interviews.
 
 ## 🗂️ Structure
 
-The repository is organized as follows:
+The repository is organized as follows:  
+Each topic (e.g., Arrays, Strings, Graphs, etc.) contains subfolders based on difficulty:
 
 ```plaintext
 📂 LeetCode/AlgoExpert
 
-├── Strings
-    01-Easy
-        ├── Problem Name
-            ├── Problem_Description.md
-            ├── solution.py
-    02-Medium
-        ├── Problem Name
-            ├── Problem_Description.md
-            ├── solution.py
-    03-Hard
-        ├── Problem Name
-            ├── Problem_Description.md
-            ├── solution.py
-
-The rest Data Structures folder Grouped by Difficulty same as above
-
-├── Arrays
-├── Dictionaries
-├── Recursion
-├── Linked Lists
-├── Stacks
-├── Graphs
-├── Heaps
-├── Dynamic Programming
-├── Searching
-├── Sorting
-├── Binary Trees
-├── Binary Search Trees
-├── Greedy Algorithms
-├── Famous Algorithms
-├── Tries
-
-README.md
+├── Topic
+│   ├── 01-Easy
+│   │   ├── Problem Name
+│   │   │   ├── Problem_Description.md
+│   │   │   ├── solution.py
+│   ├── 02-Medium
+│   │   ├── Problem Name
+│   │   │   ├── Problem_Description.md
+│   │   │   ├── solution.py
+│   ├── 03-Hard
+│   │   ├── Problem Name
+│   │   │   ├── Problem_Description.md
+│   │   │   ├── solution.py
 ```
 
-Each Data Structures folder Grouped by Difficulty:
+## 📚 Example Topics
 
-- 01-Easy
-- 01-Medium
-- 01-Hard
+- Arrays  
+- Strings  
+- Linked Lists  
+- Graphs  
+- Dynamic Programming  
+- Trees (Binary Trees & BSTs)  
+- Recursion  
+- Greedy Algorithms  
+- Sorting & Searching  
+- Tries  
+- Heaps  
+- Stacks  
+- Dictionaries  
+- Famous Algorithms  
 
-Each solution file includes:
+## ✅ What's Inside?
 
-- Problem description (brief overview).
+- 📄 `Problem_Description.md`: Detailed explanation of the problem statement.
+- 🧠 `solution.py`: Python implementation of the solution with comments, logic, and time/space complexity analysis.
+- 🧪 Optionally includes test cases or a separate `tests.py` for unit testing.
+
+Each solution file typically includes:
+
+- A brief problem overview.
 - Time and space complexity analysis.
 - Code explanations.
-- Several solution approach (from inefficient to efficient).
+- Multiple solution approaches (from brute-force to optimal).
 
 ## 🛠️ Technologies Used
 
-- **Programming Languages:** Python.
-- **Tools:** Visual Studio Code, Git, LeetCode, AlgoExpert.
+- **Programming Language:** Python 3.x
+- **Tools:** Visual Studio Code, Git, LeetCode, AlgoExpert
 
 ## 📝 Features
 
-- 📚 **Comprehensive Solutions**: Detailed solutions to problems with comments for better understanding.
-- 📊 **Complexity Analysis**: Analysis of the time and space complexity for each solution.
+- 📚 **Comprehensive Solutions**: Well-documented solutions for each problem.
+- 📊 **Complexity Analysis**: Includes time and space complexity evaluation.
 
 ## 🚀 Goals
 
-1. Solve at least 300 problems from LeetCode and AlgoExpert combined.
-2. Cover a variety of topics, including:
-    - Arrays and Strings.
-    - Trees and Graphs.
-    - Dynamic Programming.
-    - Backtracking.
-    - Recursion.
-    - Greedy Algorithms and etc.
+1. Solve at least **300 problems** from LeetCode and AlgoExpert combined.
+2. Cover a variety of core topics, including:
+    - Arrays and Strings  
+    - Trees and Graphs  
+    - Dynamic Programming  
+    - Backtracking  
+    - Recursion  
+    - Greedy Algorithms  
+    - And more...
 3. Write clean, efficient, and maintainable code.
 
 ## 🔗 Resources
