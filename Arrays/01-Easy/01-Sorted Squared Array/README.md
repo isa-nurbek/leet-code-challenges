@@ -14,6 +14,29 @@ array = [1, 2, 3, 5, 6, 8, 9]
 [1, 4, 9, 25, 36, 64, 81]
 ```
 
+## Hints
+
+<details>
+<summary>Hint 1</summary>
+
+While the integers in the input array are sorted in increasing order, their squares won't necessarily be as well, because of the possible presence of negative numbers.
+
+</details>
+
+<details>
+<summary>Hint 2</summary>
+
+Traverse the array value by value, square each value, and insert the squares into an output array. Then, sort the output array before returning it. Is this the optimal solution?
+
+</details>
+
+<details>
+<summary>Hint 3</summary>
+
+To reduce the time complexity of the algorithm mentioned in Hint #2, you need to avoid sorting the output array. To do this, as you square the values of the input array, try to directly insert them into their correct position in the output array.
+
+</details>
+
 ## Optimal Time & Space Complexity
 
 `O(n)` time | `O(n)` space - where `n` is the length of the input array.
