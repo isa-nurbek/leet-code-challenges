@@ -45,7 +45,7 @@ Each column in the matrix should be become a row in the transpose of the matrix.
 <details>
 <summary>Hint 3</summary>
 
-TTry iterating one column at a time, and with each column, create a row of the values to add to the transpose of the matrix.
+Try iterating one column at a time, and with each column, create a row of the values to add to the transpose of the matrix.
 
 </details>
 
