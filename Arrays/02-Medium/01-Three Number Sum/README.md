@@ -22,7 +22,7 @@ targetSum = 0
 <details>
 <summary>Hint 1</summary>
 
-TUsing three for loops to calculate the sums of all possible triplets in the array would generate an algorithm that runs in O(n³) time, where n is the length of the input array. Can you come up with something faster using only two for loops?
+Using three for loops to calculate the sums of all possible triplets in the array would generate an algorithm that runs in O(n³) time, where n is the length of the input array. Can you come up with something faster using only two for loops?
 
 </details>
 
