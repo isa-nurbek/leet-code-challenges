@@ -23,21 +23,21 @@ True
 ## Hints
 
 <details>
-<summary>Hint 1</summary>
+<summary><b>Hint 1</b></summary>
 
 You can solve this question by iterating through the input array from left to right once.
 
 </details>
 
 <details>
-<summary>Hint 2</summary>
+<summary><b>Hint 2</b></summary>
 
 Try iterating through the input array from left to right, in search of two adjacent integers that can indicate whether the array is trending upward or downward. Once you've found the tentative trend of the array, at each element thereafter, compare the element to the previous one; if this comparison breaks the previously identified trend, the array isn't monotonic.
 
 </details>
 
 <details>
-<summary>Hint 3</summary>
+<summary><b>Hint 3</b></summary>
 
 Alternatively, you can start by assuming that the array is both entirely non-decreasing and entirely non-increasing. As you iterate through each element, perform a check to see if you can invalidate one or both of your assumptions.
 
