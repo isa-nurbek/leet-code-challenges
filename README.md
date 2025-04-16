@@ -4,8 +4,6 @@
 
 Welcome to my **LeetCode** and **AlgoExpert** solutions repository! 🎯 This project is a personal collection of algorithmic problem-solving solutions aimed at strengthening my coding skills, preparing for technical interviews, and deepening my understanding of data structures and algorithms.
 
----
-
 ## 📌 Purpose
 
 This repository is designed to:
@@ -13,8 +11,6 @@ This repository is designed to:
 - 📈 Track my progress solving problems from **LeetCode** and **AlgoExpert**.
 - 💬 Share clean, well-documented solutions with clear explanations.
 - 🧰 Act as a personal reference for technical interview preparation.
-
----
 
 ## 🗂️ Repository Structure
 
@@ -38,8 +34,6 @@ Problems are organized by topic and difficulty:
 │   │   │   ├── solution.py
 ```
 
----
-
 ## 📚 Topics Covered
 
 - Arrays  
@@ -57,8 +51,6 @@ Problems are organized by topic and difficulty:
 - Tries  
 - Famous Algorithms (e.g., Dijkstra's, KMP, etc.)
 
----
-
 ## ✅ What’s Included?
 
 Each problem typically includes:
@@ -70,8 +62,6 @@ Each problem typically includes:
   - Code comments and step-by-step logic.
   - Multiple solution strategies (e.g., brute-force to optimized).
 
----
-
 ## 🛠️ Technologies Used
 
 - **Language:** Python 3.x  
@@ -79,8 +69,6 @@ Each problem typically includes:
 - **Platforms:** LeetCode, AlgoExpert  
 - **Version Control:** Git & GitHub  
 - **Code Quality:** [CodeClimate](https://codeclimate.com/github/isa-nurbek/leet-code-challenges/maintainability)
-
----
 
 ## 🚀 Goals
 
@@ -92,15 +80,11 @@ Each problem typically includes:
    - Backtracking & Greedy
 3. Write clean, efficient, and maintainable code with consistent patterns.
 
----
-
 ## 🔗 Resources
 
 - [LeetCode](https://leetcode.com/)
 - [AlgoExpert](https://www.algoexpert.io/)
 - [Big-O Complexity Cheat Sheet](https://www.bigocheatsheet.com/)
-
----
 
 ## 🙌 Contributions
 
