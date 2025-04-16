@@ -29,21 +29,21 @@ matrix = [
 ## Hints
 
 <details>
-<summary>Hint 1</summary>
+<summary><b>Hint 1</b></summary>
 
 The row and column indices of each entry in the matrix should be flipped. For example, the value at `matrix[1][2]` will be at `matrix[2][1]` in the transpose of the matrix.
 
 </details>
 
 <details>
-<summary>Hint 2</summary>
+<summary><b>Hint 2</b></summary>
 
 Each column in the matrix should be become a row in the transpose of the matrix. Each row in the matrix should become a column in the transpose of the matrix.
 
 </details>
 
 <details>
-<summary>Hint 3</summary>
+<summary><b>Hint 3</b></summary>
 
 Try iterating one column at a time, and with each column, create a row of the values to add to the transpose of the matrix.
 
