@@ -27,6 +27,36 @@ points = [
 // as does [1, 1], [-4, 2], [-2, -1], and [-1, 4]
 ```
 
+## Hints
+
+<details>
+<summary><b>Hint 1</b></summary>
+
+Given any two points, there are exactly three pairs of points that would make a square.
+
+</details>
+
+<details>
+<summary><b>Hint 2</b></summary>
+
+If two points are assumed to be diagonally across from each other in a square, there is only one pair of points that would complete the square.
+
+</details>
+
+<details>
+<summary><b>Hint 3</b></summary>
+
+All four points of a square will always be equidistant from the midpoint.
+
+</details>
+
+<details>
+<summary><b>Hint 4</b></summary>
+
+The slopes of the two diagonals of a square are always negative reciprocals of each other.
+
+</details>
+
 ## Optimal Time & Space Complexity
 
 `O(n^2)` time | `O(n)` space - where `n` is the number of points.
