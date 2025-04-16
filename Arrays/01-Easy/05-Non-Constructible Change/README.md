@@ -33,14 +33,14 @@ Start by sorting the input array. Since you're trying to find the minimum amount
 </details>
 
 <details>
-<summary>Hint 3</summary>
+<summary><b>Hint 3</b></summary>
 
 To understand the trick to this problem, consider the following example: `coins = [1, 2, 4]`. With this set of coins, we can create `1, 2, 3, 4, 5, 6, 7` cents worth of change. Now, if we were to add a coin of value `9` to this set, we would not be able to create `8` cents. However, if we were to add a coin of value `7`, we would be able to create `8` cents, and we would also be able to create all values of change from `1` to `15`. Why is this the case?
 
 </details>
 
 <details>
-<summary><b>Hint 3</b></summary>
+<summary><b>Hint 4</b></summary>
 
 Create a variable to store the amount of change that you can currently create up to. Sort all of your coins, and loop through them in ascending order. At every iteration, compare the current coin to the amount of change that you can currently create up to. Here are the two scenarios that you'll encounter:
 
