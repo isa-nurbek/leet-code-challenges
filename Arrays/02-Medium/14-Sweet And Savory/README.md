@@ -21,6 +21,29 @@ target = 8
 [-3, 7] // The combined profile of 4 is closest without going over
 ```
 
+## Hints
+
+<details>
+<summary><b>Hint 1</b></summary>
+
+The sweet and savory dishes are essentially two different lists that have been combined into one. It can be helpful to first separate them.
+
+</details>
+
+<details>
+<summary><b>Hint 2</b></summary>
+
+Looking at all possible pairs will be inefficient. Would sorting the lists first help improve the time complexity?
+
+</details>
+
+<details>
+<summary><b>Hint 3</b></summary>
+
+Try using a two pointer approach to find the best pairing. Start with a current pairing, and move the savory pointer until the pairing gets too savory. If the dish is too savory, then move the sweet pointer. Do this through the entire lists, keeping track of the best pairing you find.
+
+</details>
+
 ## Optimal Time & Space Complexity
 
 `O(n * log(n))` time | `O(n)` space - where `n` is number of dishes.
