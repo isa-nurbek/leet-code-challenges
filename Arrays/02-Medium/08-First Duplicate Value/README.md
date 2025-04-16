@@ -57,6 +57,13 @@ You should always pay close attention to the details of a question's prompt. In 
 
 </details>
 
+<details>
+<summary><b>Hint 4</b></summary>
+
+Since the integers are between 1 and the length of the input array, you can map them to indices in the array itself by subtracting 1 from them. Once you've mapped an integer to an index in the array, you can mutate the value in the array at that index and make it negative (by multiplying it by -1). Since the integers normally aren't negative, the first time that you encounter a negative value at the index that an integer maps to, you'll know that you'll have already seen that integer.
+
+</details>
+
 ## Optimal Time & Space Complexity
 
 `O(n)` time | `O(1)` space - where `n` is the length of the input array.
