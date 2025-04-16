@@ -27,6 +27,29 @@ knight_b = [4, 2]
 1 // knight_a moves to [2, 1], knight_b captures knight_a on [2, 1]
 ```
 
+## Hints
+
+<details>
+<summary><b>Hint 1</b></summary>
+
+The number of turns needed for two knights to meet on a common square is the same as the number of moves needed for a single knight to reach the other knight divided by two (and rounded up to account for odd numbers of moves).
+
+</details>
+
+<details>
+<summary><b>Hint 2</b></summary>
+
+Rather than thinking of this problem in terms of chess, try thinking about it as a graph problem. What are the nodes and what are the edges?
+
+</details>
+
+<details>
+<summary><b>Hint 3</b></summary>
+
+As a graph problem, you can consider each square on the board as a node, and each possible knight move as an edge. Then you can find the distance between those nodes using standard graph algorithms, such as Breadth-First-Search (BFS).
+
+</details>
+
 ## Optimal Time & Space Complexity
 
 `O(n * m)` time | `O(n * m)` space - where `n` is horizontal distance between the knights and `m` is the vertical distance between the knights.
