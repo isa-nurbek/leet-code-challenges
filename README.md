@@ -1,21 +1,24 @@
+# 🧠 LeetCode & AlgoExpert Solutions Repository
+
 [![Maintainability](https://api.codeclimate.com/v1/badges/74d1c3aa9471f0d344c2/maintainability)](https://codeclimate.com/github/isa-nurbek/leet-code-challenges/maintainability)
 
-# LeetCode & AlgoExpert Solutions Repository
+Welcome to my **LeetCode** and **AlgoExpert** solutions repository! 🎯 This project is a personal collection of algorithmic problem-solving solutions aimed at strengthening my coding skills, preparing for technical interviews, and deepening my understanding of data structures and algorithms.
 
-Welcome to my LeetCode and AlgoExpert solutions repository! 🎯 This repository is dedicated to solving algorithmic and coding problems to improve problem-solving skills, prepare for coding interviews, and deepen my understanding of data structures and algorithms.
+---
 
 ## 📌 Purpose
 
-The purpose of this repository is to:
+This repository is designed to:
 
-- Track my progress in solving problems from **LeetCode** and **AlgoExpert**.
-- Share solutions with clear explanations and well-commented code.
-- Serve as a resource for preparing for technical interviews.
+- 📈 Track my progress solving problems from **LeetCode** and **AlgoExpert**.
+- 💬 Share clean, well-documented solutions with clear explanations.
+- 🧰 Act as a personal reference for technical interview preparation.
 
-## 🗂️ Structure
+---
 
-The repository is organized as follows:  
-Each topic (e.g., Arrays, Strings, Graphs, etc.) contains subfolders based on difficulty:
+## 🗂️ Repository Structure
+
+Problems are organized by topic and difficulty:
 
 ```plaintext
 📂 LeetCode/AlgoExpert
@@ -35,60 +38,70 @@ Each topic (e.g., Arrays, Strings, Graphs, etc.) contains subfolders based on di
 │   │   │   ├── solution.py
 ```
 
-## 📚 Example Topics
+---
+
+## 📚 Topics Covered
 
 - Arrays  
 - Strings  
 - Linked Lists  
-- Graphs  
-- Dynamic Programming  
 - Trees (Binary Trees & BSTs)  
-- Recursion  
+- Graphs  
+- Heaps  
+- Stacks & Queues  
+- Dictionaries / Hash Maps  
+- Recursion & Backtracking  
 - Greedy Algorithms  
+- Dynamic Programming  
 - Sorting & Searching  
 - Tries  
-- Heaps  
-- Stacks  
-- Dictionaries  
-- Famous Algorithms  
+- Famous Algorithms (e.g., Dijkstra's, KMP, etc.)
 
-## ✅ What's Inside?
+---
 
-- 📄 `Problem_Description.md`: Detailed explanation of the problem statement.
-- 🧠 `solution.py`: Python implementation of the solution with comments, logic, and time/space complexity analysis.
+## ✅ What’s Included?
 
-Each solution file typically includes:
+Each problem typically includes:
 
-- A brief problem overview.
-- Time and space complexity analysis.
-- Code explanations.
-- Multiple solution approaches (from brute-force to optimal).
+- 📄 `Problem_Description.md`: Explanation of the problem with examples and hints.
+- 🧠 `solution.py`: Python solution with:
+  - Overview of the problem.
+  - Time and space complexity analysis.
+  - Code comments and step-by-step logic.
+  - Multiple solution strategies (e.g., brute-force to optimized).
+
+---
 
 ## 🛠️ Technologies Used
 
-- **Programming Language:** Python 3.x
-- **Tools:** Visual Studio Code, Git, LeetCode, AlgoExpert
+- **Language:** Python 3.x  
+- **IDE/Editor:** Visual Studio Code  
+- **Platforms:** LeetCode, AlgoExpert  
+- **Version Control:** Git & GitHub  
+- **Code Quality:** [CodeClimate](https://codeclimate.com/github/isa-nurbek/leet-code-challenges/maintainability)
 
-## 📝 Features
-
-- 📚 **Comprehensive Solutions**: Well-documented solutions for each problem.
-- 📊 **Complexity Analysis**: Includes time and space complexity evaluation.
+---
 
 ## 🚀 Goals
 
-1. Solve at least **300 problems** from LeetCode and AlgoExpert combined.
-2. Cover a variety of core topics, including:
-    - Arrays and Strings  
-    - Trees and Graphs  
-    - Dynamic Programming  
-    - Backtracking  
-    - Recursion  
-    - Greedy Algorithms  
-    - And more...
-3. Write clean, efficient, and maintainable code.
+1. Solve **300+ problems** across LeetCode and AlgoExpert.
+2. Master key algorithmic topics including:
+   - Arrays & Strings
+   - Graphs & Trees
+   - Recursion & DP
+   - Backtracking & Greedy
+3. Write clean, efficient, and maintainable code with consistent patterns.
+
+---
 
 ## 🔗 Resources
 
 - [LeetCode](https://leetcode.com/)
 - [AlgoExpert](https://www.algoexpert.io/)
 - [Big-O Complexity Cheat Sheet](https://www.bigocheatsheet.com/)
+
+---
+
+## 🙌 Contributions
+
+This is a personal learning project, but feedback, improvements, or discussions are always welcome!
