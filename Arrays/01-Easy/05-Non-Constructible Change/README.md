@@ -19,14 +19,14 @@ coins = [5, 7, 1, 1, 2, 3, 22]
 ## Hints
 
 <details>
-<summary>Hint 1</summary>
+<summary><b>Hint 1</b></summary>
 
 One approach to solve this problem is to attempt to create every single amount of change, starting at 1 and going up until you eventually can't create an amount. While this approach works, there is a better one.
 
 </details>
 
 <details>
-<summary>Hint 2</summary>
+<summary><b>Hint 2</b></summary>
 
 Start by sorting the input array. Since you're trying to find the minimum amount of change that you can't create, it makes sense to consider the smallest coins first.
 
@@ -40,7 +40,7 @@ To understand the trick to this problem, consider the following example: `coins 
 </details>
 
 <details>
-<summary>Hint 4</summary>
+<summary><b>Hint 3</b></summary>
 
 Create a variable to store the amount of change that you can currently create up to. Sort all of your coins, and loop through them in ascending order. At every iteration, compare the current coin to the amount of change that you can currently create up to. Here are the two scenarios that you'll encounter:
 
