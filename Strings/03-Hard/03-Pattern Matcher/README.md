@@ -21,6 +21,29 @@ string = "gogopowerrangergogopowerranger"
 ["go", "powerranger"]
 ```
 
+## Hints
+
+<details>
+<summary><b>Hint 1</b></summary>
+
+Start by checking if the pattern starts with an "x". If it doesn't, consider generating a new pattern that swaps all "x"s for "y"s and vice versa; this might greatly simplify the rest of your algorithm. Make sure to keep track of whether or not you do this swap, as your final answer will be affected by it.
+
+</details>
+
+<details>
+<summary><b>Hint 2</b></summary>
+
+Use a hash table to store the number of "x"s and "y"s that appear in the pattern, and keep track of the position of the first "y". Knowing how many "x"s and "y"s appear in the pattern, paired with the length of the main string which you have access to, will allow you to quickly test out various possible lengths for "x" and "y". Knowing where the first "y" appears in the pattern will allow you to actually generate potential substrings.
+
+</details>
+
+<details>
+<summary><b>Hint 3</b></summary>
+
+Traverse the main string and try different combinations of substrings that could represent "x" and "y". For each potential combination, map the new pattern mentioned in Hint #1 and see if it matches the main string.
+
+</details>
+
 ## Optimal Time & Space Complexity
 
 `O(n^2 + m)` time | `O(n + m)` space - where `n` is the length of the main string and `m` is the length of the pattern.
