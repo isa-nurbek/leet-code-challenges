@@ -56,7 +56,7 @@ O(n) time | O(k) space - where `n` is the number of competitions and `k` is the 
 HOME_TEAM_WON = 1  # Constant indicating that the home team won the match
 
 
-# O(n) time | O(k) space - where `n` is the number of competitions and `k` is the number of teams
+# O(n) time | O(k) space
 def tournament_winner(competitions, results):
     current_best_team = ""  # Tracks the current team with the highest score
     scores = {current_best_team: 0}  # Dictionary to store scores of all teams
