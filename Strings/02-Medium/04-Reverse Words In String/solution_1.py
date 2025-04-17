@@ -38,7 +38,7 @@ string = "AlgoExpert is the best!"
 # Solution:
 
 
-# O(n) time | O(n) space - where `n` is the length of the string.
+# O(n) time | O(n) space
 def reverse_words_in_string(string):
     # Initialize an empty list to store individual words and spaces
     words = []
