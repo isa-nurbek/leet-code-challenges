@@ -32,7 +32,7 @@ O(n) time | O(1) space - where `n` is the length of the input array.
 # Solution:
 
 
-# O(n) time | O(n) space - where `n` is the length of the input array
+# O(n) time | O(n) space
 def missing_numbers(nums):
     # Create a set of the numbers present in the input list for O(1) look-up time.
     included_nums = set(nums)
