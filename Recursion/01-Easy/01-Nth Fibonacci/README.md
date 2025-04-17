@@ -31,7 +31,7 @@ n = 6
 ## Hints
 
 <details>
-<summary>Hint 1</summary>
+<summary><b>Hint 1</b></summary>
 
 The formula to generate the nth Fibonacci number can be written as follows:  
 `F(n) = F(n - 1) + F(n - 2)`
@@ -41,7 +41,7 @@ Think of the case(s) for which this formula doesn't apply (the base case(s)) and
 </details>
 
 <details>
-<summary>Hint 2</summary>
+<summary><b>Hint 2</b></summary>
 
 What are the runtime implications of solving this problem as described in Hint #1?  
 Can you use memoization (caching) to improve the performance of your algorithm?
@@ -49,7 +49,7 @@ Can you use memoization (caching) to improve the performance of your algorithm?
 </details>
 
 <details>
-<summary>Hint 3</summary>
+<summary><b>Hint 3</b></summary>
 
 Realize that to calculate any single Fibonacci number you only need to have the two previous Fibonacci numbers. Knowing this, can you implement an iterative algorithm to solve this question, storing only the last two Fibonacci numbers at any given time?
 
