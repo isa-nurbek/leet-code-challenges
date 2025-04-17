@@ -33,6 +33,29 @@ string = "1921680"
 // The IP addresses could be ordered differently.
 ```
 
+## Hints
+
+<details>
+<summary><b>Hint 1</b></summary>
+
+How can you split this problem into subproblems to make it easier?
+
+</details>
+
+<details>
+<summary><b>Hint 2</b></summary>
+
+Each IP address is comprised of four parts; try finding one valid part at a time and then combining sets of four valid parts to create one valid IP address.
+
+</details>
+
+<details>
+<summary><b>Hint 3</b></summary>
+
+Go through all possible combinations of valid IP-address parts. You'll do this by generating a valid first part, then generating all valid second parts given the first part, then finally all valid third and fourth parts given first and second parts. If you find a set of four valid parts, then simply combine them together and add that IP address to some final array. You can start by creating all the possible first parts of an IP address; these will be substrings of the main string that start at the first character and that have lengths 1, 2 and 3. Then you can repeat this process for the second part, where the substrings in this part will start where the first part ended. The same thing applies for the third and fourth parts. After going through all possible parts and storing valid IP addresses, you'll have found all of the IP addresses that can be formed from the input string.
+
+</details>
+
 ## Optimal Time & Space Complexity
 
 `O(1)` time | `O(1)` space.
