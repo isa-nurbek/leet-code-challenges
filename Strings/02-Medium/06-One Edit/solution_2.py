@@ -3,7 +3,7 @@
 """
                                     One Edit
 
-You're given two strings `stringOne` and `stringTwo`. Write a function that determines if these two
+You're given two strings `string_one` and `string_two`. Write a function that determines if these two
 strings can be made equal using only one edit.
 
 There are 3 possible edits:
@@ -17,8 +17,8 @@ Note that both strings will contain at least one character. If the strings are t
 
 ## Sample Input:
 ```
-stringOne = "hello"
-stringTwo = "hollo"
+string_one = "hello"
+string_two = "hollo"
 ```
 
 ## Sample Output:
