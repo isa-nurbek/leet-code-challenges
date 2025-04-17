@@ -32,8 +32,7 @@ O(n * m) time | O(m) space - where `n` is the number of strings, and `m` is the 
 # Solution:
 
 
-# O(n * m) time | O(m) space - where `n`` is the number of strings, and `m` is the
-# length of the longest string
+# O(n * m) time | O(m) space
 def common_characters(strings):
     # Step 1: Find the smallest string in the list of strings.
     # This is done to minimize the number of potential common characters we need to check.
