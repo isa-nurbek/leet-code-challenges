@@ -88,4 +88,4 @@ Each problem typically includes:
 
 ## 🙌 Contributions
 
-This is a personal learning project, but feedback, improvements, or discussions are always welcome!
+This is a personal learning project, but feedback, improvements are always welcome!
