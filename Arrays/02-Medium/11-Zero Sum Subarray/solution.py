@@ -33,7 +33,7 @@ O(n) time | O(n) space - where `n` is the length of nums.
 # Solution:
 
 
-# O(n) time | O(n) space - where `n` is the length of nums
+# O(n) time | O(n) space
 def zero_sum_subarray(nums):
     # Create a set to store all the cumulative sums encountered so far.
     # Initialize it with 0 because a sum of 0 is needed to detect a subarray
