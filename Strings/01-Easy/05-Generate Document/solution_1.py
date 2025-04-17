@@ -42,8 +42,7 @@ and `c` is the number of unique characters in the characters string.
 # Solution:
 
 
-# O(m * (n + m)) time | O(1) space - where `n` is the number
-# of characters, `m` is the length of the document
+# O(m * (n + m)) time | O(1) space
 def generate_document(characters, document):
     # Iterate through each character in the document
     for character in document:
