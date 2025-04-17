@@ -32,7 +32,7 @@ O(n) time | O(1) space - where `n` is the length of the input array.
 # Solution:
 
 
-# O(n) time | O(1) space - where `n` is the length of the input array
+# O(n) time | O(1) space
 def missing_numbers(nums):
     # Calculate the total sum of numbers from 1 to n+2, where n is the length of the input list.
     # Since there are two missing numbers, the range should be 1 to len(nums) + 2.
