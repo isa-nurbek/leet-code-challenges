@@ -32,7 +32,7 @@ O(n) time | O(1) space - where `n` is the length of the input array.
 # Solution:
 
 
-# O(n) time | O(1) space - where `n` is the length of the input array
+# O(n) time | O(1) space
 def missing_numbers(nums):
     # Initialize the XOR variable to store the result of XOR operations
     solution_XOR = 0
