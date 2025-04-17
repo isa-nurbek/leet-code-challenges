@@ -18,6 +18,29 @@ string = "AAAAAAAAAAAAABBCCCCDD"
 "9A4A2B4C2D"
 ```
 
+## Hints
+
+<details>
+<summary><b>Hint 1</b></summary>
+
+Traverse the input string and count the length of each run. As you traverse the string, what should you do when you reach a run of length 9 or the end of a run?
+
+</details>
+
+<details>
+<summary><b>Hint 2</b></summary>
+
+When you reach a run of length 9 or the end of a run, store the computed count for the run as well as its character (you'll likely need a list for these computed counts and characters), and reset the count to 1 before continuing to traverse the string.
+
+</details>
+
+<details>
+<summary><b>Hint 3</b></summary>
+
+Make sure that your solution correctly handles the last run in the string.
+
+</details>
+
 ## Optimal Time & Space Complexity
 
 `O(n)` time | `O(n)` space - where `n` is the length of the input string.
