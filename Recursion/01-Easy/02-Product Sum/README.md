@@ -23,21 +23,21 @@ array = [5, 2, [7, -1], 3, [6, [-13, 8], 4]]
 ## Hints
 
 <details>
-<summary>Hint 1</summary>
+<summary><b>Hint 1</b></summary>
 
 Try using recursion to solve this problem.
 
 </details>
 
 <details>
-<summary>Hint 2</summary>
+<summary><b>Hint 2</b></summary>
 
 Initialize the product sum of the "special" array to 0. Then, iterate through all of the array's elements; if you come across a number, add it to the product sum; if you come across another "special" array, recursively call the productSum function on it and add the returned value to the product sum. How will you handle multiplying the product sums at a given level of depth?
 
 </details>
 
 <details>
-<summary>Hint 3</summary>
+<summary><b>Hint 3</b></summary>
 
 Have the product_sum function take in a second parameter: the multiplier, initialized to 1. Whenever you recursively call the product_sum function, pass in the multiplier incremented by 1.
 
