@@ -35,7 +35,7 @@ never have more than 26 character frequencies.
 # Solution:
 
 
-# O(n^2) time | O(1) space - where `n` is the length of the input string
+# O(n^2) time | O(1) space
 def first_non_repeating_character(string):
     # Initialize a flag to track if a duplicate character is found
     found_duplicate = False
