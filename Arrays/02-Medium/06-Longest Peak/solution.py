@@ -35,7 +35,7 @@ O(n) time | O(1) space - where `n` is the length of the input array.
 # Solution:
 
 
-# O(n) time | O(1) space - where `n` is the length of the input array.
+# O(n) time | O(1) space
 def longest_peak(array):
     # Initialize the length of the longest peak found so far
     longest_peak_length = 0
