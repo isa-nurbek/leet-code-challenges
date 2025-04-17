@@ -35,9 +35,7 @@ and `c` is the number of unique characters across all words.
 # Solution:
 
 
-# O(n * l) time | O(c) space - where `n` is the number of words,
-# `l` is the length of the longest word,
-# and `c` is the number of unique characters across all words.
+# O(n * l) time | O(c) space
 def minimum_characters_for_words(words):
     # Dictionary to store the maximum frequency of each character across all words
     maximum_character_frequencies = {}
