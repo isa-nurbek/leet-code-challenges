@@ -32,9 +32,7 @@ O(n * m) time | O(m) space - where `n` is the number of strings, and `m` is the 
 # Solution:
 
 
-# O(n * m) time | O(c) space - where `n`` is the number of strings, `m` is the
-# length of the longest string, and `c` is the number of unique characters across
-# all strings
+# O(n * m) time | O(c) space
 def common_characters(strings):
     # Initialize a dictionary to keep track of how many strings each character appears in
     character_counts = {}
