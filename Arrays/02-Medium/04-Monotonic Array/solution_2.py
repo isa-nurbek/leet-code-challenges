@@ -36,7 +36,7 @@ O(n) time | O(1) space - where `n` is the length of the array.
 # Solution:
 
 
-# O(n) time | O(1) space - where `n` is the length of the array
+# O(n) time | O(1) space
 def is_monotonic(array):
     # Initialize two flags to track the array's monotonicity
     is_non_decreasing = True  # Assumes the array is non-decreasing initially
