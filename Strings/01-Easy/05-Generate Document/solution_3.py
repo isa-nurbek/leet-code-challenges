@@ -42,8 +42,7 @@ and `c` is the number of unique characters in the characters string
 # Solution:
 
 
-# O(n + m) time | O(c) space - where `n` is the number of characters, `m` is
-# the length of the document, and `c` is the number of unique characters in the characters string
+# O(n + m) time | O(c) space
 def generate_document(characters, document):
     # Initialize a dictionary to keep track of the count of each character in the `characters` string.
     character_counts = {}
