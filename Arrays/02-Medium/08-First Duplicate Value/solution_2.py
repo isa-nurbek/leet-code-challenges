@@ -49,7 +49,7 @@ O(n) time | O(1) space - where `n` is the length of the input array.
 # Solution:
 
 
-# O(n) time | O(n) space - where `n` is the length of the input array.
+# O(n) time | O(n) space
 def first_duplicate_value(array):
     # Create an empty set to keep track of values we've seen so far
     seen = set()
