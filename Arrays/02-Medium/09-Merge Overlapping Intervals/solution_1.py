@@ -40,7 +40,7 @@ O(n log(n)) time | O(n) space - where `n` is the length of the input array.
 # Solution:
 
 
-# O(n log(n)) time | O(n) space - where `n` is the length of the input array.
+# O(n log(n)) time | O(n) space
 def merge_overlapping_intervals(intervals):
     # Sort the intervals based on the start value of each interval
     sorted_intervals = sorted(intervals, key=lambda x: x[0])
