@@ -40,7 +40,7 @@ O(n log(n)) time | O(n) space - where `n` is the length of the input array.
 # Solution:
 
 
-# O(n log(n)) time | O(n) space - where `n` is the length of the input array.
+# O(n log(n)) time | O(n) space
 def merge_overlapping_intervals_stack(intervals):
     # If the input list is empty, return an empty list
     if not intervals:
