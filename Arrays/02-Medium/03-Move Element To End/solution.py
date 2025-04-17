@@ -34,7 +34,7 @@ O(n) time | O(1) space - where `n` is the length of the array.
 # Solution:
 
 
-# O(n) time | O(1) space - where `n` is the length of the array
+# O(n) time | O(1) space
 def move_element_to_end(array, to_move):
     # Initialize two pointers:
     # - `i` starts at the beginning of the array (left pointer)
