@@ -37,7 +37,7 @@ O(n) time | O(n) space - where `n` is the length of the input array
 # Solution:
 
 
-# O (n^2) time | O(1) space
+# O (n²) time | O(1) space
 def two_number_sum(array, target_sum):
     # Loop through the array from the first element to the second-to-last element
     for i in range(len(array) - 1):
