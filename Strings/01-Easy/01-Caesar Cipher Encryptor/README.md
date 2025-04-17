@@ -40,13 +40,6 @@ How do you handle cases where a letter gets shifted to a position that requires 
 
 </details>
 
-<details>
-<summary><b>Hint 4</b></summary>
-
-The slopes of the two diagonals of a square are always negative reciprocals of each other.
-
-</details>
-
 ## Optimal Time & Space Complexity
 
 `O(n)` time | `O(n)` space - where `n` is the length of the input string.
