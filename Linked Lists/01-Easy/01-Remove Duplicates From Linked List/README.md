@@ -60,6 +60,29 @@ The List Looks Like: [3] → [1] → [4] → [1] → [5] → [3] → [2] → Non
 3 -> 1 -> 4 -> 5 -> 2 -> None  // the head node with value 3
 ```
 
+## Hints
+
+<details>
+<summary><b>Hint 1</b></summary>
+
+The brute-force approach to this problem is to use a hash table or a set to keep track of all node values that exist while traversing the linked list and to simply remove nodes that have a value that already exists. This approach works, but can you solve this problem without using an auxiliary data structure?
+
+</details>
+
+<details>
+<summary><b>Hint 2</b></summary>
+
+What does the fact that the nodes are sorted tell you about the location of all duplicate nodes? How can you use this fact to solve this problem with constant space?
+
+</details>
+
+<details>
+<summary><b>Hint 3</b></summary>
+
+Since the linked list's nodes are sorted, you can loop through them and, at each iteration, simply remove all successive nodes that have the same value as the current node. For each node, change its next pointer to the next node in the linked list that has a different value. This will remove all duplicate-value nodes.
+
+</details>
+
 ## Optimal Time & Space Complexity
 
 `O(n)` time | `O(1)` space - where `n` is the number of nodes in the Linked List.
