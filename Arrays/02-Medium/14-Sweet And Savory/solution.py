@@ -44,7 +44,7 @@ O(n * log(n)) time | O(n) space - where `n` is number of dishes.
 # Solution:
 
 
-# O(n * log(n)) time | O(n) space - where `n` is number of dishes
+# O(n * log(n)) time | O(n) space
 def sweet_and_savory(dishes, target):
     # Separate the dishes into sweet (negative values) and savory (positive values)
     # Sort sweet dishes in ascending order of their absolute values (closest to zero first)
