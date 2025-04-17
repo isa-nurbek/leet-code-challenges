@@ -38,7 +38,7 @@ O(n) time | O(n) space - where `n` is the length of the input array.
 # Solution:
 
 
-# O(n) time | O(n) space - where `n` is the length of the input array
+# O(n) time | O(n) space
 def array_of_products(array):
     # Initialize a list called 'products' with the same length as the input array,
     # where each element is set to 1. This will store the final product values.
