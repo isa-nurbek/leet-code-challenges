@@ -20,6 +20,29 @@ string = "AlgoExpert is the best!"
 "best! the is AlgoExpert"
 ```
 
+## Hints
+
+<details>
+<summary><b>Hint 1</b></summary>
+
+There are at least two ways to solve this problem, and both require locating the words in the string. How can you find all of the words in the string?
+
+</details>
+
+<details>
+<summary><b>Hint 2</b></summary>
+
+If you're able to locate all of the words in the string, the next step is to figure out how many spaces are between them. If you can create a list that contains all of the words in the string and all of the spaces between them, then all you need to do is reverse the list and recreate the string using the reversed list.
+
+</details>
+
+<details>
+<summary><b>Hint 3</b></summary>
+
+A potentially easier approach to this problem is to start by reversing the entire string. Once the entire string has been reversed, the words will be in the correct order, but each word will also be reversed. From here, all you have to do is reverse all of the individual words in this new string. By doing this, you'll restore each reversed word back to its original order, and you'll have the desired output.
+
+</details>
+
 ## Optimal Time & Space Complexity
 
 `O(n)` time | `O(n)` space - where `n` is the length of the string.
