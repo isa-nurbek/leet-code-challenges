@@ -41,7 +41,7 @@ O(n) time | O(n) space - where `n` is the length of the input array.
 # Solution:
 
 
-# O(n^2) time | O(n) space - where `n` is the length of the input array
+# O(n^2) time | O(n) space
 def min_rewards(scores):
     # Initialize a list of rewards with 1 for each student
     rewards = [1 for _ in scores]
