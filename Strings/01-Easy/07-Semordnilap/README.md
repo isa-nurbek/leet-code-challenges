@@ -18,6 +18,22 @@ words = ["diaper", "abc", "test", "cba", "repaid"]
 [["diaper", "repaid"], ["abc", "cba"]]
 ```
 
+## Hints
+
+<details>
+<summary><b>Hint 1</b></summary>
+
+It can be helpful to convert the input array into a set, so that you can check if a word exists in the list in constant time.
+
+</details>
+
+<details>
+<summary><b>Hint 2</b></summary>
+
+After creating the set of words, try iterating through the original array. For each word, can you check if its semordnilap pair is in the word list?
+
+</details>
+
 ## Optimal Time & Space Complexity
 
 `O(n * m)` time | `O(n)` space - where `n` is the number of words and `m` is the length of the longest word.
