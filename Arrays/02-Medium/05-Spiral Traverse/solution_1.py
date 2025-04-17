@@ -38,7 +38,7 @@ O(n) time | O(n) space - where `n` is the total number of elements in the array.
 # Solution:
 
 
-# O(n) time | O(n) space - where `n` is the total number of elements in the array.
+# O(n) time | O(n) space
 def spiral_traverse(array):
     result = []  # This will store the elements in spiral order
 
