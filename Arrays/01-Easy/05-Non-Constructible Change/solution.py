@@ -34,7 +34,7 @@ O(n log n) time | O(1) space - where `n` is the number of coins.
 # Solution:
 
 
-# O(n log n) time | O(1) space - where `n` is the number of coins
+# O(n log n) time | O(1) space
 def non_constructible_change(coins):
     # Sort the coins in ascending order to process them from smallest to largest
     coins.sort()
