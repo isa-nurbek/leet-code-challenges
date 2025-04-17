@@ -37,7 +37,7 @@ O(n) time | O(1) space - where `n` is the length of the shorter string.
 # Solution:
 
 
-# O(n) time | O(1) space - where `n` is the length of shorter string
+# O(n) time | O(1) space
 def one_edit(string_one, string_two):
     # Get the lengths of both strings
     length_one, length_two = len(string_one), len(string_two)
