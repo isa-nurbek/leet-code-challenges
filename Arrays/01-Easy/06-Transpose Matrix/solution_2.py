@@ -42,8 +42,7 @@ O(w * h) time | O(w * h) space - where `w` is the width of the matrix and `h` is
 # Solution:
 
 
-# O(w * h) time | O(w * h) space - where `w` is the
-# width of the matrix and `h` is the height
+# O(w * h) time | O(w * h) space
 def transpose_matrix(matrix):
     # The transpose of a matrix is obtained by swapping its rows and columns.
     # This list comprehension iterates over each column index (col) of the original matrix.
