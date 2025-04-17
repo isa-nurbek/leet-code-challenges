@@ -34,8 +34,7 @@ and `n` is the length of the longest word.
 # Solution:
 
 
-# O(w * n * log(n) + n * w * log(w)) time | O(w * n) space - where `w` is the number of words
-# and `n` is the length of the longest word
+# O(w * n * log(n) + n * w * log(w)) time | O(w * n) space
 def group_anagrams(words):
     # If the input list is empty, return an empty list immediately
     if len(words) == 0:
