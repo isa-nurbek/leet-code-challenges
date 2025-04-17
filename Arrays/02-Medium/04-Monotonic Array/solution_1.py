@@ -36,7 +36,7 @@ O(n) time | O(1) space - where `n` is the length of the array.
 # Solution:
 
 
-# O(n) time | O(1) space - where `n` is the length of the array
+# O(n) time | O(1) space
 def is_monotonic(array):
     # If the array has 2 or fewer elements, it is always monotonic
     if len(array) <= 2:
