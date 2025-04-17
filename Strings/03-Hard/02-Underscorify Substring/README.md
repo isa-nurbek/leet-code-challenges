@@ -17,6 +17,29 @@ substring = "test"
 "_test_this is a _testtest_ to see if _testestest_ it works"
 ```
 
+## Hints
+
+<details>
+<summary><b>Hint 1</b></summary>
+
+The first thing you need to do to solve this question is to get the locations of all instances of the substring in the main string. Try traversing the main string one character at a time and calling whatever substring-matching function is built into the language you're working in. Store a 2D array of locations, where each subarray holds the starting and ending indices of a specific instance of the substring in the main string.
+
+</details>
+
+<details>
+<summary><b>Hint 2</b></summary>
+
+The second thing you need to do is to "collapse" the 2D array mentioned in Hint #1. In essence, you need to merge the locations of substrings that overlap each other or sit next to each other. Traverse the 2D array mentioned in Hint #1 and build a new 2D array that holds these "collapsed" locations.
+
+</details>
+
+<details>
+<summary><b>Hint 3</b></summary>
+
+Finally, you need to create a new string with underscores added in the correct positions. Construct this new string by traversing the main string and the 2D array mentioned in Hint #2 at the same time. You might have to keep track of when you are "in between" underscores in order to correctly traverse the 2D array.
+
+</details>
+
 ## Optimal Time & Space Complexity
 
 Average case: `O(n + m)` | `O(n)` space - where `n` is the length of the main string and `m` is the length of the substring.
