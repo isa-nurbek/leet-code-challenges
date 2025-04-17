@@ -37,7 +37,7 @@ O(n) time | O(1) space - where `n` is the number of elements in the array.
 # Solution:
 
 
-# O(n) time | O(1) space - where `n` is the number of elements in the array
+# O(n) time | O(1) space
 def majority_element(array):
     # If the array is empty, return None
     if not array:
