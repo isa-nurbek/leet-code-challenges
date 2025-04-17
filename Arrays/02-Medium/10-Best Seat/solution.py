@@ -39,7 +39,7 @@ O(n) time | O(1) space - where `n` is the number of seats.
 # Solution:
 
 
-# O(n) time | O(1) space - where `n` is the number of seats.
+# O(n) time | O(1) space
 def best_seat(seats):
     # Initialize variables to track the best seat and the maximum available space
     best_seat = -1  # Default value if no suitable seat is found
