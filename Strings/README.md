@@ -1,6 +1,6 @@
-# String Challenges
+# String Code Challenges
 
-Welcome to the **String Challenges** unit! This unit is dedicated to solving a variety of string manipulation problems to sharpen programming and problem-solving skills.
+Welcome to the **String Code Challenges** unit! This unit is dedicated to solving a variety of string manipulation problems to sharpen programming and problem-solving skills.
 
 ---
 
