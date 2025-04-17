@@ -35,7 +35,7 @@ O(n^2) time | O(n) space - where `n`  is the length of the input array.
 # Solution:
 
 
-# `O(n^2)` time | `O(n)` space
+# `O(n²)` time | `O(n)` space
 def three_number_sum(array, target_sum):
     # Sort the array to make it easier to find the triplets
     array.sort()
