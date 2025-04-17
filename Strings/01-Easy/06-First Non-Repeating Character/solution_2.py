@@ -35,10 +35,7 @@ never have more than 26 character frequencies.
 # Solution:
 
 
-# O(n) time | O(1) space - where n is the length of the input string
-# The constant space is because the input string has lowercase
-# English-alphabet letters; thus, our hash table will never have more
-# than 26 character frequencies.
+# O(n) time | O(1) space
 def first_non_repeating_character(string):
     # Create a dictionary to store the frequency of each character in the string
     character_frequencies = {}
