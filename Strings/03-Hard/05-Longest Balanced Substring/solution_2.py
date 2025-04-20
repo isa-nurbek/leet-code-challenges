@@ -33,7 +33,7 @@ O(n) time | O(1) space - where `n` is the length of the input string.
 # Solution:
 
 
-# O(n) time | O(n) space - where `n` is the length of the input string.
+# O(n) time | O(n) space
 def longest_balanced_substring(string):
     # Initialize the maximum length of the balanced substring found so far.
     max_length = 0
