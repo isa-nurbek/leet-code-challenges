@@ -107,4 +107,4 @@ You can recursively generate characters one digit at a time and store the interm
 
 ## Optimal Time & Space Complexity
 
-`O(4^n * n)` time | `O(4^n * n)` space - where `n` is the length of the phone number.
+`O(4ⁿ * n)` time | `O(4ⁿ * n)` space - where `n` is the length of the phone number.
