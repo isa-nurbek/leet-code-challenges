@@ -35,8 +35,7 @@ and `m` is the length of the substring.
 # Solution:
 
 
-# Average case: `O(n + m)` | `O(n)` space - where `n` is the length
-# of the main string and `m` is the length of the substring
+# Average case: `O(n + m)` | `O(n)` space
 def underscorify_substring(string, substring):
     """
     Main function to underscorify all occurrences of the substring in the string.
