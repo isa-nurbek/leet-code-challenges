@@ -31,7 +31,7 @@ and `a` is the length of the character alphabet represented in the input string.
 # Solution:
 
 
-# `O(n)` time | `O(1)` space - where `n` is the length of shorter string
+# `O(n)` time | `O(1)` space
 def longest_substring_without_duplication(string):
     # Dictionary to store the last seen index of each character
     last_seen = {}
