@@ -101,3 +101,147 @@ Thus, the **space complexity is `O(n * 2ⁿ)`** (required to store all subsets).
 This is optimal for generating the powerset since the output itself has exponential size.
 
 """
+
+# =========================================================================================================================== #
+
+# Detailed Code Explanation:
+
+"""
+Let's walk through the code and understand how the `powerset` function works in detail.
+
+### ✅ **Goal:**
+The `powerset` function generates the **powerset** of a given array.
+
+- The **powerset** of a set is the set of **all subsets**, including:
+  - the empty set (`[]`)
+  - the full set itself
+  - and everything in between
+
+For example, the powerset of `[1, 2, 3]` is:
+```
+[
+  [],        # empty subset
+  [1], [2], [3],       # single-element subsets
+  [1, 2], [1, 3], [2, 3],  # two-element subsets
+  [1, 2, 3]              # full set
+]
+```
+
+---
+
+### 🧠 **Code Explanation:**
+
+```
+def powerset(array, idx=None):
+    if idx is None:
+        idx = len(array) - 1
+```
+
+- The function takes two arguments:
+  - `array`: the input list.
+  - `idx`: the current index we're working with (defaults to the **last index** in the array on the first call).
+
+---
+
+```
+if idx < 0:
+    return [[]]
+```
+
+- **Base case**: if the index is less than 0, we've finished processing all elements.
+- The only subset of an empty array is the **empty list** (`[[]]`), so return `[[]]`.
+
+---
+
+```
+elem = array[idx]
+```
+
+- `elem` is the element at the current index. This is the element we will consider **including or not including** in each subset.
+
+---
+
+```
+subsets = powerset(array, idx - 1)
+```
+
+- This is the **recursive call** to get the powerset of the **first `idx` elements** (excluding the current element).
+- So we're breaking the problem down: if we can get all subsets without `elem`, we can then create the rest of the powerset by adding `elem` to each of those subsets.
+
+---
+
+```python
+    return subsets + [subset + [elem] for subset in subsets]
+```
+
+- `subsets` is all subsets **without** `elem`.
+- `[subset + [elem] for subset in subsets]` creates a new list of subsets, where each old subset is **augmented with `elem`**.
+- We then **combine** both:
+  - subsets **without `elem`**
+  - subsets **with `elem`**
+
+---
+
+### 🔁 **How it works step-by-step:**
+
+Let’s trace `powerset([1, 2, 3])`:
+
+#### 1. Initial call: `powerset([1, 2, 3])`
+- `idx = 2`, `elem = 3`
+- recurse: `powerset([1, 2, 3], 1)`
+
+#### 2. Second call: `powerset([1, 2, 3], 1)`
+- `idx = 1`, `elem = 2`
+- recurse: `powerset([1, 2, 3], 0)`
+
+#### 3. Third call: `powerset([1, 2, 3], 0)`
+- `idx = 0`, `elem = 1`
+- recurse: `powerset([1, 2, 3], -1)`
+
+#### 4. Base case: `powerset([1, 2, 3], -1)`
+- returns `[[]]`
+
+Now we **build back up**:
+
+---
+
+#### Going back to idx=0 (`elem = 1`):
+- subsets without `1`: `[[]]`
+- subsets with `1`: `[[1]]`
+- return `[[], [1]]`
+
+---
+
+#### Going back to idx=1 (`elem = 2`):
+- subsets without `2`: `[[], [1]]`
+- subsets with `2`: `[[2], [1, 2]]`
+- return `[[], [1], [2], [1, 2]]`
+
+---
+
+#### Going back to idx=2 (`elem = 3`):
+- subsets without `3`: `[[], [1], [2], [1, 2]]`
+- subsets with `3`: `[[3], [1, 3], [2, 3], [1, 2, 3]]`
+- return:
+```
+[[], [1], [2], [1, 2], [3], [1, 3], [2, 3], [1, 2, 3]]
+```
+
+---
+
+### 🧪 Test Case: `powerset([])`
+
+- `idx = -1`
+- returns `[[]]`, the only subset of the empty set.
+
+---
+
+### 🧠 Summary:
+
+- **Recursive** approach
+- Each level of recursion:
+  - Gets all subsets **without** the current element
+  - Adds the current element to each of those subsets to get the rest
+- Combines both sets of subsets to return the result
+
+"""
