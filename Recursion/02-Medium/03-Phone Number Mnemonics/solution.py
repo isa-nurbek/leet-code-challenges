@@ -94,7 +94,7 @@ phone_number = "1905"
 
 ## Optimal Time & Space Complexity:
 ```
-O(4^n * n) time | O(4^n * n) space - where `n` is the length of the phone number.
+O(4ⁿ * n) time | O(4ⁿ * n) space - where `n` is the length of the phone number.
 ```
 """
 
@@ -103,7 +103,7 @@ O(4^n * n) time | O(4^n * n) space - where `n` is the length of the phone number
 # Solution:
 
 
-# O(4^n * n) time | O(4^n * n) space
+# O(4ⁿ * n) time | O(4ⁿ * n) space
 def phone_number_mnemonics(phone_number):
     # Initialize a list to store all generated mnemonics
     mnemonics = []
@@ -205,8 +205,8 @@ print(phone_number_mnemonics("0"))
 
 
 ### **Final Answer:**
-- **Time Complexity:** `O(n * 4^n)`
-- **Space Complexity:** `O(n * 4^n)`
+- **Time Complexity:** `O(n * 4ⁿ)`
+- **Space Complexity:** `O(n * 4ⁿ)`
 
 ### **Explanation with Example:**
 For a phone number like `"23"` (where `2` maps to `["a", "b", "c"]` and `3` maps to `["d", "e", "f"]`):
@@ -215,5 +215,177 @@ For a phone number like `"23"` (where `2` maps to `["a", "b", "c"]` and `3` maps
 - The space complexity is `O(n * 3^n)` for storing the output (but `O(n * 4^n)` in the worst case).
 
 The worst-case scenario occurs when the phone number consists entirely of `7`s or `9`s (digits with 4 letters each).
+
+"""
+
+# Detailed Code Explanation:
+
+"""
+## 🎯 **Goal of the Code**
+
+The function `phone_number_mnemonics(phone_number)` takes a string of digits (like a phone number) and returns **all possible 
+letter combinations** that the number could represent based on the traditional phone keypad mapping.
+
+---
+
+## 📞 Phone Keypad Mapping
+
+You’ve defined the mapping using a dictionary:
+
+```
+digit_to_letters = {
+    "0": ["0"], 
+    "1": ["1"],  
+    "2": ["a", "b", "c"],  
+    "3": ["d", "e", "f"],  
+    "4": ["g", "h", "i"],  
+    "5": ["j", "k", "l"], 
+    "6": ["m", "n", "o"],  
+    "7": ["p", "q", "r", "s"],  
+    "8": ["t", "u", "v"],  
+    "9": ["w", "x", "y", "z"],   
+}
+```
+
+Each digit maps to a set of characters, just like on a mobile keypad.
+
+---
+
+## 🔁 How the Function Works
+
+Here’s a breakdown of your function:
+
+```
+def phone_number_mnemonics(phone_number):
+    mnemonics = []  # List to store all the valid mnemonics
+    current_mnemonic = ["0"] * len(phone_number)  # Placeholder for one possible combination
+
+    def backtrack(index):
+        # Base case: If we’ve filled in all characters, save this combination
+        if index == len(phone_number):
+            mnemonics.append("".join(current_mnemonic))
+            return
+
+        digit = phone_number[index]  # Get the current digit
+        for letter in digit_to_letters[digit]:  # Loop through each letter that maps to this digit
+            current_mnemonic[index] = letter  # Replace character at current index
+            backtrack(index + 1)  # Move to next digit
+
+    backtrack(0)  # Start recursion from index 0
+    return mnemonics
+```
+
+---
+
+## 🔄 Example Walkthrough
+
+Let’s walk through `phone_number_mnemonics("1905")`.
+
+- **Input:** `"1905"`
+- **Digits:**  
+  - `"1"` → ["1"]  
+  - `"9"` → ["w", "x", "y", "z"]  
+  - `"0"` → ["0"]  
+  - `"5"` → ["j", "k", "l"]  
+
+So possible mnemonics are formed by taking one character from each list in sequence.
+
+E.g.,  
+`1w0j`, `1w0k`, `1w0l`,  
+`1x0j`, `1x0k`, `1x0l`,  
+...
+
+Which results in:
+```
+['1w0j', '1w0k', '1w0l',
+ '1x0j', '1x0k', '1x0l',
+ '1y0j', '1y0k', '1y0l',
+ '1z0j', '1z0k', '1z0l']
+```
+
+---
+
+## 🔁 Backtracking Strategy
+
+This is a classic **backtracking** approach, used for problems involving combinations, permutations, or exploring decision trees.
+
+### Why It Works:
+
+- The `backtrack` function explores **all paths recursively**.
+- At each level, it tries every possible letter for that digit.
+- When it reaches the end (`index == len(phone_number)`), it saves the full string.
+- Backtracking ensures we explore **every valid combination**.
+
+---
+
+## ✅ Test Case Results
+
+### `phone_number_mnemonics("0")`
+→ ["0"]
+
+### `phone_number_mnemonics("98")`
+- 9 → [w, x, y, z]  
+- 8 → [t, u, v]  
+→ 4 * 3 = 12 combinations  
+→ ["wt", "wu", ..., "zv"]
+
+---
+
+Let's visualize how the **backtracking tree** works for a small input — say:
+
+---
+
+### 📲 Input: `"23"`
+
+Using the digit mapping:
+- `"2"` → ["a", "b", "c"]
+- `"3"` → ["d", "e", "f"]
+
+---
+
+### 🌳 Backtracking Tree Visualization
+
+```
+                        [ ]         ← Start with empty string
+                       / | \
+                     a   b   c      ← Choices for '2'
+                   / | \ /|\ /|\
+                 ad ae af bd be bf cd ce cf ← Choices for '3'
+```
+
+Each path from the root to a leaf gives you one complete **mnemonic** (a 2-letter string in this case).
+
+---
+
+### ✅ Final Results:
+
+```
+["ad", "ae", "af",
+ "bd", "be", "bf",
+ "cd", "ce", "cf"]
+```
+
+---
+
+### 🌱 How This Grows for Larger Inputs
+
+If you have `"203"`:
+- `"2"` → ["a", "b", "c"]
+- `"0"` → ["0"]
+- `"3"` → ["d", "e", "f"]
+
+Tree looks like:
+
+```
+                [ ]
+               / | \
+             a   b   c
+             |   |   |
+             0   0   0
+           / | \ /|\ /|\
+         d  e  f d e f d e f
+```
+
+Each level corresponds to one digit. The total number of leaves = product of letters for each digit.
 
 """
