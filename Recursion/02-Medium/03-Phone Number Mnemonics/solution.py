@@ -105,34 +105,45 @@ O(4^n * n) time | O(4^n * n) space - where `n` is the length of the phone number
 
 # O(4^n * n) time | O(4^n * n) space
 def phone_number_mnemonics(phone_number):
+    # Initialize a list to store all generated mnemonics
     mnemonics = []
+    # Create a list to build each mnemonic, initialized with '0's as placeholders
     current_mnemonic = ["0"] * len(phone_number)
 
+    # Define a recursive backtracking function to generate mnemonics
     def backtrack(index):
+        # Base case: if we've processed all digits, add the complete mnemonic to results
         if index == len(phone_number):
             mnemonics.append("".join(current_mnemonic))
             return
 
+        # Get the current digit from the phone number
         digit = phone_number[index]
+        # For each letter mapped to the current digit:
         for letter in digit_to_letters[digit]:
+            # Assign the letter to the current position
             current_mnemonic[index] = letter
+            # Recursively process the next digit
             backtrack(index + 1)
 
+    # Start the backtracking process from the first digit (index 0)
     backtrack(0)
+    # Return all generated mnemonics
     return mnemonics
 
 
+# Mapping of digits to their corresponding letters on a phone keypad
 digit_to_letters = {
-    "0": ["0"],
-    "1": ["1"],
-    "2": ["a", "b", "c"],
-    "3": ["d", "e", "f"],
-    "4": ["g", "h", "i"],
-    "5": ["j", "k", "l"],
-    "6": ["m", "n", "o"],
-    "7": ["p", "q", "r", "s"],
-    "8": ["t", "u", "v"],
-    "9": ["w", "x", "y", "z"],
+    "0": ["0"],  # 0 maps to 0
+    "1": ["1"],  # 1 maps to 1
+    "2": ["a", "b", "c"],  # 2 maps to a, b, c
+    "3": ["d", "e", "f"],  # 3 maps to d, e, f
+    "4": ["g", "h", "i"],  # 4 maps to g, h, i
+    "5": ["j", "k", "l"],  # 5 maps to j, k, l
+    "6": ["m", "n", "o"],  # 6 maps to m, n, o
+    "7": ["p", "q", "r", "s"],  # 7 maps to p, q, r, s
+    "8": ["t", "u", "v"],  # 8 maps to t, u, v
+    "9": ["w", "x", "y", "z"],  # 9 maps to w, x, y, z
 }
 
 # Test Cases:
