@@ -42,8 +42,7 @@ and `s` is the length of the small input string.
 # Solution:
 
 
-# O(b + s) time | O(b + s) space - where `b` is the length of the big
-# input string and `s` is the length of the small input string
+# O(b + s) time | O(b + s) space
 def smallest_substring_containing(big_string, small_string):
     # Step 1: Get the character counts for the small string
     target_char_counts = get_char_counts(small_string)
