@@ -4,7 +4,7 @@ If you open the keypad of your mobile phone, it'll likely look like this:
 
 ```plaintext
    ----- ----- -----
-  |     |     |     |
+  |     |     |     |                 
   |  1  |  2  |  3  |
   |     | abc | def |
    ----- ----- -----
@@ -20,6 +20,28 @@ If you open the keypad of your mobile phone, it'll likely look like this:
         |  0  |
         |     |
          -----
+
+**Here's the mapping for clarity:**
+
+0: ["0"]
+
+1: ["1"]
+
+2: ["a", "b", "c"]
+
+3: ["d", "e", "f"]
+
+4: ["g", "h", "i"]
+
+5: ["j", "k", "l"]
+
+6: ["m", "n", "o"]
+
+7: ["p", "q", "r", "s"]
+
+8: ["t", "u", "v"]
+
+9: ["w", "x", "y", "z"]
 ```
 
 Almost every digit is associated with some letters in the alphabet; this allows certain phone numbers to spell out actual words. For example, the phone number `8464747328` can be written as `timisgreat`; similarly, the phone number `2686463` can be written as antoine or as `ant6463`.
