@@ -21,7 +21,7 @@ If you open the keypad of your mobile phone, it'll likely look like this:
         |     |
          -----
 
-**Here's the mapping for clarity:**
+Here's the mapping for clarity:
 
 0: ["0"]
 
