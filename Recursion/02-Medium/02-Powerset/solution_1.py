@@ -64,3 +64,40 @@ print(powerset([1, 2, 3]))
 
 print(powerset([]))
 # Output: [[]]
+
+# =========================================================================================================================== #
+
+# Big O Analysis:
+
+"""
+
+## Time and Space Complexity Analysis
+
+### Time Complexity:
+- Let `n` be the length of the input array.
+- The number of subsets in a powerset is `2ⁿ` (since each element can either be included or excluded from a subset).
+- For each recursive call, the function processes one element (`elem = array[idx]`) and combines the existing subsets
+with new subsets that include `elem`.
+- The work done at each step is proportional to the number of subsets at that step, which is `2^k` where `k` is the number
+of elements processed so far.
+
+- The total work is `2^0 + 2^1 + 2^2 + ... + 2^(n-1) = 2^n - 1`, which is `O(2ⁿ)`.
+
+Thus, the **time complexity is `O(n * 2ⁿ)`**. The `n` factor comes from the fact that, for each of the `2ⁿ` subsets,
+we may need to copy/modify the subset (which takes O(n) time in the worst case when copying).
+
+### Space Complexity:
+- The space complexity is determined by the output (the powerset itself) and the recursion stack.
+- The powerset contains `2^n` subsets, and the total number of elements across all subsets is `n * 2^(n-1)`
+(since each element appears in exactly half of the subsets, i.e., `2ⁿ⁻¹` times). This dominates the space usage.
+- The recursion depth is `O(n)` (since we make `n` recursive calls), but this is negligible compared to the output size.
+
+Thus, the **space complexity is `O(n * 2ⁿ)`** (required to store all subsets).
+
+### Summary:
+- Time Complexity: **O(n * 2ⁿ)**
+- Space Complexity: **O(n * 2ⁿ)**
+
+This is optimal for generating the powerset since the output itself has exponential size.
+
+"""
