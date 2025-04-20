@@ -156,3 +156,64 @@ print(phone_number_mnemonics("98"))
 
 print(phone_number_mnemonics("0"))
 # ['0']
+
+# =========================================================================================================================== #
+
+# Big O Analysis:
+
+"""
+## Time and Space Complexity Analysis
+
+### **Time Complexity:**
+
+1. **Digit to Letters Mapping:**
+   - The digits `0` and `1` map to `["0"]` and `["1"]` respectively (only 1 choice per digit).
+   - Digits `2` to `9` map to 3 or 4 letters each (e.g., `2` maps to `["a", "b", "c"]`).
+
+2. **Worst Case:**
+   - The worst case occurs when every digit in the phone number is from `7` or `9` (which map to 4 letters each). For example,
+   if the input is `"9999"`, each digit has 4 choices.
+   - Let `n` be the length of the phone number. If every digit has `4` choices, the recursion tree will have `4^n` leaves
+   (since each of the `n` digits has 4 possibilities).
+   
+   - Thus, the total number of recursive calls is `O(4^n)`.
+
+3. **Work per Recursive Call:**
+   - At each recursive call, we append a letter to `current_mnemonic` (an `O(1)` operation for array assignment).
+   - When we reach the base case (`index == len(phone_number)`), we join the `current_mnemonic` array into a string
+   (an `O(n)` operation).
+   - Since there are `O(4^n)` base cases, the total work for joining strings is `O(n * 4^n)`.
+
+4. **Overall Time Complexity:**
+   - The dominant term is `O(n * 4^n)` because of the string joining in the base case.
+   
+
+### **Space Complexity:**
+
+1. **Recursion Stack:**
+   - The maximum depth of the recursion is `n` (the length of the phone number), so the recursion stack uses `O(n)` space.
+
+2. **Output Storage (`mnemonics`):**
+   - In the worst case, there are `4^n` mnemonics, each of length `n`.
+   - Thus, the space required to store all mnemonics is `O(n * 4^n)`.
+
+3. **Auxiliary Space (`current_mnemonic`):**
+   - The `current_mnemonic` array is of size `n` and is modified in-place during backtracking.
+
+4. **Overall Space Complexity:**
+   - The dominant term is `O(n * 4^n)` due to the output storage.
+
+
+### **Final Answer:**
+- **Time Complexity:** `O(n * 4^n)`
+- **Space Complexity:** `O(n * 4^n)`
+
+### **Explanation with Example:**
+For a phone number like `"23"` (where `2` maps to `["a", "b", "c"]` and `3` maps to `["d", "e", "f"]`):
+- The recursion tree has `3 * 3 = 9` leaves (mnemonics: `["ad", "ae", "af", "bd", "be", "bf", "cd", "ce", "cf"]`).
+- The time complexity is `O(n * 3^n)` for this case (but `O(n * 4^n)` in the worst case).
+- The space complexity is `O(n * 3^n)` for storing the output (but `O(n * 4^n)` in the worst case).
+
+The worst-case scenario occurs when the phone number consists entirely of `7`s or `9`s (digits with 4 letters each).
+
+"""
