@@ -145,3 +145,103 @@ the loop runs up to `height` times for each subproblem.
 - The space complexity is dominated by the memoization storage and the recursion depth, both of which are linear in `height`.
 
 """
+
+# =========================================================================================================================== #
+
+# Detailed Code Explanation:
+
+"""
+Let's break this down step by step to understand how the **`staircase_traversal`** function works and what it's doing under the hood.
+
+---
+
+### 🔧 **Problem Statement**
+
+You are given:
+- `height`: the total number of stairs.
+- `max_steps`: the maximum number of stairs you can climb at once.
+
+You need to **count the number of distinct ways** to reach the top (i.e., the `height`-th step), starting from the ground 
+(step 0), if you can climb up to `max_steps` at a time.
+
+---
+
+### 🧠 **Intuition**
+
+This is a classic **Dynamic Programming** (DP) problem. It's similar to the **"ways to climb stairs"** problem. At any stair `n`,
+the number of ways to reach it is the sum of the number of ways to reach all stairs from `n - 1` down to `n - max_steps`.
+
+---
+
+### 🧩 **Code Breakdown**
+
+#### 🔹 Main Function: `staircase_traversal(height, max_steps)`
+
+```
+def staircase_traversal(height, max_steps):
+    return number_of_ways_to_top(height, max_steps, {0: 1, 1: 1})
+```
+
+- This function is just a wrapper.
+- It calls the recursive helper `number_of_ways_to_top()`.
+- It initializes a **memoization dictionary** (`memoize`) with base cases:
+  - `{0: 1}` → There is 1 way to stay at the ground (by doing nothing).
+  - `{1: 1}` → There is 1 way to reach the first step (1 step at a time).
+
+#### 🔹 Helper Function: `number_of_ways_to_top(height, max_steps, memoize)`
+
+```
+def number_of_ways_to_top(height, max_steps, memoize):
+    if height in memoize:
+        return memoize[height]
+```
+
+- If the result for a specific `height` is already computed and stored in `memoize`, we return it directly (avoids re-computation).
+
+```
+number_of_ways = 0
+for step in range(1, min(max_steps, height) + 1):
+    number_of_ways += number_of_ways_to_top(height - step, max_steps, memoize)
+```
+
+- We try **all possible steps** from 1 to `max_steps`.
+- For each step size, we recursively calculate the number of ways to reach `(height - step)`.
+- We sum these up to get the total number of ways to reach the current `height`.
+
+```
+memoize[height] = number_of_ways
+return number_of_ways
+```
+
+- We **store** the result in `memoize` for future lookups.
+- Then we return the total number of ways to reach the given `height`.
+
+---
+
+### ✅ **Example: `staircase_traversal(4, 2)`**
+
+You're at the bottom and need to reach step 4, taking up to 2 steps at a time.
+
+Let’s manually enumerate:
+- 1-1-1-1  
+- 1-1-2  
+- 1-2-1  
+- 2-1-1  
+- 2-2  
+
+There are **5 ways**, which matches the output.
+
+---
+
+### 🔬 Test Case Outputs Recap
+
+```
+print(staircase_traversal(4, 2))   # Output: 5
+print(staircase_traversal(10, 1))  # Output: 1
+print(staircase_traversal(6, 3))   # Output: 24
+```
+
+- `10, 1` → Only one way: take 1 step 10 times.
+- `6, 3` → Multiple combinations using steps of 1, 2, and 3. Total = 24.
+
+"""
