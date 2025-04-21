@@ -44,15 +44,40 @@ O(n) time | O(n) space - where `n` is the height of the staircase.
 
 # O(kⁿ) time | O(n) space
 def staircase_traversal(height, max_steps):
+    """Main function to calculate number of ways to climb a staircase.
+
+    Args:
+        height: Total number of steps in the staircase
+        max_steps: Maximum number of steps you can take at a time
+
+    Returns:
+        Number of distinct ways to climb the staircase
+    """
     return number_of_ways_to_top(height, max_steps)
 
 
 def number_of_ways_to_top(height, max_steps):
+    """Recursive helper function to calculate ways to reach the top.
+
+    The approach uses recursion with the idea that:
+    The number of ways to reach step n is the sum of ways to reach
+    steps n-1, n-2, ..., n-max_steps (since you can jump up to max_steps at a time)
+
+    Args:
+        height: Remaining height/steps to climb
+        max_steps: Maximum steps that can be taken at once
+
+    Returns:
+        Number of ways to climb the remaining height
+    """
+    # Base case: if height is 0 or 1, there's only 1 way (do nothing or take one step)
     if height <= 1:
         return 1
 
     number_of_ways = 0
+    # Consider all possible step sizes we can take at this point (from 1 to max_steps)
     for step in range(1, min(max_steps, height) + 1):
+        # Add the number of ways from the resulting sub-problem
         number_of_ways += number_of_ways_to_top(height - step, max_steps)
 
     return number_of_ways
