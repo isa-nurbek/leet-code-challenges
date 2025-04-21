@@ -88,3 +88,37 @@ def staircase_traversal(height, max_steps):
 print(staircase_traversal(4, 2))  #  Output: 5
 print(staircase_traversal(10, 1))  #  Output: 1
 print(staircase_traversal(6, 3))  #  Output: 24
+
+# =========================================================================================================================== #
+
+# Big O Analysis:
+
+"""
+## Time and Space Complexity Analysis
+
+
+### **Space Complexity**
+- The function uses an array `ways_to_top` of size `height + 1` to store intermediate results.
+- Thus, the **space complexity is `O(height)`**, as the space grows linearly with the input `height`.
+
+### **Time Complexity**
+1. The outer loop runs from `2` to `height`, so it iterates `O(height)` times.
+2. The inner `while` loop runs up to `max_steps` times for each iteration of the outer loop.
+   - In the worst case, `max_steps` could be as large as `height`, making this loop `O(max_steps)` per iteration.
+   - However, if `max_steps` is small compared to `height`, this reduces the time complexity.
+
+Thus, the **time complexity is `O(height * max_steps)`**, since for each step in `height`, we perform up to `max_steps` operations.
+
+### **Optimization Consideration (Sliding Window Approach)**
+The current approach uses a dynamic programming (DP) method with nested loops. However, this can be optimized further using a
+**sliding window technique** to reduce the time complexity to `O(height)` while keeping space complexity at `O(height)`
+(or even `O(max_steps)` with further optimization).
+
+### **Final Complexity Analysis**
+
+| Aspect           | Complexity               |
+|------------------|--------------------------|
+| **Time**         | `O(height * max_steps)`  |
+| **Space**        | `O(height)`              |
+
+"""
