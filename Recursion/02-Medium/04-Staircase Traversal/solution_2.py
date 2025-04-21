@@ -93,3 +93,55 @@ def number_of_ways_to_top(height, max_steps, memoize):
 print(staircase_traversal(4, 2))  #  Output: 5
 print(staircase_traversal(10, 1))  #  Output: 1
 print(staircase_traversal(6, 3))  #  Output: 24
+
+# =========================================================================================================================== #
+
+# Big O Analysis:
+
+"""
+## Time and Space Complexity Analysis
+
+Let's analyze the time and space complexity of the given `staircase_traversal` function, which uses memoization to compute
+the number of ways to climb a staircase of height `height` with a maximum step size of `max_steps`.
+
+### **Time Complexity:**
+
+1. **Recursive Calls with Memoization:**
+   - The function `number_of_ways_to_top` is called recursively for each step from 1 to `min(max_steps, height)`.
+   - However, with memoization, each subproblem (i.e., each unique `height`) is computed only once.
+   - For each `height`, the function performs `O(max_steps)` work (since the loop runs up to `max_steps` times).
+
+2. **Total Subproblems:**
+   - There are `O(height)` unique subproblems (since `height` can range from 0 to the input `height`).
+
+3. **Overall Time Complexity:**
+   - Since each of the `O(height)` subproblems is solved in `O(max_steps)` time, the total time complexity is:
+
+        O(height * max_steps)
+
+
+### **Space Complexity:**
+
+1. **Memoization Dictionary:**
+   - The memoization dictionary stores results for all `height` values from 0 up to the input `height`, so it uses `O(height)` space.
+
+2. **Recursion Call Stack:**
+   - In the worst case, the recursion can go as deep as `height` (e.g., when `max_steps = 1`, the recursion depth is `height`).
+   - Thus, the call stack also uses `O(height)` space.
+
+3. **Overall Space Complexity:**
+   - The total space complexity is the sum of the memoization dictionary and the call stack:
+
+        O(height) + O(height) = O(height)
+
+
+### **Summary:**
+- **Time Complexity:** O(height * max_steps)
+- **Space Complexity:** O(height)
+
+### **Note:**
+- If `max_steps` is very large (e.g., `max_steps >= height`), the time complexity simplifies to O(height^2), since
+the loop runs up to `height` times for each subproblem.
+- The space complexity is dominated by the memoization storage and the recursion depth, both of which are linear in `height`.
+
+"""
