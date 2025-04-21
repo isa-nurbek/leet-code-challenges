@@ -156,3 +156,132 @@ This is highly inefficient for large `height` or `max_steps`, and dynamic progra
 for practical use.
 
 """
+
+# =========================================================================================================================== #
+
+# Detailed Code Explanation:
+
+"""
+
+Let's walk through the **staircase traversal** code and break down how it works, line by line and conceptually.
+
+---
+
+### ✅ **Problem Description**
+
+You're given a staircase with a certain `height`, and at each step, you can climb anywhere from `1` to `max_steps` stairs at once.
+
+You are to determine **how many distinct ways** you can climb to the top of the staircase.
+
+---
+
+### ✅ **Function Definitions**
+
+#### `staircase_traversal(height, max_steps)`
+```
+def staircase_traversal(height, max_steps):
+    return number_of_ways_to_top(height, max_steps)
+```
+This is just a **wrapper function**. It delegates the actual calculation to `number_of_ways_to_top`.
+
+---
+
+#### `number_of_ways_to_top(height, max_steps)`
+```
+def number_of_ways_to_top(height, max_steps):
+    if height <= 1:
+        return 1
+```
+
+- **Base Case**:
+  - If `height <= 1`, it means you've either:
+    - Reached the top exactly (`height == 0`)
+    - Or you're on the last step (`height == 1`)
+  - Either way, there's **only 1 way** to be in that position (e.g., do nothing or take a final step).
+  - So, return `1`.
+
+```
+number_of_ways = 0
+for step in range(1, min(max_steps, height) + 1):
+    number_of_ways += number_of_ways_to_top(height - step, max_steps)
+```
+
+- This is the **recursive case**.
+- You're currently on a step with `height` steps to go.
+- You can take **1 up to `max_steps`** steps forward.
+  - You loop from `step = 1` to `step = min(max_steps, height)`
+  - For each possible step size, you recursively find:
+    - The number of ways to climb the remaining `height - step` steps
+  - And **accumulate** all those ways into `number_of_ways`.
+
+```
+return number_of_ways
+```
+- Finally, return the total number of ways from the current height to the top.
+
+---
+
+### ✅ **How It Works – Example: `staircase_traversal(4, 2)`**
+
+We need to compute how many ways to reach the top of a staircase of height 4, taking steps of 1 or 2.
+
+Let’s visualize the recursive tree:
+```
+number_of_ways_to_top(4, 2)
+= number_of_ways_to_top(3, 2) + number_of_ways_to_top(2, 2)
+
+number_of_ways_to_top(3, 2)
+= number_of_ways_to_top(2, 2) + number_of_ways_to_top(1, 2)
+
+number_of_ways_to_top(2, 2)
+= number_of_ways_to_top(1, 2) + number_of_ways_to_top(0, 2)
+
+number_of_ways_to_top(1, 2)
+= 1 (base case)
+
+number_of_ways_to_top(0, 2)
+= 1 (base case)
+
+Now work backwards:
+number_of_ways_to_top(2, 2) = 1 + 1 = 2
+number_of_ways_to_top(1, 2) = 1
+
+So,
+number_of_ways_to_top(3, 2) = 2 + 1 = 3
+number_of_ways_to_top(2, 2) = 2 (again)
+
+Final:
+number_of_ways_to_top(4, 2) = 3 + 2 = 5
+```
+
+---
+
+### ✅ **Test Cases**
+
+```
+print(staircase_traversal(4, 2))  # Output: 5
+```
+We explained this above.
+
+```
+print(staircase_traversal(10, 1))  # Output: 1
+```
+You can only take 1 step at a time → only 1 way to climb 10 steps.
+
+```
+print(staircase_traversal(6, 3))  # Output: 24
+```
+This is a more complex case — the function will explore all combinations of 1, 2, or 3 steps that sum to 6.
+
+---
+
+### ❗ **Performance Consideration**
+
+This recursive approach is **not efficient** for large values because it:
+- Recomputes the same subproblems repeatedly (e.g., `number_of_ways_to_top(3, 2)` is called multiple times).
+
+This can be optimized using:
+- **Memoization (Top-Down DP)** to cache results
+- **Bottom-Up Dynamic Programming** for even better performance
+
+"""
