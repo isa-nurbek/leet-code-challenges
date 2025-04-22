@@ -57,12 +57,3 @@ def staircase_traversal(height, max_steps):
             total = sum(sliding_window[:current_height])
         else:
             total = sum(sliding_window[-max_steps:])
-
-        # Update the sliding window (shift left and append new value)
-        sliding_window.pop(0)
-        sliding_window.append(total)
-
-    return sliding_window[-1]
-
-
-# Test Cases:
