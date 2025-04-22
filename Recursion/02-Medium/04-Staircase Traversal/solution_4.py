@@ -50,10 +50,3 @@ def staircase_traversal(height, max_steps):
     sliding_window = [0] * (max_steps + 1)
     sliding_window[0] = 1  # Base case: 1 way to stay at ground
     sliding_window[1] = 1  # Base case: 1 way to reach step 1
-
-    for current_height in range(2, height + 1):
-        # Compute the sum of the last 'max_steps' elements
-        if current_height <= max_steps:
-            total = sum(sliding_window[:current_height])
-        else:
-            total = sum(sliding_window[-max_steps:])
