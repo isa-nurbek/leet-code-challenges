@@ -40,9 +40,3 @@ O(n) time | O(n) space - where `n` is the height of the staircase.
 # =========================================================================================================================== #
 
 # Solution:
-
-
-# O(n) time | O(n) space
-def staircase_traversal(height, max_steps):
-    if height == 0 or height == 1:
-        return 1
