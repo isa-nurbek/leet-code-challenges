@@ -66,7 +66,3 @@ def staircase_traversal(height, max_steps):
 
 
 # Test Cases:
-
-print(staircase_traversal(4, 2))  #  Output: 5
-print(staircase_traversal(10, 1))  #  Output: 1
-print(staircase_traversal(6, 3))  #  Output: 24
