@@ -46,7 +46,3 @@ O(n) time | O(n) space - where `n` is the height of the staircase.
 def staircase_traversal(height, max_steps):
     if height == 0 or height == 1:
         return 1
-
-    sliding_window = [0] * (max_steps + 1)
-    sliding_window[0] = 1  # Base case: 1 way to stay at ground
-    sliding_window[1] = 1  # Base case: 1 way to reach step 1
