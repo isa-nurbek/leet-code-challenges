@@ -1,5 +1,0 @@
-# Problem Description:
-
-"""
-
-                                          Staircase Traversal
