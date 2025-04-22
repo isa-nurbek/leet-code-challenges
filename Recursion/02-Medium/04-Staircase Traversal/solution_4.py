@@ -12,10 +12,3 @@ could take **1 step, 1 step, then 1 step**, you could also take **1 step, then 2
 then 1 step**.
 
 > Note that `max_steps <= height` will always be true.
-
-
-## Sample Input
-```
-height = 4
-max_steps = 2
-```
