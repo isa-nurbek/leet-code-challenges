@@ -30,9 +30,3 @@ max_steps = 2
 // 2, 1, 1
 // 2, 2
 ```
-
-## Optimal Time & Space Complexity:
-```
-O(n) time | O(n) space - where `n` is the height of the staircase.
-```
-"""
