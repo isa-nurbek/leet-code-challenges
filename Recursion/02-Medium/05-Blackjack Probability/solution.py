@@ -112,3 +112,47 @@ def calculate_probability(current_hand, target, memo):
 print(blackjack_probability(21, 15))  #  Output: 0.45
 print(blackjack_probability(21, 21))  #  Output: 0
 print(blackjack_probability(10, 3))  #  Output: 0.395
+
+# =========================================================================================================================== #
+
+# Big O Analysis:
+
+"""
+## Time and Space Complexity Analysis
+
+
+### **Time Complexity**
+
+Let **`S`** be the maximum possible `current_hand` value where we perform computations.  
+- The worst case is when `starting_hand` is small, and we compute probabilities for all possible hands up to `target + 10`
+(since the maximum card is `10`).
+- The recursion branches into **10** possibilities at each step (for cards `1` to `10`).
+- However, memoization ensures that each subproblem (`current_hand`) is computed only once.
+
+Thus:
+- **Number of subproblems**: `O(T)`, where `T = target - starting_hand + 10` (since we compute up to `target + 10` in the
+worst case).
+- **Work per subproblem**: `O(10) = O(1)` (since we loop over 10 cards and perform constant-time operations).
+
+**Total time complexity**: `O(T)`, where `T` is the range of possible `current_hand` values we compute.
+
+In the worst case, if `starting_hand = 0` and `target` is large, `T = O(target)`.
+
+
+### **Space Complexity**
+
+- The space is dominated by:
+  1. The **memoization dictionary (`memo`)** which stores `O(T)` entries.
+  2. The **recursion stack depth**, which is `O(T)` in the worst case (if we draw `1`s repeatedly until we reach
+  `current_hand > target`).
+
+**Total space complexity**: `O(T)`.
+
+### **Final Answer**
+
+- **Time Complexity**: `O(T)`, where `T = target - starting_hand + 10` (or `O(target)` in the worst case).
+- **Space Complexity**: `O(T)` (due to memoization and recursion stack).
+
+This is efficient due to memoization, avoiding exponential recomputation.
+
+"""
