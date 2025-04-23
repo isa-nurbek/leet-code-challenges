@@ -52,26 +52,57 @@ O(t - s) time | O(t - s) space - where `t` is the target, and `s` is the startin
 
 # O(t - s) time | O(t - s) space
 def blackjack_probability(target, starting_hand):
+    """Calculate the probability of going over the target value in Blackjack.
+
+    Args:
+        target (int): The target value (typically 21 in Blackjack)
+        starting_hand (int): The current hand value to start from
+
+    Returns:
+        float: The probability of busting, rounded to 3 decimal places
+    """
+    # Initialize memoization dictionary to store already computed probabilities
     memo = {}
+    # Calculate and return the probability rounded to 3 decimal places
     return round(calculate_probability(starting_hand, target, memo), 3)
 
 
 def calculate_probability(current_hand, target, memo):
+    """Recursive helper function to calculate bust probability with memoization.
+
+    Args:
+        current_hand (int): Current hand value in the recursive calculation
+        target (int): The target value we're trying not to exceed
+        memo (dict): Dictionary to store computed probabilities for efficiency
+
+    Returns:
+        float: Probability of busting from the current hand state
+    """
+    # If we've already computed this hand value, return stored result
     if current_hand in memo:
         return memo[current_hand]
 
+    # Base case: current hand already exceeds target (bust)
     if current_hand > target:
-        return 1
+        return 1  # 100% probability we're busted
 
+    # Base case: current hand is close enough to target that any card will cause bust
+    # (Since highest card value is 10, if current_hand + 4 >= target, then a 10 would bust)
     if current_hand + 4 >= target:
-        return 0
+        return 0  # 0% probability of busting from this state
 
+    # Initialize total probability for this hand state
     total_probability = 0
+
+    # Consider all possible card draws (1 through 10)
     for drawn_card in range(1, 11):
+        # Each card has 10% chance (1/10 probability)
+        # Recursively calculate probability for the new hand state
         total_probability += 0.1 * calculate_probability(
             current_hand + drawn_card, target, memo
         )
 
+    # Store computed probability in memo before returning
     memo[current_hand] = total_probability
     return total_probability
 
