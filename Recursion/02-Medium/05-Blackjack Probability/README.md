@@ -28,6 +28,29 @@ starting_hand = 15
 // (the probability of busting on the first draw + the probability of busting on the second).
 ```
 
+## Hints
+
+<details>
+<summary><b>Hint 1</b></summary>
+
+Try first thinking about a simple case. Given a `target` value of 21 and a `starting_hand` of 15, how would you calculate the probability of busting? And how would that probability change if the `starting_hand` changes to 14?
+
+</details>
+
+<details>
+<summary><b>Hint 2</b></summary>
+
+The probability of busting from any given `starting_hand` is `(0.1 * p(starting_hand + 1)) + ... + (0.1 * p(starting_hand + 10))`.
+
+</details>
+
+<details>
+<summary><b>Hint 3</b></summary>
+
+Given the formula for the probability of busting, there will be a lot of repeated calculations, particularly for large `target` values with a low `starting_hand`. Can you use memoization to prevent recalculating these values?
+
+</details>
+
 ## Optimal Time & Space Complexity
 
 `O(t - s)` time | `O(t - s)` space - where `t` is the target, and `s` is the starting hand.
