@@ -91,3 +91,40 @@ def staircase_traversal(height, max_steps):
 print(staircase_traversal(4, 2))  #  Output: 5
 print(staircase_traversal(10, 1))  #  Output: 1
 print(staircase_traversal(6, 3))  #  Output: 24
+
+# =========================================================================================================================== #
+
+# Big O Analysis:
+
+"""
+## Time and Space Complexity Analysis
+
+### **Time Complexity:**
+
+1. **Initialization:** The array `ways_to_top` is initialized with size `height + 1`, which takes **O(height)** time.
+2. **Loop:** The main loop runs from `current_height = 1` to `current_height = height`, so it iterates **O(height)** times.
+   - Inside the loop:
+     - The operations (`start_of_window` calculation, `window_sum` updates, and array assignment) are all **O(1)** per iteration.
+3. **Overall:** The loop dominates the time complexity, so the total time complexity is **O(height)**.
+
+
+### **Space Complexity:**
+
+1. The `ways_to_top` array takes **O(height)** space.
+2. The other variables (`window_sum`, `current_height`, `start_of_window`, `end_of_window`) use **O(1)** space.
+3. **Overall:** The space complexity is **O(height)** due to the array.
+
+### **Optimization Insight:**
+
+The algorithm uses a **sliding window** approach to compute the number of ways to reach each step by maintaining a running sum
+(`window_sum`) of the previous `max_steps` values. This avoids the need for a nested loop (which would happen in a naive dynamic
+programming approach), thus improving time complexity from **O(height × max_steps)** to **O(height)** while keeping space
+at **O(height)**.
+
+### **Final Answer:**
+
+- **Time Complexity:** **O(height)**
+- **Space Complexity:** **O(height)** (can be optimized to **O(max_steps)** if we only keep a sliding window of the
+last `max_steps` values instead of the entire array).  
+
+"""
