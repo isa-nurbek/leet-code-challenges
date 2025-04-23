@@ -156,3 +156,125 @@ In the worst case, if `starting_hand = 0` and `target` is large, `T = O(target)`
 This is efficient due to memoization, avoiding exponential recomputation.
 
 """
+
+# =========================================================================================================================== #
+
+# Detailed Code Explanation:
+
+"""
+This code calculates the **probability of busting (going over a target number)** in a simplified version of blackjack, where
+the player repeatedly draws cards (valued 1 through 10, each with equal probability) until they either bust or reach a point
+where drawing again has too much risk.
+
+---
+
+### 🔢 **Function Signature Overview**
+
+```
+def blackjack_probability(target, starting_hand):
+```
+- `target`: the maximum value the player wants to **avoid exceeding** (typically 21).
+- `starting_hand`: current hand total before drawing more cards.
+
+---
+
+## 🔁 Main Workflow
+
+### Step 1: `blackjack_probability()`
+
+```
+memo = {}
+return round(calculate_probability(starting_hand, target, memo), 3)
+```
+
+- Initializes a `memo` dictionary for **memoization** (caching results to avoid recomputation).
+- Calls the recursive helper `calculate_probability()` with the current hand and target.
+- Rounds the result to 3 decimal places.
+
+---
+
+### Step 2: `calculate_probability(current_hand, target, memo)`
+
+This is a **recursive function** that computes the probability of **busting** from a given hand total.
+
+```
+if current_hand in memo:
+    return memo[current_hand]
+```
+- **Memoization check**: If we’ve already calculated the probability from this hand value, reuse it.
+
+---
+
+### 📌 Base Cases
+
+```
+if current_hand > target:
+    return 1
+```
+- **Busted**: If the current hand exceeds the target, return `1` (100% probability of busting — already busted).
+
+```
+if current_hand + 4 >= target:
+    return 0
+```
+- **Stop drawing**: If the maximum average draw (`+4`) brings us to or past the target, we **should not draw** — risk is too high.
+- This is a **heuristic**: since average draw is ~5.5, checking with +4 is a safety margin to stop drawing.
+
+---
+
+### 🔄 Recursive Calculation
+
+```
+total_probability = 0
+for drawn_card in range(1, 11):
+    total_probability += 0.1 * calculate_probability(current_hand + drawn_card, target, memo)
+```
+- For each card value `1 to 10`:
+  - Add the probability of busting if you draw that card.
+  - Since all cards are equally likely, each has a probability of `0.1`.
+
+```
+memo[current_hand] = total_probability
+return total_probability
+```
+- Cache the result for this hand total.
+- Return the probability of busting from this hand.
+
+---
+
+## 📊 Example: `blackjack_probability(21, 15)`
+
+- Start with 15.
+- Drawing cards 1–6 won’t bust you; 7+ will.
+- Recursively compute the risk of busting for each possible draw:
+  - E.g., if you draw 3, your new hand is 18, so you compute bust probability starting from 18.
+
+---
+
+### ✅ Test Cases
+
+```
+print(blackjack_probability(21, 15))  # 0.45
+```
+- There's a 45% chance you'll bust eventually if you keep drawing from 15 toward 21.
+
+```
+print(blackjack_probability(21, 21))  # 0
+```
+- You’re at the target. You won’t draw. No chance of busting.
+
+```
+print(blackjack_probability(10, 3))  # 0.395
+```
+- You start low, but target is also low — must stop early to avoid going over 10. Hence, some bust risk.
+
+---
+
+## 🧠 Summary
+
+This algorithm uses:
+- **Recursion with memoization** to avoid recomputing probabilities for the same hand.
+- A **probabilistic model** assuming equal chance (10%) for drawing cards from 1 to 10.
+- A **cutoff heuristic (`+4`)** to decide when to stop drawing.
+
+"""
