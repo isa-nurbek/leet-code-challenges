@@ -70,4 +70,4 @@ def reveal_minesweeper(board, row, column):
 
 
 def get_neighbors(board, row, column):
-    pass
+    
