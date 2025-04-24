@@ -86,3 +86,7 @@ If the player clicks on a cell with no adjacent mines, it is as if they clicked 
 Doing DFS or BFS through all of the adjacent cells without mines will be the most efficient way to find and reveal them all.
 
 </details>
+
+## Optimal Time & Space Complexity
+
+`O(w * h)` time | `O(w * h)` space - where `w` is the width of the board, and `h` is the height of the board.
