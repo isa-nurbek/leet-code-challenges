@@ -18,7 +18,7 @@ If the player clicks on a cell with no adjacent mines, replace the `"H"` with `"
 
 You can assume the given row and column will always represent a legal move. The board can be of any size and have any number of mines in it.
 
-## Sample Input
+## Sample Input #1
 
 ```plaintext
 board = [
@@ -28,15 +28,38 @@ board = [
 ]   
 row = 2
 column = 0
-  
 ```
 
-## Sample Output
+## Sample Output #1
 
 ```plaintext
 [
   ["M", "M"],
   ["2", "2"],
   ["0", "0"]
+]
+```
+
+## Sample Input #2
+
+```plaintext
+board = [
+  ["H", "H", "H", "H", "M"],
+  ["H", "1", "M", "H", "1"],
+  ["H", "H", "H", "H", "H"],
+  ["H", "H", "H", "H", "H"]
+]   
+row = 3
+column = 4
+```
+
+## Sample Output #2
+
+```plaintext
+[
+  ["0", "1", "H", "H", "M"],
+  ["0", "1", "M", "2", "1"],
+  ["0", "1", "1", "1", "0"],
+  ["0", "0", "0", "0", "0"]
 ]
 ```
