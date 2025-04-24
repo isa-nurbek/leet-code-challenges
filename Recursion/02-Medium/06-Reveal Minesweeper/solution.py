@@ -64,7 +64,9 @@ O(w * h) time | O(w * h) space - where `w` is the width of the board, and `h` is
 
 # O(w * h) time | O(w * h) space
 def reveal_minesweeper(board, row, column):
-    pass
+    if board[row][column] == "M":
+        board[row][column] = "X"
+        return board
 
 
 def get_neighbors(board, row, column):
