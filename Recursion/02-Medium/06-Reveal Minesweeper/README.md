@@ -6,10 +6,10 @@ You're given a two-dimensional array of strings that represents a Minesweeper bo
 
 The board will always contain only strings, and each string will be one of the following:
 
-- "M": A mine that has not been clicked on.
-- "X": A mine that has been clicked on, indicating a lost game.
-- "H": A cell with no mine, but whose content is still hidden to the player.
-- "0-8": A cell with no mine, with an integer from 0 to 8 representing the number of adjacent mines. Note that this is a single-digit integer represented as a string. For example "2" would mean there are 2 adjacent cells with mines. Numbered cells are not clickable as they have already been revealed.
+- `"M"`: A mine that has not been clicked on.
+- `"X"`: A mine that has been clicked on, indicating a lost game.
+- `"H"`: A cell with no mine, but whose content is still hidden to the player.
+- `"0-8"`: A cell with no mine, with an integer from 0 to 8 representing the number of adjacent mines. Note that this is a single-digit integer represented as a string. For example "2" would mean there are 2 adjacent cells with mines. Numbered cells are not clickable as they have already been revealed.
 If the player clicks on a mine, replace the "M" with "X", indicating the game was lost.
 
 If the player clicks on a cell adjacent to a mine, replace the "H" with a string representing the number of adjacent mines.
