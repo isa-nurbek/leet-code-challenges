@@ -23,7 +23,7 @@ This repository will cover a wide range of array-related topics, including:
 - Subarrays and sublists (e.g., finding maximum subarrays).
 - Rotations and shifts.
 - Multi-dimensional arrays and matrix operations.
-- Challenges involving nested arrays or arrays with constraints and etc.
+- Challenges involving nested arrays or arrays with constraints
 
 ---
 
