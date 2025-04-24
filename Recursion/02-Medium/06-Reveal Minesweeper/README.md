@@ -40,6 +40,8 @@ column = 0
 ]
 ```
 
+---
+
 ## Sample Input #2
 
 ```plaintext
