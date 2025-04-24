@@ -17,3 +17,26 @@ If the player clicks on a cell adjacent to a mine, replace the `"H"` with a stri
 If the player clicks on a cell with no adjacent mines, replace the `"H"` with `"0"`. Additionally, reveal all of the adjacent hidden cells as if the player had clicked on those cells as well.
 
 You can assume the given row and column will always represent a legal move. The board can be of any size and have any number of mines in it.
+
+## Sample Input
+
+```plaintext
+board = [
+  ["M", "M"],
+  ["H", "H"],
+  ["H", "H"]
+]   
+row = 2
+column = 0
+  
+```
+
+## Sample Output
+
+```plaintext
+[
+  ["M", "M"],
+  ["2", "2"],
+  ["0", "0"]
+]
+```
