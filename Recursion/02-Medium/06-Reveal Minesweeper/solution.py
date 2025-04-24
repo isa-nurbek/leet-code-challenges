@@ -58,3 +58,14 @@ O(w * h) time | O(w * h) space - where `w` is the width of the board, and `h` is
 """
 
 # =========================================================================================================================== #
+
+# Solution:
+
+
+# O(w * h) time | O(w * h) space
+def reveal_minesweeper(board, row, column):
+    pass
+
+
+def get_neighbors(board, row, column):
+    pass
