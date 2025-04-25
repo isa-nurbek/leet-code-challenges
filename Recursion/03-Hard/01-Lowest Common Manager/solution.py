@@ -162,3 +162,291 @@ This analysis assumes that the tree is represented with pointers/references (as 
 represented differently (e.g., an adjacency list), the space complexity might vary slightly, but the overall trends remain the same.
 
 """
+
+# =========================================================================================================================== #
+
+# Detailed Code Explanation:
+
+"""
+## 💼 **Problem Statement**
+
+You're given an **organizational chart (org chart)** — a tree-like hierarchy where each employee (node) may have zero or more
+direct reports (children). The goal is to find the **lowest common manager (LCM)** for any two given employees.
+
+> ✅ The **Lowest Common Manager** is the lowest person in the org chart who manages both employees directly or indirectly.
+
+---
+
+## 🧠 **High-Level Idea**
+
+We use a **recursive post-order traversal** of the org chart to determine:
+
+- How many of the target reports (employee1 and employee2) exist in the subtree rooted at the current node.
+- If both are found in the subtree, then the current node is their **lowest common manager**.
+
+---
+
+## 🔍 **Step-by-Step Code Walkthrough**
+
+### ➤ `get_lowest_common_manager(top_manager, report_one, report_two)`
+This is the **entry function** that kicks off the process. It calls the recursive helper:
+
+```
+return get_org_info(top_manager, report_one, report_two).lowest_common_manager
+```
+
+---
+
+### ➤ `get_org_info(manager, report_one, report_two)`
+This function does the **real work** recursively.
+
+#### 🔁 For every node (`manager`):
+
+1. Initialize a counter: `num_important_reports = 0`
+    - This counts how many of the target employees (`report_one` and `report_two`) are found in the subtree rooted at this manager.
+
+2. For each **direct report** of the current manager:
+    - Recursively call `get_org_info(...)`.
+    - If any subtree already returned a `lowest_common_manager`, it means we’ve already found our answer, so **short-circuit and return early**.
+    - Otherwise, accumulate the `num_important_reports` found in those subtrees.
+
+3. After checking all direct reports:
+    - If the current manager **is** one of the two target employees, increment the counter.
+    - If `num_important_reports == 2`, it means the current `manager` is the **lowest common manager** of the two reports.
+
+4. Return an `OrgInfo` object that keeps track of:
+    - The lowest common manager (if found at this level).
+    - The number of important reports found.
+
+```
+if manager == report_one or manager == report_two:
+    num_important_reports += 1
+
+lowest_common_manager = manager if num_important_reports == 2 else None
+return OrgInfo(lowest_common_manager, num_important_reports)
+```
+
+---
+
+### ➤ `OrgInfo` class
+This is a simple **helper class** to store:
+- `lowest_common_manager`
+- `num_important_reports`
+
+Used to pass this info up the recursive call stack.
+
+---
+
+### ➤ `OrgChart` class
+Defines the structure of each employee node:
+- `name`: the employee's name.
+- `direct_reports`: a list of employees that report directly to this employee.
+
+```
+def add_direct_reports(self, reports):
+    self.direct_reports = reports
+```
+
+---
+
+## 🧱 **Org Chart Built in Example**
+
+Here's how the tree looks:
+
+```
+          A
+        /   \
+       B     C
+     /  \   / \
+    D    E F   G
+   / \
+  H   I
+```
+
+So:
+- `A` is the top manager.
+- `E` reports to `B`.
+- `I` reports to `D`, which reports to `B`.
+
+Thus, both `E` and `I` ultimately report up to `B`.
+
+So the **Lowest Common Manager of E and I is `B`**.
+
+---
+
+## ✅ **Output**
+
+```
+print(lcm.name)  # Output: "B"
+```
+
+---
+
+## 📌 Summary of Key Concepts
+
+| Concept        | Explanation                                                               |
+|----------------|---------------------------------------------------------------------------|
+| Tree Traversal | We use **post-order traversal** so we analyze children before the parent. |
+| Base Cases     | Return early if LCM is already found in a child.                          |
+| Bottom-Up      | We count how many of the target employees are found in the subtree.       |
+| Short-Circuit  | Optimization: If a child returns LCM, no need to check the rest.          |
+| Reusability    | OrgInfo makes the recursion clean and testable.                           |
+
+---
+
+Here’s an **ASCII diagram** showing the **org chart** first, and then a **visual simulation of the recursive traversal** when
+finding the lowest common manager of `E` and `I`.
+
+---
+
+## 🧱 Org Chart Structure
+
+```
+             A
+           /   \
+         B       C
+       /   \    / \
+     D      E  F   G
+    / \
+   H   I
+```
+
+---
+
+## 🔁 Recursive Traversal Trace
+
+We're trying to find the **Lowest Common Manager (LCM)** for `E` and `I`.  
+The traversal starts from the top (`A`) and goes **post-order**: left subtree → right subtree → node itself.
+
+### Legend:
+- ✅ = target found
+- ❌ = target not found
+- ★ = lowest common manager found here
+
+---
+
+```
+Traversal Start: get_org_info(A)
+
+→ Traverse B
+  → Traverse D
+    → Traverse H: ❌ (returns OrgInfo(None, 0))
+    → Traverse I: ✅ (returns OrgInfo(None, 1))
+    → D is not target → total important reports: 1
+    → return OrgInfo(None, 1)
+    
+  → Traverse E: ✅ (it's a target)
+    → return OrgInfo(None, 1)
+
+  → B is not target, but subtree has:
+       - D subtree found 1 target
+       - E subtree found 1 target
+    → total = 2
+    → ★ Found LCM at B → return OrgInfo(B, 2)
+
+→ Since LCM is found at B, A returns early with OrgInfo(B, 2)
+```
+
+---
+
+## ✅ Final Result
+
+```
+lcm = get_lowest_common_manager(A, E, I)
+print(lcm.name)  # → "B"
+```
+
+---
+
+Let’s walk through the **call stack** for the function calls — as if we’re tracing it during runtime.
+
+We'll simulate how each call to `get_org_info(manager, report_one, report_two)` is added to the **call stack**, what it returns,
+and when it's popped off the stack.
+
+---
+
+### 🎯 Goal: Find LCM of `E` and `I`
+
+We’ll show:
+- The **call stack** state (`→` means we’re descending, `←` means we’re returning).
+- **What the function is doing**.
+- What it **returns**.
+
+---
+
+## 🧵 Initial Call
+
+```
+→ get_org_info(A)
+```
+
+---
+
+## 📥 Recursive Descent into Left Subtree of A
+
+```
+→ get_org_info(A)
+  → get_org_info(B)
+    → get_org_info(D)
+      → get_org_info(H)   # H has no children
+        - Not E or I → return OrgInfo(None, 0)
+      ← return OrgInfo(None, 0)
+
+      → get_org_info(I)   # I is target
+        - Found I → return OrgInfo(None, 1)
+      ← return OrgInfo(None, 1)
+
+    - D is not E or I
+    - D sees 1 important report → return OrgInfo(None, 1)
+  ← return OrgInfo(None, 1)
+```
+
+---
+
+## 🧭 Continue in B → Now go to E
+
+```
+  → get_org_info(E)   # E is target
+    - Found E → return OrgInfo(None, 1)
+  ← return OrgInfo(None, 1)
+
+- B is not target
+- Total reports found under B = 1 (from D) + 1 (from E) = 2
+- ✅ LCM is B → return OrgInfo(B, 2)
+← return OrgInfo(B, 2)
+```
+
+---
+
+## ❌ A gets the answer early → Skips Right Subtree
+
+Since `OrgInfo.lowest_common_manager` is **not None**, A skips checking C.
+
+```
+→ get_org_info(A) sees LCM already found at B
+← return OrgInfo(B, 2)
+```
+
+---
+
+## 🧾 Final Stack Unwinding
+
+```
+Stack unwinds:
+  get_org_info(H) → OrgInfo(None, 0)
+  get_org_info(I) → OrgInfo(None, 1)
+  get_org_info(D) → OrgInfo(None, 1)
+  get_org_info(E) → OrgInfo(None, 1)
+  get_org_info(B) → OrgInfo(B, 2)
+  get_org_info(A) → OrgInfo(B, 2)
+```
+
+---
+
+## ✅ Final Output
+
+```
+print(lcm.name)  # "B"
+```
+
+"""
