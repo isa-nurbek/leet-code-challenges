@@ -235,3 +235,275 @@ empty cell in a board with no mines).
 (BFS), but the current implementation uses recursion.
 
 """
+
+# =========================================================================================================================== #
+
+# Detailed Code Explanation:
+
+"""
+The `reveal_minesweeper` function is designed to simulate the behavior of revealing a cell in a **Minesweeper game**.
+When a cell is clicked, the function either:
+
+1. Ends the game if a **mine ('M')** is clicked.
+2. Reveals the **number of adjacent mines** if there are any.
+3. Recursively reveals **neighboring cells** if there are no adjacent mines (flood fill behavior).
+
+Let’s break down the **code step by step**, including both functions and then the test cases.
+
+---
+
+### 🔧 `get_neighbors` Function
+
+```
+def get_neighbors(board, row, column):
+    directions = [(0, 1), (0, -1), (1, 0), (-1, 0), 
+                  (1, 1), (1, -1), (-1, 1), (-1, -1)]
+    neighbors = []
+
+    for direction_row, direction_column in directions:
+        new_row = row + direction_row
+        new_column = column + direction_column
+
+        if 0 <= new_row < len(board) and 0 <= new_column < len(board[0]):
+            neighbors.append([new_row, new_column])
+
+    return neighbors
+```
+
+#### ✅ Purpose:
+Finds the 8 possible neighbors (horizontal, vertical, diagonal) around a given cell.
+
+#### ⚙️ How it works:
+- It adds directional offsets to the current cell.
+- It ensures the new cell is **within bounds** before adding it to the list.
+
+---
+
+### 🎯 `reveal_minesweeper` Function
+
+```
+def reveal_minesweeper(board, row, column):
+    if board[row][column] == "M":
+        board[row][column] = "X"
+        return board
+```
+
+#### ☠️ Case 1: Clicked on a Mine
+- If the clicked cell is `'M'`, it’s replaced with `'X'` (indicating game over).
+- Returns the board immediately.
+
+---
+
+```
+neighbors = get_neighbors(board, row, column)
+adjacent_minutes_count = 0
+
+for neighbor_row, neighbor_column in neighbors:
+    if board[neighbor_row][neighbor_column] == "M":
+        adjacent_minutes_count += 1
+```
+
+#### 🔍 Case 2: Count Adjacent Mines
+- Gathers all 8 neighboring cells.
+- Counts how many are `'M'` (mines).
+
+---
+
+```
+if adjacent_minutes_count > 0:
+    board[row][column] = str(adjacent_minutes_count)
+```
+
+#### 🧮 Case 3: Show Mine Count
+- If there's at least one adjacent mine, the cell is updated with the **number** (as a string).
+- No further recursion happens.
+
+---
+
+```
+else:
+    board[row][column] = "0"
+
+    for neighbor_row, neighbor_column in neighbors:
+        if board[neighbor_row][neighbor_column] == "H":
+            reveal_minesweeper(board, neighbor_row, neighbor_column)
+```
+
+#### 🌊 Case 4: Flood Fill
+- If **no adjacent mines**, mark the cell `'0'`.
+- Then recursively reveal each hidden (`'H'`) neighbor.
+- This spreads outward until all reachable zero-mine cells and their boundaries are revealed.
+
+---
+
+### 🧪 Test Cases Explained
+
+#### Test Case 1:
+```
+board = [["M", "M"], ["H", "H"], ["H", "H"]]
+row = 2
+column = 0
+```
+
+Initial board:
+```
+M M
+H H
+H H  <- click here (2, 0)
+```
+
+- (2,0) has 0 adjacent mines → set to `'0'`.
+- Its neighbors include (1,0), (1,1), (2,1).
+- (1,0) has 2 adjacent mines → becomes `'2'`.
+- (1,1) also has 2 mines near → becomes `'2'`.
+- (2,1) has 0 → becomes `'0'`.
+
+Final board:
+```
+M M
+2 2
+0 0
+```
+
+---
+
+#### Test Case 2:
+```
+board_2 = [
+    ["H", "H", "H", "H", "M"],
+    ["H", "1", "M", "H", "1"],
+    ["H", "H", "H", "H", "H"],
+    ["H", "H", "H", "H", "H"],
+]
+row_2 = 3
+column_2 = 4
+```
+
+You clicked on bottom-right corner (3,4), which is `'H'`.
+
+- It has **0 adjacent mines**, so it becomes `'0'`.
+- Recursively checks neighbors like (2,3), (2,4), etc.
+- Those cells might also become `'0'` or show counts depending on their adjacent mine counts.
+- This triggers a **flood-fill** of all empty safe zones and boundary cells with numbers.
+
+Final revealed board:
+```
+["0", "1", "H", "H", "M"],
+["0", "1", "M", "2", "1"],
+["0", "1", "1", "1", "0"],
+["0", "0", "0", "0", "0"]
+```
+
+---
+
+### 🧠 Summary
+
+| Symbol | Meaning                      |
+|--------|------------------------------|
+| `H`    | Hidden cell                  |
+| `M`    | Mine                         |
+| `X`    | Clicked mine (game over)     |
+| `0`    | Revealed, no adjacent mines  |
+| `1-8`  | Revealed, with adjacent mines|
+
+---
+
+### ✅ Features Demonstrated
+- Basic recursion
+- Flood-fill using DFS logic
+- Safe bounds checking
+- Clear separation of logic via `get_neighbors`
+
+---
+
+Let’s walk through a **visual representation** of how the **flood-fill (recursive reveal)** propagates in **Test Case 2**,
+where you click on the bottom-right corner at `(3,4)`.
+
+---
+
+### 🧪 Initial Board (`'H'` = hidden, `'M'` = mine)
+
+We mark the **clicked cell** with `C`.
+
+```
+[
+  ["H", "H", "H", "H", "M"],
+  ["H", "1", "M", "H", "1"],
+  ["H", "H", "H", "H", "H"],
+  ["H", "H", "H", "H", "C"],
+]
+```
+
+---
+
+### 🔁 Step-by-Step Reveal (Flood-Fill)
+
+#### 🔹 Step 1: Click on `(3,4)`  
+- 0 adjacent mines → set to `'0'`
+- Recurse on all 8 neighbors
+
+```
+(3,4) = '0'
+```
+
+Recurse into neighbors: `(2,3)`, `(2,4)`, `(3,3)`
+
+---
+
+#### 🔹 Step 2: Visit `(2,3)`  
+- 1 adjacent mine → set to `'1'`
+
+#### 🔹 Step 3: Visit `(2,4)`
+- 0 adjacent mines → set to `'0'`
+- Recurse into its neighbors: `(1,3)`, `(1,4)`, `(2,3)`
+
+#### 🔹 Step 4: Visit `(3,3)`
+- 0 adjacent mines → set to `'0'`
+- Recurse into `(2,2)`, `(3,2)`, `(2,3)`
+
+---
+
+This process continues, **recursively visiting safe neighbors** and updating the board.
+
+Here's a simplified order of visits (⬇️ = deeper into recursion):
+
+```
+Click (3,4) ➡️
+→ (2,4) ➡️
+   → (1,4)  [1 mine]
+   → (1,3)  [2 mines]
+   → (2,3)  [1 mine]
+→ (3,3) ➡️
+   → (3,2) ➡️
+     → (3,1) ➡️
+       → (3,0)
+→ (2,2)
+→ (2,1)
+→ (2,0)
+→ (1,0)
+→ (0,0)
+→ (0,1)
+```
+
+---
+
+### 🧼 Final Revealed Board
+
+```
+[
+  ["0", "1", "H", "H", "M"],
+  ["0", "1", "M", "2", "1"],
+  ["0", "1", "1", "1", "0"],
+  ["0", "0", "0", "0", "0"],
+]
+```
+
+---
+
+### 🧠 Visualization Summary
+
+- Safe zones (`'0'`) trigger further reveal.
+- Boundary cells (with `1`, `2`, etc.) stop the recursion.
+- Mines are left untouched unless clicked.
+
+"""
