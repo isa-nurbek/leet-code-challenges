@@ -27,7 +27,7 @@ True
 
 ## Optimal Time & Space Complexity:
 ```
-O(nm) time | O(nm) space - where `n` is the length of the first string and `m` is the length of the second string.
+O(n ⋅ m) time | O(n ⋅ m) space - where `n` is the length of the first string and `m` is the length of the second string.
 ```
 """
 
@@ -88,5 +88,37 @@ print(interweaving_strings("a", "b", "ab"))
 """
 ## Time and Space Complexity Analysis
 
+### **Time Complexity:**
+
+The function `are_interwoven` is a recursive function that explores all possible ways to interleave the strings `one` and
+`two` to form `three`. 
+
+- At each step, it checks whether the current character of `three` matches either the next character in `one` or `two` (or both).
+- In the worst case, it explores all possible interleavings, which leads to a binary tree of recursive calls where each level
+represents a character in `three`.
+- The depth of the recursion tree is `len(three) = len(one) + len(two) = n + m` (where `n = len(one)`, `m = len(two)`).
+- At each step, there are up to **2 choices** (take from `one` or `two` if both match), leading to an exponential number of
+recursive calls.
+
+Thus, the **worst-case time complexity is**: O(2^n + m) where `n` and `m` are the lengths of `one` and `two`, respectively.
+
+
+### **Space Complexity:**
+
+The space complexity is determined by the **maximum depth of the recursion stack**:
+- The recursion goes up to a depth of `n + m` (since we increment `i` or `j` at each step until `i + j = len(three)`).
+- No additional data structures are used (aside from the recursion stack).
+
+Thus, the **space complexity is**: O(n + m) due to the recursion stack.
+
+#### **Optimization Note:**
+If we use memoization, the space complexity would increase to: O(n ⋅ m) to store the DP table, but recursion depth would
+still be O(n + m).
+
+---
+
+### **Final Answer:**
+- **Time Complexity:** O(2^n + m)
+- **Space Complexity:** O(n + m) (due to recursion stack).
 
 """
