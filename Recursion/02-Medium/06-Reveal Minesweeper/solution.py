@@ -171,3 +171,67 @@ print(reveal_minesweeper(board_2, row_2, column_2))
   ["0", "0", "0", "0", "0"],
 ]  
 """
+
+# =========================================================================================================================== #
+
+# Big O Analysis:
+
+"""
+## Time and Space Complexity Analysis
+
+### Time Complexity:
+
+1. **Base Case (clicking on a mine 'M'):**  
+   - Constant time O(1), as it just marks the cell as 'X' and returns.
+
+2. **Counting Adjacent Mines:**  
+   - The `get_neighbors` function checks up to 8 directions (constant time O(1)), but in the worst case, it could be fewer
+   if the cell is on the edge/corner of the board.  
+   - For each neighbor, checking if it's a mine is O(1).  
+   - Overall, counting adjacent mines is O(1).
+
+3. **Recursive Reveal for Empty Cells ('0'):**  
+   - If the cell has no adjacent mines (`adjacent_minutes_count == 0`), the algorithm recursively reveals all neighboring
+   hidden cells ('H').  
+   - In the worst case (e.g., a large empty region), this can traverse the entire board, leading to O(N * M) time, where
+   N is the number of rows and M is the number of columns.  
+   - However, each cell is processed at most once (since it's marked as '0' or a number and won't be reprocessed), so the
+   total work is proportional to the number of cells.
+
+**Overall Time Complexity:**  
+- **Worst Case:** O(N * M), where N is the number of rows and M is the number of columns. This happens when you click on an
+empty cell with no adjacent mines, and the algorithm reveals the entire board.  
+- **Best Case:** O(1), when clicking on a mine or a cell with adjacent mines (no recursion).  
+- **Average Case:** Depends on the board configuration, but typically less than O(N * M) unless the board is mostly empty.
+
+---
+
+### Space Complexity:
+
+1. **Recursion Stack:**  
+   - In the worst case (revealing a large empty region), the recursion depth could be O(N * M) (e.g., a snake-like empty path).  
+   - However, in practice, the recursion depth is limited by the size of the region being revealed, which is O(max(N, M)) in 
+   most realistic scenarios (e.g., a spiral or a rectangular area).  
+
+2. **No Additional Data Structures:**  
+   - The algorithm modifies the board in place and doesn't use extra space proportional to the input.  
+
+**Overall Space Complexity:**  
+- **Worst Case:** O(N * M) due to recursion stack (unlikely in practice but possible).  
+- **Best Case:** O(1) (no recursion).  
+- **Typical Case:** O(max(N, M)) for the recursion stack when revealing a large empty region.  
+
+---
+
+### Summary:
+- **Time Complexity:** O(N * M) in the worst case, O(1) in the best case.  
+- **Space Complexity:** O(N * M) in the worst case (due to recursion), O(1) in the best case.  
+
+### Notes:
+- The worst-case time and space complexity occur when the entire board is revealed recursively (e.g., clicking on an
+empty cell in a board with no mines).  
+- For typical Minesweeper boards (with some mines), the average time and space complexity are much better.  
+- You could optimize the space complexity to O(1) (no recursion overhead) by using an iterative approach with a queue
+(BFS), but the current implementation uses recursion.
+
+"""
