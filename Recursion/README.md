@@ -6,10 +6,10 @@ Welcome to the **Recursion Code Challenges** unit! This unit focuses on masterin
 
 ## 🚀 Goals
 
-- Deepen understanding of recursive thinking and problem decomposition.
-- Solve classic recursion-based coding problems.
-- Learn to convert recursive solutions to iterative ones and vice versa.
-- Prepare for coding interviews and algorithm challenges involving recursion.
+- Deepen understanding of recursive thinking and problem decomposition
+- Solve classic recursion-based coding problems
+- Learn to convert recursive solutions to iterative ones and vice versa
+- Prepare for coding interviews and algorithm challenges involving recursion
 
 ---
 
@@ -17,13 +17,13 @@ Welcome to the **Recursion Code Challenges** unit! This unit focuses on masterin
 
 This repository will cover a wide variety of recursion-related topics, including:
 
-- Base cases and recursive calls.
-- Tail recursion vs. head recursion.
-- Recursion with arrays and strings.
-- Backtracking algorithms.
-- Divide and conquer strategies (e.g., Merge Sort, Quick Sort).
-- Recursion trees and time complexity analysis.
-- Memoization and dynamic programming basics using recursion and etc.
+- Base cases and recursive calls
+- Tail recursion vs. head recursion
+- Recursion with arrays and strings
+- Backtracking algorithms
+- Divide and conquer strategies (e.g., Merge Sort, Quick Sort)
+- Recursion trees and time complexity analysis
+- Memoization and dynamic programming basics using recursion
 
 ---
 

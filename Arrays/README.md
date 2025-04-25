@@ -6,10 +6,10 @@ Welcome to the **Array Code Challenges** unit! This unit is dedicated to solving
 
 ## 🚀 Goals
 
-- Strengthen problem-solving skills using arrays.
-- Understand and implement common algorithms and operations on arrays.
-- Prepare for coding interviews and competitive programming.
-- Build a reusable library of solutions for array-related problems.
+- Strengthen problem-solving skills using arrays
+- Understand and implement common algorithms and operations on arrays
+- Prepare for coding interviews and competitive programming
+- Build a reusable library of solutions for array-related problems
 
 ---
 
@@ -17,13 +17,13 @@ Welcome to the **Array Code Challenges** unit! This unit is dedicated to solving
 
 This repository will cover a wide range of array-related topics, including:
 
-- Basic operations: Traversal, insertion, deletion.
-- Searching and sorting algorithms.
-- Two-pointer and sliding window techniques.
-- Subarrays and sublists (e.g., finding maximum subarrays).
-- Rotations and shifts.
-- Multi-dimensional arrays and matrix operations.
-- Challenges involving nested arrays or arrays with constraints and etc.
+- Basic operations: Traversal, insertion, deletion
+- Searching and sorting algorithms
+- Two-pointer and sliding window techniques
+- Subarrays and sublists (e.g., finding maximum subarrays)
+- Rotations and shifts
+- Multi-dimensional arrays and matrix operations
+- Challenges involving nested arrays or arrays with constraints
 
 ---
 
