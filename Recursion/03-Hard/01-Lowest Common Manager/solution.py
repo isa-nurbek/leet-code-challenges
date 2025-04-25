@@ -121,3 +121,44 @@ report_two = nodes["I"]  # Second employee we care about
 lcm = get_lowest_common_manager(top_manager, report_one, report_two)
 print(lcm.name)
 # Output: "B" (since B is the lowest manager that oversees both E and I)
+
+# =========================================================================================================================== #
+
+# Big O Analysis:
+
+"""
+## Time and Space Complexity Analysis
+
+### Time Complexity:
+
+- **Tree Traversal**: The algorithm performs a depth-first search (DFS) traversal of the organizational tree. Each node is
+visited exactly once.
+- **Operations per Node**: For each node, the algorithm checks its direct reports (children) and performs constant-time
+operations (comparisons, additions).
+- **Overall**: If `n` is the number of nodes (employees) in the organizational tree, the time complexity is **O(n)**,
+since each node is processed once.
+
+### Space Complexity:
+
+- **Recursion Stack**: The space complexity is determined by the maximum depth of the recursion stack, which corresponds
+to the height of the tree.
+  - In the **best case** (balanced tree), the height is `O(log n)`, so the space complexity is `O(log n)`.
+  - In the **worst case** (unbalanced tree, e.g., a linked list), the height is `O(n)`, so the space complexity is `O(n)`.
+- **Auxiliary Data**: The `OrgInfo` objects are created in each recursive call but are not stored beyond their scope, so they
+don't contribute to additional space complexity beyond the recursion stack.
+
+### Summary:
+- **Time Complexity**: **O(n)** (where `n` is the number of nodes in the tree).
+- **Space Complexity**: **O(h)** (where `h` is the height of the tree, ranging from `O(log n)` in balanced trees to `O(n)`
+in unbalanced trees).
+
+### Notes:
+- The algorithm efficiently finds the LCM by leveraging post-order traversal and propagating information about found reports
+(`num_important_reports`) upwards.
+- The worst-case space complexity occurs when the tree is highly unbalanced (e.g., a degenerate linked list), where the recursion
+depth equals the number of nodes.
+
+This analysis assumes that the tree is represented with pointers/references (as in the given `OrgChart` class). If the tree were
+represented differently (e.g., an adjacency list), the space complexity might vary slightly, but the overall trends remain the same.
+
+"""
