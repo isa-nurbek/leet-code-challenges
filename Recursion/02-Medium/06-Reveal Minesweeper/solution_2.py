@@ -307,12 +307,12 @@ directions = [(0, 1), (0, -1), (1, 0), (-1, 0),
 
 ## ✅ Summary
 
-| Symbol | Meaning |
-|--------|---------|
-| `"M"`  | Hidden mine |
-| `"H"`  | Hidden safe cell |
-| `"X"`  | Revealed mine (game over) |
-| `"0"`  | Revealed safe cell with 0 adjacent mines |
+| Symbol      | Meaning                                     |
+|-------------|---------------------------------------------|
+| `"M"`       | Hidden mine                                 |
+| `"H"`       | Hidden safe cell                            |
+| `"X"`       | Revealed mine (game over)                   |
+| `"0"`       | Revealed safe cell with 0 adjacent mines    |
 | `"1"`-`"8"` | Revealed cell with that many adjacent mines |
 
 ---
