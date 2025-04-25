@@ -67,27 +67,47 @@ from collections import deque
 
 
 def reveal_minesweeper_bfs(board, row, column):
+    """
+    Reveals cells on a Minesweeper board using BFS starting from the given position.
+
+    Args:
+        board: 2D list representing the Minesweeper board
+        row: Starting row index
+        column: Starting column index
+
+    Returns:
+        The modified board with revealed cells
+    """
+
+    # If the starting cell is a mine, reveal it as 'X' and return immediately
     if board[row][column] == "M":
         board[row][column] = "X"
         return board
 
+    # Initialize a queue for BFS and add the starting position
     queue = deque()
     queue.append((row, column))
 
     while queue:
         r, c = queue.popleft()
 
+        # Skip if this cell is already revealed (not 'H')
         if board[r][c] != "H":
             continue
 
+        # Get all valid neighboring cells
         neighbors = get_neighbors(board, r, c)
+        # Count how many neighbors are mines
         mine_count = sum(1 for nr, nc in neighbors if board[nr][nc] == "M")
 
         if mine_count > 0:
+            # If there are adjacent mines, show the count
             board[r][c] = str(mine_count)
         else:
+            # If no adjacent mines, mark as '0' and explore neighbors
             board[r][c] = "0"
             for nr, nc in neighbors:
+                # Only add hidden cells to the queue
                 if board[nr][nc] == "H":
                     queue.append((nr, nc))
 
@@ -95,11 +115,24 @@ def reveal_minesweeper_bfs(board, row, column):
 
 
 def get_neighbors(board, row, column):
+    """
+    Returns all valid neighboring cells (including diagonals) for a given position.
+
+    Args:
+        board: 2D list representing the Minesweeper board
+        row: Current row index
+        column: Current column index
+
+    Returns:
+        List of (row, column) tuples representing valid neighbors
+    """
+    # All 8 possible directions (horizontal, vertical, diagonal)
     directions = [(0, 1), (0, -1), (1, 0), (-1, 0), (1, 1), (1, -1), (-1, 1), (-1, -1)]
     neighbors = []
 
     for dr, dc in directions:
         nr, nc = row + dr, column + dc
+        # Check if the neighbor is within board boundaries
         if 0 <= nr < len(board) and 0 <= nc < len(board[0]):
             neighbors.append((nr, nc))
 
@@ -108,10 +141,12 @@ def get_neighbors(board, row, column):
 
 # Test Cases:
 
+# Test Case 1: Simple 3x2 board
 board = [["M", "M"], ["H", "H"], ["H", "H"]]
 print(reveal_minesweeper_bfs(board, 2, 0))
 # Expected Output: [['M', 'M'], ['2', '2'], ['0', '0']]
 
+# Test Case 2: More complex board
 board_2 = [
     ["H", "H", "H", "H", "M"],
     ["H", "1", "M", "H", "1"],
