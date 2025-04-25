@@ -64,23 +64,41 @@ O(w * h) time | O(w * h) space - where `w` is the width of the board, and `h` is
 
 # O(w * h) time | O(w * h) space
 def reveal_minesweeper(board, row, column):
+    """
+    Reveals the selected cell in a Minesweeper board and updates the board accordingly.
+
+    Args:
+        board: 2D list representing the Minesweeper game board
+        row: row index of the selected cell
+        column: column index of the selected cell
+
+    Returns:
+        The updated board after revealing the selected cell
+    """
+
+    # If the selected cell is a mine, mark it with 'X' (player loses)
     if board[row][column] == "M":
         board[row][column] = "X"
         return board
 
+    # Get all adjacent cells (neighbors) to the selected cell
     neighbors = get_neighbors(board, row, column)
     adjacent_minutes_count = 0
 
+    # Count how many mines are adjacent to the selected cell
     for neighbor_row, neighbor_column in neighbors:
         if board[neighbor_row][neighbor_column] == "M":
             adjacent_minutes_count += 1
 
     if adjacent_minutes_count > 0:
+        # If there are adjacent mines, show the count
         board[row][column] = str(adjacent_minutes_count)
     else:
+        # If no adjacent mines, mark as '0' and reveal all adjacent hidden cells
         board[row][column] = "0"
 
         for neighbor_row, neighbor_column in neighbors:
+            # Recursively reveal adjacent hidden cells ('H')
             if board[neighbor_row][neighbor_column] == "H":
                 reveal_minesweeper(board, neighbor_row, neighbor_column)
 
@@ -88,13 +106,35 @@ def reveal_minesweeper(board, row, column):
 
 
 def get_neighbors(board, row, column):
-    directions = [(0, 1), (0, -1), (1, 0), (-1, 0), (1, 1), (1, -1), (-1, 1), (-1, -1)]
+    """
+    Gets all valid adjacent cells (neighbors) for a given cell position.
+
+    Args:
+        board: 2D list representing the game board
+        row: row index of the cell
+        column: column index of the cell
+
+    Returns:
+        List of [row, column] pairs representing valid neighbor positions
+    """
+    # All 8 possible directions for adjacent cells
+    directions = [
+        (0, 1),
+        (0, -1),
+        (1, 0),
+        (-1, 0),  # up, down, right, left
+        (1, 1),
+        (1, -1),
+        (-1, 1),
+        (-1, -1),
+    ]  # diagonals
     neighbors = []
 
     for direction_row, direction_column in directions:
         new_row = row + direction_row
         new_column = column + direction_column
 
+        # Check if the new position is within board boundaries
         if 0 <= new_row < len(board) and 0 <= new_column < len(board[0]):
             neighbors.append([new_row, new_column])
 
@@ -103,10 +143,12 @@ def get_neighbors(board, row, column):
 
 # Test Cases:
 
+# Test Case 1: Simple 3x2 board
 board = [["M", "M"], ["H", "H"], ["H", "H"]]
 row = 2
 column = 0
 
+# Test Case 2: More complex 4x5 board
 board_2 = [
     ["H", "H", "H", "H", "M"],
     ["H", "1", "M", "H", "1"],
@@ -117,11 +159,10 @@ row_2 = 3
 column_2 = 4
 
 print(reveal_minesweeper(board, row, column))
-# Output: [['M', 'M'], ['2', '2'], ['0', '0']]
+# Expected Output: [['M', 'M'], ['2', '2'], ['0', '0']]
 
 print(reveal_minesweeper(board_2, row_2, column_2))
-
-# Output:
+# Expected Output:
 """
 [
   ["0", "1", "H", "H", "M"],
