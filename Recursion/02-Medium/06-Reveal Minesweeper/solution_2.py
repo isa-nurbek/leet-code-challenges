@@ -62,10 +62,10 @@ O(w * h) time | O(w * h) space - where `w` is the width of the board, and `h` is
 # Solution:
 
 
-# O(w * h) time | O(w * h) space
 from collections import deque
 
 
+# O(w * h) time | O(w * h) space
 def reveal_minesweeper_bfs(board, row, column):
     """
     Reveals cells on a Minesweeper board using BFS starting from the given position.
@@ -162,4 +162,37 @@ print(reveal_minesweeper_bfs(board_2, 3, 4))
   ["0", "1", "1", "1", "0"],
   ["0", "0", "0", "0", "0"],
 ]  
+"""
+
+# =========================================================================================================================== #
+
+# Big O Analysis:
+
+"""
+## Time and Space Complexity Analysis
+
+### Time Complexity:
+
+1. **BFS Traversal**: In the worst case, we might need to visit every cell on the board once. For a board of size `m x n`,
+this gives us `O(m * n)` time.
+2. **Neighbor Check**: For each cell, we check up to 8 neighbors (constant time per cell). This doesn't change the overall
+complexity since `O(8 * m * n)` is still `O(m * n)`.
+
+Thus, the **time complexity is `O(m * n)`**, where `m` is the number of rows and `n` is the number of columns in the board.
+
+### Space Complexity:
+
+1. **Queue**: In the worst case (e.g., the entire board is empty and all cells are revealed), the queue could hold up to `O(m * n)`
+cells (though in practice, it's usually less due to branching).
+2. **Visited Handling**: The algorithm implicitly tracks visited cells by checking if a cell is `"H"` (hidden) before adding it
+to the queue, so no extra space is used for a `visited` set.
+
+Thus, the **space complexity is `O(m * n)`** in the worst case due to the queue.
+
+### Summary:
+- **Time Complexity**: `O(m * n)`
+- **Space Complexity**: `O(m * n)`
+
+This is optimal for a BFS approach to Minesweeper, as you must potentially reveal every cell on the board in the worst case.
+
 """
