@@ -88,3 +88,50 @@ print(interweaving_strings("aabcc", "dbbca", "aadbbbaccc"))
 
 print(interweaving_strings("a", "b", "ab"))
 # Output: True
+
+# =========================================================================================================================== #
+
+# Big O Analysis:
+
+"""
+## Time and Space Complexity Analysis
+
+Let's analyze the time and space complexity of the `interweaving_strings` function, which uses memoization to determine if `three`
+is an interweaving of `one` and `two`.
+
+### Definitions:
+- Let `m` be the length of string `one`.
+- Let `n` be the length of string `two`.
+- The length of `three` is `m + n` (otherwise, the function returns early).
+
+### Time Complexity:
+
+The function explores all possible ways to interleave `one` and `two` to form `three` using memoization to avoid redundant
+computations.
+
+1. **Memoization Table**: The memoization table stores results for all possible `(i, j)` pairs where `i` ranges from `0` to `m`
+and `j` ranges from `0` to `n`. Thus, there are `(m + 1) * (n + 1)` possible unique states.
+2. **Work per State**: For each state `(i, j)`, the function performs a constant amount of work (checking characters and making
+recursive calls). The recursive calls are memoized, so each state is computed only once.
+3. **Total Time**: The total time is proportional to the number of unique states, which is `O(m * n)`.
+
+Thus, the time complexity is **`O(m * n)`**.
+
+### Space Complexity:
+
+The space complexity is determined by:
+1. **Memoization Table**: The memoization table stores `O(m * n)` entries. Each entry is a boolean value, but the overhead of the
+dictionary (or hash map) is still `O(m * n)`.
+2. **Recursion Stack**: In the worst case, the recursion depth can go up to `m + n` (when you fully traverse one string before the
+other). However, since the function uses memoization, the recursion stack does not explode beyond `O(m + n)`.
+
+Thus, the space complexity is **`O(m * n)`** (dominated by the memoization table).
+
+### Summary:
+- **Time Complexity**: `O(m * n)`
+- **Space Complexity**: `O(m * n)`
+
+This is a classic dynamic programming approach where memoization avoids recomputing overlapping subproblems, leading to an
+efficient solution.
+
+"""
