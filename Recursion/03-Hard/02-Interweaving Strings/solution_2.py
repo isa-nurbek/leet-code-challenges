@@ -38,37 +38,43 @@ O(n ⋅ m) time | O(n ⋅ m) space - where `n` is the length of the first string
 
 # O(n ⋅ m) time | O(n ⋅ m) space
 def interweaving_strings(one, two, three):
+    # First check: if three isn't exactly the combination of one and two lengths, return False
     if len(three) != len(one) + len(two):
         return False
 
-    # Initialize memoization table: (i, j) -> bool
+    # Initialize memoization dictionary to store already computed results
     memo = {}
+    # Start the recursive check from beginning of both strings (indices 0, 0)
     return are_interwoven(one, two, three, 0, 0, memo)
 
 
 def are_interwoven(one, two, three, i, j, memo):
-    # Check if we've already computed this (i, j) pair
+    # Check if we've already computed this (i,j) combination before
     if (i, j) in memo:
         return memo[(i, j)]
 
+    # k is the current position in the three string we're checking
     k = i + j
 
-    # Base case: reached the end of 'three'
+    # Base case: we've reached the end of three string
     if k == len(three):
         return True
 
-    # Try taking a character from 'one' if possible
+    # Option 1: Try taking next character from string 'one' if it matches three[k]
     if i < len(one) and one[i] == three[k]:
+        # Recursively check if remaining strings can be interwoven
         memo[(i, j)] = are_interwoven(one, two, three, i + 1, j, memo)
+        # If we found a valid interweaving, return True immediately
         if memo[(i, j)]:
             return True
 
-    # Try taking a character from 'two' if possible
+    # Option 2: Try taking next character from string 'two' if it matches three[k]
     if j < len(two) and two[j] == three[k]:
+        # Recursively check if remaining strings can be interwoven
         memo[(i, j)] = are_interwoven(one, two, three, i, j + 1, memo)
         return memo[(i, j)]
 
-    # Neither option worked
+    # If neither option worked, memoize False for this (i,j) position
     memo[(i, j)] = False
     return False
 
