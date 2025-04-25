@@ -135,3 +135,166 @@ This is a classic dynamic programming approach where memoization avoids recomput
 efficient solution.
 
 """
+
+# =========================================================================================================================== #
+
+# Detailed Code Explanation:
+
+"""
+The function `interweaving_strings(one, two, three)` checks whether the string `three` is formed by **interweaving** the strings
+`one` and `two`, meaning characters from `one` and `two` appear in `three` **in the same order** as in their respective strings —
+though they can be mixed together.
+
+---
+
+## 🔍 High-Level Explanation
+
+Given:
+- `one = "abc"`
+- `two = "def"`
+- `three = "adbcef"`
+
+The function returns `True` if you can **interleave** characters from `one` and `two` to get `three`, **preserving the order of
+characters in each input string**.
+
+---
+
+## 🧠 Step-by-Step Breakdown
+
+### ✅ Step 1: Length Check
+```
+if len(three) != len(one) + len(two):
+    return False
+```
+If `three` is not the combined length of `one` and `two`, it's impossible to form it by interleaving — return `False`.
+
+---
+
+### ✅ Step 2: Use Memoization for Efficiency
+```
+memo = {}
+```
+`memo` is a dictionary to **cache results** for subproblems. It avoids recalculating the same `(i, j)` combination.
+
+---
+
+### ✅ Step 3: Recursive Function — `are_interwoven`
+The function tries to build `three` from `one` and `two` character-by-character.
+
+```
+def are_interwoven(one, two, three, i, j, memo):
+```
+
+- `i`: index in `one`
+- `j`: index in `two`
+- `k = i + j`: index in `three`
+
+### 🚩 Base Case
+```
+if k == len(three):
+    return True
+```
+If `i + j` reaches the end of `three`, we have matched all characters successfully.
+
+---
+
+### 🧪 Recursive Steps
+#### Option 1: Use a character from `one` if it matches `three[k]`
+```
+if i < len(one) and one[i] == three[k]:
+    memo[(i, j)] = are_interwoven(one, two, three, i + 1, j, memo)
+    if memo[(i, j)]:
+        return True
+```
+
+#### Option 2: Use a character from `two` if it matches `three[k]`
+```
+if j < len(two) and two[j] == three[k]:
+    memo[(i, j)] = are_interwoven(one, two, three, i, j + 1, memo)
+    return memo[(i, j)]
+```
+
+#### If neither works:
+```
+memo[(i, j)] = False
+return False
+```
+
+---
+
+## 🧪 Example Walkthrough
+
+### Test Case:
+```
+interweaving_strings("aabcc", "dbbca", "aadbbbaccc")
+```
+
+Try to build `"aadbbbaccc"` from `"aabcc"` and `"dbbca"`:
+- Start with `"a"` from `"aabcc"` ✅
+- Next `"a"` from `"aabcc"` ✅
+- Then `"d"` from `"dbbca"` ✅
+- Then `"b"` from `"aabcc"` or `"dbbca"`? Must try both!
+- Eventually, it fails because `"b"` from `"dbbca"` is used too early, breaking the rest of the structure.
+
+Hence, it returns **False**.
+
+---
+
+## ✅ Summary
+
+- 🧮 Uses recursion + memoization (top-down dynamic programming).
+- 🔄 Tries all valid ways to pick characters from `one` or `two` to match `three`.
+- 🧠 Caches subproblem results to avoid recomputation.
+- ❌ Returns False as soon as it detects no valid interleaving path.
+
+---
+
+Here’s a simplified **ASCII recursion tree** for:
+
+```
+interweaving_strings("aabcc", "dbbca", "aadbbbaccc")
+```
+
+We'll track:
+- `i`: index in `"aabcc"` (`one`)
+- `j`: index in `"dbbca"` (`two`)
+- `k`: `i + j`, index in `"aadbbbaccc"` (`three`)
+
+We'll also show character matches and branching choices.
+
+```
+Start: i=0, j=0, k=0 -> three[0]='a'
+|
+|-- i=1, j=0, k=1 -> three[1]='a' == one[1]='a' ✅
+|   |
+|   |-- i=2, j=0, k=2 -> three[2]='d' == two[0]='d' ✅
+|       |
+|       |-- i=2, j=1, k=3 -> three[3]='b'
+|           |
+|           |-- i=2, j=2, k=4 -> three[4]='b'
+|               |
+|               |-- i=2, j=3, k=5 -> three[5]='b'
+|                   |
+|                   |-- i=2, j=4, k=6 -> three[6]='a'
+|                       |
+|                       |-- i=3, j=4, k=7 -> three[7]='c'
+|                           |
+|                           |-- i=4, j=4, k=8 -> three[8]='c'
+|                               |
+|                               |-- i=5, j=4, k=9 -> three[9]='c'
+|                                   ✅ All matched: return True
+|
+|-- Other branches (e.g., taking from `two` at the wrong time)
+|   |
+|   |-- i=1, j=1, k=2 -> three[2]='d' != one[1]='a' ❌
+|   |-- i=1, j=1, k=2 -> memo hit → False
+```
+
+---
+
+### 🔁 Highlights:
+- ✅ Good path (leftmost) reaches the end successfully.
+- ❌ Wrong choices are pruned due to mismatches.
+- 🧠 Memoization prevents recomputing dead paths.
+
+"""
