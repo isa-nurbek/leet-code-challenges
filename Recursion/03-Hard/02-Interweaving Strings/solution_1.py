@@ -122,3 +122,123 @@ still be O(n + m).
 - **Space Complexity:** O(n + m) (due to recursion stack).
 
 """
+
+# =========================================================================================================================== #
+
+# Detailed Code Explanation:
+
+"""
+Let's walk through the `interweaving_strings` code in detail, including the recursive function and how it handles different
+scenarios.
+
+### **Goal of the Problem**
+
+You are given three strings:
+- `one`
+- `two`
+- `three`
+
+You need to determine **if `three` is a valid interleaving** of `one` and `two`.
+
+---
+
+### **What does interleaving mean here?**
+
+A string `three` is an **interleaving** of `one` and `two` if:
+- It contains all characters of `one` and `two`, in the **same order** they appear in their respective strings.
+- But the characters from `one` and `two` can be mixed.
+
+#### Example:
+```python
+one = "abc"
+two = "def"
+three = "adbcef"
+```
+
+Here, `three` is a valid interleaving: take "a" from `one`, "d" from `two`, "b" from `one`, "c" from `one`, "e" from `two`,
+"f" from `two`.
+
+---
+
+### **Step-by-Step Code Explanation**
+
+```
+def interweaving_strings(one, two, three):
+    if len(three) != len(one) + len(two):
+        return False
+```
+
+- Before doing any recursive check, this condition ensures that the combined length of `one` and `two` must match `three`.
+If not, `three` can't be an interleaving.
+
+```
+return are_interwoven(one, two, three, 0, 0)
+```
+
+- Start recursive checking from the beginning of `one` and `two` (i.e., indices `i = 0` and `j = 0`).
+
+---
+
+### **Recursive Function: `are_interwoven`**
+
+```
+def are_interwoven(one, two, three, i, j):
+    k = i + j
+```
+
+- `k` is the current index in `three`, since the characters taken from `one` and `two` should add up to the index in `three`.
+
+```
+if k == len(three):
+    return True
+```
+
+- If we've reached the end of `three`, that means every character matched from `one` and `two`, so return `True`.
+
+---
+
+### **Check Character Matches**
+
+```
+if i < len(one) and one[i] == three[k]:
+    if are_interwoven(one, two, three, i + 1, j):
+        return True
+```
+
+- If current character in `one` matches `three[k]`, we make a recursive call advancing `i` (i.e., consuming one more char from
+`one`). If this path leads to success, return `True`.
+
+```
+if j < len(two) and two[j] == three[k]:
+    return are_interwoven(one, two, three, i, j + 1)
+```
+
+- Similarly, if the current character in `two` matches `three[k]`, we try that path.
+
+```
+return False
+```
+
+- If neither character matches `three[k]`, this path fails, so return `False`.
+
+---
+
+### **Test Case Analysis**
+
+#### ✅ `interweaving_strings("algoexpert", "your-dream-job", "your-algodream-expertjob")`
+- All characters are interleaved correctly while maintaining order. **Returns: `True`**
+
+#### ❌ `interweaving_strings("aabcc", "dbbca", "aadbbbaccc")`
+- One character order mismatch causes it to fail. **Returns: `False`**
+
+#### ✅ `interweaving_strings("a", "b", "ab")`
+- Simple valid interleaving. **Returns: `True`**
+
+---
+
+### ⚠️ Potential Issue
+
+This recursive solution has **no memoization**, which means it may repeat work unnecessarily for overlapping subproblems.
+For large inputs, it could become very slow.
+
+"""
