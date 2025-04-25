@@ -43,6 +43,7 @@ If at any given combination of the indices `i`, `j`, and `k` mentioned in Hint #
 
 </details>
 
+<details>
 <summary><b>Hint 4</b></summary>
 
 By following Hint #3, you'll perform, in some cases, many computations multiple times. How can you use caching to improve the time complexity of this algorithm?
