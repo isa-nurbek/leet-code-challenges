@@ -68,6 +68,65 @@ def reveal_minesweeper(board, row, column):
         board[row][column] = "X"
         return board
 
+    neighbors = get_neighbors(board, row, column)
+    adjacent_minutes_count = 0
+
+    for neighbor_row, neighbor_column in neighbors:
+        if board[neighbor_row][neighbor_column] == "M":
+            adjacent_minutes_count += 1
+
+    if adjacent_minutes_count > 0:
+        board[row][column] = str(adjacent_minutes_count)
+    else:
+        board[row][column] = "0"
+
+        for neighbor_row, neighbor_column in neighbors:
+            if board[neighbor_row][neighbor_column] == "H":
+                reveal_minesweeper(board, neighbor_row, neighbor_column)
+
+    return board
+
 
 def get_neighbors(board, row, column):
-    
+    directions = [(0, 1), (0, -1), (1, 0), (-1, 0), (1, 1), (1, -1), (-1, 1), (-1, -1)]
+    neighbors = []
+
+    for direction_row, direction_column in directions:
+        new_row = row + direction_row
+        new_column = column + direction_column
+
+        if 0 <= new_row < len(board) and 0 <= new_column < len(board[0]):
+            neighbors.append([new_row, new_column])
+
+    return neighbors
+
+
+# Test Cases:
+
+board = [["M", "M"], ["H", "H"], ["H", "H"]]
+row = 2
+column = 0
+
+board_2 = [
+    ["H", "H", "H", "H", "M"],
+    ["H", "1", "M", "H", "1"],
+    ["H", "H", "H", "H", "H"],
+    ["H", "H", "H", "H", "H"],
+]
+row_2 = 3
+column_2 = 4
+
+print(reveal_minesweeper(board, row, column))
+# Output: [['M', 'M'], ['2', '2'], ['0', '0']]
+
+print(reveal_minesweeper(board_2, row_2, column_2))
+
+# Output:
+"""
+[
+  ["0", "1", "H", "H", "M"],
+  ["0", "1", "M", "2", "1"],
+  ["0", "1", "1", "1", "0"],
+  ["0", "0", "0", "0", "0"],
+]  
+"""
