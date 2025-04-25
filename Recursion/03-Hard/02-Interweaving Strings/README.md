@@ -52,4 +52,4 @@ By following Hint #3, you'll perform, in some cases, many computations multiple 
 
 ## Optimal Time & Space Complexity
 
-`O(nm)` time | `O(nm)` space - where `n` is the length of the first string and `m` is the length of the second string.
+`O(n ⋅ m)` time | `O(n ⋅ m)` space - where `n` is the length of the first string and `m` is the length of the second string.
