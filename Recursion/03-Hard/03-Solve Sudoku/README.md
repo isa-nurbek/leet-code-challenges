@@ -22,7 +22,7 @@ The objective is to fill the grid such that each row, column, and `3x3` subgrid 
 
 Your input for this problem will always be a partially filled `9x9` two-dimensional array that represents a solvable Sudoku puzzle. Every element in the array will be an integer in the range of `0-9`, where a `0` represents an empty square that must be filled by your algorithm.
 
-Note that you may modify the input array and that there will always be exactly one solution to each input Sudoku board.
+> Note that you may modify the input array and that there will always be exactly one solution to each input Sudoku board.
 
 ## Sample Input
 
