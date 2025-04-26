@@ -129,7 +129,7 @@ print(generate_div_tags(1))
 The total number of valid combinations of `n` pairs of div tags is given by the **Catalan number**:
 
 
-    Cₙ = 1 / n + 1} (2n / n)
+    Cₙ = 1 / n + 1 (2n / n)
 
 
 So, for each of those combinations, you're constructing a string of length `5n` for each `<div>` and `6n` for each `</div>`,
@@ -158,5 +158,181 @@ There are two main components:
 ### Summary:
 - **Time Complexity**: O(4ⁿ / √n)
 - **Space Complexity**: O(n · 4ⁿ / √n)
+
+"""
+
+# =========================================================================================================================== #
+
+# Detailed Code Explanation:
+
+"""
+This code generates **all valid combinations of HTML `<div>` tags** for a given number. Each combination must be *well-formed*,
+meaning every `<div>` has a matching `</div>`, and tags are nested properly (like in valid HTML).
+
+---
+
+### 🔍 What is the Goal?
+
+Given a number `n`, we want to generate all valid strings containing exactly `n` opening `<div>` tags and `n` closing `</div>` tags,
+where:
+
+- Every opening `<div>` has a matching `</div>`.
+- The tags are properly nested like parentheses in an arithmetic expression.
+
+---
+
+### 📘 Analogy: Parentheses Generation
+
+This is **identical in structure** to the classic _"Generate Valid Parentheses"_ problem. Instead of `"("` and `")"`, we're
+using `"<div>"` and `"</div>"`.
+
+---
+
+### 🧠 Core Idea: Backtracking
+
+We use **recursion and backtracking** to try out all valid sequences by adding one tag at a time, ensuring at every step that
+we maintain validity:
+- You can't close more tags than you've opened.
+- You can only add a closing tag if there's already an unmatched opening tag.
+
+---
+
+### 🧱 Code Breakdown
+
+#### 1. `generate_div_tags(number_of_tags)`
+
+This is the main function that sets things up.
+
+```
+def generate_div_tags(number_of_tags):
+    matched_div_tags = []
+    generate_div_tags_from_prefix(number_of_tags, number_of_tags, "", matched_div_tags)
+    return matched_div_tags
+```
+
+- `number_of_tags`: total number of `<div>` tags to be used (also same number of `</div>` tags).
+- `matched_div_tags`: list that will collect all valid sequences.
+- It calls the helper recursive function `generate_div_tags_from_prefix`.
+
+---
+
+#### 2. `generate_div_tags_from_prefix(opening_tags_needed, closing_tags_needed, prefix, result)`
+
+This recursive function builds up valid sequences step-by-step.
+
+Parameters:
+- `opening_tags_needed`: how many opening tags `<div>` are still left to add.
+- `closing_tags_needed`: how many closing tags `</div>` are still left to add.
+- `prefix`: the string built so far.
+- `result`: reference to the list that will hold all complete valid combinations.
+
+Let’s break down the logic:
+
+##### ✅ If we still need opening tags:
+```
+if opening_tags_needed > 0:
+```
+We can always add an opening tag if we haven’t used all of them yet:
+```
+new_prefix = prefix + "<div>"
+generate_div_tags_from_prefix(
+    opening_tags_needed - 1, closing_tags_needed, new_prefix, result
+)
+```
+
+##### ✅ If we can legally add a closing tag:
+```
+if opening_tags_needed < closing_tags_needed:
+```
+Only add a closing tag if there's at least one unmatched `<div>` tag. That is, more opening tags have been used than closing ones.
+```
+new_prefix = prefix + "</div>"
+generate_div_tags_from_prefix(
+    opening_tags_needed, closing_tags_needed - 1, new_prefix, result
+)
+```
+
+##### 🎯 Base Case – no tags left to add:
+```
+if closing_tags_needed == 0:
+    result.append(prefix)
+```
+Once both opening and closing tags are used up, add the complete string to the result list.
+
+---
+
+### 🧪 Example: `generate_div_tags(1)`
+
+Only one valid possibility:
+```
+["<div></div>"]
+```
+
+---
+
+### 🧪 Example: `generate_div_tags(3)`
+
+Valid outputs (exactly 3 `<div>`s and 3 `</div>`s, properly nested):
+
+1. `<div><div><div></div></div></div>`
+2. `<div><div></div><div></div></div>`
+3. `<div><div></div></div><div></div>`
+4. `<div></div><div><div></div></div>`
+5. `<div></div><div></div><div></div>`
+
+---
+
+### 🧠 Time Complexity
+
+This is a **Catalan Number** problem:
+- Number of valid sequences = Catalan(n)
+- Catalan(n) = (2n)! / ((n+1)! * n!) → grows exponentially.
+
+So, **Time Complexity = O(Catalan(n))**
+
+
+### Space Complexity:
+
+O(Catalan(n) * n) - total
+O(n) - for recursion stack
+
+---
+
+Here's an ASCII diagram showing the **recursion tree** for `generate_div_tags(2)`. It demonstrates how each step adds either
+`<div>` or `</div>`, and how valid sequences are formed:
+
+---
+
+### 🌳 **Recursion Tree for `generate_div_tags(2)`**
+
+```
+Start: ""
+|
+├── Add <div> → "<div>"
+|   |
+|   ├── Add <div> → "<div><div>"
+|   |   |
+|   |   ├── Add </div> → "<div><div></div>"
+|   |   |   |
+|   |   |   └── Add </div> → "<div><div></div></div>" ✅
+|   |
+|   └── Add </div> → "<div></div>"
+|       |
+|       └── Add <div> → "<div></div><div>"
+|           |
+|           └── Add </div> → "<div></div><div></div>" ✅
+```
+
+---
+
+### ✅ Final Valid Outputs for `n=2`
+
+1. `<div><div></div></div>`
+2. `<div></div><div></div>`
+
+---
+
+This tree shows how the function explores all valid sequences **by tracking available opening and closing tags** and only taking
+valid paths. Each branch is a function call, and each leaf where both counts reach zero is a valid sequence.
 
 """
