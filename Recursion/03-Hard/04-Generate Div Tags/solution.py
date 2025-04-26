@@ -34,7 +34,7 @@ number_of_tags = 3
 
 ## Optimal Time & Space Complexity:
 ```
-O((2n)!/((n!((n + 1)!)))) time | O((2n)!/((n!((n + 1)!)))) space - where `n` is the input number.
+O(4ⁿ / √n) time | O(n · 4ⁿ / √n) space- where `n` is the input number.
 ```
 """
 
@@ -43,7 +43,7 @@ O((2n)!/((n!((n + 1)!)))) time | O((2n)!/((n!((n + 1)!)))) space - where `n` is 
 # Solution:
 
 
-# O(4ⁿ) time | O(4ⁿ) space
+# O(4ⁿ / √n) time | O(n · 4ⁿ / √n) space
 def generate_div_tags(number_of_tags):
     """
     Generates all possible valid combinations of a given number of div tags.
@@ -116,3 +116,47 @@ print(generate_div_tags(3))
 
 print(generate_div_tags(1))
 # Output: ["<div></div>"]
+
+# =========================================================================================================================== #
+
+# Big O Analysis:
+
+"""
+## Time and Space Complexity Analysis
+
+### 🔍 Time Complexity
+
+The total number of valid combinations of `n` pairs of div tags is given by the **Catalan number**:
+
+
+    Cₙ = 1 / n + 1} (2n / n)
+
+
+So, for each of those combinations, you're constructing a string of length `5n` for each `<div>` and `6n` for each `</div>`,
+roughly O(n) characters per result.
+
+- Number of valid strings = **O(Cₙ)**  
+- Time to construct each string = **O(n)**  
+- Recursive branching structure also explores all valid states, each state doing constant work aside from recursion.
+
+So the time complexity is approximately: O(4ⁿ / √n)
+
+---
+
+### 🧠 Space Complexity
+
+There are two main components:
+
+1. **Call stack (recursion depth):** At most `2n` recursive calls deep  
+   → **O(n)**
+
+2. **Result list:** Holds `Cₙ` strings, each of length O(n)  
+   → **O(n · Cₙ) = O(n · 4ⁿ / √n)**
+
+**👉 Total space complexity:** O(n · 4ⁿ / √n)
+
+### Summary:
+- **Time Complexity**: O(4ⁿ / √n)
+- **Space Complexity**: O(n · 4ⁿ / √n)
+
+"""
