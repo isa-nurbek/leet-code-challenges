@@ -181,3 +181,50 @@ print(solve_sudoku(board))
   [3, 4, 9, 2, 1, 6, 8, 5, 7],
 ]
 """
+
+# =========================================================================================================================== #
+
+# Big O Analysis:
+
+"""
+## Time and Space Complexity Analysis
+
+### Time Complexity:
+
+The Sudoku solver uses a backtracking approach, which is essentially a brute-force method with pruning. Here's how the time
+complexity breaks down:
+
+1. **Worst-case scenario**: In the worst case, the algorithm tries every possible digit (1-9) in every empty cell until it finds
+a solution. For an empty Sudoku board (all cells are 0), this would be O(9^(n)), where n is the number of empty cells. Since a
+Sudoku board has 81 cells, the worst-case time complexity is O(9^(81)).
+
+2. **Pruning**: The `is_valid_at_position` function checks if a digit is valid in the current row, column, and 3x3 subgrid, which
+prunes the search space significantly. However, in the worst case, the time complexity remains exponential.
+
+3. **Practical performance**: In practice, the algorithm performs much better than the worst case because:
+   - Many cells are already filled (reducing n).
+   - The validity checks prune invalid paths early.
+   - The order of trying digits (1-9) and the order of filling cells (left to right, top to bottom) can lead to early solutions.
+
+### Space Complexity:
+
+The space complexity is determined by the recursion stack and the board itself:
+
+1. **Recursion stack**: The maximum depth of the recursion stack is equal to the number of empty cells (since each recursive call
+fills one cell). In the worst case, this is O(81) = O(1) (since the board size is fixed).
+
+2. **Board**: The board is passed by reference (or modified in place), so no additional space is used for the board.
+
+Thus, the space complexity is **O(1)** (constant) because the recursion depth is bounded by the fixed size of the Sudoku board
+(81 cells).
+
+### Summary:
+- **Time Complexity**: O(9^(n)), where n is the number of empty cells. In the worst case (empty board), this is O(9^81).
+- **Space Complexity**: O(1) (constant), due to fixed board size and in-place modifications.
+
+### Notes:
+- The worst-case time complexity is extremely high, but in practice, the solver works efficiently for most standard Sudoku puzzles
+because of the pruning and the constraints reducing the search space.
+- The space complexity is efficient because no additional data structures are used, and the recursion depth is limited.
+
+"""
