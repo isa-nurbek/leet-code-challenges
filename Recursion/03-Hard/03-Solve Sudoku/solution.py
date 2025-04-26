@@ -228,3 +228,230 @@ because of the pruning and the constraints reducing the search space.
 - The space complexity is efficient because no additional data structures are used, and the recursion depth is limited.
 
 """
+
+# =========================================================================================================================== #
+
+# Detailed Code Explanation:
+
+"""
+Let’s walk through the **Sudoku solver** code step by step. The program uses **backtracking**, a common technique for solving
+constraint satisfaction problems like Sudoku.
+
+---
+
+## 🧩 Problem Overview: Sudoku Rules
+
+You are given a 9x9 board where some cells are filled (digits 1-9) and others are `0` (empty). Your task is to fill the empty
+cells so that:
+- Each row has digits 1-9 with no repetition.
+- Each column has digits 1-9 with no repetition.
+- Each 3x3 subgrid has digits 1-9 with no repetition.
+
+---
+
+## 🔍 Function by Function Explanation
+
+### 1. `solve_sudoku(board)`
+
+```
+def solve_sudoku(board):
+    solve_partial_sudoku(0, 0, board)
+    return board
+```
+
+This is the **main function**. It calls the recursive backtracking function `solve_partial_sudoku` starting from the top-left
+cell `(0, 0)`. Once done, it returns the filled board.
+
+---
+
+### 2. `solve_partial_sudoku(row, col, board)`
+
+```
+def solve_partial_sudoku(row, col, board):
+    current_row = row
+    current_col = col
+
+    if current_col == len(board[current_row]):
+        current_row += 1
+        current_col = 0
+
+        if current_row == len(board):
+            return True  # Finished the entire board
+
+    if board[current_row][current_col] == 0:
+        return try_digits_at_position(current_row, current_col, board)
+
+    return solve_partial_sudoku(current_row, current_col + 1, board)
+```
+
+This function:
+- Moves through the board **cell by cell**, from left to right and top to bottom.
+- If the current column goes past the last column, it **moves to the next row**.
+- If we reach past the last row, that means the board is complete, so we return `True`.
+- If the current cell is `0`, we try placing a valid digit using `try_digits_at_position`.
+- If the current cell already has a digit, just move to the **next column**.
+
+---
+
+### 3. `try_digits_at_position(row, col, board)`
+
+```
+def try_digits_at_position(row, col, board):
+    for digit in range(1, 10):
+        if is_valid_at_position(digit, row, col, board):
+            board[row][col] = digit
+
+            if solve_partial_sudoku(row, col + 1, board):
+                return True
+
+    board[row][col] = 0
+    return False
+```
+
+This function:
+- Tries digits from 1 to 9 in the current cell.
+- For each digit, it checks if it's valid using `is_valid_at_position`.
+- If valid, it places the digit and recursively solves the rest of the board.
+- If no digit works, it **resets the cell to 0** and returns `False` to backtrack.
+
+---
+
+### 4. `is_valid_at_position(value, row, col, board)`
+
+```
+def is_valid_at_position(value, row, col, board):
+    row_is_valid = value not in board[row]
+    column_is_valid = value not in map(lambda r: r[col], board)
+
+    if not row_is_valid or not column_is_valid:
+        return False
+
+    subgrid_row_start = (row // 3) * 3
+    subgrid_col_start = (col // 3) * 3
+
+    for row_idx in range(3):
+        for col_idx in range(3):
+            row_to_check = subgrid_row_start + row_idx
+            col_to_check = subgrid_col_start + col_idx
+            existing_value = board[row_to_check][col_to_check]
+
+            if existing_value == value:
+                return False
+
+    return True
+```
+
+This function:
+- Checks if the digit is already in the **row** or **column**.
+- Then finds the **3x3 subgrid** that the current cell belongs to.
+- It checks if the digit is already used in the subgrid.
+- If all checks pass, it returns `True`; otherwise, `False`.
+
+---
+
+## 🔄 How Backtracking Works
+
+1. The algorithm tries a digit at a position.
+2. If it’s valid, it goes to the next empty cell.
+3. If it eventually finds a dead end (no digit fits), it **backs up** and tries a different digit at the previous step.
+4. This process repeats until the entire board is filled.
+
+---
+
+## ✅ Final Output
+
+After running `solve_sudoku(board)`, the input board is **modified in place** to be a fully solved Sudoku puzzle.
+
+---
+
+Let’s walk through the **first few steps** of solving the Sudoku board using ASCII visualization. I’ll show:
+
+1. The **initial board**.
+2. A couple of **steps** where digits are placed.
+3. Backtracking if needed (not shown here but I’ll explain how it would look).
+
+---
+
+### 🧩 Initial Sudoku Board
+
+Empty cells are represented as `.` for clarity.
+
+```
+[7 8 . | 4 . . | 1 2 .]
+[6 . . | . 7 5 | . . 9]
+[. . . | 6 . 1 | . 7 8]
+-----------------------
+[. . 7 | . 4 . | 2 6 .]
+[. . 1 | . 5 . | 9 3 .]
+[9 . 4 | . 6 . | . . 5]
+-----------------------
+[. 7 . | 3 . . | . 1 2]
+[1 2 . | . . 7 | 4 . .]
+[. 4 9 | 2 . 6 | . . 7]
+```
+
+---
+
+### 🧮 Step 1: Try Filling First Empty Cell (0,2)
+
+We try digits `1` to `9`:
+- `1`, `2`, `4`, `7`, `8` are already in row/column/subgrid.
+- Try `3` → ✅ valid!
+
+Place `3` at (0,2):
+
+```
+[7 8 3 | 4 . . | 1 2 .]
+```
+
+---
+
+### 🧮 Step 2: Move to (0,4)
+
+Try digits `1–9`:
+- `1`, `2`, `3`, `4`, `7`, `8` are taken.
+- Try `5` → ✅ valid!
+
+Place `5` at (0,4):
+
+```
+[7 8 3 | 4 5 . | 1 2 .]
+```
+
+---
+
+### ⏪ Backtracking (if needed)
+
+If no valid digit can be placed later, the algorithm will **undo**:
+- It will **reset (0,4) back to `.`**
+- Try next digit at (0,2)
+- Repeat...
+
+We’d see a move like:
+
+```
+Backtracking: Resetting cell (0,4) from 5 to .
+Backtracking: Resetting cell (0,2) from 3 to .
+```
+
+---
+
+Here’s the **fully solved Sudoku board** represented in clean ASCII format, with each 3x3 block separated for readability:
+
+```
+[7 8 5 | 4 3 9 | 1 2 6]
+[6 1 2 | 8 7 5 | 3 4 9]
+[4 9 3 | 6 2 1 | 5 7 8]
+-----------------------
+[8 5 7 | 9 4 3 | 2 6 1]
+[2 6 1 | 7 5 8 | 9 3 4]
+[9 3 4 | 1 6 2 | 7 8 5]
+-----------------------
+[5 7 8 | 3 9 4 | 6 1 2]
+[1 2 6 | 5 8 7 | 4 9 3]
+[3 4 9 | 2 1 6 | 8 5 7]
+```
+
+✅ Every row, column, and 3x3 subgrid has digits from `1` to `9` with no repetition.
+
+"""
