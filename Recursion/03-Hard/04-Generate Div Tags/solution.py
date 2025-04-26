@@ -43,32 +43,61 @@ O((2n)!/((n!((n + 1)!)))) time | O((2n)!/((n!((n + 1)!)))) space - where `n` is 
 # Solution:
 
 
-# O((2n)!/((n!((n + 1)!)))) time | O((2n)!/((n!((n + 1)!)))) space
+# O(4ⁿ) time | O(4ⁿ) space
 def generate_div_tags(number_of_tags):
-    matched_div_tags = []
-    generate_div_tags_from_prefix(number_of_tags, number_of_tags, "", matched_div_tags)
+    """
+    Generates all possible valid combinations of a given number of div tags.
 
+    Args:
+        number_of_tags (int): The number of div tag pairs to generate
+
+    Returns:
+        list: A list of strings containing all valid div tag combinations
+    """
+    matched_div_tags = []
+    # Start the recursive generation with full count of opening and closing tags needed
+    generate_div_tags_from_prefix(number_of_tags, number_of_tags, "", matched_div_tags)
     return matched_div_tags
 
 
 def generate_div_tags_from_prefix(
     opening_tags_needed, closing_tags_needed, prefix, result
 ):
+    """
+    Recursively generates valid div tag combinations by building them character by character.
 
+    The approach uses backtracking to explore all possible valid sequences where:
+    1. We never close a tag that hasn't been opened
+    2. We end with all tags properly closed
+
+    Args:
+        opening_tags_needed (int): How many more opening <div> tags we can add
+        closing_tags_needed (int): How many more closing </div> tags we can add
+        prefix (str): The current string being built
+        result (list): Accumulator for valid complete strings
+    """
+
+    # Base case: all tags have been properly opened and closed
+    if closing_tags_needed == 0:
+        result.append(prefix)
+        return
+
+    # If we can still open more tags (more <div> available)
     if opening_tags_needed > 0:
+        # Add an opening tag and recurse, decreasing opening tags needed
         new_prefix = prefix + "<div>"
         generate_div_tags_from_prefix(
             opening_tags_needed - 1, closing_tags_needed, new_prefix, result
         )
 
+    # We can add a closing tag if we have unclosed opening tags
+    # (opening_tags_needed < closing_tags_needed means we have open tags to close)
     if opening_tags_needed < closing_tags_needed:
+        # Add a closing tag and recurse, decreasing closing tags needed
         new_prefix = prefix + "</div>"
         generate_div_tags_from_prefix(
             opening_tags_needed, closing_tags_needed - 1, new_prefix, result
         )
-
-    if closing_tags_needed == 0:
-        result.append(prefix)
 
 
 # Test Cases:
