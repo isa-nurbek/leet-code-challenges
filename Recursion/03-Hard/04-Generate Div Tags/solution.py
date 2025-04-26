@@ -29,12 +29,13 @@ number_of_tags = 3
     "<div><div></div></div><div></div>",
     "<div></div><div><div></div></div>",
     "<div></div><div></div><div></div>",
-] // The strings could be ordered differently.
+]
+// The strings could be ordered differently.
 ```
 
 ## Optimal Time & Space Complexity:
 ```
-O(4ⁿ / √n) time | O(n · 4ⁿ / √n) space- where `n` is the input number.
+O(4ⁿ / √n) time | O(n · 4ⁿ / √n) space - where `n` is the input number.
 ```
 """
 
