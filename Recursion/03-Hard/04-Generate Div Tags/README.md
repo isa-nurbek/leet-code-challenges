@@ -17,13 +17,14 @@ number_of_tags = 3
 ## Sample Output
 
 ```plaintext
-  [
+[
     "<div><div><div></div></div></div>",
     "<div><div></div><div></div></div>",
     "<div><div></div></div><div></div>",
     "<div></div><div><div></div></div>",
     "<div></div><div></div><div></div>",
-  ] // The strings could be ordered differently.
+] 
+// The strings could be ordered differently.
 ```
 
 ## Hints
