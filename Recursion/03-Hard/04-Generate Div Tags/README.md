@@ -55,4 +55,4 @@ Using the rules defined in Hint #2, write a recursive algorithm that generates a
 
 ## Optimal Time & Space Complexity
 
-`O((2n)!/((n!((n + 1)!))))` time | `O((2n)!/((n!((n + 1)!))))` space - where `n` is the input number.
+`O(4ⁿ / √n)` time | `O(n · 4ⁿ / √n)` space - where `n` is the input number.
