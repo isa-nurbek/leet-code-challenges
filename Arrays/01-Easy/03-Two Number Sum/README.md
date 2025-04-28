@@ -10,13 +10,15 @@ You can assume that there will be at most one pair of numbers summing up to the 
 
 ```plaintext
 array = [3, 5, -4, 8, 11, 1, -1, 6]
-targetSum = 10
+target_sum = 10
 ```
 
 ## Sample Output
 
 ```plaintext
-[-1, 11] // the numbers could be in reverse order
+[-1, 11]
+
+The numbers could be in reverse order
 ```
 
 ## Hints
