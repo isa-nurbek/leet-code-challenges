@@ -28,12 +28,14 @@ unsorted_linked_list_dict = {
 }
 
 
-The List Looks Like: [3] → [1] → [4] → [1] → [5] → [3] → [2] → None  // the head node with value 3
+// The List Looks Like: [3] → [1] → [4] → [1] → [5] → [3] → [2] → None  
+// The head node with value 3
 ```
 
 ## Sample Output With Unsorted Linked List:
 ```
-3 -> 1 -> 4 -> 5 -> 2 -> None  // the head node with value 3
+3 -> 1 -> 4 -> 5 -> 2 -> None  
+// The head node with value 3
 ```
 
 ## Optimal Time & Space Complexity:
