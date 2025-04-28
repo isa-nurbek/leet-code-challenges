@@ -26,7 +26,9 @@ scores = [8, 4, 2, 1, 3, 6, 7, 9, 5]
 
 ## Sample Output:
 ```
-25 // you would give out the following rewards: [4, 3, 2, 1, 2, 3, 4, 5, 1]
+25 
+
+// You would give out the following rewards: [4, 3, 2, 1, 2, 3, 4, 5, 1]
 ```
 
 ## Optimal Time & Space Complexity:
