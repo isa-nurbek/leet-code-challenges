@@ -28,20 +28,22 @@ high = 2300
 
 ```plaintext
 True
-// We use cup [450, 465] to measure four volumes:
-// First measurement: Low = 450, High = 465
-// Second measurement: Low = 450 + 450 = 900, High = 465 + 465 = 930
-// Third measurement: Low = 900 + 450 = 1350, High = 930 + 465 = 1395
-// Fourth measurement: Low = 1350 + 450 = 1800, High = 1395 + 465 = 1860
+"""
+We use cup [450, 465] to measure four volumes:
+First measurement: Low = 450, High = 465
+Second measurement: Low = 450 + 450 = 900, High = 465 + 465 = 930
+Third measurement: Low = 900 + 450 = 1350, High = 930 + 465 = 1395
+Fourth measurement: Low = 1350 + 450 = 1800, High = 1395 + 465 = 1860
 
-// Then we use cup [200, 210] to measure two volumes:
-// Fifth measurement: Low = 1800 + 200 = 2000, High = 1860 + 210 = 2070
-// Sixth measurement: Low = 2000 + 200 = 2200, High = 2070 + 210 = 2280
+Then we use cup [200, 210] to measure two volumes:
+Fifth measurement: Low = 1800 + 200 = 2000, High = 1860 + 210 = 2070
+Sixth measurement: Low = 2000 + 200 = 2200, High = 2070 + 210 = 2280
 
-// We've measured a volume in the range [2200, 2280].
-// This is within our target range, so we return `true`.
+We've measured a volume in the range [2200, 2280].
+This is within our target range, so we return `True`.
 
-// Note: there are other ways to measure a volume in the target range.
+Note: there are other ways to measure a volume in the target range.
+"""
 ```
 
 ## Hints
