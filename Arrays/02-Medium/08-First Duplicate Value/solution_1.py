@@ -20,7 +20,7 @@ Note that you're allowed to mutate the input array.
 array = [2, 1, 5, 2, 3, 3, 4]
 ```
 
-## Sample Output 2:
+## Sample Output 1:
 ```
 2 
 
@@ -28,12 +28,12 @@ array = [2, 1, 5, 2, 3, 3, 4]
 // 3 also appears more than once, but the second 3 appears after the second 2.
 ```
 
-## Sample Input 3:
+## Sample Input 2:
 ```
 array = [2, 1, 5, 3, 3, 2, 4]
 ```
 
-## Sample Output 3:
+## Sample Output 2:
 ```
 3 
 
