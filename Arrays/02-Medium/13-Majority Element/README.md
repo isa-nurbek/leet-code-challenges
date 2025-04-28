@@ -15,7 +15,9 @@ array = [1, 2, 3, 2, 2, 1, 2]
 ## Sample Output
 
 ```plaintext
-2 // 2 occurs in 4/7 array indices, making it the majority element
+2
+
+// 2 occurs in 4/7 array indices, making it the majority element
 ```
 
 ## Hints
