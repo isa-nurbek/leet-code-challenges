@@ -24,7 +24,9 @@ knight_b = [4, 2]
 ## Sample Output
 
 ```plaintext
-1 // knight_a moves to [2, 1], knight_b captures knight_a on [2, 1]
+1
+
+// knight_a moves to [2, 1], knight_b captures knight_a on [2, 1]
 ```
 
 ## Hints
