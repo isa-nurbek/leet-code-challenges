@@ -30,6 +30,7 @@ number_of_tags = 3
     "<div></div><div><div></div></div>",
     "<div></div><div></div><div></div>",
 ]
+
 // The strings could be ordered differently.
 ```
 
