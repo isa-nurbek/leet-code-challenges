@@ -15,7 +15,7 @@ n = 2
 ```plaintext
 1
 
-sequence: 0, 1
+// Sequence: 0, 1
 ```
 
 ## Sample Input #2
@@ -29,7 +29,7 @@ n = 6
 ```plaintext
 5
 
-sequence: 0, 1, 1, 2, 3, 5
+// Sequence: 0, 1, 1, 2, 3, 5
 ```
 
 ## Hints
