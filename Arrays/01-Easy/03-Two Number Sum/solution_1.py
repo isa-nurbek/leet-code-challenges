@@ -24,7 +24,7 @@ target_sum = 10
 ```
 [-1, 11]
 
-The numbers could be in reverse order
+// The numbers could be in reverse order
 ```
 
 ## Optimal Time & Space Complexity:
