@@ -27,7 +27,8 @@ Drawing a 2-6 would result in the dealer standing.
 Drawing a 7-10 would result in the dealer busting.
 Drawing a 1 would result in a 16, meaning the dealer keeps drawing.
 Drawing with a 16 results in a 0.5 probability of busting (6-10 all result in busts).
-The overall probability of busting is 0.4 + (0.1 * 0.5) (the probability of busting on the first draw + the probability of busting on the second).
+The overall probability of busting is 0.4 + (0.1 * 0.5)
+The probability of busting on the first draw + the probability of busting on the second.
 """
 ```
 
