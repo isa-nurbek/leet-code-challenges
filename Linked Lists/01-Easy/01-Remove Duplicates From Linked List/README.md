@@ -23,13 +23,16 @@ sorted_linked_list_dict = {
     ],
 }
 
-The List Looks Like: [1] -> [1] -> [3] -> [4] -> [4] -> [4] -> [5] -> [6] -> [6] -> None // the head node with value 1
+// The List Looks Like: [1] -> [1] -> [3] -> [4] -> [4] -> [4] -> [5] -> [6] -> [6] -> None
+// The head node with value 1
 ```
 
 ## Sample Output With Sorted Linked List
 
 ```plaintext
-1 -> 3 -> 4 -> 5 -> 6 -> None // the head node with value 1
+1 -> 3 -> 4 -> 5 -> 6 -> None
+
+// The head node with value 1
 ```
 
 ---
@@ -51,13 +54,16 @@ unsorted_linked_list_dict = {
 }
 
 
-The List Looks Like: [3] → [1] → [4] → [1] → [5] → [3] → [2] → None  // the head node with value 3
+// The List Looks Like: [3] → [1] → [4] → [1] → [5] → [3] → [2] → None
+// The head node with value 3
 ```
 
 ## Sample Output With Unsorted Linked List
 
 ```plaintext
-3 -> 1 -> 4 -> 5 -> 2 -> None  // the head node with value 3
+3 -> 1 -> 4 -> 5 -> 2 -> None
+
+// The head node with value 3
 ```
 
 ## Hints
