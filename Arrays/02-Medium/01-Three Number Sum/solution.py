@@ -15,7 +15,7 @@ If no three numbers sum up to the target sum, the function should return an empt
 ## Sample Input:
 ```
 array = [12, 3, 1, 2, -6, 5, -8, 6]
-targetSum = 0
+target_sum = 0
 ```
 
 ## Sample Output:
