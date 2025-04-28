@@ -18,7 +18,9 @@ nums = [-5, -5, 2, 3, -2]
 
 ## Sample Output:
 ```
-True // The subarray [-5, 2, 3] has a sum of 0
+True 
+
+// The subarray [-5, 2, 3] has a sum of 0
 ```
 
 ## Optimal Time & Space Complexity:
