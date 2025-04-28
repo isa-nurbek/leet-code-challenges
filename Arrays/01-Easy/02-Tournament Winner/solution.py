@@ -35,6 +35,7 @@ results = [0, 0, 1]
 ## Sample Output:
 ```
 "Python"
+
 // C# beats HTML, Python Beats C#, and Python Beats HTML.
 // HTML - 0 points
 // C# -  3 points
