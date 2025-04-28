@@ -13,7 +13,9 @@ n = 2
 ## Sample Output #1
 
 ```plaintext
-1 // 0, 1
+1
+
+sequence: 0, 1
 ```
 
 ## Sample Input #2
@@ -25,7 +27,9 @@ n = 6
 ## Sample Output #2
 
 ```plaintext
-5 // 0, 1, 1, 2, 3, 5
+5
+
+sequence: 0, 1, 1, 2, 3, 5
 ```
 
 ## Hints
