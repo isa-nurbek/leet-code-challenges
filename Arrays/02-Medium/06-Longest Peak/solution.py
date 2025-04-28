@@ -22,7 +22,7 @@ array = [1, 2, 3, 3, 4, 0, 10, 6, 5, -1, -3, 2, 3]
 ```
 6 
 
-// In array he longest peak is [0, 10, 6, 5, -1, -3], which has a length of *6*
+// In array the longest peak is [0, 10, 6, 5, -1, -3], which has a length of *6*
 ```
 
 ## Optimal Time & Space Complexity:
