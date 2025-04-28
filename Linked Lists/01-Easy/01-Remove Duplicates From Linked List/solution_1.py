@@ -30,12 +30,15 @@ sorted_linked_list_dict = {
     ],
 }
 
-The List Looks Like: [1] -> [1] -> [3] -> [4] -> [4] -> [4] -> [5] -> [6] -> [6] -> None // the head node with value 1
+// The List Looks Like: [1] -> [1] -> [3] -> [4] -> [4] -> [4] -> [5] -> [6] -> [6] -> None 
+// The head node with value 1
 ```
 
 ## Sample Output With Sorted Linked List:
 ```
-1 -> 3 -> 4 -> 5 -> 6 -> None // the head node with value 1
+1 -> 3 -> 4 -> 5 -> 6 -> None 
+
+// The head node with value 1
 ```
 
 ## Optimal Time & Space Complexity:
