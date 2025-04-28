@@ -18,8 +18,11 @@ intervals = [[1, 2], [3, 5], [4, 7], [6, 8], [9, 10]]
 
 ```plaintext
 [[1, 2], [3, 8], [9, 10]]
-// Merge the intervals [3, 5], [4, 7], and [6, 8].
-// The intervals could be ordered differently.
+
+"""
+Merge the intervals [3, 5], [4, 7], and [6, 8].
+The intervals could be ordered differently.
+"""
 ```
 
 ## Hints
