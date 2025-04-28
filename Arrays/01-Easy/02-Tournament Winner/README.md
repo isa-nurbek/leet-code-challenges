@@ -21,10 +21,13 @@ results = [0, 0, 1]
 
 ```plaintext
 "Python"
-// C# beats HTML, Python Beats C#, and Python Beats HTML.
-// HTML - 0 points 
-// C# -  3 points
-// Python -  6 points
+
+"""
+C# beats HTML, Python Beats C#, and Python Beats HTML.
+HTML - 0 points 
+C# -  3 points
+Python -  6 points
+"""
 ```
 
 ## Hints
