@@ -27,8 +27,9 @@ points = [
 
 ## Sample Output:
 ```
-2  // [1, 1], [0, 0], [0, 1], and [1, 0] makes a square,
-// as does [1, 1], [-4, 2], [-2, -1], and [-1, 4]
+2  
+
+// [1, 1], [0, 0], [0, 1], and [1, 0] makes a square, as does [1, 1], [-4, 2], [-2, -1], and [-1, 4]
 ```
 
 ## Optimal Time & Space Complexity:
