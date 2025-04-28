@@ -17,12 +17,15 @@ max_steps = 2
 
 ```plaintext
 5
-// You can climb the staircase in the following ways: 
-// 1, 1, 1, 1
-// 1, 1, 2
-// 1, 2, 1
-// 2, 1, 1
-// 2, 2
+
+"""
+You can climb the staircase in the following ways: 
+1, 1, 1, 1
+1, 1, 2
+1, 2, 1
+2, 1, 1
+2, 2
+"""
 ```
 
 ## Hints
