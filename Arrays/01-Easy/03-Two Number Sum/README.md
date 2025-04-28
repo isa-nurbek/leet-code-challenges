@@ -18,7 +18,9 @@ target_sum = 10
 ```plaintext
 [-1, 11]
 
+"""
 The numbers could be in reverse order
+"""
 ```
 
 ## Hints
