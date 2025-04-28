@@ -14,7 +14,9 @@ to_move = 2
 ## Sample Output
 
 ```plaintext
-[1, 3, 4, 2, 2, 2, 2, 2] // the numbers 1, 3, and 4 could be ordered differently
+[1, 3, 4, 2, 2, 2, 2, 2]
+
+// The numbers 1, 3, and 4 could be ordered differently
 ```
 
 ## Hints
