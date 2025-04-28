@@ -17,7 +17,9 @@ nums = [1, 4, 3]
 
 ## Sample Output:
 ```
-[2, 5]  // n is 5, meaning the completed list should be [1, 2, 3, 4, 5]
+[2, 5]  
+
+// n is 5, meaning the completed list should be [1, 2, 3, 4, 5]
 ```
 
 ## Optimal Time & Space Complexity:
