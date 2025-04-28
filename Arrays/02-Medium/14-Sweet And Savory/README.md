@@ -18,7 +18,9 @@ target = 8
 ## Sample Output
 
 ```plaintext
-[-3, 7] // The combined profile of 4 is closest without going over
+[-3, 7]
+
+// The combined profile of 4 is closest without going over
 ```
 
 ## Hints
