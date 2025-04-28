@@ -8,13 +8,15 @@ If no four numbers sum up to the target sum, the function should return an empty
 
 ```plaintext
 array = [7, 6, 4, -1, 1, 2]
-targetSum = 16
+target_sum = 16
 ```
 
 ## Sample Output
 
 ```plaintext
-[[7, 6, 4, -1], [7, 6, 1, 2]] // the quadruplets could be ordered differently
+[[7, 6, 4, -1], [7, 6, 1, 2]]
+
+// The quadruplets could be ordered differently
 ```
 
 ## Hints
