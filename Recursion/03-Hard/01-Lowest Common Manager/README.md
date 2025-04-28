@@ -7,7 +7,8 @@ Write a function that returns the lowest common manager to the two reports.
 ## Sample Input
 
 ```plaintext
-// From the organizational chart below.
+// From the organizational chart below:
+
 top_manager = Node A
 report_one = Node E
 report_two = Node I
