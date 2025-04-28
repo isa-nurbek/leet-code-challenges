@@ -13,7 +13,9 @@ nums = [1, 4, 3]
 ## Sample Output
 
 ```plaintext
-[2, 5]  // n is 5, meaning the completed list should be [1, 2, 3, 4, 5]
+[2, 5]
+
+// n is 5, meaning the completed list should be [1, 2, 3, 4, 5]
 ```
 
 ## Hints
@@ -28,7 +30,7 @@ How would you solve this problem if there was only one missing number? Can that 
 <details>
 <summary><b>Hint 2</b></summary>
 
-To efficiently find a single missing number, you can sum up all of the values in the array as well as sum up all of the values in the expected array (i.e. in the range [1, n]). The difference between these values is the missing number.
+To efficiently find a single missing number, you can sum up all of the values in the array as well as sum up all of the values in the expected array (i.e. in the range `[1, n]`). The difference between these values is the missing number.
 
 </details>
 
