@@ -20,7 +20,9 @@ target_sum = 10
 
 ## Sample Output:
 ```
-[4, 8]  // The longest subarray that sums to 10 starts at index 4 and ends at index 8
+[4, 8]  
+
+// The longest subarray that sums to 10 starts at index 4 and ends at index 8
 ```
 
 ## Optimal Time & Space Complexity:
