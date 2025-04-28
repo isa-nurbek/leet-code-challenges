@@ -29,7 +29,9 @@ target = 8
 
 ## Sample Output:
 ```
-[-3, 7] // The combined profile of 4 is closest without going over
+[-3, 7] 
+
+// The combined profile of 4 is closest without going over
 ```
 
 ## Optimal Time & Space Complexity:
