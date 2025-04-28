@@ -31,7 +31,9 @@ starting_hand = 15
 
 ## Sample Output
 ```
-0.45 // Drawing a 2-6 would result in the dealer standing.
+0.45 
+
+// Drawing a 2-6 would result in the dealer standing.
 // Drawing a 7-10 would result in the dealer busting.
 // Drawing a 1 would result in a 16, meaning the dealer keeps drawing.
 // Drawing with a 16 results in a 0.5 probability of busting (6-10 all result in busts).
