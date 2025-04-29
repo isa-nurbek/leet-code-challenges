@@ -149,3 +149,66 @@ print(ambiguous_measurements(measuring_cups, low, high))  # True
 
 print(ambiguous_measurements(measuring_cups_2, low_2, high_2))  # False
 # Explanation: No combination of cups sums up to a range within [10,12]
+
+# =========================================================================================================================== #
+
+# Big O Analysis:
+
+"""
+## Time and Space Complexity Analysis
+
+### **Time Complexity:**
+
+The algorithm uses a recursive approach with memoization to avoid redundant calculations. Here's how we can break it down:
+
+1. **Recursive Calls:**
+   - At each step, the function tries all possible measuring cups (let's say there are `n` cups).
+   - For each cup, it reduces the problem to a new subproblem with updated `low` and `high` values (`new_low = max(0, low - cup_low)
+   ` and `new_high = max(0, high - cup_high)`).
+   - The recursion continues until `low` and `high` become ≤ 0 or a valid measurement is found.
+
+2. **Memoization:**
+   - The memoization ensures that each unique `(low, high)` pair is computed only once.
+   - The number of unique `(low, high)` pairs is bounded by `O(low * high)` because `low` and `high` decrease in each recursive
+   call (but not below 0).
+
+3. **Total Work:**
+   - For each `(low, high)` pair, the algorithm iterates over all `n` measuring cups.
+   - Therefore, the total time complexity is:
+
+        O(n ⋅ low ⋅ high)
+
+   - This is because there are `O(low * high)` possible subproblems, and each subproblem takes `O(n)` time.
+
+### **Space Complexity:**
+
+The space complexity is determined by:
+1. **Memoization Storage:**
+   - The memoization dictionary stores results for `O(low * high)` unique `(low, high)` pairs.
+   - Each entry takes constant space (since we store a boolean).
+   - Thus, the space required for memoization is:
+
+        O(low ⋅ high)
+
+2. **Recursion Stack:**
+   - The maximum recursion depth is bounded by the number of times we can subtract `cup_low` and `cup_high` from `low` and `high`
+   before they become ≤ 0.
+   - In the worst case, this is `O(low + high)` (if we subtract the smallest possible values each time).
+   - However, since memoization avoids redundant calls, the recursion stack does not grow beyond `O(low + high)`.
+
+Thus, the total space complexity is:
+
+    O(low ⋅ high + low + high) = O(low ⋅ high)
+
+(because `low * high` dominates `low + high` for large values).
+
+### **Summary:**
+- **Time Complexity:**  O(n ⋅ low ⋅ high)
+- **Space Complexity:**  O(low ⋅ high)
+
+### **Optimization Consideration:**
+- If `low` and `high` are very large, this approach may not be efficient due to the `O(low * high)` factor.
+- Alternative approaches (e.g., dynamic programming with GCD-based pruning or BFS over possible measurements) could be more
+efficient in some cases.
+
+"""
