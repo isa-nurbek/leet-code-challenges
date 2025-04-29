@@ -109,3 +109,27 @@ def can_measure_in_range(measuring_cups, low, high, memoization):
 
 def create_hashable_key(low, high):
     return str(low) + ":" + str(high)
+
+
+# Test Cases:
+measuring_cups = [
+    [200, 210],
+    [450, 465],
+    [800, 850],
+]
+
+low = 2100
+high = 2300
+
+measuring_cups_2 = [
+    [1, 3],
+    [2, 4],
+    [5, 7],
+    [10, 20],
+]
+
+low_2 = 10
+high_2 = 12
+
+print(ambiguous_measurements(measuring_cups, low, high))  # True
+print(ambiguous_measurements(measuring_cups_2, low_2, high_2))  # False
