@@ -72,7 +72,7 @@ Each problem typically includes:
 
 ## 🚀 Goals
 
-1. Solve **300+ problems** across LeetCode and AlgoExpert.
+1. Solve **200+ problems** across LeetCode and AlgoExpert.
 2. Master key algorithmic topics including:
    - Arrays & Strings
    - Graphs & Trees
