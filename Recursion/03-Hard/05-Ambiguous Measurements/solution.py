@@ -212,3 +212,319 @@ Thus, the total space complexity is:
 efficient in some cases.
 
 """
+
+# =========================================================================================================================== #
+
+# Detailed Code Explanation:
+
+"""
+Let’s walk through your code carefully and break it down step-by-step:
+
+## **1. Problem Statement**
+You are given:
+- A list of **measuring cups** where each cup has a **low** and **high** measurement (because measuring is imprecise).
+- A **target range** `[low, high]`.
+
+You want to determine **if you can use any combination of the cups** (each cup can be used any number of times) to measure an
+amount **that falls within** the target range.
+
+---
+
+## **2. Code Overview**
+
+There are 3 main parts:
+
+### 2.1. `ambiguous_measurements(measuring_cups, low, high)`
+- Main function you call.
+- It initializes a **memoization dictionary** to avoid recalculating subproblems.
+- It calls the helper `can_measure_in_range(...)`.
+
+---
+
+### 2.2. `can_measure_in_range(measuring_cups, low, high, memoization)`
+This is a **recursive function** that tries to solve the problem.
+
+Here’s what it does:
+1. **Memoization Check**:
+   - It creates a `memoize_key` by combining `low` and `high` into a string (like `'2100:2300'`).
+   - If this key has been computed before, return its stored value.
+
+2. **Base Case**:
+   - If both `low` and `high` are **≤ 0**, return `False`.
+   - (This means you've subtracted too much — you can’t have negative liquid amounts.)
+
+3. **Main Recursive Work**:
+   - For each measuring cup:
+     - Get its `cup_low` and `cup_high` values.
+   
+     - **Direct Match Check**:
+       - If the cup's range `[cup_low, cup_high]` fits **inside** the current `[low, high]`, immediately return `True`.
+       - Example: if you need between 10–12 units and the cup measures 11 units, you're good.
+
+     - **Recursive Attempt**:
+       - Otherwise, "pretend" you used this cup and **decrease** the target range:
+         - `new_low = max(0, low - cup_low)`
+         - `new_high = max(0, high - cup_high)`
+       - Recurse on the new smaller range.
+       - (You're trying to see: if I use this cup now, can I measure the remaining quantity?)
+
+     - If **any** cup eventually leads to success (`can_measure == True`), break and return True.
+
+4. **Memoization Save**:
+   - After trying all cups, save the result (True or False) in `memoization` to avoid recomputing this `(low, high)` range
+   in the future.
+
+5. **Return the Result**.
+
+---
+
+### 2.3. `create_hashable_key(low, high)`
+- Just a helper that makes a string out of `(low, high)`, because Python dictionaries need **hashable keys** and lists/tuples
+might cause problems if low/high change dynamically.
+
+---
+
+## **3. Example Walkthrough**
+
+### Example 1:
+```
+measuring_cups = [
+    [200, 210],
+    [450, 465],
+    [800, 850],
+]
+low = 2100
+high = 2300
+```
+
+- Start with `[2100, 2300]`.
+- Try using one cup:
+  - Use `[800, 850]`:
+    - New range becomes `[2100-850, 2300-800]` → `[1250, 1500]`.
+  - Again, try using `[800, 850]`:
+    - New range: `[1250-850, 1500-800]` → `[400, 700]`.
+  - Keep trying:
+    - Maybe now try `[450, 465]`:
+      - New range: `[400-465, 700-450]` → `[0, 250]`.
+    - Now you try `[200, 210]`:
+      - New range: `[0-210, 250-200]` → `[0, 50]`.
+- Eventually, it checks whether you can get exactly into the target window. 
+- It finds a valid combination: **True**.
+
+---
+
+### Example 2:
+```
+measuring_cups = [
+    [1, 3],
+    [2, 4],
+    [5, 7],
+    [10, 20],
+]
+low = 10
+high = 12
+```
+
+- Need to measure between 10–12 units.
+- Try:
+  - `[1,3]` → New range `[7,11]`
+  - `[2,4]` → New range `[6,10]`
+  - `[5,7]` → New range `[3,7]`
+- None of these combinations fit perfectly inside `[10,12]` when you recurse.
+- Eventually, recursion exhausts all options.
+- **Returns False**.
+
+---
+
+## **4. Summary**
+
+- **Technique**: Recursion + Memoization (Dynamic Programming).
+- **Key Idea**: For every `(low, high)`, try each cup and check whether using it helps reach the goal.
+- **Efficiency**: Memoization ensures you don't recompute the same `(low, high)` multiple times → much faster.
+
+---
+
+## **5. Important Points**
+- **Memoization** is crucial; otherwise, recursion would become exponentially slow.
+- **Base cases** are carefully thought out (checking when `low` and `high` are ≤ 0).
+- **Greedy matching** (checking if a single cup fits) helps short-circuit the recursion early.
+- **max(0, ...)** ensures no negative liquid amounts — you cannot "owe" liquid.
+
+---
+
+Let's **visualize** the recursive tree for the **first example**:
+
+---
+### **Example 1:**
+```
+measuring_cups = [
+    [200, 210],
+    [450, 465],
+    [800, 850],
+]
+low = 2100
+high = 2300
+```
+
+We need to measure between **2100 and 2300** units.
+
+---
+
+### **Starting point:**
+
+```
+Goal: [2100, 2300]
+```
+Now, try each cup:
+
+---
+
+### **Level 1:**
+(At each level, we pick one cup and shrink the [low, high] accordingly.)
+
+- Try using `[200,210]`:
+  ```
+  New range: [2100-210, 2300-200] → [1890, 2100]
+  ```
+- Try using `[450,465]`:
+  ```
+  New range: [2100-465, 2300-450] → [1635, 1850]
+  ```
+- Try using `[800,850]`:
+  ```
+  New range: [2100-850, 2300-800] → [1250, 1500]
+  ```
+  
+---
+
+### **Branching from [1250,1500]**:
+(we took `[800,850]` in the first move)
+
+Now, again try all cups:
+
+- Use `[200,210]`:
+  ```
+  [1250-210, 1500-200] → [1040, 1300]
+  ```
+- Use `[450,465]`:
+  ```
+  [1250-465, 1500-450] → [785, 1050]
+  ```
+- Use `[800,850]`:
+  ```
+  [1250-850, 1500-800] → [400, 700]
+  ```
+
+---
+
+### **Branching from [400,700]**:
+(we took `[800,850]` again)
+
+Try all cups:
+
+- Use `[200,210]`:
+  ```
+  [400-210, 700-200] → [190, 500]
+  ```
+- Use `[450,465]`:
+  ```
+  [400-465, 700-450] → [0, 250]   <-- Important! Notice 0.
+  ```
+- Use `[800,850]`:
+  ```
+  [400-850, 700-800] → [0, 0]     (but negative values not allowed)
+  ```
+
+---
+
+### **Branching from [0,250]**:
+(now from `[400,700]` after picking `[450,465]`)
+
+Try cups again:
+
+- Use `[200,210]`:
+  ```
+  [0-210, 250-200] → [0, 50]
+  ```
+- Use `[450,465]`:
+  ```
+  [0-465, 250-450] → [0, 0]
+  ```
+- Use `[800,850]`:
+  ```
+  [0-850, 250-800] → [0, 0]
+  ```
+
+---
+
+### **Branching from [0,50]**:
+Try cups again:
+
+- Use `[200,210]`: cannot fit — cup range is 200–210, too big.
+- Use `[450,465]`: cannot fit — cup range too big.
+- Use `[800,850]`: cannot fit.
+
+No success here.
+
+---
+
+### **What happened?**
+
+At `[0,250]`, no immediate match.
+At `[400,700]`, we tried `[450,465]`, but **still not complete**.
+
+---
+
+However, **notice another path** we missed earlier:
+
+When starting from `[1250,1500]`, **if you pick [450,465]** immediately:
+
+```
+[1250-465, 1500-450] → [785,1050]
+```
+
+From `[785,1050]`:
+
+- Pick `[800,850]` again:
+  ```
+  [785-850, 1050-800] → [0,250]
+  ```
+
+And so on.
+
+---
+
+### **Conclusion:**
+The recursion keeps trying:
+- Use [800–850] as many times as needed.
+- Then [450–465] to adjust.
+- Then [200–210] to finalize.
+
+**Eventually,** it can match the range `[2100,2300]` exactly by clever combinations of the cups.
+
+Thus, **Answer: True** ✅
+
+---
+
+# 🎯 **Tree Summary**
+```
+[2100,2300]
+├── [1890,2100] (by 200–210) --> keep recursing
+├── [1635,1850] (by 450–465) --> keep recursing
+└── [1250,1500] (by 800–850)
+     ├── [1040,1300] (by 200–210)
+     ├── [785,1050] (by 450–465)
+     │    ├── [0,250] (by 800–850)
+     │         ├── [0,50] (by 200–210)
+     └── [400,700] (by 800–850)
+          ├── [0,250] (by 450–465)
+```
+
+---
+
+## 🔥 **Key Insight**
+- **Recursive tree**: each node represents trying a new cup and shrinking the target.
+- **Memoization** prevents revisiting the same `[low, high]` pairs repeatedly.
+- **Goal** is to reach a "safe zone" where the cup exactly fits inside `[low, high]`.
+
+"""
