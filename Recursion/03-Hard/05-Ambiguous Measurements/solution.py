@@ -70,3 +70,42 @@ O(low * high * n) time | O(low * high) space - where `n` is the number of measur
 
 
 # O(low * high * n) time | O(low * high) space
+def ambiguous_measurements(measuring_cups, low, high):
+    memoization = {}
+
+    return can_measure_in_range(measuring_cups, low, high, memoization)
+
+
+def can_measure_in_range(measuring_cups, low, high, memoization):
+    memoize_key = create_hashable_key(low, high)
+
+    if memoize_key in memoization:
+        return memoization[memoize_key]
+
+    if low <= 0 and high <= 0:
+        return False
+
+    can_measure = False
+
+    for cup in measuring_cups:
+        cup_low, cup_high = cup
+
+        if low <= cup_low and cup_high <= high:
+            can_measure = True
+            break
+
+        new_low = max(0, low - cup_low)
+        new_high = max(0, high - cup_high)
+
+        can_measure = can_measure_in_range(
+            measuring_cups, new_low, new_high, memoization
+        )
+        if can_measure:
+            break
+
+    memoization[memoize_key] = can_measure
+    return can_measure
+
+
+def create_hashable_key(low, high):
+    return str(low) + ":" + str(high)
