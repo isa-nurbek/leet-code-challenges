@@ -71,47 +71,60 @@ O(low * high * n) time | O(low * high) space - where `n` is the number of measur
 
 # O(low * high * n) time | O(low * high) space
 def ambiguous_measurements(measuring_cups, low, high):
+    # Initialize memoization dictionary to store already computed results
     memoization = {}
 
+    # Start the recursive measurement checking process
     return can_measure_in_range(measuring_cups, low, high, memoization)
 
 
 def can_measure_in_range(measuring_cups, low, high, memoization):
+    # Create a unique key for the current low and high values for memoization
     memoize_key = create_hashable_key(low, high)
 
+    # If we've already computed this range before, return the stored result
     if memoize_key in memoization:
         return memoization[memoize_key]
 
+    # Base case: if both low and high are <= 0, we can't measure anything
     if low <= 0 and high <= 0:
         return False
 
-    can_measure = False
+    can_measure = False  # Initialize result for current range
 
+    # Check each measuring cup to see if it can help measure the desired range
     for cup in measuring_cups:
-        cup_low, cup_high = cup
+        cup_low, cup_high = cup  # Unpack the cup's measurement range
 
+        # Case 1: If the cup's range fits entirely within our target range
         if low <= cup_low and cup_high <= high:
             can_measure = True
             break
 
-        new_low = max(0, low - cup_low)
-        new_high = max(0, high - cup_high)
+        # Case 2: Subtract the cup's range from our target range and recurse
+        # This represents using this cup once and seeing if we can measure the remainder
+        new_low = max(0, low - cup_low)  # Don't go below 0
+        new_high = max(0, high - cup_high)  # Don't go below 0
 
+        # Recursively check if we can measure the new reduced range
         can_measure = can_measure_in_range(
             measuring_cups, new_low, new_high, memoization
         )
         if can_measure:
             break
 
+    # Store the result for this range before returning
     memoization[memoize_key] = can_measure
     return can_measure
 
 
 def create_hashable_key(low, high):
+    # Helper function to create a string key from low and high values
     return str(low) + ":" + str(high)
 
 
 # Test Cases:
+
 measuring_cups = [
     [200, 210],
     [450, 465],
@@ -132,4 +145,7 @@ low_2 = 10
 high_2 = 12
 
 print(ambiguous_measurements(measuring_cups, low, high))  # True
+# Explanation: 4*[450,465] + 2*[200,210] = [2200,2280] which is within [2100,2300]
+
 print(ambiguous_measurements(measuring_cups_2, low_2, high_2))  # False
+# Explanation: No combination of cups sums up to a range within [10,12]
