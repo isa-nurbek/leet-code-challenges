@@ -70,3 +70,59 @@ O(low * high * n) time | O(low * high) space - where `n` is the number of measur
 
 
 # O(low * high * n) time | O(low * high) space
+from collections import deque
+
+
+def ambiguous_measurements(measuring_cups, low, high):
+    queue = deque()
+    queue.append((0, 0))
+    visited = set()
+    visited.add((0, 0))
+
+    while queue:
+        current_low_sum, current_high_sum = queue.popleft()
+
+        if current_low_sum >= low and current_high_sum <= high:
+            return True
+
+        for cup in measuring_cups:
+            cup_low, cup_high = cup
+            new_low_sum = current_low_sum + cup_low
+            new_high_sum = current_high_sum + cup_high
+
+            if new_high_sum > high:
+                continue  # No point in exploring further as it exceeds the high
+
+            if (new_low_sum, new_high_sum) not in visited:
+                visited.add((new_low_sum, new_high_sum))
+                queue.append((new_low_sum, new_high_sum))
+
+    return False
+
+
+# Test Cases:
+
+measuring_cups = [
+    [200, 210],
+    [450, 465],
+    [800, 850],
+]
+
+low = 2100
+high = 2300
+
+measuring_cups_2 = [
+    [1, 3],
+    [2, 4],
+    [5, 7],
+    [10, 20],
+]
+
+low_2 = 10
+high_2 = 12
+
+print(ambiguous_measurements(measuring_cups, low, high))  # True
+# Explanation: 4*[450,465] + 2*[200,210] = [2200,2280] which is within [2100,2300]
+
+print(ambiguous_measurements(measuring_cups_2, low_2, high_2))  # False
+# Explanation: No combination of cups sums up to a range within [10,12]
