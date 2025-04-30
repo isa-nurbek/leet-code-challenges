@@ -1,6 +1,6 @@
 # Subarray Sort
 
-Write a function that takes in an array of at least two integers and that returns an array of the starting and ending indices of the smallest subarray in the input array that needs to be sorted in place in order for the entire input array to be sorted (in ascending order).
+Write a function that takes in an array of at least two integers and that returns an array of the starting and ending indices of the smallest subarray in the input array that needs to be sorted in place in order for the entire input array to be sorted (in `ascending order`).
 
 If the input array is already sorted, the function should return `[-1, -1]`.
 
@@ -35,7 +35,7 @@ Find the smallest and largest numbers that are out of order in the input array. 
 <details>
 <summary><b>Hint 3</b></summary>
 
-Once you've found the smallest and largest out-of-order numbers mentioned in Hint #2, find their final sorted positions in the array. This should give you the extremities of the smallest subarray that needs to be sorted.
+Once you've found the smallest and largest out-of-order numbers mentioned in `Hint #2`, find their final sorted positions in the array. This should give you the extremities of the smallest subarray that needs to be sorted.
 
 </details>
 
