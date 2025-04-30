@@ -74,29 +74,57 @@ from collections import deque
 
 
 def ambiguous_measurements(measuring_cups, low, high):
+    """
+    Determines if we can measure a quantity between `low` and `high` using the given measuring cups.
+
+    Each measuring cup provides a range [cup_low, cup_high]. The goal is to see if by combining
+    these cups (summing their ranges), we can achieve a range that falls within [low, high].
+
+    Args:
+        measuring_cups: List of tuples, where each tuple represents a cup's measurement range (low, high).
+        low: The target lower bound.
+        high: The target upper bound.
+
+    Returns:
+        bool: True if a valid combination exists, False otherwise.
+    """
+
+    # We use a queue to perform a BFS (Breadth-First Search) over possible sums of ranges.
+    # Each element in the queue is a tuple (current_sum_low, current_sum_high).
     queue = deque()
-    queue.append((0, 0))
+    queue.append((0, 0))  # Start with zero measurements
+
+    # A set to keep track of visited states to avoid redundant processing.
     visited = set()
-    visited.add((0, 0))
+    visited.add((0, 0))  # Mark the initial state as visited
 
     while queue:
         current_low_sum, current_high_sum = queue.popleft()
 
+        # Check if the current summed range falls within the target [low, high]
         if current_low_sum >= low and current_high_sum <= high:
-            return True
+            return True  # Found a valid combination
 
+        # Explore all possible next steps by adding each measuring cup's range
         for cup in measuring_cups:
             cup_low, cup_high = cup
+
+            # Calculate new summed range after using the current cup
             new_low_sum = current_low_sum + cup_low
             new_high_sum = current_high_sum + cup_high
 
+            # If the new high exceeds the target high, skip this path (pruning)
             if new_high_sum > high:
-                continue  # No point in exploring further as it exceeds the high
+                continue
 
+            # Check if this new state has been visited before
             if (new_low_sum, new_high_sum) not in visited:
-                visited.add((new_low_sum, new_high_sum))
-                queue.append((new_low_sum, new_high_sum))
+                visited.add((new_low_sum, new_high_sum))  # Mark as visited
+                queue.append(
+                    (new_low_sum, new_high_sum)
+                )  # Add to queue for further exploration
 
+    # If queue is exhausted and no valid combination found, return False
     return False
 
 
