@@ -189,3 +189,151 @@ quadratic dependence on `high`.
 the complexity manageable.
 
 """
+
+# =========================================================================================================================== #
+
+# Detailed Code Explanation:
+
+"""
+The function `ambiguous_measurements` is designed to determine **whether it's possible to measure an ambiguous amount of liquid**
+using a set of **measuring cups**, each defined by a **range** [low_i, high_i], such that the total measured quantity falls
+**within a target range** [low, high].
+
+---
+
+## 🔍 **What the Function Tries to Do**
+
+Given:
+- A list of measuring cups, where each cup has a low and high range (e.g., [200, 210] means that the cup can hold between 200
+and 210 ml),
+- A target range of liquid [low, high],
+
+We want to determine whether it is **possible to combine the cups in such a way** (any number of times) so that the total
+measured amount:
+- Is **at least `low`**, and
+- Is **at most `high`**,
+- And the **exact total is not precisely known**, hence the term "ambiguous".
+
+---
+
+## 📦 **Core Idea**
+
+The idea is to **explore all possible combinations of cup ranges using BFS** (Breadth-First Search). At each step, the function:
+- Adds one more cup,
+- Updates the cumulative low and high bounds of the total liquid measured so far,
+- Checks if the cumulative total lies within the target range.
+
+---
+
+## 🧠 Step-by-Step Walkthrough
+
+### 1. **Initial Setup**
+```
+queue = deque()
+queue.append((0, 0))  # Starting from zero measurement
+visited = set()
+visited.add((0, 0))   # Avoid revisiting the same state
+```
+- Start from a total of 0 measured liquid.
+- Use BFS (`queue`) to explore all possible measurement states.
+- Use a `visited` set to **avoid repeating the same (low_sum, high_sum)** pair.
+
+---
+
+### 2. **BFS Loop**
+```
+while queue:
+    current_low_sum, current_high_sum = queue.popleft()
+```
+- Keep processing combinations while there are states to explore.
+
+---
+
+### 3. **Goal Check**
+```
+if current_low_sum >= low and current_high_sum <= high:
+    return True
+```
+- If the **current cumulative range lies entirely within the target**, then we can ambiguously measure within the desired range.
+- Return `True` — it **is possible**.
+
+---
+
+### 4. **Expand to New States**
+```
+for cup in measuring_cups:
+    cup_low, cup_high = cup
+    new_low_sum = current_low_sum + cup_low
+    new_high_sum = current_high_sum + cup_high
+
+    if new_high_sum > high:
+        continue  # Stop exploring this path (over limit)
+
+    if (new_low_sum, new_high_sum) not in visited:
+        visited.add((new_low_sum, new_high_sum))
+        queue.append((new_low_sum, new_high_sum))
+```
+
+- For each cup, add its range to the current measurement.
+- Skip the state if the upper bound of the new range is already too large (`new_high_sum > high`).
+- Avoid repeating states using the `visited` set.
+
+---
+
+### 5. **If BFS Ends Without Finding a Valid Range**
+```
+return False
+```
+- If no such ambiguous range is found after exploring all possibilities, return `False`.
+
+---
+
+## ✅ Test Case Analysis
+
+### Case 1:
+```
+measuring_cups = [
+    [200, 210],
+    [450, 465],
+    [800, 850],
+]
+low = 2100
+high = 2300
+```
+- Possible combinations:
+  - Using [450, 465] × 2 + [800, 850] × 2:
+    - Low sum: 450+450+800+800 = 2500 > high → invalid
+  - But some combinations like [450, 465], [800, 850], [200, 210] can be tried and eventually, one will fit within [2100, 2300].
+- So the output is `True`.
+
+---
+
+### Case 2:
+```
+measuring_cups_2 = [
+    [1, 3],
+    [2, 4],
+    [5, 7],
+    [10, 20],
+]
+low = 10
+high = 12
+```
+- Every combination either:
+  - Falls below 10, or
+  - Exceeds 12
+  - Or the range is too wide to land entirely within [10, 12]
+- So no ambiguous total lies **entirely** within [10, 12].
+- Output: `False`
+
+---
+
+## 🔄 Summary
+
+- Uses **BFS** to explore all reachable measuring ranges.
+- Checks for **ambiguous overlap** within the target range.
+- Efficient via `visited` set to prune duplicates.
+- It's a smart approach to simulate real-life scenarios like uncertain measurement tools and determining if they can measure
+within bounds.
+
+"""
