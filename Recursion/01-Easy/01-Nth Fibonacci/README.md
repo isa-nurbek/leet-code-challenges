@@ -1,8 +1,8 @@
 # Nth Fibonacci
 
-The Fibonacci sequence is defined as follows: the first number of the sequence is `0`, the second number is `1`, and the nth number is the sum of the (n - 1)th and (n - 2)th numbers. Write a function that takes in an integer `n` and returns the nth Fibonacci number.
+The Fibonacci sequence is defined as follows: the first number of the sequence is `0`, the second number is `1`, and the nth number is the sum of the `(n - 1)`th and `(n - 2)`th numbers. Write a function that takes in an integer `n` and returns the nth Fibonacci number.
 
-Important note: the Fibonacci sequence is often defined with its first two numbers as `F0 = 0` and `F1 = 1`. For the purpose of this question, the first Fibonacci number is `F0`; therefore, `get_nth_fib(1)` is equal to `F0`, `get_nth_fib(2)` is equal to `F1`, etc..
+> Important note: the Fibonacci sequence is often defined with its first two numbers as `F0 = 0` and `F1 = 1`. For the purpose of this question, the first Fibonacci number is `F0`; therefore, `get_nth_fib(1)` is equal to `F0`, `get_nth_fib(2)` is equal to `F1`, etc..
 
 ## Sample Input #1
 
@@ -47,7 +47,7 @@ Think of the case(s) for which this formula doesn't apply (the base case(s)) and
 <details>
 <summary><b>Hint 2</b></summary>
 
-What are the runtime implications of solving this problem as described in Hint #1?  
+What are the runtime implications of solving this problem as described in `Hint #1`?  
 Can you use memoization (caching) to improve the performance of your algorithm?
 
 </details>
