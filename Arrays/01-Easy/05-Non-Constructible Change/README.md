@@ -21,7 +21,7 @@ coins = [5, 7, 1, 1, 2, 3, 22]
 <details>
 <summary><b>Hint 1</b></summary>
 
-One approach to solve this problem is to attempt to create every single amount of change, starting at 1 and going up until you eventually can't create an amount. While this approach works, there is a better one.
+One approach to solve this problem is to attempt to create every single amount of change, starting at `1` and going up until you eventually can't create an amount. While this approach works, there is a better one.
 
 </details>
 
@@ -44,9 +44,9 @@ To understand the trick to this problem, consider the following example: `coins 
 
 Create a variable to store the amount of change that you can currently create up to. Sort all of your coins, and loop through them in ascending order. At every iteration, compare the current coin to the amount of change that you can currently create up to. Here are the two scenarios that you'll encounter:
 
-- The coin value is **greater** than the amount of change that you can currently create plus 1.
-- The coin value is **smaller than or equal** to the amount of change that you can currently create plus 1.
-In the first scenario, you simply return the current amount of change that you can create plus 1, because you can't create that amount of change. In the second scenario, you add the value of the coin to the amount of change that you can currently create up to, and you continue iterating through the coins.
+- The coin value is **greater** than the amount of change that you can currently create plus `1`.
+- The coin value is **smaller than or equal** to the amount of change that you can currently create plus `1`.
+In the first scenario, you simply return the current amount of change that you can create plus `1`, because you can't create that amount of change. In the second scenario, you add the value of the coin to the amount of change that you can currently create up to, and you continue iterating through the coins.
 
 The reason for this is that, if you're in the second scenario, you can create all of the values of change that you can currently create plus the value of the coin that you just considered. If you're given coins `[1, 2]`, then you can make `1, 2, 3` cents. So if you add a coin of value `4`, then you can make `4 + 1` cents, `4 + 2` cents, and `4 + 3` cents. Thus, you can make up to `7` cents.
 
