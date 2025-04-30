@@ -1,6 +1,6 @@
 # Array Of Products
 
-Write a function that takes in a non-empty array of integers and returns an array of the same length, where each element in the output array is equal to the product of every other number in the input array.
+Write a function that takes in a `non-empty` array of integers and returns an array of the same length, where each element in the output array is equal to the product of every other number in the input array.
 
 In other words, the value at `output[i]` is equal to the product of every number in the input array other than `input[i]`.
 
@@ -37,7 +37,7 @@ Think about the most naive approach to solving this problem. How can we do exact
 <details>
 <summary><b>Hint 2</b></summary>
 
-Understand how output[i] is being calculated. How can we calculate the product of every element other than the one at the current index? Can we do this with just one loop through the input array, or do we have to do multiple loops?
+Understand how `output[i]` is being calculated. How can we calculate the product of every element other than the one at the current index? Can we do this with just one loop through the input array, or do we have to do multiple loops?
 
 </details>
 
