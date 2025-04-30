@@ -33,17 +33,17 @@ Try using two for loops to sum all possible pairs of numbers in the input array.
 <details>
 <summary><b>Hint 2</b></summary>
 
-Realize that for every number X in the input array, you are essentially trying to find a corresponding number Y such that X + Y = target_sum. With two variables in this equation known to you, it shouldn't be hard to solve for Y.
+Realize that for every number `X` in the input array, you are essentially trying to find a corresponding number `Y` such that `X + Y = target_sum`. With two variables in this equation known to you, it shouldn't be hard to solve for `Y`.
 
 </details>
 
 <details>
 <summary><b>Hint 3</b></summary>
 
-Try storing every number in a hash table, solving the equation mentioned in Hint #2 for every number, and checking if the Y that you find is stored in the hash table. What are the time and space implications of this approach?
+Try storing every number in a hash table, solving the equation mentioned in `Hint #2` for every number, and checking if the `Y` that you find is stored in the hash table. What are the time and space implications of this approach?
 
 </details>
 
 ## Optimal Time & Space Complexity
 
-`O(n)` time | `O(n)` space - where `n` is the length of the input array
+`O(n)` time | `O(n)` space - where `n` is the length of the input array.
