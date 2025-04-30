@@ -6,7 +6,7 @@ Each dish has a flavor profile represented by an integer. A negative integer mea
 
 You're given an array of these dishes and a target combined flavor profile. Write a function that returns the best possible pairing of two dishes (the pairing with a total flavor profile that's closest to the target one). Note that this pairing must include one sweet and one savory dish. You're also concerned about the dish being too savory, so your pairing should never be more savory than the target flavor profile.
 
-All dishes will have a positive or negative flavor profile; there are no dishes with a 0 value. For simplicity, you can assume that there will be at most one best solution. If there isn't a valid solution, your function should return `[0, 0]`. The returned array should be sorted, meaning the sweet dish should always come first.
+All dishes will have a positive or negative flavor profile; there are no dishes with a `0` value. For simplicity, you can assume that there will be at most one best solution. If there isn't a valid solution, your function should return `[0, 0]`. The returned array should be sorted, meaning the sweet dish should always come first.
 
 ## Sample Input
 
@@ -42,7 +42,7 @@ Looking at all possible pairs will be inefficient. Would sorting the lists first
 <details>
 <summary><b>Hint 3</b></summary>
 
-Try using a two pointer approach to find the best pairing. Start with a current pairing, and move the savory pointer until the pairing gets too savory. If the dish is too savory, then move the sweet pointer. Do this through the entire lists, keeping track of the best pairing you find.
+Try using a `two pointer` approach to find the best pairing. Start with a current pairing, and move the savory pointer until the pairing gets too savory. If the dish is too savory, then move the sweet pointer. Do this through the entire lists, keeping track of the best pairing you find.
 
 </details>
 
