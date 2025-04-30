@@ -35,16 +35,37 @@ O(n²) time | O(n) space - where `n` is the input number.
 
 
 def number_of_binary_tree_topologies(n):
+    """Returns the number of possible binary tree topologies with n nodes.
+
+    A binary tree topology is defined by the arrangement of nodes, without considering
+    specific node values. This function uses a recursive approach to count all possible
+    unique structures.
+
+    Args:
+        n: The number of nodes in the binary tree (non-negative integer)
+
+    Returns:
+        The number of distinct binary tree topologies possible with n nodes
+    """
+
+    # Base case: an empty tree (0 nodes) has exactly 1 topology (the empty tree)
     if n == 0:
         return 1
 
+    # Initialize counter for total number of trees
     number_of_trees = 0
 
+    # Iterate through all possible left subtree sizes
+    # For n nodes, the root uses 1 node, remaining n-1 nodes are split between left/right
     for left_tree_size in range(n):
+        # Calculate corresponding right subtree size
         right_tree_size = n - 1 - left_tree_size
 
+        # Recursively compute number of topologies for left and right subtrees
         number_of_left_trees = number_of_binary_tree_topologies(left_tree_size)
         number_of_right_trees = number_of_binary_tree_topologies(right_tree_size)
+
+        # The total for this split is the product of left and right possibilities
         number_of_trees += number_of_left_trees * number_of_right_trees
 
     return number_of_trees
