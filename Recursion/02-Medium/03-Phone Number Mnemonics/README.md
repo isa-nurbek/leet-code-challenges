@@ -50,7 +50,7 @@ It's important to note that a phone number doesn't represent a single sequence o
 
 A mnemonic is defined as a pattern of letters, ideas, or associations that assist in remembering something. Companies oftentimes use a mnemonic for their phone number to make it easier to remember.
 
-Given a stringified phone number of any non-zero length, write a function that returns all mnemonics for this phone number, in any order.
+Given a stringified phone number of any `non-zero` length, write a function that returns all mnemonics for this phone number, in any order.
 
 For this problem, a valid mnemonic may only contain letters and the digits `0` and `1`. In other words, if a digit is able to be represented by a letter, then it must be. Digits `0` and `1` are the only two digits that don't have letter representations on the keypad.
 
