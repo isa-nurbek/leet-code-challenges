@@ -1,6 +1,6 @@
 # Ambiguous Measurements
 
-This problem deals with measuring cups that are missing important measuring labels. Specifically, a measuring cup only has two measuring lines, a Low (L) line and a High (H) line. This means that these cups can't precisely measure and can only guarantee that the substance poured into them will be between the L and H line. For example, you might have a measuring cup that has a Low line at `400ml` and a high line at `435ml`. This means that when you use this measuring cup, you can only be sure that what you're measuring is between `400ml` and `435ml`.
+This problem deals with measuring cups that are missing important measuring labels. Specifically, a measuring cup only has two measuring lines, a `Low (L)` line and a `High (H)` line. This means that these cups can't precisely measure and can only guarantee that the substance poured into them will be between the `L` and `H` line. For example, you might have a measuring cup that has a Low line at `400ml` and a high line at `435ml`. This means that when you use this measuring cup, you can only be sure that what you're measuring is between `400ml` and `435ml`.
 
 You're given a list of measuring cups containing their low and high lines as well as one `low` integer and one `high` integer representing a range for a target measurement. Write a function that returns a boolean representing whether you can use the cups to accurately measure a volume in the specified `[low, high]` range (the range is inclusive).
 
@@ -66,7 +66,7 @@ If the cup that you're going to use last has a measuring range of `[100, 110]` a
 <details>
 <summary><b>Hint 3</b></summary>
 
-Hint #2 should give you an idea of how to solve this problem recursively. Try every cup as the last cup for the starting range, then recursively try to measure the new ranges created after using the selected last cups. If you ever reach a point where one cup can measure the entire range, then you're finished and you can measure the target range. Try to think of a way to optimize this recursive approach, since it might involve a lot of repeated calculations.
+`Hint #2` should give you an idea of how to solve this problem recursively. Try every cup as the last cup for the starting range, then recursively try to measure the new ranges created after using the selected last cups. If you ever reach a point where one cup can measure the entire range, then you're finished and you can measure the target range. Try to think of a way to optimize this recursive approach, since it might involve a lot of repeated calculations.
 
 </details>
 
