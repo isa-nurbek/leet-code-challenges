@@ -8,7 +8,7 @@ Imagine that you're a teacher who's just graded the final exam in a class. You h
 
 Write a function that takes in a list of scores and returns the minimum number of rewards that you must give out to students to satisfy the two rules.
 
-You can assume that all students have different scores; in other words, the scores are all unique.
+You can assume that all students have different scores; in other words, `the scores are all unique`.
 
 ## Sample Input
 
