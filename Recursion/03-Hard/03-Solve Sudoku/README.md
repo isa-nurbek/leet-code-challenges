@@ -1,6 +1,6 @@
 # Solve Sudoku
 
-You're given a two-dimensional array that represents a `9x9` partially filled Sudoku board. Write a function that returns the solved Sudoku board.
+You're given a `two-dimensional` array that represents a `9x9` partially filled Sudoku board. Write a function that returns the solved Sudoku board.
 
 Sudoku is a famous number-placement puzzle in which you need to fill a `9x9` grid with integers in the range of `1-9`. Each `9x9` Sudoku board is split into `9`, `3x3` subgrids, as seen in the illustration below, and starts out partially filled.
 
@@ -76,7 +76,7 @@ Keep in mind that a Sudoku board doesn't need to be entirely filled to figure ou
 <details>
 <summary><b>Hint 3</b></summary>
 
-The method described in Hint #2 is more formally known as backtracking. This involves attempting to place digits into empty positions in the Sudoku board and checking at each insertion if that newly inserted digit makes the Sudoku board invalid. If it does, then you try to insert another digit until you find one that doesn't invalidate the board. If it doesn't invalidate the board, you temporarily place that digit and continue to try to solve the rest of the board. If you ever reach a position where there are no valid digits to be inserted (every digit placed in that position leads to an invalid board), that means that one of the previously inserted digits is incorrect. Thus, you must backtrack and change previously placed digits. For more details on this approach, refer to the Conceptual Overview section of this question's video explanation.
+The method described in `Hint #2` is more formally known as backtracking. This involves attempting to place digits into empty positions in the Sudoku board and checking at each insertion if that newly inserted digit makes the Sudoku board invalid. If it does, then you try to insert another digit until you find one that doesn't invalidate the board. If it doesn't invalidate the board, you temporarily place that digit and continue to try to solve the rest of the board. If you ever reach a position where there are no valid digits to be inserted (every digit placed in that position leads to an invalid board), that means that one of the previously inserted digits is incorrect. Thus, you must backtrack and change previously placed digits. For more details on this approach, refer to the Conceptual Overview section of this question's video explanation.
 
 </details>
 
