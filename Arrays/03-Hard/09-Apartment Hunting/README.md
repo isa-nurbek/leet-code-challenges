@@ -6,9 +6,9 @@ You also have a list of requirements: a list of buildings that are important to 
 
 In order to optimize your life, you want to pick an apartment block such that you minimize the farthest distance you'd have to walk from your apartment to reach any of your required buildings.
 
-Write a function that takes in a list of contiguous blocks on a specific street and a list of your required buildings and that returns the location (the index) of the block that's most optimal for you.
+Write a function that takes in a list of contiguous blocks on a specific street and a list of your required buildings and that returns the location `(the index)` of the block that's most optimal for you.
 
-If there are multiple most optimal blocks, your function can return the index of any one of them.
+If there are multiple most optimal blocks, your function can return the `index of any one of them`.
 
 ## Sample Input
 
@@ -47,7 +47,7 @@ For every block, you want to go through every requirement, and for every require
 <details>
 <summary><b>Hint 2</b></summary>
 
-Is there a way to optimize on the solution mentioned in Hint #1 (that uses three nested "for" loops) by precomputing the smallest distances of every requirement from every block?
+Is there a way to optimize on the solution mentioned in `Hint #1` (that uses three nested "for" loops) by precomputing the smallest distances of every requirement from every block?
 
 </details>
 
