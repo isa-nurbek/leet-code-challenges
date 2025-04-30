@@ -40,7 +40,7 @@ If you can advance `2` steps at a time, how many ways can you reach a staircase 
 <details>
 <summary><b>Hint 2</b></summary>
 
-Continuing from Hint #1, if you know the number of ways to climb a staircase of height `1` and of height `2`, how many ways are there to climb a staircase of height `3` (assuming the same max steps of `2`)?
+Continuing from `Hint #1`, if you know the number of ways to climb a staircase of height `1` and of height `2`, how many ways are there to climb a staircase of height `3` (assuming the same max steps of `2`)?
 
 </details>
 
