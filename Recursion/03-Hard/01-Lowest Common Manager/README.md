@@ -2,7 +2,7 @@
 
 You're given three inputs, all of which are instances of an `OrgChart` class that have a `direct_reports` property pointing to their direct reports. The first input is the top manager in an organizational chart (i.e., the only instance that isn't anybody else's direct report), and the other two inputs are reports in the organizational chart. The two reports are guaranteed to be distinct.
 
-Write a function that returns the lowest common manager to the two reports.
+Write a function that returns the `lowest common manager` to the two reports.
 
 ## Sample Input
 
@@ -39,7 +39,7 @@ Given a random subtree in the organizational chart, the manager at the root of t
 <details>
 <summary><b>Hint 2</b></summary>
 
-Knowing Hint #1, the lowest common manager to two reports in an organizational chart is the root of the lowest subtree containing those two reports. Find that lowest subtree to find the lowest common manager.
+Knowing `Hint #1`, the lowest common manager to two reports in an organizational chart is the root of the lowest subtree containing those two reports. Find that lowest subtree to find the lowest common manager.
 
 </details>
 
