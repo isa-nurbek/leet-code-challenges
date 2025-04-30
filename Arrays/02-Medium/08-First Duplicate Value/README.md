@@ -6,7 +6,7 @@ In other words, out of all the integers that might occur more than once in the i
 
 If no integer appears more than once, your function should return `-1`.
 
-Note that you're allowed to mutate the input array.
+> Note that you're allowed to mutate the input array.
 
 ## Sample Input #1
 
@@ -47,28 +47,28 @@ array = [2, 1, 5, 3, 3, 2, 4]
 <details>
 <summary><b>Hint 1</b></summary>
 
-The brute-force solution can be done in O(n²) time. Think about how you can determine if a value appears twice in an array.
+The brute-force solution can be done in `O(n²)` time. Think about how you can determine if a value appears twice in an array.
 
 </details>
 
 <details>
 <summary><b>Hint 2</b></summary>
 
-You can use a data structure that has constant-time lookups to keep track of integers that you've seen already. This leads the way to a linear-time solution.
+You can use a data structure that has `constant-time` lookups to keep track of integers that you've seen already. This leads the way to a `linear-time` solution.
 
 </details>
 
 <details>
 <summary><b>Hint 3</b></summary>
 
-You should always pay close attention to the details of a question's prompt. In this question, the integers in the array are between 1 and n, inclusive, where n is the length of the input array. The prompt also explicitly allows us to mutate the array. How can these details help us find a better solution, either time-complexity-wise or space-complexity-wise?
+You should always pay close attention to the details of a question's prompt. In this question, the integers in the array are between `1` and `n`, inclusive, where `n` is the length of the input array. The prompt also explicitly allows us to mutate the array. How can these details help us find a better solution, either time-complexity-wise or space-complexity-wise?
 
 </details>
 
 <details>
 <summary><b>Hint 4</b></summary>
 
-Since the integers are between 1 and the length of the input array, you can map them to indices in the array itself by subtracting 1 from them. Once you've mapped an integer to an index in the array, you can mutate the value in the array at that index and make it negative (by multiplying it by -1). Since the integers normally aren't negative, the first time that you encounter a negative value at the index that an integer maps to, you'll know that you'll have already seen that integer.
+Since the integers are between `1` and the `length of the input array`, you can map them to indices in the array itself by subtracting `1` from them. Once you've mapped an integer to an index in the array, you can mutate the value in the array at that index and make it negative (by multiplying it by `-1`). Since the integers normally aren't negative, the first time that you encounter a negative value at the index that an integer maps to, you'll know that you'll have already seen that integer.
 
 </details>
 
