@@ -33,7 +33,7 @@ Traverse the array value by value, square each value, and insert the squares int
 <details>
 <summary><b>Hint 3</b></summary>
 
-To reduce the time complexity of the algorithm mentioned in Hint #2, you need to avoid sorting the output array. To do this, as you square the values of the input array, try to directly insert them into their correct position in the output array.
+To reduce the time complexity of the algorithm mentioned in `Hint #2`, you need to avoid sorting the output array. To do this, as you square the values of the input array, try to directly insert them into their correct position in the output array.
 
 </details>
 
