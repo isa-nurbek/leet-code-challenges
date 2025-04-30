@@ -69,7 +69,7 @@ O(low * high * n) time | O(low * high) space - where `n` is the number of measur
 # Solution:
 
 
-# O(low * high * n) time | O(low * high) space
+# O(k * high^2) time | O(high^2) space
 from collections import deque
 
 
@@ -154,3 +154,38 @@ print(ambiguous_measurements(measuring_cups, low, high))  # True
 
 print(ambiguous_measurements(measuring_cups_2, low_2, high_2))  # False
 # Explanation: No combination of cups sums up to a range within [10,12]
+
+# =========================================================================================================================== #
+
+# Big O Analysis:
+
+"""
+## Time and Space Complexity Analysis
+
+### Time Complexity:
+
+1. **Breadth-First Search (BFS)**: The algorithm uses BFS to explore all possible sums of measuring cup measurements. Each state
+in the BFS is represented by `(current_low_sum, current_high_sum)`.
+2. **State Exploration**: In the worst case, the algorithm explores all possible combinations of `current_low_sum` and
+`current_high_sum` up to `high`. The number of unique states is bounded by `O(high^2)` because both `current_low_sum` and
+`current_high_sum` can range from `0` to `high`.
+3. **Processing Each State**: For each state, the algorithm iterates over all `measuring_cups` (let's say there are `k` cups).
+Thus, the total time complexity is `O(k * high^2)`.
+
+### Space Complexity:
+
+1. **Queue**: The queue stores the states to be processed. In the worst case, it can hold all unique states, which is `O(high^2)`.
+2. **Visited Set**: The visited set also stores all unique states, which is `O(high^2)`.
+3. **Overall Space Complexity**: The dominant factor is the queue and the visited set, so the space complexity is `O(high^2)`.
+
+### Summary:
+- **Time Complexity**: `O(k * high^2)`, where `k` is the number of measuring cups.
+- **Space Complexity**: `O(high^2)`.
+
+### Notes:
+- The algorithm is efficient when `high` is not too large, but it can become slow for very large values of `high` due to the
+quadratic dependence on `high`.
+- The `visited` set ensures that no state is processed more than once, which is crucial for avoiding redundant work and keeping
+the complexity manageable.
+
+"""
