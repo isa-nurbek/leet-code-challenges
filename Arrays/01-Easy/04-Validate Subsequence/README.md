@@ -36,10 +36,10 @@ Iterate through the main array, and look for the first integer in the potential 
 <details>
 <summary><b>Hint 3</b></summary>
 
-To actually implement what Hint #2 describes, you'll have to declare a variable holding your position in the potential subsequence. At first, this position will be the 0th index in the sequence; as you find the sequence's integers in the main array, you'll increment the position variable until you reach the end of the sequence.
+To actually implement what `Hint #2` describes, you'll have to declare a variable holding your position in the potential subsequence. At first, this position will be the `0`th index in the sequence; as you find the sequence's integers in the main array, you'll increment the position variable until you reach the end of the sequence.
 
 </details>
 
 ## Optimal Time & Space Complexity
 
-`O(n)` time | `O(1)` space - where `n` is the length of the array
+`O(n)` time | `O(1)` space - where `n` is the length of the array.
