@@ -6,7 +6,7 @@ An array is said to be monotonic if its elements, from left to right, are entire
 
 Non-increasing elements aren't necessarily exclusively decreasing; they simply don't increase. Similarly, non-decreasing elements aren't necessarily exclusively increasing; they simply don't decrease.
 
-Note that empty arrays and arrays of one element are monotonic.
+> Note that empty arrays and arrays of one element are monotonic.
 
 ## Sample Input
 
