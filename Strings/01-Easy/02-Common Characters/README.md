@@ -13,7 +13,9 @@ strings = ["abc", "bcd", "cbaccd"]
 ## Sample Output
 
 ```plaintext
-["b", "c"] // The characters could be ordered differently.
+["b", "c"]
+
+// The characters could be ordered differently.
 ```
 
 ## Hints
