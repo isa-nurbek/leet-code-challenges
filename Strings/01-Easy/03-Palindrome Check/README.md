@@ -1,6 +1,6 @@
 # Palindrome Check
 
-Write a function that takes in a non-empty string and that returns a boolean representing whether the string is a palindrome.
+Write a function that takes in a `non-empty` string and that returns a boolean representing whether the string is a palindrome.
 
 A palindrome is defined as a string that's written the same forward and backward. Note that single-character strings are palindromes.
 
@@ -13,7 +13,9 @@ string = "abcdcba"
 ## Sample Output
 
 ```plaintext
-true // it's written the same forward and backward.
+True
+
+// It's written the same forward and backward.
 ```
 
 ## Hints
