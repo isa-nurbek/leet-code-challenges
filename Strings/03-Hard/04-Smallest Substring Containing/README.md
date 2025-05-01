@@ -1,8 +1,8 @@
 # Smallest Substring Containing
 
-You're given two non-empty strings: a big string and a small string. Write a function that returns the smallest substring in the big string that contains all of the small string's characters.
+You're given two `non-empty` strings: a big string and a small string. Write a function that returns the smallest substring in the big string that contains all of the small string's characters.
 
-Note that:
+> Note that:
 
 - The substring can contain other characters not found in the small string.
   
@@ -44,7 +44,7 @@ Try using two pointers (a left pointer and a right pointer) to traverse through 
 <details>
 <summary><b>Hint 3</b></summary>
 
-With the two pointers mentioned in Hint #2, move the right pointer to the right in the big string, keeping track of all the characters you visit in a hash table identical to the one mentioned in Hint #1, until you've found all of the characters contained in the small string. At that point, move the left pointer to the right in the big string, keeping track of all the characters you "lose", and stop once you no longer have all of the small string's characters in between the left and right pointers. Then, repeat the process by moving the right pointer forward and implementing the same logic described in this Hint.
+With the two pointers mentioned in `Hint #2`, move the right pointer to the right in the big string, keeping track of all the characters you visit in a hash table identical to the one mentioned in Hint #1, until you've found all of the characters contained in the small string. At that point, move the left pointer to the right in the big string, keeping track of all the characters you "lose", and stop once you no longer have all of the small string's characters in between the left and right pointers. Then, repeat the process by moving the right pointer forward and implementing the same logic described in this Hint.
 
 </details>
 
