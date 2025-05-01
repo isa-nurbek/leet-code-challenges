@@ -40,7 +40,7 @@ One of the simplest ways to solve this problem is to loop through the `document`
 <details>
 <summary><b>Hint 3</b></summary>
 
-The approach discussed in Hint #2 runs in `O(m * (n + m))` time. Can you use some external space to optimize this time complexity?
+The approach discussed in `Hint #2` runs in `O(m * (n + m))` time. Can you use some external space to optimize this time complexity?
 
 </details>
 
