@@ -36,7 +36,7 @@ The second thing you need to do is to "collapse" the 2D array mentioned in Hint 
 <details>
 <summary><b>Hint 3</b></summary>
 
-Finally, you need to create a new string with underscores added in the correct positions. Construct this new string by traversing the main string and the 2D array mentioned in Hint #2 at the same time. You might have to keep track of when you are "in between" underscores in order to correctly traverse the 2D array.
+Finally, you need to create a new string with underscores added in the correct positions. Construct this new string by traversing the main string and the 2D array mentioned in `Hint #2` at the same time. You might have to keep track of when you are "in between" underscores in order to correctly traverse the 2D array.
 
 </details>
 
