@@ -15,7 +15,9 @@ string = "abcdcaf"
 ## Sample Output
 
 ```plaintext
-1 // The first non-repeating character is "b" and is found at index 1.
+1
+
+// The first non-repeating character is "b" and is found at index 1.
 ```
 
 ## Hints
