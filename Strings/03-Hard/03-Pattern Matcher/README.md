@@ -40,7 +40,7 @@ Use a hash table to store the number of "x"s and "y"s that appear in the pattern
 <details>
 <summary><b>Hint 3</b></summary>
 
-Traverse the main string and try different combinations of substrings that could represent "x" and "y". For each potential combination, map the new pattern mentioned in Hint #1 and see if it matches the main string.
+Traverse the main string and try different combinations of substrings that could represent "x" and "y". For each potential combination, map the new pattern mentioned in `Hint #1` and see if it matches the main string.
 
 </details>
 
