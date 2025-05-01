@@ -1,6 +1,6 @@
 # Run-Length Encoding
 
-Write a function that takes in a non-empty string and returns its run-length encoding.
+Write a function that takes in a `non-empty` string and returns its `run-length encoding`.
 
 From Wikipedia, "run-length encoding is a form of lossless data compression in which runs of data are stored as a single data value and count, rather than as the original run." For this problem, a run of data is any sequence of consecutive, identical characters. So the run `"AAA"` would be run-length-encoded as `"3A"`.
 
@@ -23,14 +23,14 @@ string = "AAAAAAAAAAAAABBCCCCDD"
 <details>
 <summary><b>Hint 1</b></summary>
 
-Traverse the input string and count the length of each run. As you traverse the string, what should you do when you reach a run of length 9 or the end of a run?
+Traverse the input string and count the length of each run. As you traverse the string, what should you do when you reach a run of length `9` or the end of a run?
 
 </details>
 
 <details>
 <summary><b>Hint 2</b></summary>
 
-When you reach a run of length 9 or the end of a run, store the computed count for the run as well as its character (you'll likely need a list for these computed counts and characters), and reset the count to 1 before continuing to traverse the string.
+When you reach a run of length `9` or the end of a run, store the computed count for the run as well as its character (you'll likely need a list for these computed counts and characters), and reset the count to `1` before continuing to traverse the string.
 
 </details>
 
