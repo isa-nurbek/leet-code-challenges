@@ -13,7 +13,9 @@ string = "(()))("
 ## Sample Output
 
 ```plaintext
-4 // The longest balanced substring is "(())".
+4
+
+// The longest balanced substring is "(())".
 ```
 
 ## Hints
