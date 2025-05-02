@@ -214,7 +214,7 @@ print(number_of_binary_tree_topologies(3))  # Output: 5
 ```
 
 * Possible binary tree topologies with 3 nodes: 5.
-* Matches Catalan number $C_3 = 5$
+* Matches Catalan number C_3 = 5
 
 ```
 print(number_of_binary_tree_topologies(0))  # Output: 1
@@ -226,7 +226,7 @@ print(number_of_binary_tree_topologies(0))  # Output: 1
 print(number_of_binary_tree_topologies(5))  # Output: 42
 ```
 
-* Catalan number $C_5 = 42$
+* Catalan number C_5 = 42
 
 ---
 
