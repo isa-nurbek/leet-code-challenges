@@ -57,4 +57,4 @@ When placing a queen in order to generate a full placement of `n` queens, you'll
 
 ## Optimal Time & Space Complexity
 
-`Upper Bound: O(n!)` time | `O(n)` space - where `n` is the input number.
+`Upper Bound`: `O(n!)` time | `O(n)` space - where `n` is the input number.
