@@ -171,3 +171,115 @@ backtracking approach to explore all possible valid configurations.
 instead of storing all possible configurations.
 
 """
+
+# =========================================================================================================================== #
+
+# Detailed Code Explanation:
+
+"""
+This code solves the **N-Queens problem**, where the goal is to place `n` queens on an `n x n` chessboard so that **no two queens
+attack each other**. Queens attack each other if they're on the same row, column, or diagonal. The function returns **the total
+number of valid arrangements**.
+
+---
+
+## 🔍 Overview of the Approach
+
+It uses **backtracking** to explore all possible placements of queens row by row, and **prunes** invalid ones early to avoid
+unnecessary work.
+
+---
+
+## 🧠 Detailed Explanation
+
+### 1. **Main Function: `non_attacking_queens(n)`**
+
+```
+def non_attacking_queens(n):
+    column_placements = [0] * n
+    return get_number_of_non_attacking_queen_placements(0, column_placements, n)
+```
+
+* `column_placements`: A list of size `n` where index represents a row, and the value at that index represents the column of the
+queen placed in that row.
+
+  * Example: `[1, 3, 0, 2]` means queens are placed at positions (0,1), (1,3), (2,0), and (3,2).
+* Starts the recursive function at `row = 0`.
+
+---
+
+### 2. **Recursive Backtracking Function:**
+
+```
+def get_number_of_non_attacking_queen_placements(row, column_placements, board_size):
+    if row == board_size:
+        return 1  # A valid full board configuration is found
+
+    valid_placements = 0
+    for col in range(board_size):
+        if is_non_attacking_placement(row, col, column_placements):
+            column_placements[row] = col  # Place queen
+            valid_placements += get_number_of_non_attacking_queen_placements(
+                row + 1, column_placements, board_size
+            )
+
+    return valid_placements
+```
+
+* For each row, it tries placing a queen in each column.
+* For every position `(row, col)`, it checks if it's **safe** using `is_non_attacking_placement`.
+* If safe, place the queen and **recurse** to the next row.
+* When a full board is completed (base case: `row == board_size`), return 1.
+
+> This acts like a **counter**, summing up each complete valid configuration.
+
+---
+
+### 3. **Validation Function:**
+
+```
+def is_non_attacking_placement(row, col, column_placements):
+    for previous_row in range(row):
+        column_to_check = column_placements[previous_row]
+
+        same_column = column_to_check == col
+        on_diagonal = abs(column_to_check - col) == row - previous_row
+
+        if same_column or on_diagonal:
+            return False
+
+    return True
+```
+
+Checks whether placing a queen at `(row, col)` is **safe**:
+
+* Same column: `column_to_check == col`
+* Same diagonal:
+
+  * Two points `(r1, c1)` and `(r2, c2)` are on the same diagonal if `abs(r1 - r2) == abs(c1 - c2)`.
+  * Here simplified as: `abs(column_to_check - col) == row - previous_row`
+
+---
+
+## 🧪 Test Cases:
+
+```
+print(non_attacking_queens(4))  # Output: 2
+print(non_attacking_queens(2))  # Output: 0
+print(non_attacking_queens(10))  # Output: 724
+```
+
+* `n = 4`: Two valid ways to place 4 queens.
+* `n = 2`: No valid arrangement (queens always attack).
+* `n = 10`: 724 valid arrangements.
+
+---
+
+## ✅ Summary
+
+* **Backtracking** approach.
+* **Column placements** stored in a list to avoid creating full board structures.
+* **Efficient pruning** using diagonal and column checks.
+* Time complexity is roughly **O(n!)**, but pruned due to validation.
+
+"""
