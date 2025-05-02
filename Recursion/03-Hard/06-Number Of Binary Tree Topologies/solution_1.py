@@ -85,38 +85,37 @@ print(number_of_binary_tree_topologies(5))  # Output: 42
 """
 ## Time and Space Complexity Analysis
 
-Let's analyze the time and space complexity of the given recursive solution for calculating the number of binary tree topologies.
-
 ### Time Complexity:
-The function computes the number of binary tree topologies by considering all possible left and right subtree combinations for a given `n`. 
 
-1. **Recursive Structure**: For each call with `n` nodes, it makes recursive calls for all possible left subtree sizes from `0` to `n-1` (with corresponding right subtree sizes from `n-1` to `0`). This leads to a lot of overlapping subproblems.
+The time complexity can be analyzed by considering how many subproblems are solved and how much work is done for each subproblem.
 
-2. **Number of Subproblems**: The number of unique subproblems is `O(n)` (from `0` to `n`), but each subproblem `k` is computed by summing over all pairs of smaller subproblems.
+1. **Number of Subproblems**: For each `n`, the function makes recursive calls for all possible left subtree sizes from `0` to
+`n-1`. This means the number of unique subproblems is `n` (one for each possible value of `k` from `0` to `n-1`).
 
-3. **Repeated Work**: Without memoization, the same subproblems are recomputed many times. The time complexity is exponential, specifically it follows the Catalan number recurrence. The nth Catalan number is given by:
-   \[
-   C_n = \frac{1}{n+1} \binom{2n}{n}
-   \]
-   The Catalan numbers grow as \( C_n \approx \frac{4^n}{n^{3/2} \sqrt{\pi}} \), so the time complexity is \( O(4^n / n^{3/2}) \).
+2. **Work per Subproblem**: For each subproblem of size `n`, the function performs `O(n)` work (due to the loop iterating over
+`left_tree_size` from `0` to `n-1`), and each iteration involves two recursive calls and some constant-time operations.
 
-4. **Overall Time Complexity**: The time complexity is \( O(4^n / n^{3/2}) \), which is exponential in `n`.
+However, the recursive calls lead to overlapping subproblems, and the total number of unique subproblems is `O(n)`. If we were to
+memoize the results (i.e., use dynamic programming), the time complexity would be `O(n^2)` because for each `i` from `1` to `n`,
+we do `O(i)` work (summing over `i` from `1` to `n` gives `O(n^2)`).
+
+But in the current implementation (without memoization), the time complexity is exponential because the same subproblems are
+recomputed many times. Specifically, the time complexity is given by the Catalan number recurrence, which grows as `O(4^n / n^(3/2))
+` (the nth Catalan number is `C(n) = (2n choose n) / (n+1)`, and the sum of all Catalan numbers up to `n` is also exponential).
 
 ### Space Complexity:
-1. **Recursion Stack**: The maximum depth of the recursion stack is `O(n)` because each recursive call reduces the problem size by at least `1` (from `n` down to `0`).
-2. **No Additional Storage**: The function does not use any additional data structures to store intermediate results (like memoization), so the space complexity is just the recursion stack.
+1. **Recursion Stack**: The maximum depth of the recursion stack is `O(n)` (when the left or right subtree is as large as possible,
+e.g., left subtree size `n-1`, then `n-2`, etc., down to `0`).
+2. **No Additional Space**: The current implementation does not use any additional space for memoization, so the space complexity
+is `O(n)` due to the recursion stack.
 
-   - **Overall Space Complexity**: \( O(n) \).
+### Summary:
+- **Time Complexity (current recursive implementation)**: Exponential, `O(4^n / n^(3/2))` (nth Catalan number).
+- **Space Complexity (current recursive implementation)**: `O(n)` (due to recursion stack).
 
-### Optimizing with Memoization:
-If you memoize the results of subproblems (i.e., store the result of `number_of_binary_tree_topologies(k)` once computed and reuse it), you can drastically improve the time complexity:
-- **Time Complexity with Memoization**: \( O(n^2) \), because there are \( O(n) \) unique subproblems, and each subproblem takes \( O(n) \) time to compute (due to the loop).
-- **Space Complexity with Memoization**: \( O(n) \) to store the memoization table and \( O(n) \) for the recursion stack, so \( O(n) \) total.
-
-### Final Answer:
-- **Time Complexity**: \( O(4^n / n^{3/2}) \) (exponential, without memoization).
-- **Space Complexity**: \( O(n) \) (due to recursion stack).
-
-For practical purposes, you should use memoization to bring the time complexity down to \( O(n^2) \). The recursive solution without memoization is very inefficient for larger `n`.
+### Optimized Approach (Dynamic Programming):
+If you memoize the results of subproblems (i.e., store the results of `number_of_binary_tree_topologies(k)` for `k` from `0` to
+`n`), the time complexity becomes `O(n^2)` (since you compute `n` subproblems, each taking `O(n)` time), and the space complexity
+becomes `O(n)` (to store the results).
 
 """
