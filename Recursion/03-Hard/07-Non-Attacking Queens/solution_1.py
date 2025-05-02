@@ -103,3 +103,71 @@ def is_non_attacking_placement(row, col, column_placements):
 print(non_attacking_queens(4))  # Output: 2
 print(non_attacking_queens(2))  # Output: 0
 print(non_attacking_queens(10))  # Output: 724
+
+# =========================================================================================================================== #
+
+# Big O Analysis:
+
+"""
+## Time and Space Complexity Analysis
+
+### Time Complexity Analysis
+
+The problem is to place `n` queens on an `n x n` chessboard such that no two queens attack each other. The solution uses a
+backtracking approach to explore all possible valid configurations.
+
+1. **Recursive Tree Structure**: 
+   - At each row `row`, the algorithm tries to place a queen in each column `col` from `0` to `n-1`.
+   - For each valid placement (where the queen doesn't attack any previously placed queens), it proceeds to the next row.
+   - The recursion continues until all `n` queens are placed (`row == n`), at which point a valid configuration is found.
+
+2. **Branching Factor**:
+   - At the first row (`row = 0`), there are `n` possible columns to place the queen.
+   - At the second row (`row = 1`), the number of valid columns depends on the placement of the first queen. In the worst case,
+   it could still be `n` (but in practice, it's less due to constraints).
+   - This branching continues until the last row.
+
+3. **Worst-Case Scenario**:
+   - The worst-case time complexity is upper-bounded by `O(n!)`. This is because:
+     - The first queen has `n` choices.
+     - The second queen has at most `n-1` choices (excluding the column of the first queen and diagonals).
+     - The third queen has at most `n-2` choices, and so on.
+     - This leads to `n * (n-1) * (n-2) * ... * 1 = n!` possibilities in the worst case.
+   - However, in practice, the actual number is much less than `n!` because many branches are pruned early when a placement is
+   invalid. But for big-O analysis, we consider the worst case.
+
+4. **Checking Validity (`is_non_attacking_placement`)**:
+   - For each placement at `(row, col)`, the function checks against all previously placed queens (up to `row` queens).
+   - This check takes `O(row)` time (since it loops through `previous_row` from `0` to `row-1`).
+   - In the worst case (when `row = n`), this is `O(n)` time per check.
+   - Since this check is done for each node in the recursive tree, the total time complexity becomes `O(n! * n)`.
+
+### Space Complexity Analysis
+
+1. **Recursion Stack**:
+   - The maximum depth of the recursion is `n` (one level for each row).
+   - At each level, local variables and parameters are stored. This contributes `O(n)` space for the recursion stack.
+
+2. **Storage for `column_placements`**:
+   - The `column_placements` array stores the column position of the queen in each row, so it takes `O(n)` space.
+
+3. **Total Space Complexity**:
+   - The total space complexity is `O(n)` (for recursion stack and `column_placements`). No additional significant space is used.
+
+### Final Answer
+
+- **Time Complexity**: `O(n! * n)`
+  - The `n!` comes from the number of possible valid queen placements (which is less than `n!` but upper-bounded by it).
+  - The `n` factor comes from the `is_non_attacking_placement` check at each step.
+  
+- **Space Complexity**: `O(n)`
+  - This is due to the recursion stack depth (`O(n)`) and the `column_placements` array (`O(n)`). 
+
+### Additional Notes
+
+- The actual number of valid configurations for the N-Queens problem is much less than `n!`, but the time complexity is still
+`O(n! * n)` in the worst case because we cannot do better than exploring all possible valid branches.
+- The space complexity is efficient (`O(n)`) because the algorithm uses backtracking and reuses the `column_placements` array
+instead of storing all possible configurations.
+
+"""
