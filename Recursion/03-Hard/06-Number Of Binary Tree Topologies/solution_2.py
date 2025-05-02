@@ -125,3 +125,115 @@ Thus, the total space complexity is **O(n)**.
 - **Space Complexity**: O(n)
 
 """
+
+# =========================================================================================================================== #
+
+# Detailed Code Explanation:
+
+"""
+
+### 🔍 **Step-by-Step Explanation of the Code**
+
+```
+def number_of_binary_tree_topologies(n, memo=None):
+```
+
+* This function calculates the number of binary tree topologies for `n` nodes using **memoization** to store already computed values.
+
+---
+
+```
+if memo is None:
+    memo = {0: 1}  
+```
+
+* Initializes the memoization dictionary.
+* `memo[0] = 1` means there's **one topology** with **0 nodes** — the **empty tree**.
+
+---
+
+```
+if n in memo:
+    return memo[n]
+```
+
+* If the result for `n` is already computed, return it to avoid redundant computation.
+
+---
+
+```
+number_of_trees = 0
+for left_tree_size in range(n):
+```
+
+* Initialize the count.
+* Loop over all possible sizes for the left subtree (`0` to `n-1`).
+
+---
+
+```
+right_tree_size = n - 1 - left_tree_size
+```
+
+* The right subtree gets the remaining nodes after one root and the left subtree.
+
+---
+
+```
+number_of_left_trees = number_of_binary_tree_topologies(left_tree_size, memo)
+number_of_right_trees = number_of_binary_tree_topologies(right_tree_size, memo)
+```
+
+* Recursively calculate the number of binary tree topologies for the left and right subtrees.
+* These calls will use memoized values when available.
+
+---
+
+```
+number_of_trees += number_of_left_trees * number_of_right_trees
+```
+
+* Multiply left and right subtree counts because each combination creates a new topology.
+* Sum over all such combinations.
+
+---
+
+```
+memo[n] = number_of_trees
+return number_of_trees
+```
+
+* Cache the result in `memo` and return it.
+
+---
+
+### 🧪 **Test Cases**
+
+```
+print(number_of_binary_tree_topologies(3))  # Output: 5
+```
+
+* Possible binary tree topologies with 3 nodes: 5.
+* Matches Catalan number $C_3 = 5$
+
+```
+print(number_of_binary_tree_topologies(0))  # Output: 1
+```
+
+* 1 way to form an empty tree (base case).
+
+```
+print(number_of_binary_tree_topologies(5))  # Output: 42
+```
+
+* Catalan number $C_5 = 42$
+
+---
+
+### ✅ Summary
+
+* This function uses **recursive dynamic programming** (top-down with memoization) to compute **Catalan numbers**.
+* Time complexity with memoization is **O(n²)** due to the nested recursive calls and caching.
+* Used for counting binary search trees, balanced parentheses, polygon triangulations, etc.
+
+"""
