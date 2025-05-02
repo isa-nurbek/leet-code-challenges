@@ -83,3 +83,45 @@ def number_of_binary_tree_topologies(n, memo=None):
 print(number_of_binary_tree_topologies(3))  # Output: 5
 print(number_of_binary_tree_topologies(0))  # Output: 1
 print(number_of_binary_tree_topologies(5))  # Output: 42
+
+# =========================================================================================================================== #
+
+# Big O Analysis:
+
+"""
+## Time and Space Complexity Analysis
+
+### Time Complexity Analysis
+
+The function `number_of_binary_tree_topologies(n)` computes the number of possible binary tree topologies for a given number of
+nodes `n` using memoization to avoid redundant calculations. 
+
+1. **Recursive Breakdown**: For each call with `n`, the function iterates from `0` to `n-1` (i.e., `n` iterations), splitting the
+problem into left and right subtrees. For each split, it makes two recursive calls:
+   - `number_of_binary_tree_topologies(left_tree_size, memo)`
+   - `number_of_binary_tree_topologies(right_tree_size, memo)`
+
+2. **Memoization Impact**: With memoization, each unique subproblem (i.e., each unique value of `k` where `0 <= k <= n`) is computed
+only once. After computing `number_of_binary_tree_topologies(k)`, the result is stored in `memo` and reused in subsequent calls.
+
+3. **Total Subproblems**: The number of unique subproblems is `O(n)` (specifically, `n+1` subproblems for `k = 0` to `k = n`).
+
+4. **Work per Subproblem**: For each subproblem `k`, the work done is `O(k)` (due to the loop from `0` to `k-1`). 
+
+5. **Total Time Complexity**: The total time is the sum of the work for all subproblems: **O(n²)**.
+
+### Space Complexity Analysis
+
+1. **Memoization Storage**: The `memo` dictionary stores `n+1` entries (for `k = 0` to `k = n`), each requiring constant space. Thus, the space for `memo` is **O(n)**.
+
+2. **Recursion Stack**: In the worst case, the recursion stack can go as deep as `n` (e.g., when computing `n`, then `n-1`, then
+`n-2`, etc., down to `0`). Thus, the recursion stack space is **O(n)**.
+
+3. **Total Space Complexity**: The dominant factors are the `memo` storage and the recursion stack, both of which are `O(n)`.
+Thus, the total space complexity is **O(n)**.
+
+### Summary
+- **Time Complexity**: O(n²)
+- **Space Complexity**: O(n)
+
+"""
