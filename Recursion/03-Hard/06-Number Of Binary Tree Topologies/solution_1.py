@@ -119,3 +119,103 @@ If you memoize the results of subproblems (i.e., store the results of `number_of
 becomes `O(n)` (to store the results).
 
 """
+
+# =========================================================================================================================== #
+
+# Detailed Code Explanation:
+
+"""
+This function computes the **number of binary tree topologies** that can be formed using `n` distinct nodes. A **binary tree
+topology** refers to a *structure* (not considering the actual values of nodes, only their arrangement). The number of different
+topologies you can form for `n` nodes corresponds to the **Catalan numbers**.
+
+---
+
+### 🔍 Code Walkthrough
+
+```
+def number_of_binary_tree_topologies(n):
+```
+
+Defines a recursive function that takes an integer `n` — the number of nodes.
+
+---
+
+```
+if n == 0:
+    return 1
+```
+
+**Base Case**: There is exactly 1 binary tree topology for 0 nodes — the empty tree.
+
+---
+
+```
+number_of_trees = 0
+```
+
+Initializes a counter to accumulate the total number of topologies.
+
+---
+
+```
+for left_tree_size in range(n):
+    right_tree_size = n - 1 - left_tree_size
+```
+
+Loops over all possible sizes of the **left subtree**. Since a binary tree with `n` nodes has:
+
+* 1 root node
+* `n - 1` remaining nodes for the left and right subtrees
+
+The loop distributes these `n - 1` nodes between the left and right subtrees.
+
+---
+
+```
+number_of_left_trees = number_of_binary_tree_topologies(left_tree_size)
+number_of_right_trees = number_of_binary_tree_topologies(right_tree_size)
+```
+
+Recursively calculates the number of binary tree topologies for left and right subtree sizes.
+
+---
+
+```
+number_of_trees += number_of_left_trees * number_of_right_trees
+```
+
+Multiplies the number of left and right subtree combinations and adds to the total. This multiplication accounts for **all 
+combinations** of left and right subtrees.
+
+---
+
+```
+return number_of_trees
+```
+
+Returns the total number of unique binary tree topologies for `n` nodes.
+
+---
+
+### 🧪 Test Cases
+
+```
+print(number_of_binary_tree_topologies(3))  # Output: 5
+```
+
+* Catalan number for 3 → 5 topologies.
+
+```
+print(number_of_binary_tree_topologies(0))  # Output: 1
+```
+
+* Only one topology for 0 nodes — the empty tree.
+
+```
+print(number_of_binary_tree_topologies(5))  # Output: 42
+```
+
+* Catalan number for 5 → 42 topologies.
+
+"""
