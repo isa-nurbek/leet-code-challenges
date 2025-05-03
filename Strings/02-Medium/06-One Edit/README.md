@@ -8,7 +8,7 @@ There are 3 possible edits:
 - **Add:** One character is added at any index in one string.
 - **Remove:** One character is removed at any index in one string.
 
-Note that both strings will contain at least one character. If the strings are the same, your function should return true.
+> Note that both strings will contain at least one character. If the strings are the same, your function should return `True`.
 
 ## Sample Input
 
@@ -20,7 +20,9 @@ string_two = "hollo"
 ## Sample Output
 
 ```plaintext
-True // A single replace at index 1 of either string can make the strings equal.
+True
+
+// A single replace at index 1 of either string can make the strings equal.
 ```
 
 ## Hints
@@ -28,7 +30,7 @@ True // A single replace at index 1 of either string can make the strings equal.
 <details>
 <summary><b>Hint 1</b></summary>
 
-If the difference in lengths of the strings is greater than 1, then there is no way to make them equal with a single edit.
+If the difference in lengths of the strings is greater than `1`, then there is no way to make them equal with a single edit.
 
 </details>
 
