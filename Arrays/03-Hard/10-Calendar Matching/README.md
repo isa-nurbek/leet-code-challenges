@@ -4,8 +4,7 @@ Imagine that you want to schedule a meeting of a certain duration with a co-work
 
 Write a function that takes in your calendar, your daily bounds, your co-worker's calendar, your co-worker's daily bounds, and the duration of the meeting that you want to schedule, and that returns a list of all the time blocks (in the form of `[start_time, end_time]`) during which you could schedule the meeting, ordered from earliest time block to latest.
 
-Note that times will be given and should be returned in military time. For example: `8:30`, `9:01`, and `23:56`.
-
+> Note that times will be given and should be returned in military time. For example: `8:30`, `9:01`, and `23:56`.
 > Also note that the given calendar times will be sorted by start time in ascending order, as you would expect them to appear in a calendar application like `Google Calendar`.
 
 ## Sample Input
