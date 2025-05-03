@@ -23,7 +23,7 @@ words = ["diaper", "abc", "test", "cba", "repaid"]
 <details>
 <summary><b>Hint 1</b></summary>
 
-It can be helpful to convert the input array into a set, so that you can check if a word exists in the list in constant time.
+It can be helpful to convert the input array into a set, so that you can check if a word exists in the list in `constant time`.
 
 </details>
 
