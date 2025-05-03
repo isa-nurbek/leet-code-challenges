@@ -22,7 +22,7 @@ key = 2
 <details>
 <summary><b>Hint 1</b></summary>
 
-Most languages have built-in functions that give you the Unicode value of a character as well as the character corresponding to a Unicode value. Consider using such functions to determine which letters the input string's letters should be mapped to.
+Most languages have `built-in functions` that give you the `Unicode` value of a character as well as the character corresponding to a `Unicode` value. Consider using such functions to determine which letters the input string's letters should be mapped to.
 
 </details>
 
@@ -36,7 +36,7 @@ Try creating your own mapping of letters to codes. In other words, try associati
 <details>
 <summary><b>Hint 3</b></summary>
 
-How do you handle cases where a letter gets shifted to a position that requires wrapping around the alphabet? What about cases where the key is very large and causes multiple wrappings around the alphabet? The modulo operator should be your friend here.
+How do you handle cases where a letter gets shifted to a position that requires wrapping around the alphabet? What about cases where the key is very large and causes multiple wrappings around the alphabet? The `modulo operator` should be your friend here.
 
 </details>
 

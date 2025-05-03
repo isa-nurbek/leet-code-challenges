@@ -45,4 +45,4 @@ Hash tables are very commonly used to keep track of frequencies. Build a hash ta
 
 ## Optimal Time & Space Complexity
 
-`O(n)` time | `O(1)` space - where `n` is the length of the input string The constant space is because the input string only has lowercase English-alphabet letters; thus, our hash table will never have more than `26` character frequencies.
+`O(n)` time | `O(1)` space - where `n` is the length of the input string. The constant space is because the input string only has lowercase English-alphabet letters; thus, our hash table will never have more than `26` character frequencies.

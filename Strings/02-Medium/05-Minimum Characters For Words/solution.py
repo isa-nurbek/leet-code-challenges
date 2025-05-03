@@ -19,6 +19,7 @@ words = ["this", "that", "did", "deed", "them!", "a"]
 ## Sample Output:
 ```
 ["t", "t", "h", "i", "s", "a", "d", "d", "e", "e", "m", "!"]
+
 // The characters could be ordered differently.
 ```
 

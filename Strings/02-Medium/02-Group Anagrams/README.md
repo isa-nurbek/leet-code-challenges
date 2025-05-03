@@ -37,7 +37,7 @@ For any two of the resulting strings mentioned in `Hint #1` that are equal to ea
 <details>
 <summary><b>Hint 3</b></summary>
 
-Can you simply store the resulting strings mentioned in Hint #1 in a hash table and find the groups of anagrams using this hash table?
+Can you simply store the resulting strings mentioned in `Hint #1` in a hash table and find the groups of anagrams using this hash table?
 
 </details>
 

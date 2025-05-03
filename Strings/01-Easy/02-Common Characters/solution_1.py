@@ -17,7 +17,9 @@ strings = ["abc", "bcd", "cbaccd"]
 
 ## Sample Output:
 ```
-["b", "c"] // The characters could be ordered differently.
+["b", "c"]
+
+// The characters could be ordered differently.
 ```
 
 ## Optimal Time & Space Complexity:
@@ -68,9 +70,7 @@ def common_characters(strings):
 print(common_characters(["abc", "bcd", "cbad"]))  # Output: ['b', 'c']
 print(common_characters(["a", "b", "c"]))  # Output: []
 print(common_characters(["aaaa", "a"]))  # Output: ['a']
-print(
-    common_characters(["*abc!d", "de!f*", "**!!!****d*****"])
-)  # Output: ['d', '!', '*']
+print(common_characters(["*abc!d", "de!f*", "**!!!****d*****"]))  # Output: ['d', '!', '*']
 
 # =========================================================================================================================== #
 

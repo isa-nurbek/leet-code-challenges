@@ -15,7 +15,9 @@ string = "abcdcba"
 
 ## Sample Output:
 ```
-true // it's written the same forward and backward
+True
+
+// It's written the same forward and backward
 ```
 
 ## Optimal Time & Space Complexity:

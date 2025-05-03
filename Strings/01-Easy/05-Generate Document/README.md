@@ -6,7 +6,7 @@ You're only able to generate the document if the frequency of unique characters 
 
 The document that you need to create may contain any characters, including special characters, capital letters, numbers, and spaces.
 
-Note: you can always generate the empty string (`""`).
+> Note: you can always generate the empty string (`""`).
 
 ## Sample Input
 

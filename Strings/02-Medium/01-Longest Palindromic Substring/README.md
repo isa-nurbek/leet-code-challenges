@@ -2,7 +2,9 @@
 
 Write a function that, given a string, returns its longest palindromic substring.
 
-A palindrome is defined as a string that's written the same forward and backward. Note that single-character strings are palindromes.
+A palindrome is defined as a string that's written the same forward and backward.
+
+> Note that single-character strings are palindromes.
 
 You can assume that there will only be one longest palindromic substring.
 
@@ -37,7 +39,7 @@ Recognize that a palindrome is a string that is symmetrical with respect to its 
 <details>
 <summary><b>Hint 3</b></summary>
 
-Traverse the input string, and at each index, apply the logic mentioned in Hint #2. What does this accomplish? Is the runtime of this approach better?
+Traverse the input string, and at each index, apply the logic mentioned in `Hint #2`. What does this accomplish? Is the runtime of this approach better?
 
 </details>
 

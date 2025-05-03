@@ -4,7 +4,7 @@ Write a function that takes in an array of words and returns the smallest array 
 
 For example, the characters `["y", "r", "o", "u"]` are needed to form the words `["your", "you", "or", "yo"]`.
 
-Note: the input words won't contain any spaces; however, they might contain punctuation and/or special characters.
+> Note: the input words won't contain any spaces; however, they might contain punctuation and/or special characters.
 
 ## Sample Input
 
@@ -39,7 +39,7 @@ The word that contains the highest frequency of any character dictates how many 
 <details>
 <summary><b>Hint 3</b></summary>
 
-Use a hash table to keep track of the maximum frequencies of all unique characters that occur across all words. Count the frequency of each character in each word, and use those per-word frequencies to update your maximum-character-frequency hash table. Once you've determined the maximum frequency of each character across all words, you can use the built-up hash table to generate your output array.
+Use a hash table to keep track of the maximum frequencies of all unique characters that occur across all words. Count the frequency of each character in each word, and use those per-word frequencies to update your `maximum-character-frequency` hash table. Once you've determined the maximum frequency of each character across all words, you can use the built-up hash table to generate your output array.
 
 </details>
 
