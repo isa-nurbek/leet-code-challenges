@@ -121,3 +121,45 @@ def non_attacking_queens(n):
 print(non_attacking_queens(4))  # Output: 2
 print(non_attacking_queens(2))  # Output: 0
 print(non_attacking_queens(10))  # Output: 724
+
+# =========================================================================================================================== #
+
+# Big O Analysis:
+
+"""
+## Time and Space Complexity Analysis
+
+### Time Complexity:
+The algorithm uses a backtracking approach to explore all possible valid queen placements.
+
+1. **Branching Factor**: At each row, we have up to `N` possible columns to place the queen.
+2. **Depth of Recursion**: The recursion goes up to `N` levels (one for each row).
+3. **Pruning**: The algorithm prunes invalid paths early (when a column, diagonal, or anti-diagonal is already occupied).
+
+In the worst case, the algorithm explores all possible configurations, leading to a time complexity of O(N!).
+Here's why:
+- 1st row: N choices
+- 2nd row: at most N-1 choices (pruning invalid columns/diagonals)
+- 3rd row: at most N-2 choices
+- ...
+- Nth row: 1 choice
+
+Thus, the total number of recursive calls is bounded by N × (N-1) × (N-2) × ... × 1 = N!.
+
+However, due to pruning, the actual number of recursive calls is much smaller in practice, but the worst-case time complexity
+remains O(N!).
+
+### Space Complexity:
+
+The space complexity is determined by:
+1. **Recursion Depth**: The recursion goes up to `N` levels, so the call stack uses O(N) space.
+2. **Sets for Tracking Conflicts**: The `columns`, `diagonals`, and `anti_diagonals` sets each can grow up to O(N) size
+(since at most N elements are stored at any time).
+
+Thus, the total space complexity is O(N) (for recursion and the sets).
+
+### Summary:
+- **Time Complexity**: O(N!) (worst-case, though pruning makes it faster in practice).
+- **Space Complexity**: O(N) (for recursion and tracking conflicts). 
+
+"""
