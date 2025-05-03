@@ -49,17 +49,47 @@ Upper Bound: O(n!) time | O(n) space - where `n` is the input number.
 # Solution:
 
 
-# Lower Bound: O(n!) time | O(1) space
+# Lower Bound: O(n!) time | O(n) space
 def non_attacking_queens(n):
+    """
+    Counts the number of ways to place n queens on an n x n chessboard
+    such that no two queens attack each other.
+
+    Args:
+        n: The size of the chessboard and number of queens to place.
+
+    Returns:
+        The number of valid configurations.
+    """
+
     def backtrack(row, columns, diagonals, anti_diagonals):
+        """
+        Recursive backtracking helper function.
+
+        Args:
+            row: Current row being considered (0 to n-1)
+            columns: Set of columns already occupied by queens
+            diagonals: Set of diagonals (row - col) already occupied
+            anti_diagonals: Set of anti-diagonals (row + col) already occupied
+
+        Returns:
+            Number of valid configurations found from this state
+        """
+        # Base case: all rows have been filled successfully
         if row == n:
             return 1
 
         count = 0
+        # Try each column in the current row
         for col in range(n):
-            diagonal = row - col
-            anti_diagonal = row + col
+            # Calculate diagonal and anti-diagonal identifiers
+            # These identify the two types of diagonals a queen can attack along
+            diagonal = row - col  # For diagonals going from top-left to bottom-right
+            anti_diagonal = (
+                row + col
+            )  # For diagonals going from top-right to bottom-left
 
+            # Skip if this column or diagonals are already occupied
             if (
                 col in columns
                 or diagonal in diagonals
@@ -67,18 +97,22 @@ def non_attacking_queens(n):
             ):
                 continue
 
+            # Place the queen by adding to our tracking sets
             columns.add(col)
             diagonals.add(diagonal)
             anti_diagonals.add(anti_diagonal)
 
+            # Recurse to next row and accumulate solutions
             count += backtrack(row + 1, columns, diagonals, anti_diagonals)
 
+            # Backtrack - remove the queen to explore other possibilities
             columns.remove(col)
             diagonals.remove(diagonal)
             anti_diagonals.remove(anti_diagonal)
 
         return count
 
+    # Start the backtracking from row 0 with empty sets
     return backtrack(0, set(), set(), set())
 
 
