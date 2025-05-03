@@ -163,3 +163,206 @@ Thus, the total space complexity is O(N) (for recursion and the sets).
 - **Space Complexity**: O(N) (for recursion and tracking conflicts). 
 
 """
+
+# =========================================================================================================================== #
+
+# Detailed Code Explanation:
+
+"""
+The provided function `non_attacking_queens(n)` solves the classic **N-Queens problem**, which asks: *How many ways can you place
+`n` queens on an `n x n` chessboard so that no two queens attack each other?* Queens attack along rows, columns, and diagonals,
+so we need to place them such that **no two queens share the same row, column, or diagonal**.
+
+---
+
+### ✅ Key Concepts
+
+* **Backtracking**: Try placing queens one row at a time, exploring only valid positions. If a placement leads to a conflict,
+backtrack and try a different position.
+
+* **Sets**:
+
+  * `columns`: Tracks which columns already have a queen.
+  * `diagonals`: Tracks `row - col` (main diagonals: ↘ direction).
+  * `anti_diagonals`: Tracks `row + col` (anti-diagonals: ↙ direction).
+
+---
+
+### 🔍 Step-by-Step Explanation
+
+#### Function: `non_attacking_queens(n)`
+
+This is the entry point. It calls a helper function `backtrack` with:
+
+* `row = 0`: We start placing queens from the top row.
+* Three empty sets to track constraints: `columns`, `diagonals`, and `anti_diagonals`.
+
+---
+
+#### Function: `backtrack(row, columns, diagonals, anti_diagonals)`
+
+This function recursively tries to place a queen in a valid position in the current `row`.
+
+##### Base Case:
+
+```
+if row == n:
+    return 1
+```
+
+* If we've successfully placed queens in all `n` rows, it's a valid solution. Return `1` to count it.
+
+##### Loop Through Columns:
+
+```
+for col in range(n):
+```
+
+* Try placing a queen in each column of the current row.
+
+##### Diagonal Identifiers:
+
+```
+diagonal = row - col
+anti_diagonal = row + col
+```
+
+* These values uniquely identify the diagonals.
+
+##### Check Conflicts:
+
+```
+if col in columns or diagonal in diagonals or anti_diagonal in anti_diagonals:
+    continue
+```
+
+* Skip the column if a queen already attacks from the same column, diagonal, or anti-diagonal.
+
+##### Place the Queen:
+
+```
+columns.add(col)
+diagonals.add(diagonal)
+anti_diagonals.add(anti_diagonal)
+```
+
+* Mark the position as occupied.
+
+##### Recursive Call:
+
+```
+count += backtrack(row + 1, columns, diagonals, anti_diagonals)
+```
+
+* Move to the next row to place another queen.
+
+##### Backtrack:
+
+```
+columns.remove(col)
+diagonals.remove(diagonal)
+anti_diagonals.remove(anti_diagonal)
+```
+
+* Remove the queen and try the next column.
+
+##### Return the Count:
+
+```
+return count
+```
+
+* This accumulates the number of valid arrangements for the current path.
+
+---
+
+### 📌 Test Cases
+
+```
+print(non_attacking_queens(4))  # Output: 2
+```
+
+* For 4x4 board, there are 2 valid configurations.
+
+```
+print(non_attacking_queens(2))  # Output: 0
+```
+
+* For 2x2 board, it's impossible to place 2 queens without conflict.
+
+```
+print(non_attacking_queens(10))  # Output: 724
+```
+
+* For 10x10 board, there are 724 valid ways.
+
+---
+
+### 🧠 Why It Works Efficiently
+
+* **Backtracking + Pruning**: Quickly skips invalid placements using sets.
+* **Diagonal encoding** is a clever trick to avoid a full `n x n` matrix.
+
+---
+
+Here's an **ASCII visualization** of how queens are placed on a chessboard for `n = 4`, showing the **two valid solutions**
+to the 4-Queens problem:
+
+---
+
+### ✅ First Valid Configuration (Solution 1)
+
+Each row has exactly **one `Q`** (queen), and `.` represents an empty square.
+
+```
+. Q . .
+. . . Q
+Q . . .
+. . Q .
+```
+
+Explanation:
+
+* Row 0 → Column 1
+* Row 1 → Column 3
+* Row 2 → Column 0
+* Row 3 → Column 2
+
+No two queens are in the same row, column, or diagonal.
+
+---
+
+### ✅ Second Valid Configuration (Solution 2)
+
+```
+. . Q .
+Q . . .
+. . . Q
+. Q . .
+```
+
+Explanation:
+
+* Row 0 → Column 2
+* Row 1 → Column 0
+* Row 2 → Column 3
+* Row 3 → Column 1
+
+Again, all queens are placed safely.
+
+---
+
+### 🔥 Diagonal Explanation
+
+Let’s take the first solution:
+
+```
+. Q . .   ← Row 0, Col 1 → Diagonal = -1, Anti-diagonal = 1
+. . . Q   ← Row 1, Col 3 → Diagonal = -2, Anti-diagonal = 4
+Q . . .   ← Row 2, Col 0 → Diagonal = 2, Anti-diagonal = 2
+. . Q .   ← Row 3, Col 2 → Diagonal = 1, Anti-diagonal = 5
+```
+
+None of the diagonal or anti-diagonal values repeat → queens do **not attack** each other diagonally.
+
+"""
