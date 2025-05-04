@@ -48,4 +48,4 @@ Once you've taken the daily bounds into account, you'll want to merge the two ca
 
 ## Optimal Time & Space Complexity
 
-`O(c1 + c2)` time | `O(c1 + c2)` space - where `c1` and `c2` are the respective numbers of meetings in calendar_1 and calendar_2.
+`O(c1 + c2)` time | `O(c1 + c2)` space - where `c1` and `c2` are the respective numbers of meetings in `calendar_1` and `calendar_2`.
