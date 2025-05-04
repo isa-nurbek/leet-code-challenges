@@ -305,3 +305,222 @@ The overall space complexity is **O(n + m)**, as we store the merged and flatten
 - **Space Complexity**: O(n + m)
 
 """
+
+# =========================================================================================================================== #
+
+# Detailed Code Explanation:
+
+"""
+This program helps find **available meeting time slots** between two people's calendars that:
+
+1. Respect each person's daily working hours (`daily_bounds`),
+2. Avoid already scheduled meetings,
+3. Are long enough to accommodate a required `meeting_duration`.
+
+---
+
+### 📌 Function Summary
+
+Here's a quick breakdown of what each function does:
+
+* `calendar_matching(...)`: Main function coordinating the process.
+* `update_calendar(...)`: Marks the unavailable times **outside** of daily bounds as busy.
+* `merge_calendars(...)`: Combines both people's meetings into a single list.
+* `flatten_calendar(...)`: Merges overlapping meetings into continuous blocks.
+* `get_matching_availabilities(...)`: Finds the gaps (available times) that are long enough for the required meeting duration.
+* `time_to_minutes(...)` / `minutes_to_time(...)`: Utility functions to convert between time strings (`"HH:MM"`) and
+total minutes (`int`).
+
+---
+
+### ✅ Step-by-Step Example Using the Test Case
+
+**Input:**
+
+```
+calendar_1 = [
+    ["9:00", "10:30"],
+    ["12:00", "13:00"],
+    ["16:00", "18:00"],
+]
+daily_bounds_1 = ["9:00", "20:00"]
+
+calendar_2 = [
+    ["10:00", "11:30"],
+    ["12:30", "14:30"],
+    ["14:30", "15:00"],
+    ["16:00", "17:00"],
+]
+daily_bounds_2 = ["10:00", "18:30"]
+
+meeting_duration = 30
+```
+
+---
+
+### 1. `update_calendar(...)`
+
+Adds the **unavailable times** outside daily bounds for both users.
+
+For `calendar_1` with bounds `["9:00", "20:00"]`, the updated calendar becomes:
+
+```
+[
+    ["0:00", "9:00"],        # before working hours
+    ["9:00", "10:30"],
+    ["12:00", "13:00"],
+    ["16:00", "18:00"],
+    ["20:00", "23:59"]       # after working hours
+]
+```
+
+All times are then converted to **minutes since midnight**:
+
+```
+[
+    [0, 540],
+    [540, 630],
+    [720, 780],
+    [960, 1080],
+    [1200, 1439]
+]
+```
+
+Same logic for `calendar_2` with bounds `["10:00", "18:30"]`:
+
+```
+[
+    [0, 600],
+    [600, 690],
+    [750, 870],
+    [870, 900],
+    [960, 1020],
+    [1110, 1439]
+]
+```
+
+---
+
+### 2. `merge_calendars(...)`
+
+Merges both users' updated calendars while keeping them sorted by start time:
+
+```
+merged = [
+    [0, 540], [0, 600], [540, 630], [600, 690], [720, 780], 
+    [750, 870], [870, 900], [960, 1020], [960, 1080], 
+    [1110, 1439], [1200, 1439]
+]
+```
+
+---
+
+### 3. `flatten_calendar(...)`
+
+Merges **overlapping or adjacent** time blocks into a continuous busy period.
+
+Result:
+
+```
+[
+    [0, 690],       # merged all early meetings
+    [720, 900],     # merged 720-780 and 750-900
+    [960, 1080],    # overlapping 960-1020 and 960-1080
+    [1110, 1439]
+]
+```
+
+---
+
+### 4. `get_matching_availabilities(...)`
+
+Finds **gaps** between busy slots that are ≥ `meeting_duration` (30 minutes):
+
+* Gap between 690 and 720 → **30 minutes** → ✅ → `'11:30' to '12:00'`
+* Gap between 900 and 960 → **60 minutes** → ✅ → `'15:00' to '16:00'`
+* Gap between 1080 and 1110 → **30 minutes** → ✅ → `'18:00' to '18:30'`
+
+Result:
+
+```
+[['11:30', '12:00'], ['15:00', '16:00'], ['18:00', '18:30']]
+```
+
+---
+
+### ✅ Final Output
+
+```
+[['11:30', '12:00'], ['15:00', '16:00'], ['18:00', '18:30']]
+```
+
+These are all time slots that both people are available and free for **at least 30 minutes**.
+
+---
+
+Let's create a simple **ASCII timeline** that visualizes:
+
+* Busy time blocks as `█`
+* Free time blocks as `░`
+* Time spans marked at key points
+* Granularity: 30-minute intervals from `9:00` to `20:00` (as this is the overlap of the two users’ bounds)
+
+---
+
+### 🕒 Timeline Scale (Each Block = 30 mins)
+
+```
+Time:     9   9:30 10  10:30 11  11:30 12  12:30 1   1:30 2   2:30 3   3:30 4   4:30 5   5:30 6   6:30 7   7:30 8
+          |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |
+```
+
+---
+
+### 👤 `calendar_1` (bounds `9:00–20:00`)
+
+Meetings: `9:00–10:30`, `12:00–13:00`, `16:00–18:00`
+
+```
+User 1:   ████░░░░░░░░████░░░░░░░░░░░░████████░░░░░░░░
+```
+
+---
+
+### 👤 `calendar_2` (bounds `10:00–18:30`)
+
+Meetings: `10:00–11:30`, `12:30–15:00`, `16:00–17:00`
+
+```
+User 2:   ░░███░░░░████████████░░░░░░████░░░░░░░░░░░░
+```
+
+---
+
+### 📘 Merged & Flattened (combined busy time)
+
+```
+Merged:   ███████░░██████░░░░░░████████░░░░░░░░
+Slots:           ↑       ↑        ↑
+               [11:30] [15:00]  [18:00]
+                        ↓        ↓
+                     [12:00]  [18:30]
+```
+
+---
+
+### ✅ Available Meeting Slots ≥ 30 mins
+
+```
+Available: ░░░░░░░░░░░░██░░░░░░░░██░░░░░░░░
+Times:        [11:30–12:00], [15:00–16:00], [18:00–18:30]
+```
+
+---
+
+This visualization gives a **high-level view** of when both users are:
+
+* ✅ Free at the same time
+* 🧱 Busy due to meetings
+* ⏳ Limited by their daily bounds
+
+"""
