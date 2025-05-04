@@ -254,3 +254,54 @@ print(
 )
 
 # Output: [['11:30', '12:00'], ['15:00', '16:00'], ['18:00', '18:30']]
+
+# =========================================================================================================================== #
+
+# Big O Analysis:
+
+"""
+## Time and Space Complexity Analysis
+
+### Time Complexity:
+
+1. **update_calendar**:
+   - Inserting at the beginning and end of the list: O(1) for appending, O(n) for inserting at the beginning (but in practice,
+   the calendar is small, so this is negligible).
+   - Mapping each time string to minutes: O(n) where n is the number of meetings in the calendar.
+
+2. **merge_calendars**:
+   - Merging two sorted calendars: O(n + m) where n and m are the lengths of the two calendars.
+
+3. **flatten_calendar**:
+   - Iterating through the merged calendar once: O(n + m) where n and m are the lengths of the two calendars.
+
+4. **get_matching_availabilities**:
+   - Iterating through the flattened calendar once: O(k) where k is the length of the flattened calendar (k ≤ n + m).
+
+5. **time_to_minutes** and **minutes_to_time**:
+   - These are O(1) operations per call.
+
+Overall, the dominant operations are the merging and flattening steps, so the total time complexity is **O(n + m)**, where n
+and m are the number of meetings in the two input calendars.
+
+### Space Complexity:
+
+1. **update_calendar**:
+   - Creates a new list with the updated bounds: O(n) space.
+
+2. **merge_calendars**:
+   - Creates a new merged list: O(n + m) space.
+
+3. **flatten_calendar**:
+   - Creates a new flattened list: O(n + m) space in the worst case (no overlaps).
+
+4. **get_matching_availabilities**:
+   - Creates a list of matching availabilities: O(k) space where k is the number of available slots (k ≤ n + m).
+
+The overall space complexity is **O(n + m)**, as we store the merged and flattened calendars, and the final availabilities.
+
+### Summary:
+- **Time Complexity**: O(n + m)
+- **Space Complexity**: O(n + m)
+
+"""
