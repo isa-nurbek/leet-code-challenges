@@ -205,5 +205,219 @@ Let's analyze the time and space complexity of the given `waterfall_streams` fun
 - **Time Complexity:**  O(n * m^2) 
 - **Space Complexity:**  O(m) 
 
+"""
+
+"""
+The `waterfall_streams` function simulates the flow of water dropped onto a 2D grid from a specific **source column** in the **top row**. The water flows downward unless blocked, and when it hits an obstacle (`1` in the grid), it tries to flow **left and right**. The goal is to calculate **what percentage of water ends up in each column at the bottom row**.
+
+---
+
+### 🧱 **Input Grid:**
+
+Each cell in the grid can be:
+
+* `0` – an open cell where water can flow.
+* `1` – a block that stops water.
+
+---
+
+### ✅ **High-Level Steps:**
+
+1. **Initialize the first row** with `-1` at the `source` column, representing 100% water (negative numbers track water flow).
+2. **Iterate row by row** simulating the water flowing down.
+3. At each cell:
+
+   * If it has water from above and no block below, continue flowing straight down.
+   * If there's a block below, try to split the water:
+
+     * Move right until you find an open cell (not blocked above or in the current row), or stop at a block.
+     * Move left similarly.
+4. After processing all rows, **convert the final water values into percentages** by multiplying by `-100`.
+
+---
+
+### 🔍 **Detailed Line-by-Line Explanation:**
+
+```python
+def waterfall_streams(array, source):
+    row_above = array[0][:]
+    row_above[source] = -1  # Start with -1 (100%) water at the source column
+```
+
+* `row_above` stores water values from the row above the current one.
+* `-1` means 100% of water is at the source column.
+
+---
+
+```python
+    for row in range(1, len(array)):
+        current_row = array[row][:]
+```
+
+* Iterate through each row starting from the second one.
+* Copy the current row to avoid mutating the original grid.
+
+---
+
+```python
+        for idx in range(len(row_above)):
+            value_above = row_above[idx]
+
+            has_water_above = value_above < 0
+            has_block = current_row[idx] == 1
+```
+
+* Check each column.
+* `value_above` is water amount from the previous row (negative = water present).
+* Check if there's a block below the water source.
+
+---
+
+```python
+            if not has_water_above:
+                continue
+```
+
+* Skip if there's no water above.
+
+---
+
+```python
+            if not has_block:
+                current_row[idx] += value_above
+                continue
+```
+
+* If there's no block, allow water to fall straight down.
+
+---
+
+### 🔀 **Water Split Logic**
+
+```python
+            split_water = value_above / 2
+```
+
+* If there is a block below, water splits 50/50 to left and right.
+
+---
+
+```python
+            right_idx = idx
+            while right_idx + 1 < len(row_above):
+                right_idx += 1
+
+                if row_above[right_idx] == 1:
+                    break
+
+                if current_row[right_idx] != 1:
+                    current_row[right_idx] += split_water
+                    break
+```
+
+* Try to find a path to the right for water to flow.
+* Stop if blocked (`1` in row above), or pour into the first open space.
+
+---
+
+```python
+            left_idx = idx
+            while left_idx - 1 >= 0:
+                left_idx -= 1
+
+                if row_above[left_idx] == 1:
+                    break
+
+                if current_row[left_idx] != 1:
+                    current_row[left_idx] += split_water
+                    break
+```
+
+* Same as above, but to the left.
+
+---
+
+```python
+        row_above = current_row
+```
+
+* After processing current row, make it the new "row above" for the next iteration.
+
+---
+
+### 🧮 **Final Conversion to Percentages:**
+
+```python
+    final_percentages = list(map(lambda num: num * -100, row_above))
+    return final_percentages
+```
+
+* Convert water amounts to positive percentages.
+* Cells that never got water remain `0`.
+
+---
+
+### 📊 Test Case Breakdown:
+
+```python
+array = [
+    [0, 0, 0, 0, 0, 0, 0],  # water starts at column 3
+    [1, 0, 0, 0, 0, 0, 0],  # block at column 0
+    [0, 0, 1, 1, 1, 0, 0],  # vertical wall in the middle
+    [0, 0, 0, 0, 0, 0, 0],  # open
+    [1, 1, 1, 0, 0, 1, 0],  # split paths
+    [0, 0, 0, 0, 0, 0, 1],  # right side blocked at the end
+    [0, 0, 0, 0, 0, 0, 0],
+]
+source = 3
+```
+
+* Water drops at column 3.
+* Hits wall at row 2, splits into 2 paths around the wall.
+* Eventually, water reaches columns 3 and 4, each with 25%.
+
+**Output:**
+
+```python
+[0, 0, 0, 25.0, 25.0, 0, 0]
+```
+
+---
+
+Here's an **ASCII visualization** of how the `waterfall_streams` function simulates water flow through the given grid. I’ll show:
+
+* `⬇` – where water flows straight down
+* `↙` / `↘` – where water splits and moves left or right
+* `█` – a block (`1`)
+* `.` – empty space (`0`)
+* `%` – where water accumulates in the final row
+* `S` – source (start point of water)
+
+---
+
+### 🧩 Grid Layout with Flow:
+
+```plaintext
+Row 0:   .   .   .   S   .   .   .
+Row 1:   █   .   .   ⬇   .   .   .
+Row 2:   .   .   █   █   █   .   .
+Row 3:   .   .  ↙.   .   .↘  .   .
+Row 4:   █   █   █   ⬇   ⬇   █   .
+Row 5:   .   .   .   ⬇   ⬇   .   █
+Row 6:   %   .   .  25% 25%  .   .
+```
+
+---
+
+### 🔍 Breakdown of the Flow:
+
+* **Row 0:** Water starts at column 3 (`S`)
+* **Row 1:** Water flows straight down to column 3 (`⬇`)
+* **Row 2:** Hits blocks in columns 2, 3, 4 → water cannot continue straight
+* **Row 3:** Water splits: left (to col 2, but blocked) and right (to col 4)
+* **Row 4–6:** Water continues straight down where possible
+* **Row 6:** 25% water ends in both columns 3 and 4
+
+---
 
 """
