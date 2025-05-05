@@ -8,9 +8,8 @@ a function that returns a modified version of the linked list where `all nodes w
 distinct values. Modify the list in place (do not create a new list). The relative order of the remaining nodes should preserve
 their original order (whether sorted or unsorted).
 
-Each `LinkedList` node has an integer `value` as well as a `next` node pointing to the next node in the list or to `None` / `null`
-if it's the tail of the list.
-
+Each `LinkedList` node has an integer `value` as well as a `next` node pointing to the next node in the list or to `None` if it's
+the tail of the list.
 
 ## Sample Input With Sorted Linked List:
 ```
