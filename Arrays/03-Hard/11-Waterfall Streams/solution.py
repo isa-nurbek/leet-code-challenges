@@ -71,51 +71,70 @@ O(w^2 * h) time | O(w) space - where `w` and `h` are the width and height of the
 
 # O(w^2 * h) time | O(w) space
 def waterfall_streams(array, source):
+    # Initialize the first row by making a copy of it
+    # Mark the source position with -1 (representing 100% water)
     row_above = array[0][:]
-    row_above[source] = -1
+    row_above[source] = -1  # Negative value represents water percentage (1 = 100%)
 
+    # Process each subsequent row
     for row in range(1, len(array)):
+        # Create a copy of the current row to modify
         current_row = array[row][:]
 
+        # Check each position in the row above
         for idx in range(len(row_above)):
             value_above = row_above[idx]
 
+            # Check if there's water above this position
             has_water_above = value_above < 0
+            # Check if current position is a block
             has_block = current_row[idx] == 1
 
+            # If no water above, nothing to do
             if not has_water_above:
                 continue
 
+            # If current position isn't a block, water falls straight down
             if not has_block:
                 current_row[idx] += value_above
                 continue
 
-            split_water = value_above / 2
+            # If we reach here, water hits a block and needs to split
+            split_water = value_above / 2  # Divide water equally to both sides
 
+            # First, try to move water to the right
             right_idx = idx
             while right_idx + 1 < len(row_above):
                 right_idx += 1
 
+                # If we hit a block in the row above while moving right, stop
                 if row_above[right_idx] == 1:
                     break
 
+                # If we find an empty space in current row, deposit the split water
                 if current_row[right_idx] != 1:
                     current_row[right_idx] += split_water
                     break
 
+            # Then, try to move water to the left
             left_idx = idx
             while left_idx - 1 >= 0:
                 left_idx -= 1
 
+                # If we hit a block in the row above while moving left, stop
                 if row_above[left_idx] == 1:
                     break
 
+                # If we find an empty space in current row, deposit the split water
                 if current_row[left_idx] != 1:
                     current_row[left_idx] += split_water
                     break
 
+        # The current row becomes the row above for the next iteration
         row_above = current_row
 
+    # Convert the negative percentages to positive values
+    # Multiply by -100 to convert from decimal (-0.5 → 50)
     final_percentages = list(map(lambda num: num * -100, row_above))
 
     return final_percentages
