@@ -156,3 +156,54 @@ source = 3
 print(waterfall_streams(array, source))
 
 # Output: [0, 0, 0, 25.0, 25.0, 0, 0]
+
+# =========================================================================================================================== #
+
+# Big O Analysis:
+
+"""
+## Time and Space Complexity Analysis
+
+Let's analyze the time and space complexity of the given `waterfall_streams` function.
+
+### **Time Complexity:**
+1. **Initial Setup:**
+   - Copying the first row: `O(m)`, where `m` is the number of columns.
+   
+2. **Outer Loop:**
+   - Iterates over each row (from the second row to the last row): `O(n)`, where `n` is the number of rows.
+   
+3. **Inner Loop:**
+   - For each row, it iterates over each column: `O(m)`.
+   - For each column with water above (`value_above < 0`) and a block (`current_row[idx] == 1`), it splits the water and spreads it to the left and right:
+     - In the worst case, spreading water to the left or right could take `O(m)` time (e.g., if the water spreads all the way to the end of the row).
+   
+   - Thus, the worst-case time for the inner loop is `O(m^2)` per row (due to nested loops for spreading).
+
+4. **Total Time Complexity:**
+   - Since we have `n` rows and for each row, the worst-case time is `O(m^2)`, the total time complexity is:
+     
+     O(n * m^2)
+     
+   - This assumes that in the worst case, for every block, the water spreads all the way to the ends of the row.
+
+### **Space Complexity:**
+1. **Row Copies:**
+   - The function maintains a copy of the previous row (`row_above`) and the current row (`current_row`), each of size `m`: `O(m)` space.
+   
+2. **Final Output:**
+   - The `final_percentages` array is of size `m`, but this is part of the output and doesn't count toward auxiliary space.
+
+3. **Total Space Complexity:**
+   - The dominant space usage is the two row copies, so the space complexity is:
+     
+     O(m)
+     
+   - This is because we only keep track of the previous and current rows at any given time, not the entire matrix.
+
+### **Summary:**
+- **Time Complexity:**  O(n * m^2) 
+- **Space Complexity:**  O(m) 
+
+
+"""
