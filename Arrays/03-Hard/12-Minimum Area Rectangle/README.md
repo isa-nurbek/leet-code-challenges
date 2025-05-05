@@ -25,6 +25,7 @@ points =
 
 ```plaintext
 3
+
 // The rectangle with corners [1, 5], [2, 5], [1, 2], and [2, 2]
 // has the minimum area: 3.
 ```
@@ -34,21 +35,21 @@ points =
 <details>
 <summary><b>Hint 1</b></summary>
 
-The brute-force approach to this problem is to simply generate all possible combinations of 4 points and to see if they form a rectangle. You can calculate the area of all of these rectangles and then return the minimum area that you find. Is there a better approach than this?
+The brute-force approach to this problem is to simply generate all possible combinations of `4 points` and to see if they form a rectangle. You can calculate the area of all of these rectangles and then return the minimum area that you find. Is there a better approach than this?
 
 </details>
 
 <details>
 <summary><b>Hint 2</b></summary>
 
-A more optimal approach is to find vertical or horizontal edges that are parallel to the y or x axes, respectively. If you find two parallel edges (two vertical edges, for example) that share a vertical or horizontal coordinate (y values in the case of vertical edges), then those edges form a rectangle.
+A more optimal approach is to find vertical or horizontal edges that are parallel to the `y` or `x` axes, respectively. If you find two parallel edges (two vertical edges, for example) that share a vertical or horizontal coordinate (`y` values in the case of vertical edges), then those edges form a rectangle.
 
 </details>
 
 <details>
 <summary><b>Hint 3</b></summary>
 
-Another approach is to pick any two points that don't have the same x or y values (i.e., points that could be at opposite ends of a rectangle diagonal) and to see if you can create a rectangle with them and two other points. Given two points where p1 = (x1, y1) and p2 = (x2, y2), if points p3 = (x1, y2) and p4 = (x2, y1) exist, then these 4 points form a rectangle.
+Another approach is to pick any two points that don't have the same `x` or `y` values (i.e., points that could be at opposite ends of a rectangle diagonal) and to see if you can create a rectangle with them and two other points. Given two points where `p1 = (x1, y1)` and `p2 = (x2, y2)`, if points `p3 = (x1, y2)` and `p4 = (x2, y1)` exist, then these `4 points` form a rectangle.
 
 </details>
 
