@@ -55,4 +55,4 @@ Another approach is to pick any two points that don't have the same `x` or `y` v
 
 ## Optimal Time & Space Complexity
 
-O(n²) time | O(n) space - where n is the number of points
+`O(n²)` time | `O(n)` space - where `n` is the number of points.
