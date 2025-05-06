@@ -164,9 +164,8 @@ print(waterfall_streams(array, source))
 """
 ## Time and Space Complexity Analysis
 
-Let's analyze the time and space complexity of the given `waterfall_streams` function.
-
 ### **Time Complexity:**
+
 1. **Initial Setup:**
    - Copying the first row: `O(m)`, where `m` is the number of columns.
    
@@ -175,30 +174,28 @@ Let's analyze the time and space complexity of the given `waterfall_streams` fun
    
 3. **Inner Loop:**
    - For each row, it iterates over each column: `O(m)`.
-   - For each column with water above (`value_above < 0`) and a block (`current_row[idx] == 1`), it splits the water and spreads it to the left and right:
-     - In the worst case, spreading water to the left or right could take `O(m)` time (e.g., if the water spreads all the way to the end of the row).
+   - For each column with water above (`value_above < 0`) and a block (`current_row[idx] == 1`), it splits the water and spreads
+   it to the left and right:
+     - In the worst case, spreading water to the left or right could take `O(m)` time (e.g., if the water spreads all the way
+     to the end of the row).
    
    - Thus, the worst-case time for the inner loop is `O(m^2)` per row (due to nested loops for spreading).
 
 4. **Total Time Complexity:**
-   - Since we have `n` rows and for each row, the worst-case time is `O(m^2)`, the total time complexity is:
-     
-     O(n * m^2)
-     
+   - Since we have `n` rows and for each row, the worst-case time is `O(m^2)`, the total time complexity is: O(n * m^2)
    - This assumes that in the worst case, for every block, the water spreads all the way to the ends of the row.
 
 ### **Space Complexity:**
+
 1. **Row Copies:**
-   - The function maintains a copy of the previous row (`row_above`) and the current row (`current_row`), each of size `m`: `O(m)` space.
+   - The function maintains a copy of the previous row (`row_above`) and the current row (`current_row`),
+   each of size `m`: `O(m)` space.
    
 2. **Final Output:**
    - The `final_percentages` array is of size `m`, but this is part of the output and doesn't count toward auxiliary space.
 
 3. **Total Space Complexity:**
-   - The dominant space usage is the two row copies, so the space complexity is:
-     
-     O(m)
-     
+   - The dominant space usage is the two row copies, so the space complexity is: O(m)
    - This is because we only keep track of the previous and current rows at any given time, not the entire matrix.
 
 ### **Summary:**
@@ -207,8 +204,14 @@ Let's analyze the time and space complexity of the given `waterfall_streams` fun
 
 """
 
+# =========================================================================================================================== #
+
+# Detailed Code Explanation:
+
 """
-The `waterfall_streams` function simulates the flow of water dropped onto a 2D grid from a specific **source column** in the **top row**. The water flows downward unless blocked, and when it hits an obstacle (`1` in the grid), it tries to flow **left and right**. The goal is to calculate **what percentage of water ends up in each column at the bottom row**.
+The `waterfall_streams` function simulates the flow of water dropped onto a 2D grid from a specific **source column** in the **top row**.
+The water flows downward unless blocked, and when it hits an obstacle (`1` in the grid), it tries to flow **left and right**.
+The goal is to calculate **what percentage of water ends up in each column at the bottom row**.
 
 ---
 
@@ -238,7 +241,7 @@ Each cell in the grid can be:
 
 ### 🔍 **Detailed Line-by-Line Explanation:**
 
-```python
+```
 def waterfall_streams(array, source):
     row_above = array[0][:]
     row_above[source] = -1  # Start with -1 (100%) water at the source column
@@ -249,9 +252,9 @@ def waterfall_streams(array, source):
 
 ---
 
-```python
-    for row in range(1, len(array)):
-        current_row = array[row][:]
+```
+for row in range(1, len(array)):
+    current_row = array[row][:]
 ```
 
 * Iterate through each row starting from the second one.
@@ -259,12 +262,12 @@ def waterfall_streams(array, source):
 
 ---
 
-```python
-        for idx in range(len(row_above)):
-            value_above = row_above[idx]
+```
+for idx in range(len(row_above)):
+    value_above = row_above[idx]
 
-            has_water_above = value_above < 0
-            has_block = current_row[idx] == 1
+    has_water_above = value_above < 0
+    has_block = current_row[idx] == 1
 ```
 
 * Check each column.
@@ -273,19 +276,19 @@ def waterfall_streams(array, source):
 
 ---
 
-```python
-            if not has_water_above:
-                continue
+```
+if not has_water_above:
+    continue
 ```
 
 * Skip if there's no water above.
 
 ---
 
-```python
-            if not has_block:
-                current_row[idx] += value_above
-                continue
+```
+if not has_block:
+    current_row[idx] += value_above
+    continue
 ```
 
 * If there's no block, allow water to fall straight down.
@@ -294,25 +297,25 @@ def waterfall_streams(array, source):
 
 ### 🔀 **Water Split Logic**
 
-```python
-            split_water = value_above / 2
+```
+split_water = value_above / 2
 ```
 
 * If there is a block below, water splits 50/50 to left and right.
 
 ---
 
-```python
-            right_idx = idx
-            while right_idx + 1 < len(row_above):
-                right_idx += 1
+```
+right_idx = idx
+while right_idx + 1 < len(row_above):
+    right_idx += 1
 
-                if row_above[right_idx] == 1:
-                    break
+    if row_above[right_idx] == 1:
+        break
 
-                if current_row[right_idx] != 1:
-                    current_row[right_idx] += split_water
-                    break
+    if current_row[right_idx] != 1:
+        current_row[right_idx] += split_water
+        break
 ```
 
 * Try to find a path to the right for water to flow.
@@ -320,25 +323,25 @@ def waterfall_streams(array, source):
 
 ---
 
-```python
-            left_idx = idx
-            while left_idx - 1 >= 0:
-                left_idx -= 1
+```
+left_idx = idx
+while left_idx - 1 >= 0:
+    left_idx -= 1
 
-                if row_above[left_idx] == 1:
-                    break
+    if row_above[left_idx] == 1:
+        break
 
-                if current_row[left_idx] != 1:
-                    current_row[left_idx] += split_water
-                    break
+    if current_row[left_idx] != 1:
+        current_row[left_idx] += split_water
+        break
 ```
 
 * Same as above, but to the left.
 
 ---
 
-```python
-        row_above = current_row
+```
+row_above = current_row
 ```
 
 * After processing current row, make it the new "row above" for the next iteration.
@@ -347,9 +350,9 @@ def waterfall_streams(array, source):
 
 ### 🧮 **Final Conversion to Percentages:**
 
-```python
-    final_percentages = list(map(lambda num: num * -100, row_above))
-    return final_percentages
+```
+final_percentages = list(map(lambda num: num * -100, row_above))
+return final_percentages
 ```
 
 * Convert water amounts to positive percentages.
@@ -359,7 +362,7 @@ def waterfall_streams(array, source):
 
 ### 📊 Test Case Breakdown:
 
-```python
+```
 array = [
     [0, 0, 0, 0, 0, 0, 0],  # water starts at column 3
     [1, 0, 0, 0, 0, 0, 0],  # block at column 0
@@ -378,13 +381,13 @@ source = 3
 
 **Output:**
 
-```python
+```
 [0, 0, 0, 25.0, 25.0, 0, 0]
 ```
 
 ---
 
-Here's an **ASCII visualization** of how the `waterfall_streams` function simulates water flow through the given grid. I’ll show:
+Here's an **ASCII visualization** of how the `waterfall_streams` function simulates water flow through the given grid:
 
 * `⬇` – where water flows straight down
 * `↙` / `↘` – where water splits and moves left or right
@@ -417,7 +420,5 @@ Row 6:   %   .   .  25% 25%  .   .
 * **Row 3:** Water splits: left (to col 2, but blocked) and right (to col 4)
 * **Row 4–6:** Water continues straight down where possible
 * **Row 6:** 25% water ends in both columns 3 and 4
-
----
 
 """
