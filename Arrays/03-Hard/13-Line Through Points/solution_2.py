@@ -155,3 +155,153 @@ The GCD calculation adds a logarithmic factor to the time complexity. The space 
 for each point.
 
 """
+
+# =========================================================================================================================== #
+
+# Detailed Code Explanation:
+
+"""
+Let's break down the `line_through_points` function step by step and explain how it determines the **maximum number of points
+that lie on the same straight line**.
+
+---
+
+## ✅ **Objective**
+
+Given a list of 2D points, the goal is to find the **maximum number of points** that lie on a **single straight line**.
+
+---
+
+## 📘 **Key Idea**
+
+* Two points define a line.
+* Any other point on the same line must share the same **slope** with respect to those two points.
+* So, for each point, compute slopes to every other point, and track how many share the same slope (i.e., lie on the same line).
+
+---
+
+## 🔍 **Detailed Explanation**
+
+```
+def line_through_points(points):
+    max_points = 1
+```
+
+* We initialize `max_points = 1` because at the very least, a single point forms a trivial line by itself.
+
+---
+
+```
+for i in range(len(points)):
+    slopes = {}
+    x1, y1 = points[i]
+```
+
+* For every point `i`, consider it as the **starting point**.
+* Create a dictionary `slopes` to track how many other points share the same slope with `points[i]`.
+
+---
+
+```
+for j in range(i + 1, len(points)):
+    x2, y2 = points[j]
+    dx = x2 - x1
+    dy = y2 - y1
+```
+
+* Compare point `i` to every subsequent point `j`, calculating the differences in `x` and `y`.
+
+---
+
+### ⚠️ Special Case Handling
+
+```
+if dx == 0:
+    slope = (0, 1)  # Vertical line
+elif dy == 0:
+    slope = (1, 0)  # Horizontal line
+```
+
+* Vertical lines (infinite slope) are represented as `(0,1)`.
+* Horizontal lines (zero slope) are represented as `(1,0)`.
+
+---
+
+### 🧮 Reducing Slopes to Simplest Form
+
+```
+else:
+    def gcd(a, b):
+        while b:
+            a, b = b, a % b
+        return a
+
+    common_divisor = gcd(abs(dx), abs(dy))
+    reduced_dx = dx // common_divisor
+    reduced_dy = dy // common_divisor
+
+    if reduced_dx < 0:
+        reduced_dx *= -1
+        reduced_dy *= -1
+
+    slope = (reduced_dy, reduced_dx)
+```
+
+* For non-vertical/horizontal lines, the slope is `dy/dx`.
+* Use `gcd` to reduce `(dy, dx)` to its simplest form.
+* Normalize the sign so the same slope doesn't appear with opposite signs.
+
+> Example: `(2, 4)` becomes `(1, 2)`, and `(-2, -4)` also becomes `(1, 2)`.
+
+---
+
+### 📊 Storing Slopes
+
+```
+if slope not in slopes:
+    slopes[slope] = 1  # Start with 1 (the current point)
+slopes[slope] += 1
+```
+
+* If we encounter this slope for the first time, initialize its count as `1`.
+* Then increment it — this counts how many points share the same slope (line) with `points[i]`.
+
+---
+
+```
+if slopes:
+    current_max = max(slopes.values())
+    max_points = max(max_points, current_max)
+```
+
+* After processing all points from `i` to the end, take the highest count of any slope from point `i`.
+* Update `max_points` accordingly.
+
+---
+
+```
+return max_points
+```
+
+* Finally, return the **maximum number of points** found that lie on a single line.
+
+---
+
+## ✅ **Test Case Example**
+
+### Input:
+
+```
+points = [[1, 1], [2, 2], [3, 3], [0, 4], [-2, 6], [4, 0], [2, 1]]
+```
+
+* Points `[1,1], [2,2], [3,3], [-2,6]` lie on the line `y = x`, so output is `4`.
+
+---
+
+## 💡 Efficiency
+
+* Time Complexity: **O(n²)** — for each point, compare with all others.
+* Space Complexity: **O(n)** — to store slope counts per point.
+
+"""
