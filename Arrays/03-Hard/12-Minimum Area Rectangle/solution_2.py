@@ -15,8 +15,7 @@ points`.
 
 ## Sample Input
 ```
-points =
-[
+points = [
   [1, 5],
   [5, 1],
   [4, 2],
