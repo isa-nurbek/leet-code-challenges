@@ -206,3 +206,267 @@ Thus, the total space complexity is `O(n)` (for the `slopes` dictionary and a fe
 - **Space Complexity**: `O(n)`
 
 """
+
+# =========================================================================================================================== #
+
+# Detailed Code Explanation:
+
+"""
+The function `line_through_points(points)` is designed to determine **the maximum number of points that lie on the same straight
+line** from a given list of 2D points.
+
+---
+
+### 🧠 **High-Level Idea**
+
+To find the maximum number of points that lie on the same line, we:
+
+* Loop over each point.
+* For that point, compute the **slope** between it and every other point.
+* Count how many times each slope occurs.
+* The maximum frequency for any slope from a given point indicates how many points lie on the same line through that point.
+* Track the global maximum across all starting points.
+
+---
+
+## 🔍 Detailed Walkthrough
+
+---
+
+### `line_through_points(points)`
+
+```
+max_number_of_points_on_line = 1
+```
+
+We initialize a variable to keep track of the global maximum number of collinear points (at least one point always exists).
+
+---
+
+### Outer Loop – picking base point
+
+```
+for idx1, p1 in enumerate(points):
+    slopes = {}
+```
+
+We iterate over each point `p1` in `points`. For each base point `p1`, we maintain a dictionary `slopes` to store counts of
+different slopes between `p1` and the rest.
+
+---
+
+### Inner Loop – comparing with other points
+
+```
+for idx2 in range(idx1 + 1, len(points)):
+    p2 = points[idx2]
+```
+
+For each pair `(p1, p2)` where `p2` comes after `p1`, compute the slope.
+
+---
+
+### Get the slope
+
+```
+rise, run = get_slope_of_line_between_points(p1, p2)
+slope_key = create_hashable_key_for_rational(rise, run)
+```
+
+We get the reduced slope between `p1` and `p2` in the form `[rise, run]`, and then convert it to a hashable key for dictionary usage.
+
+---
+
+### Update dictionary with slope
+
+```
+if slope_key not in slopes:
+    slopes[slope_key] = 1
+slopes[slope_key] += 1
+```
+
+* We initialize the slope count to 1 if it doesn’t exist.
+* Then increment it to reflect one more point found on that slope (so it becomes 2 for the first occurrence since we start with
+the base point and `p2`).
+
+---
+
+### Update global maximum
+
+```
+max_number_of_points_on_line = max(
+    max_number_of_points_on_line, max(slopes.values(), default=0)
+)
+```
+
+Update the global maximum with the highest number of points on any line through `p1`.
+
+---
+
+### Final result
+
+```
+return max_number_of_points_on_line
+```
+
+Return the overall maximum number of collinear points.
+
+---
+
+## 🧮 Helper Functions
+
+---
+
+### `get_slope_of_line_between_points(p1, p2)`
+
+```
+def get_slope_of_line_between_points(p1, p2):
+    ...
+    if p1x != p2x:
+        ...
+        gcd = get_greatest_common_divisor(abs(x_diff), abs(y_diff))
+        ...
+        slope = [y_diff, x_diff]
+```
+
+* Calculates the slope `(rise, run)` between `p1` and `p2` in a **normalized rational form** to avoid floating point precision errors.
+* Uses GCD to reduce slope.
+* Ensures consistency in sign by making denominator positive.
+
+If `p1x == p2x`, slope is vertical → represented as `[1, 0]`.
+
+---
+
+### `create_hashable_key_for_rational(numerator, denominator)`
+
+```
+return str(numerator) + ":" + str(denominator)
+```
+
+Convert a slope like `[2, 1]` to `"2:1"` so it can be used as a dictionary key.
+
+---
+
+### `get_greatest_common_divisor(num1, num2)`
+
+```
+while True:
+    if a == 0:
+        return b
+    if b == 0:
+        return a
+    a, b = b, a % b
+```
+
+Standard Euclidean algorithm to compute GCD for reducing the slope.
+
+---
+
+## ✅ Example Input/Output
+
+### Example 1:
+
+```
+points = [[1, 1], [2, 2], [3, 3], [0, 4], [-2, 6], [4, 0], [2, 1]]
+```
+
+* Points `[1,1], [2,2], [3,3], [-2,6]` lie on the same line (slope = 1).
+* Result: `4`
+
+### Example 2:
+
+```
+points = [[3, 3], [0, 4], [-2, 6], [4, 0], [2, 1], [3, 4], [5, 6], [0, 0]]
+```
+
+* Best line includes `[0,4], [-2,6], [3,3]` or similar.
+* Result: `3`
+
+---
+
+## 🧪 Time Complexity
+
+Let `n = number of points`:
+
+* Outer loop: `O(n)`
+* Inner loop: up to `O(n)`
+* Slope calculation & hash: `O(1)`
+
+**Overall: O(n²)** — which is efficient for up to \~10⁴ points.
+
+---
+
+Let's visualize the points and lines using ASCII.
+
+We’ll take the first test case:
+
+```
+points = [[1, 1], [2, 2], [3, 3], [0, 4], [-2, 6], [4, 0], [2, 1]]
+```
+
+We’ll map these points roughly on a coordinate grid (Y increases upward, X to the right):
+
+---
+
+### 🗺️ ASCII Grid (approximate)
+
+```
+ 6 |       *                   (-2,6)
+ 5 |                           
+ 4 | *                         (0,4)
+ 3 |         *                 (3,3)
+ 2 |     *                     (2,2)
+ 1 | *       *                 (1,1)  (2,1)
+ 0 |             *             (4,0)
+   +--------------------------
+     -2  -1   0   1   2   3   4   X
+```
+
+---
+
+### 📈 Line of Best Fit
+
+Let's find which points lie on the same straight line.
+
+**Slope 1 (rise/run = 1):**
+
+* From (1,1) to (2,2), (3,3), (-2,6)
+* These all follow: `y = x`
+
+```
+Line: y = x
+Points: (1,1), (2,2), (3,3), (-2,6)
+```
+
+So, visually:
+
+```
+ 6 |       *                   (-2,6)
+ 5 |                           
+ 4 | *                         (0,4)
+ 3 |         *                 (3,3)   ← on line
+ 2 |     *                     (2,2)   ← on line
+ 1 | *       *                 (1,1)   ← on line, (2,1) is not
+ 0 |             *             (4,0)
+   +--------------------------
+     -2  -1   0   1   2   3   4   X
+```
+
+---
+
+### 🧩 Other Lines:
+
+You can also visualize other lines like:
+
+* (0,4) → (-2,6) has slope = -1
+* (2,1) → (4,0) has slope = -0.5
+
+But none of them go through more than 2 or 3 points.
+
+---
+
+### ✅ Final Result:
+
+The maximum number of points that lie on the same line is **4**, clearly visible as those aligned diagonally through slope `1`.
+
+"""
