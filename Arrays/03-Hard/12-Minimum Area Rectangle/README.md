@@ -7,8 +7,7 @@ The input array will contain points represented by arrays of two integers `[x, y
 ## Sample Input
 
 ```plaintext
-points = 
-[
+points = [
   [1, 5],
   [5, 1],
   [4, 2],
