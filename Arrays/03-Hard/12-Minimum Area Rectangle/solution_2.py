@@ -109,3 +109,38 @@ print(minimum_area_rectangle(points))  # Output: 3
 
 points_2 = [[-4, 4], [4, 4], [4, -2], [-4, -2], [0, -2], [4, 2], [0, 2]]
 print(minimum_area_rectangle(points_2))  # Output: 16
+
+# =========================================================================================================================== #
+
+# Big O Analysis:
+
+"""
+## Time and Space Complexity Analysis
+
+### Time Complexity:
+
+- **Building `point_set` and `columns`:** O(n).
+
+- **Sorting each column:** O(k * m log m), where `k` is the number of columns and `m` is the average number of points per column.
+In the worst case, this is O(n log n).
+
+- **Finding common y-values:** For each pair of columns, this is O(m + n) in the worst case (using a two-pointer approach).
+If there are `k` columns, this becomes O(k² * m).
+
+- **Overall:** O(n + k² * m + n log n). In the worst case (all points in one column), this is O(n²).
+In the average case, it's closer to O(n log n + k² * m).
+
+### Space Complexity:
+
+- `point_set`: O(n).
+- `columns`: O(n).
+- `processed_columns`: O(k * m) in the worst case, where `k` is the number of columns and `m` is the average number of points
+per column.
+
+- **Overall:** O(n).
+
+### Summary:
+- **Time Complexity:** O(n²) in the worst case, O(n log n + k² * m) in the average case.
+- **Space Complexity:** O(n)
+
+"""
