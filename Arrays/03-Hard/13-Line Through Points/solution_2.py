@@ -112,3 +112,46 @@ print(line_through_points(points))  # Output: 4
 
 points_2 = [[3, 3], [0, 4], [-2, 6], [4, 0], [2, 1], [3, 4], [5, 6], [0, 0]]
 print(line_through_points(points_2))  # Output: 3
+
+# =========================================================================================================================== #
+
+# Big O Analysis:
+
+"""
+## Time and Space Complexity Analysis
+
+### Time Complexity:
+
+1. **Outer Loop**: The outer loop runs `n` times, where `n` is the number of points.
+2. **Inner Loop**: For each iteration of the outer loop, the inner loop runs `n - i - 1` times (where `i` is the current index of
+the outer loop). In the worst case, this is roughly `n` times.
+3. **GCD Calculation**: Inside the inner loop, the GCD is calculated for each pair of points. The GCD calculation using Euclid's
+algorithm has a time complexity of `O(log(min(abs(dx), abs(dy))))`. In the worst case, this can be considered `O(log(max_coordinate))
+`, where `max_coordinate` is the maximum value of the coordinates.
+4. **Slope Calculation and Dictionary Operations**: The rest of the operations (slope calculation, dictionary insertion/update)
+are `O(1)`.
+
+Thus, the total time complexity is:
+- Worst case: `O(n² * log(max_coordinate))`
+- Best case: `O(n²)` (if all points are the same or GCD calculation is negligible)
+
+### Space Complexity:
+
+1. **Slopes Dictionary**: For each outer loop iteration, a new `slopes` dictionary is created. In the worst case, this dictionary
+can hold up to `n` unique slopes (if all lines through the current point are unique).
+2. **Other Variables**: The other variables use constant space (`O(1)`).
+
+Thus, the total space complexity is:
+- Worst case: `O(n)` (due to the `slopes` dictionary in each iteration, but since it's recreated for each outer loop, the maximum
+space at any point is `O(n)`).
+- Best case: `O(1)` (if all points are the same or collinear).
+
+### Summary:
+- **Time Complexity**: `O(n² * log(max_coordinate))` (worst case), `O(n²)` (best case).
+- **Space Complexity**: `O(n)` (worst case), `O(1)` (best case).
+
+This is because the function checks all pairs of points to determine the maximum number of collinear points by comparing slopes.
+The GCD calculation adds a logarithmic factor to the time complexity. The space is dominated by the dictionary storing the slopes
+for each point.
+
+"""
