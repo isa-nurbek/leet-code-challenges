@@ -137,3 +137,61 @@ print(minimum_area_rectangle(points))  # Output: 3
 
 points_2 = [[-4, 4], [4, 4], [4, -2], [-4, -2], [0, -2], [4, 2], [0, 2]]
 print(minimum_area_rectangle(points_2))  # Output: 16
+
+# =========================================================================================================================== #
+
+# Big O Analysis:
+
+"""
+## Time and Space Complexity Analysis
+
+### Time Complexity:
+
+1. **Initialization (`initialize_columns` function):**
+   - Iterates through all `n` points once: O(n)
+   - Each insertion into the `columns` dictionary is O(1) on average.
+   - Total: O(n)
+
+2. **Sorting the x-coordinates (`sorted_columns`):**
+   - Let `k` be the number of unique x-coordinates. Sorting them takes O(k log k).
+
+3. **Main loop:**
+   - Outer loop runs for each unique x-coordinate: O(k) iterations.
+   - For each x, we sort its y-values: If there are `m_i` points in column x, this takes O(m_i log m_i). 
+     - In the worst case, all points could be in the same column, making this O(n log n) for that column.
+   - The nested double loop over y-values in the same column:
+     - For a column with `m_i` y-values, the double loop runs O(m_i²) times (since for each element,
+     we compare with all previous elements).
+     - In the worst case, this could be O(n²) if all points are in the same column.
+   - The operations inside the innermost loop (dictionary lookup and insertion) are O(1) on average.
+
+**Worst-case time complexity:**
+- The dominant terms are the O(n²) from the nested y-loops (if all points are in the same column) and the O(n log n) from
+sorting the y-values.
+- Thus, the worst-case time complexity is O(n²).
+
+**Best-case time complexity:**
+- If the points are spread out such that each column has at most 1 point, the nested loops do almost no work, and the complexity
+is dominated by sorting the x-coordinates and y-values: O(n log n).
+
+
+### Space Complexity:
+
+1. **`columns` dictionary:**
+   - Stores all `n` points: O(n) space.
+2. **`edges_parallel_to_y_axis` dictionary:**
+   - In the worst case, this stores all possible (y1, y2) pairs from a single column. If one column has all `n` points,
+   the number of unique (y1, y2) pairs is O(n²).
+   - Thus, the worst-case space complexity is O(n²).
+
+**Worst-case space complexity:** O(n²).
+
+### Summary:
+- **Time Complexity:** O(n²) in the worst case, O(n log n) in the best case.
+- **Space Complexity:** O(n²) in the worst case (due to the `edges_parallel_to_y_axis` dictionary), O(n) otherwise.
+
+### Notes:
+- The worst case occurs when many points share the same x-coordinate, leading to many (y1, y2) pairs being stored.
+- In practice, if the points are well-distributed, the complexity will be closer to O(n log n) time and O(n) space.
+
+"""
