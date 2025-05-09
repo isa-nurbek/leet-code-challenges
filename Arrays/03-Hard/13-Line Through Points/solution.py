@@ -44,65 +44,112 @@ O(n²) time | O(n) space - where `n` is the number of points.
 
 # O(n²) time | O(n) space
 def line_through_points(points):
-    max_number_of_points_on_line = 1
+    """
+    Finds the maximum number of points that lie on the same straight line.
+    
+    Args:
+        points: List of (x, y) coordinate points
+        
+    Returns:
+        Maximum number of collinear points
+    """
+    max_number_of_points_on_line = 1  # At least one point will always be on any line
+    
+    # For each point, check all possible lines through it and other points
     for idx1, p1 in enumerate(points):
-        slopes = {}
-
+        slopes = {}  # Dictionary to count points with same slope from p1
+        
+        # Compare with all points after current point to avoid duplicate checks
         for idx2 in range(idx1 + 1, len(points)):
             p2 = points[idx2]
+            # Get the slope between p1 and p2 as a reduced fraction [rise, run]
             rise, run = get_slope_of_line_between_points(p1, p2)
+            # Create a unique string key for the slope to use in dictionary
             slope_key = create_hashable_key_for_rational(rise, run)
-
+            
+            # Initialize count if slope not seen before
             if slope_key not in slopes:
-                slopes[slope_key] = 1
-
-            slopes[slope_key] += 1
-
+                slopes[slope_key] = 1  # Start with 1 to count p1
+                
+            slopes[slope_key] += 1  # Add p2 to this slope count
+            
+        # Update global maximum with the maximum count for lines through p1
         max_number_of_points_on_line = max(
             max_number_of_points_on_line, max(slopes.values(), default=0)
-        )
-
+    
     return max_number_of_points_on_line
 
 
 def get_slope_of_line_between_points(p1, p2):
+    """
+    Calculates the slope between two points as a reduced fraction [rise, run].
+    Handles vertical lines and duplicate points.
+    
+    Args:
+        p1: First point (x1, y1)
+        p2: Second point (x2, y2)
+        
+    Returns:
+        Slope as [numerator, denominator] in simplest form
+    """
     p1x, p1y = p1
     p2x, p2y = p2
-    slope = [1, 0]
-
-    if p1x != p2x:
+    slope = [1, 0]  # Default for vertical line (undefined slope)
+    
+    if p1x != p2x:  # If not vertical line
         x_diff = p1x - p2x
         y_diff = p1y - p2y
-
+        
+        # Reduce fraction to simplest form using GCD
         gcd = get_greatest_common_divisor(abs(x_diff), abs(y_diff))
-
+        
         x_diff = x_diff // gcd
         y_diff = y_diff // gcd
-
+        
+        # Ensure denominator is positive for consistent representation
         if x_diff < 0:
             x_diff *= -1
             y_diff *= -1
-
-        slope = [y_diff, x_diff]
-
+            
+        slope = [y_diff, x_diff]  # slope = rise/run = y_diff/x_diff
+    
     return slope
 
 
 def create_hashable_key_for_rational(numerator, denominator):
+    """
+    Creates a unique string representation of a fraction for use as dictionary key.
+    
+    Args:
+        numerator: Numerator of the slope fraction
+        denominator: Denominator of the slope fraction
+        
+    Returns:
+        String in format "numerator:denominator"
+    """
     return str(numerator) + ":" + str(denominator)
 
 
 def get_greatest_common_divisor(num1, num2):
+    """
+    Calculates the greatest common divisor (GCD) of two numbers using Euclid's algorithm.
+    
+    Args:
+        num1: First number
+        num2: Second number
+        
+    Returns:
+        GCD of num1 and num2
+    """
     a = num1
     b = num2
-
+    
     while True:
         if a == 0:
             return b
-
         if b == 0:
             return a
-
+        # Replace larger number with remainder of division
         a, b = b, a % b
 
 
