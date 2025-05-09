@@ -26,8 +26,7 @@ points =
 ```plaintext
 3
 
-// The rectangle with corners [1, 5], [2, 5], [1, 2], and [2, 2]
-// has the minimum area: 3.
+// The rectangle with corners [1, 5], [2, 5], [1, 2], and [2, 2] has the minimum area: 3
 ```
 
 ## Hints
