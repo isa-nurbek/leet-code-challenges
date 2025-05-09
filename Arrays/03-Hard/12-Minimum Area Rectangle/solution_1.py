@@ -195,3 +195,207 @@ is dominated by sorting the x-coordinates and y-values: O(n log n).
 - In practice, if the points are well-distributed, the complexity will be closer to O(n log n) time and O(n) space.
 
 """
+
+# =========================================================================================================================== #
+
+# Detailed Code Explanation:
+
+"""
+This Python code finds the **minimum area of an axis-aligned rectangle** that can be formed from a given list of points on a 2D
+plane. The rectangle's sides must be parallel to the x-axis and y-axis.
+
+Let's walk through the code step by step.
+
+---
+
+## 🧠 **High-Level Idea**
+
+A rectangle can be formed by **two vertical lines (same pair of y-values)** at **two different x-values**. So the code:
+
+1. **Groups points by x-coordinate** (columns).
+2. For each x-coordinate, it:
+
+   * Looks at all **pairs of y-values**.
+   * Forms a potential **vertical edge**.
+3. If the **same y-pair** has been seen before at another x:
+
+   * A rectangle is formed between those x-values and y-values.
+   * Compute the area.
+4. Keep track of the **minimum area found**.
+
+---
+
+## 🔍 Detailed Breakdown
+
+### ✅ `initialize_columns(points)`
+
+Groups all the points by their `x` values:
+
+```
+{
+    x1: [y1, y2, ...],
+    x2: [y3, y4, ...],
+    ...
+}
+```
+
+#### Example:
+
+Input:
+
+```
+[[1, 5], [1, 2], [2, 2], [2, 4], [2, 5]]
+```
+
+Output:
+
+```
+{
+    1: [5, 2],
+    2: [2, 4, 5]
+}
+```
+
+This prepares us to iterate over all x-values and the y-values associated with each.
+
+---
+
+### ✅ `minimum_area_rectangle(points)`
+
+1. **Initialize:**
+
+   * `columns`: from the helper.
+   * `min_area_found`: starts as infinity.
+   * `edges_parallel_to_y_axis`: a dictionary to store previously seen (y1, y2) edge and the x-value where it occurred.
+
+2. **Sort x-values**: We process columns in increasing x order to ensure width is positive.
+
+3. **Iterate through each column (x):**
+
+   * Get `y_values_in_current_column`, sort them to process (y1, y2) pairs consistently.
+   * For each **pair of y-values (y1, y2)**:
+
+     * Create a key: `"y1:y2"` (e.g., "2:5")
+     * If that y-pair has been seen before:
+
+       * Compute area between current `x` and stored previous x:
+         `area = (x - x_prev) * (y2 - y1)`
+       * Update minimum area if it's smaller.
+     * Store/update the current x for this y-pair.
+
+---
+
+### 🔁 Example: Walkthrough
+
+Input:
+
+```
+points = [[1, 5], [5, 1], [4, 2], [2, 4], [2, 2], [1, 2], [4, 5], [2, 5], [-1, -2]]
+```
+
+Let’s focus on key pairs:
+
+* At `x = 1`: y-values are `[2, 5]`, pair `"2:5"` is seen at x = 1.
+* At `x = 2`: y-values are `[2, 4, 5]`. Pairs:
+
+  * `"2:4"`: new
+  * `"2:5"`: seen at x=1 → rectangle formed with width = 1, height = 3 → area = 3.
+
+So far, `min_area_found = 3`. Other pairs are also checked to see if a smaller rectangle exists.
+
+---
+
+### 🔚 Final Step
+
+If we’ve seen any rectangle (`min_area_found` updated), return it. Otherwise, return `0`.
+
+---
+
+## ✅ Output
+
+### Test Case 1:
+
+```
+points = [[1, 5], [5, 1], [4, 2], [2, 4], [2, 2], [1, 2], [4, 5], [2, 5], [-1, -2]]
+# Output: 3
+```
+
+Minimal rectangle formed between (1,2)-(1,5) and (2,2)-(2,5)
+
+### Test Case 2:
+
+```
+points_2 = [[-4, 4], [4, 4], [4, -2], [-4, -2], [0, -2], [4, 2], [0, 2]]
+# Output: 16
+```
+
+Rectangle from (-4, -2)-(4, -2)-(4, 4)-(-4, 4), area = 8 \* 2 = 16.
+
+---
+
+Let's visualize how the algorithm identifies a **minimum area rectangle** using ASCII art.
+
+We’ll use **Test Case 1**:
+
+```
+points = [[1, 5], [5, 1], [4, 2], [2, 4], [2, 2], [1, 2], [4, 5], [2, 5], [-1, -2]]
+# Output: 3
+```
+
+We'll focus only on the key rectangle:
+
+* Corners: `(1,2), (1,5), (2,2), (2,5)`
+
+---
+
+### 🗺️ Coordinate Plane (y: 6 to -1)
+
+We'll mark:
+
+* Points with `*`
+* Rectangle edges with `|`, `-`, `+`
+* X/Y axis reference
+
+```
+    y ↑
+      6 |                    
+      5 |    *         *   *
+      4 |        *           
+      3 |                    
+      2 |    *         *   *
+      1 |              *     
+      0 |                    
+     -1 |                    
+     -2 |*                   
+        +------------------------→ x
+         -1   0   1   2   3   4   5
+```
+
+---
+
+### 🧱 Highlighting the Rectangle (1,2) — (2,5)
+
+We draw lines connecting them:
+
+```
+    y ↑
+      6 |                    
+      5 |    *       +---+   *
+      4 |        *   |   |       
+      3 |            |   |    
+      2 |    *       +---+   *
+      1 |              *     
+      0 |                    
+     -1 |                    
+     -2 |*                   
+        +------------------------→ x
+         -1   0   1   2   3   4   5
+```
+
+Legend:
+
+* `*` = original points
+* `+---+`, `|   |` = the rectangle
+* Rectangle area = width `1` × height `3` = `3`
+
+"""
