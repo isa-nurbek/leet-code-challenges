@@ -131,7 +131,7 @@ def print_linked_list(linked_list):
     print("None")
 
 
-# Your input data
+# Input data
 sorted_linked_list_dict = {
     "head": "1",
     "nodes": [
