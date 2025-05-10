@@ -83,23 +83,32 @@ def build_linked_list(data):
 # Function to remove kth node from end
 # O(n) time | O(1) space
 def remove_kth_node_from_end(head, k):
+    # Initialize two pointers, both starting at the head of the linked list
     counter = 1
-    first = head
-    second = head
+    first = head  # This will eventually point to the node BEFORE the one to remove
+    second = head  # This will be used to create the proper distance between pointers
 
+    # Move the second pointer k nodes ahead of the first pointer
     while counter <= k:
         second = second.next
         counter += 1
 
+    # If second has reached the end (None), this means we need to remove the head
     if second is None:
+        # Copy the value from the next node to effectively remove the head
         head.value = head.next.value
+        # Skip over the next node (which now has the head's original value)
         head.next = head.next.next
-        return
+        return  # Early return since we've handled the special case
 
+    # Move both pointers until second reaches the last node
+    # This maintains the k node gap between them
     while second.next is not None:
         second = second.next
         first = first.next
 
+    # Now first points to the node before the one to remove
+    # Skip over the kth node from end by pointing first.next to first.next.next
     first.next = first.next.next
 
 
