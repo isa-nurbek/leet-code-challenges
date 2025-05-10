@@ -13,9 +13,7 @@ linked_list = 1 -> 2 -> 3 -> 4 -> 5 -> 6 -> 7 -> 8 -> 9 -> None
 ## Sample Output
 
 ```plaintext
-3 -> 5 -> None
-
-// The middle could be 7 or 3, we return the second middle node
+5 -> 6 -> 7 -> 8 -> 9 -> None
 ```
 
 ## Hints
