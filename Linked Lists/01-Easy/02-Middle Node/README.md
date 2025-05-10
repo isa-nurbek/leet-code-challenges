@@ -7,7 +7,7 @@ Each `LinkedList` node has an integer `value` as well as a `next` node pointing 
 ## Sample Input
 
 ```plaintext
-linked_list = [2] → [7] → [3] → [5] → None
+linked_list = 1 -> 2 -> 3 -> 4 -> 5 -> 6 -> 7 -> 8 -> 9 -> None
 ```
 
 ## Sample Output
