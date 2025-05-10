@@ -384,3 +384,305 @@ This makes the doubly linked list efficient for insertions/deletions at known po
 efficient for operations requiring traversal.
 
 """
+
+# =========================================================================================================================== #
+
+# Detailed Code Explanation:
+
+"""
+This Python code implements and tests a **Doubly Linked List** (`DoublyLinkedList`) with a set of operations. Here's a detailed
+breakdown of **each component**, **how the logic works**, and **how it produces the final output**.
+
+---
+
+## 🔹 1. `Node` Class
+
+```
+class Node:
+    def __init__(self, value):
+        self.value = value
+        self.prev = None
+        self.next = None
+```
+
+Each `Node` contains:
+
+* `value`: the data.
+* `prev`: pointer to the previous node.
+* `next`: pointer to the next node.
+
+---
+
+## 🔹 2. `DoublyLinkedList` Class
+
+This class tracks:
+
+* `head`: the first node.
+* `tail`: the last node.
+
+### Key Methods:
+
+#### ✅ `setHead(node)`
+
+* Sets `node` as the new head.
+* If the list is empty, sets both `head` and `tail`.
+* Otherwise, inserts `node` before the current head.
+
+#### ✅ `setTail(node)`
+
+* If list is empty → sets `head` (and thus `tail`).
+* Else inserts `node` after the current tail.
+
+#### ✅ `insertBefore(node, nodeToInsert)`
+
+* First removes `nodeToInsert` if it’s already in the list.
+* Re-links `nodeToInsert` to be right before `node`.
+
+#### ✅ `insertAfter(node, nodeToInsert)`
+
+* Removes `nodeToInsert` if already in the list.
+* Re-links `nodeToInsert` right after `node`.
+
+#### ✅ `insertAtPosition(position, nodeToInsert)`
+
+* Position 1 → use `setHead`.
+* Otherwise, traverses to position and inserts before that node.
+* If position is beyond the list → uses `setTail`.
+
+#### ✅ `removeNodesWithValue(value)`
+
+* Loops through the list.
+* Removes all nodes that match `value`.
+
+#### ✅ `remove(node)`
+
+* Updates `head` or `tail` if necessary.
+* Calls `_removeNodeBindings` to detach node.
+
+#### ✅ `_removeNodeBindings(node)`
+
+* Safely detaches a node by reassigning neighboring nodes’ pointers.
+
+#### ✅ `containsNodeWithValue(value)`
+
+* Returns `True` if any node in the list contains `value`.
+
+---
+
+## 🔹 3. Helper Functions
+
+### `create_node(node_dict, nodes_map)`
+
+* Given a dictionary (with id, value), it creates or reuses a `Node` instance and stores it in `nodes_map`.
+
+### `link_nodes(nodes_list, nodes_map)`
+
+* Not used in this specific test, but designed to connect nodes based on `next`/`prev` in a serialized format.
+
+---
+
+## 🔹 4. Main Function: `test_doubly_linked_list()`
+
+This runs a full test of the `DoublyLinkedList`.
+
+### ➤ Step-by-step Breakdown:
+
+#### 🟠 Node Creation
+
+```
+nodes = [
+    {"id": "1", ..., "value": 1}, ..., {"id": "6", ..., "value": 6}
+]
+```
+
+Each dictionary becomes a `Node`. Stored in `nodes_map` by `id`.
+
+#### 🟠 Method Calls
+
+This sequence is applied to the DLL:
+
+```
+{"arguments": ["5"], "method": "setHead"},   # Head: 5
+{"arguments": ["4"], "method": "setHead"},   # Head: 4 -> 5
+{"arguments": ["3"], "method": "setHead"},   # 3 -> 4 -> 5
+{"arguments": ["2"], "method": "setHead"},   # 2 -> 3 -> 4 -> 5
+{"arguments": ["1"], "method": "setHead"},   # 1 -> 2 -> 3 -> 4 -> 5
+{"arguments": ["4"], "method": "setHead"},   # 4 -> 1 -> 2 -> 3 -> 5
+{"arguments": ["6"], "method": "setTail"},   # 4 -> 1 -> 2 -> 3 -> 5 -> 6
+{"arguments": ["6", "3"], "method": "insertBefore"},  # Move node "3" before "6"
+{"arguments": ["6", "3-2"], "method": "insertAfter"}, # Insert node "3-2" after "6"
+{"arguments": [1, "3-3"], "method": "insertAtPosition"}, # Insert "3-3" at position 1
+{"arguments": [3], "method": "removeNodesWithValue"},  # Remove all nodes with value == 3
+{"arguments": ["2"], "method": "remove"},              # Remove node "2"
+{"arguments": [5], "method": "containsNodeWithValue"}  # Check if 5 is in the list
+```
+
+### ➤ Key Changes After Execution:
+
+1. Nodes with value `3` (`"3"`, `"3-2"`, and `"3-3"`) are removed.
+2. Node `"2"` is removed.
+3. Remaining list becomes:
+
+```
+Head to tail: 4 -> 1 -> 5 -> 6 -> None
+Tail to head: 6 -> 5 -> 1 -> 4 -> None
+```
+
+4. Result of `containsNodeWithValue(5)` → `True`.
+
+---
+
+## 🔹 5. Final Output:
+
+```
+containsNodeWithValue(5): True
+Final linked list from head to tail:
+4 -> 1 -> 5 -> 6 -> None
+Final linked list from tail to head:
+6 -> 5 -> 1 -> 4 -> None
+```
+
+---
+
+## ✅ Summary
+
+### Data Structure Features:
+
+* Fully functional doubly linked list implementation.
+* Supports insertion/removal at head, tail, specific position, or around a node.
+* Maintains head and tail pointers.
+* Efficient node movement without reallocation.
+
+### Strengths:
+
+* Prevents duplicates by removing before re-insertion.
+* Handles edge cases (empty list, head/tail adjustments).
+* Clean separation of concerns with helper methods.
+
+---
+
+Here's a **step-by-step ASCII visualization** of how the doubly linked list changes after each major operation from your test case.
+
+### 🔹 Initial State: Empty
+
+```
+HEAD: None
+TAIL: None
+```
+
+---
+
+### 🔸 `setHead("5")`
+
+```
+HEAD/Tail → [5]
+```
+
+---
+
+### 🔸 `setHead("4")`
+
+```
+HEAD → [4] ⇄ [5] ← TAIL
+```
+
+---
+
+### 🔸 `setHead("3")`
+
+```
+HEAD → [3] ⇄ [4] ⇄ [5] ← TAIL
+```
+
+---
+
+### 🔸 `setHead("2")`
+
+```
+HEAD → [2] ⇄ [3] ⇄ [4] ⇄ [5] ← TAIL
+```
+
+---
+
+### 🔸 `setHead("1")`
+
+```
+HEAD → [1] ⇄ [2] ⇄ [3] ⇄ [4] ⇄ [5] ← TAIL
+```
+
+---
+
+### 🔸 `setHead("4")`
+
+Moves `4` to front:
+
+```
+HEAD → [4] ⇄ [1] ⇄ [2] ⇄ [3] ⇄ [5] ← TAIL
+```
+
+---
+
+### 🔸 `setTail("6")`
+
+```
+HEAD → [4] ⇄ [1] ⇄ [2] ⇄ [3] ⇄ [5] ⇄ [6] ← TAIL
+```
+
+---
+
+### 🔸 `insertBefore("6", "3")`
+
+Moves existing node `3` before `6`:
+
+```
+HEAD → [4] ⇄ [1] ⇄ [2] ⇄ [5] ⇄ [3] ⇄ [6] ← TAIL
+```
+
+---
+
+### 🔸 `insertAfter("6", "3-2")`
+
+```
+HEAD → [4] ⇄ [1] ⇄ [2] ⇄ [5] ⇄ [3] ⇄ [6] ⇄ [3-2] ← TAIL
+```
+
+---
+
+### 🔸 `insertAtPosition(1, "3-3")`
+
+```
+HEAD → [3-3] ⇄ [4] ⇄ [1] ⇄ [2] ⇄ [5] ⇄ [3] ⇄ [6] ⇄ [3-2] ← TAIL
+```
+
+---
+
+### 🔸 `removeNodesWithValue(3)`
+
+Removes all nodes where `value == 3`:
+("3", "3-2", "3-3")
+
+```
+HEAD → [4] ⇄ [1] ⇄ [2] ⇄ [5] ⇄ [6] ← TAIL
+```
+
+---
+
+### 🔸 `remove("2")`
+
+```
+HEAD → [4] ⇄ [1] ⇄ [5] ⇄ [6] ← TAIL
+```
+
+---
+
+### 🔸 `containsNodeWithValue(5)` → ✅ `True`
+
+---
+
+### 🔹 ✅ Final State
+
+```
+HEAD → [4] ⇄ [1] ⇄ [5] ⇄ [6] ← TAIL
+```
+
+"""
