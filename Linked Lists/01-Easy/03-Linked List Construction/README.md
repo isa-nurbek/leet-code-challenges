@@ -16,8 +16,10 @@ Each `Node` has an integer `value` as well as a `prev` node and a `next` node, b
 ```plaintext
 // Assume the following linked list has already been created:
 1 <-> 2 <-> 3 <-> 4 <-> 5
+
 // Assume that we also have the following stand-alone nodes:
 3, 3, 6
+
 setHead(4): 4 <-> 1 <-> 2 <-> 3 <-> 5 // set the existing node with value 4 as the head
 setTail(6): 4 <-> 1 <-> 2 <-> 3 <-> 5 <-> 6 // set the stand-alone node with value 6 as the tail
 insertBefore(6, 3): 4 <-> 1 <-> 2 <-> 5 <-> 3 <-> 6 // move the existing node with value 3 before the existing node with value 6
@@ -54,5 +56,7 @@ Similar to `Hint #2`, realize that the `remove()` method can be used to implemen
 ## Optimal Time & Space Complexity
 
 `setHead`, `setTail`, `insertBefore`, `insertAfter`, and `remove`: `O(1)` time | `O(1)` space.
+
 `insertAtPosition`: `O(p)` time | `O(1)` space - where `p` is input position.
+
 `removeNodesWithValue`, `containsNodeWithValue`: `O(n)` time | `O(1)` space - where `n` is the number of nodes in the linked list.
