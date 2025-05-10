@@ -194,3 +194,335 @@ any additional data structures that grow with the input size.
 - **Space Complexity**: O(1) (constant space).
 
 """
+
+# =========================================================================================================================== #
+
+# Detailed Code Explanation:
+
+"""
+Here’s a **detailed explanation** of how the entire code works, broken down into sections:
+
+---
+
+## ✅ 1. `LinkedList` Class
+
+```
+class LinkedList:
+    def __init__(self, value):
+        self.value = value  # Value stored in the node
+        self.next = None    # Pointer to the next node (initially None)
+```
+
+This class defines a node in a singly linked list. Each node holds:
+
+* `value`: The data it stores.
+* `next`: A reference (pointer) to the next node in the list.
+
+---
+
+## ✅ 2. `build_linked_list(data)` Function
+
+This function **constructs a linked list** from a dictionary format. The input dictionary looks like:
+
+```
+{
+    "head": "0",          # ID of the head node
+    "nodes": [
+        {"id": "0", "next": "1", "value": 0},
+        {"id": "1", "next": "2", "value": 1},
+        ...
+    ]
+}
+```
+
+### Step-by-step:
+
+```
+nodes = {}
+for node_data in data["nodes"]:
+    node = LinkedList(node_data["value"])
+    nodes[node_data["id"]] = node
+```
+
+* Creates all nodes and stores them in a dictionary using their `"id"` as keys.
+* This allows easy access for linking later.
+
+```
+for node_data in data["nodes"]:
+    if node_data["next"] is not None:
+        nodes[node_data["id"]].next = nodes[node_data["next"]]
+```
+
+* Sets the `.next` pointer of each node to point to the node with the `"next"` ID.
+
+```
+return nodes[data["head"]]
+```
+
+* Returns the **head node** of the constructed linked list.
+
+---
+
+## ✅ 3. `remove_kth_node_from_end(head, k)` Function
+
+Removes the **k-th node from the end** of a singly linked list **in one pass (O(n) time)** and **O(1) space**.
+
+### Key Idea:
+
+* Use two pointers: `first` and `second`
+* Move `second` **k steps** ahead of `first`
+* Then move both together until `second` hits the end
+* Now `first` is just before the node to delete
+
+---
+
+### Detailed Steps:
+
+#### 🔹 Step 1: Initialize pointers
+
+```
+first = head
+second = head
+```
+
+#### 🔹 Step 2: Move `second` k steps ahead
+
+```
+while counter <= k:
+    second = second.next
+    counter += 1
+```
+
+* After this loop, `second` is `k` nodes ahead of `first`.
+
+#### 🔹 Step 3: Edge Case – `k` equals length of list
+
+```
+if second is None:
+    head.value = head.next.value
+    head.next = head.next.next
+    return
+```
+
+* If `second` is `None`, it means we must delete the **head** node.
+* To do this in place (since we can't change `head` pointer), we **copy the next node’s value** and **skip the next node**.
+
+#### 🔹 Step 4: Move both pointers until `second.next` is None
+
+```
+while second.next is not None:
+    second = second.next
+    first = first.next
+```
+
+* Now, `first.next` is the node to delete.
+
+#### 🔹 Step 5: Skip the target node
+
+```
+first.next = first.next.next
+```
+
+* This deletes the node by skipping it in the link.
+
+---
+
+## ✅ 4. `print_linked_list(linked_list)` Function
+
+Simple utility to print the values of the list:
+
+```
+0 -> 1 -> 2 -> ... -> None
+```
+
+It loops through the list using `.next` and prints the `value`.
+
+---
+
+## ✅ 5. Test Data and Output
+
+### Initial Linked List:
+
+```
+0 -> 1 -> 2 -> 3 -> 4 -> 5 -> 6 -> 7 -> 8 -> 9 -> None
+```
+
+### Operation:
+
+```
+remove_kth_node_from_end(linked_list, 4)
+```
+
+This removes the **4th node from the end**, which is `6` (position index 6, value 6).
+
+### Final Linked List:
+
+```text
+0 -> 1 -> 2 -> 3 -> 4 -> 5 -> 7 -> 8 -> 9 -> None
+```
+
+✅ Node with value `6` is gone!
+
+---
+
+Here's a **step-by-step ASCII visualization** of how the two-pointer technique removes the **4th node from the end** in the given
+linked list:
+
+---
+
+### 🔗 Initial Linked List
+
+```
+HEAD
+ ↓
+[0] → [1] → [2] → [3] → [4] → [5] → [6] → [7] → [8] → [9] → None
+```
+
+---
+
+### 🎯 Goal
+
+Remove the **4th node from the end**, which is the node with value **6**.
+
+---
+
+### 🧭 Step 1: Move `second` k=4 nodes ahead
+
+```
+first
+ ↓
+[0] → [1] → [2] → [3] → [4] → [5] → [6] → [7] → [8] → [9] → None
+         ↑
+       second (4 steps ahead of first)
+```
+
+* `second` is 4 steps ahead of `first`.
+
+---
+
+### 🚶 Step 2: Move both `first` and `second` forward together until `second.next == None`
+
+Repeat until `second.next == None`:
+
+1st iteration:
+
+```
+       first
+        ↓
+[0] → [1] → [2] → [3] → [4] → [5] → [6] → [7] → [8] → [9] → None
+                                ↑
+                              second
+```
+
+2nd iteration:
+
+```
+             first
+              ↓
+[0] → [1] → [2] → [3] → [4] → [5] → [6] → [7] → [8] → [9] → None
+                                        ↑
+                                      second
+```
+
+3rd iteration:
+
+```
+                   first
+                    ↓
+[0] → [1] → [2] → [3] → [4] → [5] → [6] → [7] → [8] → [9] → None
+                                                ↑
+                                              second
+```
+
+Now `second.next == None`, so stop.
+
+---
+
+### ✂️ Step 3: Delete the node after `first`
+
+`first` is at node with value **5**, so `first.next` (which is **6**) is deleted:
+
+```
+first.next = first.next.next
+```
+
+---
+
+### ✅ Final Linked List
+
+```
+[0] → [1] → [2] → [3] → [4] → [5] → [7] → [8] → [9] → None
+```
+
+Node `[6]` has been removed.
+
+---
+
+Let's visualize the **edge case** where the **head node is removed** — specifically, when `k` equals the length of the list.
+
+---
+
+### 🧪 Example
+
+Let’s say the original linked list is:
+
+```
+[0] → [1] → [2] → [3] → [4] → None
+```
+
+If `k = 5` (length of list), we are being asked to **remove the 5th node from the end**, which is the **head node [0]**.
+
+---
+
+### 🧭 Step 1: Move `second` k=5 steps ahead
+
+```
+first
+ ↓
+[0] → [1] → [2] → [3] → [4] → None
+                         ↑
+                      second (after 5 steps)
+```
+
+After moving `second` 5 steps forward, it becomes `None`.
+
+---
+
+### ⚠️ Special Case Triggered
+
+```
+if second is None:
+    head.value = head.next.value
+    head.next = head.next.next
+```
+
+Because `second` is `None`, we cannot move both pointers anymore.
+
+So, we do this:
+
+### ✂️ Step 2: Copy value from head.next into head
+
+```
+Copy value from [1] → into [0] → becomes:
+
+[1] → [1] → [2] → [3] → [4] → None
+```
+
+Now remove original [1] by skipping it:
+
+```
+head.next = head.next.next
+```
+
+---
+
+### ✅ Final Linked List
+
+```
+[1] → [2] → [3] → [4] → None
+```
+
+So effectively, **the head node was replaced** by its successor — a **common trick** when you must delete a node but can't
+update external references to it (e.g., in-place deletion).
+
+"""
