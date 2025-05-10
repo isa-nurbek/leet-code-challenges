@@ -124,3 +124,37 @@ result = middle_node(linked_list)
 
 print_linked_list(result)
 # Output: 5 -> 6 -> 7 -> 8 -> 9 -> None
+
+# =========================================================================================================================== #
+
+# Big O Analysis:
+
+"""
+## Time and Space Complexity Analysis:
+
+Let's analyze the time and space complexity of the `middle_node` function.
+
+### Time Complexity:
+
+The function uses the "tortoise and hare" approach to find the middle node of a linked list.
+Here's how it works:
+
+1. `slow` pointer moves one node at a time.
+2. `fast` pointer moves two nodes at a time.
+3. When `fast` reaches the end of the list (or goes beyond it), `slow` will be at the middle node.
+
+- In the worst case, `fast` will traverse the entire list (or nearly the entire list), which takes `O(n)` time, where `n`
+is the number of nodes in the linked list.
+- Therefore, the **time complexity is `O(n)`**.
+
+### Space Complexity:
+
+The function only uses two pointers (`slow` and `fast`) and does not use any additional data structures or recursive calls
+that grow with the input size.
+- Thus, the **space complexity is `O(1)` (constant space)**.
+
+### Summary:
+- **Time Complexity:** `O(n)`
+- **Space Complexity:** `O(1)`
+
+"""
