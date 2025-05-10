@@ -132,3 +132,44 @@ result = middle_node(linked_list)
 
 print_linked_list(result)
 # Output: 5 -> 6 -> 7 -> 8 -> 9 -> None
+
+# =========================================================================================================================== #
+
+# Big O Analysis:
+
+"""
+## Time and Space Complexity Analysis:
+
+Let's analyze the time and space complexity of the `middle_node` function.
+
+### Time Complexity:
+
+1. **First Loop (Counting Nodes):**
+   - The first `while` loop iterates through each node in the linked list exactly once to count the total number of nodes (`count`). 
+   - If the linked list has `n` nodes, this loop runs `n` times.
+   - Time complexity for this part: **O(n)**.
+
+2. **Second Loop (Finding Middle Node):**
+   - The `for` loop runs from the head of the linked list to the middle node, which takes `count // 2` steps.
+   - Since `count` is `n`, this loop runs `n // 2` times, which is **O(n)** in asymptotic terms.
+   - Time complexity for this part: **O(n)**.
+
+- **Total Time Complexity:** O(n) + O(n) = **O(n)**.
+
+### Space Complexity:
+
+- The function uses a constant amount of additional space (variables like `count`, `current_node`, `middle_node`, and
+the loop counter `_`). 
+- No additional data structures or recursive calls are used that grow with the input size.
+- **Space Complexity:** **O(1)** (constant space).
+
+### Summary:
+- **Time Complexity:** O(n)
+- **Space Complexity:** O(1)
+
+### Alternative Approach (Optimized):
+You can also solve this problem in **O(n) time** and **O(1) space** using the **"fast and slow pointer"** technique (tortoise
+and hare), where the fast pointer moves two steps at a time and the slow pointer moves one step at a time. When the fast pointer
+reaches the end, the slow pointer will be at the middle. This approach only requires **one traversal** of the linked list.
+
+"""
