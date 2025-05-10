@@ -69,18 +69,25 @@ def build_linked_list(data):
 # Function to find the middle node
 # O(n) time | O(1) space
 def middle_node(linked_list):
+    # Initialize a counter to keep track of the number of nodes
     count = 0
+    # Start with the head/first node of the linked list
     current_node = linked_list
 
+    # First pass: traverse the entire linked list to count nodes
     while current_node is not None:
-        count += 1
-        current_node = current_node.next
+        count += 1  # Increment counter for each node
+        current_node = current_node.next  # Move to next node
 
+    # Reset to the head/first node for second traversal
     middle_node = linked_list
 
+    # Second pass: traverse to the middle node
+    # We only need to go halfway (count // 2) through the list
     for _ in range(count // 2):
-        middle_node = middle_node.next
+        middle_node = middle_node.next  # Move forward node by node
 
+    # Return the node at the middle position
     return middle_node
 
 
