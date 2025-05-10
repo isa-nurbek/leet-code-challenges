@@ -155,3 +155,42 @@ remove_kth_node_from_end(linked_list, 4)  # This modifies the linked_list in pla
 # Print the modified linked list
 print_linked_list(linked_list)
 # Output: 0 -> 1 -> 2 -> 3 -> 4 -> 5 -> 7 -> 8 -> 9 -> None
+
+# =========================================================================================================================== #
+
+# Big O Analysis:
+
+"""
+## Time and Space Complexity Analysis:
+
+Let's analyze the time and space complexity of the given `remove_kth_node_from_end` function.
+
+### Time Complexity:
+
+The function uses a two-pointer technique to remove the k-th node from the end of a linked list. 
+
+Here's the breakdown:
+
+1. **Initialization**: O(1) - Just setting up `counter`, `first`, and `second`.
+2. **First while loop**: O(k) - Moves the `second` pointer `k` nodes ahead.
+3. **Check if `second` is None**: O(1) - Checks if `second` has reached the end (this happens when `k` equals the length of the
+list, meaning we need to remove the head).
+4. **Second while loop**: O(n - k) - Moves both `first` and `second` until `second.next` is `None`. This means `first` will be at
+the node just before the one to be removed.
+5. **Removing the node**: O(1) - Adjusts the `next` pointer to skip the node to be removed.
+
+- **Total time complexity**: O(k) + O(n - k) = O(n), where `n` is the number of nodes in the linked list.
+This is because we traverse the list at most twice (once to move `second` and once to move both pointers).
+
+### Space Complexity:
+
+The function uses a constant amount of extra space (only a few pointers like `counter`, `first`, and `second`). It does not use
+any additional data structures that grow with the input size.
+
+- **Total space complexity**: O(1) (constant space).
+
+### Summary:
+- **Time Complexity**: O(n) (linear time).
+- **Space Complexity**: O(1) (constant space).
+
+"""
