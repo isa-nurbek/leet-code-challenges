@@ -69,13 +69,17 @@ def build_linked_list(data):
 # Function to find the middle node
 # O(n) time | O(1) space
 def middle_node(linked_list):
+    # Initialize two pointers, both starting at the head of the linked list
     slow = linked_list
     fast = linked_list
 
+    # Traverse the list with 'fast' moving twice as fast as 'slow'
+    # When 'fast' reaches the end, 'slow' will be at the middle
     while fast is not None and fast.next is not None:
-        slow = slow.next
-        fast = fast.next.next
+        slow = slow.next  # Move slow pointer one step forward
+        fast = fast.next.next  # Move fast pointer two steps forward
 
+    # Return the middle node (slow pointer's position)
     return slow
 
 
