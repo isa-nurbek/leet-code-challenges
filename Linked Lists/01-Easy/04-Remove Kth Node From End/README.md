@@ -8,7 +8,7 @@ Furthermore, the input head of the linked list should remain the head of the lin
 
 > Note that your function doesn't need to return anything.
 
-You can assume that the input Linked List will always have at least two nodes and, more specifically, at least k nodes.
+You can assume that the input Linked List will always have at least two nodes and, more specifically, at least `k` nodes.
 
 Each `LinkedList` node has an integer `value` as well as a `next` node pointing to the next node in the list or to `None` if it's the tail of the list.
 
