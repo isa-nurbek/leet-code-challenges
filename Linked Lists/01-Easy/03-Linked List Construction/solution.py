@@ -299,3 +299,88 @@ Head to tail:
 Tail to head:
 6 -> 5 -> 1 -> 4 -> None
 """
+
+# =========================================================================================================================== #
+
+# Big O Analysis:
+
+"""
+## Time and Space Complexity Analysis:
+
+Here's the time and space complexity analysis for each method in the `DoublyLinkedList` class:
+
+### **Node Class**
+- **Time Complexity**: O(1) for initialization (constant time operations).
+- **Space Complexity**: O(1) (stores `value`, `prev`, and `next`).
+
+### **DoublyLinkedList Class**
+#### **1. `__init__(self)`**
+- **Time Complexity**: O(1) (initializes `head` and `tail`).
+- **Space Complexity**: O(1) (only stores `head` and `tail` pointers).
+
+#### **2. `setHead(self, node)`**
+- **Time Complexity**: O(1) (either sets head directly or calls `insertBefore`, which is O(1)).
+- **Space Complexity**: O(1) (no extra space used).
+
+#### **3. `setTail(self, node)`**
+- **Time Complexity**: O(1) (either calls `setHead` or `insertAfter`, both O(1)).
+- **Space Complexity**: O(1) (no extra space used).
+
+#### **4. `insertBefore(self, node, nodeToInsert)`**
+- **Time Complexity**: O(1) (all operations are constant time, including `remove`).
+- **Space Complexity**: O(1) (only updates pointers).
+
+#### **5. `insertAfter(self, node, nodeToInsert)`**
+- **Time Complexity**: O(1) (similar to `insertBefore`).
+- **Space Complexity**: O(1) (only updates pointers).
+
+#### **6. `insertAtPosition(self, position, nodeToInsert)`**
+- **Time Complexity**:  
+  - **Best Case**: O(1) (if inserting at position 1, calls `setHead`).  
+  - **Worst Case**: O(n) (if inserting at the end or beyond, traverses the entire list).  
+- **Space Complexity**: O(1) (no extra space used).
+
+#### **7. `removeNodesWithValue(self, value)`**
+- **Time Complexity**: O(n) (traverses the entire list once and removes nodes in O(1) time per node).  
+- **Space Complexity**: O(1) (only uses a temporary pointer `current`).
+
+#### **8. `remove(self, node)`**
+- **Time Complexity**: O(1) (updates pointers in constant time).  
+- **Space Complexity**: O(1) (no extra space used).
+
+#### **9. `containsNodeWithValue(self, value)`**
+- **Time Complexity**: O(n) (traverses the list until it finds the value or reaches the end).  
+- **Space Complexity**: O(1) (only uses a temporary pointer `current`).
+
+#### **10. `_removeNodeBindings(self, node)` (Helper Method)**
+- **Time Complexity**: O(1) (updates pointers in constant time).  
+- **Space Complexity**: O(1) (no extra space used).
+
+### **Summary Table**
+
+| Method                     | Time Complexity  | Space Complexity |
+|----------------------------|------------------|------------------|
+| `setHead`                  | O(1)             | O(1)             |
+| `setTail`                  | O(1)             | O(1)             |
+| `insertBefore`             | O(1)             | O(1)             |
+| `insertAfter`              | O(1)             | O(1)             |
+| `insertAtPosition`         | O(n)             | O(1)             |
+| `removeNodesWithValue`     | O(n)             | O(1)             |
+| `remove`                   | O(1)             | O(1)             |
+| `containsNodeWithValue`    | O(n)             | O(1)             |
+| `_removeNodeBindings`      | O(1)             | O(1)             |
+
+### **General Observations**
+
+- **Most operations (except `insertAtPosition`, `removeNodesWithValue`, and `containsNodeWithValue`) are O(1)** because they
+only involve pointer manipulations.
+
+- **Traversal-based operations (`insertAtPosition`, `removeNodesWithValue`, `containsNodeWithValue`) are O(n)** in the worst case
+since they may need to scan the entire list.
+
+- **Space complexity is always O(1)** for all methods since no additional data structures are used (only a few temporary variables).
+
+This makes the doubly linked list efficient for insertions/deletions at known positions (head/tail/adjacent nodes) but less
+efficient for operations requiring traversal.
+
+"""
