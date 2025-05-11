@@ -17,7 +17,8 @@ linkedList_two = 9 -> 4 -> 5
 
 ```plaintext
 1 -> 9 -> 2 -> 2
-// linkedListOne represents 1742
-// linkedListTwo represents 549
+
+// linkedList_one represents: 1742
+// linkedList_two represents: 549
 // 1742 + 549 = 2291
 ```
