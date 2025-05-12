@@ -40,55 +40,78 @@ O(n + m) time | O(1) space - where `n` is the length of the first Linked List an
 
 class LinkedList:
     def __init__(self, value):
-        self.value = value
-        self.next = None
+        self.value = value  # Stores the value of the node
+        self.next = None  # Pointer to the next node (initially None)
 
 
 def build_intersected_linked_lists(list_one_data, list_two_data):
-    """Builds two linked lists that may intersect, ensuring shared nodes are the same object."""
+    """Builds two linked lists that may intersect, ensuring shared nodes are the same object.
+
+    Args:
+        list_one_data: Dictionary containing head ID and node data for first list
+        list_two_data: Dictionary containing head ID and node data for second list
+
+    Returns:
+        Tuple of (head_of_list_one, head_of_list_two)
+    """
     if not list_one_data or not list_two_data:
         return None, None
 
+    # Dictionary to store all nodes by their IDs to ensure shared nodes are same objects
     all_nodes = {}
 
-    # Process list_one_data
+    # Process list_one_data - create nodes if they don't exist
     for node_data in list_one_data["nodes"]:
         if node_data["id"] not in all_nodes:
             all_nodes[node_data["id"]] = LinkedList(node_data["value"])
 
-    # Process list_two_data (reuse nodes if IDs overlap)
+    # Process list_two_data - reuse nodes if IDs overlap with list_one
     for node_data in list_two_data["nodes"]:
         if node_data["id"] not in all_nodes:
             all_nodes[node_data["id"]] = LinkedList(node_data["value"])
 
-    # Connect nodes for list_one
+    # Connect nodes for list_one using the 'next' pointers
     for node_data in list_one_data["nodes"]:
         if node_data["next"] is not None:
             all_nodes[node_data["id"]].next = all_nodes[node_data["next"]]
 
-    # Connect nodes for list_two
+    # Connect nodes for list_two using the 'next' pointers
     for node_data in list_two_data["nodes"]:
         if node_data["next"] is not None:
             all_nodes[node_data["id"]].next = all_nodes[node_data["next"]]
 
+    # Return the head nodes of both lists
     return all_nodes[list_one_data["head"]], all_nodes[list_two_data["head"]]
 
 
+# O(n + m) time | O(1) space
 def merging_linked_lists(linked_list_one, linked_list_two):
+    """Finds the intersection point of two linked lists.
+
+    Args:
+        linked_list_one: Head node of first linked list
+        linked_list_two: Head node of second linked list
+
+    Returns:
+        The first intersecting node if found, None otherwise
+    """
+
     def get_length(head):
+        """Helper function to get length of a linked list."""
         length = 0
         while head:
             length += 1
             head = head.next
         return length
 
+    # Get lengths of both lists
     len_one = get_length(linked_list_one)
     len_two = get_length(linked_list_two)
 
     current_one = linked_list_one
     current_two = linked_list_two
 
-    # Move the longer list's pointer forward
+    # Move the longer list's pointer forward to align starting points
     if len_one > len_two:
         for _ in range(len_one - len_two):
             current_one = current_one.next
@@ -96,17 +119,18 @@ def merging_linked_lists(linked_list_one, linked_list_two):
         for _ in range(len_two - len_one):
             current_two = current_two.next
 
-    # Traverse both lists in parallel
+    # Traverse both lists in parallel until intersection is found
     while current_one and current_two:
-        if current_one == current_two:
+        if current_one == current_two:  # If nodes are the same object
             return current_one
         current_one = current_one.next
         current_two = current_two.next
 
-    return None
+    return None  # No intersection found
 
 
 def print_linked_list(linked_list):
+    """Prints the linked list values in order."""
     current = linked_list
     while current:
         print(current.value, end=" -> ")
@@ -114,43 +138,47 @@ def print_linked_list(linked_list):
     print("None")
 
 
-# Input data
+# Input data for first test case
 linkedList_one_data = {
     "head": "1",
     "nodes": [
-        {"id": "1", "next": "2", "value": 1},
-        {"id": "2", "next": "3", "value": 2},
-        {"id": "3", "next": None, "value": 3},
+        {"id": "1", "next": "2", "value": 1},  # Node 1 -> Node 2
+        {"id": "2", "next": "3", "value": 2},  # Node 2 -> Node 3
+        {"id": "3", "next": None, "value": 3},  # Node 3 -> None
     ],
 }
 
 linkedList_two_data = {
     "head": "4",
     "nodes": [
-        {"id": "4", "next": "5", "value": 4},
-        {"id": "5", "next": "3", "value": 5},
-        {"id": "3", "next": None, "value": 3},
+        {"id": "4", "next": "5", "value": 4},  # Node 4 -> Node 5
+        {"id": "5", "next": "3", "value": 5},  # Node 5 -> Node 3 (shared with list one)
+        {"id": "3", "next": None, "value": 3},  # Node 3 -> None (shared)
     ],
 }
 
-# New test case: 2->3->1->4 and 8->7->1->4 (intersect at 1->4)
+# Input data for second test case
 linkedList_three_data = {
     "head": "2",
     "nodes": [
-        {"id": "2", "next": "3", "value": 2},
-        {"id": "3", "next": "1", "value": 3},
-        {"id": "1", "next": "4", "value": 1},
-        {"id": "4", "next": None, "value": 4},
+        {"id": "2", "next": "3", "value": 2},  # Node 2 -> Node 3
+        {"id": "3", "next": "1", "value": 3},  # Node 3 -> Node 1
+        {"id": "1", "next": "4", "value": 1},  # Node 1 -> Node 4
+        {"id": "4", "next": None, "value": 4},  # Node 4 -> None
     ],
 }
 
 linkedList_four_data = {
     "head": "8",
     "nodes": [
-        {"id": "8", "next": "7", "value": 8},
-        {"id": "7", "next": "1", "value": 7},
-        {"id": "1", "next": "4", "value": 1},
-        {"id": "4", "next": None, "value": 4},
+        {"id": "8", "next": "7", "value": 8},  # Node 8 -> Node 7
+        {
+            "id": "7",
+            "next": "1",
+            "value": 7,
+        },  # Node 7 -> Node 1 (shared with list three)
+        {"id": "1", "next": "4", "value": 1},  # Node 1 -> Node 4 (shared)
+        {"id": "4", "next": None, "value": 4},  # Node 4 -> None (shared)
     ],
 }
 
