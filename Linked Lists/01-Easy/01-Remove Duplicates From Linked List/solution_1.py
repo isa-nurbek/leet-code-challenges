@@ -1,7 +1,7 @@
 # Problem Description:
 
 """
-                                            # Remove Duplicates From Linked List
+                                             Remove Duplicates From Linked List
 
 You're given the head of a Singly Linked List whose nodes are in `sorted or unsorted order` with respect to their values. Write
 a function that returns a modified version of the linked list where `all nodes with duplicate values are removed`, leaving only
