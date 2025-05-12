@@ -168,3 +168,45 @@ print_linked_list(result)  # Output: 1 -> 9 -> 2 -> 2 -> None
 # Test Case 2: Sum linked_list_one with itself (as in our original test)
 result = sum_of_linked_lists(linked_list_one, linked_list_one)
 print_linked_list(result)  # Output: 4 -> 8 -> 4 -> 2 -> None
+
+# =========================================================================================================================== #
+
+# Big O Analysis:
+
+"""
+## Time and Space Complexity Analysis:
+
+Let's analyze the time and space complexity of the given `sum_of_linked_lists` function.
+
+### Time Complexity:
+
+The function iterates through both linked lists (`linkedList_one` and `linkedList_two`) simultaneously, processing one node
+from each list in each iteration. The loop continues until:
+1. Both `node_one` and `node_two` are `None`, and
+2. There is no remaining `carry` to process.
+
+- Let `n` be the length of `linkedList_one`.
+- Let `m` be the length of `linkedList_two`.
+
+The loop runs for a maximum of `max(n, m)` iterations (plus possibly one more iteration if there's a final carry). 
+
+Since each iteration involves constant-time operations (arithmetic operations, creating a new node, pointer updates),
+the overall time complexity is: **O(max(n, m))**
+
+### Space Complexity:
+
+The function constructs a new linked list to represent the sum. The size of the new linked list is at most `max(n, m) + 1`
+(in the case of a final carry).
+
+- The space used for the new linked list is proportional to the number of digits in the sum, which is **O(max(n, m))**.
+
+The auxiliary space used (variables like `carry`, `current_node`, etc.) is constant, so it doesn't affect the overall space complexity.
+
+Thus, the space complexity is:
+- **O(max(n, m))**, due to the new linked list created.
+
+### Summary:
+- **Time Complexity:** O(max(n, m))
+- **Space Complexity:** O(max(n, m)) (for the new linked list)
+
+"""
