@@ -74,15 +74,36 @@ def build_linked_list(data):
 
 # O(n) time | O(1) space
 def reverse_linked_list(head):
+    """Reverse a singly linked list.
+
+    Args:
+        head: The head node of the linked list to be reversed
+
+    Returns:
+        The new head node of the reversed linked list
+    """
+
+    # Initialize two pointers:
+    # previous_node will track the node before current_node in the original list
+    # current_node starts at the head of the original list
     previous_node, current_node = None, head
 
+    # Traverse through the original list
     while current_node is not None:
+        # Store the next node before we overwrite current_node.next
         next_node = current_node.next
+
+        # Reverse the link by pointing current_node's next to the previous node
         current_node.next = previous_node
 
+        # Move both pointers forward in their respective directions:
+        # previous_node moves to current position
+        # current_node moves to the next node we stored earlier
         previous_node = current_node
         current_node = next_node
 
+    # When the loop ends, current_node is None and previous_node is the last node,
+    # which is now the head of the reversed list
     return previous_node
 
 
