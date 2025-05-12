@@ -229,3 +229,210 @@ Let's analyze the time and space complexity of the given `merge_linked_lists` fu
 reduce the space complexity to **O(1)** (just a few pointers) while maintaining the same time complexity.
 
 """
+
+# =========================================================================================================================== #
+
+# Detailed Code Explanation:
+
+"""
+Let's break this code down step by step, starting from the class definition to the final test case. This code constructs **singly
+linked lists**, merges two **sorted** linked lists, and prints them. The merge is done **recursively and in-place** (without
+creating new nodes).
+
+---
+
+## 🔹 1. `LinkedList` Class
+
+```
+class LinkedList:
+    def __init__(self, value):
+        self.value = value
+        self.next = None
+```
+
+This defines a **node** in a singly linked list:
+
+* `value`: holds the data (an integer).
+* `next`: points to the next node in the list (`None` by default).
+
+---
+
+## 🔹 2. `build_linked_list(data)`
+
+This function builds a linked list from a **dictionary representation**, which is useful for testing.
+
+### Example input:
+
+```
+{
+  "head": "2",
+  "nodes": [
+      {"id": "2", "next": "6", "value": 2},
+      {"id": "6", "next": "7", "value": 6},
+      {"id": "7", "next": "8", "value": 7},
+      {"id": "8", "next": None, "value": 8},
+  ]
+}
+```
+
+### Steps:
+
+1. **Create all nodes** using their `id` and `value`. Store them in a dictionary:
+
+   ```
+   nodes = {
+       "2": LinkedList(2),
+       "6": LinkedList(6),
+       ...
+   }
+   ```
+2. **Connect the nodes** using the `next` references (`id`s):
+
+   ```
+   nodes["2"].next = nodes["6"]
+   nodes["6"].next = nodes["7"]
+   ...
+   ```
+3. **Return the head node**:
+
+   ```
+   return nodes["2"]
+   ```
+
+---
+
+## 🔹 3. `merge_linked_lists(head_one, head_two)`
+
+Merges **two sorted linked lists** into one **sorted** list.
+
+### Logic:
+
+* If either list is empty (`None`), return the other.
+* Compare the head values:
+
+  * If `head_one.value < head_two.value`, use `head_one` as the base and call `recursive_merge`.
+  * Otherwise, use `head_two` as the base and call `recursive_merge`.
+
+### Example:
+
+```
+list_one: 2 → 6 → 7 → 8
+list_two: 1 → 3 → 4 → 5 → 9 → 10
+```
+
+Since `1 < 2`, we call:
+
+```
+recursive_merge(p1=1, p2=2, p1_prev=None)
+```
+
+and return `list_two`'s head (`1`) as the merged list's head.
+
+---
+
+## 🔹 4. `recursive_merge(p1, p2, p1_prev)`
+
+This function recursively merges the lists **in-place**, assuming `p1` is the current node in the base list and `p2` is from
+the other list.
+
+### Parameters:
+
+* `p1`: current node in base list
+* `p2`: current node from other list
+* `p1_prev`: previous node before `p1` (helps in linking when `p2` needs to be inserted before `p1`)
+
+### Cases:
+
+1. **`p1` is `None`**: End of base list — attach remaining `p2` list to `p1_prev.next`.
+2. **`p2` is `None`**: Nothing more to merge.
+3. **If `p1.value < p2.value`**:
+
+   * Move forward in base list: `recursive_merge(p1.next, p2, p1)`
+4. **Else (`p2.value <= p1.value`)**:
+
+   * Insert `p2` before `p1`.
+   * Set `p1_prev.next = p2` (if `p1_prev` exists).
+   * Save `p2.next` to `new_p2`.
+   * Set `p2.next = p1`.
+   * Recurse: `recursive_merge(p1, new_p2, p2)`
+
+### Example Flow (Initial):
+
+```
+list1: 2 → 6 → 7 → 8
+list2: 1 → 3 → 4 → 5 → 9 → 10
+
+Start: merge_linked_lists(2, 1)
+Result: merged head = 1
+Now recursively insert 2, 6, 7, 8 into the proper places.
+```
+
+---
+
+## 🔹 5. `print_linked_list(head)`
+
+This utility function prints the linked list like:
+
+```
+1 -> 2 -> 3 -> ... -> None
+```
+
+---
+
+## 🔹 6. Test Case 1
+
+**Merging two non-empty sorted lists**
+
+```
+linked_list_dict_one = { ... }
+linked_list_dict_two = { ... }
+```
+
+Build both linked lists and merge them:
+
+```
+list_one = build_linked_list(linked_list_dict_one)
+list_two = build_linked_list(linked_list_dict_two)
+merged_list = merge_linked_lists(list_one, list_two)
+```
+
+### Output:
+
+```
+Merged List:
+1 -> 2 -> 3 -> 4 -> 5 -> 6 -> 7 -> 8 -> 9 -> 10 -> None
+```
+
+---
+
+## 🔹 7. Test Case 2
+
+**Merging an empty list with a non-empty list**
+
+```
+empty_list = None
+merged_with_empty = merge_linked_lists(empty_list, list_two)
+```
+
+### Output:
+
+```
+Merged with Empty List:
+1 -> 3 -> 4 -> 5 -> 9 -> 10 -> None
+```
+
+---
+
+## ✅ Summary
+
+| Component              | Purpose                                        |
+| ---------------------- | ---------------------------------------------- |
+| `LinkedList` class     | Represents a single node in a linked list      |
+| `build_linked_list()`  | Converts a dictionary to an actual linked list |
+| `merge_linked_lists()` | Entry point to merge two sorted lists          |
+| `recursive_merge()`    | Recursively merges two lists in-place          |
+| `print_linked_list()`  | Prints the list in a readable format           |
+
+This is a clean, recursive, **in-place merge** of two sorted linked lists without creating new nodes.
+
+"""
