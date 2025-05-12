@@ -144,3 +144,32 @@ result = reverse_linked_list(linked_list)
 
 print_linked_list(result)
 # Output: 5 -> 4 -> 3 -> 2 -> 1 -> 0 -> None
+
+# =========================================================================================================================== #
+
+# Big O Analysis:
+
+"""
+## Time and Space Complexity Analysis:
+
+Let's analyze the time and space complexity of the given `reverse_linked_list` function.
+
+### Time Complexity:
+
+The function iterates through each node in the linked list exactly once. For each node, it performs a constant amount of
+work (updating pointers). 
+
+- If the linked list has `n` nodes, the time complexity is **O(n)**.
+
+### Space Complexity:
+
+The function uses a fixed number of additional variables (`previous_node`, `current_node`, `next_node`), regardless of the size of
+the input linked list. No additional data structures or recursive calls are used.
+
+- Thus, the space complexity is **O(1)** (constant space).
+
+### Summary:
+- **Time Complexity:** O(n)
+- **Space Complexity:** O(1)
+
+"""
