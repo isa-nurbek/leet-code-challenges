@@ -192,3 +192,40 @@ merged_with_empty = merge_linked_lists(empty_list, list_two)
 print("\nMerged with Empty List:")
 print_linked_list(merged_with_empty)
 # Merged with Empty List: 1 → 3 → 4 → 5 → 9 → 10 → None
+
+# =========================================================================================================================== #
+
+# Big O Analysis:
+
+"""
+## Time and Space Complexity Analysis:
+
+Let's analyze the time and space complexity of the given `merge_linked_lists` function and its helper `recursive_merge`.
+
+### Time Complexity:
+
+1. **Best Case**: When one list is empty - O(1) (just return the other list)
+2. **Worst/Average Case**: 
+   - The function processes each node of both lists exactly once.
+   - If `n` is the length of the first list and `m` is the length of the second list, the time complexity is **O(n + m)**
+   because each recursive call processes one node from either `p1` or `p2`.
+
+### Space Complexity:
+
+1. **Best Case**: When one list is empty - O(1) (no recursion needed)
+2. **Worst/Average Case**:
+   - The recursion depth is at most `n + m` (if we alternate between `p1` and `p2` in each call).
+   - Thus, the space complexity is **O(n + m)** due to the recursion stack.
+
+
+### Summary:
+| Complexity  | Time     | Space    |
+|-------------|----------|----------|
+| **Best**    | O(1)     | O(1)     |
+| **Worst**   | O(n + m) | O(n + m) |
+
+### Optimization Note:
+- This implementation uses **recursion**, which incurs additional space for the call stack. An **iterative approach** would
+reduce the space complexity to **O(1)** (just a few pointers) while maintaining the same time complexity.
+
+"""
