@@ -9,14 +9,14 @@ Each `LinkedList` node has an integer `value` as well as a `next` node pointing 
 ## Sample Input
 
 ```plaintext
-linkedList_one = 2 -> 4 -> 7 -> 1
-linkedList_two = 9 -> 4 -> 5
+linkedList_one = 2 -> 4 -> 7 -> 1 -> None
+linkedList_two = 9 -> 4 -> 5 -> None
 ```
 
 ## Sample Output
 
 ```plaintext
-1 -> 9 -> 2 -> 2
+1 -> 9 -> 2 -> 2 -> None
 
 // linkedList_one represents: 1742
 // linkedList_two represents: 549
