@@ -80,28 +80,46 @@ def build_linked_list(data):
 # Function to sum of 2 Linked Lists
 # O(max(n, m)) time | O(max(n, m)) space
 def sum_of_linked_lists(linkedList_one, linkedList_two):
+    # Initialize a dummy head node for the new linked list (result list)
+    # This helps simplify the code by providing a starting point
     new_linked_list_head_pointer = LinkedList(0)
+    # Current node points to the last node in our new linked list
     current_node = new_linked_list_head_pointer
+    # Carry stores the carry-over value when sum of digits >= 10
     carry = 0
 
+    # Start with the head nodes of both input linked lists
     node_one = linkedList_one
     node_two = linkedList_two
 
+    # Continue processing while:
+    # 1. There are nodes remaining in either input list, OR
+    # 2. There's a carry value that needs to be added
     while node_one is not None or node_two is not None or carry != 0:
+        # Get the current digit from each list (0 if list is exhausted)
         value_one = node_one.value if node_one is not None else 0
         value_two = node_two.value if node_two is not None else 0
+
+        # Calculate sum of current digits plus any carry from previous step
         sum_of_values = value_one + value_two + carry
 
+        # The digit to store in new node is sum modulo 10
         new_value = sum_of_values % 10
+        # Create new node with the calculated digit
         new_node = LinkedList(new_value)
 
+        # Link the new node to our result list and move current pointer
         current_node.next = new_node
         current_node = new_node
 
+        # Calculate carry for next iteration (sum divided by 10)
         carry = sum_of_values // 10
+
+        # Move to next nodes in input lists (if they exist)
         node_one = node_one.next if node_one is not None else None
         node_two = node_two.next if node_two is not None else None
 
+    # Return the head of the result list (skipping the dummy head node)
     return new_linked_list_head_pointer.next
 
 
