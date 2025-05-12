@@ -74,6 +74,7 @@ def build_linked_list(data):
     return nodes[data["head"]]
 
 
+# O(n) time | O(1) space
 def find_loop(head):
     """Finds the starting node of a loop in a linked list using Floyd's algorithm.
 
@@ -164,3 +165,41 @@ else:
     print("No loop detected")
 
 # Output: 0 -> 1 -> 2 -> 3 -> 4 -> 5 -> 6 -> 7 -> 8 -> 9 -> 4 (loop starts here)
+
+# =========================================================================================================================== #
+
+# Big O Analysis:
+
+"""
+## Time and Space Complexity Analysis:
+
+### Time Complexity Analysis:
+
+1. **Detecting the Loop (First While Loop):**
+   - The `slow` pointer moves one step at a time (`slow = slow.next`).
+   - The `fast` pointer moves two steps at a time (`fast = fast.next.next`).
+   - In the worst case (when there is a loop), the `fast` pointer will eventually catch up to the `slow` pointer after `O(n)` iterations, where `n` is the number of nodes in the linked list. This is because the `fast` pointer closes the gap between
+   itself and the `slow` pointer by 1 node in each iteration.
+
+2. **Finding the Start of the Loop (Second While Loop):**
+   - After resetting `slow` to `head`, both `slow` and `fast` move one step at a time until they meet.
+   - The distance from the head to the start of the loop is `k`, and the distance from the meeting point to the start of the loop
+   is also `k` (this is a property of Floyd's algorithm). Thus, this loop runs in `O(k)` time, which is `O(n)` in the worst case.
+
+Combining both parts, the total time complexity is `O(n) + O(n) = O(n)`.
+
+### Space Complexity Analysis:
+
+- The algorithm uses only two pointers (`slow` and `fast`) and no additional data structures, so the space complexity is `O(1)`
+(constant space).
+
+### Summary:
+- **Time Complexity:** `O(n)`
+- **Space Complexity:** `O(1)`
+
+### Correctness:
+The algorithm is correct and follows Floyd's Tortoise and Hare algorithm for cycle detection in linked lists. It first detects
+whether a loop exists and then finds the starting node of the loop. The logic is sound, and the time and space complexity analysis
+is accurate.
+
+"""
