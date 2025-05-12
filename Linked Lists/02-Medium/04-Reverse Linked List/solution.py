@@ -173,3 +173,155 @@ the input linked list. No additional data structures or recursive calls are used
 - **Space Complexity:** O(1)
 
 """
+
+# =========================================================================================================================== #
+
+# Detailed Code Explanation:
+
+"""
+Here's a **detailed explanation** of the code you provided, breaking it down into its parts and describing how it all works together:
+
+---
+
+## 🔷 Part 1: The `LinkedList` Class
+
+```
+class LinkedList:
+    def __init__(self, value):
+        self.value = value  # Store the value of this node
+        self.next = None    # Pointer to the next node (initially None)
+```
+
+* This class defines a **node** of a singly linked list.
+* Each node contains:
+
+  * `value`: the actual data stored in the node.
+  * `next`: a reference (pointer) to the **next node** in the list, initially set to `None`.
+
+---
+
+## 🔷 Part 2: `build_linked_list(data)` Function
+
+This function **builds a linked list** from a dictionary input.
+
+### Input:
+
+```
+{
+    "head": "0",
+    "nodes": [
+        {"id": "0", "next": "1", "value": 0},
+        {"id": "1", "next": "2", "value": 1},
+        ...
+    ]
+}
+```
+
+### Step-by-step:
+
+```
+if not data:
+    return None
+```
+
+* Handles empty input by returning `None`.
+
+```
+nodes = {}
+for node_data in data["nodes"]:
+    node = LinkedList(node_data["value"])
+    nodes[node_data["id"]] = node
+```
+
+* Creates `LinkedList` objects for each node in the input.
+* Uses a dictionary (`nodes`) to map each node's `"id"` to its corresponding object.
+
+```
+for node_data in data["nodes"]:
+    if node_data["next"] is not None:
+        nodes[node_data["id"]].next = nodes[node_data["next"]]
+```
+
+* Iterates again to **connect nodes** by setting the `next` pointers using the `"next"` field in the input.
+
+```
+return nodes[data["head"]]
+```
+
+* Returns the **head node** (starting point) using the `"head"` ID.
+
+---
+
+## 🔷 Part 3: `reverse_linked_list(head)` Function
+
+This function **reverses** the linked list **in-place**.
+
+### Logic:
+
+It uses three pointers:
+
+* `previous_node` (starts as `None`)
+* `current_node` (starts at the head of the list)
+* `next_node` (temporarily holds the next node)
+
+```
+while current_node is not None:
+    next_node = current_node.next         # Step 1: Store next node
+    current_node.next = previous_node     # Step 2: Reverse the pointer
+    previous_node = current_node          # Step 3: Move previous forward
+    current_node = next_node              # Step 4: Move current forward
+```
+
+At each step, the current node’s `next` is redirected to the previous node, effectively reversing the link direction.
+
+```
+return previous_node
+```
+
+At the end, `previous_node` will point to the **new head** of the reversed list.
+
+---
+
+## 🔷 Part 4: `print_linked_list(linked_list)` Function
+
+A helper function to **print the list** in human-readable format.
+
+```
+while current:
+    print(current.value, end=" -> ")
+    current = current.next
+print("None")
+```
+
+---
+
+## 🔷 Final Execution Flow
+
+```
+linked_list = build_linked_list(linked_list_dict)
+result = reverse_linked_list(linked_list)
+print_linked_list(result)
+```
+
+### What happens here:
+
+1. The dictionary is used to **build a linked list**:
+   `0 -> 1 -> 2 -> 3 -> 4 -> 5 -> None`
+
+2. `reverse_linked_list()` is called to reverse the list.
+
+3. The final list becomes:
+   `5 -> 4 -> 3 -> 2 -> 1 -> 0 -> None`
+
+---
+
+## ✅ Summary
+
+| Component               | Purpose                                                       |
+| ----------------------- | ------------------------------------------------------------- |
+| `LinkedList` class      | Defines a single node with `value` and `next`                 |
+| `build_linked_list()`   | Constructs the entire linked list from a dictionary           |
+| `reverse_linked_list()` | Reverses the linked list in-place in O(n) time and O(1) space |
+| `print_linked_list()`   | Traverses and prints the linked list for visualization        |
+
+"""
