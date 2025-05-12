@@ -71,7 +71,7 @@ def build_linked_list(data):
 
     return nodes[data["head"]]  # Return the head node
 
-
+# O(n + m) time | O(1) space 
 def merge_linked_lists(head_one, head_two):
     """Merges two sorted linked lists into a single sorted list in-place.
 
