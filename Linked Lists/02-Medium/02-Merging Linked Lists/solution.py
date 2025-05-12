@@ -220,3 +220,43 @@ Intersected list:
 1 -> 4 -> None
 
 """
+
+# =========================================================================================================================== #
+
+# Big O Analysis:
+
+"""
+## Time and Space Complexity Analysis:
+
+Let's analyze the time and space complexity of the `merging_linked_lists` function.
+
+### Time Complexity:
+
+1. **Calculating Lengths**: 
+   - `get_length(linked_list_one)` traverses the entire first list, taking O(n) time where n is the length of the first list.
+   - `get_length(linked_list_two)` traverses the entire second list, taking O(m) time where m is the length of the second list.
+   - Total for this part: O(n + m).
+
+2. **Advancing the Pointer of the Longer List**:
+   - The loop runs `abs(len_one - len_two)` times, which is O(|n - m|).
+   - This is also bounded by O(n + m) in the worst case.
+
+3. **Parallel Traversal**:
+   - The while loop runs until the end of the shorter list (after alignment), which is O(min(n, m)).
+   - In the worst case, this is O(n + m) (when one list is much longer than the other, but the merge happens at the end).
+
+Overall, the time complexity is **O(n + m)**, where n and m are the lengths of the two linked lists. This is because all steps
+are linear and additive.
+
+### Space Complexity:
+
+1. The function only uses a constant amount of extra space (variables like `len_one`, `len_two`, `current_one`, `current_two`, etc.).
+2. No additional data structures are used that grow with the input size.
+
+Thus, the space complexity is **O(1)** (constant space).
+
+### Summary:
+- **Time Complexity**: O(n + m)
+- **Space Complexity**: O(1)
+
+"""
