@@ -210,3 +210,232 @@ Thus, the space complexity is:
 - **Space Complexity:** O(max(n, m)) (for the new linked list)
 
 """
+
+# =========================================================================================================================== #
+
+# Detailed Code Explanation:
+
+"""
+This code defines and manipulates **linked lists** to perform **addition of two numbers**, where each number is represented by
+a linked list, with **digits stored in reverse order**. Here's a step-by-step breakdown of how the code works:
+
+---
+
+## ✅ 1. **LinkedList Class**
+
+```
+class LinkedList:
+    def __init__(self, value):
+        self.value = value
+        self.next = None
+```
+
+* Defines a single **node** in a singly linked list.
+* Each node holds:
+
+  * `value`: A digit (e.g., 2, 4, etc.).
+  * `next`: A reference to the next node (or `None` if it’s the end).
+
+---
+
+## ✅ 2. **build_linked_list(data)**
+
+This function **constructs a linked list** from a dictionary representation.
+
+```
+def build_linked_list(data):
+    ...
+```
+
+### Input format (example for `linkedList_one_data`):
+
+```
+{
+    "head": "2",
+    "nodes": [
+        {"id": "2", "next": "4", "value": 2},
+        {"id": "4", "next": "7", "value": 4},
+        {"id": "7", "next": "1", "value": 7},
+        {"id": "1", "next": None, "value": 1},
+    ]
+}
+```
+
+### How it works:
+
+1. Creates a dictionary of all nodes using their IDs.
+2. Connects the nodes using their `"next"` references.
+3. Returns the node that corresponds to the `"head"`.
+
+🔁 This allows us to build any linked list from structured data (helpful for testing).
+
+---
+
+## ✅ 3. **sum_of_linked_lists(linkedList_one, linkedList_two)**
+
+This is the **main function** that adds two numbers represented by linked lists.
+
+### Analogy:
+
+If we represent numbers in **reverse** (least significant digit first), then:
+
+```
+Number 1 = 1 -> 7 -> 4 -> 2  (represents 1742)
+Number 2 = 5 -> 4 -> 9       (represents 945)
+```
+
+### Goal:
+
+Add them:
+
+```
+   1742
++   945
+-------
+   2687
+```
+
+Then return as: `7 -> 8 -> 6 -> 2`
+
+### Code breakdown:
+
+```
+new_linked_list_head_pointer = LinkedList(0)
+```
+
+* Dummy node to simplify logic; final result is `dummy.next`.
+
+```
+carry = 0
+```
+
+* Store carry from digit addition (just like column-wise addition).
+
+```
+while node_one is not None or node_two is not None or carry != 0:
+```
+
+* Loop as long as there's a digit to process or a leftover carry.
+
+Inside the loop:
+
+```
+value_one = node_one.value if node_one is not None else 0
+value_two = node_two.value if node_two is not None else 0
+sum_of_values = value_one + value_two + carry
+```
+
+* Pull the digit from each list (or 0 if list has ended).
+* Add the carry.
+* Calculate `new_value = sum_of_values % 10` (ones digit).
+* Update carry: `carry = sum_of_values // 10` (tens digit).
+* Create a new node with `new_value`, attach it.
+
+At the end:
+
+```
+return new_linked_list_head_pointer.next
+```
+
+* Return actual result, skipping the dummy head.
+
+---
+
+## ✅ 4. **print_linked_list(linked_list)**
+
+Utility function to print list in human-readable form.
+
+---
+
+## ✅ 5. **Test Cases**
+
+### 🔹Test Case 1:
+
+Linked List One: `2 -> 4 -> 7 -> 1` (represents 1742)
+Linked List Two: `9 -> 4 -> 5` (represents 549)
+
+```
+   1742
++   549
+-------
+   2291
+```
+
+Should be printed as: `1 -> 9 -> 2 -> 2` ✅
+
+### 🔹Test Case 2:
+
+Adding `linked_list_one` to itself:
+
+```
+   1742
++  1742
+-------
+   3484
+```
+
+Should be printed as: `4 -> 8 -> 4 -> 2` ✅
+
+---
+
+## ✅ Summary of Concepts Involved
+
+| Concept              | Explanation                                    |
+| -------------------- | ---------------------------------------------- |
+| Linked List          | A chain of nodes pointing to the next          |
+| Reverse Order Digits | Least significant digit is at the head         |
+| Carry Handling       | Used when digit sum > 9                        |
+| Dummy Node           | Simplifies list creation and return            |
+| Edge Handling        | Continues addition even if one list ends early |
+
+---
+
+Here's an **ASCII visualization** of how the **linked list addition** works, using **Test Case 1** (1742 + 549):
+
+### 🧮 Input Numbers (in reverse order):
+
+```
+Linked List One (represents 1742):
+2 -> 4 -> 7 -> 1 -> None   # means 1,742 (read right to left)
+
+Linked List Two (represents 549):
+9 -> 4 -> 5 -> None        # means 549 (read right to left)
+```
+
+---
+
+### ➕ Addition Step by Step:
+
+We add digit-by-digit from head to tail (like manual addition), carrying over as needed.
+
+```
+     2       4       7       1       (digits from Linked List One)
++    9       4       5       -       (digits from Linked List Two, padded with 0)
+-------------------------------------------------
+    11      8      12       1        (raw sum)
+     1      9       2       2        (digit placed in result)
+  carry→1   0       1       0
+```
+
+---
+
+### 🔢 Final Result Linked List:
+
+```
+1 -> 9 -> 2 -> 2 -> None   # represents 2,291
+```
+
+---
+
+### 🧠 Summary in Visual Format:
+
+```
+  LL1:     2 ->   4 ->   7 ->   1 -> None
+  LL2:     9 ->   4 ->   5 ->   - -> None
+         -------------------------------
+Sum:     (11)   (8)    (12)   (1)
+Digit:    1 ->   9 ->   2 ->   2 -> None
+Carry:    1      0      1      0
+```
+
+"""
