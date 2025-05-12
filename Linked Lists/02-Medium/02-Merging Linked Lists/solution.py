@@ -260,3 +260,228 @@ Thus, the space complexity is **O(1)** (constant space).
 - **Space Complexity**: O(1)
 
 """
+
+# =========================================================================================================================== #
+
+# Detailed Code Explanation:
+
+"""
+This code is a Python implementation that builds two linked lists which **may share nodes (i.e., intersect)** and detects the
+intersection point if it exists. Let’s go through each part of the code in detail to understand how it works.
+
+---
+
+## ✅ Classes and Helpers
+
+### `class LinkedList`
+
+```
+class LinkedList:
+    def __init__(self, value):
+        self.value = value
+        self.next = None
+```
+
+This defines a basic singly linked list node. Each node contains:
+
+* `value`: the data the node holds.
+* `next`: a pointer to the next node (or `None` if it's the last node).
+
+---
+
+## 🔧 Function: `build_intersected_linked_lists`
+
+This function **builds two linked lists** from the input data structures. If nodes in the two lists share the same ID, they are
+**treated as the same object (i.e., same memory reference)** — this allows the lists to **intersect**.
+
+```
+def build_intersected_linked_lists(list_one_data, list_two_data):
+```
+
+### Key variables:
+
+* `all_nodes`: dictionary that maps `id` strings to actual `LinkedList` node objects.
+
+### Step-by-step:
+
+1. **Create nodes for `list_one_data`** using `LinkedList(node_data["value"])`.
+
+   * Store them in `all_nodes` using `node_data["id"]` as the key.
+
+2. **Do the same for `list_two_data`**, but **reuse any existing nodes** if their ID is already in `all_nodes`.
+
+3. **Connect nodes** for both lists based on their `next` pointers (which refer to other node IDs).
+
+4. Return the **head nodes** of both lists using their IDs.
+
+> ✅ This enables **node sharing** — if both lists refer to a node with the same ID, they **literally point to the same object**,
+allowing true intersections.
+
+---
+
+## 🔍 Function: `merging_linked_lists`
+
+This function **detects the intersection node** (if any) between two linked lists.
+
+```
+def merging_linked_lists(linked_list_one, linked_list_two):
+```
+
+### Step-by-step:
+
+1. Compute the **length** of each list using the helper `get_length`.
+
+2. **Align the start positions** of both lists:
+
+   * Advance the pointer of the longer list by the difference in lengths so both are equidistant from the end.
+
+3. **Traverse both lists in parallel**:
+
+   * At each step, compare `current_one == current_two` (i.e., same object in memory).
+   * If they point to the **same node**, return it as the **intersection point**.
+   * Otherwise, continue traversing.
+
+4. If no match is found, return `None`.
+
+> 🧠 **Key Insight**: Because intersecting lists share nodes by reference, comparing the **object identity** is enough.
+
+---
+
+## 🖨️ Function: `print_linked_list`
+
+This is a simple printer for linked lists:
+
+```
+def print_linked_list(linked_list):
+```
+
+It walks through the list and prints values in a readable `a -> b -> ... -> None` format.
+
+---
+
+## 🧪 Input Data & Test Cases
+
+### Original Test Case:
+
+```
+linkedList_one_data = {
+    "head": "1",
+    "nodes": [
+        {"id": "1", "next": "2", "value": 1},
+        {"id": "2", "next": "3", "value": 2},
+        {"id": "3", "next": None, "value": 3},
+    ],
+}
+
+linkedList_two_data = {
+    "head": "4",
+    "nodes": [
+        {"id": "4", "next": "5", "value": 4},
+        {"id": "5", "next": "3", "value": 5},  # points to same "3"
+        {"id": "3", "next": None, "value": 3},  # same node as above
+    ],
+}
+```
+
+* `list_one`: 1 → 2 → 3
+* `list_two`: 4 → 5 → 3 (intersects at node `3`)
+
+### New Test Case:
+
+```
+linkedList_three_data = {
+    "head": "2",
+    "nodes": [
+        {"id": "2", "next": "3", "value": 2},
+        {"id": "3", "next": "1", "value": 3},
+        {"id": "1", "next": "4", "value": 1},
+        {"id": "4", "next": None, "value": 4},
+    ],
+}
+
+linkedList_four_data = {
+    "head": "8",
+    "nodes": [
+        {"id": "8", "next": "7", "value": 8},
+        {"id": "7", "next": "1", "value": 7},
+        {"id": "1", "next": "4", "value": 1},
+        {"id": "4", "next": None, "value": 4},
+    ],
+}
+```
+
+* `list_three`: 2 → 3 → 1 → 4
+* `list_four`: 8 → 7 → 1 → 4 (intersects at node `1`)
+
+---
+
+## ✅ Output Explanation
+
+### For Test Case 1:
+
+```
+Intersection at node with value: 3
+Intersected list:
+3 -> None
+```
+
+### For Test Case 2:
+
+```
+Intersection at node with value: 1
+Intersected list:
+1 -> 4 -> None
+```
+
+In both cases, the function correctly identifies the first intersecting node and prints the rest of the list from that point.
+
+---
+
+## 🔚 Summary
+
+* **Shared nodes by ID** are reused to simulate realistic intersections.
+* **Intersection detection** is efficient: O(n + m) time and O(1) space.
+* **Real-life analogy**: Think of two roads merging at a junction — this detects where they meet **based on reference**, not value.
+
+---
+
+Here's an **ASCII visualization** of the two test cases showing how the linked lists intersect.
+
+---
+
+### 🔹 Test Case 1:
+
+**List One:** `1 → 2 → 3`
+**List Two:** `4 → 5 ↘`
+         `↘ 3`
+
+```
+List One:   1 → 2 → 3
+                     ↑
+List Two:   4 → 5 ───┘
+```
+
+**Intersection Point:** Node with value `3`
+
+---
+
+### 🔹 Test Case 2:
+
+**List Three:** `2 → 3 → 1 → 4`
+**List Four:** `8 → 7 ↘`
+               `↘ 1 → 4`
+
+```
+List Three: 2 → 3 → 1 → 4
+                        ↑
+List Four:  8 → 7 ──────┘
+```
+
+**Intersection Point:** Node with value `1`
+
+---
+
+These diagrams clearly show how the lists **merge into a shared tail**, which is exactly what your `merging_linked_lists`
+function detects.
+
+"""
