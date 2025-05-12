@@ -13,14 +13,18 @@ You can assume that the input Linked List will always have at least one node; in
 ## Sample Input
 
 ```plaintext
-head = 0 -> 1 -> 2 -> 3 -> 4 -> 5 -> None  // the head node with value 0
+// The head node with value 0
+
+head = 0 -> 1 -> 2 -> 3 -> 4 -> 5 -> None 
 k = 2
 ```
 
 ## Sample Output
 
 ```plaintext
-4 -> 5 -> 0 -> 1 -> 2 -> 3  // the new head node with value 4
+4 -> 5 -> 0 -> 1 -> 2 -> 3
+
+// The new head node with value 4
 ```
 
 ## Hints
