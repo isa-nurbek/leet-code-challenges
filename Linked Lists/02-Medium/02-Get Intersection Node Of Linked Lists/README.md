@@ -1,4 +1,4 @@
-# Merging Linked Lists
+# Get Intersection Node Of Linked Lists
 
 You're given two Linked Lists of potentially unequal length. These Linked Lists potentially merge at a shared intersection node. Write a function that returns the intersection node or returns `None` if there is no intersection.
 
