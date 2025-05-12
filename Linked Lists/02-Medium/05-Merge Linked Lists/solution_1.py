@@ -168,3 +168,38 @@ merged_with_empty = merge_linked_lists(empty_list, list_two)
 print("\nMerged with Empty List:")
 print_linked_list(merged_with_empty)
 # Merged with Empty List: 1 → 3 → 4 → 5 → 9 → 10 → None
+
+# =========================================================================================================================== #
+
+# Big O Analysis:
+
+"""
+## Time and Space Complexity Analysis:
+
+Let's analyze the time and space complexity of the `mergeLinkedLists` function.
+
+### Time Complexity:
+
+The function iterates through both linked lists (`head_one` and `head_two`) exactly once. At each step, it compares the values
+of the current nodes and appends the smaller one to the merged list. 
+
+- If `head_one` has `n` nodes and `head_two` has `m` nodes, the while loop runs for at most `n + m` iterations (since in each
+iteration, either `p1` or `p2` advances).
+- The remaining nodes (if any) are attached in constant time (`O(1)`).
+
+Thus, the **time complexity is `O(n + m)`**, where `n` and `m` are the lengths of the two input linked lists.
+
+### Space Complexity:
+
+The function uses a constant amount of extra space:
+- Pointers `p1`, `p2`, `prev`, and `merged_head` are used, but no additional data structures are created that scale with the
+input size.
+- The merging is done in-place by rearranging the `next` pointers of the existing nodes.
+
+Thus, the **space complexity is `O(1)` (constant space)**.
+
+### Summary:
+- **Time Complexity:** `O(n + m)`
+- **Space Complexity:** `O(1)` (in-place merge)
+
+"""
