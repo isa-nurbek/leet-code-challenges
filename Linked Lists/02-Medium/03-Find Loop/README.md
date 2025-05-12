@@ -9,7 +9,7 @@ Each `LinkedList` node has an integer `value` as well as a `next` node pointing 
 ```plaintext
 // The head node with value 0
 
-head = 0 -> 1 -> 2 -> 3 -> 4 -> 5 -> 6 -> None  
+head = 0 -> 1 -> 2 -> 3 -> 4 -> 5 -> 6
                            ^         v
                            9 <- 8 <- 7
 ```
@@ -17,7 +17,7 @@ head = 0 -> 1 -> 2 -> 3 -> 4 -> 5 -> 6 -> None
 ## Sample Output
 
 ```plaintext
-4 -> 5 -> 6 -> None
+4 -> 5 -> 6 
 ^         v
 9 <- 8 <- 7
 
