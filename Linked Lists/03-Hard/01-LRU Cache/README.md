@@ -55,4 +55,4 @@ Try storing keys in a hash table and mapping them to nodes in a doubly linked li
 
 ## Optimal Time & Space Complexity
 
-All 3 methods: `insertKeyValuePair`, `getValueFromKey`, `getMostRecentKey` - `O(1)` time | `O(1)` space.
+All 3 methods: `insertKeyValuePair`, `getValueFromKey`, `getMostRecentKey` - `O(1)` time | `O(n)` space.
