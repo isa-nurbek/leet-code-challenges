@@ -201,3 +201,55 @@ Most recent key after accessing 'a': a
 Value for 'b' (evicted): None
 Most recent key after inserting 'd': d
 """
+
+# =========================================================================================================================== #
+
+# Big O Analysis:
+
+"""
+## Time and Space Complexity Analysis:
+
+### Time Complexity Analysis
+
+1. **`insertKeyValuePair(key, value)`**:
+   - **Checking if key exists in cache**: O(1) average time (hash table lookup).
+   - **Replacing value (if key exists)**: O(1) (updating the value in the node).
+   - **Evicting least recent (if cache is full)**:
+     - Removing the tail from the doubly linked list: O(1).
+     - Deleting the key from the hash table: O(1).
+   - **Inserting new key-value pair**:
+     - Creating a new node: O(1).
+     - Adding to the hash table: O(1) average time.
+   - **Updating most recent**:
+     - Moving the node to the head of the doubly linked list: O(1) (since `set_head_to` and `remove_bindings` are O(1)).
+   - **Total**: O(1) average time per operation.
+
+2. **`getValueFromKey(key)`**:
+   - **Checking if key exists in cache**: O(1) average time.
+   - **Updating most recent**:
+     - Moving the node to the head of the doubly linked list: O(1).
+   - **Total**: O(1) average time per operation.
+
+3. **`getMostRecentKey()`**:
+   - Accessing the head of the doubly linked list: O(1).
+   - **Total**: O(1).
+
+4. **Helper Methods**:
+   - `_evict_least_recent()`: O(1) (removing tail and hash table deletion).
+   - `_update_most_recent(node)`: O(1) (moving node to head).
+   - `_replace_value(key, value)`: O(1) (updating node value).
+
+### Space Complexity Analysis
+- **Hash Table (`self.cache`)**: O(n) where n is the number of key-value pairs (up to `maxSize`).
+- **Doubly Linked List (`self.listOfMostRecent`)**: O(n) (stores the same nodes as the hash table, just in order).
+- **Nodes in Doubly Linked List**: Each node stores `key`, `value`, `prev`, and `next`, but this is still O(1) per node.
+- **Total Space**: O(n) where n is the maximum capacity (`maxSize`) of the cache.
+
+### Summary
+- **Time Complexity**: All operations (insert, get, update) are O(1) average time.
+- **Space Complexity**: O(n) where n is the maximum size of the cache (`maxSize`).
+
+This implementation efficiently maintains the LRU property using a hash table for O(1) access and a doubly linked list
+for O(1) order updates.
+
+"""
