@@ -52,40 +52,55 @@ All 3 methods: `insertKeyValuePair`, `getValueFromKey`, `getMostRecentKey` - O(1
 
 class LRUCache:
     def __init__(self, maxSize):
+        # Initialize the cache as a dictionary to store key-node pairs
         self.cache = {}
-        self.maxSize = max(1, maxSize)  # Ensures maxSize is at least 1
+        # Ensure maxSize is at least 1 (minimum cache size)
+        self.maxSize = max(1, maxSize)
+        # Doubly linked list to maintain usage order (most recent at head)
         self.listOfMostRecent = DoublyLinkedList()
 
     def insertKeyValuePair(self, key, value):
+        # If key already exists in cache
         if key in self.cache:
+            # Just replace the value and update usage
             self._replace_value(key, value)
         else:
+            # If cache is full, evict least recently used item
             if len(self.cache) == self.maxSize:
                 self._evict_least_recent()
+            # Create new node and add to cache
             self.cache[key] = DoublyLinkedListNode(key, value)
+        # Update usage (move to front of LRU list)
         self._update_most_recent(self.cache[key])
 
     def getValueFromKey(self, key):
+        # Return None if key doesn't exist
         if key not in self.cache:
             return None
+        # Update usage since this key was recently accessed
         self._update_most_recent(self.cache[key])
         return self.cache[key].value
 
     def getMostRecentKey(self):
+        # Return the key of the most recently used item (head of list)
         return self.listOfMostRecent.head.key if self.listOfMostRecent.head else None
 
     def _evict_least_recent(self):
+        # Remove the tail node (least recently used) from both list and cache
         key_to_remove = self.listOfMostRecent.tail.key
         self.listOfMostRecent.remove_tail()
         del self.cache[key_to_remove]
 
     def _update_most_recent(self, node):
+        # Move the accessed node to the head of the list (most recent position)
         self.listOfMostRecent.set_head_to(node)
 
     def _replace_value(self, key, value):
+        # Simply update the value of an existing key
         self.cache[key].value = value
 
     def __str__(self):
+        # Helper method to print cache contents in order (most to least recent)
         keys = []
         current = self.listOfMostRecent.head
         while current:
@@ -96,30 +111,39 @@ class LRUCache:
 
 class DoublyLinkedList:
     def __init__(self):
-        self.head = None
-        self.tail = None
+        # Initialize empty doubly linked list
+        self.head = None  # Most recently used
+        self.tail = None  # Least recently used
 
     def set_head_to(self, node):
+        # If node is already head, no action needed
         if self.head == node:
             return
+        # If list is empty, set both head and tail to node
         if self.head is None:
             self.head = node
             self.tail = node
             return
+        # If node is currently tail, remove it from tail position first
         if self.tail == node:
             self.remove_tail()
-        node.remove_bindings()  # This should come before modifying head's prev
+        # Remove node from its current position in list (if any)
+        node.remove_bindings()
+        # Insert node at head
         self.head.prev = node
         node.next = self.head
         self.head = node
 
     def remove_tail(self):
+        # If list is empty, do nothing
         if self.tail is None:
             return
+        # Special case: only one node in list
         if self.tail == self.head:
             self.head = None
             self.tail = None
             return
+        # Move tail pointer to previous node and clear next pointer
         self.tail = self.tail.prev
         self.tail.next = None
 
@@ -128,14 +152,16 @@ class DoublyLinkedListNode:
     def __init__(self, key, value):
         self.key = key
         self.value = value
-        self.prev = None
-        self.next = None
+        self.prev = None  # Pointer to previous node
+        self.next = None  # Pointer to next node
 
     def remove_bindings(self):
+        # Remove this node from its current position by updating neighbors' pointers
         if self.prev:
             self.prev.next = self.next
         if self.next:
             self.next.prev = self.prev
+        # Clear this node's pointers
         self.prev = None
         self.next = None
 
