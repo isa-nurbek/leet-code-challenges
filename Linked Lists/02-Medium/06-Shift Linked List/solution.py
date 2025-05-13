@@ -80,27 +80,39 @@ def build_linked_list(data):
 
 # O(n) time | O(1) space
 def shift_linkedList(head, k):
-    list_length = 1
-    list_tail = head
+    # Calculate the length of the linked list and find the tail node
+    list_length = 1  # starts at 1 since we're counting the head
+    list_tail = head  # we'll use this to traverse to the end
 
+    # Traverse to the end of the list to find tail and get length
     while list_tail.next is not None:
         list_tail = list_tail.next
         list_length += 1
 
-    offset = abs(k) % list_length
+    # Calculate the effective offset (handle cases where k > list length)
+    offset = abs(k) % list_length  # absolute value for negative k
+    # If no effective shift needed, return original list
     if offset == 0:
         return head
 
+    # Determine the position of the new tail node:
+    # - For positive k: move list_length - offset nodes from start
+    # - For negative k: move offset nodes from start
     new_tail_position = list_length - offset if k > 0 else offset
-    new_tail = head
 
-    for _ in range(1, new_tail_position):
+    # Find the new tail node
+    new_tail = head
+    for _ in range(1, new_tail_position):  # starts at 1 since head is node 0
         new_tail = new_tail.next
 
+    # The node after new tail becomes the new head
     new_head = new_tail.next
+    # Break the list at new tail
     new_tail.next = None
-
+    # Connect original tail to original head to make it circular
     list_tail.next = head
+
+    # Return the new head of the shifted list
     return new_head
 
 
