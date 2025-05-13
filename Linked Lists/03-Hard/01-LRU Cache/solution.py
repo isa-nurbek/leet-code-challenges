@@ -253,3 +253,411 @@ This implementation efficiently maintains the LRU property using a hash table fo
 for O(1) order updates.
 
 """
+
+# =========================================================================================================================== #
+
+# Detailed Code Explanation:
+
+"""
+This implementation is a **Least Recently Used (LRU) Cache** using a combination of:
+
+1. **A hash map (`dict`)** for fast lookups (`O(1)`).
+2. **A doubly linked list** to keep track of the usage order (`O(1)` insertions/deletions from head/tail).
+
+---
+
+## 🔁 What is an LRU Cache?
+
+An LRU cache evicts the **least recently used** item when it reaches its maximum size.
+
+* Recently accessed or inserted items are moved to the **front** (head) of the list.
+* The **least recently used** item sits at the **back** (tail), and will be evicted when the cache is full.
+
+---
+
+## 🔩 Components of the Code
+
+### ✅ Class: `LRUCache`
+
+```
+class LRUCache:
+```
+
+This class manages the cache logic with methods to:
+
+* Insert or update values (`insertKeyValuePair`)
+* Retrieve values (`getValueFromKey`)
+* Track the most recently used key (`getMostRecentKey`)
+
+### 🔧 `__init__`
+
+```
+def __init__(self, maxSize):
+    self.cache = {}  # Dictionary: key → node
+    self.maxSize = max(1, maxSize)  # Avoid 0 size cache
+    self.listOfMostRecent = DoublyLinkedList()  # Order tracker
+```
+
+* `self.cache` stores key → node mappings.
+* `self.listOfMostRecent` keeps track of usage order.
+
+---
+
+### 🚀 `insertKeyValuePair`
+
+```
+def insertKeyValuePair(self, key, value):
+```
+
+* If the key exists: updates value via `_replace_value()`.
+* If key is new and cache is full: evicts LRU item via `_evict_least_recent()`.
+* Adds key-node mapping and moves node to head (most recent).
+
+---
+
+### 🔍 `getValueFromKey`
+
+```
+def getValueFromKey(self, key):
+```
+
+* If key doesn't exist → returns `None`.
+* If found → moves node to head (mark as recently used) and returns value.
+
+---
+
+### 🔝 `getMostRecentKey`
+
+```
+def getMostRecentKey(self):
+```
+
+Returns the key of the **head** node (most recently used).
+
+---
+
+### 💣 `_evict_least_recent`
+
+```
+def _evict_least_recent(self):
+    key_to_remove = self.listOfMostRecent.tail.key
+    self.listOfMostRecent.remove_tail()
+    del self.cache[key_to_remove]
+```
+
+Removes the tail node (least recently used) and deletes its entry in the dictionary.
+
+---
+
+### 🔁 `_update_most_recent`
+
+```
+def _update_most_recent(self, node):
+    self.listOfMostRecent.set_head_to(node)
+```
+
+Moves a node to the head of the linked list.
+
+---
+
+### ✏️ `_replace_value`
+
+```
+def _replace_value(self, key, value):
+    self.cache[key].value = value
+```
+
+Updates the value in the existing node.
+
+---
+
+## 🔗 Class: `DoublyLinkedList`
+
+This class manages the order of keys.
+
+### `set_head_to`
+
+```
+def set_head_to(self, node):
+```
+
+* If the node is already head → do nothing.
+* If list is empty → make node both head and tail.
+* If node is tail → remove it from tail.
+* Remove node from current position (if exists), then insert at head.
+
+### `remove_tail`
+
+```
+def remove_tail(self):
+```
+
+Removes the tail node and updates pointers.
+
+---
+
+## 🔘 Class: `DoublyLinkedListNode`
+
+Represents a node with:
+
+```
+key, value, prev, next
+```
+
+Used in both dictionary and linked list.
+
+### `remove_bindings`
+
+```
+def remove_bindings(self):
+```
+
+Disconnects the node from neighbors (helps in re-insertion elsewhere).
+
+---
+
+## 🔍 Example Execution Walkthrough
+
+```
+cache = LRUCache(3)
+```
+
+**Insertions:**
+
+```
+cache.insertKeyValuePair("a", 1)  # a
+cache.insertKeyValuePair("b", 2)  # b → a
+cache.insertKeyValuePair("c", 3)  # c → b → a
+```
+
+```
+print(cache.getMostRecentKey())  # c
+```
+
+Accessing `"a"`:
+
+```
+cache.getValueFromKey("a")  # Moves a to front
+# a → c → b
+```
+
+Insert `"d"` (capacity full):
+
+```
+cache.insertKeyValuePair("d", 4)
+# Evicts least recent (b), inserts d → a → c
+```
+
+Check evicted key:
+
+```
+print(cache.getValueFromKey("b"))  # None
+```
+
+---
+
+## 🧠 Time and Space Complexity
+
+| Operation            | Time |
+| -------------------- | ---- |
+| `insertKeyValuePair` | O(1) |
+| `getValueFromKey`    | O(1) |
+| `getMostRecentKey`   | O(1) |
+| `Eviction`           | O(1) |
+
+Space: O(N) for storing up to `maxSize` nodes.
+
+---
+
+## ✅ Summary
+
+* Fast O(1) operations via `dict` + `doubly linked list`.
+* Maintains correct usage order.
+* Evicts least recently used when full.
+* Nodes are reused and re-ordered efficiently.
+
+---
+
+Here's an **ASCII visualization** of how the **doubly linked list** (usage order) and the **cache dictionary** evolve as we
+perform operations.
+
+---
+
+### ✅ Start: Initialize LRUCache(3)
+
+```
+cache = LRUCache(3)
+```
+
+Cache: `{}`
+List: *(empty)*
+
+---
+
+### ➕ Insert ("a", 1)
+
+```
+cache.insertKeyValuePair("a", 1)
+```
+
+**Cache:**
+
+```
+{"a": Node("a", 1)}
+```
+
+**List (most recent on the left):**
+
+```
+[a]
+```
+
+---
+
+### ➕ Insert ("b", 2)
+
+```
+cache.insertKeyValuePair("b", 2)
+```
+
+**Cache:**
+
+```
+{"a": Node("a", 1), "b": Node("b", 2)}
+```
+
+**List:**
+
+```
+[b] <-> [a]
+```
+
+---
+
+### ➕ Insert ("c", 3)
+
+```
+cache.insertKeyValuePair("c", 3)
+```
+
+**Cache:**
+
+```
+{"a": Node("a", 1), "b": Node("b", 2), "c": Node("c", 3)}
+```
+
+**List:**
+
+```
+[c] <-> [b] <-> [a]
+```
+
+---
+
+### 🔍 Access "a"
+
+```
+cache.getValueFromKey("a")
+```
+
+Move "a" to front.
+
+**List:**
+
+```
+[a] <-> [c] <-> [b]
+```
+
+---
+
+### ➕ Insert ("d", 4)
+
+```
+cache.insertKeyValuePair("d", 4)
+```
+
+* Cache full → evict least recent = "b"
+* Insert "d" at front
+
+**Cache:**
+
+```
+{"a": Node("a", 1), "c": Node("c", 3), "d": Node("d", 4)}
+```
+
+**List:**
+
+```
+[d] <-> [a] <-> [c]
+```
+
+---
+
+### 🔍 Access "b"
+
+```
+cache.getValueFromKey("b")  # None (evicted)
+```
+
+---
+
+### 🔚 Final state
+
+**Cache:**
+
+```
+{"a": ..., "c": ..., "d": ...}
+```
+
+**List:**
+
+```
+[d] <-> [a] <-> [c]
+```
+
+---
+
+### 🧭 Legend
+
+* `[key]` is a node (value not shown for simplicity)
+* Arrows `<->` show doubly linked connections
+* Left = Most Recent
+* Right = Least Recent
+
+---
+
+Here's a **step-by-step side-by-side table** of the cache and the doubly linked list (usage order) as operations are performed:
+
+### 🗂️ Legend
+
+| Term           | Meaning                                     |
+| -------------- | ------------------------------------------- |
+| `[key]`        | Node with `key` (value omitted for clarity) |
+| Leftmost node  | Most recently used                          |
+| Rightmost node | Least recently used                         |
+| `<->`          | Doubly linked list connections              |
+
+---
+
+## 📋 Step-by-Step Table
+
+| Step | Operation           | Cache Contents                                        | Doubly Linked List (MRU → LRU) |
+| ---- | ------------------- | ----------------------------------------------------- | ------------------------------ |
+| 0    | Init `LRUCache(3)`  | `{}`                                                  | *(empty)*                      |
+| 1    | `insert("a", 1)`    | `{"a": [a]}`                                          | `[a]`                          |
+| 2    | `insert("b", 2)`    | `{"a": [a], "b": [b]}`                                | `[b] <-> [a]`                  |
+| 3    | `insert("c", 3)`    | `{"a": [a], "b": [b], "c": [c]}`                      | `[c] <-> [b] <-> [a]`          |
+| 4    | `get("a")`          | `{"a": [a], "b": [b], "c": [c]}`                      | `[a] <-> [c] <-> [b]`          |
+| 5    | `insert("d", 4)`    | `{"a": [a], "c": [c], "d": [d]}` <br> (*"b" evicted*) | `[d] <-> [a] <-> [c]`          |
+| 6    | `get("b")` → `None` | `{"a": [a], "c": [c], "d": [d]}`                      | `[d] <-> [a] <-> [c]`          |
+
+---
+
+### ✅ Final State
+
+| Component | State                            |
+| --------- | -------------------------------- |
+| **Cache** | `{"a": [a], "c": [c], "d": [d]}` |
+| **List**  | `[d] <-> [a] <-> [c]`            |
+
+"""
