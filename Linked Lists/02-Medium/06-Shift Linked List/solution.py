@@ -202,3 +202,192 @@ This is optimal for this problem since you must traverse the entire list at leas
 The space usage is minimal since only a few pointers are modified in place.
 
 """
+
+# =========================================================================================================================== #
+
+# Detailed Code Explanation:
+
+"""
+Let's go through the entire code step by step to understand how it works and how it produces the final output.
+
+---
+
+## 🔧 1. Class Definition: `LinkedList`
+
+```
+class LinkedList:
+    def __init__(self, value):
+        self.value = value  # Stores the value of the node
+        self.next = None    # Points to the next node (initially None)
+```
+
+This class represents a **single node** in a singly linked list. Each node has:
+
+* `value`: the data it holds.
+* `next`: a reference to the next node in the list (or `None` if it’s the last node).
+
+---
+
+## 🏗️ 2. Building the Linked List: `build_linked_list`
+
+```
+def build_linked_list(data):
+    ...
+```
+
+This function builds a linked list from a **dictionary input** format.
+
+### Example Input:
+
+```
+linked_list_dict = {
+    "head": "0",
+    "nodes": [
+        {"id": "0", "next": "1", "value": 0},
+        {"id": "1", "next": "2", "value": 1},
+        {"id": "2", "next": "3", "value": 2},
+        {"id": "3", "next": "4", "value": 3},
+        {"id": "4", "next": "5", "value": 4},
+        {"id": "5", "next": None, "value": 5},
+    ],
+}
+```
+
+### Breakdown:
+
+1. **Step 1 – Create Nodes**: All nodes are created and stored in a dictionary:
+
+   ```
+   nodes[node_data["id"]] = node
+   ```
+
+   So, for example:
+
+   * `"0"` → Node with value `0`
+   * `"1"` → Node with value `1`
+   * etc.
+
+2. **Step 2 – Link Nodes**:
+   Based on the `next` field, each node's `next` pointer is assigned.
+
+3. **Step 3 – Return Head**:
+   The node with ID `"0"` is returned as the head node (start of the list).
+
+---
+
+## 🔁 3. Shifting the Linked List: `shift_linkedList`
+
+```
+def shift_linkedList(head, k):
+    ...
+```
+
+### Purpose:
+
+This function "shifts" the linked list by `k` positions:
+
+* If `k > 0`: shift the list **right** (move tail nodes to front).
+* If `k < 0`: shift the list **left** (move head nodes to back).
+
+### Step-by-Step Breakdown:
+
+#### ✅ Step 1 – Get Length and Tail
+
+```
+list_length = 1
+list_tail = head
+
+while list_tail.next is not None:
+    list_tail = list_tail.next
+    list_length += 1
+```
+
+* Traverse the list to find the last node (`list_tail`) and calculate its length.
+
+For the input list: `0 -> 1 -> 2 -> 3 -> 4 -> 5 -> None`
+
+* `list_length = 6`
+* `list_tail = node with value 5`
+
+---
+
+#### ✅ Step 2 – Compute Offset
+
+```
+offset = abs(k) % list_length
+if offset == 0:
+    return head
+```
+
+* `offset = abs(2) % 6 = 2`
+* If `offset == 0`, no shift is needed.
+
+---
+
+#### ✅ Step 3 – Find New Tail and Head
+
+```
+new_tail_position = list_length - offset if k > 0 else offset
+new_tail = head
+for i in range(1, new_tail_position):
+    new_tail = new_tail.next
+```
+
+* For `k = 2`, we want to move 2 nodes from the end to the front.
+* So, new tail is at position `6 - 2 = 4` (0-indexed).
+
+Node positions:
+
+* `0 -> 1 -> 2 -> 3 -> 4 -> 5`
+* New tail is node with value `3`
+* New head is node with value `4`
+
+---
+
+#### ✅ Step 4 – Cut and Reconnect
+
+```
+new_head = new_tail.next     # Node with value 4
+new_tail.next = None         # Break the link
+list_tail.next = head        # Connect old tail to old head
+return new_head              # Return new head
+```
+
+After this:
+
+* `4 -> 5 -> 0 -> 1 -> 2 -> 3 -> None`
+
+---
+
+## 🖨️ 4. Printing the Linked List: `print_linked_list`
+
+```
+def print_linked_list(linked_list):
+    ...
+```
+
+A simple traversal of the list to print each node's value followed by `" -> "`, ending with `"None"`.
+
+---
+
+## ✅ Output for Test Case
+
+Input List:
+`0 -> 1 -> 2 -> 3 -> 4 -> 5 -> None`
+`k = 2` → shift right by 2
+
+Output:
+`4 -> 5 -> 0 -> 1 -> 2 -> 3 -> None`
+
+---
+
+## 📌 Summary
+
+| Function            | Responsibility                                   |
+| ------------------- | ------------------------------------------------ |
+| `LinkedList`        | Defines a node in a singly linked list           |
+| `build_linked_list` | Converts a dict structure into a linked list     |
+| `shift_linkedList`  | Shifts list nodes left or right by `k` positions |
+| `print_linked_list` | Prints linked list elements in readable format   |
+
+"""
