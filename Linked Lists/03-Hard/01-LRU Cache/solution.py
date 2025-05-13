@@ -40,7 +40,7 @@ getValueFromKey("a"): 5
 
 ## Optimal Time & Space Complexity:
 ```
-All 3 methods: `insertKeyValuePair`, `getValueFromKey`, `getMostRecentKey` - O(1) time | O(1) space.
+All 3 methods: `insertKeyValuePair`, `getValueFromKey`, `getMostRecentKey` - O(1) time | O(n) space.
 ```
 
 """
