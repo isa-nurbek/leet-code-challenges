@@ -155,3 +155,50 @@ result = shift_linkedList(linked_list, 2)
 
 print_linked_list(result)
 # Output: 4 -> 5 -> 0 -> 1 -> 2 -> 3 -> None
+
+# =========================================================================================================================== #
+
+# Big O Analysis:
+
+"""
+## Time and Space Complexity Analysis:
+
+Let's analyze the time and space complexity of the `shift_linkedList` function.
+
+### Time Complexity:
+
+1. **Finding the Tail and Length**:  
+   The first `while` loop traverses the entire linked list to find the tail and compute the length. This takes **O(n)** time,
+   where `n` is the number of nodes in the linked list.
+
+2. **Calculating the Offset**:  
+   The `offset` is computed using `abs(k) % list_length`, which is an **O(1)** operation.
+
+3. **Finding the New Tail and New Head**:  
+   The `for` loop runs for `new_tail_position - 1` iterations, where `new_tail_position` is at most `n - 1`.
+   In the worst case, this is **O(n)**.
+
+4. **Adjusting Pointers**:  
+   The operations `new_tail.next = None` and `list_tail.next = head` are **O(1)**.
+
+**Total Time Complexity**:  
+Since all steps are either **O(n)** or **O(1)**, the overall time complexity is:  
+**O(n)** (linear time).
+
+### Space Complexity:
+
+1. **Variables Used**:  
+   The function uses a constant number of variables (`list_length`, `list_tail`, `offset`, `new_tail_position`, `new_tail`,
+   `new_head`), regardless of the input size. No additional data structures (like arrays or hash tables) are used.
+
+**Total Space Complexity**:  
+**O(1)** (constant space).
+
+### Summary:
+- **Time Complexity**: **O(n)**  
+- **Space Complexity**: **O(1)**  
+
+This is optimal for this problem since you must traverse the entire list at least once to determine its length and tail.
+The space usage is minimal since only a few pointers are modified in place.
+
+"""
