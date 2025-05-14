@@ -213,3 +213,42 @@ result = rearrange_linked_list(linked_list, 3)
 
 print_linked_list(result)
 # Output: 0 -> 2 -> 1 -> 3 -> 5 -> 4 -> None
+
+# =========================================================================================================================== #
+
+# Big O Analysis:
+
+"""
+## Time and Space Complexity Analysis:
+
+Let's analyze the time and space complexity of the given `rearrange_linked_list` function.
+
+### Time Complexity:
+
+1. **Initialization**: The initialization of the six pointers (`smaller_list_head`, `smaller_list_tail`, etc.) is done
+in constant time, O(1).
+2. **Traversing the Linked List**: The `while` loop iterates over each node in the original linked list exactly once. If there
+are `n` nodes in the linked list, this loop runs in O(n) time.
+   - Inside the loop, each operation (checking the value, calling `grow_linked_list`, updating `prev_node` and `node`) is done
+   in constant time, O(1).
+3. **Connecting the Lists**: The `connect_linked_lists` function is called twice, and each call is done in constant time, O(1),
+as it just involves updating a few pointers.
+   
+Overall, the time complexity is dominated by the traversal of the linked list, so the total time complexity is **O(n)**.
+
+### Space Complexity:
+
+1. **Additional Pointers**: The algorithm uses a constant number of additional pointers (like `smaller_list_head`,
+`smaller_list_tail`, etc.), which does not depend on the input size. Thus, the space used for these is O(1).
+2. **Input and Output**: The input is the linked list of size `n`, and the output is a rearranged linked list of the same size.
+However, the rearrangement is done in-place by reusing the existing nodes and only modifying their `next` pointers.
+No additional data structures (like arrays or hash maps) are used.
+
+Thus, the space complexity is **O(1)** (constant extra space), as the algorithm does not use any additional space proportional
+to the input size.
+
+### Summary:
+- **Time Complexity**: O(n)
+- **Space Complexity**: O(1) (in-place rearrangement)
+
+"""
