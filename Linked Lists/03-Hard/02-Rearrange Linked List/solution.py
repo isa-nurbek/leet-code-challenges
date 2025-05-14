@@ -84,6 +84,10 @@ def build_linked_list(data):
 
 # O(n) time | O(1) space
 def rearrange_linked_list(head, k):
+    # Initialize pointers for three separate linked lists:
+    # 1. Nodes with values smaller than k
+    # 2. Nodes with values equal to k
+    # 3. Nodes with values greater than k
     smaller_list_head = None
     smaller_list_tail = None
 
@@ -93,31 +97,37 @@ def rearrange_linked_list(head, k):
     greater_list_head = None
     greater_list_tail = None
 
+    # Traverse the original linked list
     node = head
     while node is not None:
+        # Determine which list the current node belongs to based on its value
         if node.value < k:
+            # Add to smaller values list
             smaller_list_head, smaller_list_tail = grow_linked_list(
                 smaller_list_head, smaller_list_tail, node
             )
         elif node.value > k:
+            # Add to greater values list
             greater_list_head, greater_list_tail = grow_linked_list(
                 greater_list_head, greater_list_tail, node
             )
         else:
+            # Add to equal values list
             equal_list_head, equal_list_tail = grow_linked_list(
                 equal_list_head, equal_list_tail, node
             )
 
+        # Move to next node after disconnecting current node from original list
         prev_node = node
         node = node.next
-        prev_node.next = None
+        prev_node.next = None  # Disconnect the node from original list
 
-    # Connect smaller and equal lists
+    # First, connect the smaller and equal lists
     connected_head, connected_tail = connect_linked_lists(
         smaller_list_head, smaller_list_tail, equal_list_head, equal_list_tail
     )
 
-    # Connect the result with the greater list
+    # Then connect the combined list with the greater list
     final_head, _ = connect_linked_lists(
         connected_head, connected_tail, greater_list_head, greater_list_tail
     )
@@ -126,27 +136,41 @@ def rearrange_linked_list(head, k):
 
 
 def grow_linked_list(head, tail, node):
+    """
+    Helper function to append a node to a linked list.
+    Returns the new head and tail of the linked list.
+    If the list was empty, the new node becomes both head and tail.
+    Otherwise, the node is appended to the end of the list.
+    """
     new_head = head
     new_tail = node
 
     if new_head is None:
-        new_head = node
+        new_head = node  # First node in the list
 
     if tail is not None:
-        tail.next = node
+        tail.next = node  # Append to existing list
 
     return (new_head, new_tail)
 
 
 def connect_linked_lists(head_one, tail_one, head_two, tail_two):
+    """
+    Helper function to connect two linked lists.
+    Returns the head and tail of the combined list.
+    If either list is empty, returns the other list.
+    Otherwise, connects tail of first list to head of second list.
+    """
     if head_one is None:
         return head_two, tail_two
 
     if head_two is None:
         return head_one, tail_one
 
+    # Connect the two lists
     tail_one.next = head_two
 
+    # Return head of first list and tail of second list
     return head_one, tail_two
 
 
