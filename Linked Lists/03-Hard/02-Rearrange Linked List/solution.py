@@ -55,6 +55,7 @@ class LinkedList:
         self.next = None  # Pointer to the next node (initially None)
 
 
+# Helper function to convert dictionary to LinkedList
 def build_linked_list(data):
     """Builds a linked list from a dictionary representation.
 
