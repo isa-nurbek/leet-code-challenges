@@ -37,36 +37,73 @@ O(log(n)) time | O(1) space - where `n` is the length of the input array.
 
 # O(log(n)) time | O(log(n)) space
 def search_for_range(array, target):
+    """
+    Finds the starting and ending positions of a target value in a sorted array.
+
+    Args:
+        array: A sorted list of integers.
+        target: The integer value to search for in the array.
+
+    Returns:
+        A list containing the first and last indices of the target value.
+        Returns [-1, -1] if the target is not found.
+    """
+    # Initialize the result range with [-1, -1] in case target is not found
     final_range = [-1, -1]
 
+    # First search to find the left boundary (start index) of the target
     altered_binary_search(array, target, 0, len(array) - 1, final_range, True)
+    # Second search to find the right boundary (end index) of the target
     altered_binary_search(array, target, 0, len(array) - 1, final_range, False)
 
     return final_range
 
 
 def altered_binary_search(array, target, left, right, final_range, go_left):
+    """
+    A modified binary search that searches for the boundaries of a target value.
+
+    Args:
+        array: The sorted list to search in.
+        target: The value to search for.
+        left: The left boundary of the current search range.
+        right: The right boundary of the current search range.
+        final_range: The result array that stores the start and end indices.
+        go_left: Boolean flag indicating whether we're searching for the left boundary (True)
+                 or right boundary (False) of the target range.
+    """
+    # Base case: stop when left pointer exceeds right pointer
     if left > right:
         return
 
+    # Calculate middle index
     middle = (left + right) // 2
 
     if array[middle] < target:
+        # Target is in the right half
         altered_binary_search(array, target, middle + 1, right, final_range, go_left)
     elif array[middle] > target:
+        # Target is in the left half
         altered_binary_search(array, target, left, middle - 1, final_range, go_left)
     else:
+        # Found the target value
         if go_left:
+            # We're searching for the left boundary
             if middle == 0 or array[middle - 1] != target:
+                # Found the left boundary (either at start of array or previous element is different)
                 final_range[0] = middle
             else:
+                # Continue searching left to find the earliest occurrence
                 altered_binary_search(
                     array, target, left, middle - 1, final_range, go_left
                 )
         else:
+            # We're searching for the right boundary
             if middle == len(array) - 1 or array[middle + 1] != target:
+                # Found the right boundary (either at end of array or next element is different)
                 final_range[1] = middle
             else:
+                # Continue searching right to find the last occurrence
                 altered_binary_search(
                     array, target, middle + 1, right, final_range, go_left
                 )
