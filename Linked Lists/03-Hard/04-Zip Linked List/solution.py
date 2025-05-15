@@ -214,4 +214,4 @@ linked_list = build_linked_list(linked_list_dict)
 result = zip_linkedList(linked_list)
 
 print_linked_list(result)
-# Correct output: 1 -> 6 -> 2 -> 5 -> 3 -> 4 -> None
+# Output: 1 -> 6 -> 2 -> 5 -> 3 -> 4 -> None
