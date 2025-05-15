@@ -101,3 +101,37 @@ print(shifted_binary_search([0, 1, 21, 33, 37, 45, 61, 71, 72, 73], 38))
 
 print(shifted_binary_search([111, 1, 5, 23], 5))
 # Output: 2
+
+# =========================================================================================================================== #
+
+# Big O Analysis:
+
+"""
+## Time and Space Complexity Analysis:
+
+Let's analyze the time and space complexity of the given `shifted_binary_search` algorithm.
+
+### Time Complexity:
+
+The algorithm is a modified binary search that works on a rotated sorted array. At each step, it:
+1. Calculates the middle index
+2. Compares the middle element with the target
+3. Determines which half of the array is properly sorted
+4. Decides whether to search in the left or right half based on where the target could be
+
+Since we're effectively dividing the search space in half with each iteration (similar to standard binary search),
+the time complexity is **O(log n)**, where n is the number of elements in the array.
+
+### Space Complexity:
+
+The algorithm is implemented iteratively (using a while loop) rather than recursively. It only uses a constant amount of
+additional space (for variables like `left`, `right`, `middle`, etc.), so the space complexity is **O(1)**.
+
+### Summary:
+- **Time Complexity:** O(log n)
+- **Space Complexity:** O(1)
+
+This makes it very efficient for searching in rotated sorted arrays, maintaining the same logarithmic time complexity as
+standard binary search while using constant space.
+
+"""
