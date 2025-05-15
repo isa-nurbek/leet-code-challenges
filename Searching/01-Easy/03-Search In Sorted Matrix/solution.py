@@ -107,3 +107,33 @@ target = 12
 
 print(search_in_sorted_matrix(matrix, target))
 # Output: [0, 3]
+
+# =========================================================================================================================== #
+
+# Big O Analysis:
+
+"""
+## Time and Space Complexity Analysis:
+
+### Time Complexity Analysis:
+
+The algorithm starts at the top-right corner of the matrix (or bottom-left could also work) and moves either **left** (to
+decrease the value) or **down** (to increase the value) based on the comparison with the `target`.
+
+- **Worst Case**: The algorithm traverses at most one full row and one full column.  
+  - For an `m x n` matrix, the maximum steps taken are `m + n - 1` (since you can go from the top-right to the bottom-left corner).  
+  - Thus, the time complexity is **O(m + n)**.
+
+### Space Complexity Analysis:
+
+- The algorithm uses a constant amount of extra space (only `row` and `col` variables are modified).  
+- Thus, the space complexity is **O(1)**.
+
+### Summary:
+- **Time Complexity**: **O(m + n)**  
+- **Space Complexity**: **O(1)**  
+
+This is optimal for this problem since in the worst case, you must check at least one full row or column to confirm
+the absence of the target.
+
+"""
