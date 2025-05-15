@@ -74,29 +74,37 @@ def build_linked_list(data):
     return nodes[data["head"]]
 
 
-# O(n) time | O(n) space
+# O(n) time | O(1) space
 def linkedList_palindrome(head):
+    # Edge case: empty list or single node is always a palindrome
     if not head or not head.next:
         return True
 
-    # Step 1: Find the middle using slow and fast pointers
+    # Step 1: Find the middle of the linked list using slow and fast pointers
+    # Slow moves 1 step at a time, fast moves 2 steps
+    # When fast reaches end, slow will be at middle
     slow = fast = head
     while fast and fast.next:
         slow = slow.next
         fast = fast.next.next
 
-    # Step 2: Reverse the second half
+    # Step 2: Reverse the second half of the linked list
+    # We'll reverse starting from the middle node (slow)
     prev = None
     current = slow
     while current:
+        # Store next node before we overwrite current.next
         next_node = current.next
+        # Reverse the link
         current.next = prev
+        # Move pointers forward
         prev = current
         current = next_node
+    # After loop, prev will be the head of reversed second half
 
     # Step 3: Compare the first half with the reversed second half
-    left = head
-    right = prev
+    left = head  # Pointer to start of first half
+    right = prev  # Pointer to start of reversed second half
     is_palindrome = True
     while right:
         if left.value != right.value:
@@ -105,14 +113,16 @@ def linkedList_palindrome(head):
         left = left.next
         right = right.next
 
-    # (Optional) Step 4: Restore the list (reverse back the second half)
-    current = prev
+    # Step 4 (Optional): Restore the original list by reversing the second half back
+    # This is good practice when you don't want to modify input data structure
+    current = prev  # prev is head of reversed second half
     prev = None
     while current:
         next_node = current.next
         current.next = prev
         prev = current
         current = next_node
+    # Reattach the restored second half to the middle node
     slow.next = prev
 
     return is_palindrome
