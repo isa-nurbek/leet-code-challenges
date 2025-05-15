@@ -34,33 +34,61 @@ O(log(n)) time | O(1) space - where `n` is the length of the input array.
 # Solution:
 
 
-# O(log(n)) time | O(log(n)) space
+# O(log(n)) time | O(1) space
 def shifted_binary_search(array, target):
+    """
+    Performs a binary search on a shifted sorted array to find the target value.
+
+    Args:
+    array: A sorted array that has been shifted (rotated) at some pivot point.
+    target: The value to search for in the array.
+
+    Returns:
+    The index of the target in the array, or -1 if not found.
+    """
     return shifted_binary_search_helper(array, target, 0, len(array) - 1)
 
 
 def shifted_binary_search_helper(array, target, left, right):
-    while left <= right:
-        middle = (left + right) // 2
-        potential_match = array[middle]
+    """
+    Helper function that performs the actual shifted binary search recursively.
 
-        left_num = array[left]
-        right_num = array[right]
+    Args:
+    array: The shifted sorted array to search.
+    target: The value to search for.
+    left: The left boundary of the current search range.
+    right: The right boundary of the current search range.
+
+    Returns:
+    The index of the target in the array, or -1 if not found.
+    """
+    while left <= right:
+        middle = (left + right) // 2  # Calculate the middle index
+        potential_match = array[middle]  # Value at middle index
+
+        left_num = array[left]  # Value at left boundary
+        right_num = array[right]  # Value at right boundary
 
         if target == potential_match:
-            return middle
-        elif left_num <= potential_match:
-            if target < potential_match and target >= left_num:
-                right = middle - 1
-            else:
-                left = middle + 1
-        else:
-            if target > potential_match and target <= right_num:
-                left = middle + 1
-            else:
-                right = middle - 1
+            return middle  # Found the target
 
-    return -1
+        # Check if left half is normally ordered (not shifted)
+        elif left_num <= potential_match:
+            # If target is in the normally ordered left half
+            if target < potential_match and target >= left_num:
+                right = middle - 1  # Search left half
+            else:
+                left = middle + 1  # Search right half
+
+        # Right half must be normally ordered (since left half isn't)
+        else:
+            # If target is in the normally ordered right half
+            if target > potential_match and target <= right_num:
+                left = middle + 1  # Search right half
+            else:
+                right = middle - 1  # Search left half
+
+    return -1  # Target not found in array
 
 
 # Test Cases:
