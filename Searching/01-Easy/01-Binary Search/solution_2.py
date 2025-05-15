@@ -129,3 +129,259 @@ implementation is iterative and does not use additional space for recursive call
 - **Space Complexity**: **O(1)** (constant space)
 
 """
+
+# =========================================================================================================================== #
+
+# Detailed Code Explanation:
+
+"""
+This code is an implementation of the **binary search** algorithm in Python. Binary search is a highly efficient algorithm for
+finding an element in a **sorted array**. It works by **repeatedly dividing the search interval in half**.
+
+---
+
+## 🔍 Core Idea of Binary Search
+
+* Start with the entire array.
+* Find the **middle element**.
+* If the middle element equals the target, return its index.
+* If the target is **less** than the middle element, search the **left half**.
+* If the target is **greater**, search the **right half**.
+* Repeat until the element is found or the search space is empty.
+
+---
+
+## ✅ Code Breakdown
+
+### `binary_search(array, target)`
+
+This is the main function that is called by the user. It serves as a **wrapper** to call a helper function with the initial
+search boundaries:
+
+```
+return binary_search_helper(array, target, 0, len(array) - 1)
+```
+
+* `array`: the sorted list of elements
+* `target`: the value to find
+* `0`: left boundary (start of array)
+* `len(array) - 1`: right boundary (end of array)
+
+---
+
+### `binary_search_helper(array, target, left, right)`
+
+This is the **actual binary search logic**, implemented using a `while` loop.
+
+```
+while left <= right:
+```
+
+This loop continues as long as the search space is valid. When `left > right`, it means the target is not found.
+
+---
+
+### Step-by-Step Execution Inside the Loop:
+
+```
+middle = (left + right) // 2
+```
+
+* Calculates the **midpoint index** of the current search range.
+
+```
+potential_match = array[middle]
+```
+
+* Retrieves the value at the middle index.
+
+---
+
+### Decision Making:
+
+```
+if target == potential_match:
+    return middle
+```
+
+* Found the target! Return the index.
+
+```
+elif target < potential_match:
+    right = middle - 1
+```
+
+* Target must be in the **left half**, so adjust the right boundary.
+
+```
+else:
+    left = middle + 1
+```
+
+* Target must be in the **right half**, so adjust the left boundary.
+
+---
+
+### If Not Found:
+
+```
+return -1
+```
+
+* If the loop exits without finding the target, return `-1` to indicate "not found".
+
+---
+
+## 🧪 Test Cases
+
+### Test 1:
+
+```
+print(binary_search([0, 1, 21, 33, 45, 45, 61, 71, 72, 73], 33))
+# Output: 3
+```
+
+* 33 is found at index `3`.
+
+### Test 2:
+
+```
+print(binary_search([1, 5, 23, 111], 5))
+# Output: 1
+```
+
+* 5 is at index `1`.
+
+### Test 3:
+
+```
+print(binary_search([0, 1, 21, 33, 45, 45, 61, 71, 72, 73], 0))
+# Output: 0
+```
+
+* 0 is at the beginning, index `0`.
+
+---
+
+## ⏱️ Time and Space Complexity
+
+* **Time Complexity**: O(log n)
+
+  * Because the search space is halved on each iteration.
+* **Space Complexity**: O(1)
+
+  * It uses constant space (iterative version). A recursive version would use O(log n) space due to the call stack.
+
+---
+
+## ✅ Summary
+
+* Efficient search for sorted arrays.
+* Works by dividing the array in half repeatedly.
+* Implemented iteratively here.
+* Returns the index if the element is found, otherwise `-1`.
+
+---
+
+Let's walk through a **visual ASCII step-by-step trace** of the binary search using this example:
+
+### 🔍 Example:
+
+```
+binary_search([0, 1, 21, 33, 45, 45, 61, 71, 72, 73], 33)
+```
+
+We are searching for **33** in a sorted array.
+
+---
+
+### 🧠 Step-by-Step ASCII Visualization
+
+#### Initial array:
+
+```
+Index :   0   1   2   3   4   5   6   7   8   9
+Array : [ 0,  1, 21, 33, 45, 45, 61, 71, 72, 73]
+Target: 33
+```
+
+---
+
+#### 🔁 Iteration 1:
+
+```
+left = 0
+right = 9
+middle = (0 + 9) // 2 = 4
+
+[ 0,  1, 21, 33, 45, 45, 61, 71, 72, 73]
+                   ↑
+                 middle = 4
+                 value  = 45
+```
+
+* `target (33) < 45` → search **left half**.
+* Update: `right = middle - 1 = 3`
+
+---
+
+#### 🔁 Iteration 2:
+
+```
+left = 0
+right = 3
+middle = (0 + 3) // 2 = 1
+
+[ 0,  1, 21, 33, 45, 45, 61, 71, 72, 73]
+       ↑
+     middle = 1
+     value  = 1
+```
+
+* `target (33) > 1` → search **right half**.
+* Update: `left = middle + 1 = 2`
+
+---
+
+#### 🔁 Iteration 3:
+
+```
+left = 2
+right = 3
+middle = (2 + 3) // 2 = 2
+
+[ 0,  1, 21, 33, 45, 45, 61, 71, 72, 73]
+           ↑
+         middle = 2
+         value  = 21
+```
+
+* `target (33) > 21` → search **right half**.
+* Update: `left = middle + 1 = 3`
+
+---
+
+#### 🔁 Iteration 4:
+
+```
+left = 3
+right = 3
+middle = (3 + 3) // 2 = 3
+
+[ 0,  1, 21, 33, 45, 45, 61, 71, 72, 73]
+               ↑
+             middle = 3
+             value  = 33
+```
+
+✅ Target found at index **3**!
+
+---
+
+## ✅ Final Result:
+
+```
+Return 3
+```
+
+"""
