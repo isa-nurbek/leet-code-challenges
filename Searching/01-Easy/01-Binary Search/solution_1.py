@@ -86,3 +86,41 @@ print(binary_search([1, 5, 23, 111], 5))
 
 print(binary_search([0, 1, 21, 33, 45, 45, 61, 71, 72, 73], 0))
 # Output: 0
+
+# =========================================================================================================================== #
+
+# Big O Analysis:
+
+"""
+## Time and Space Complexity Analysis:
+
+### Time Complexity:
+
+Binary search works by repeatedly dividing the search interval in half. At each step, the algorithm compares the middle element
+of the current interval with the target value and eliminates half of the remaining elements from consideration.
+
+- **Best Case**: O(1) - when the target is the middle element of the array.
+- **Worst Case**: O(log n) - when the target is at one of the ends or not present in the array.
+- **Average Case**: O(log n)
+
+Each recursive call processes half of the remaining elements, leading to a logarithmic number of operations with respect to the
+input size.
+
+### Space Complexity:
+
+This is a recursive implementation, so we need to consider the call stack:
+- In each recursive call, we only pass constant space (the array reference and a few indices).
+- The maximum depth of the recursion is the number of times we can divide the array in half, which is log₂n.
+
+Therefore:
+- **Space Complexity**: O(log n) for the recursive call stack.
+
+### Summary:
+- Time Complexity: O(log n)
+- Space Complexity: O(log n) (due to recursion)
+
+### Comparison with Iterative Binary Search:
+An iterative implementation would have O(1) space complexity since it doesn't use the call stack. This recursive version uses
+more space (O(log n)) due to the recursive calls, but both have the same O(log n) time complexity.
+
+"""
