@@ -138,3 +138,45 @@ result = node_swap(linked_list)
 
 print_linked_list(result)
 # Output: 1 -> 0 -> 3 -> 2 -> 5 -> 4 -> None
+
+# =========================================================================================================================== #
+
+# Big O Analysis:
+
+"""
+## Time and Space Complexity Analysis:
+
+Let's analyze the time and space complexity of the given `node_swap` function, which swaps nodes in pairs in a linked list.
+
+### Time Complexity:
+
+1. **Base Case**: The function checks if `head` is `None` or `head.next` is `None`. This is an O(1) operation.
+2. **Recursive Case**: 
+   - The function processes two nodes at a time (`head` and `head.next`), and then recursively calls `node_swap` on `head.next.next`
+   (i.e., the rest of the list after the current pair).
+   - This means the function processes each node exactly once, leading to O(n) time where `n` is the number of nodes in the linked list.
+   - Each recursive call does a constant amount of work (pointer manipulations) besides the recursive call.
+
+Thus, the time complexity is **O(n)**.
+
+### Space Complexity:
+
+1. **Recursion Stack**: 
+   - The space complexity is determined by the depth of the recursion stack.
+   - Since the function processes two nodes at a time, the maximum depth of the recursion stack is `n/2`, which simplifies to O(n).
+   - For example, a list with 4 nodes will have a recursion depth of 2: `node_swap(1->2->3->4)` calls `node_swap(3->4)`, which then
+   calls `node_swap(None)`.
+
+Thus, the space complexity is **O(n)** due to the recursion stack.
+
+### Summary for Given Code:
+- **Time Complexity**: O(n)
+- **Space Complexity**: O(n) (due to recursion stack)
+
+### Iterative Alternative (for O(1) space):
+If you wanted to optimize space, you could implement this iteratively.
+
+The iterative approach uses O(1) extra space (no recursion stack), so the space complexity would be O(1).
+The time complexity remains O(n).
+
+"""
