@@ -215,3 +215,51 @@ result = zip_linkedList(linked_list)
 
 print_linked_list(result)
 # Correct output: 1 -> 6 -> 2 -> 5 -> 3 -> 4 -> None
+
+# =========================================================================================================================== #
+
+# Big O Analysis:
+
+"""
+## Time and Space Complexity Analysis:
+
+Let's analyze the time and space complexity of each function and then the overall `zip_linkedList` function.
+
+### 1. `split_linkedList(linked_list)`
+- **Time Complexity**: O(n)
+  - The slow and fast pointer approach traverses the list once. The fast pointer moves two steps at a time, so the loop runs
+  approximately n/2 times, which is O(n).
+- **Space Complexity**: O(1)
+  - Only a constant amount of extra space is used for the pointers (`slow_iterator` and `fast_iterator`).
+
+### 2. `reverse_linkedList(linked_list)`
+- **Time Complexity**: O(n)
+  - The function traverses the entire list once, reversing the links as it goes.
+- **Space Complexity**: O(1)
+  - Only a constant amount of extra space is used for the pointers (`previous_node`, `current_node`, and `next_node`).
+
+### 3. `interweave_linkedLists(linked_list_1, linked_list_2)`
+- **Time Complexity**: O(n)
+  - The function traverses both lists once, interweaving the nodes. Since the second half is reversed and roughly half the
+  length of the original list, the total number of operations is proportional to n.
+- **Space Complexity**: O(1)
+  - Only a constant amount of extra space is used for the pointers (`linked_list_1_iterator`, `linked_list_2_iterator`,
+  `linked_list_1_next`, and `linked_list_2_next`).
+
+### 4. `zip_linkedList(linked_list)`
+- **Time Complexity**: O(n)
+  - `split_linkedList`: O(n)
+  - `reverse_linkedList`: O(n/2) ≈ O(n) (since it reverses the second half)
+  - `interweave_linkedLists`: O(n)
+  - The total time complexity is O(n) + O(n) + O(n) = O(n).
+- **Space Complexity**: O(1)
+  - All operations are done in-place with only a constant amount of extra space used across all helper functions.
+
+### Summary:
+- **Time Complexity**: O(n)
+- **Space Complexity**: O(1)
+
+The algorithm efficiently zips the linked list in linear time with constant space by splitting the list, reversing the
+second half, and then interweaving the two halves.
+
+"""
