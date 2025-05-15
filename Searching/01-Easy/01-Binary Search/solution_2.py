@@ -89,3 +89,43 @@ print(binary_search([1, 5, 23, 111], 5))
 
 print(binary_search([0, 1, 21, 33, 45, 45, 61, 71, 72, 73], 0))
 # Output: 0
+
+# =========================================================================================================================== #
+
+# Big O Analysis:
+
+"""
+## Time and Space Complexity Analysis:
+
+### Time Complexity Analysis:
+
+The time complexity of binary search is **O(log n)**, where **n** is the number of elements in the array.
+
+#### Explanation:
+1. **Divide and Conquer Approach**: In each iteration, the search space is halved. 
+   - Initially, the search space is the entire array (size `n`).
+   - After the first comparison, it reduces to `n/2`.
+   - After the second comparison, it reduces to `n/4`, and so on.
+   
+2. **Number of Steps**: The algorithm continues dividing the search space until it either finds the target or the search space is
+empty. The maximum number of steps required is the number of times you can divide `n` by 2 until you get to 1, which is `log₂ n`.
+
+#### Example:
+- For an array of size `8`, the worst-case number of steps is `log₂ 8 = 3`.
+- For an array of size `1024`, the worst-case number of steps is `log₂ 1024 = 10`.
+
+### Space Complexity Analysis:
+
+The space complexity is **O(1)** (constant space).
+
+#### Explanation:
+1. **Iterative Approach**: The algorithm uses a loop and only a few extra variables (`left`, `right`, `middle`, `potential_match`),
+regardless of the input size.
+2. **No Recursion**: Unlike the recursive version of binary search (which would have `O(log n)` space due to the call stack), this
+implementation is iterative and does not use additional space for recursive calls.
+
+### Summary:
+- **Time Complexity**: **O(log n)**
+- **Space Complexity**: **O(1)** (constant space)
+
+"""
