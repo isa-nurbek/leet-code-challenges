@@ -188,3 +188,44 @@ Linked list:
 Is palindrome? True
 
 """
+
+# =========================================================================================================================== #
+
+# Big O Analysis:
+
+"""
+## Time and Space Complexity Analysis:
+
+Let's analyze the time and space complexity of the given `linkedList_palindrome` function.
+
+### **Time Complexity: O(n)**
+
+- The function `is_palindrome` is called recursively for each node in the linked list (once per `right_node` traversal).
+- Each recursive call performs a constant amount of work (comparisons and pointer updates).
+- Since we traverse the entire linked list once, the time complexity is **O(n)**, where `n` is the number of nodes in the linked list.
+
+### **Space Complexity: O(n)**
+
+- The recursion stack grows proportionally to the length of the linked list because we make a recursive call for each node
+(until `right_node` becomes `None`).
+- In the worst case (when the list is not a palindrome), we reach the end of the list before unwinding the stack, leading to
+**O(n)** space usage.
+- If the list is a palindrome, we still use **O(n)** space due to the recursion depth.
+
+### **Summary**
+- **Time Complexity:** **O(n)** (linear time, as we visit each node once).
+- **Space Complexity:** **O(n)** (due to recursion stack; not constant space because we don’t modify the list in-place).
+
+### **Optimization Note**
+
+This approach uses recursion, which inherently uses **O(n)** space. An alternative **O(1)** space solution (but still **O(n)** time)
+would involve:
+1. Finding the middle of the linked list (using slow & fast pointers).
+2. Reversing the second half in-place.
+3. Comparing the first half with the reversed second half.
+4. Restoring the list (if required).
+
+This would avoid recursion and reduce space complexity to **O(1)**.
+However, the given solution is correct and efficiently solves the problem in **O(n)** time.
+
+"""
