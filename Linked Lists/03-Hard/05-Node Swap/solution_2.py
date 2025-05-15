@@ -137,3 +137,33 @@ result = node_swap(linked_list)
 
 print_linked_list(result)
 # Output: 1 -> 0 -> 3 -> 2 -> 5 -> 4 -> None
+
+# =========================================================================================================================== #
+
+# Big O Analysis:
+
+"""
+## Time and Space Complexity Analysis:
+
+Let's analyze the time and space complexity of the `node_swap` function, which swaps every two adjacent nodes in a linked list.
+
+### Time Complexity:
+
+- The function iterates through the linked list once, processing nodes in pairs.
+- For each pair of nodes, it performs a constant number of operations (pointer updates).
+- If the linked list has `n` nodes, the loop runs approximately `n/2` times (since we process two nodes at a time).
+- Thus, the time complexity is **O(n)**, where `n` is the number of nodes in the linked list.
+
+### Space Complexity:
+
+- The function uses a constant amount of extra space (`dummy`, `prev`, `first`, and `second` pointers), regardless of the input size.
+- No additional data structures or recursive calls are used.
+- Thus, the space complexity is **O(1)** (constant space).
+
+### Summary:
+- **Time Complexity:** O(n)
+- **Space Complexity:** O(1)
+
+This is an efficient in-place algorithm for swapping adjacent nodes in a linked list.
+
+"""
