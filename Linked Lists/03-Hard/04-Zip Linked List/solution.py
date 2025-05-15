@@ -214,7 +214,7 @@ linked_list = build_linked_list(linked_list_dict)
 result = zip_linkedList(linked_list)
 
 print_linked_list(result)
-# Correct output: 1 -> 6 -> 2 -> 5 -> 3 -> 4 -> None
+# Output: 1 -> 6 -> 2 -> 5 -> 3 -> 4 -> None
 
 # =========================================================================================================================== #
 
@@ -261,5 +261,335 @@ Let's analyze the time and space complexity of each function and then the overal
 
 The algorithm efficiently zips the linked list in linear time with constant space by splitting the list, reversing the
 second half, and then interweaving the two halves.
+
+"""
+
+# =========================================================================================================================== #
+
+# Detailed Code Explanation:
+
+"""
+Let's walk through the entire code step-by-step to understand what it does and how it works.
+
+## 🎯 **Goal of the Program**
+
+The code takes a **singly linked list** and rearranges it in a **zip** fashion:
+
+> **Original:** `1 -> 2 -> 3 -> 4 -> 5 -> 6 -> None`
+> **Zipped:** `1 -> 6 -> 2 -> 5 -> 3 -> 4 -> None`
+
+This is commonly called **zipping a linked list**, where nodes from the **start** and **end** are interleaved.
+
+---
+
+## 📦 1. `class LinkedList`
+
+```
+class LinkedList:
+    def __init__(self, value):
+        self.value = value
+        self.next = None
+```
+
+Defines a node in the singly linked list:
+
+* `value`: holds data (e.g. 1, 2, ...).
+* `next`: points to the next node in the list.
+
+---
+
+## 🏗️ 2. `build_linked_list(data)`
+
+This helper function converts a **dictionary representation** of a linked list into actual `LinkedList` objects.
+
+```
+def build_linked_list(data):
+    if not data:
+        return None
+
+    nodes = {}
+    for node_data in data["nodes"]:
+        node = LinkedList(node_data["value"])
+        nodes[node_data["id"]] = node
+
+    for node_data in data["nodes"]:
+        if node_data["next"] is not None:
+            nodes[node_data["id"]].next = nodes[node_data["next"]]
+
+    return nodes[data["head"]]
+```
+
+### 🔍 What it does:
+
+* Step 1: Create all `LinkedList` nodes and map them by their `"id"`.
+* Step 2: Link them according to the `"next"` field.
+* Step 3: Return the head of the linked list.
+
+✅ This gives us a proper `LinkedList` object we can work with.
+
+---
+
+## 🔄 3. `zip_linkedList(linked_list)`
+
+This is the **main function** that performs the zipping.
+
+```
+def zip_linkedList(linked_list):
+    if linked_list.next is None or linked_list.next.next is None:
+        return linked_list  # Too short to zip
+
+    first_half_head = linked_list
+    second_half_head = split_linkedList(linked_list)
+
+    reversed_second_half_head = reverse_linkedList(second_half_head)
+    return interweave_linkedLists(first_half_head, reversed_second_half_head)
+```
+
+### 🔍 Breakdown:
+
+* If the list has 1 or 2 elements, return it directly.
+* Otherwise:
+
+  1. Split the list into two halves.
+  2. Reverse the second half.
+  3. Interleave the two halves (zip them).
+
+---
+
+## ✂️ 4. `split_linkedList(linked_list)`
+
+This splits the list into two halves using the **slow and fast pointer** approach.
+
+```
+def split_linkedList(linked_list):
+    slow_iterator = linked_list
+    fast_iterator = linked_list
+
+    while fast_iterator is not None and fast_iterator.next is not None:
+        slow_iterator = slow_iterator.next
+        fast_iterator = fast_iterator.next.next
+
+    second_half_head = slow_iterator.next
+    slow_iterator.next = None  # Break the list
+
+    return second_half_head
+```
+
+### 🔍 Purpose:
+
+* Use two pointers:
+
+  * `slow` moves one step.
+  * `fast` moves two steps.
+* When `fast` reaches the end, `slow` is in the middle.
+* Cut the list after `slow`.
+
+**Example:**
+From `1 -> 2 -> 3 -> 4 -> 5 -> 6`, we get:
+
+* First half: `1 -> 2 -> 3`
+* Second half: `4 -> 5 -> 6`
+
+---
+
+## 🔁 5. `reverse_linkedList(linked_list)`
+
+Reverses a singly linked list.
+
+```
+def reverse_linkedList(linked_list):
+    previous_node, current_node = None, linked_list
+
+    while current_node is not None:
+        next_node = current_node.next
+        current_node.next = previous_node
+
+        previous_node = current_node
+        current_node = next_node
+
+    return previous_node
+```
+
+**Example:**
+Turns `4 -> 5 -> 6 -> None` into `6 -> 5 -> 4 -> None`.
+
+---
+
+## 🔗 6. `interweave_linkedLists(linked_list_1, linked_list_2)`
+
+This interleaves (zips) two lists together.
+
+```
+def interweave_linkedLists(linked_list_1, linked_list_2):
+    linked_list_1_iterator = linked_list_1
+    linked_list_2_iterator = linked_list_2
+
+    while linked_list_1_iterator is not None and linked_list_2_iterator is not None:
+        # Save next pointers
+        linked_list_1_next = linked_list_1_iterator.next
+        linked_list_2_next = linked_list_2_iterator.next
+
+        # Link current nodes
+        linked_list_1_iterator.next = linked_list_2_iterator
+        if linked_list_1_next is not None:
+            linked_list_2_iterator.next = linked_list_1_next
+
+        # Move to next nodes
+        linked_list_1_iterator = linked_list_1_next
+        linked_list_2_iterator = linked_list_2_next
+
+    return linked_list_1
+```
+
+**Example:**
+Interweaving `1 -> 2 -> 3` and `6 -> 5 -> 4` gives:
+
+```
+1 -> 6 -> 2 -> 5 -> 3 -> 4 -> None
+```
+
+It does so by alternating nodes between the two lists.
+
+---
+
+## 📤 7. `print_linked_list(linked_list)`
+
+Simply prints the linked list in readable format:
+
+```
+1 -> 6 -> 2 -> 5 -> 3 -> 4 -> None
+```
+
+---
+
+## ✅ Test Case
+
+```
+linked_list_dict = {
+    "head": "1",
+    "nodes": [
+        {"id": "1", "next": "2", "value": 1},
+        {"id": "2", "next": "3", "value": 2},
+        {"id": "3", "next": "4", "value": 3},
+        {"id": "4", "next": "5", "value": 4},
+        {"id": "5", "next": "6", "value": 5},
+        {"id": "6", "next": None, "value": 6},
+    ],
+}
+```
+
+This builds the list:
+
+```
+1 -> 2 -> 3 -> 4 -> 5 -> 6
+```
+
+After zipping:
+
+```
+1 -> 6 -> 2 -> 5 -> 3 -> 4
+```
+
+---
+
+## 🔚 Summary
+
+The entire flow:
+
+1. **Build** a linked list from a dictionary.
+2. **Split** it in two halves.
+3. **Reverse** the second half.
+4. **Interleave** the two halves to zip them.
+5. **Print** the result.
+
+---
+
+Let's walk through the **zipping process** visually using **ASCII diagrams** step-by-step:
+
+### 📋 **Original Linked List**
+
+We start with:
+
+```
+1 -> 2 -> 3 -> 4 -> 5 -> 6 -> None
+```
+
+---
+
+### ✂️ **Step 1: Split into Two Halves**
+
+Use **slow and fast pointers** to find the middle.
+
+```
+First Half:     1 -> 2 -> 3 -> None
+Second Half:                     4 -> 5 -> 6 -> None
+```
+
+---
+
+### 🔁 **Step 2: Reverse the Second Half**
+
+We reverse `4 -> 5 -> 6`:
+
+```
+Reversed Second Half:  6 -> 5 -> 4 -> None
+```
+
+---
+
+### 🔗 **Step 3: Interleave (Zip) the Two Lists**
+
+Now we interleave:
+
+* From first half: `1 -> 2 -> 3`
+* From reversed second half: `6 -> 5 -> 4`
+
+We do this **one node at a time**:
+
+#### ✅ Iteration 1:
+
+```
+Take 1 from First
+Take 6 from Second
+
+Result so far:  1 -> 6
+```
+
+#### ✅ Iteration 2:
+
+```
+Take 2 from First
+Take 5 from Second
+
+Result so far:  1 -> 6 -> 2 -> 5
+```
+
+#### ✅ Iteration 3:
+
+```
+Take 3 from First
+Take 4 from Second
+
+Final Result:   1 -> 6 -> 2 -> 5 -> 3 -> 4 -> None
+```
+
+---
+
+### 🎉 **Final Zipped Linked List**
+
+```
+1 -> 6 -> 2 -> 5 -> 3 -> 4 -> None
+```
+
+---
+
+### 🧠 Summary of Steps Visually:
+
+```
+Original:        1 -> 2 -> 3 -> 4 -> 5 -> 6 -> None
+Split:           1 -> 2 -> 3       and       4 -> 5 -> 6
+Reversed 2nd:                       6 -> 5 -> 4
+Zipped:          1 -> 6 -> 2 -> 5 -> 3 -> 4 -> None
+```
 
 """
