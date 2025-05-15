@@ -177,3 +177,51 @@ Linked list:
 Is palindrome? True
 
 """
+
+# =========================================================================================================================== #
+
+# Big O Analysis:
+
+"""
+## Time and Space Complexity Analysis:
+
+Let's analyze the time and space complexity of the `linkedList_palindrome` function step by step.
+
+### Time Complexity:
+
+1. **Finding the middle of the linked list (Step 1):**
+   - The `slow` pointer moves one step at a time, while the `fast` pointer moves two steps at a time.
+   - This takes `O(n/2)` time, which simplifies to `O(n)`.
+
+2. **Reversing the second half of the linked list (Step 2):**
+   - We reverse the second half of the list starting from the `slow` pointer.
+   - This also takes `O(n/2)` time, which simplifies to `O(n)`.
+
+3. **Comparing the first half with the reversed second half (Step 3):**
+   - We compare up to `n/2` nodes in the worst case.
+   - This takes `O(n/2)` time, which simplifies to `O(n)`.
+
+4. **(Optional) Restoring the linked list (Step 4):**
+   - We reverse the second half back to its original order.
+   - This takes `O(n/2)` time, which simplifies to `O(n)`.
+
+**Total Time Complexity:**
+- `O(n) + O(n) + O(n) + O(n) = O(n)`.
+- The dominant term is linear, so the overall time complexity is `O(n)`.
+
+### Space Complexity:
+
+- The algorithm uses a constant amount of extra space for pointers (`slow`, `fast`, `prev`, `current`, `next_node`, `left`, `right`, etc.).
+- No additional data structures (like stacks or arrays) are used.
+- Thus, the space complexity is `O(1)` (constant space).
+
+### Summary:
+- **Time Complexity:** `O(n)`
+- **Space Complexity:** `O(1)`
+
+### Note:
+The optional step (Step 4) restores the linked list to its original state, which is good practice if you don't want to modify the
+input data structure. However, if you don't care about restoring the list, you can omit Step 4, and the time complexity remains
+`O(n)` (since `O(n)` still dominates). The space complexity remains `O(1)` either way.
+
+"""
