@@ -44,6 +44,7 @@ class LinkedList:
         self.next = None  # Pointer to the next node (initially None)
 
 
+# Helper function to convert dictionary to LinkedList
 def build_intersected_linked_lists(list_one_data, list_two_data):
     """Builds two linked lists that may intersect, ensuring shared nodes are the same object.
 
@@ -129,6 +130,7 @@ def merging_linked_lists(linked_list_one, linked_list_two):
     return None  # No intersection found
 
 
+# Function to print the linked list (for verification)
 def print_linked_list(linked_list):
     """Prints the linked list values in order."""
     current = linked_list
