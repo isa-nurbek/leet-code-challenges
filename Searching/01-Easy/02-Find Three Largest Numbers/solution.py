@@ -109,3 +109,42 @@ print(find_three_largest_numbers([55, 43, 11, 3, -3, 10]))
 
 print(find_three_largest_numbers([7, 7, 7, 7, 7, 7, 8, 7, 7, 7, 7]))
 # Output: [7, 7, 8]
+
+# =========================================================================================================================== #
+
+# Big O Analysis:
+
+"""
+## Time and Space Complexity Analysis:
+
+### **Time Complexity:**
+
+1. **`find_three_largest_numbers(array)`**:
+   - This function iterates over each element in the input array once (`O(n)` time, where `n` is the size of the array).
+   - For each element, it calls `update_largest()`, which performs comparisons and possibly calls `shift_and_update()`.
+
+2. **`update_largest(three_largest, num)`**:
+   - This function performs at most 3 comparisons (`O(1)` time per call).
+
+3. **`shift_and_update(array, num, idx)`**:
+   - This function shifts elements in the `three_largest` array up to index `idx`. The worst case is when `idx = 2`, which
+   requires shifting 3 elements (`O(1)` time since the array size is fixed at 3).
+
+**Overall Time Complexity**:
+- Since each element in the input array is processed in `O(1)` time (due to fixed-size operations),
+the total time complexity is: O(n) where `n` is the number of elements in the input array.
+
+---
+
+### **Space Complexity:**
+
+1. The algorithm uses an auxiliary array `three_largest` of size 3, which is **constant space**.
+2. No additional space is used that scales with the input size.
+
+**Overall Space Complexity**: O(1)
+
+### **Summary:**
+- **Time Complexity:** O(n)
+- **Space Complexity:** O(1)
+
+"""
