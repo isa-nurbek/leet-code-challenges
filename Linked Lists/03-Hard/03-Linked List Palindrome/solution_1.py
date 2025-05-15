@@ -229,3 +229,317 @@ This would avoid recursion and reduce space complexity to **O(1)**.
 However, the given solution is correct and efficiently solves the problem in **O(n)** time.
 
 """
+
+# =========================================================================================================================== #
+
+# Detailed Code Explanation:
+
+"""
+This code checks whether a given **singly linked list** is a **palindrome**—that is, whether it reads the same forwards and
+backwards. Here's a detailed explanation of each part of the code, its structure, and how it works step by step.
+
+---
+
+## 🔧 1. **LinkedList Node Definition**
+
+```
+class LinkedList:
+    def __init__(self, value):
+        self.value = value
+        self.next = None
+```
+
+* This is a **custom singly linked list node class**.
+* Each node holds a `value` and a reference to the `next` node (`None` by default).
+
+---
+
+## 🏗️ 2. **build_linked_list(data)**
+
+```
+def build_linked_list(data):
+```
+
+This function constructs the linked list from a **dictionary format** like:
+
+```
+{
+    "head": "0",
+    "nodes": [
+        {"id": "0", "next": "1", "value": 0},
+        ...
+    ]
+}
+```
+
+### 🔍 How it works:
+
+1. **Create a dictionary of node instances** keyed by their IDs:
+
+   ```
+   nodes = {}
+   for node_data in data["nodes"]:
+       node = LinkedList(node_data["value"])
+       nodes[node_data["id"]] = node
+   ```
+
+2. **Connect the nodes** using the `next` references:
+
+   ```
+   for node_data in data["nodes"]:
+       if node_data["next"] is not None:
+           nodes[node_data["id"]].next = nodes[node_data["next"]]
+   ```
+
+3. **Return the head node**:
+
+   ```
+   return nodes[data["head"]]
+   ```
+
+---
+
+## 🔁 3. **Recursive Palindrome Check**
+
+### Main function:
+
+```
+def linkedList_palindrome(head):
+    is_palindrome_results = is_palindrome(head, head)
+    return is_palindrome_results.outer_nodes_are_equal
+```
+
+* This calls the recursive `is_palindrome` helper to check if the linked list is a palindrome.
+* It passes the `head` node twice:
+
+  * One will stay at the front (`left_node`)
+  * The other will recurse to the end (`right_node`)
+
+---
+
+## 🔄 4. **Recursive Helper: `is_palindrome()`**
+
+```
+def is_palindrome(left_node, right_node):
+    if right_node is None:
+        return LinkedListInfo(True, left_node)
+```
+
+### 🔁 Key idea: **Recursive reverse traversal**
+
+* The recursion **goes to the end of the list** (`right_node` moves to `None`), then
+* As it **unwinds**, it compares values from **both ends** inward:
+
+  * `right_node` comes from the **back**
+  * `left_node_to_compare` comes from the **front**
+
+### Step-by-step:
+
+1. **Base Case**:
+
+   * When `right_node` is `None`, return:
+
+     ```
+     LinkedListInfo(True, left_node)
+     ```
+
+     * This means we're at the end, and comparison can begin.
+
+2. **Recursive Call**:
+
+   ```
+   recursive_call_results = is_palindrome(left_node, right_node.next)
+   ```
+
+   * This walks all the way to the end.
+
+3. **Check value equality while unwinding**:
+
+   ```
+   recursive_is_equal = (
+       outer_nodes_are_equal and left_node_to_compare.value == right_node.value
+   )
+   ```
+
+4. **Advance the left pointer (towards center)**:
+
+   ```
+   next_left_node_to_compare = left_node_to_compare.next
+   ```
+
+5. **Return new `LinkedListInfo` object**:
+
+   ```
+   return LinkedListInfo(recursive_is_equal, next_left_node_to_compare)
+   ```
+
+---
+
+## 🧱 5. **Support Class: `LinkedListInfo`**
+
+```
+class LinkedListInfo:
+    def __init__(self, outer_nodes_are_equal, left_node_to_compare):
+        self.outer_nodes_are_equal = outer_nodes_are_equal
+        self.left_node_to_compare = left_node_to_compare
+```
+
+* A container to hold two values:
+
+  * `outer_nodes_are_equal`: Are the outer nodes matched up to this point?
+  * `left_node_to_compare`: Move this forward on each recursive return.
+
+---
+
+## 🖨️ 6. **Print Utility Function**
+
+```
+def print_linked_list(linked_list):
+    current = linked_list
+    while current:
+        print(current.value, end=" -> ")
+        current = current.next
+    print("None")
+```
+
+* Just prints the list nicely: `0 -> 1 -> 2 -> 2 -> 1 -> 0 -> None`
+
+---
+
+## 🧪 7. **Test Case Input**
+
+```
+linked_list_dict = {
+    "head": "0",
+    "nodes": [
+        {"id": "0", "next": "1", "value": 0},
+        {"id": "1", "next": "2", "value": 1},
+        {"id": "2", "next": "2-2", "value": 2},
+        {"id": "2-2", "next": "1-2", "value": 2},
+        {"id": "1-2", "next": "0-2", "value": 1},
+        {"id": "0-2", "next": None, "value": 0},
+    ],
+}
+```
+
+* This builds the list: `0 -> 1 -> 2 -> 2 -> 1 -> 0`
+* This is a **palindrome**, so the output will be:
+
+```
+Is palindrome? True
+```
+
+---
+
+## ⏱️ Time and Space Complexity
+
+### Time Complexity: **O(n)**
+
+* Each node is visited exactly once during recursion.
+
+### Space Complexity: **O(n)**
+
+* Due to the **recursive call stack** holding `n` frames (1 per node).
+
+---
+
+## ✅ Summary
+
+This code:
+
+* Builds a linked list from a dictionary format.
+* Checks if the list is a palindrome using a clever **recursive approach**.
+* Uses an inner class to pass multiple values back during recursion.
+* Has O(n) time and space complexity.
+
+---
+
+Let's visualize the linked list and how the **recursive palindrome check** works in ASCII.
+
+## 🔗 Linked List Structure
+
+Given this input:
+
+```
+linked_list_dict = {
+    "head": "0",
+    "nodes": [
+        {"id": "0", "next": "1", "value": 0},
+        {"id": "1", "next": "2", "value": 1},
+        {"id": "2", "next": "2-2", "value": 2},
+        {"id": "2-2", "next": "1-2", "value": 2},
+        {"id": "1-2", "next": "0-2", "value": 1},
+        {"id": "0-2", "next": None, "value": 0},
+    ],
+}
+```
+
+### ➤ ASCII Diagram of the Linked List
+
+```
+[0] --> [1] --> [2] --> [2] --> [1] --> [0] --> None
+ ^                                     ^
+Head                                   Tail
+```
+
+---
+
+## 🔁 Recursive Palindrome Check (Step-by-Step)
+
+The recursion starts with both `left_node` and `right_node` pointing to the **head**.
+
+### ➤ Step 1: Traverse to the end (recursion goes deep)
+
+Call Stack builds like this:
+
+```
+is_palindrome(0, 0)    # right_node = 0
+└─ is_palindrome(0, 1)    # right_node = 1
+   └─ is_palindrome(0, 2)
+      └─ is_palindrome(0, 2)
+         └─ is_palindrome(0, 1)
+            └─ is_palindrome(0, 0)
+               └─ is_palindrome(0, None)  # Base case
+```
+
+At the base case:
+
+* `right_node` is `None`
+* Return `LinkedListInfo(True, left_node = 0)`
+
+---
+
+### ⬅ Step 2: Backtrack and Compare Values
+
+Now, as the stack unwinds, we compare values from **outside inward**:
+
+```
+Unwinding order (right_node):
+0  ←  left = 0  →  MATCH
+1  ←  left = 1  →  MATCH
+2  ←  left = 2  →  MATCH
+2  ←  left = 2  →  MATCH
+1  ←  left = 1  →  MATCH
+0  ←  left = 0  →  MATCH
+```
+
+### ASCII Tracking:
+
+```
+Comparisons:
+[0] == [0]  ✔
+ [1] == [1] ✔
+  [2] == [2] ✔
+
+Halfway reached, all values match. ✅
+```
+
+---
+
+## ✅ Final Result
+
+```
+Is palindrome? True
+```
+
+"""
