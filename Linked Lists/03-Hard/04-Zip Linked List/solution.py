@@ -182,6 +182,7 @@ def reverse_linkedList(linked_list):
     return previous_node  # New head of reversed list
 
 
+# Function to print the linked list (for verification)
 def print_linked_list(linked_list):
     """Prints a linked list in arrow format.
 
