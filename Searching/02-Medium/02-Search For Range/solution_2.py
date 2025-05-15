@@ -37,34 +37,61 @@ O(log(n)) time | O(1) space - where `n` is the length of the input array.
 
 # O(log(n)) time | O(1) space
 def search_for_range(array, target):
+    # Initialize the final range with [-1, -1] in case target is not found
     final_range = [-1, -1]
 
+    # First search to find the leftmost index of target (go_left = True)
     altered_binary_search(array, target, 0, len(array) - 1, final_range, True)
+    # Second search to find the rightmost index of target (go_left = False)
     altered_binary_search(array, target, 0, len(array) - 1, final_range, False)
 
     return final_range
 
 
 def altered_binary_search(array, target, left, right, final_range, go_left):
+    """
+    A modified binary search that searches for the leftmost or rightmost
+    occurrence of target in array and updates final_range accordingly.
+
+    Args:
+        array: The sorted array to search in
+        target: The value to search for
+        left: Left boundary of current search range
+        right: Right boundary of current search range
+        final_range: The result array to store start/end indices
+        go_left: Boolean indicating whether we're searching for leftmost (True)
+                 or rightmost (False) occurrence
+    """
     while left <= right:
         middle = (left + right) // 2
 
         if array[middle] < target:
+            # Target is in right half
             left = middle + 1
         elif array[middle] > target:
+            # Target is in left half
             right = middle - 1
         else:
+            # Found target value at middle index
             if go_left:
+                # We're searching for left boundary
                 if middle == 0 or array[middle - 1] != target:
+                    # Found left boundary (either at start of array or previous
+                    # element isn't target)
                     final_range[0] = middle
                     return
                 else:
+                    # Continue searching left half for earlier occurrences
                     right = middle - 1
             else:
+                # We're searching for right boundary
                 if middle == len(array) - 1 or array[middle + 1] != target:
+                    # Found right boundary (either at end of array or next
+                    # element isn't target)
                     final_range[1] = middle
                     return
                 else:
+                    # Continue searching right half for later occurrences
                     left = middle + 1
 
 
