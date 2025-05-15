@@ -119,3 +119,47 @@ print(search_for_range([5, 7, 7, 8, 8, 10], 5))
 
 print(search_for_range([0, 1, 21, 33, 45, 45, 45, 45, 45, 45, 61, 71, 73], -1))
 # Output: [-1, -1]
+
+# =========================================================================================================================== #
+
+# Big O Analysis:
+
+"""
+## Time and Space Complexity Analysis:
+
+Let's analyze the time and space complexity of the given `search_for_range` algorithm.
+
+### **Time Complexity: O(log n)**
+
+The algorithm performs two modified binary searches:
+1. One to find the leftmost occurrence of the target (`go_left = True`).
+2. One to find the rightmost occurrence of the target (`go_left = False`).
+
+Each binary search runs in **O(log n)** time because, in the worst case, it halves the search space in each recursive call.
+Since we perform **two independent binary searches**, the total time remains **O(log n)**.
+
+#### **Why not O(2 log n)?**
+- In Big-O notation, we drop constant factors, so **O(2 log n) = O(log n)**.
+
+### **Space Complexity: O(log n) (due to recursion stack)**
+
+The algorithm uses recursion, and the maximum depth of the recursion stack is determined by the number of times we split
+the array in half:
+- Each binary search has a recursion depth of **O(log n)**.
+- Since the two searches are independent (not nested), the space complexity remains **O(log n)**.
+
+### **Summary**
+
+| Complexity  | Value                                             |
+|-------------|---------------------------------------------------|
+| **Time**    | O(log n)                                          |
+| **Space**   | O(log n) (can be O(1) if implemented iteratively) |
+
+#### **Can we optimize space to O(1)?**
+
+Yes! If we rewrite the binary search iteratively instead of recursively, the space complexity reduces to **O(1)** because
+we no longer use the call stack.
+
+This algorithm efficiently finds the range of a target in a sorted array using a modified binary search approach.
+
+"""
