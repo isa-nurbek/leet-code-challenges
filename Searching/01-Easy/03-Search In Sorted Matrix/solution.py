@@ -42,17 +42,39 @@ O(n + m) time | O(1) space - where `n` is the length of the matrix's rows and `m
 
 # O(n + m) time | O(1) space
 def search_in_sorted_matrix(matrix, target):
+    """
+    Searches for a target value in a 2D matrix where:
+    - Each row is sorted in ascending order
+    - Each column is sorted in ascending order
+
+    Args:
+    matrix: List[List[int]] - The 2D sorted matrix to search in
+    target: int - The value to search for
+
+    Returns:
+    List[int] - The [row, col] indices if found, else [-1, -1]
+    """
+
+    # Start from the top-right corner of the matrix
+    # This position gives us a "middle" point where:
+    # - Moving left decreases values
+    # - Moving down increases values
     row = 0
     col = len(matrix[0]) - 1
 
+    # Continue searching while within matrix bounds
     while row < len(matrix) and col >= 0:
         if matrix[row][col] > target:
+            # Current value is too large, move left to smaller values
             col -= 1
         elif matrix[row][col] < target:
+            # Current value is too small, move down to larger values
             row += 1
         else:
+            # Found the target, return its position
             return [row, col]
 
+    # Target not found in matrix
     return [-1, -1]
 
 
