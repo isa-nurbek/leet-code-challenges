@@ -137,3 +137,192 @@ This is optimal for this problem since in the worst case, you must check at leas
 the absence of the target.
 
 """
+
+# =========================================================================================================================== #
+
+# Detailed Code Explanation:
+
+"""
+The function `search_in_sorted_matrix` efficiently searches for a target number in a special kind of matrix — one where **each
+row is sorted from left to right** and **each column is sorted from top to bottom**.
+
+---
+
+## 🔍 Goal
+
+Given such a matrix and a target value, return the **[row, column]** of the target if found, else return `[-1, -1]`.
+
+---
+
+## ✅ Key Matrix Property
+
+In the matrix:
+
+```python
+[
+    [ 1,   4,   7,  12,  15, 1000],
+    [ 2,   5,  19,  31,  32, 1001],
+    [ 3,   8,  24,  33,  35, 1002],
+    [40,  41,  42,  44,  45, 1003],
+    [99, 100, 103, 106, 128, 1004],
+]
+```
+
+* Every **row** is sorted left to right.
+* Every **column** is sorted top to bottom.
+
+So, we can eliminate entire rows or columns intelligently.
+
+---
+
+## 🚀 Approach: Start from Top-Right Corner
+
+### Why top-right?
+
+At any element at `(row, col)`:
+
+* If the current value is **greater than** the target → move **left** (values decrease).
+* If the current value is **less than** the target → move **down** (values increase).
+* If it's equal → return its position.
+
+---
+
+## 🔢 Code Walkthrough
+
+```
+def search_in_sorted_matrix(matrix, target):
+    row = 0                                 # Start from the first row
+    col = len(matrix[0]) - 1                # Start from the last column (top-right corner)
+
+    while row < len(matrix) and col >= 0:   # Stay within matrix bounds
+        if matrix[row][col] > target:       # Too big? Move left
+            col -= 1
+        elif matrix[row][col] < target:     # Too small? Move down
+            row += 1
+        else:                               # Found it
+            return [row, col]
+
+    return [-1, -1]                          # Not found
+```
+
+---
+
+## 🧪 Test Case 1
+
+```
+target = 44
+```
+
+Start at top-right: `matrix[0][5] = 1000`
+
+| Step | Value | Action           | New Position |
+| ---- | ----- | ---------------- | ------------ |
+| 1    | 1000  | > 44 → left      | (0, 4)       |
+| 2    | 15    | < 44 → down      | (1, 4)       |
+| 3    | 32    | < 44 → down      | (2, 4)       |
+| 4    | 35    | < 44 → down      | (3, 4)       |
+| 5    | 45    | > 44 → left      | (3, 3)       |
+| 6    | 44    | == 44 → ✅ found | (3, 3)       |
+
+**Output:** `[3, 3]`
+
+---
+
+## 🧪 Test Case 2
+
+```
+target = 12
+```
+
+Start at `matrix[0][5] = 1000`
+
+| Step | Value | Action            | New Position |
+| ---- | ----- | ----------------- | ------------ |
+| 1    | 1000  | > 12 → left       | (0, 4)       |
+| 2    | 15    | > 12 → left       | (0, 3)       |
+| 3    | 12    | == 12 → ✅ found  | (0, 3)       |
+
+**Output:** `[0, 3]`
+
+---
+
+## ⏱️ Time & Space Complexity
+
+### Time Complexity: **O(m + n)**
+
+* At most we go down `m` times and left `n` times.
+* Efficient for large matrices.
+
+### Space Complexity: **O(1)**
+
+* No extra space used.
+
+---
+
+## ✅ Summary
+
+* Start at top-right corner.
+* Use matrix properties to eliminate rows/columns.
+* Very efficient and elegant solution for sorted 2D matrices.
+
+---
+
+Here's an **ASCII visualization** of how the search progresses through the matrix in both test cases.
+
+---
+
+## 🧪 Test Case 1: `target = 44`
+
+### Matrix:
+
+```
+[
+ [  1,   4,   7,  12,  15, 1000],
+ [  2,   5,  19,  31,  32, 1001],
+ [  3,   8,  24,  33,  35, 1002],
+ [ 40,  41,  42,  44,  45, 1003],
+ [ 99, 100, 103, 106, 128, 1004]
+]
+```
+
+### Traversal path to find `44`:
+
+We mark each visited cell with `*`, and the found target with `✔`.
+
+```
+[
+ [  1,   4,   7,  12,  15, *1000],
+ [  2,   5,  19,  31,  *32, *1001],
+ [  3,   8,  24,  33,  *35, *1002],
+ [ 40,  41,  42, ✔44,  *45, *1003],
+ [ 99, 100, 103, 106, 128, 1004]
+]
+```
+
+---
+
+## 🧪 Test Case 2: `target = 12`
+
+### Traversal path to find `12`:
+
+```
+[
+ [  1,   4,   7, ✔12,  *15, *1000],
+ [  2,   5,  19,  31,  32, 1001],
+ [  3,   8,  24,  33,  35, 1002],
+ [ 40,  41,  42,  44,  45, 1003],
+ [ 99, 100, 103, 106, 128, 1004]
+]
+```
+
+---
+
+## 🔁 Legend
+
+* `*` → Visited cell
+* `✔` → Target found
+
+This makes it visually clear how the algorithm “slides” left/down toward the target using the matrix’s sorted nature.
+
+
+"""
