@@ -46,6 +46,7 @@ class LinkedList:
         self.next = None  # Pointer to the next node (initially None)
 
 
+# Helper function to convert dictionary to LinkedList
 def build_linked_list(data):
     """Builds a linked list from a dictionary representation.
 
@@ -140,6 +141,7 @@ def recursive_merge(p1, p2, p1_prev):
         recursive_merge(p1, new_p2, p2)
 
 
+# Function to print the linked list (for verification)
 def print_linked_list(head):
     """Prints the linked list in a readable format.
 
