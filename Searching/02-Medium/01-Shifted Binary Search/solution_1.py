@@ -140,3 +140,243 @@ the call stack.
 - Space Complexity: **O(log n)** (due to recursion)
 
 """
+
+# =========================================================================================================================== #
+
+# Detailed Code Explanation:
+
+"""
+The function `shifted_binary_search` is designed to efficiently find a target element in a **shifted (or rotated) sorted array**.
+A shifted sorted array is an array that was initially sorted in ascending order but then rotated (or shifted) at some pivot point.
+For example:
+
+Original sorted array:
+
+```
+[0, 1, 2, 3, 4, 5, 6]
+```
+
+Shifted version:
+
+```
+[4, 5, 6, 0, 1, 2, 3]
+```
+
+---
+
+### 🔍 Goal:
+
+Find the index of a `target` number in such a shifted array using a modified binary search. If not found, return `-1`.
+
+---
+
+## ✅ Code Walkthrough
+
+```
+def shifted_binary_search(array, target):
+    return shifted_binary_search_helper(array, target, 0, len(array) - 1)
+```
+
+* A simple wrapper function that starts the recursive binary search with full array boundaries (`left = 0`, `right = len(array) - 1`).
+
+---
+
+### Core Recursive Logic
+
+```
+def shifted_binary_search_helper(array, target, left, right):
+    if left > right:
+        return -1  # Base case: target not found
+```
+
+* If the search boundaries cross over, the target isn't in the array.
+
+```
+middle = (left + right) // 2
+potential_match = array[middle]
+
+left_num = array[left]
+right_num = array[right]
+```
+
+* `middle` is the midpoint of the current subarray.
+* `potential_match` is the value at the middle.
+* `left_num` and `right_num` store the boundary values for reasoning about sorted halves.
+
+---
+
+### 🎯 Base Match Case
+
+```
+if target == potential_match:
+    return middle
+```
+
+* If the middle element is the target, return the index.
+
+---
+
+### 🔄 Identifying Sorted Halves
+
+A rotated array still has **at least one sorted half** (left or right), which is critical for binary search to proceed correctly.
+
+```
+elif left_num <= potential_match:
+```
+
+* If the **left half** (`left` to `middle`) is sorted:
+
+```
+if target < potential_match and target >= left_num:
+    # Target is in the sorted left half
+    return shifted_binary_search_helper(array, target, left, middle - 1)
+else:
+    # Target is in the right half
+    return shifted_binary_search_helper(array, target, middle + 1, right)
+```
+
+---
+
+```
+else:
+    # Right half is sorted
+    if target > potential_match and target <= right_num:
+        # Target is in the sorted right half
+        return shifted_binary_search_helper(array, target, middle + 1, right)
+    else:
+        # Target is in the left half
+        return shifted_binary_search_helper(array, target, left, middle - 1)
+```
+
+---
+
+## 📊 Time & Space Complexity
+
+* **Time Complexity:** `O(log n)` — It halves the search space each time, like standard binary search.
+* **Space Complexity:** `O(log n)` due to recursion stack (can be made `O(1)` using an iterative version).
+
+---
+
+## 🧪 Test Case Explanation
+
+### Test 1:
+
+```
+shifted_binary_search([45, 61, 71, 72, 73, 0, 1, 21, 33, 37], 33)
+```
+
+* Rotated at index 5. Sorted parts: `[45...73]` and `[0...37]`.
+* 33 is in the right half ⇒ found at index **8** ✅
+
+---
+
+### Test 2:
+
+```
+shifted_binary_search([0, 1, 21, 33, 37, 45, 61, 71, 72, 73], 38)
+```
+
+* Not rotated. Standard binary search.
+* 38 not found ⇒ returns **-1** ✅
+
+---
+
+### Test 3:
+
+```
+shifted_binary_search([111, 1, 5, 23], 5)
+```
+
+* Rotated: `[111] [1, 5, 23]`
+* 5 is in the sorted right half ⇒ found at index **2** ✅
+
+---
+
+## ✅ Summary
+
+This algorithm extends the classic binary search to handle **rotated sorted arrays** by intelligently determining which half
+is sorted and deciding whether to search there based on the target's value range.
+
+---
+
+Here's a **visual ASCII explanation** of how the `shifted_binary_search` works step by step. Let's walk through this example:
+
+### 🔍 Example:
+
+```
+array = [45, 61, 71, 72, 73, 0, 1, 21, 33, 37]
+target = 33
+```
+
+---
+
+### Step 1: Full Array View
+
+```
+Index:   0   1   2   3   4   5   6   7   8   9
+Array:  [45, 61, 71, 72, 73,  0,  1, 21, 33, 37]
+                  ↑                   ↑
+                left                right
+              = 0                   = 9
+```
+
+Midpoint is:
+
+```
+middle = (0 + 9) // 2 = 4
+array[4] = 73
+```
+
+* Left half [45, 61, 71, 72, 73] is **sorted**.
+* Target = 33 is **not in** [45...73], so search **right half**.
+
+---
+
+### Step 2: Right Half: index 5 to 9
+
+```
+Index:   0   1   2   3   4   5   6   7   8   9
+Array:                     [ 0,  1, 21, 33, 37]
+                            ↑             ↑
+                          left          right
+                        = 5             = 9
+```
+
+```
+middle = (5 + 9) // 2 = 7
+array[7] = 21
+```
+
+* Left half [0, 1, 21] is sorted.
+* Target = 33 is **not in** [0...21], so search **right half**.
+
+---
+
+### Step 3: Right Half: index 8 to 9
+
+```
+Index:   0   1   2   3   4   5   6   7   8   9
+Array:                            [33, 37]
+                                   ↑    ↑
+                                 left right
+                                = 8   = 9
+```
+
+```
+middle = (8 + 9) // 2 = 8
+array[8] = 33
+```
+
+✅ Found! Return index **8**
+
+---
+
+### Final Recap:
+
+Each time, the algorithm:
+
+* Divides the array in half.
+* Identifies which side is **sorted**.
+* Narrows down search to only the half where the target **could exist**.
+
+"""
