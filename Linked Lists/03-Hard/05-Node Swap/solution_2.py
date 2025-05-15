@@ -167,3 +167,321 @@ Let's analyze the time and space complexity of the `node_swap` function, which s
 This is an efficient in-place algorithm for swapping adjacent nodes in a linked list.
 
 """
+
+# =========================================================================================================================== #
+
+# Detailed Code Explanation:
+
+"""
+Let's break down the code step by step to explain how everything works together to achieve **pairwise swapping of nodes in a linked list**.
+
+---
+
+## ✅ **1. Class Definition**
+
+```
+class LinkedList:
+    def __init__(self, value):
+        self.value = value
+        self.next = None
+```
+
+This is a simple `LinkedList` node class:
+
+* Each node contains a `value`.
+* And a `next` pointer that points to the **next node** in the linked list.
+* Initially, `next` is set to `None`.
+
+---
+
+## ✅ **2. Building a Linked List from a Dictionary**
+
+```
+def build_linked_list(data):
+    ...
+```
+
+This function converts a dictionary (like JSON data) into an actual linked list made of `LinkedList` objects.
+
+### 🔹 Step-by-step:
+
+Suppose we get this dictionary input:
+
+```
+{
+    "head": "0",
+    "nodes": [
+        {"id": "0", "next": "1", "value": 0},
+        {"id": "1", "next": "2", "value": 1},
+        ...
+    ]
+}
+```
+
+### 🔹 Step 1: Create all the nodes and store in a dictionary
+
+```
+nodes = {}
+for node_data in data["nodes"]:
+    node = LinkedList(node_data["value"])
+    nodes[node_data["id"]] = node
+```
+
+* Creates a `LinkedList` object for each node.
+* Maps each node's `id` to the node object.
+
+### 🔹 Step 2: Connect the `next` pointers
+
+```
+for node_data in data["nodes"]:
+    if node_data["next"] is not None:
+        nodes[node_data["id"]].next = nodes[node_data["next"]]
+```
+
+* Sets the `next` attribute to the corresponding node using the `id`.
+
+### 🔹 Step 3: Return the head node
+
+```
+return nodes[data["head"]]
+```
+
+* Returns the node corresponding to the `head` id.
+
+---
+
+## ✅ **3. Swapping Nodes in Pairs (`node_swap`)**
+
+```
+def node_swap(head):
+    ...
+```
+
+This function swaps every **pair of adjacent nodes** in the linked list.
+
+### 🔹 Example Before Swap:
+
+```
+0 -> 1 -> 2 -> 3 -> 4 -> 5 -> None
+```
+
+### 🔹 After Swap:
+
+```
+1 -> 0 -> 3 -> 2 -> 5 -> 4 -> None
+```
+
+### 🔹 Step-by-step explanation:
+
+#### 1. Dummy node
+
+```
+dummy = LinkedList(0)
+dummy.next = head
+prev = dummy
+```
+
+* A dummy node is used to simplify edge cases (like when head is being changed).
+* `prev` is a pointer used to track the node **before the current pair**.
+
+#### 2. Loop to iterate through pairs
+
+```
+while prev.next and prev.next.next:
+```
+
+* Loop as long as there are at least two nodes ahead to form a pair.
+
+#### 3. Identify the two nodes in the pair
+
+```
+first = prev.next
+second = prev.next.next
+```
+
+#### 4. Swap the nodes
+
+```
+prev.next = second          # previous node now points to second
+first.next = second.next    # first now points to node after second
+second.next = first         # second points to first (completing the swap)
+```
+
+This changes:
+
+```
+prev -> first -> second -> next_pair
+```
+
+To:
+
+```
+prev -> second -> first -> next_pair
+```
+
+#### 5. Move the `prev` pointer forward
+
+```
+prev = first
+```
+
+* `first` is now the second node in the pair after swapping, so `prev` moves to it.
+
+---
+
+## ✅ **4. Printing the Linked List**
+
+```
+def print_linked_list(linked_list):
+    ...
+```
+
+This just traverses the linked list and prints:
+
+```
+value -> value -> ... -> None
+```
+
+---
+
+## ✅ **5. Test Case**
+
+```
+linked_list_dict = {
+    "head": "0",
+    ...
+}
+```
+
+You’re building a linked list of 6 nodes:
+
+```
+0 -> 1 -> 2 -> 3 -> 4 -> 5 -> None
+```
+
+Then applying the `node_swap` function, the result becomes:
+
+```
+1 -> 0 -> 3 -> 2 -> 5 -> 4 -> None
+```
+
+---
+
+## ✅ **Summary of Important Concepts**
+
+| Concept                           | Description                                                              |
+| --------------------------------- | ------------------------------------------------------------------------ |
+| **Dummy Node**                    | Simplifies pointer updates at the head of the list.                      |
+| **Two Pointers (first & second)** | Used to identify the pair to be swapped.                                 |
+| **Pointer Manipulation**          | Rearranging `next` pointers to swap nodes without changing their values. |
+| **O(n) Time**                     | Each node is visited once.                                               |
+| **O(1) Space**                    | No extra data structures used, just a few pointers.                      |
+
+---
+
+Here's an **ASCII diagram** to visualize how the **pairwise node swapping** works.
+
+### 🔰 Initial Linked List:
+
+```
+[0] -> [1] -> [2] -> [3] -> [4] -> [5] -> None
+```
+
+We want to swap every two adjacent nodes, so first `[0]` and `[1]`, then `[2]` and `[3]`, and so on.
+
+---
+
+### 🔄 Step-by-step Swap: First Pair (0 and 1)
+
+**Pointers:**
+
+* `prev` is a dummy node initially pointing to `[0]`.
+* `first = [0]`, `second = [1]`
+
+```
+dummy -> [0] -> [1] -> [2] -> [3] -> [4] -> [5] -> None
+   ^       ^      ^
+ prev   first  second
+```
+
+**After swap:**
+
+* `prev.next = second`
+* `first.next = second.next`
+* `second.next = first`
+
+So now:
+
+```
+dummy -> [1] -> [0] -> [2] -> [3] -> [4] -> [5] -> None
+             ^     ^
+           second  first
+```
+
+`prev` moves to `first` (which is `[0]`), and the loop continues.
+
+---
+
+### 🔄 Second Pair (2 and 3)
+
+**Pointers:**
+
+* `prev = [0]`
+* `first = [2]`, `second = [3]`
+
+```
+[0] -> [2] -> [3] -> [4] -> [5] -> None
+         ^      ^
+      first   second
+```
+
+**After swap:**
+
+```
+[0] -> [3] -> [2] -> [4] -> [5] -> None
+         ^     ^
+      second  first
+```
+
+---
+
+### 🔄 Third Pair (4 and 5)
+
+**Pointers:**
+
+* `prev = [2]`
+* `first = [4]`, `second = [5]`
+
+```
+[2] -> [4] -> [5] -> None
+         ^      ^
+      first   second
+```
+
+**After swap:**
+
+```
+[2] -> [5] -> [4] -> None
+         ^     ^
+      second  first
+```
+
+---
+
+### ✅ Final List After All Swaps:
+
+```
+[1] -> [0] -> [3] -> [2] -> [5] -> [4] -> None
+```
+
+---
+
+### 📌 Summary of Node Transitions:
+
+| Original Pair | After Swap  |
+| ------------- | ----------- |
+| [0] → [1]     | [1] → [0]   |
+| [2] → [3]     | [3] → [2]   |
+| [4] → [5]     | [5] → [4]   |
+
+"""
