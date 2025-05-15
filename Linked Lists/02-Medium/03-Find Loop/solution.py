@@ -47,6 +47,7 @@ class LinkedList:
         self.next = None  # Pointer to the next node (initially None)
 
 
+# Helper function to convert dictionary to LinkedList
 def build_linked_list(data):
     """Builds a linked list from a dictionary representation.
 
@@ -107,6 +108,7 @@ def find_loop(head):
     return slow
 
 
+# Function to print the linked list (for verification)
 def print_linked_list_with_loop(head, loop_start):
     """Prints the linked list up to the loop start and then the loop once.
 
