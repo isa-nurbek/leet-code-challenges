@@ -47,7 +47,7 @@ One of the most straightforward ways to solve this problem is to split the origi
 <details>
 <summary><b>Hint 3</b></summary>
 
-After you split the linked list into two halves and reverse the second half, you'll have something like `1 -> 2 -> 3` and `5 -> 4`; at this point, you can simply add the first node of the reversed second half into the first half between `1` and `2` as in `1 -> 5 -> 2...` .Simply continue this process until you've inserted all of the nodes from the reversed second half into the first.
+After you split the linked list into two halves and reverse the second half, you'll have something like `1 -> 2 -> 3` and `5 -> 4`; at this point, you can simply add the first node of the reversed second half into the first half between `1` and `2` as in `1 -> 5 -> 2...`. Simply continue this process until you've inserted all of the nodes from the reversed second half into the first.
 
 </details>
 
