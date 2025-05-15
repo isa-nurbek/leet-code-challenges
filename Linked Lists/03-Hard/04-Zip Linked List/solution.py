@@ -51,14 +51,25 @@ class LinkedList:
 
 
 def build_linked_list(data):
+    """Builds a linked list from dictionary representation.
+
+    Args:
+        data: Dictionary containing 'head' id and 'nodes' list with each node's
+              id, value, and next node id.
+
+    Returns:
+        The head node of the constructed linked list.
+    """
     if not data:
         return None
 
+    # First create all nodes and store them in a dictionary by id
     nodes = {}
     for node_data in data["nodes"]:
         node = LinkedList(node_data["value"])
         nodes[node_data["id"]] = node
 
+    # Then connect the nodes by setting next pointers
     for node_data in data["nodes"]:
         if node_data["next"] is not None:
             nodes[node_data["id"]].next = nodes[node_data["next"]]
@@ -66,46 +77,83 @@ def build_linked_list(data):
     return nodes[data["head"]]
 
 
+# O(n) time | O(1) space
 def zip_linkedList(linked_list):
+    """Zips a linked list in place by interleaving first half with reversed second half.
+
+    Example: 1->2->3->4->5->6 becomes 1->6->2->5->3->4
+
+    Args:
+        linked_list: Head node of the linked list to zip.
+
+    Returns:
+        The head of the zipped linked list.
+    """
+    # Base case: list is too short to zip
     if linked_list.next is None or linked_list.next.next is None:
         return linked_list
 
+    # Split the list into two halves
     first_half_head = linked_list
     second_half_head = split_linkedList(linked_list)
 
+    # Reverse the second half
     reversed_second_half_head = reverse_linkedList(second_half_head)
+
+    # Interweave the two halves
     return interweave_linkedLists(first_half_head, reversed_second_half_head)
 
 
 def split_linkedList(linked_list):
+    """Splits a linked list into two halves using slow/fast pointer technique.
+
+    Args:
+        linked_list: Head node of the linked list to split.
+
+    Returns:
+        The head node of the second half.
+    """
     slow_iterator = linked_list
     fast_iterator = linked_list
 
+    # Fast pointer moves twice as fast as slow pointer
     while fast_iterator is not None and fast_iterator.next is not None:
         slow_iterator = slow_iterator.next
         fast_iterator = fast_iterator.next.next
 
+    # When fast reaches end, slow is at midpoint
     second_half_head = slow_iterator.next
-    slow_iterator.next = None
+    slow_iterator.next = None  # Terminate first half
 
     return second_half_head
 
 
 def interweave_linkedLists(linked_list_1, linked_list_2):
+    """Interweaves two linked lists by alternating nodes from each list.
+
+    Args:
+        linked_list_1: Head node of first linked list.
+        linked_list_2: Head node of second linked list.
+
+    Returns:
+        The head node of the interwoven list (linked_list_1 will be first node).
+    """
     linked_list_1_iterator = linked_list_1
     linked_list_2_iterator = linked_list_2
 
     while linked_list_1_iterator is not None and linked_list_2_iterator is not None:
-        # Save next pointers
+        # Save next pointers before we overwrite them
         linked_list_1_next = linked_list_1_iterator.next
         linked_list_2_next = linked_list_2_iterator.next
 
-        # Link current nodes
+        # Link current node from first list to current node of second list
         linked_list_1_iterator.next = linked_list_2_iterator
+
+        # Only link second list node to next first list node if it exists
         if linked_list_1_next is not None:
             linked_list_2_iterator.next = linked_list_1_next
 
-        # Move to next nodes
+        # Move to next nodes in each list
         linked_list_1_iterator = linked_list_1_next
         linked_list_2_iterator = linked_list_2_next
 
@@ -113,19 +161,33 @@ def interweave_linkedLists(linked_list_1, linked_list_2):
 
 
 def reverse_linkedList(linked_list):
+    """Reverses a linked list in place.
+
+    Args:
+        linked_list: Head node of the linked list to reverse.
+
+    Returns:
+        The new head node of the reversed list.
+    """
     previous_node, current_node = None, linked_list
 
     while current_node is not None:
-        next_node = current_node.next
-        current_node.next = previous_node
+        next_node = current_node.next  # Save next node before overwriting
+        current_node.next = previous_node  # Reverse the link
 
+        # Move pointers forward
         previous_node = current_node
         current_node = next_node
 
-    return previous_node
+    return previous_node  # New head of reversed list
 
 
 def print_linked_list(linked_list):
+    """Prints a linked list in arrow format.
+
+    Args:
+        linked_list: Head node of the linked list to print.
+    """
     current = linked_list
     while current:
         print(current.value, end=" -> ")
@@ -146,9 +208,10 @@ linked_list_dict = {
     ],
 }
 
+# Build, zip, and print the linked list
 linked_list = build_linked_list(linked_list_dict)
 
 result = zip_linkedList(linked_list)
 
 print_linked_list(result)
-# Output: 1 -> 6 -> 2 -> 5 -> 3 -> 4 -> None
+# Correct output: 1 -> 6 -> 2 -> 5 -> 3 -> 4 -> None
