@@ -46,8 +46,8 @@ O(n) time | O(1) space - where `n` is the length of the input Linked List.
 
 class LinkedList:
     def __init__(self, value):
-        self.value = value
-        self.next = None
+        self.value = value  # Store the value of this node
+        self.next = None  # Pointer to the next node (initially None)
 
 
 def build_linked_list(data):
