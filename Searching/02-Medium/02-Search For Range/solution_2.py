@@ -105,3 +105,45 @@ print(search_for_range([5, 7, 7, 8, 8, 10], 5))
 
 print(search_for_range([0, 1, 21, 33, 45, 45, 45, 45, 45, 45, 61, 71, 73], -1))
 # Output: [-1, -1]
+
+# =========================================================================================================================== #
+
+# Big O Analysis:
+
+"""
+## Time and Space Complexity Analysis:
+
+Let's analyze the time and space complexity of the given `search_for_range` function and its helper `altered_binary_search`.
+
+### Time Complexity:
+
+1. **Binary Search Variant**: The `altered_binary_search` function is a modified binary search. In the worst case, it will run
+in O(log n) time, where n is the number of elements in the array. This is because, like standard binary search, it halves the
+search space in each iteration.
+
+2. **Two Binary Searches**: The `search_for_range` function calls `altered_binary_search` twice—once to find the left boundary
+(`go_left=True`) and once to find the right boundary (`go_left=False`). Each of these calls is O(log n).
+
+3. **Total Time Complexity**: Since we perform two O(log n) operations, the total time complexity remains **O(log n)**.
+The constants (2 in this case) are dropped in Big-O notation.
+
+### Space Complexity:
+
+1. **Recursive vs. Iterative**: The `altered_binary_search` function is implemented iteratively (using a `while` loop), so it does
+not use additional space on the call stack. This is in contrast to a recursive binary search, which would use O(log n) space due
+to the call stack.
+
+2. **Variables**: The function uses a constant amount of extra space (variables like `left`, `right`, `middle`, etc.), and the
+`final_range` array is passed by reference and has a fixed size of 2.
+
+3. **Total Space Complexity**: The space complexity is **O(1)** (constant space), as no additional space is used that scales with
+the input size.
+
+### Summary:
+- **Time Complexity**: O(log n)
+- **Space Complexity**: O(1)
+
+This is an efficient solution for finding the range of a target value in a sorted array. The two-pass binary search approach
+ensures we correctly identify the boundaries of the target range.
+
+"""
