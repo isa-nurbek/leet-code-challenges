@@ -104,3 +104,39 @@ print(shifted_binary_search([0, 1, 21, 33, 37, 45, 61, 71, 72, 73], 38))
 
 print(shifted_binary_search([111, 1, 5, 23], 5))
 # Output: 2
+
+# =========================================================================================================================== #
+
+# Big O Analysis:
+
+"""
+## Time and Space Complexity Analysis:
+
+### Time Complexity Analysis:
+
+The time complexity of the `shifted_binary_search` algorithm is **O(log n)**, where `n` is the number of elements in the array. Here's why:
+
+1. **Binary Search Approach**: The algorithm is a modified binary search. In each recursive call, it divides the search space
+(the current `left` to `right` range) roughly in half, similar to standard binary search.
+
+2. **Constant Work per Recursive Call**: In each recursive call, the algorithm performs a constant amount of work (calculating
+`middle`, comparing `target` with `potential_match`, `left_num`, and `right_num`, and deciding which half to recurse into).
+
+3. **Number of Recursive Calls**: Since the search space is halved in each step, the maximum number of recursive calls is
+proportional to the height of the recursion tree, which is `log₂ n`. Thus, the total time is O(log n).
+
+### Space Complexity Analysis:
+
+The space complexity is **O(log n)** due to the recursive nature of the algorithm. Here's why:
+
+1. **Recursive Call Stack**: Each recursive call adds a new layer to the call stack. In the worst case, the depth of the recursion
+tree is `log₂ n` (same as the time complexity), so the space used by the call stack is O(log n).
+
+2. **No Additional Space**: The algorithm does not use any additional data structures or allocate significant extra memory beyond
+the call stack.
+
+### Summary:
+- Time Complexity: **O(log n)**
+- Space Complexity: **O(log n)** (due to recursion)
+
+"""
