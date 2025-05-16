@@ -45,32 +45,73 @@ O(n * log(m)) time | O(1) space - where `n` is the length of steps, and `m` is t
 
 # O(n * log(m)) time | O(1) space
 def optimal_assembly_line(step_durations, num_stations):
-    left, right = max(step_durations), sum(step_durations)
-    max_station_duration = float("inf")
+    """
+    Finds the minimum possible maximum station duration when assembling products
+    with given step durations across a fixed number of stations.
 
+    Uses binary search to efficiently find the optimal solution.
+
+    Args:
+        step_durations: List of durations for each assembly step
+        num_stations: Number of available workstations
+
+    Returns:
+        The minimum possible maximum duration across all stations
+    """
+    # Initialize binary search bounds:
+    # - The minimum possible max duration is the duration of the longest single step
+    # - The maximum possible max duration is the sum of all step durations (all steps in one station)
+    left, right = max(step_durations), sum(step_durations)
+    max_station_duration = float("inf")  # Will store the optimal solution
+
+    # Binary search loop to find the minimal maximum station duration
     while left <= right:
+        # Try a potential solution in the middle of current search range
         potential_max_station_duration = (left + right) // 2
 
+        # Check if we can distribute steps with this maximum duration
         if is_potential_solution(
             step_durations, num_stations, potential_max_station_duration
         ):
+            # If yes, try to find a better (smaller) solution
             max_station_duration = potential_max_station_duration
             right = potential_max_station_duration - 1
         else:
+            # If no, we need to try larger durations
             left = potential_max_station_duration + 1
 
     return max_station_duration
 
 
 def is_potential_solution(step_durations, num_stations, potential_max_station_duration):
-    stations_required = 1
-    current_duration = 0
+    """
+    Checks if it's possible to distribute the assembly steps across stations
+    without exceeding the given maximum station duration.
+
+    Args:
+        step_durations: List of durations for each assembly step
+        num_stations: Number of available workstations
+        potential_max_station_duration: The maximum duration we're testing
+
+    Returns:
+        True if the steps can be distributed within the given constraints,
+        False otherwise
+    """
+    stations_required = 1  # At least one station needed
+    current_duration = 0  # Tracks duration of current station
 
     for step_duration in step_durations:
+        # Check if adding this step would exceed current station's capacity
         if current_duration + step_duration > potential_max_station_duration:
+            # Need to use a new station
             stations_required += 1
-            current_duration = step_duration
+            current_duration = step_duration  # Start new station with this step
+
+            # Early exit if we've already exceeded station count
+            if stations_required > num_stations:
+                return False
         else:
+            # Add step to current station
             current_duration += step_duration
 
     return stations_required <= num_stations
