@@ -164,3 +164,236 @@ Let's analyze the time and space complexity of the given `optimal_assembly_line`
 This is an efficient solution for the assembly line balancing problem, leveraging binary search to minimize the maximum station duration.
 
 """
+
+# =========================================================================================================================== #
+
+# Detailed Code Explanation:
+
+"""
+This code solves a problem commonly known as the **Assembly Line Balancing Problem**, where you want to divide a sequence of tasks
+(each with a fixed time duration) among a limited number of workstations in such a way that the **maximum time assigned to any 
+workstation** is minimized.
+
+---
+
+## **Goal**
+
+Given:
+
+* A list of **step durations** (e.g., `[15, 15, 30, 30, 45]`)
+* A number of **stations** (e.g., `3`)
+
+The goal is to **partition** the steps into the given number of stations such that:
+
+* The **maximum total time** on any one station is minimized.
+* Steps must be assigned in order (no rearranging).
+
+---
+
+## **Code Breakdown**
+
+### `optimal_assembly_line(step_durations, num_stations)`
+
+This is the **main function** that performs a **binary search** on the answer.
+
+### Step-by-step:
+
+1. **Initialize bounds for binary search:**
+
+   ```
+   left = max(step_durations)
+   right = sum(step_durations)
+   ```
+
+   * The **minimum possible maximum time** on any station (`left`) is the longest individual step (since each step must be fully assigned).
+   * The **maximum possible time** (`right`) is if all steps are assigned to one station.
+
+2. **Binary search loop:**
+
+   ```
+   while left <= right:
+       potential_max_station_duration = (left + right) // 2
+   ```
+
+   * Try the **midpoint** between left and right as a guess for the max station load.
+
+3. **Check if this guess is feasible** using helper function:
+
+   ```
+   if is_potential_solution(step_durations, num_stations, potential_max_station_duration):
+   ```
+
+   * If it's possible to assign all steps to `num_stations` without exceeding this `potential_max_station_duration`,
+   it might be the answer, but we try for **a smaller one**.
+
+   * If not, we try **a larger** duration.
+
+---
+
+### `is_potential_solution(step_durations, num_stations, potential_max_station_duration)`
+
+This function **checks whether we can assign the tasks** into the given number of stations such that **no station exceeds
+the given potential max duration**.
+
+1. Start with 1 station and 0 duration:
+
+   ```
+   stations_required = 1
+   current_duration = 0
+   ```
+
+2. Loop through each step:
+
+   ```
+   for step_duration in step_durations:
+       if current_duration + step_duration > potential_max_station_duration:
+           stations_required += 1
+           current_duration = step_duration
+       else:
+           current_duration += step_duration
+   ```
+
+   * If adding a step exceeds the current station's capacity, start a **new station**.
+   * Otherwise, add the step to the current station.
+
+3. After the loop, check how many stations were needed:
+
+   ```
+   return stations_required <= num_stations
+   ```
+
+---
+
+## **Example Explanation**
+
+### Test: `optimal_assembly_line([15, 15, 30, 30, 45], 3)`
+
+* Possible grouping with minimum max load of **60**:
+
+  * Station 1: 15 + 15 + 30 = 60
+  * Station 2: 30
+  * Station 3: 45
+
+### Test: `optimal_assembly_line([1, 2, 3, 4, 5], 3)`
+
+* Optimal grouping with max load **6**:
+
+  * Station 1: 1 + 2 + 3 = 6
+  * Station 2: 4
+  * Station 3: 5
+
+### Test: `optimal_assembly_line([30, 5, 20, 10], 2)`
+
+* Optimal grouping with max load **35**:
+
+  * Station 1: 30 + 5 = 35
+  * Station 2: 20 + 10 = 30
+
+---
+
+## ✅ **Summary**
+
+* **Binary Search** is used to minimize the **maximum load per station**.
+* `is_potential_solution()` checks whether a specific load limit can be achieved with the given number of stations.
+* The algorithm runs efficiently with **O(n log sum)** complexity, where `n` is the number of steps.
+
+---
+
+Let's visualize how the `optimal_assembly_line` function works using **ASCII diagrams**, showing how the tasks are distributed
+across stations in a way that minimizes the **maximum duration per station**.
+
+---
+
+### ✅ Test Case:
+
+```
+optimal_assembly_line([15, 15, 30, 30, 45], 3)
+# Expected output: 60
+```
+
+### 🧱 Step Durations:
+
+```
+[15, 15, 30, 30, 45]
+```
+
+---
+
+### 🔎 Goal:
+
+Split these tasks across **3 stations** such that no station has a total duration over 60 (the optimal max).
+
+---
+
+### ✅ Final Partitioning (One Possible Optimal):
+
+```
+Station 1: [15][15][30] -> 15 + 15 + 30 = 60
+Station 2:       [30]    -> 30
+Station 3:            [45] -> 45
+```
+
+### ASCII Visualization:
+
+```
+Station 1: |■■■■■■■■■■■■■■■|■■■■■■■■■■■■■■■|■■■■■■■■■■■■■■■■■■■■■■■■|
+            15             15             30   --> total: 60
+
+Station 2:                            |■■■■■■■■■■■■■■■■■■■■■■■■|
+                                      30                       --> total: 30
+
+Station 3:                                          |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■|
+                                                    45                             --> total: 45
+```
+
+---
+
+### 🧪 Test Case:
+
+```
+optimal_assembly_line([1, 2, 3, 4, 5], 3)
+# Expected output: 6
+```
+
+### Final Partitioning:
+
+```
+Station 1: [1][2][3] -> 6
+Station 2:       [4] -> 4
+Station 3:          [5] -> 5
+```
+
+### ASCII Visualization:
+
+```
+Station 1: |■|■■|■■■|           --> total: 6
+            1  2   3
+
+Station 2:         |■■■■|       --> total: 4
+                    4
+
+Station 3:              |■■■■■| --> total: 5
+                         5
+```
+
+---
+
+### ⚙️ How Binary Search Helps:
+
+Imagine a ruler where:
+
+```
+left  = max(step_durations) = 45
+right = sum(step_durations) = 135
+```
+
+Binary search checks values like:
+
+* mid = (45 + 135) // 2 = 90
+* Is 90 feasible? → Yes → Try smaller
+* mid = (45 + 89) // 2 = 67
+* Is 67 feasible? → Yes → Try smaller
+* …
+* Eventually lands on **60** as the smallest max station load that works.
+
+"""
