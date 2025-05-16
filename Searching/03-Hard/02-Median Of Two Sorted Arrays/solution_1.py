@@ -104,9 +104,6 @@ print(median_of_two_sorted_arrays([1, 3, 4, 5], [2, 3, 6, 7]))
 print(median_of_two_sorted_arrays([2, 2, 2, 2, 2], [3, 3, 3, 3]))
 # Output: 2
 
-print(median_of_two_sorted_arrays([-100, -50, -1, 15, 3], [1, 20, 50, 100]))
-# Output: 15
-
 # =========================================================================================================================== #
 
 # Big O Analysis:
@@ -153,5 +150,222 @@ No additional data structures (like arrays or hash maps) are used that grow with
 
 This is a straightforward merge-based approach. There exists a more efficient `O(log(min(n, m)))` solution using binary search,
 but it is more complex to implement. The current approach is intuitive and works well for moderately sized inputs.
+
+"""
+
+# =========================================================================================================================== #
+
+# Detailed Code Explanation:
+
+"""
+The function `median_of_two_sorted_arrays` efficiently finds the **median** of two **sorted arrays** without merging them entirely,
+by iterating through them just enough to find the median. It runs in **O(n)** time where `n` is the total number of elements needed
+to reach the median.
+
+---
+
+### 🧠 Goal:
+
+Find the median of two sorted arrays without merging them.
+
+---
+
+## 🧩 Median Refresher
+
+* **Odd total elements:** The median is the middle element.
+* **Even total elements:** The median is the average of the two middle elements.
+
+---
+
+### 📌 Function Breakdown:
+
+```
+def median_of_two_sorted_arrays(array_one, array_two):
+```
+
+This function takes two **sorted arrays** as inputs.
+
+---
+
+### 🔢 Initialize pointers and median positions
+
+```
+idx_one, idx_two = 0, 0
+total_length = len(array_one) + len(array_two)
+middle_idx = (total_length - 1) // 2
+next_middle_idx = middle_idx + 1 if total_length % 2 == 0 else None
+```
+
+* `idx_one` and `idx_two` are iterators for both arrays.
+* `middle_idx` gives the **index of the median** if the total length is **odd**, or the **first of the two medians** if even.
+* `next_middle_idx` is set only for even total lengths.
+
+---
+
+### 🔄 Walk through arrays up to `middle_idx`
+
+```
+while idx_one + idx_two < middle_idx:
+    if idx_one >= len(array_one):
+        idx_two += 1
+    elif idx_two >= len(array_two):
+        idx_one += 1
+    elif array_one[idx_one] < array_two[idx_two]:
+        idx_one += 1
+    else:
+        idx_two += 1
+```
+
+This loop moves either `idx_one` or `idx_two` forward to reach the position `middle_idx`.
+
+It simulates the **merging process of merge sort** without actually merging, by skipping elements that are guaranteed to be smaller.
+
+---
+
+### 🧮 Find the median
+
+#### 🟢 If total length is odd:
+
+```
+if next_middle_idx is None:
+    if idx_one >= len(array_one):
+        return array_two[idx_two]
+    if idx_two >= len(array_two):
+        return array_one[idx_one]
+    return min(array_one[idx_one], array_two[idx_two])
+```
+
+* Just return the **next smallest** unvisited element.
+
+#### 🔵 If total length is even:
+
+```
+else:
+    values = []
+    for _ in range(2):
+        if idx_one >= len(array_one):
+            values.append(array_two[idx_two])
+            idx_two += 1
+        elif idx_two >= len(array_two):
+            values.append(array_one[idx_one])
+            idx_one += 1
+        elif array_one[idx_one] < array_two[idx_two]:
+            values.append(array_one[idx_one])
+            idx_one += 1
+        else:
+            values.append(array_two[idx_two])
+            idx_two += 1
+    return sum(values) / 2
+```
+
+* Collect the **next two smallest** elements and return their average.
+
+---
+
+## ✅ Test Cases Breakdown
+
+### 🧪 1. `median_of_two_sorted_arrays([1, 3, 4, 5], [2, 3, 6, 7])`
+
+Combined sorted: `[1, 2, 3, 3, 4, 5, 6, 7]`
+
+* Length = 8 (even) → median = average of 4th and 5th elements: `(3 + 4)/2 = 3.5`
+
+✅ Output: `3.5`
+
+---
+
+### 🧪 2. `median_of_two_sorted_arrays([2, 2, 2, 2, 2], [3, 3, 3, 3])`
+
+Combined: `[2, 2, 2, 2, 2, 3, 3, 3, 3]` → median = 2 (middle element)
+
+✅ Output: `2`
+
+---
+
+## ✅ Summary
+
+### Pros:
+
+* Efficient: avoids merging.
+* Linear time: `O(m + n)` in the worst case.
+* Simple and readable logic.
+
+---
+
+Here's an **ASCII visualization** of how the function `median_of_two_sorted_arrays` works step-by-step using the **first test case**:
+
+---
+
+### 📘 Test Input:
+
+```
+array_one = [1, 3, 4, 5]
+array_two = [2, 3, 6, 7]
+```
+
+### ✅ Combined Sorted (for reference):
+
+```
+[1, 2, 3, 3, 4, 5, 6, 7]
+             ↑   ↑
+          middle  next (even-length)
+```
+
+* Total length = 8 (even)
+* Median = average of 4th and 5th elements: (3 + 4) / 2 = 3.5
+
+---
+
+### 🔁 Visualization of the while-loop (finding middle_idx = 3):
+
+We simulate merging by picking the smallest of the two current elements.
+
+```
+Step | idx_one | idx_two | array_one[idx_one] | array_two[idx_two] | Pick
+---------------------------------------------------------------------------
+  1  |    0    |    0    |         1          |         2          |  1
+  2  |    1    |    0    |         3          |         2          |  2
+  3  |    1    |    1    |         3          |         3          |  3
+```
+
+✅ At this point, `idx_one + idx_two = 3`, which is the `middle_idx`.
+
+---
+
+### 🟡 We now need the next two elements:
+
+We fetch two more elements using the same rules:
+
+```
+Advance to get median elements:
+--------------------------------------------
+  4  |    1    |    2    |         3          |         6          |  3
+  5  |    2    |    2    |         4          |         6          |  4
+```
+
+### 📌 Final Values:
+
+* Picked two elements: 3 and 4
+* Median = (3 + 4) / 2 = **3.5**
+
+---
+
+### 📊 Summary Table:
+
+```
+Array One : [1, 3, 4, 5]
+               ↑
+Array Two : [2, 3, 6, 7]
+                    ↑
+
+Merged Order:
+Step 1 → 1 (from array_one)
+Step 2 → 2 (from array_two)
+Step 3 → 3 (from array_one)
+Step 4 → 3 (from array_two) ← median start
+Step 5 → 4 (from array_one) ← median end
+```
+
+**Median: (3 + 4) / 2 = 3.5**
 
 """
