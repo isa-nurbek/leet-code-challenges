@@ -48,7 +48,7 @@ import random  # Import the random module for selecting random pivot
 
 # Best: O(n log(n)) time | O(log(n)) space
 # Average: O(n log(n)) time | O(log(n)) space
-# Worst: O(n²) time | O(n) space
+# Worst: O(n²) time | O(n²) space
 def randomized_quick_sort(arr):
     """
     Sorts an array using the randomized quicksort algorithm.
@@ -96,3 +96,60 @@ print(
 
 print(randomized_quick_sort([2, 1]))
 # Output: [1, 2]
+
+# =========================================================================================================================== #
+
+# Big O Analysis:
+
+"""
+## Time and Space Complexity Analysis:
+
+### Time Complexity Analysis
+
+1. **Best Case**: 
+   - The pivot chosen divides the array into two nearly equal parts every time.
+   - The recurrence relation is: T(n) = 2T(n/2) + O(n).
+   - By the Master Theorem, this solves to O(n log n).
+
+2. **Average Case**:
+   - In randomized quicksort, the probability of choosing a "good" pivot (one that splits the array roughly in half) is high.
+   - The average-case time complexity is also O(n log n).
+
+3. **Worst Case**:
+   - The worst case occurs when the pivot is consistently the smallest or largest element, leading to highly unbalanced partitions.
+   - The recurrence relation becomes: T(n) = T(n-1) + O(n), which solves to O(n²).
+   - However, the probability of this happening in randomized quicksort is very low (especially as the input size grows).
+
+### Space Complexity Analysis
+
+The space complexity is determined by the additional memory used during the sorting process:
+
+1. **Auxiliary Space for Partitions**:
+   - In each recursive call, we create new lists `left`, `middle`, and `right`. In the worst case (unbalanced partitions),
+   this can lead to O(n) space per recursive call, and the recursion depth can be O(n), leading to O(n²) space.
+   - In the average case (balanced partitions), the recursion depth is O(log n), and the total space used is O(n log n)
+   (since each level of recursion requires O(n) space).
+
+2. **Optimization**:
+   - This implementation is not in-place, so it uses more space than an in-place version of quicksort (which would have O(log n))
+   space for recursion stack in the average case).
+
+### Summary:
+
+- **Time Complexity**:
+
+  - Best Case: O(n log n)
+  - Average Case: O(n log n)
+  - Worst Case: O(n²) (unlikely with randomization).
+  
+- **Space Complexity**:
+
+  - Best Case: O(n log n)
+  - Average Case: O(n log n)
+  - Worst Case: O(n²)
+
+### Note:
+The space complexity can be improved to O(n) in the worst case (or O(log n)) for in-place versions), but this implementation
+trades space for clarity and simplicity.
+
+"""
