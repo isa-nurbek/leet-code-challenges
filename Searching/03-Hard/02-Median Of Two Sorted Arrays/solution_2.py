@@ -36,35 +36,48 @@ O(log(min(n, m)) time | O(1) space - where `n` is the length of `array_one` and 
 
 # O(log(min(n, m))) time | O(1) space
 def median_of_two_sorted_arrays(array_one, array_two):
+    # Ensure array_one is the smaller array to reduce binary search range
     if len(array_one) > len(array_two):
         array_one, array_two = array_two, array_one
 
     n, m = len(array_one), len(array_two)
     total = n + m
-    half = (total + 1) // 2
+    half = (total + 1) // 2  # This works for both even and odd total lengths
 
+    # Initialize binary search bounds for the smaller array
     left, right = 0, n
+
     while left <= right:
+        # Partition position in array_one
         mid = (left + right) // 2
+        # Corresponding partition position in array_two
         remaining = half - mid
 
+        # Handle edge cases where partition might be at the beginning or end
+        # of either array by using +/- infinity as appropriate
         max_left_one = float("-inf") if mid == 0 else array_one[mid - 1]
         min_right_one = float("inf") if mid == n else array_one[mid]
         max_left_two = float("-inf") if remaining == 0 else array_two[remaining - 1]
         min_right_two = float("inf") if remaining == m else array_two[remaining]
 
+        # Check if we've found the correct partition
         if max_left_one <= min_right_two and max_left_two <= min_right_one:
+            # If total length is odd, median is the max of left partitions
             if total % 2 == 1:
                 return max(max_left_one, max_left_two)
             else:
+                # If even, median is average of max left and min right partitions
                 return (
                     max(max_left_one, max_left_two) + min(min_right_one, min_right_two)
                 ) / 2
+        # If array_one's left partition is too big, move partition left
         elif max_left_one > min_right_two:
             right = mid - 1
+        # Otherwise, move partition right
         else:
             left = mid + 1
 
+    # This should theoretically never be reached with valid sorted input
     raise ValueError("Input arrays are not sorted or invalid.")
 
 
