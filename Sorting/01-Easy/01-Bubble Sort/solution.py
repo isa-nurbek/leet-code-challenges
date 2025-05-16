@@ -123,3 +123,205 @@ The time complexity of the Bubble Sort algorithm can be analyzed as follows:
 - **Space Complexity**: `O(1)` (in-place sorting).
 
 """
+
+# =========================================================================================================================== #
+
+# Detailed Code Explanation:
+
+"""
+Let's break down the code step by step. You're looking at an implementation of the Bubble Sort algorithm in Python:
+
+### 🔁 Bubble Sort – How It Works
+
+Bubble Sort is a simple sorting algorithm that repeatedly steps through the list, compares adjacent elements, and swaps them
+if they are in the wrong order. The largest unsorted element "bubbles" up to its correct position on each pass.
+
+---
+
+### 📌 Explanation of Each Part
+
+#### 1. `is_sorted = False`
+
+* We use this variable to check if the array is sorted.
+* It starts as `False`, meaning we assume the array is not sorted at the beginning.
+
+#### 2. `counter = 0`
+
+* Tracks how many elements from the end are already sorted.
+* With each full pass, the largest element gets to the correct position, so we don’t need to check those again.
+
+---
+
+#### 3. `while not is_sorted:`
+
+* Runs as long as the array is not sorted.
+
+##### Inside the loop:
+
+```
+is_sorted = True
+```
+
+* Assume it's sorted at the beginning of each pass.
+* If any swap is made, we know it's not sorted, and set `is_sorted` to `False` again.
+
+---
+
+#### 4. The `for` loop:
+
+```
+for i in range(len(array) - 1 - counter):
+```
+
+* Iterates through the unsorted part of the array.
+* `len(array) - 1 - counter` ensures we don’t touch the sorted part at the end.
+
+---
+
+#### 5. The `if` condition:
+
+```
+if array[i] > array[i + 1]:
+    swap(i, i + 1, array)
+    is_sorted = False
+```
+
+* If the current element is greater than the next, they are in the wrong order.
+* Swap them and mark `is_sorted = False` to keep sorting.
+
+---
+
+#### 6. The `swap` function:
+
+```
+def swap(i, j, array):
+    array[i], array[j] = array[j], array[i]
+```
+
+* Swaps the two elements at positions `i` and `j`.
+
+---
+
+#### 7. `counter += 1`
+
+* After each pass, increment `counter` because the largest item is now correctly placed at the end.
+
+---
+
+### ✅ Sample Walkthrough
+
+Take `[8, 5, 2, 9]` as an example:
+
+1st pass: Compare and swap → `[5, 2, 8, 9]`
+2nd pass: Compare and swap → `[2, 5, 8, 9]`
+3rd pass: Nothing changes → `is_sorted` remains `True`, so we stop.
+
+---
+
+### 🧪 Output Results
+
+```
+print(bubble_sort([8, 5, 2, 9, 5, 6, 3]))
+# Output: [2, 3, 5, 5, 6, 8, 9]
+```
+
+This shows that the algorithm correctly sorts the array in ascending order.
+
+---
+
+### 💡 Summary
+
+* Bubble Sort has average and worst-case time complexity of O(n²), but it's simple and easy to implement.
+* Best case is O(n) when the array is already sorted (because of the `is_sorted` optimization).
+
+---
+
+Let's walk through an ASCII visualization of Bubble Sort using this sample input:
+
+```
+[8, 5, 2, 9]
+```
+
+We’ll show each pass of the algorithm, with swaps highlighted.
+
+---
+
+### 🔁 Pass 1:
+
+Compare each adjacent pair and swap if needed.
+
+Initial array:
+
+```
+[8, 5, 2, 9]
+```
+
+Compare 8 > 5 → Swap:
+
+```
+[5, 8, 2, 9]   ← swapped (8,5)
+```
+
+Compare 8 > 2 → Swap:
+
+```
+[5, 2, 8, 9]   ← swapped (8,2)
+```
+
+Compare 8 < 9 → No swap:
+
+```
+[5, 2, 8, 9]
+```
+
+✅ Largest element 9 is now in the correct place.
+
+---
+
+### 🔁 Pass 2:
+
+We don’t include the last element (9) because it’s already sorted.
+
+Start:
+
+```
+[5, 2, 8, 9]
+```
+
+Compare 5 > 2 → Swap:
+
+```
+[2, 5, 8, 9]   ← swapped (5,2)
+```
+
+Compare 5 < 8 → No swap:
+
+```
+[2, 5, 8, 9]
+```
+
+✅ Second largest element 8 is now in the correct place.
+
+---
+
+### 🔁 Pass 3:
+
+Only the first two elements need checking.
+
+Compare 2 < 5 → No swap:
+
+```
+[2, 5, 8, 9]
+```
+
+✅ Everything is in order. No swaps → array is sorted.
+
+---
+
+### ✅ Final Result:
+
+```
+[2, 5, 8, 9]
+```
+
+"""
