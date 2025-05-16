@@ -153,3 +153,202 @@ The space complexity can be improved to O(n) in the worst case (or O(log n)) for
 trades space for clarity and simplicity.
 
 """
+
+# =========================================================================================================================== #
+
+# Detailed Code Explanation:
+
+"""
+Let’s break down the code for the function randomized\_quick\_sort step-by-step:
+
+### Overview
+
+This is a Python implementation of the Quick Sort algorithm using a randomized pivot selection strategy. Quick Sort is a
+divide-and-conquer sorting algorithm with average time complexity O(n log n).
+
+---
+
+### Code Explanation
+
+```
+import random
+```
+
+* Imports the `random` module, used to randomly select a pivot element to improve performance on already sorted or nearly sorted arrays.
+
+---
+
+```
+    def randomized_quick_sort(arr):
+```
+
+* Defines the function that takes a list arr and returns a sorted version of it.
+
+---
+
+```
+if len(arr) <= 1:
+    return arr.copy()
+```
+
+* Base case: if the array has 0 or 1 element, it's already sorted.
+* `arr.copy()` ensures that the original array isn’t affected if the user modifies the result.
+
+---
+
+```
+    pivot_idx = random.randint(0, len(arr) - 1)
+    pivot = arr[pivot_idx]
+```
+
+* Picks a random index as the pivot.
+* The pivot is the value at that index. This randomization helps to avoid the worst-case performance of Quick Sort O(n²)
+for sorted or patterned input.
+
+---
+
+```
+    left = [x for x in arr if x < pivot]
+    middle = [x for x in arr if x == pivot]
+    right = [x for x in arr if x > pivot]
+```
+
+* The array is partitioned into three sublists:
+
+  * `left`: elements less than pivot
+  * `middle`: elements equal to pivot (important for handling duplicates)
+  * `right`: elements greater than pivot
+
+---
+
+```
+    return randomized_quick_sort(left) + middle + randomized_quick_sort(right)
+```
+
+* Recursive calls:
+
+  * Sort `left` and `right` partitions independently.
+  * Combine the sorted parts with `middle` to get the full sorted array.
+
+---
+
+### Example
+
+For the input:
+
+```
+randomized_quick_sort([8, 5, 2, 9, 5, 6, 3])
+```
+
+Let’s say the randomly chosen pivot is 5:
+
+* `left`: [2, 3]
+* `middle`: [5, 5]
+* `right`: [8, 9, 6]
+
+Then, it recursively sorts [2, 3] and [8, 9, 6], combines all, and returns the sorted list:
+
+```
+[2, 3] + [5, 5] + [6, 8, 9] → [2, 3, 5, 5, 6, 8, 9]
+```
+
+---
+
+### Key Points
+
+* ✅ Efficient average-case performance: O(n log n)
+* ✅ Handles duplicates properly
+* ✅ Random pivot helps avoid worst-case scenarios
+* ❌ Not in-place (creates new lists for each partition, so uses extra memory)
+
+---
+
+Here's a step-by-step ASCII visualization of how randomized_quick_sort works using this example:
+
+🧪 Input:
+
+```
+[8, 5, 2, 9, 5, 6, 3]
+```
+
+Let’s walk through it, assuming the randomly chosen pivots are as follows at each step.
+
+---
+
+### Step 1: Pick pivot = 5
+
+Split:
+
+```
+Left   = [2, 3]
+Middle = [5, 5]
+Right  = [8, 9, 6]
+```
+
+Recursive calls:
+
+```
+randomized_quick_sort([2, 3])
+randomized_quick_sort([8, 9, 6])
+```
+
+---
+
+### Step 2a: Sort [2, 3] — Pick pivot = 3
+
+Split:
+
+```
+Left   = [2]
+Middle = [3]
+Right  = []
+```
+
+Return:
+
+```
+[2] + [3] + [] = [2, 3]
+```
+
+---
+
+### Step 2b: Sort [8, 9, 6] — Pick pivot = 8
+
+Split:
+
+```
+Left   = [6]
+Middle = [8]
+Right  = [9]
+```
+
+Return:
+
+```
+[6] + [8] + [9] = [6, 8, 9]
+```
+
+---
+
+### Final Assembly
+
+Now combine everything:
+
+```
+Left   = [2, 3]
+Middle = [5, 5]
+Right  = [6, 8, 9]
+
+Final = [2, 3] + [5, 5] + [6, 8, 9]
+      = [2, 3, 5, 5, 6, 8, 9]
+```
+
+---
+
+🎉 Final Sorted Output:
+
+```
+[2, 3, 5, 5, 6, 8, 9]
+```
+
+"""
