@@ -43,23 +43,42 @@ Worst: O(n²) time | O(log(n)) space - where n is the length of the input array.
 
 # Solution:
 
-import random
+import random  # Import the random module for selecting random pivot
 
 
 # Best: O(n log(n)) time | O(log(n)) space
 # Average: O(n log(n)) time | O(log(n)) space
 # Worst: O(n²) time | O(n) space
 def randomized_quick_sort(arr):
-    if len(arr) <= 1:
-        return arr.copy()
+    """
+    Sorts an array using the randomized quicksort algorithm.
+    This version creates new lists for partitions rather than sorting in-place.
 
+    Args:
+        arr: List of comparable elements to be sorted
+
+    Returns:
+        A new list containing all elements from arr in sorted order
+    """
+
+    # Base case: arrays of length 0 or 1 are already sorted
+    if len(arr) <= 1:
+        return arr.copy()  # Return a copy to maintain consistency in return types
+
+    # Randomly select a pivot index to help avoid worst-case O(n^2) performance
     pivot_idx = random.randint(0, len(arr) - 1)
     pivot = arr[pivot_idx]
 
+    # Partition the array into three parts:
+    # - left: elements smaller than pivot
+    # - middle: elements equal to pivot (handles duplicate values)
+    # - right: elements larger than pivot
     left = [x for x in arr if x < pivot]
     middle = [x for x in arr if x == pivot]
     right = [x for x in arr if x > pivot]
 
+    # Recursively sort the left and right partitions, then combine with middle
+    # Note: middle doesn't need sorting as all elements are equal
     return randomized_quick_sort(left) + middle + randomized_quick_sort(right)
 
 
