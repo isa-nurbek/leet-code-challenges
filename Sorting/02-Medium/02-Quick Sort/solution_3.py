@@ -46,7 +46,7 @@ Worst: O(n²) time | O(log(n)) space - where n is the length of the input array.
 
 # Best: O(n log(n)) time | O(log(n)) space
 # Average: O(n log(n)) time | O(log(n)) space
-# Worst: O(n²) time | O(n²) space
+# Worst: O(n²) time | O(n) space
 def quick_sort_inplace(arr, low=0, high=None):
     """
     Sorts the array in-place using quicksort algorithm.
@@ -120,3 +120,47 @@ print(
 
 print(quick_sort_inplace([2, 1]))
 # Output: [1, 2]
+
+# =========================================================================================================================== #
+
+# Big O Analysis:
+
+"""
+## Time and Space Complexity Analysis:
+
+### Time Complexity Analysis:
+
+1. **Best Case**:  
+   - Occurs when the pivot always divides the array into two nearly equal halves.  
+   - Recurrence relation: T(n) = 2T(n/2) + O(n)
+   - By the Master Theorem, this solves to O(n log n).
+
+2. **Average Case**:  
+   - For random input, the pivot is expected to split the array reasonably well.  
+   - The average time complexity is also O(n log n).
+
+3. **Worst Case**:  
+   - Occurs when the pivot is always the smallest or largest element (e.g., already sorted/reverse-sorted array).  
+   - Recurrence relation: T(n) = T(n-1) + O(n)
+   - This leads to O(n²).
+
+### Space Complexity Analysis:
+
+- The space complexity is determined by the recursion stack depth.  
+  - **Best/Average Case**: The recursion depth is O(log n).  
+  - **Worst Case**: The recursion depth is O(n).  
+- Since the sorting is done in-place, no additional space is used apart from the recursion stack.  
+
+### Summary:
+
+| Case       | Time Complexity  | Space Complexity  |
+|------------|------------------|-------------------|
+| Best       | O(n log n)       | O(log n)          |
+| Average    | O(n log n)       | O(log n)          |
+| Worst      | O(n²)            | O(n)              |
+
+### Notes:
+- The worst case can be avoided by using randomized quicksort (choosing a random pivot).  
+- In practice, quicksort is often faster than other O(n log n) algorithms due to smaller constant factors and cache efficiency.
+
+"""
