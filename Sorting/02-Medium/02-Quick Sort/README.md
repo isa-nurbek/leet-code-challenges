@@ -2,6 +2,10 @@
 
 Write a function that takes in an array of integers and returns a `sorted` version of that array. Use the `Quick Sort` algorithm to sort the array.
 
+To avoid `O(n²)` worst-case time complexity you can:
+- Choose a `random pivot` or `median-of-three pivot`.
+- Use an `in-place partitioning` scheme to reduce space usage.
+
 ## Sample Input
 
 ```plaintext
