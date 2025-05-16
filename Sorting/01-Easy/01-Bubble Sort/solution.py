@@ -77,3 +77,49 @@ print(bubble_sort([-4, 5, 10, 8, -10, -6, -4, -2, -5, 3, 5, -4, -5, -1, 1, 6, -7
 
 print(bubble_sort([2, 1]))
 # Output: [1, 2]
+
+# =========================================================================================================================== #
+
+# Big O Analysis:
+
+"""
+## Time and Space Complexity Analysis:
+
+### Time Complexity Analysis:
+
+The time complexity of the Bubble Sort algorithm can be analyzed as follows:
+
+1. **Worst-case time complexity**: 
+   - In the worst case (when the array is in reverse order), the algorithm will perform the maximum number of comparisons and swaps.
+   - For each pass through the array, the largest unsorted element "bubbles up" to its correct position.
+   - The number of comparisons in the first pass is `(n-1)`, then `(n-2)`, and so on, down to `1` in the last pass.
+   - Total comparisons = `(n-1) + (n-2) + ... + 1 = n(n-1)/2`, which is `O(n²)`.
+
+2. **Best-case time complexity**:
+   - In the best case (when the array is already sorted), the algorithm will still perform `(n-1)` comparisons in the first pass
+   but will not perform any swaps.
+   - Due to the `is_sorted` flag, the algorithm will terminate after the first pass.
+   - Thus, the best-case time complexity is `O(n)`.
+
+3. **Average-case time complexity**:
+   - On average, Bubble Sort performs `O(n²)` comparisons and swaps because it typically requires multiple passes through the array.
+
+### Space Complexity Analysis:
+
+1. **Space complexity**:
+   - Bubble Sort is an in-place sorting algorithm, meaning it does not require additional space proportional to the input size.
+   - The only extra space used is for variables like `is_sorted`, `counter`, `i`, and temporary variables in the `swap` function,
+   which are all constant space O(1).
+   - Thus, the space complexity is `O(1)`.
+
+### Summary:
+
+- **Time Complexity**:
+
+  - Worst-case: `O(n²)`
+  - Best-case: `O(n)` (with `is_sorted` optimization)
+  - Average-case: `O(n²)`
+  
+- **Space Complexity**: `O(1)` (in-place sorting).
+
+"""
