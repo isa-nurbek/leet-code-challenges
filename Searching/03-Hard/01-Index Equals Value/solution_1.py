@@ -82,7 +82,7 @@ print(index_equals_value([-5, -4, -3, -2, -1, 0, 1, 3, 5, 6, 7, 11, 12, 14, 19, 
 The function iterates through each element of the array exactly once in the worst case (if no element satisfies `array[idx] == idx`). 
 
 - **Best Case**: The first element satisfies the condition (`array[0] == 0`), and the function returns immediately.
-Time complexity is \( O(1) \).
+Time complexity is O(1).
 
 - **Worst Case**: No element satisfies the condition, or the matching element is at the end of the array.
 The loop runs `n` times (where `n`) is the length of the array).
