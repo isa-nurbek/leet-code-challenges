@@ -82,3 +82,43 @@ print(three_number_sort([7, 8, 9, 7, 8, 9, 9, 9, 9, 9, 9, 9], [8, 7, 9]))
 
 print(three_number_sort([], [0, 7, 9]))
 # Output: []
+
+# =========================================================================================================================== #
+
+# Big O Analysis:
+
+"""
+## Time and Space Complexity Analysis:
+
+### **Time Complexity:**
+
+1. **Counting Occurrences:**
+   - The first loop iterates through each element in the `array` (length `N`).
+   - For each element, it calls `order.index(element)`, which in the worst case takes `O(3)` = `O(1)` time (since `order` has
+   only 3 elements).
+   - Thus, this part takes `O(N * 3)` = `O(N)` time.
+
+2. **Reconstructing the Sorted Array:**
+   - The outer loop runs 3 times (for each unique value in `order`).
+   - The inner loop runs `count` times (where `count` is the number of occurrences of the current value in `order`).
+   - The total number of assignments in the inner loop is `N` (since we're reconstructing the entire array).
+   - The `sum(value_counts[:i])` is `O(3)` = `O(1)` since `i` is at most 2.
+   - Thus, this part also takes `O(N)` time.
+
+**Total Time Complexity:** `O(N) + O(N)` = `O(N)`.
+
+### **Space Complexity:**
+
+- The only additional space used is `value_counts`, which is of fixed size `3` (since `order` has only 3 unique values).
+- No other significant extra space is used (the input array is modified in-place).
+
+**Total Space Complexity:** `O(1)` (constant extra space).
+
+### **Summary:**
+- **Time Complexity:** `O(N)`
+- **Space Complexity:** `O(1)`
+
+This is an efficient in-place sorting algorithm for this constrained problem (where the array only contains 3 distinct values
+in a known order). It works similarly to the "Dutch National Flag" problem solution.
+
+"""
