@@ -17,7 +17,7 @@ array = [8, 5, 2, 9, 5, 6, 3]
 ## Hints
 
 <details>
-<summary><b>Hint 1</b></summary>
+<summary><b>Hint</b></summary>
 
 Divide the input array into two subarrays in place. The first subarray should be sorted at all times and should start with a length of `0`, while the second subarray should be unsorted. Find the smallest (or largest) element in the unsorted subarray and insert it into the sorted subarray with a swap. Repeat this process of finding the smallest (or largest) element in the unsorted subarray and inserting it in its correct position in the sorted subarray with a swap until the entire array is sorted.
 
