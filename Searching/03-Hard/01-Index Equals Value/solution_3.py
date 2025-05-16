@@ -78,3 +78,45 @@ print(index_equals_value([-12, 1, 2, 3, 12]))
 
 print(index_equals_value([-5, -4, -3, -2, -1, 0, 1, 3, 5, 6, 7, 11, 12, 14, 19, 20]))
 # Output: 11
+
+# =========================================================================================================================== #
+
+# Big O Analysis:
+
+"""
+## Time and Space Complexity Analysis:
+
+### Time Complexity Analysis:
+
+1. **Binary Search**: The algorithm uses binary search, which halves the search space in each iteration. 
+   - In each iteration, the algorithm checks the middle element and adjusts the `left` or `right` pointer accordingly.
+   - The number of iterations is proportional to the number of times you can halve the search space until it becomes empty.
+   For an array of size `n`, this is `O(log n)`.
+
+2. **Operations per Iteration**: In each iteration, the algorithm performs a constant amount of work (calculating `middle`,
+accessing `array[middle]`, comparisons, and updating pointers). Thus, the work per iteration is `O(1)`.
+
+Combining these, the total time complexity is: O(log n) 
+
+### Space Complexity Analysis:
+
+The space complexity is determined by the additional memory used by the algorithm beyond the input:
+
+1. **Variables**: The algorithm uses a few extra variables (`left`, `right`, `middle`, `middle_value`, `result`), all of which
+occupy constant space O(1).
+2. **Input**: The input array is not counted towards the space complexity of the function itself (it's part of the input space).
+
+Thus, the space complexity is: O(1) 
+
+### Summary:
+- **Time Complexity**: `O(log n)`
+- **Space Complexity**: `O(1)`
+
+### Additional Notes:
+- The algorithm is efficient because it leverages the sorted nature of the array (implied by the problem constraints, since binary
+search is used) to eliminate half of the remaining elements in each step.
+
+- The early termination when `middle_value == middle` (by setting `right = middle - 1`) ensures that we find the smallest such
+index, if it exists. If no such index exists, the function returns `-1`.
+
+"""
