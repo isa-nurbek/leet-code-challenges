@@ -1,7 +1,7 @@
 # Problem Description:
 
 """
-                                             Index Equals Value
+                                             Median Of Two Sorted Arrays
 
 You're given `two sorted arrays` of integers `array_one` and `array_two`. Write a function that returns the `median` of these arrays.
 
