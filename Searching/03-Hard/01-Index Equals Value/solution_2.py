@@ -96,3 +96,44 @@ print(index_equals_value([-12, 1, 2, 3, 12]))
 
 print(index_equals_value([-5, -4, -3, -2, -1, 0, 1, 3, 5, 6, 7, 11, 12, 14, 19, 20]))
 # Output: 11
+
+# =========================================================================================================================== #
+
+# Big O Analysis:
+
+"""
+## Time and Space Complexity Analysis:
+
+### Time Complexity:
+
+The function implements a modified binary search algorithm.
+
+Here's why:
+
+1. **Binary Search Approach**: The helper function divides the search space in half at each recursive call, similar to
+standard binary search.
+
+2. **Constant Work per Step**: In each recursive call, it performs a constant amount of work (calculating the middle index,
+comparing values, etc.).
+
+3. **Recursive Calls**: The recursion reduces the problem size by approximately half each time.
+
+Since the search space is halved at each step, the time complexity is **O(log n)**, where `n` is the length of the input array.
+
+### Space Complexity:
+
+The space complexity depends on whether the recursion is tail-optimized or not:
+
+1. **Recursive Calls**: The helper function is recursive, and in the worst case, it can make **O(log n)** nested calls before
+reaching the base case (since the depth of recursion is logarithmic in the size of the array).
+
+2. **Stack Space**: Each recursive call consumes stack space for parameters and local variables.
+
+Thus, the space complexity is **O(log n)** due to the recursion stack. If this were implemented iteratively instead of recursively,
+the space complexity could be reduced to **O(1)**.
+
+### Final Answer:
+- **Time Complexity**: **O(log n)**
+- **Space Complexity**: **O(log n)** (due to recursion stack; could be O(1) if rewritten iteratively)
+
+"""
