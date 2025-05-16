@@ -48,30 +48,64 @@ Worst: O(n²) time | O(log(n)) space - where n is the length of the input array.
 # Average: O(n log(n)) time | O(log(n)) space
 # Worst: O(n²) time | O(n²) space
 def quick_sort_inplace(arr, low=0, high=None):
-    if high is None:
-        high = len(arr) - 1
+    """
+    Sorts the array in-place using quicksort algorithm.
 
+    Args:
+        arr: List to be sorted
+        low: Starting index of the subarray to be sorted (default 0)
+        high: Ending index of the subarray to be sorted (default None, which sets to last index)
+
+    Returns:
+        The sorted array (modified in-place)
+    """
+    if high is None:
+        high = len(arr) - 1  # Initialize high to last index if not provided
+
+    # Only proceed if there's more than one element to sort
     if low < high:
+        # Partition the array and get the pivot's final index
         pivot_idx = partition(arr, low, high)
 
-        quick_sort_inplace(arr, low, pivot_idx - 1)
-        quick_sort_inplace(arr, pivot_idx + 1, high)
+        # Recursively sort the elements before and after the pivot
+        quick_sort_inplace(arr, low, pivot_idx - 1)  # Sort left subarray
+        quick_sort_inplace(arr, pivot_idx + 1, high)  # Sort right subarray
 
-    return arr  # In-place modification
+    return arr  # Return the sorted array (modified in-place)
 
 
 def partition(arr, low, high):
-    pivot = arr[high]
+    """
+    Partitions the subarray arr[low..high] such that:
+    - All elements <= pivot are before it
+    - All elements > pivot are after it
+    - The pivot is placed in its correct sorted position
 
-    i = low - 1
+    Args:
+        arr: The array to partition
+        low: Starting index of subarray
+        high: Ending index of subarray (pivot is initially arr[high])
 
+    Returns:
+        The index of the pivot element after partitioning
+    """
+    pivot = arr[high]  # Choose last element as pivot
+
+    i = low - 1  # Index of smaller element (starts before the subarray)
+
+    # Iterate through the subarray
     for j in range(low, high):
+        # If current element is smaller than or equal to pivot
         if arr[j] <= pivot:
-            i += 1
+            i += 1  # Increment index of smaller element
+            # Swap elements at i and j
             arr[i], arr[j] = arr[j], arr[i]
 
+    # Place the pivot in its correct position
+    # (after the last element that was <= pivot)
     arr[i + 1], arr[high] = arr[high], arr[i + 1]
-    return i + 1
+
+    return i + 1  # Return the pivot's final index
 
 
 # Test Cases:
