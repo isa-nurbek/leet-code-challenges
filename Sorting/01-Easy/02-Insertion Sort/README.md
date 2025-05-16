@@ -17,7 +17,7 @@ array = [8, 5, 2, 9, 5, 6, 3]
 ## Hints
 
 <details>
-<summary><b>Hint 1</b></summary>
+<summary><b>Hint</b></summary>
 
 Divide the input array into two subarrays in place. The first subarray should be sorted at all times and should start with a length of `1`, while the second subarray should be unsorted. Iterate through the unsorted subarray, inserting all of its elements into the sorted subarray in the correct position by swapping them into place. Eventually, the entire array will be sorted.
 
