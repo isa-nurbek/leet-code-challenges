@@ -144,3 +144,158 @@ Selection Sort is inefficient for large datasets but can be useful when memory w
 most `O(n)` swaps).
 
 """
+
+# =========================================================================================================================== #
+
+# Detailed Code Explanation:
+
+"""
+Let's break it down in detail to understand how it works.
+
+---
+
+## 🔍 What is Selection Sort?
+
+Selection sort is a simple comparison-based sorting algorithm. It works by repeatedly finding the minimum element from the unsorted
+part of the list and moving it to the front. It operates in-place, so it doesn’t need extra memory.
+
+---
+
+## 🔧 Code Breakdown
+
+### 1. The main function: `selection_sort(array)`
+
+```
+def selection_sort(array):
+    current_idx = 0
+
+    while current_idx < len(array) - 1:
+        smallest_idx = current_idx
+```
+
+* `current_idx`: This is the index where we want to place the smallest remaining value.
+* We loop through the array starting from `current_idx` to the end to find the smallest value.
+
+### 2. Finding the smallest value in the unsorted part
+
+```
+for i in range(current_idx + 1, len(array)):
+    if array[smallest_idx] > array[i]:
+        smallest_idx = i
+```
+
+* This loop compares the current smallest element with the rest of the array.
+* If a smaller value is found, `smallest_idx` is updated.
+
+### 3. Swapping elements
+
+```
+swap(current_idx, smallest_idx, array)
+current_idx += 1
+```
+
+* Once the smallest element in the unsorted part is found, it is swapped with the element at `current_idx`.
+* Then we move the boundary of the sorted part one step forward.
+
+### 4. The swap helper function
+
+```
+def swap(i, j, array):
+    array[i], array[j] = array[j], array[i]
+```
+
+* This function swaps the values at positions `i` and `j` in the array using tuple unpacking.
+
+---
+
+## 🔁 Step-by-Step Example
+
+For `selection_sort([8, 5, 2, 9, 5, 6, 3])`
+
+* Iteration 1: Find smallest → 2 → swap with 8 → [2, 5, 8, 9, 5, 6, 3]
+* Iteration 2: Find next smallest → 3 → swap with 5 → [2, 3, 8, 9, 5, 6, 5]
+* Continue until fully sorted → [2, 3, 5, 5, 6, 8, 9]
+
+---
+
+## ✅ Time and Space Complexity
+
+* 🕒 Time: O(n²) in all cases (worst, average, and best).
+* 🧠 Space: O(1) — it sorts in-place.
+
+---
+
+## 🧪 Test Outputs
+
+Test cases output as expected:
+
+```
+print(selection_sort([8, 5, 2, 9, 5, 6, 3]))
+# Output: [2, 3, 5, 5, 6, 8, 9]
+
+print(selection_sort([-4, 5, 10, 8, -10, -6, -4, -2, -5, 3, 5, -4, -5, -1, 1, 6, -7]))
+# Output: [-10, -7, -6, -5, -5, -4, -4, -4, -2, -1, 1, 3, 5, 5, 6, 8, 10]
+
+print(selection_sort([2, 1]))
+# Output: [1, 2]
+```
+
+---
+
+Here's a detailed ASCII visualization showing how Selection Sort works on the array:
+
+📦 Input: [8, 5, 2, 9, 5, 6, 3]
+
+Legend:
+
+* ⬅️ current index being sorted
+* 🔍 scanning unsorted portion
+* ✅ sorted portion
+* ⭐ smallest found in unsorted portion
+
+We’ll show each step of the algorithm:
+
+Initial:
+[8, 5, 2, 9, 5, 6, 3]
+
+───────────────────────────────
+Pass 1 (current_idx = 0):
+
+[8⬅️, 5🔍, 2⭐, 9🔍, 5🔍, 6🔍, 3🔍] → Swap 8 and 2
+[2✅, 5, 8, 9, 5, 6, 3]
+
+───────────────────────────────
+Pass 2 (current_idx = 1):
+
+[2✅, 5⬅️, 8🔍, 9🔍, 5🔍, 6🔍, 3⭐] → Swap 5 and 3
+[2✅, 3✅, 8, 9, 5, 6, 5]
+
+───────────────────────────────
+Pass 3 (current_idx = 2):
+
+[2✅, 3✅, 8⬅️, 9🔍, 5⭐, 6🔍, 5🔍] → Swap 8 and 5
+[2✅, 3✅, 5✅, 9, 8, 6, 5]
+
+───────────────────────────────
+Pass 4 (current_idx = 3):
+
+[2✅, 3✅, 5✅, 9⬅️, 8🔍, 6🔍, 5⭐] → Swap 9 and 5
+[2✅, 3✅, 5✅, 5✅, 8, 6, 9]
+
+───────────────────────────────
+Pass 5 (current_idx = 4):
+
+[2✅, 3✅, 5✅, 5✅, 8⬅️, 6⭐, 9🔍] → Swap 8 and 6
+[2✅, 3✅, 5✅, 5✅, 6✅, 8, 9]
+
+───────────────────────────────
+Pass 6 (current_idx = 5):
+
+[2✅, 3✅, 5✅, 5✅, 6✅, 8⬅️, 9🔍] → Already sorted
+[2✅, 3✅, 5✅, 5✅, 6✅, 8✅, 9]
+
+───────────────────────────────
+✅ Final Sorted Array:
+[2, 3, 5, 5, 6, 8, 9]
+
+"""
