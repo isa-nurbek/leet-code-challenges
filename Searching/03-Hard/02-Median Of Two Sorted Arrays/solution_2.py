@@ -88,3 +88,44 @@ print(median_of_two_sorted_arrays([1, 3, 4, 5], [2, 3, 6, 7]))
 
 print(median_of_two_sorted_arrays([2, 2, 2, 2, 2], [3, 3, 3, 3]))
 # Output: 2
+
+# =========================================================================================================================== #
+
+# Big O Analysis:
+
+"""
+## Time and Space Complexity Analysis:
+
+### Time Complexity Analysis:
+
+The algorithm performs a binary search on the smaller of the two arrays (`array_one`). In each iteration of the binary search,
+it checks a partition of `array_one` and computes the corresponding partition in `array_two` to determine if the correct partition
+for the median has been found. 
+
+1. **Binary Search**: The binary search runs on the smaller array of size `n`, so it performs `O(log n)` iterations.
+2. **Work per Iteration**: In each iteration, the algorithm performs a constant number of operations (accessing elements,
+comparisons, and arithmetic operations). No loops or recursive calls are present within the binary search loop.
+   
+Thus, the **time complexity is `O(log(min(n, m)))`**, where `n` and `m` are the lengths of the two input arrays. This is because
+the binary search is performed on the smaller array, and the larger array's partition is derived in constant time.
+
+---
+
+### Space Complexity Analysis:
+
+The algorithm uses a constant amount of additional space, regardless of the input sizes. It only stores a few variables (`left`,
+`right`, `mid`, `remaining`, `max_left_one`, `min_right_one`, `max_left_two`, `min_right_two`, etc.), and no additional data
+structures or recursive calls are involved.
+
+Thus, the **space complexity is `O(1)`**.
+
+---
+
+### Summary:
+- **Time Complexity**: `O(log(min(n, m)))`  
+- **Space Complexity**: `O(1)`  
+
+This is an optimal solution for finding the median of two sorted arrays, as it efficiently narrows down the search space using
+binary search without requiring extra memory.
+
+"""
