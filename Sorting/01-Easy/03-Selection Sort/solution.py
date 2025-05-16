@@ -35,22 +35,45 @@ Worst: O(n²) time | O(1) space - where `n` is the length of the input array.
 # Average: O(n²) time | O(1)
 # Worst: O(n²) time | O(1) space
 def selection_sort(array):
-    current_idx = 0
+    """
+    Sorts an array in ascending order using the Selection Sort algorithm.
 
+    Args:
+        array: The list to be sorted
+
+    Returns:
+        The sorted list in ascending order
+    """
+    current_idx = 0  # Start with the first element as the initial position to fill
+
+    # Loop through the array until the second-to-last element
+    # (the last element will already be sorted when we get to it)
     while current_idx < len(array) - 1:
-        smallest_idx = current_idx
+        smallest_idx = current_idx  # Assume current element is the smallest initially
 
+        # Search the unsorted portion of the array for the smallest element
         for i in range(current_idx + 1, len(array)):
+            # If we find a smaller element, update the smallest_idx
             if array[smallest_idx] > array[i]:
                 smallest_idx = i
 
+        # Swap the smallest found element with the current position
         swap(current_idx, smallest_idx, array)
+        # Move to the next position in the array
         current_idx += 1
 
     return array
 
 
 def swap(i, j, array):
+    """
+    Helper function to swap two elements in an array.
+
+    Args:
+        i: Index of first element
+        j: Index of second element
+        array: The array containing the elements to swap
+    """
     array[i], array[j] = array[j], array[i]
 
 
