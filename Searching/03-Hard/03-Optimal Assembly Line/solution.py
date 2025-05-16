@@ -127,3 +127,40 @@ print(optimal_assembly_line([1, 2, 3, 4, 5], 3))
 
 print(optimal_assembly_line([30, 5, 20, 10], 2))
 # Output: 35
+
+# =========================================================================================================================== #
+
+# Big O Analysis:
+
+"""
+## Time and Space Complexity Analysis:
+
+Let's analyze the time and space complexity of the given `optimal_assembly_line` algorithm.
+
+### Time Complexity:
+
+1. **Binary Search Component**:
+   - The binary search runs between `left = max(step_durations)` and `right = sum(step_durations)`.
+   - Each iteration reduces the search space by half, so the number of iterations is `O(log(sum(step_durations) - max(step_durations)))`.
+
+2. **Feasibility Check (`is_potential_solution`)**:
+   - This function iterates through all `step_durations` exactly once, performing `O(1)` operations per step.
+   - Thus, its time complexity is `O(n)`, where `n` is the number of steps.
+
+3. **Overall Time Complexity**:
+   - Since the binary search performs `O(log(S))` iterations (where `S = sum(step_durations) - max(step_durations)`) and each
+   iteration calls `is_potential_solution` in `O(n)` time, the total time complexity is: O(n log S)
+
+### Space Complexity:
+
+- The algorithm uses a constant amount of additional space (for variables like `left`, `right`, `max_station_duration`, etc.).
+- The `is_potential_solution` function also uses only `O(1)` extra space (for `stations_required` and `current_duration`).
+- Thus, the **space complexity is `O(1)`** (no additional space proportional to input size is used).
+
+### Summary:
+- **Time Complexity**: `O(n log S)` where `n` is the number of steps and `S = sum(step_durations) - max(step_durations)`.
+- **Space Complexity**: `O(1)` (constant space).
+
+This is an efficient solution for the assembly line balancing problem, leveraging binary search to minimize the maximum station duration.
+
+"""
