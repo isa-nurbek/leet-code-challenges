@@ -106,3 +106,52 @@ print(median_of_two_sorted_arrays([2, 2, 2, 2, 2], [3, 3, 3, 3]))
 
 print(median_of_two_sorted_arrays([-100, -50, -1, 15, 3], [1, 20, 50, 100]))
 # Output: 15
+
+# =========================================================================================================================== #
+
+# Big O Analysis:
+
+"""
+## Time and Space Complexity Analysis:
+
+### Time Complexity Analysis
+
+1. **Finding the middle index(es):**  
+   - The `while` loop runs until `idx_one + idx_two` reaches `middle_idx`.  
+   - In the worst case, this requires traversing up to `middle_idx` elements, where `middle_idx` is roughly `(n + m) / 2`
+   (where `n` and `m` are the lengths of `array_one` and `array_two`, respectively).  
+   - Thus, the loop runs in `O((n + m) / 2) = O(n + m)` time.
+
+2. **Collecting the middle value(s):**  
+   - In the odd case, we perform a constant-time check (`min` of two values or a direct access).  
+   - In the even case, we collect two values in a fixed number of steps (2 iterations of a loop with constant-time operations).  
+   - This part is `O(1)` in both cases.
+
+**Overall Time Complexity:**  
+The dominant part is the `while` loop, so the time complexity is `O(n + m)`.
+
+---
+
+### Space Complexity Analysis
+
+The algorithm uses a constant amount of additional space:
+- A few variables (`idx_one`, `idx_two`, `total_length`, `middle_idx`, `next_middle_idx`).  
+- In the even case, a small list (`values`) of size 2 is used.  
+
+No additional data structures (like arrays or hash maps) are used that grow with input size.
+
+**Overall Space Complexity:**  
+`O(1)` (constant space).
+
+---
+
+### Summary:
+- **Time Complexity**: `O(n + m)`
+- **Space Complexity**: `O(1)`
+
+### Optimization Note
+
+This is a straightforward merge-based approach. There exists a more efficient `O(log(min(n, m)))` solution using binary search,
+but it is more complex to implement. The current approach is intuitive and works well for moderately sized inputs.
+
+"""
