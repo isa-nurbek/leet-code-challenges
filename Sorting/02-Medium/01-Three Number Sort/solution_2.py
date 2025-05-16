@@ -85,3 +85,42 @@ print(three_number_sort([7, 8, 9, 7, 8, 9, 9, 9, 9, 9, 9, 9], [8, 7, 9]))
 
 print(three_number_sort([], [0, 7, 9]))
 # Output: []
+
+# =========================================================================================================================== #
+
+# Big O Analysis:
+
+"""
+## Time and Space Complexity Analysis:
+
+### Time Complexity Analysis:
+
+The algorithm processes each element in the array exactly once using the `second_idx` and `third_idx` pointers. The `while`
+loop runs until `second_idx` crosses `third_idx`, which means it processes each element in the array at most once. 
+
+- **Comparisons and swaps**: For each element, the algorithm performs a constant amount of work (comparisons and swaps). 
+- **Number of operations**: Since there are `n` elements in the array, the total number of operations is proportional to `n`.
+
+Thus, the **time complexity is O(n)**, where `n` is the length of the array.
+
+---
+
+### Space Complexity Analysis:
+
+The algorithm sorts the array in place by swapping elements and using a few extra variables (`first_idx`, `second_idx`,
+`third_idx`, `first_value`, `second_value`, `value`). 
+
+- No additional data structures (like extra arrays or hash tables) are used.
+- The space used does not grow with the input size.
+
+Thus, the **space complexity is O(1)** (constant space).
+
+---
+
+### Summary:
+- **Time Complexity**: O(n)
+- **Space Complexity**: O(1)
+
+This is similar to the Dutch National Flag problem, where we partition the array into three sections in a single pass.
+
+"""
