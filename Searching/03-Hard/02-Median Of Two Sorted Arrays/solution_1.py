@@ -36,30 +36,50 @@ O(log(min(n, m)) time | O(1) space - where `n` is the length of `array_one` and 
 
 # O(n + m) time | O(1) space
 def median_of_two_sorted_arrays(array_one, array_two):
+    # Initialize pointers for both arrays
     idx_one, idx_two = 0, 0
+
+    # Calculate total length of combined arrays
     total_length = len(array_one) + len(array_two)
+
+    # Calculate middle index (for odd length) or first middle index (for even length)
     middle_idx = (total_length - 1) // 2
+
+    # For even length, we need the next index after middle to calculate median
     next_middle_idx = middle_idx + 1 if total_length % 2 == 0 else None
 
+    # Move pointers forward until we reach the middle index of the combined array
     while idx_one + idx_two < middle_idx:
+        # If we've exhausted array_one, move array_two's pointer
         if idx_one >= len(array_one):
             idx_two += 1
+        # If we've exhausted array_two, move array_one's pointer
         elif idx_two >= len(array_two):
             idx_one += 1
+        # Otherwise, move the pointer of the array with smaller current element
         elif array_one[idx_one] < array_two[idx_two]:
             idx_one += 1
         else:
             idx_two += 1
 
+    # Handle case where total length is odd (single middle element)
     if next_middle_idx is None:
+        # If array_one is exhausted, return current element from array_two
         if idx_one >= len(array_one):
             return array_two[idx_two]
+
+        # If array_two is exhausted, return current element from array_one
         if idx_two >= len(array_two):
             return array_one[idx_one]
+
+        # Otherwise return the smaller of current elements (since arrays are sorted)
         return min(array_one[idx_one], array_two[idx_two])
+    # Handle case where total length is even (average of two middle elements)
     else:
         values = []
+        # We need to collect the next two elements (current and next)
         for _ in range(2):
+            # Similar logic as above to get next elements
             if idx_one >= len(array_one):
                 values.append(array_two[idx_two])
                 idx_two += 1
@@ -72,6 +92,7 @@ def median_of_two_sorted_arrays(array_one, array_two):
             else:
                 values.append(array_two[idx_two])
                 idx_two += 1
+        # Return average of the two middle elements
         return sum(values) / 2
 
 
