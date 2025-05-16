@@ -35,23 +35,54 @@ O(log(n)) time | O(1) space - where `n` is the length of the input array.
 
 # O(log(n)) time | O(log(n)) space
 def index_equals_value(array):
+    """
+    Finds the first index in a sorted array where array[index] == index.
+    Uses a helper function to perform binary search recursively.
+
+    Args:
+        array: A sorted list of integers where elements are distinct and in increasing order.
+
+    Returns:
+        The first index where array[index] == index, or -1 if no such index exists.
+    """
     return index_equals_value_helper(array, 0, len(array) - 1)
 
 
 def index_equals_value_helper(array, left_idx, right_idx):
+    """
+    Helper function that performs binary search to find the first index where array[index] == index.
+
+    Args:
+        array: The sorted list of integers to search
+        left_idx: Left boundary of the current search range
+        right_idx: Right boundary of the current search range
+
+    Returns:
+        The first matching index found, or -1 if none exists in the current range
+    """
+
+    # Base case: search range is invalid, meaning no match was found
     if left_idx > right_idx:
         return -1
 
+    # Calculate middle index to split search range
     middle_idx = left_idx + (right_idx - left_idx) // 2
     middle_value = array[middle_idx]
 
     if middle_value < middle_idx:
+        # If value is less than index, all elements to the left must also be smaller
+        # because array is strictly increasing. So we search right half.
         return index_equals_value_helper(array, middle_idx + 1, right_idx)
     elif middle_value == middle_idx and middle_idx == 0:
+        # Found match at index 0 (can't check left neighbor)
         return middle_idx
     elif middle_value == middle_idx and array[middle_idx - 1] < middle_idx - 1:
+        # Found match where previous element doesn't match, so this is first occurrence
         return middle_idx
     else:
+        # Either:
+        # 1) Value > index, so we need to search left half, or
+        # 2) Value == index but there might be earlier matches, so search left half
         return index_equals_value_helper(array, left_idx, middle_idx - 1)
 
 
