@@ -147,3 +147,201 @@ To avoid O(n²) worst-case time complexity:
 2. Use an in-place partitioning scheme to reduce space usage.
 
 """
+
+# =========================================================================================================================== #
+
+# Detailed Code Explanation:
+
+"""
+Let's walk through the Quick Sort implementation you posted step by step.
+
+---
+
+## 🔍 Function Overview
+
+```
+def quick_sort(arr):
+```
+
+This function takes a list (or array) of numbers, `arr`, and returns a sorted version of that list using the Quick Sort algorithm.
+
+---
+
+## 🧠 Base Case
+
+```
+if len(arr) <= 1:
+    return arr.copy()
+```
+
+If the array has one or zero elements, it's already sorted. So the function returns a copy of the array (to avoid modifying the original).
+
+---
+
+## 🎯 Choosing a Pivot
+
+```
+pivot = arr[-1]
+```
+
+The pivot is the last element in the array. Quick Sort uses a pivot to partition the array into two parts:
+
+* Elements less than or equal to the pivot (go to the left)
+* Elements greater than the pivot (go to the right)
+
+---
+
+## ✂️ Partitioning
+
+```
+left = [x for x in arr[:-1] if x <= pivot]
+right = [x for x in arr[:-1] if x > pivot]
+```
+
+* `arr[:-1]` excludes the pivot itself.
+* `left` holds elements less than or equal to the pivot.
+* `right` holds elements greater than the pivot.
+
+---
+
+## 🔁 Recursion
+
+```
+return quick_sort(left) + [pivot] + quick_sort(right)
+```
+
+This is the recursive step:
+
+* Recursively sort the left part
+* Add the pivot in the middle
+* Recursively sort the right part
+
+Combining these gives the final sorted array.
+
+---
+
+## ✅ Example
+
+```
+quick_sort([8, 5, 2, 9, 5, 6, 3])
+```
+
+1. Pivot = 3
+2. Left = [2]
+3. Right = [8, 5, 9, 5, 6]
+
+Then it recursively sorts [2] and [8, 5, 9, 5, 6], and so on.
+
+---
+
+## 🧪 Test Cases Recap
+
+```
+print(quick_sort([8, 5, 2, 9, 5, 6, 3]))
+# [2, 3, 5, 5, 6, 8, 9]
+
+print(quick_sort([-4, 5, 10, 8, -10, -6, -4, -2, -5, 3, 5, -4, -5, -1, 1, 6, -7]))
+# [-10, -7, -6, -5, -5, -4, -4, -4, -2, -1, 1, 3, 5, 5, 6, 8, 10]
+
+print(quick_sort([2, 1]))
+# [1, 2]
+```
+
+All these test cases confirm the function works correctly, including for:
+
+* Negative numbers
+* Repeated values
+* Small lists
+
+---
+
+## ✅ Summary
+
+This Quick Sort implementation:
+
+* Is clear and readable
+* Uses list comprehensions for partitioning
+* Works recursively
+* Does not modify the original list
+
+It’s good for learning and small lists, but for large inputs, creating many sublists with list comprehensions may use extra memory.
+
+---
+
+Here's an ASCII visualization of how the Quick Sort algorithm works on this sample input:
+
+```
+quick_sort([8, 5, 2, 9, 5, 6, 3])
+```
+
+---
+
+## 🔁 Step-by-step Quick Sort (Pivot = Last Element)
+
+```
+Initial Array:
+[8, 5, 2, 9, 5, 6, 3]
+
+Step 1:
+Pivot = 3
+Left  = [2]
+Right = [8, 5, 9, 5, 6]
+
+Now sort left and right parts:
+quick_sort([2]) + [3] + quick_sort([8, 5, 9, 5, 6])
+
+-------------------------------------
+
+Left side done:
+[2]
+
+Right side (quick_sort([8, 5, 9, 5, 6])):
+
+Step 2:
+Pivot = 6
+Left  = [5, 5]
+Right = [8, 9]
+
+quick_sort([5, 5]) + [6] + quick_sort([8, 9])
+
+-------------------------------------
+
+quick_sort([5, 5]):
+
+Pivot = 5
+Left  = [5]
+Right = []
+
+=> [5] + [5] + [] = [5, 5]
+
+quick_sort([8, 9]):
+
+Pivot = 9
+Left  = [8]
+Right = []
+
+=> [8] + [9] + [] = [8, 9]
+
+Now combine:
+[5, 5] + [6] + [8, 9] = [5, 5, 6, 8, 9]
+
+-------------------------------------
+
+Final combination:
+
+Left:  [2]
+Pivot: [3]
+Right: [5, 5, 6, 8, 9]
+
+=> [2] + [3] + [5, 5, 6, 8, 9] = [2, 3, 5, 5, 6, 8, 9]
+```
+
+---
+
+## ✅ Final Sorted Array
+
+```
+[2, 3, 5, 5, 6, 8, 9]
+```
+
+"""
