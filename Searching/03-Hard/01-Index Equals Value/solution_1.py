@@ -35,12 +35,27 @@ O(log(n)) time | O(1) space - where `n` is the length of the input array.
 
 # O(n) time | O(1) space
 def index_equals_value(array):
+    """
+    Finds the first index in a sorted array where the value equals the index.
+
+    Args:
+        array: A sorted list of integers to search through.
+
+    Returns:
+        int: The first index where array[index] == index, or -1 if no such index exists.
+    """
+
+    # Iterate through each index in the array
     for idx in range(len(array)):
+        # Get the value at the current index
         value = array[idx]
 
+        # Check if the value matches the index
         if value == idx:
+            # Return the first matching index found
             return idx
 
+    # If no index matches its value, return -1
     return -1
 
 
