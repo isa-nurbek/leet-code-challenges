@@ -35,22 +35,35 @@ Worst: O(n²) time | O(1) space - where `n` is the length of the input array.
 # Average: O(n²) time | O(1)
 # Worst: O(n²) time | O(1) space
 def bubble_sort(array):
+    # Initialize a flag to track if the array is sorted
     is_sorted = False
+    # Initialize a counter to keep track of how many elements have been sorted
     counter = 0
 
+    # Continue looping until the array is sorted
     while not is_sorted:
+        # Assume the array is sorted unless we find elements to swap
         is_sorted = True
 
+        # Iterate through the unsorted portion of the array
+        # The sorted portion grows by 1 each iteration (hence len(array) - 1 - counter)
         for i in range(len(array) - 1 - counter):
+            # If current element is greater than the next element
             if array[i] > array[i + 1]:
+                # Swap the elements
                 swap(i, i + 1, array)
+                # Since we found elements to swap, array wasn't fully sorted
                 is_sorted = False
+
+        # Increment the counter as the largest element has bubbled to the end
         counter += 1
 
+    # Return the sorted array
     return array
 
 
 def swap(i, j, array):
+    # Swap two elements in the array
     array[i], array[j] = array[j], array[i]
 
 
