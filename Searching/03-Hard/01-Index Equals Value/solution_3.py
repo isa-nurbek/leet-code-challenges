@@ -120,3 +120,256 @@ search is used) to eliminate half of the remaining elements in each step.
 index, if it exists. If no such index exists, the function returns `-1`.
 
 """
+
+# =========================================================================================================================== #
+
+# Detailed Code Explanation:
+
+"""
+This function, `index_equals_value`, searches for the **smallest index `i`** in a **sorted array** such that:
+
+```
+array[i] == i
+```
+
+It uses a **modified binary search** to efficiently find this index.
+
+---
+
+### 🔍 Problem Goal
+
+Find the smallest index `i` such that `array[i] == i`.
+If no such index exists, return `-1`.
+
+---
+
+## 🔁 Code Breakdown
+
+### Initialization:
+
+```
+left = 0
+right = len(array) - 1
+result = -1
+```
+
+* `left` and `right` define the current bounds of the binary search.
+* `result` will store the **smallest matching index** found (if any).
+
+---
+
+### While Loop (Binary Search):
+
+```
+while left <= right:
+    middle = left + (right - left) // 2
+    middle_value = array[middle]
+```
+
+* Calculates the middle index safely to avoid integer overflow.
+* Retrieves the value at that index.
+
+---
+
+### Three Cases:
+
+#### ✅ Case 1: Match Found
+
+```
+if middle_value == middle:
+    result = middle
+    right = middle - 1  # Continue to search left for smaller match
+```
+
+* A match is found (`array[middle] == middle`), so store it in `result`.
+* Instead of stopping, we continue searching the **left side** (`right = middle - 1`) to find **smaller** matching indices.
+
+#### ➡️ Case 2: Value Less Than Index
+
+```
+elif middle_value < middle:
+    left = middle + 1
+```
+
+* If `array[middle] < middle`, then for all elements on the **left**, `array[i]` will be even **smaller** than `i`.
+* So we **discard the left half** and search in the **right half**.
+
+#### ⬅️ Case 3: Value Greater Than Index
+
+```
+else:  # middle_value > middle
+    right = middle - 1
+```
+
+* If `array[middle] > middle`, all elements on the **right** will also have `array[i] > i`.
+* So we **discard the right half** and search in the **left half**.
+
+---
+
+### Return
+
+```
+return result
+```
+
+* Returns the smallest index `i` such that `array[i] == i`.
+* If no match is found, `result` remains `-1`.
+
+---
+
+## 🧪 Test Case Analysis
+
+### Test 1:
+
+```
+print(index_equals_value([-5, -3, 0, 3, 4, 5, 9]))
+```
+
+* Index 3 → `array[3] = 3` ✅
+* Output: `3`
+
+---
+
+### Test 2:
+
+```
+print(index_equals_value([-12, 1, 2, 3, 12]))
+```
+
+* Index 1 → `array[1] = 1` ✅
+* Index 2 → `array[2] = 2` ✅, but we want the **smallest**, so return `1`.
+
+---
+
+### Test 3:
+
+```
+print(index_equals_value([-5, -4, -3, -2, -1, 0, 1, 3, 5, 6, 7, 11, 12, 14, 19, 20]))
+```
+
+* Index 11 → `array[11] = 11` ✅
+* Output: `11`
+
+---
+
+## 🧠 Time Complexity
+
+* Binary search ⇒ **O(log n)** time
+* Much faster than linear search (**O(n)**), especially for large arrays.
+
+---
+
+## ✅ Summary
+
+* This is a clever variant of binary search to find a "fixed point": `array[i] == i`.
+* It returns the **smallest such index**, not just any match.
+* Efficient, elegant, and widely used in algorithmic interview problems.
+
+---
+
+Here’s a step-by-step **ASCII visualization** of how the `index_equals_value()` function works, using the example:
+
+```
+index_equals_value([-5, -3, 0, 3, 4, 5, 9])
+```
+
+---
+
+## 🧠 Array Layout:
+
+```
+Index:      0   1   2   3   4   5   6
+Values:    -5  -3   0   3   4   5   9
+```
+
+We are looking for `array[i] == i`.
+
+---
+
+### 🔍 Step-by-Step Binary Search
+
+#### Step 1: Initial bounds
+
+```
+left = 0, right = 6
+middle = (0 + 6) // 2 = 3
+array[3] = 3
+
+=> Match found! array[3] == 3
+=> Store result = 3
+=> Move right to middle - 1 to find smaller match
+```
+
+#### Step 2:
+
+```
+left = 0, right = 2
+middle = (0 + 2) // 2 = 1
+array[1] = -3
+
+=> array[1] < 1
+=> Move left to middle + 1
+```
+
+#### Step 3:
+
+```
+left = 2, right = 2
+middle = (2 + 2) // 2 = 2
+array[2] = 0
+
+=> array[2] < 2
+=> Move left to middle + 1
+```
+
+Now `left = 3`, `right = 2` → loop ends.
+
+---
+
+### ✅ Final Result:
+
+The smallest index where `array[i] == i` is:
+
+```
+Result: 3
+```
+
+---
+
+## 🔠 ASCII Diagram (Horizontal)
+
+```
+Indexes:      0   1   2   3   4   5   6
+Array:       -5  -3   0   3   4   5   9
+              ↑       ↑
+            Left     Mid (3 == 3 ✅)
+```
+
+After storing result = 3, we search the left side:
+
+```
+Indexes:      0   1   2   3
+Array:       -5  -3   0   3
+              ↑   ↑
+            Left Mid (array[1] = -3 < 1)
+```
+
+```
+Indexes:      0   1   2
+Array:       -5  -3   0
+                  ↑   ↑
+                Left Mid (array[2] = 0 < 2)
+```
+
+---
+
+### ⛳️ ASCII Summary
+
+```
+Search 1 → middle = 3 → array[3] = 3 ✅
+Search left → middle = 1 → array[1] = -3 ❌
+Search right → middle = 2 → array[2] = 0 ❌
+Loop ends → return result = 3
+```
+
+"""
