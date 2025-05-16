@@ -85,3 +85,45 @@ print(insertion_sort([-4, 5, 10, 8, -10, -6, -4, -2, -5, 3, 5, -4, -5, -1, 1, 6,
 
 print(insertion_sort([2, 1]))
 # Output: [1, 2]
+
+# =========================================================================================================================== #
+
+# Big O Analysis:
+
+"""
+## Time and Space Complexity Analysis:
+
+### Time Complexity:
+
+1. **Best Case**: When the array is already sorted, the inner `while` loop never executes (since `array[j] < array[j-1]` will
+always be false). This results in only the outer loop running, giving us a time complexity of **O(n)**.
+
+2. **Worst Case**: When the array is sorted in reverse order, the inner `while` loop executes maximally. For each element at index
+`i`, we need to swap it all the way to the beginning of the array. This results in:
+   - 1 swap for the 2nd element,
+   - 2 swaps for the 3rd element,
+   - ...
+   - (n-1) swaps for the nth element.
+   The total number of swaps is `1 + 2 + ... + (n-1) = n(n-1)/2`, which is **O(n²)**.
+
+3. **Average Case**: On average, insertion sort also requires **O(n²)** time because, for randomly ordered arrays, each element
+may need to be moved about halfway back through the already-sorted portion.
+
+### Space Complexity:
+
+- The algorithm sorts the array **in-place**, meaning it only uses a constant amount of additional space (for variables like `i`,
+`j`, and temporary values during swapping). Thus, the space complexity is **O(1)** (constant space).
+
+### Summary:
+
+- **Time Complexity**:
+
+  - Best Case: O(n) (already sorted)
+  - Worst Case: O(n²) (reverse sorted)
+  - Average Case: O(n²)
+  
+- **Space Complexity**: O(1) (in-place sorting).
+
+This makes insertion sort efficient for small or nearly sorted datasets but inefficient for large, randomly ordered datasets.
+
+"""
