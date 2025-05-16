@@ -135,3 +135,83 @@ print(quick_select([102, 41, 58, 81, 2, -5, 1000, 10021, 181, -14515, 25, 15], 5
 
 print(quick_select([43, 24, 37], 2))
 # Output: 37
+
+# =========================================================================================================================== #
+
+# Big O Analysis:
+
+"""
+## Time and Space Complexity Analysis:
+
+### Time Complexity Analysis of Quickselect
+
+The **quickselect** algorithm is used to find the k-th smallest (or largest) element in an unsorted list. It's a selection
+algorithm that is based on the **quicksort** algorithm but only recurses into one side of the partition (the side where the
+desired element lies).
+
+#### Best-case Time Complexity: **O(n)**
+
+- This occurs when the pivot chosen at every step divides the array into roughly equal parts. However, since we only recurse
+into one partition, the total work is:
+  - First pass: O(n) (partitioning the entire array)
+  - Second pass: O(n/2) (partitioning half the array)
+  - Third pass: O(n/4)
+  - ...
+  - Total: O(n + n/2 + n/4 + ...) = O(2n) = O(n)
+
+#### Average-case Time Complexity: **O(n)**
+
+- On average, the pivot will divide the array into two parts where one part is a constant fraction of the original array
+(e.g., 1/4 and 3/4). The series still sums to O(n).
+
+#### Worst-case Time Complexity: **O(n²)**
+
+- This happens when the pivot is always the smallest or largest element (e.g., already sorted array and choosing the first/last
+element as the pivot). In this case:
+  - First pass: O(n)
+  - Second pass: O(n-1)
+  - Third pass: O(n-2)
+  - ...
+  - Total: O(n + (n-1) + (n-2) + ... + 1) = O(n²)
+
+#### Improving Worst-case to O(n) with Median-of-Medians
+
+- If we use a **deterministic pivot selection** strategy like the "median of medians" algorithm (which guarantees a "good" pivot),
+the worst-case time complexity can be improved to O(n). However, this adds significant constant overhead and is rarely used in practice.
+
+---
+
+### Space Complexity Analysis of Quickselect
+
+Quickselect is an **in-place** algorithm, meaning it doesn't use additional space proportional to the input size.
+
+#### Best/Average-case Space Complexity: **O(1) (Iterative) or O(log n) (Recursive)**
+
+- The **iterative version** (like the one implemented above) uses **constant space** (O(1)) because it only modifies the array
+in-place and uses a loop (no recursion stack).
+- The **recursive version** would use **O(log n)** space in the average case (due to recursion depth), but the worst case would
+be O(n) (if the pivot is unbalanced).
+
+#### Worst-case Space Complexity (Recursive): **O(n)**
+
+- If the pivot is always the smallest/largest element, the recursion depth is O(n), leading to O(n) space usage.
+
+The provided implementation is **iterative**, so its space complexity is **O(1)** in all cases.
+
+---
+
+### Summary
+
+| Case          | Time Complexity | Space Complexity (Iterative) |
+|---------------|-----------------|------------------------------|
+| Best-case     | O(n)            | O(1)                         |
+| Average-case  | O(n)            | O(1)                         |
+| Worst-case    | O(n²)           | O(1)                         |
+
+### Notes
+1. The **worst-case O(n²)** can be avoided by using **randomized pivot selection** (choosing a random pivot instead of always
+`start_idx`), which makes the worst-case extremely unlikely in practice.
+2. The **median-of-medians** method guarantees O(n) worst-case time but is slower in practice due to high constant factors.
+3. The **iterative implementation** is better for space complexity (O(1)) compared to a recursive one (O(log n) avg / O(n) worst).
+
+"""
