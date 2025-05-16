@@ -35,17 +35,43 @@ Worst: O(n²) time | O(1) space - where `n` is the length of the input array.
 # Average: O(n²) time | O(1)
 # Worst: O(n²) time | O(1) space
 def insertion_sort(array):
-    for i in range(1, len(array)):
-        j = i
+    """
+    Sorts an array in ascending order using the Insertion Sort algorithm.
 
+    Insertion Sort works by building a sorted portion of the array one element at a time.
+    It takes each element from the unsorted portion and inserts it into its correct position
+    in the sorted portion.
+
+    Args:
+        array: The list to be sorted
+
+    Returns:
+        The sorted list in ascending order
+    """
+    # Start from the second element (index 1) since the first element is trivially sorted
+    for i in range(1, len(array)):
+        j = i  # j is the current index of the element we're inserting
+
+        # While we haven't reached the start of the array and the current element
+        # is smaller than its left neighbor
         while j > 0 and array[j] < array[j - 1]:
+            # Swap the current element with its left neighbor
             swap(j, j - 1, array)
+            # Move left one position to check the next pair
             j -= 1
 
     return array
 
 
 def swap(i, j, array):
+    """
+    Helper function to swap two elements in an array.
+
+    Args:
+        i: Index of first element
+        j: Index of second element
+        array: The array containing the elements to swap
+    """
     array[i], array[j] = array[j], array[i]
 
 
