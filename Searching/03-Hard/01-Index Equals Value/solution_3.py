@@ -35,23 +35,36 @@ O(log(n)) time | O(1) space - where `n` is the length of the input array.
 
 # O(log(n)) time | O(1) space
 def index_equals_value(array):
+    # Initialize left and right pointers for binary search
     left = 0
     right = len(array) - 1
+    # Initialize result to -1 (no match found case)
     result = -1
 
+    # Binary search loop
     while left <= right:
+        # Calculate middle index to avoid potential overflow
         middle = left + (right - left) // 2
         middle_value = array[middle]
 
         if middle_value == middle:
+            # Found a match, store the result
             result = middle
-            # Keep searching left for a smaller matching index
+            # Continue searching left half to find a smaller matching index
+            # since we want the smallest index where array[i] == i
             right = middle - 1
         elif middle_value < middle:
+            # If value is less than index, all elements to the left must also be
+            # smaller than their indices (since array is sorted)
+            # So we search the right half
             left = middle + 1
         else:  # middle_value > middle
+            # If value is greater than index, all elements to the right must also be
+            # larger than their indices (since array is sorted)
+            # So we search the left half
             right = middle - 1
 
+    # Return the smallest found index where array[i] == i, or -1 if none exists
     return result
 
 
