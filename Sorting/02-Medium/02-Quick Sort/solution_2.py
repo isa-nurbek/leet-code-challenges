@@ -6,6 +6,19 @@
 Write a function that takes in an array of integers and returns a `sorted` version of that array. Use the `Quick Sort` algorithm
 to sort the array.
 
+To avoid `O(n²)` worst-case time complexity you can:
+
+- Choose a `random pivot` or `median-of-three pivot`.
+- Use an `in-place partitioning` scheme to reduce space usage.
+
+1. **Avoiding O(n²) worst-case**: Quick Sort can degrade to `O(n²)` time complexity if poorly chosen pivots (e.g., always picking
+the `first/last` element in an already sorted array) lead to highly unbalanced partitions. The suggestions address this:
+   - **Random pivot**: Randomization makes worst-case behavior unlikely.
+   - **Median-of-three pivot**: Choosing the median of the first, middle, and last elements helps avoid bad pivots.
+
+2. **In-place partitioning**: This reduces space complexity from O(log n) (due to recursion stack) to O(1) auxiliary space
+(excluding the stack), making it more memory-efficient.
+
 
 ## Sample Input:
 ```
