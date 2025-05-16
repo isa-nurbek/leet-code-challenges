@@ -41,19 +41,32 @@ O(n) time | O(1) space - where `n` is the length of the array.
 
 # O(n) time | O(1) space
 def three_number_sort(array, order):
+    # Initialize a list to keep count of how many times each number in 'order' appears
     value_counts = [0, 0, 0]
 
+    # Count occurrences of each value in the array based on their order in 'order'
     for element in array:
+        # Find the index of the current element in the 'order' list
         order_idx = order.index(element)
+        # Increment the count for that index
         value_counts[order_idx] += 1
 
+    # Reconstruct the array in the desired order
     for i in range(3):
+        # Get the value that should appear in this position of the sorted array
         value = order[i]
+        # Get how many times this value appears in the original array
         count = value_counts[i]
 
+        # Calculate where this block of values should start in the array
+        # It's the sum of counts of all previous values in the order
         num_elements_before = sum(value_counts[:i])
+
+        # Fill the appropriate positions in the array with the current value
         for n in range(count):
+            # Calculate the current index to fill
             current_idx = num_elements_before + n
+            # Assign the value to its correct position
             array[current_idx] = value
 
     return array
