@@ -25,4 +25,8 @@ Traverse the input array, swapping any two numbers that are out of order and kee
 
 ## Optimal Time & Space Complexity
 
-`O(n * log(m))` time | `O(1)` space - where `n` is the length of steps, and `m` is the sum of all values in steps.
+**Best**: `O(n)` time | `O(1)` space - where `n` is the length of the input array.
+
+**Average**: `O(n²)` time | `O(1)` space - where `n` is the length of the input array.
+
+**Worst**: `O(n²)` time | `O(1)` space - where `n` is the length of the input array.
