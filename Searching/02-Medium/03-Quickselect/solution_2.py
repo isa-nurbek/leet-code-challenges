@@ -142,3 +142,56 @@ print(quick_select([102, 41, 58, 81, 2, -5, 1000, 10021, 181, -14515, 25, 15], 5
 
 print(quick_select([43, 24, 37], 2))
 # Output: 37
+
+# =========================================================================================================================== #
+
+# Big O Analysis:
+
+"""
+## Time and Space Complexity Analysis:
+
+### Time Complexity:
+
+The `quick_select` algorithm is a selection algorithm to find the k-th smallest element in an unordered list.
+It's based on the QuickSort algorithm but only recurses into one partition.
+
+1. **Best Case**:  
+   - The best case occurs when the randomly chosen pivot is the k-th element.  
+   - This results in a single partitioning step, giving a time complexity of **O(n)**.
+
+2. **Average Case**:  
+   - On average, the pivot will divide the array into two roughly equal parts.  
+   - The recurrence relation is:  
+     
+    T(n) = T(n/2) + O(n)
+    
+   - Solving this using the Master Theorem gives **O(n)** time complexity.
+
+3. **Worst Case**:  
+   - The worst case occurs when the pivot is always the smallest or largest element (e.g., if the array is already sorted and
+   we pick the first/last element as the pivot).  
+   - The recurrence relation becomes:  
+    
+    T(n) = T(n-1) + O(n)
+    
+   - This results in **O(n²)** time complexity.  
+   - However, since we are using **randomized pivot selection**, the probability of worst-case behavior is extremely low.
+
+### Space Complexity:
+
+- The algorithm is **iterative** (using a `while True` loop instead of recursion), so it does not use additional call stack space.  
+- All operations are performed **in-place** (only constant extra space is used for variables like `pivot_idx`, `left_idx`, `right_idx`, etc.).  
+- Thus, the space complexity is **O(1)** (constant space).
+
+### Summary:
+
+| Case      | Time Complexity | Space Complexity  |
+|-----------|-----------------|-------------------|
+| Best      | O(n)            | O(1)              |
+| Average   | O(n)            | O(1)              |
+| Worst     | O(n²)           | O(1)              |
+
+The randomized pivot selection ensures that the **average case O(n)** is the expected runtime, making this an efficient algorithm
+for selection problems.
+
+"""
