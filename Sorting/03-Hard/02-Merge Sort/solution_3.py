@@ -118,3 +118,45 @@ print(merge_sort_iterative([38, 27, 43, 3, 9, 82, 10]))
 
 print(merge_sort_iterative([5, -2, 2, -8, 3, -10, -6, -1, 2, -2, 9, 1, 1]))
 # Output: [-10, -8, -6, -2, -2, -1, 1, 1, 2, 2, 3, 5, 9]
+
+# =========================================================================================================================== #
+
+# Big O Analysis:
+
+"""
+## Time and Space Complexity Analysis:
+
+Let's analyze the time and space complexity of this iterative merge sort implementation.
+
+### Time Complexity:
+
+The iterative merge sort follows the same divide-and-conquer approach as recursive merge sort, just implemented differently.
+
+1. **Outer while loop**: Runs until `size` grows from 1 to n (or larger). Since `size` doubles each iteration (size *= 2),
+this loop runs O(log n) times.
+
+2. **Inner for loop**: For each `size`, it processes all elements in the array with O(n) total work per `size` (since each
+element is part of exactly one merge operation at each size level).
+
+3. **merge() function**: For each merge operation of two subarrays of size `size`, it takes O(size) time, and across all merges
+at a given level, this sums to O(n) time.
+
+Since we have O(log n) levels/doublings of `size`, and each level does O(n) work, the total time complexity is O(n log n).
+
+### Space Complexity:
+
+1. The algorithm uses a temporary array `temp` of size n, which is its dominant space usage.
+2. Other variables use constant space.
+
+Thus, the space complexity is O(n) (for the `temp` array).
+
+### Summary:
+- **Time Complexity**: O(n log n) in all cases (best, average, worst) because merge sort always divides the array in half and
+merges in linear time.
+- **Space Complexity**: O(n) due to the auxiliary `temp` array.
+
+This matches the complexity of the standard recursive merge sort, just implemented iteratively to avoid recursion stack overhead.
+The iterative approach is generally more space-efficient in practice (though both are O(n) space) because it avoids recursive
+call stack space.
+
+"""
