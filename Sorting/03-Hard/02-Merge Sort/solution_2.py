@@ -128,3 +128,45 @@ print(merge_sort([38, 27, 43, 3, 9, 82, 10]))
 
 print(merge_sort([5, -2, 2, -8, 3, -10, -6, -1, 2, -2, 9, 1, 1]))
 # Output: [-10, -8, -6, -2, -2, -1, 1, 1, 2, 2, 3, 5, 9]
+
+# =========================================================================================================================== #
+
+# Big O Analysis:
+
+"""
+## Time and Space Complexity Analysis:
+
+Let's analyze the time and space complexity of this Merge Sort implementation.
+
+### Time Complexity:
+
+Merge Sort is a divide-and-conquer algorithm with consistent performance. 
+
+1. **Divide Step**: The array is recursively divided into halves until we reach subarrays of size 1.
+This takes O(log n) levels of recursion since we're halving the array each time.
+
+2. **Merge Step**: At each level of recursion, we merge all the subarrays at that level, which takes O(n) time since we're
+processing all n elements.
+
+Since we have O(log n) levels and each level takes O(n) time, the **total time complexity is O(n log n)** in all cases
+(best, average, and worst).
+
+### Space Complexity:
+
+1. **Temporary Array**: The implementation uses a temporary array `temp` of size n, which is the main additional space used.
+2. **Recursion Stack**: The recursion depth is O(log n), but this doesn't dominate over the temporary array.
+
+Thus, the **space complexity is O(n)** due to the temporary array. This is the standard space complexity for the top-down
+Merge Sort implementation.
+
+### Key Points:
+
+- Time Complexity: **O(n log n)** (always, very consistent).
+- Space Complexity: **O(n)** (due to the temporary array).
+
+- Merge Sort is stable (preserves order of equal elements) and works well for large datasets, but it uses additional space
+unlike in-place sorts like Quick Sort.
+
+This implementation is efficient and correct, following the standard Merge Sort approach.
+
+"""
