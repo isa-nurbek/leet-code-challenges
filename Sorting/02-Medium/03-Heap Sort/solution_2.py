@@ -43,29 +43,58 @@ Worst: O(n log(n)) time | O(1) space - where n is the length of the input array.
 
 # Min-Heap Version (Descending Order Sort)
 def min_heapify(arr, n, i):
-    smallest = i
-    left = 2 * i + 1
-    right = 2 * i + 2
+    """
+    Converts an array into a min-heap structure starting from index i.
+    A min-heap is a binary tree where each parent node is smaller than its children.
 
+    Args:
+        arr: The array to be heapified
+        n: Size of the heap (can be smaller than array length)
+        i: Index of the root node to start heapification from
+    """
+    smallest = i  # Initialize smallest as root
+    left = 2 * i + 1  # Left child index
+    right = 2 * i + 2  # Right child index
+
+    # If left child exists and is smaller than current smallest
     if left < n and arr[left] < arr[smallest]:
         smallest = left
 
+    # If right child exists and is smaller than current smallest
     if right < n and arr[right] < arr[smallest]:
         smallest = right
 
+    # If smallest is not the root, swap and continue heapifying
     if smallest != i:
-        arr[i], arr[smallest] = arr[smallest], arr[i]
-        min_heapify(arr, n, smallest)
+        arr[i], arr[smallest] = arr[smallest], arr[i]  # Swap
+        min_heapify(arr, n, smallest)  # Recursively heapify the affected subtree
 
 
 def heap_sort_descending(arr):
+    """
+    Sorts an array in descending order using a min-heap approach.
+    The process involves:
+    1. Building a min-heap from the array
+    2. Repeatedly extracting the smallest element and rebuilding the heap
+
+    Args:
+        arr: The array to be sorted
+
+    Returns:
+        The sorted array in descending order
+    """
     n = len(arr)
 
+    # Build the min-heap (rearrange array)
+    # Start from the last non-leaf node (n//2 - 1) and work up to the root
     for i in range(n // 2 - 1, -1, -1):
         min_heapify(arr, n, i)
 
+    # Extract elements one by one
     for i in range(n - 1, 0, -1):
+        # Move current root (smallest) to end
         arr[0], arr[i] = arr[i], arr[0]
+        # Heapify the reduced heap (size i)
         min_heapify(arr, i, 0)
 
     return arr
