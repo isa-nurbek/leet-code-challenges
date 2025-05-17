@@ -33,6 +33,7 @@ and `b` is the base of the numbering system used.
 
 
 # O(d * (n + b)) time | O(n + b) space
+# Handle negative numbers
 def radix_sort(arr):
     if not arr:
         return arr
@@ -48,7 +49,6 @@ def radix_sort(arr):
     return sorted_negatives + sorted_non_negatives
 
 
-# Handle negative numbers
 def radix_sort_non_negative(arr):
     if not arr:
         return arr
