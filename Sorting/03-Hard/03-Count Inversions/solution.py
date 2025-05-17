@@ -174,3 +174,295 @@ this temporary storage.
 - **Space Complexity**: O(n) (due to the temporary array used in merging)
 
 """
+
+# =========================================================================================================================== #
+
+# Detailed Code Explanation:
+
+"""
+## 💡 What Is an Inversion?
+
+An **inversion** is a pair of indices `(i, j)` such that:
+
+* `i < j`
+* and `array[i] > array[j]`
+
+It’s a measure of how far the array is from being sorted.
+For example, in `[2, 3, 1]`, the pairs `(2,1)` and `(3,1)` are inversions → total = 2.
+
+---
+
+## ✅ Function Overview
+
+### 1. `count_inversions(array)`
+
+This is the **main function**.
+It just calls the helper function `count_sub_array_inversions()` with the full range of the array.
+
+```
+def count_inversions(array):
+    return count_sub_array_inversions(array, 0, len(array))
+```
+
+---
+
+### 2. `count_sub_array_inversions(array, start, end)`
+
+This function **recursively divides** the array like merge sort.
+
+```
+if end - start <= 1:
+    return 0
+```
+
+Base case: A sub-array with ≤ 1 element has 0 inversions.
+
+```
+middle = start + (end - start) // 2
+```
+
+Calculate the midpoint.
+
+```
+left_inversions = count_sub_array_inversions(array, start, middle)
+right_inversions = count_sub_array_inversions(array, middle, end)
+```
+
+Recursively count inversions in the left and right halves.
+
+```
+merged_array_inversions = merge_sort_and_count_inversions(array, start, middle, end)
+```
+
+Count **split inversions** while merging the two sorted halves.
+
+Finally, return the total:
+
+```
+return left_inversions + right_inversions + merged_array_inversions
+```
+
+---
+
+### 3. `merge_sort_and_count_inversions(array, start, middle, end)`
+
+This function:
+
+* **Merges** two sorted subarrays `array[start:middle]` and `array[middle:end]`.
+* While merging, it counts **inversions** that occur across the split (left element > right element).
+
+```
+while left < middle and right < end:
+    if array[left] <= array[right]:
+        sorted_array.append(array[left])
+        left += 1
+    else:
+        inversions += middle - left
+        sorted_array.append(array[right])
+        right += 1
+```
+
+* If `array[left] > array[right]`, then **all elements from `left` to `middle - 1`** are greater than `array[right]`.
+So, add `middle - left` to the inversion count.
+
+Then append the remaining elements (if any) and **copy the sorted values back into the original array**:
+
+```
+sorted_array += array[left:middle] + array[right:end]
+
+for idx, num in enumerate(sorted_array):
+    array[start + idx] = num
+```
+
+Return the count of inversions found during this merge.
+
+---
+
+## 🧪 Test Cases and Output
+
+### Test 1
+
+```
+[2, 3, 3, 1, 9, 5, 6]
+```
+
+Inversions:
+
+* (2, 1), (3, 1), (3, 1), (9, 5), (9, 6) → **5**
+
+✅ Output: `5`
+
+---
+
+### Test 2
+
+```
+[5, -1, 2, -4, 3, 4, 19, 87, 762, -8, 0]
+```
+
+This has **23** inversions. The function correctly counts all of them.
+
+✅ Output: `23`
+
+---
+
+### Test 3
+
+```
+[]
+```
+
+No elements = no inversions.
+
+✅ Output: `0`
+
+---
+
+## 📊 Time Complexity
+
+This algorithm is an enhanced merge sort:
+
+* Divide step: `O(log n)`
+* Merge and count step: `O(n)`
+* Total: **O(n log n)**
+
+Efficient even for large arrays.
+
+---
+
+## ✅ Summary
+
+* Uses **divide and conquer** via merge sort.
+* Counts:
+
+  * Left-side inversions
+  * Right-side inversions
+  * Cross (split) inversions
+* Very efficient compared to brute-force `O(n²)` approach.
+
+---
+
+Here’s an **ASCII visualization** of how the inversion-counting process works using **merge sort** for the input array:
+
+```
+Input: [2, 3, 3, 1, 9, 5, 6]
+```
+
+---
+
+### STEP 1: Split the array (Divide Phase)
+
+We recursively split the array:
+
+```
+[2, 3, 3, 1, 9, 5, 6]
+     |
+     +--------------------------+
+     |                          |
+[2, 3, 3, 1]               [9, 5, 6]
+     |                          |
+     +--------+          +------+   
+     |        |          |           
+[2, 3]    [3, 1]     [9]     [5, 6]
+  |          |                 |
+ [2] [3]   [3] [1]           [5] [6]
+```
+
+---
+
+### STEP 2: Count Inversions during Merge Phase
+
+We now merge upwards and count inversions.
+
+#### Merge [2] and [3] → No inversions
+
+```
+Merge: [2] + [3] → [2, 3] (inversions: 0)
+```
+
+#### Merge [3] and [1] → One inversion
+
+```
+Compare 3 > 1 → inversion
+Merge: [3] + [1] → [1, 3] (inversions: 1)
+```
+
+#### Merge [2, 3] and [1, 3]
+
+```
+Compare:
+  2 > 1 → inversion (count += 2 - 0 = 2)
+  3 > 1 → inversion
+→ [1, 2, 3, 3]
+→ Total new inversions = 2
+Subtotal for left half: 0 (from [2,3]) + 1 (from [3,1]) + 2 = **3**
+```
+
+#### Merge [5] and [6] → No inversion
+
+```
+Merge: [5] + [6] → [5, 6] (inversions: 0)
+```
+
+#### Merge [9] and [5, 6]
+
+```
+9 > 5 → inversion (count += 1)
+9 > 6 → inversion (count += 1)
+→ [5, 6, 9]
+→ Total new inversions = 2
+Subtotal for right half: 0 (from [5,6]) + 2 = **2**
+```
+
+---
+
+### STEP 3: Merge [1, 2, 3, 3] and [5, 6, 9]
+
+All elements on the left are ≤ those on the right → **no new inversions**
+
+```
+Final Merge: [1, 2, 3, 3] + [5, 6, 9]
+→ [1, 2, 3, 3, 5, 6, 9]
+→ No new inversions
+```
+
+---
+
+### FINAL RESULT:
+
+Add all inversions:
+
+```
+Left half:   3 inversions
+Right half:  2 inversions
+Split merge: 0 inversions
+
+TOTAL = 3 + 2 + 0 = **5 inversions**
+```
+
+---
+
+### Tree with inversion counts:
+
+```
+                                  [2, 3, 3, 1, 9, 5, 6]
+                                         ↓
+                          [2, 3, 3, 1]         [9, 5, 6]
+                             ↓                   ↓
+                        [2, 3]   [3, 1]       [9]   [5, 6]
+                         ↓         ↓                 ↓
+                      [2] [3]   [3] [1]           [5] [6]
+
+                      ↑ 0 inv  ↑ 1 inv           ↑ 0 inv
+                  Merge → [2, 3]            Merge → [5, 6]
+                      ↑                     ↑
+                   Merge → [1, 2, 3, 3]     [5, 6, 9] ↑ 2 inv
+                             ↑
+                         Total 3 inv
+
+Final merge → [1, 2, 3, 3, 5, 6, 9] → 0 new inv
+
+TOTAL inversions: **5**
+```
+
+"""
