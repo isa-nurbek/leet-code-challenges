@@ -32,38 +32,61 @@ and `b` is the base of the numbering system used.
 
 # O(d * (n + b)) time | O(n + b) space
 def radix_sort(arr):
+    """Sorts an array of integers using the radix sort algorithm."""
+    # Handle empty array case
     if not arr:
         return arr
 
+    # Find the maximum number to know the number of digits
     max_num = max(arr)
 
+    # Start with the least significant digit (rightmost)
     exp = 1
     while max_num // exp > 0:
+        # Sort the array based on the current digit (exp place)
         counting_sort(arr, exp)
+        # Move to the next significant digit (left)
         exp *= 10
 
     return arr
 
 
 def counting_sort(arr, exp):
+    """Performs counting sort on the given array based on a specific digit place.
+
+    Args:
+        arr: The array to be sorted
+        exp: The current digit place (1 for units, 10 for tens, etc.)
+    """
     n = len(arr)
+    # Initialize output array that will have sorted numbers
     output = [0] * n
+    # Initialize count array to store count of occurrences for each digit (0-9)
     count = [0] * 10
 
+    # Store count of occurrences for each digit in count[]
     for i in range(n):
+        # Extract the digit at the current exp place
         index = (arr[i] // exp) % 10
         count[index] += 1
 
+    # Change count[i] so it contains the actual position of this digit in output[]
     for i in range(1, 10):
         count[i] += count[i - 1]
 
-    i = n - 1
+    # Build the output array in sorted order
+    i = n - 1  # Start from the end to maintain stability
     while i >= 0:
+        # Get the digit at current exp place
         index = (arr[i] // exp) % 10
+        # Place the element at its correct position in output[]
         output[count[index] - 1] = arr[i]
+        # Decrease the count for this digit
         count[index] -= 1
+        # Move to the previous element
         i -= 1
 
+    # Copy the sorted output back to the original array
     for i in range(n):
         arr[i] = output[i]
 
