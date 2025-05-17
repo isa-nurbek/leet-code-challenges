@@ -130,3 +130,47 @@ print(count_inversions([5, -1, 2, -4, 3, 4, 19, 87, 762, -8, 0]))
 
 print(count_inversions([]))
 # Output: 0
+
+# =========================================================================================================================== #
+
+# Big O Analysis:
+
+"""
+## Time and Space Complexity Analysis:
+
+### Time Complexity Analysis:
+
+The given code counts the number of inversions in an array using a modified merge sort algorithm.
+Here's the breakdown of the time complexity:
+
+1. **Divide Step**: The array is recursively divided into two halves until the base case (subarrays of size 1 or 0) is reached.
+This division takes O(log n) time because the array is halved at each recursive call.
+
+2. **Conquer Step**: The inversions are counted in the left half, the right half, and during the merge step. The work done at each
+level of recursion is O(n) for the merge step (explained below), and there are O(log n) levels of recursion.
+
+3. **Merge Step**: The `merge_sort_and_count_inversions` function merges two sorted subarrays and counts the inversions across them.
+This is done in O(n) time per merge, where `n` is the total number of elements in the two subarrays being merged. The key operation
+is counting inversions when an element from the right subarray is placed before elements in the left subarray, which is done in
+constant time per such occurrence.
+
+Thus, the overall time complexity is O(n log n), which is the same as the standard merge sort. This is because the additional work
+for counting inversions during the merge step does not increase the asymptotic complexity.
+
+### Space Complexity Analysis:
+
+1. **Recursive Calls**: The recursion depth is O(log n), but this does not contribute significantly to space complexity beyond the
+stack space.
+
+2. **Temporary Array**: The `merge_sort_and_count_inversions` function uses a temporary array (`sorted_array`) to store the merged
+result before copying it back to the original array. The size of this temporary array is proportional to the number of elements
+being merged, which is O(n) in the worst case.
+
+Thus, the space complexity is O(n) due to the additional space used for merging. The algorithm is not purely in-place because of
+this temporary storage.
+
+### Summary:
+- **Time Complexity**: O(n log n)
+- **Space Complexity**: O(n) (due to the temporary array used in merging)
+
+"""
