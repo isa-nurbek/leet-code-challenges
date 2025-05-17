@@ -168,3 +168,250 @@ In practice, for large `n`, the recursive `min_heapify` could be rewritten itera
 - **Space Complexity:** **O(1)** (if using iterative heapify) or **O(log n)** (due to recursion stack).
 
 """
+
+# =========================================================================================================================== #
+
+# Detailed Code Explanation:
+
+"""
+This code implements **heap sort in descending order** using a **min-heap** structure. Let's break it down step by step to
+understand how it works and why it gives a sorted array in descending order.
+
+---
+
+## 🔧 Key Concepts
+
+* **Min-Heap**: A binary tree where the value at the root is **less than or equal** to its children.
+* **Heapify**: A process to maintain the heap property (min-heap in this case) at a given node.
+* **Heap Sort Using Min-Heap**: We build a min-heap and then repeatedly remove the smallest element (the root), placing it
+at the end of the array. This gives us a **descending** sorted array.
+
+---
+
+## ✅ Code Breakdown
+
+### 1. `min_heapify(arr, n, i)`
+
+```
+def min_heapify(arr, n, i):
+    smallest = i
+    left = 2 * i + 1
+    right = 2 * i + 2
+
+    if left < n and arr[left] < arr[smallest]:
+        smallest = left
+
+    if right < n and arr[right] < arr[smallest]:
+        smallest = right
+
+    if smallest != i:
+        arr[i], arr[smallest] = arr[smallest], arr[i]
+        min_heapify(arr, n, smallest)
+```
+
+This function maintains the **min-heap** property at index `i`:
+
+* It calculates indices of the **left** and **right** children of node `i`.
+* If either child is **smaller** than the current node, it updates `smallest`.
+* If the smallest is not the current node, it **swaps** the values and **recursively heapifies** the subtree rooted
+at the new smallest index.
+
+---
+
+### 2. `heap_sort_descending(arr)`
+
+```
+def heap_sort_descending(arr):
+    n = len(arr)
+
+    # Step 1: Build the min-heap
+    for i in range(n // 2 - 1, -1, -1):
+        min_heapify(arr, n, i)
+```
+
+This loop **builds a min-heap** from the unsorted array by starting from the last non-leaf node and calling `min_heapify` bottom-up.
+
+```
+    # Step 2: Extract elements from heap one by one
+    for i in range(n - 1, 0, -1):
+        arr[0], arr[i] = arr[i], arr[0]  # move smallest to end
+        min_heapify(arr, i, 0)          # re-heapify the reduced heap
+```
+
+* After the min-heap is built, we **extract the smallest element** (at index `0`) and swap it with the last element.
+* We then **reduce the heap size by 1** and **heapify the root again** to maintain the min-heap.
+* This process continues, pushing smaller elements toward the end of the array.
+
+Finally, return the modified array.
+
+---
+
+## 🔄 Example Walkthrough: `[8, 5, 2, 9, 5, 6, 3]`
+
+### Step 1: Build Min-Heap
+
+The min-heap version of `[8, 5, 2, 9, 5, 6, 3]` becomes something like:
+
+```
+       2
+     /   \
+    5     3
+   / \   / \
+  9  5  6  8
+```
+
+Heap array: `[2, 5, 3, 9, 5, 6, 8]`
+
+### Step 2: Sorting (swap and re-heapify)
+
+* Swap `2` with `8` → `[8, 5, 3, 9, 5, 6, 2]` → Heapify → `[3, 5, 8, 9, 5, 6, 2]`
+* Swap `3` with `6` → `[6, 5, 8, 9, 5, 3, 2]` → Heapify → ...
+* Keep doing this...
+
+Eventually, you'll get `[9, 8, 6, 5, 5, 3, 2]`.
+
+---
+
+## ✅ Final Outputs
+
+```
+print(heap_sort_descending([8, 5, 2, 9, 5, 6, 3]))
+# Output: [9, 8, 6, 5, 5, 3, 2]
+
+print(heap_sort_descending([-4, 5, 10, 8, -10, -6, -4, -2, -5, 3, 5, -4, -5, -1, 1, 6, -7]))
+# Output: [10, 8, 6, 5, 5, 3, 1, -1, -2, -4, -4, -4, -5, -5, -6, -7, -10]
+
+print(heap_sort_descending([2, 1]))
+# Output: [2, 1]
+```
+
+---
+
+## 🧠 Summary
+
+| Step                    | Description                                                               |
+| ----------------------- | ------------------------------------------------------------------------- |
+| **1. Build Min-Heap**   | Transform the array into a min-heap.                                      |
+| **2. Swap and Heapify** | Repeatedly move the smallest element to the end and rebuild the min-heap. |
+| **Result**              | Array is sorted in **descending order**.                                  |
+
+---
+
+Let's visualize the **heap sort in descending order using a min-heap** in **ASCII art**, using the input:
+
+```
+arr = [8, 5, 2, 9, 5, 6, 3]
+```
+
+---
+
+## 🏁 Original Array (Index view):
+
+```
+Index:     0   1   2   3   4   5   6
+Array:    [8,  5,  2,  9,  5,  6,  3]
+```
+
+---
+
+## 🧱 Step 1: Build Min-Heap
+
+We start heapifying from the last non-leaf node (`n//2 - 1 = 2`) up to the root.
+
+### Final Min-Heap Representation (as array):
+
+```
+[2, 5, 3, 9, 5, 6, 8]
+```
+
+### Min-Heap Tree (Visual):
+
+```
+        2
+      /   \
+     5     3
+    / \   / \
+   9   5 6   8
+```
+
+---
+
+## 🔁 Step 2: Heap Sort (Swap root with last, re-heapify)
+
+### ⬇ Swap 2 (min) with last: 8
+
+```
+[8, 5, 3, 9, 5, 6, 2]  ← size reduced to 6
+```
+
+### Heapify Index 0 → Result:
+
+```
+[3, 5, 8, 9, 5, 6]
+```
+
+```
+        3
+      /   \
+     5     8
+    / \   /
+   9   5 6
+```
+
+---
+
+### ⬇ Swap 3 with 6:
+
+```
+[6, 5, 8, 9, 5, 3, 2]
+```
+
+Heapify → `[5, 6, 8, 9, 5]` ...
+
+Repeat this process...
+
+---
+
+## ✅ Final Sorted Array (Descending):
+
+```
+[9, 8, 6, 5, 5, 3, 2]
+```
+
+---
+
+## 🔚 Final Visualization
+
+Heap process in stages (partial):
+
+### Initial:
+
+```
+        2
+      /   \
+     5     3
+    / \   / \
+   9   5 6   8
+```
+
+### After first extraction (2 swapped with 8):
+
+```
+        3
+      /   \
+     5     8
+    / \   /
+   9   5 6
+```
+
+### After second extraction (3 swapped with 6):
+
+```
+        5
+      /   \
+     5     6
+    / \
+   9   8
+```
+
+"""
