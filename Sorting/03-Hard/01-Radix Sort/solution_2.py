@@ -32,7 +32,7 @@ and `b` is the base of the numbering system used.
 # Solution:
 
 
-# O(d * (n + b)) time | O(n) space
+# O(d * (n + b)) time | O(n + b) space
 # Handle negative numbers
 def radix_sort(arr):
     """
@@ -188,5 +188,336 @@ If `d` is large (e.g., very large numbers), the performance may degrade.
 - The implementation handles negative numbers by sorting them separately and reversing the order, which is a correct approach
 but adds some overhead.
 
+"""
+
+# =========================================================================================================================== #
+
+# Detailed Code Explanation:
+
+"""
+Here's a detailed explanation of how your `radix_sort` function works, including its handling of **negative numbers**—a feature
+traditional radix sort doesn't directly support.
+
+---
+
+## 🔍 **Overview**
+
+Radix Sort is a non-comparative sorting algorithm that sorts integers by processing individual digits. It works best for
+non-negative integers, so your implementation first separates **negative** and **non-negative** numbers, sorts them independently,
+and then combines them for the final result.
+
+---
+
+## ⚙️ **Function Breakdown**
+
+### ### 1. `radix_sort(arr)`
+
+This is the **main function** which:
+
+#### Step-by-step:
+
+```
+if not arr:
+    return arr
+```
+
+* Base case: If the list is empty, return it.
+
+```
+negatives = [-x for x in arr if x < 0]
+```
+
+* Extracts negative numbers and **converts them to positive** for radix sorting. (Radix Sort doesn't work on negatives directly.)
+
+```
+non_negatives = [x for x in arr if x >= 0]
+```
+
+* Extracts non-negative numbers as-is.
+
+```
+sorted_negatives = radix_sort_non_negative(negatives)
+sorted_non_negatives = radix_sort_non_negative(non_negatives)
+```
+
+* Calls the helper function `radix_sort_non_negative()` on both parts.
+
+```
+sorted_negatives = [-x for x in reversed(sorted_negatives)]
+```
+
+* After sorting positive versions of the negatives, reverse the order (since smaller negative values are larger positive numbers),
+and re-apply the negative sign.
+
+```
+return sorted_negatives + sorted_non_negatives
+```
+
+* Combine the two sorted lists and return.
+
+---
+
+### ### 2. `radix_sort_non_negative(arr)`
+
+This is a **pure radix sort** for non-negative integers.
+
+#### Step-by-step:
+
+```
+if not arr:
+    return arr
+```
+
+* Return early for empty list.
+
+```
+max_num = max(arr)
+exp = 1
+```
+
+* Get the largest number to determine how many digits to process.
+* `exp` is the current digit position (1 = units, 10 = tens, etc.).
+
+```
+while max_num // exp > 0:
+    counting_sort(arr, exp)
+    exp *= 10
+```
+
+* Continue until all digit places have been processed.
+* In each iteration, `counting_sort()` sorts the array based on the digit at `exp` place.
+
+---
+
+### ### 3. `counting_sort(arr, exp)`
+
+Performs a **stable counting sort** based on the digit at the current exponent (`exp`).
+
+#### Step-by-step:
+
+```
+n = len(arr)
+output = [0] * n
+count = [0] * 10
+```
+
+* `output`: stores the sorted values temporarily.
+* `count`: frequency of digits (0-9).
+
+```
+for i in range(n):
+    index = (arr[i] // exp) % 10
+    count[index] += 1
+```
+
+* Count the occurrence of each digit at the current `exp` place.
+
+```
+for i in range(1, 10):
+    count[i] += count[i - 1]
+```
+
+* Update `count` to contain actual positions in `output`.
+
+```
+i = n - 1
+while i >= 0:
+    index = (arr[i] // exp) % 10
+    output[count[index] - 1] = arr[i]
+    count[index] -= 1
+    i -= 1
+```
+
+* Build the output array by placing items in correct positions in **reverse order** (to make sort stable).
+
+```
+for i in range(n):
+    arr[i] = output[i]
+```
+
+* Copy sorted results back to `arr`.
+
+---
+
+## ✅ Example Walkthrough
+
+Let's take this test case:
+
+```
+radix_sort([8762, 654, -3008, 345, 87, -65, 234, 12, -2])
+```
+
+1. **Separate**:
+
+   * `negatives`: `[-3008, -65, -2] → [3008, 65, 2]`
+   * `non_negatives`: `[8762, 654, 345, 87, 234, 12]`
+
+2. **Sort both** using `radix_sort_non_negative`:
+
+   * Sorted `negatives` as `[2, 65, 3008]` → Reverse & negate → `[-3008, -65, -2]`
+   * Sorted `non_negatives` as `[12, 87, 234, 345, 654, 8762]`
+
+3. **Final merged output**:
+
+   ```
+   [-3008, -65, -2, 12, 87, 234, 345, 654, 8762]
+   ```
+
+---
+
+## ✅ Output Verification
+
+```
+print(radix_sort([8762, 654, -3008, 345, 87, -65, 234, 12, -2]))
+# [-3008, -65, -2, 12, 87, 234, 345, 654, 8762]
+```
+
+All test cases return correct sorted results, including negative numbers.
+
+---
+
+## 🧠 Key Concepts Covered
+
+| Concept                  | Description                                                      |
+| ------------------------ | ---------------------------------------------------------------- |
+| **Radix Sort**           | Digit-wise sorting, stable and efficient for integers.           |
+| **Stable Counting Sort** | Needed for digit-wise stability.                                 |
+| **Handling Negatives**   | Converted to positive, sorted, then restored in reverse.         |
+| **Space Complexity**     | O(n + k) where `k` is digit range (0-9 here).                    |
+| **Time Complexity**      | O(d·n), where `d` = max number of digits, `n` = length of array. |
+
+---
+
+Here's an **ASCII visualization** of how your `radix_sort` function works—especially showing how **negatives are handled
+separately**, **radix sort processes digits**, and the **final merge**.
+
+---
+
+### ✅ Input Example
+
+We’ll use:
+
+```
+arr = [8762, 654, -3008, 345, 87, -65, 234, 12, -2]
+```
+
+---
+
+### 📤 Step 1: Split into Negatives and Non-Negatives
+
+```
+Original:       [8762, 654, -3008, 345, 87, -65, 234, 12, -2]
+
+Negatives:      [-3008, -65, -2]
+Non-negatives:  [8762, 654, 345, 87, 234, 12]
+```
+
+Negatives converted to positives:
+
+```
+Negatives (abs): [3008, 65, 2]
+```
+
+---
+
+### 🔁 Step 2: Radix Sort `radix_sort_non_negative()`
+
+We show how it works digit by digit (LSD → MSD):
+
+#### 📦 Radix Sort of `[3008, 65, 2]`
+
+```
+Initial Array: [3008, 65, 2]
+
+Pass 1 (exp = 1, unit digit):
+  Digits:       8     5   2
+  Sorted:       [2, 65, 3008]
+
+Pass 2 (exp = 10, tens digit):
+  Digits:       0     6   0
+  Sorted:       [3008, 2, 65]
+
+Pass 3 (exp = 100, hundreds digit):
+  Digits:       0     0   3
+  Sorted:       [2, 65, 3008]
+
+Pass 4 (exp = 1000, thousands digit):
+  Digits:       3     0   0
+  Sorted:       [2, 65, 3008]
+```
+
+Now reverse and negate:
+
+```
+Before reverse: [2, 65, 3008]
+Reversed:       [3008, 65, 2]
+Negated:        [-3008, -65, -2]
+```
+
+---
+
+#### 📦 Radix Sort of `[8762, 654, 345, 87, 234, 12]`
+
+Let's visualize:
+
+```
+Initial Array: [8762, 654, 345, 87, 234, 12]
+
+Pass 1 (unit digit):
+  Digits:         2     4     5     7     4     2
+  Sorted:       [12, 8762, 654, 234, 345, 87]
+
+Pass 2 (tens digit):
+  Digits:         1     6     5     3     4     8
+  Sorted:       [12, 234, 345, 654, 8762, 87]
+
+Pass 3 (hundreds digit):
+  Digits:         0     2     3     6     7     0
+  Sorted:       [12, 87, 234, 345, 654, 8762]
+
+Pass 4 (thousands digit):
+  Digits:         0     0     0     0     0     8
+  Sorted:       [12, 87, 234, 345, 654, 8762]
+```
+
+---
+
+### 🔗 Step 3: Merge Final Sorted Arrays
+
+```
+Sorted Negatives:     [-3008, -65, -2]
+Sorted Non-Negatives: [12, 87, 234, 345, 654, 8762]
+
+Final Merged Output:  [-3008, -65, -2, 12, 87, 234, 345, 654, 8762]
+```
+
+---
+
+### 📊 ASCII Summary Flow
+
+```
+           +----------------------------+
+Input ---> | [8762, 654, -3008, ..., -2]|
+           +----------------------------+
+                        |
+        +---------------+---------------+
+        |                               |
+ Negatives < 0                    Non-negatives >= 0
+ [3008, 65, 2]                     [8762, 654, 345, 87, 234, 12]
+        |                               |
+ radix_sort_non_negative          radix_sort_non_negative
+        |                               |
+   [2, 65, 3008]                    [12, 87, 234, 345, 654, 8762]
+        |                               |
+ Reverse & Negate                     (keep as-is)
+ [-3008, -65, -2]                    [12, 87, 234, 345, 654, 8762]
+        \                               /
+         \                             /
+          +-------------------------+
+          |     Final Merge        |
+          +-------------------------+
+          | [-3008, -65, -2, 12, ...]
+          +-------------------------+
+```
 
 """
