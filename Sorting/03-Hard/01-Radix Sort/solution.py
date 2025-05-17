@@ -6,6 +6,8 @@
 Write a function that takes in an array of `non-negative` integers and returns a `sorted` version of that array. Use the `Radix
 Sort` algorithm to sort the array.
 
+You can also extend the implementation to include `negative` and `floating-point` numbers.
+
 
 ## Sample Input:
 ```
