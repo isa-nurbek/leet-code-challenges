@@ -35,51 +35,92 @@ and `b` is the base of the numbering system used.
 # O(d * (n + b)) time | O(n + b) space
 # Handle negative numbers
 def radix_sort(arr):
+    """
+    Sorts an array of integers using radix sort algorithm.
+    Handles both negative and non-negative numbers by separating them,
+    sorting separately, and combining results.
+
+    Args:
+        arr: List of integers to be sorted
+
+    Returns:
+        List of sorted integers
+    """
     if not arr:
         return arr
 
-    negatives = [-x for x in arr if x < 0]
+    # Separate negative and non-negative numbers
+    negatives = [-x for x in arr if x < 0]  # Convert negatives to positives for sorting
     non_negatives = [x for x in arr if x >= 0]
 
+    # Sort both parts using radix sort for non-negative numbers
     sorted_negatives = radix_sort_non_negative(negatives)
     sorted_non_negatives = radix_sort_non_negative(non_negatives)
 
+    # Convert negatives back to original sign and reverse order
+    # (since larger positive numbers = smaller negative numbers)
     sorted_negatives = [-x for x in reversed(sorted_negatives)]
 
+    # Combine results (negatives come first in sorted order)
     return sorted_negatives + sorted_non_negatives
 
 
 def radix_sort_non_negative(arr):
+    """
+    Radix sort implementation for non-negative integers only.
+    Sorts numbers digit by digit starting from least significant digit.
+
+    Args:
+        arr: List of non-negative integers to be sorted
+
+    Returns:
+        List of sorted non-negative integers
+    """
     if not arr:
         return arr
 
+    # Find maximum number to know number of digits
     max_num = max(arr)
-    exp = 1
+
+    # Do counting sort for every digit (exp is 10^digit)
+    exp = 1  # Start with least significant digit (units place)
     while max_num // exp > 0:
         counting_sort(arr, exp)
-        exp *= 10
+        exp *= 10  # Move to next digit (tens, hundreds, etc.)
     return arr
 
 
 def counting_sort(arr, exp):
-    n = len(arr)
-    output = [0] * n
-    count = [0] * 10
+    """
+    Performs counting sort on the given digit (exp) of array elements.
+    This is a helper function for radix_sort_non_negative.
 
+    Args:
+        arr: List of non-negative integers to be sorted
+        exp: Current digit position to sort by (power of 10)
+    """
+    n = len(arr)
+    output = [0] * n  # Will store sorted output
+    count = [0] * 10  # Counting array for digits 0-9
+
+    # Count occurrences of each digit in current place
     for i in range(n):
-        index = (arr[i] // exp) % 10
+        index = (arr[i] // exp) % 10  # Extract current digit
         count[index] += 1
 
+    # Calculate cumulative count (determines positions in output)
     for i in range(1, 10):
         count[i] += count[i - 1]
 
+    # Build the output array in sorted order
     i = n - 1
-    while i >= 0:
+    while i >= 0:  # Moving backwards for stability
         index = (arr[i] // exp) % 10
-        output[count[index] - 1] = arr[i]
+        output[count[index] - 1] = arr[i]  # Place element in correct position
         count[index] -= 1
         i -= 1
 
+    # Copy the sorted output back to original array
     for i in range(n):
         arr[i] = output[i]
 
