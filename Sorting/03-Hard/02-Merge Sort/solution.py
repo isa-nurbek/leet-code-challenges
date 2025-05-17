@@ -107,3 +107,52 @@ print(merge_sort([38, 27, 43, 3, 9, 82, 10]))
 
 print(merge_sort([5, -2, 2, -8, 3, -10, -6, -1, 2, -2, 9, 1, 1]))
 # Output: [-10, -8, -6, -2, -2, -1, 1, 1, 2, 2, 3, 5, 9]
+
+# =========================================================================================================================== #
+
+# Big O Analysis:
+
+"""
+## Time and Space Complexity Analysis:
+
+### Time Complexity Analysis:
+
+The space complexity of Merge Sort is determined by the additional space used during the sorting process:
+
+1. **Divide Step**: The array is divided into two halves recursively until each subarray has only one element.
+This division process takes O(log n) steps because the array is halved at each level of recursion.
+
+2. **Merge Step**: At each level of recursion, merging two sorted subarrays takes O(n) time, where `n` is the total number of
+elements being merged. This is because each element is compared and placed in the merged array exactly once.
+
+3. **Total Levels**: Since the array is divided into halves at each level, there are `log n` levels of recursion.
+
+4. **Total Time**: At each level, the total work done is O(n) (for merging all subarrays at that level).
+Since there are `log n` levels, the total time complexity is: O(n log n)
+
+   This holds for the best, average, and worst cases because the algorithm always divides the array in half and merges it back
+   together, regardless of the initial order of the elements.
+
+### Space Complexity Analysis:
+
+The space complexity of Merge Sort is determined by the additional space used during the sorting process:
+
+1. **Recursive Calls**: The recursion depth is O(log n), which contributes to the space used on the call stack.
+
+2. **Temporary Arrays**: During the merge process, temporary arrays are created to store the left and right halves of the subarrays.
+At any given time, the maximum additional space used is O(n) because the algorithm needs to store the entire array being sorted
+at the top level of recursion (though smaller subarrays are used at lower levels).
+
+3. **Total Space**: The dominant factor is the temporary storage used for merging, so the space complexity is: O(n)
+
+   This is because the algorithm requires additional space proportional to the size of the input array to store the merged subarrays.
+
+### Summary:
+
+- **Time Complexity**: O(n log n) in all cases (best, average, worst).
+- **Space Complexity**: O(n) due to the additional space required for merging.
+
+Merge Sort is a stable, comparison-based sorting algorithm with consistent performance, but it does require additional space,
+which may be a consideration for very large datasets.
+
+"""
