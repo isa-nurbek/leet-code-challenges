@@ -32,7 +32,7 @@ and `b` is the base of the numbering system used.
 # Solution:
 
 
-# O(d * (n + b)) time | O(n + b) space
+# O(d * (n + b)) time | O(n) space
 # Handle negative numbers
 def radix_sort(arr):
     """
@@ -138,3 +138,55 @@ print(radix_sort([0, -1, -2, -3, -4]))
 
 print(radix_sort([-111, -11, -1, 0, 1, 11, 111]))
 # Output: [-111, -11, -1, 0, 1, 11, 111]
+
+# =========================================================================================================================== #
+
+# Big O Analysis:
+
+"""
+## Time and Space Complexity Analysis:
+
+### Time Complexity:
+
+1. **Radix Sort for Non-negative Numbers (`radix_sort_non_negative`)**:
+   - Let `d` be the maximum number of digits in any number in the array (determined by `max_num`).
+   - The outer loop runs `d` times (once for each digit position, from least significant to most significant).
+   - Each iteration calls `counting_sort`, which has a time complexity of `O(n + k)`, where `k` is the range of digits
+   (here, `k = 10` since digits are 0-9).
+   - Thus, the total time complexity for `radix_sort_non_negative` is `O(d * (n + 10))`, which simplifies to `O(d * n)`
+   (since `10` is a constant).
+
+2. **Handling Negatives (`radix_sort`)**:
+   - The input array is split into negatives and non-negatives, which takes `O(n)` time.
+   - Negatives are converted to positive (and later back to negative), which is `O(m)` where `m` is the number of negatives.
+   - The `radix_sort_non_negative` is called twice (once for negatives and once for non-negatives), so the total time is
+   `O(d_neg * m + d_non_neg * (n - m))`, where `d_neg` and `d_non_neg` are the maximum digits in the negatives and non-negatives, respectively.
+   - Reversing the sorted negatives takes `O(m)` time.
+   - Combining the sorted arrays takes `O(n)` time.
+   - The total time complexity is still `O(d * n)`, where `d` is the maximum number of digits across all numbers (both negative
+   and non-negative).
+
+### Space Complexity:
+
+1. **Counting Sort (`counting_sort`)**:
+   - Uses an auxiliary array `output` of size `n` and a `count` array of size `10`.
+   - Thus, the space complexity is `O(n + 10)`, which simplifies to `O(n)`.
+
+2. **Radix Sort (`radix_sort_non_negative` and `radix_sort`)**:
+   - The space is dominated by the `counting_sort` calls, so it is `O(n)` for the auxiliary arrays.
+   - Additionally, splitting the array into negatives and non-negatives requires `O(n)` space for the two subarrays.
+   - Thus, the total space complexity is `O(n)`.
+
+### Summary:
+- **Time Complexity**: `O(d * n)`, where `d` is the maximum number of digits in any number in the array,
+and `n` is the number of elements.
+- **Space Complexity**: `O(n)` (auxiliary space for counting sort and splitting the array).
+
+### Notes:
+- Radix sort is efficient when `d` is small compared to `n` (e.g., for large arrays of numbers with a bounded number of digits).
+If `d` is large (e.g., very large numbers), the performance may degrade.
+- The implementation handles negative numbers by sorting them separately and reversing the order, which is a correct approach
+but adds some overhead.
+
+
+"""
