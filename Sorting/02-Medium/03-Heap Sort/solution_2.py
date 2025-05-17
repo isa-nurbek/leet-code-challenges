@@ -114,3 +114,57 @@ print(
 
 print(heap_sort_descending([2, 1]))
 # Output: [2, 1]
+
+# =========================================================================================================================== #
+
+# Big O Analysis:
+
+"""
+## Time and Space Complexity Analysis:
+
+Let's analyze the time and space complexity of the given `heap_sort_descending` function, which uses a min-heap to sort
+an array in descending order.
+
+### Time Complexity:
+
+1. **Building the Min-Heap (Heapify all non-leaf nodes):**
+   - The loop runs from `n//2 - 1` down to `0`, so it performs `O(n)` calls to `min_heapify`.
+   - Each `min_heapify` operation takes `O(log n)` time in the worst case (since the height of the heap is `log n`).
+   - However, the tighter analysis for building the heap is actually `O(n)` (not `O(n log n)`), because most of the `heapify`
+   operations work on smaller subtrees. This is a well-known result in heap construction.
+
+   ⇒ Building the heap: **O(n)** time.
+
+2. **Extracting elements and re-heapifying:**
+   - The loop runs `n-1` times (from `n-1` down to `1`).
+   - In each iteration, we swap the root (smallest element) with the last element and call `min_heapify` on the new root.
+   - Each `min_heapify` call takes `O(log i)` time (where `i` is the current size of the heap, decreasing from `n-1` to `1`).
+   - The total time for this phase is:
+     
+        Total = `Σ (from i=1 to n-1) O(log i)` ≈ **O(n log n)** (since `log(n!) ≈ n log n`).
+
+   ⇒ Extracting and re-heapifying: **O(n log n)** time.
+
+**Total Time Complexity:**  
+The dominant term is `O(n log n)` (from the extraction phase), so the overall time complexity is: **O(n log n)**.
+
+---
+
+### Space Complexity:
+
+- The `min_heapify` function is recursive, but its maximum depth is `O(log n)` (the height of the heap). Thus, the recursion
+stack uses **O(log n)** space.
+- Apart from this, the algorithm sorts the array in-place, using only a constant amount of additional space (for variables like
+`smallest`, `left`, `right`, etc.).
+
+**Total Space Complexity:**  
+**O(1)** (if we ignore recursion stack, otherwise **O(log n)** for recursion).  
+In practice, for large `n`, the recursive `min_heapify` could be rewritten iteratively to achieve **O(1)** space.
+
+---
+
+### Summary:
+- **Time Complexity:** **O(n log n)** (best, average, and worst case).
+- **Space Complexity:** **O(1)** (if using iterative heapify) or **O(log n)** (due to recursion stack).
+
+"""
