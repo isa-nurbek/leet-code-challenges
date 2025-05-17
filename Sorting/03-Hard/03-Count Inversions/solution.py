@@ -38,40 +38,82 @@ O(n log n) time | O(n) space - where `n` is the length of the array.
 
 # O(n log n) time | O(n) space
 def count_inversions(array):
+    """Count the number of inversions in the given array.
+    An inversion is a pair of indices (i, j) where i < j and array[i] > array[j].
+
+    Args:
+        array: The input array to count inversions in
+
+    Returns:
+        The total number of inversions in the array
+    """
+    # Start the recursive divide-and-conquer process on the entire array
     return count_sub_array_inversions(array, 0, len(array))
 
 
 def count_sub_array_inversions(array, start, end):
+    """Recursively count inversions in a subarray using divide-and-conquer approach.
+
+    Args:
+        array: The original array being processed
+        start: Starting index of the subarray (inclusive)
+        end: Ending index of the subarray (exclusive)
+
+    Returns:
+        The number of inversions in the subarray from start to end
+    """
+    # Base case: subarray has 0 or 1 elements - no inversions possible
     if end - start <= 1:
         return 0
 
+    # Calculate middle point to divide the subarray
     middle = start + (end - start) // 2
 
+    # Recursively count inversions in left and right halves
     left_inversions = count_sub_array_inversions(array, start, middle)
     right_inversions = count_sub_array_inversions(array, middle, end)
+
+    # Count inversions found during merging and sort the subarray
     merged_array_inversions = merge_sort_and_count_inversions(array, start, middle, end)
 
+    # Return total inversions (left + right + merge)
     return left_inversions + right_inversions + merged_array_inversions
 
 
 def merge_sort_and_count_inversions(array, start, middle, end):
-    sorted_array = []
+    """Merge two sorted subarrays while counting split inversions.
 
-    left = start
-    right = middle
-    inversions = 0
+    Args:
+        array: The original array being processed
+        start: Start index of left subarray
+        middle: Start index of right subarray (end of left subarray)
+        end: End index of right subarray
 
+    Returns:
+        The number of split inversions found during merging
+    """
+    sorted_array = []  # Temporary storage for merged result
+    left = start  # Pointer for left subarray
+    right = middle  # Pointer for right subarray
+    inversions = 0  # Count of split inversions found during merge
+
+    # Merge the two subarrays while counting inversions
     while left < middle and right < end:
         if array[left] <= array[right]:
+            # No inversion - left element is smaller
             sorted_array.append(array[left])
             left += 1
         else:
+            # When right element is smaller than left, it's smaller than all
+            # remaining elements in left subarray (since left subarray is sorted)
             inversions += middle - left
             sorted_array.append(array[right])
             right += 1
 
+    # Append any remaining elements from either subarray
     sorted_array += array[left:middle] + array[right:end]
 
+    # Copy the merged result back into the original array
     for idx, num in enumerate(sorted_array):
         array[start + idx] = num
 
