@@ -101,3 +101,58 @@ print(radix_sort([111, 11, 11, 1, 0]))
 
 print(radix_sort([4, 44, 444, 888, 88, 33, 3, 22, 2222, 1111, 1234]))
 # Output: [3, 4, 22, 33, 44, 88, 444, 888, 1111, 1234, 2222]
+
+# =========================================================================================================================== #
+
+# Big O Analysis:
+
+"""
+## Time and Space Complexity Analysis:
+
+### **Radix Sort Analysis**
+
+#### **Time Complexity**
+
+- **Overall Time Complexity**: **O(d * (n + k))**
+  - **d**: Number of digits in the largest number (`max_num`).
+  - **n**: Number of elements in the array.
+  - **k**: Base of the numbering system (here, base 10 ⇒ `k = 10`).
+
+**Breakdown:**
+1. **Finding `max_num`**: `O(n)` (one pass over the array).
+2. **Loop over each digit (`d` times)**:
+   - Each iteration calls **Counting Sort**, which runs in `O(n + k)` time.
+   - Since `k = 10` (constant), Counting Sort is `O(n)` per digit.
+3. **Total time**: `O(d * n)` (since `k` is constant).
+
+**Best/Worst/Average Case**:  
+
+Radix Sort is **non-comparative**, so its time complexity remains **O(d * n)** regardless of input distribution.
+
+---
+
+#### **Space Complexity**
+
+- **Overall Space Complexity**: **O(n + k)**
+  - **Output array**: `O(n)` (to store sorted elements per digit).
+  - **Count array**: `O(k)` (here, `k = 10` ⇒ constant `O(1)`).
+  - **Total space**: `O(n)` (since `k` is negligible).
+
+**Notes**:
+- **In-place?** No, Radix Sort uses extra space for `output` and `count` arrays.
+- **Stable?** Yes, because Counting Sort is stable (preserves order of equal keys).
+
+---
+
+### **Key Takeaways**
+| Complexity     | Value      |
+|----------------|------------|
+| **Time**       | O(d * n)   |
+| **Space**      | O(n)       |
+| **Stable?**    | Yes        |
+| **In-place?**  | No         |
+
+- **Efficiency**: Excellent for integers with a fixed number of digits (e.g., sorting 32-bit integers where `d = 10`).
+- **Limitation**: Not ideal for floating-point numbers or variable-length strings (unless padded).
+
+"""
