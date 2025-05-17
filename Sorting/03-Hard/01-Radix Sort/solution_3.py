@@ -255,3 +255,345 @@ This implementation is most efficient when:
 3. Precision maintenance is more important than absolute speed
 
 """
+
+# =========================================================================================================================== #
+
+# Detailed Code Explanation:
+
+"""
+**Radix Sort** for floating-point numbers using the `decimal.Decimal` module to preserve precision.
+Let's walk through the code in detail, step by step.
+
+---
+
+## 🧠 **Concept Recap: Radix Sort**
+
+* Radix Sort is a **non-comparative** sorting algorithm.
+* It processes numbers digit by digit, from the least significant digit (LSD) to the most significant digit (MSD).
+* It is efficient for **integers**, but not directly usable for **floats** or **negative numbers**.
+
+### ⚠️ Problem:
+
+Radix Sort can’t handle:
+
+1. **Floating points** (like `1.23`, `0.004`)
+2. **Negative numbers**
+
+### ✅ Solution Strategy:
+
+1. **Convert floats to integers** by scaling them (using powers of 10).
+2. Sort integers using **Radix Sort**.
+3. **Handle negatives separately** (as Radix Sort is for non-negatives).
+4. Scale back to the original float representation.
+
+---
+
+## 🧩 Code Breakdown
+
+```
+def radix_sort(arr):
+    if not arr:
+        return arr
+```
+
+* Return immediately if the input list is empty.
+
+---
+
+### Step 1: Convert input to `Decimal` for precision
+
+```
+decimal_arr = [Decimal(str(x)) for x in arr]
+```
+
+* Wrap every input in `Decimal` using `str(x)` to avoid floating-point precision issues.
+
+---
+
+### Step 2: Determine scaling factor
+
+```
+scale = get_scale_factor(decimal_arr)
+```
+
+#### `get_scale_factor()` function:
+
+```
+def get_scale_factor(arr):
+    max_decimals = 0
+    for num in arr:
+        if num.as_tuple().exponent < 0:
+            max_decimals = max(max_decimals, -num.as_tuple().exponent)
+    return Decimal("1" + "0" * max_decimals)
+```
+
+* It finds the **maximum number of digits after the decimal point**.
+* Then creates a `scale` of 10^max_decimals to convert all numbers into integers.
+
+Example:
+
+* For `1.23`, `0.005`, `2.1`, it computes `scale = 1000`.
+
+---
+
+### Step 3: Multiply by scale to convert all Decimals to integers
+
+```
+scaled_arr = [int(x * scale) for x in decimal_arr]
+```
+
+Now the numbers are all **integers** (e.g., `1.23 * 1000 = 1230`).
+
+---
+
+### Step 4: Split into negatives and non-negatives
+
+```
+negatives = [-x for x in scaled_arr if x < 0]
+non_negatives = [x for x in scaled_arr if x >= 0]
+```
+
+* Radix Sort can't handle negative numbers, so we:
+
+  * Take absolute values of negatives (`-x`)
+  * Keep non-negatives as-is
+
+---
+
+### Step 5: Sort both arrays using helper function
+
+```
+sorted_negatives = radix_sort_non_negative(negatives)
+sorted_non_negatives = radix_sort_non_negative(non_negatives)
+```
+
+#### `radix_sort_non_negative()` function:
+
+```
+def radix_sort_non_negative(arr):
+    if not arr:
+        return arr
+
+    max_num = max(arr)
+    exp = 1
+    while max_num // exp > 0:
+        counting_sort(arr, exp)
+        exp *= 10
+    return arr
+```
+
+* Applies **LSD Radix Sort** using digit positions (`exp = 1`, `10`, `100`, ...)
+
+#### `counting_sort()` function:
+
+```
+def counting_sort(arr, exp):
+    ...
+```
+
+* A **stable** version of counting sort that sorts by the current digit.
+
+---
+
+### Step 6: Reattach negative signs and combine both halves
+
+```
+sorted_negatives = [-x for x in reversed(sorted_negatives)]
+```
+
+* Revert negatives and **reverse them** (since larger absolute values are smaller negatives).
+
+```
+sorted_scaled = sorted_negatives + sorted_non_negatives
+```
+
+* Concatenate the sorted negative and positive halves.
+
+---
+
+### Step 7: Scale back to decimal
+
+```
+return [Decimal(x) / scale for x in sorted_scaled]
+```
+
+* Convert back to original floating-point numbers by dividing with the scale.
+
+---
+
+## ✅ Example Walkthrough
+
+Input:
+
+```
+[Decimal("3.141"), Decimal("-2.71"), Decimal("1.618"), Decimal("0.0"), Decimal("-0.577"), Decimal("2.718")]
+```
+
+1. **Max decimals**: 3 → scale = 1000
+2. **Scaled**: [3141, -2710, 1618, 0, -577, 2718]
+3. **Split**: Negatives → [2710, 577], Positives → [3141, 1618, 0, 2718]
+4. **Sort**:
+
+   * Sorted negatives: [577, 2710] → revert: [-2710, -577]
+   * Sorted positives: [0, 1618, 2718, 3141]
+5. **Combined**: [-2710, -577, 0, 1618, 2718, 3141]
+6. **Scaled back**: [-2.71, -0.577, 0.0, 1.618, 2.718, 3.141]
+
+---
+
+## 🧪 Test Cases Recap
+
+All test cases confirm:
+
+* Accurate handling of floats
+* Correct negative number ordering
+* Maintains high precision with `Decimal`
+
+---
+
+## ✅ Summary
+
+### 🔧 Techniques Used:
+
+* Decimal scaling to integers
+* Handling negative numbers separately
+* LSD Radix Sort with stable Counting Sort
+
+### 💡 Key Benefits:
+
+* Accurate for floats with arbitrary precision
+* Efficient for large lists of decimal numbers
+
+---
+
+Here’s an **ASCII visualization** of how the `radix_sort()` function processes a list of decimal numbers.
+
+---
+
+### 🎯 **Input**
+
+```
+arr = [3.141, -2.71, 1.618, 0.0, -0.577, 2.718]
+```
+
+---
+
+### 🔍 Step 1: Convert to Decimals
+
+```
+[3.141, -2.71, 1.618, 0.0, -0.577, 2.718]
+```
+
+---
+
+### 🧮 Step 2: Determine scale factor (max 3 decimal digits)
+
+```
+scale = 10^3 = 1000
+```
+
+---
+
+### 🧱 Step 3: Scale all numbers
+
+```
+x * scale:
+3.141   → 3141
+-2.71   → -2710
+1.618   → 1618
+ 0.0    → 0
+-0.577  → -577
+2.718   → 2718
+```
+
+```
+scaled_arr = [3141, -2710, 1618, 0, -577, 2718]
+```
+
+---
+
+### ➗ Step 4: Split into negative and non-negative
+
+```
+Negatives (abs): [2710, 577]
+Non-negatives:   [3141, 1618, 0, 2718]
+```
+
+---
+
+### 🔄 Step 5: Radix Sort (LSD) each half
+
+#### Sort Negatives:
+
+```
+Before sorting: [2710, 577]
+Sorted (radix): [577, 2710]
+Reversed & negated: [-2710, -577]
+```
+
+#### Sort Non-Negatives:
+
+```
+Before sorting: [3141, 1618, 0, 2718]
+Sorted (radix): [0, 1618, 2718, 3141]
+```
+
+---
+
+### 🔗 Step 6: Merge both halves
+
+```
+sorted_scaled = [-2710, -577, 0, 1618, 2718, 3141]
+```
+
+---
+
+### 📉 Step 7: Scale back to original decimals
+
+```
+x / scale:
+-2710   → -2.710
+-577    → -0.577
+0       →  0.000
+1618    →  1.618
+2718    →  2.718
+3141    →  3.141
+```
+
+---
+
+### ✅ Final Sorted Output
+
+```
+[-2.71, -0.577, 0.0, 1.618, 2.718, 3.141]
+```
+
+---
+
+## 🧭 Overall Flow Diagram (ASCII)
+
+```
+Input:         [3.141, -2.71, 1.618, 0.0, -0.577, 2.718]
+                     ↓
+Convert to Decimal (preserves precision)
+                     ↓
+Determine max decimal places (→ scale = 1000)
+                     ↓
+Scale to integers:   [3141, -2710, 1618, 0, -577, 2718]
+                     ↓
+Split:
+   Negatives(abs):   [2710, 577]
+   Non-negatives:    [3141, 1618, 0, 2718]
+                     ↓
+Radix sort each:
+   Sorted negatives: [-2710, -577]
+   Sorted non-neg:   [0, 1618, 2718, 3141]
+                     ↓
+Merge:               [-2710, -577, 0, 1618, 2718, 3141]
+                     ↓
+Scale back to floats
+                     ↓
+Output:        [-2.71, -0.577, 0.0, 1.618, 2.718, 3.141]
+```
+
+"""
