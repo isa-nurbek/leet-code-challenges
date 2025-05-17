@@ -195,3 +195,63 @@ print(
     )
 )
 # Output: [-0.1, -0.00001, 0.000001, 0.0001]
+
+# =========================================================================================================================== #
+
+# Big O Analysis:
+
+"""
+## Time and Space Complexity Analysis:
+
+### Time Complexity:
+
+1. **Scaling Phase** (converting decimals to integers):
+   - `get_scale_factor()`: O(n) to examine all numbers and find max decimal places
+   - Scaling operation: O(n)
+   - Total for scaling: O(n)
+
+2. **Radix Sort on Non-negative Numbers**:
+   - For each digit position (d positions, where d is the number of digits in the largest number):
+     - Counting sort: O(n)
+   - Total: O(d * n)
+
+3. **Negative Numbers Handling**:
+   - Similar complexity as non-negative numbers: O(d * n) for the negative portion
+
+4. **Final Conversion**:
+   - Scaling back to decimals: O(n)
+
+**Overall Time Complexity**: O(d * n),
+where:
+- n is the number of elements
+- d is the maximum number of digits in the scaled integer representation of the numbers
+
+### Space Complexity:
+
+1. **Scaling Storage**:
+   - Storing decimal_arr: O(n)
+   - Storing scaled_arr: O(n)
+
+2. **Counting Sort**:
+   - Output array: O(n)
+   - Count array: O(10) = O(1)
+
+3. **Negative/Negative Separation**:
+   - Temporary storage for negatives and non-negatives: O(n)
+
+**Overall Space Complexity**: O(n) (linear space)
+
+### Key Notes:
+
+- The complexity depends heavily on the precision (number of decimal places) because it affects the number of digits (d)
+in the scaled integers.
+- For floating-point numbers with many decimal places, d can become large, making the algorithm less efficient.
+- This implementation handles both positive and negative numbers by processing them separately.
+- The Decimal conversion ensures precision is maintained during the sorting process.
+
+This implementation is most efficient when:
+1. The numbers have limited decimal places (small d)
+2. The range of numbers isn't extremely large
+3. Precision maintenance is more important than absolute speed
+
+"""
