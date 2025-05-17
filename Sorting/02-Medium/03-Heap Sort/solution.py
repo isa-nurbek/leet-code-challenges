@@ -35,29 +35,44 @@ Worst: O(n log(n)) time | O(1) space - where n is the length of the input array.
 # Average: O(n log(n)) time | O(1) space
 # Worst: O(n log(n)) time | O(1) space
 def heapify(arr, n, i):
-    largest = i
-    left = 2 * i + 1
-    right = 2 * i + 2
+    """
+    Heapify a subtree rooted at index i in an array of size n.
+    This function ensures the max-heap property is maintained for the subtree.
+    """
+    largest = i  # Initialize largest as root
+    left = 2 * i + 1  # Left child position
+    right = 2 * i + 2  # Right child position
 
+    # If left child exists and is greater than current largest
     if left < n and arr[left] > arr[largest]:
         largest = left
 
+    # If right child exists and is greater than current largest
     if right < n and arr[right] > arr[largest]:
         largest = right
 
+    # If largest is not root, swap and continue heapifying
     if largest != i:
         arr[i], arr[largest] = arr[largest], arr[i]  # Swap
-        heapify(arr, n, largest)
+        heapify(arr, n, largest)  # Recursively heapify the affected subtree
 
 
 def heap_sort(arr):
+    """
+    Main function to perform heap sort on the given array.
+    """
     n = len(arr)
 
+    # Build a max-heap (rearrange array)
+    # Start from the last non-leaf node (n//2 - 1) and work backwards
     for i in range(n // 2 - 1, -1, -1):
         heapify(arr, n, i)
 
+    # One by one extract elements from the heap
     for i in range(n - 1, 0, -1):
+        # Move current root (max element) to the end
         arr[i], arr[0] = arr[0], arr[i]
+        # Call heapify on the reduced heap (size = i)
         heapify(arr, i, 0)
 
     return arr
