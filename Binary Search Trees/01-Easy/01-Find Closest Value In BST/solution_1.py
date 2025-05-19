@@ -80,8 +80,8 @@ def build_tree(data):
     return nodes[data["nodes"][0]["id"]]
 
 
-# Average: O(log(n)) time | O(1) space
-# Worst: O(n) time | O(1) space
+# Average: O(log(n)) time | O(log(n)) space
+# Worst: O(n) time | O(n) space
 def find_closest_value_in_bst(tree, target):
     # Start the helper function with the tree's root value as initial closest
     return find_closest_value_in_bst_helper(tree, target, tree.value)
