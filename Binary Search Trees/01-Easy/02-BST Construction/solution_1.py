@@ -66,84 +66,109 @@ Worst: (all 3 methods): O(n) time | O(1) space - where `n` is the number of node
 # Binary Search Tree (BST) node class
 class BST:
     def __init__(self, value):
+        # Initialize a BST node with a value, and set left and right children to None
         self.value = value
         self.left = None
         self.right = None
 
-    # Average: O(log n) time | O(log n) space
-    # Worst: O(n) time | O(n) space
     def insert(self, value):
+        # Insert a new value into the BST
         if value < self.value:
+            # If the value is less than current node's value, go to the left subtree
             if self.left is None:
+                # If left child is empty, create a new node here
                 self.left = BST(value)
             else:
+                # Otherwise, recursively insert into the left subtree
                 self.left.insert(value)
         else:
+            # If the value is greater or equal, go to the right subtree
             if self.right is None:
+                # If right child is empty, create a new node here
                 self.right = BST(value)
             else:
+                # Otherwise, recursively insert into the right subtree
                 self.right.insert(value)
-        return self
+        return self  # Return the tree to allow method chaining
 
-    # Average: O(log n) time | O(log n) space
-    # Worst: O(n) time | O(n) space
     def contains(self, value):
+        # Check if the BST contains a given value
         if value < self.value:
+            # If value is less than current node, search left subtree
             if self.left is None:
-                return False
+                return False  # Value not found
             else:
                 return self.left.contains(value)
         elif value > self.value:
+            # If value is greater than current node, search right subtree
             if self.right is None:
-                return False
+                return False  # Value not found
             else:
                 return self.right.contains(value)
         else:
+            # Found the value
             return True
 
-    # Average: O(log n) time | O(log n) space
-    # Worst: O(n) time | O(n) space
     def remove(self, value, parent=None):
+        # Remove a value from the BST
         if value < self.value:
+            # If value is less than current node, go left
             if self.left is not None:
                 self.left.remove(value, self)
         elif value > self.value:
+            # If value is greater than current node, go right
             if self.right is not None:
                 self.right.remove(value, self)
         else:
+            # Found the node to remove
             if self.left is not None and self.right is not None:
+                # Case 1: Node has two children
+                # Replace value with minimum value from right subtree
                 self.value = self.right.get_min_value()
+                # Remove the duplicate value from right subtree
                 self.right.remove(self.value, self)
             elif parent is None:
+                # Case 2: Node is root with one or zero children
                 if self.left is not None:
+                    # Replace with left child's value and pointers
                     self.value = self.left.value
                     self.right = self.left.right
                     self.left = self.left.left
                 elif self.right is not None:
+                    # Replace with right child's value and pointers
                     self.value = self.right.value
                     self.left = self.right.left
                     self.right = self.right.right
                 else:
-                    pass
+                    # Node is root with no children - single node tree
+                    pass  # In practice, might want to handle this case differently
             elif parent.left == self:
+                # Case 3: Node is left child with one or zero children
+                # Replace parent's left pointer with our non-null child (if any)
                 parent.left = self.left if self.left is not None else self.right
             elif parent.right == self:
+                # Case 4: Node is right child with one or zero children
+                # Replace parent's right pointer with our non-null child (if any)
                 parent.right = self.left if self.left is not None else self.right
-        return self
+        return self  # Return the tree to allow method chaining
 
     def get_min_value(self):
+        # Get the minimum value in the BST (leftmost node)
         if self.left is None:
-            return self.value
+            return self.value  # Found the leftmost node
         else:
-            return self.left.get_min_value()
+            return self.left.get_min_value()  # Recurse left
 
     def __str__(self):
+        # String representation of the BST for visualization
         return self._visualize()
 
     def _visualize(self, level=0):
-        ret = "\t" * level + repr(self.value) + "\n"
+        # Helper method for tree visualization (recursive)
+        ret = "\t" * level + repr(self.value) + "\n"  # Current node
         for child in [self.left, self.right]:
             if child:
+                # Add visualization of children with increased indentation
                 ret += child._visualize(level + 1)
         return ret
 
