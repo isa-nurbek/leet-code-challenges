@@ -154,3 +154,34 @@ tree = build_tree(tree_dict)
 result = find_closest_value_in_bst(tree, 12)
 
 print(result)  # Output: 13
+
+# =========================================================================================================================== #
+
+# Big O Analysis:
+
+"""
+## Time and Space Complexity Analysis:
+
+Let's analyze the time and space complexity of the given `find_closest_value_in_bst` function.
+
+### Time Complexity:
+
+- **Best Case**: O(1) - When the target value is equal to the root node's value, the loop breaks immediately after the first comparison.
+- **Average Case**: O(log n) - In a balanced BST, with each comparison, we eliminate half of the remaining tree
+(similar to binary search).
+- **Worst Case**: O(n) - If the BST is completely unbalanced (essentially a linked list), we might have to traverse all `n` nodes.
+
+### Space Complexity:
+
+- **Best/Average/Worst Case**: O(1) - The algorithm uses a constant amount of additional space (only a few variables like
+`current_node` and `closest`), regardless of the input size. No recursion or additional data structures are used.
+
+### Summary:
+
+- **Time Complexity**: O(log n) on average (balanced BST), O(n) in the worst case (unbalanced BST).
+- **Space Complexity**: O(1) in all cases.
+
+This is an **iterative** solution, which avoids the recursion stack space that a recursive approach would require (O(log n) on
+average for a balanced BST, O(n) in the worst case for an unbalanced BST). Thus, the space complexity is optimized.
+
+"""
