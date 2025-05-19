@@ -177,3 +177,224 @@ in all cases while keeping the same time complexity.
 - The initial closest value is set to `tree.value`, which is a reasonable starting point.
 
 """
+
+# =========================================================================================================================== #
+
+# Detailed Code Explanation:
+
+"""
+This code defines a **binary search tree (BST)**, builds it from a given data structure, and finds the **closest value to a given
+target** in the BST. Let's break it down in detail:
+
+---
+
+### 🔶 Class: `BST`
+
+```
+class BST:
+    def __init__(self, value):
+        self.value = value
+        self.left = None
+        self.right = None
+```
+
+* A basic class to represent a **node** in a Binary Search Tree.
+* Each node stores:
+
+  * `value`: the integer value of the node.
+  * `left`: reference to the left child (or `None` if it doesn’t exist).
+  * `right`: reference to the right child.
+
+---
+
+### 🔶 Function: `build_tree(data)`
+
+```
+def build_tree(data):
+    if not data:
+        return None
+```
+
+* **Input**: A dictionary `data` that contains node descriptions with `id`, `value`, `left`, and `right`.
+* **Output**: The root of the constructed BST.
+
+#### Step-by-step logic:
+
+##### Step 1: Create all `BST` node objects.
+
+```
+    nodes = {}
+    for node_data in data["nodes"]:
+        node = BST(node_data["value"])
+        nodes[node_data["id"]] = node
+```
+
+* A dictionary `nodes` maps each node's `"id"` to a `BST` node object created using its `"value"`.
+
+##### Step 2: Set left and right children.
+
+```
+    for node_data in data["nodes"]:
+        node = nodes[node_data["id"]]
+        if node_data["left"] is not None:
+            node.left = nodes[node_data["left"]]
+        if node_data["right"] is not None:
+            node.right = nodes[node_data["right"]]
+```
+
+* For each node, assign the `left` and `right` child using references to the already created node objects.
+
+##### Step 3: Return the root node.
+
+```
+    return nodes[data["nodes"][0]["id"]]
+```
+
+* Assumes the first node in the list is the root.
+
+---
+
+### 🔶 Function: `find_closest_value_in_bst(tree, target)`
+
+This is the public wrapper that calls the helper function.
+
+```
+def find_closest_value_in_bst(tree, target):
+    return find_closest_value_in_bst_helper(tree, target, tree.value)
+```
+
+* It starts the recursion from the root (`tree`) and sets the initial closest value as the root's value.
+
+---
+
+### 🔶 Function: `find_closest_value_in_bst_helper(tree, target, closest)`
+
+This is a **recursive** helper function.
+
+```
+def find_closest_value_in_bst_helper(tree, target, closest):
+    if tree is None:
+        return closest
+```
+
+* Base case: if we've reached a null node, return the closest value found so far.
+
+```
+    if abs(target - closest) > abs(target - tree.value):
+        closest = tree.value
+```
+
+* If the current node's value is **closer to the target** than the previously stored closest value, update it.
+
+```
+    if target < tree.value:
+        return find_closest_value_in_bst_helper(tree.left, target, closest)
+    elif target > tree.value:
+        return find_closest_value_in_bst_helper(tree.right, target, closest)
+    else:
+        return closest
+```
+
+* Traverse:
+
+  * Go **left** if the target is smaller (because BST has smaller values on the left).
+  * Go **right** if the target is larger.
+  * If the value matches the target exactly, return it.
+
+---
+
+### 🔶 Input Tree Structure (`tree_dict`)
+
+This dictionary describes a binary search tree:
+
+```
+          10
+         /  \
+        5    15
+       / \     \
+      2   5     22
+     /
+    1
+         \
+         13
+           \
+           14
+```
+
+(Visualizing the `13 -> 14` part as part of the right subtree of `15`.)
+
+---
+
+### 🔶 Running the Code
+
+```
+result = find_closest_value_in_bst(tree, 12)
+print(result)  # Output: 13
+```
+
+* **Target**: `12`
+* The traversal will go:
+
+  * Start at `10` → update closest (difference = 2)
+  * Go right to `15` → difference is 3 (no update)
+  * Go left to `13` → difference is 1 → update closest
+  * Go right to `14` → difference is 2 (no update)
+
+Closest = `13`
+
+---
+
+### ✅ Summary
+
+* **BST nodes** are created using a class.
+* **Tree is built** from a dictionary of nodes with references.
+* The **closest value** is found by recursive traversal, comparing each node’s value to the target and tracking the minimum
+absolute difference.
+* **Efficient**: Average time complexity is `O(log n)` for balanced BSTs, worst-case is `O(n)` for skewed trees.
+
+---
+
+Here’s an **ASCII visualization** of the Binary Search Tree (BST) represented by `tree_dict`:
+
+```
+               10
+             /    \
+           5       15
+         /   \     / \
+        2     5   13  22
+       /           \
+      1             14
+```
+
+### Explanation:
+
+* Root: `10`
+* Left subtree of `10`:
+
+  * Node `5`, with:
+
+    * Left child: `2`
+
+      * Left child: `1`
+    * Right child: another `5` (`id = "5-2"`)
+* Right subtree of `10`:
+
+  * Node `15`, with:
+
+    * Left child: `13`
+
+      * Right child: `14`
+    * Right child: `22`
+
+### Path Traversed to Find Closest to 12:
+
+To find the closest value to `12`:
+
+1. Start at `10` → closest so far = 10
+2. Move right to `15` (target > 10) → closest remains 10 (|15 - 12| = 3, |10 - 12| = 2)
+3. Move left to `13` (target < 15) → update closest to 13 (|13 - 12| = 1)
+4. Move right to `14` → no update (|14 - 12| = 2 > 1)
+
+✅ Final closest = **13**
+
+"""
