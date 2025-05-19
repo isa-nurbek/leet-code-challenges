@@ -366,3 +366,282 @@ the get_min_value operation.
 - All operations degrade to O(n) time (but still O(1) space).
 
 """
+
+# =========================================================================================================================== #
+
+# Detailed Code Explanation:
+
+"""
+This Python code defines a **Binary Search Tree (BST)** with support for three key operations:
+
+* `insert(value)` – inserts a value into the BST
+* `contains(value)` – checks whether a value exists in the BST
+* `remove(value)` – removes a value from the BST if present
+
+Below is a **detailed breakdown** of how each component works:
+
+---
+
+## ✅ Class Structure and Initialization
+
+```
+class BST:
+    def __init__(self, value):
+        self.value = value
+        self.left = None
+        self.right = None
+```
+
+### Purpose:
+
+* Initializes a BST node with a value.
+* `left` and `right` are pointers to the left and right child nodes (both initially `None`).
+
+---
+
+## 🔼 `insert(value)`: Insertion
+
+```
+def insert(self, value):
+    current = self
+    while True:
+        if value < current.value:
+            if current.left is None:
+                current.left = BST(value)
+                break
+            else:
+                current = current.left
+        else:
+            if current.right is None:
+                current.right = BST(value)
+                break
+            else:
+                current = current.right
+    return self
+```
+
+### Logic:
+
+* Starts from the root (`self`) and traverses the tree.
+* If the value is **less**, go left; if **greater or equal**, go right.
+* Once a `None` child is found, insert the new value there as a new `BST` node.
+* Returns `self` to allow chaining like `bst.insert(5).insert(10)`.
+
+---
+
+## 🔍 `contains(value)`: Search
+
+```
+def contains(self, value):
+    current = self
+    while current is not None:
+        if value < current.value:
+            current = current.left
+        elif value > current.value:
+            current = current.right
+        else:
+            return True
+    return False
+```
+
+### Logic:
+
+* Searches for a value starting from the root.
+* Moves left or right depending on how the value compares.
+* Returns `True` if found, otherwise `False`.
+
+---
+
+## ❌ `remove(value)`: Deletion
+
+```
+def remove(self, value, parent=None):
+    current = self
+    while current is not None:
+        ...
+```
+
+### Key Cases:
+
+#### 📌 Case 1: Node has **two children**
+
+```
+if current.left is not None and current.right is not None:
+    current.value = current.right.get_min_value()
+    current.right.remove(current.value, current)
+```
+
+* Find the smallest value in the **right subtree** (in-order successor).
+* Replace current node's value with that.
+* Recursively remove the duplicate from the right subtree.
+
+---
+
+#### 📌 Case 2: Node is **root** with **one child**
+
+```
+elif parent is None:
+    if current.left is not None:
+        current.value = current.left.value
+        current.right = current.left.right
+        current.left = current.left.left
+    elif current.right is not None:
+        current.value = current.right.value
+        current.left = current.right.left
+        current.right = current.right.right
+    else:
+        pass  # Only one node in the tree
+```
+
+* If root has one child, copy child’s value and pointers to root (effectively deleting root and replacing it).
+* If root is the **only node**, do nothing (`pass`).
+
+---
+
+#### 📌 Case 3 & 4: Node has **one or no child** and is not the root
+
+```
+elif parent.left == current:
+    parent.left = current.left if current.left is not None else current.right
+elif parent.right == current:
+    parent.right = current.left if current.left is not None else current.right
+```
+
+* Remove the current node by pointing the parent’s reference to the current node’s child (if any).
+
+---
+
+## 🧮 `get_min_value()`: Utility for Deletion
+
+```
+def get_min_value(self):
+    current = self
+    while current.left is not None:
+        current = current.left
+    return current.value
+```
+
+### Purpose:
+
+* Finds and returns the **minimum value** in the subtree (i.e., the leftmost node).
+
+---
+
+## 🌲 Visualization Support
+
+```
+def __str__(self):
+    return self._visualize()
+
+def _visualize(self, level=0):
+    ret = "\t" * level + repr(self.value) + "\n"
+    for child in [self.left, self.right]:
+        if child:
+            ret += child._visualize(level + 1)
+    return ret
+```
+
+### Purpose:
+
+* Nicely formats the tree using tab-indentation to show hierarchy.
+* Used when printing the tree via `print(bst)`.
+
+---
+
+## 🧪 `main()`: Driver Code
+
+```
+def main():
+    bst = BST(10)
+    ...
+```
+
+### Steps:
+
+1. Creates a BST with root `10`.
+2. Applies a series of operations: insertions, deletion of `10`, and a search for `15`.
+3. After each insert or remove, it prints the tree.
+4. For `contains`, it just prints whether the value is found.
+
+### Operations:
+
+```
+[
+    ("insert", 5), ("insert", 15), ("insert", 2), ("insert", 5),
+    ("insert", 13), ("insert", 22), ("insert", 1), ("insert", 14),
+    ("insert", 12), ("remove", 10), ("contains", 15)
+]
+```
+
+---
+
+## 🔚 Summary
+
+| Operation  | Time Complexity (Average) | Time Complexity (Worst Case) |
+| ---------- | ------------------------- | ---------------------------- |
+| `insert`   | O(log n)                  | O(n)                         |
+| `contains` | O(log n)                  | O(n)                         |
+| `remove`   | O(log n)                  | O(n)                         |
+
+> **Note**: Worst case happens when the tree becomes unbalanced (like a linked list).
+
+---
+
+Here’s how you can **visualize the Binary Search Tree (BST) in ASCII** after performing the operations from our code:
+
+### 🧪 BST Operations in Order:
+
+```
+bst = BST(10)
+bst.insert(5)
+bst.insert(15)
+bst.insert(2)
+bst.insert(5)
+bst.insert(13)
+bst.insert(22)
+bst.insert(1)
+bst.insert(14)
+bst.insert(12)
+bst.remove(10)
+```
+
+### 🌲 Final BST Structure (after removing `10`)
+
+We start with root `10`, but `10` is removed. It gets replaced by the in-order successor (`12`), and the duplicate `12` gets
+removed from the right subtree.
+
+Here’s the resulting tree:
+
+```
+         12
+        /  \
+       5    15
+      / \   / \
+     2   5 13 22
+    /       \
+   1         14
+```
+
+---
+
+### 📄 ASCII Tree Representation
+
+```
+12
+├── 5
+│   ├── 2
+│   │   └── 1
+│   └── 5
+└── 15
+    ├── 13
+    │   └── 14
+    └── 22
+```
+
+This format uses:
+
+* `├──` to show a child branch,
+* `│   ` for vertical continuation,
+* `└──` for the last child.
+
+"""
