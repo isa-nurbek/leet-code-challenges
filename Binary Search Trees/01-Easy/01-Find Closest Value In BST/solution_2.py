@@ -83,21 +83,47 @@ def build_tree(data):
 # Average: O(log(n)) time | O(1) space
 # Worst: O(n) time | O(1) space
 def find_closest_value_in_bst(tree, target):
+    """Find the value in a binary search tree (BST) that is closest to the target.
+
+    Args:
+        tree: The root node of the BST
+        target: The target value we're trying to find a closest match for
+
+    Returns:
+        The value in the BST that is closest to the target
+    """
+    # Start the helper function with the tree's root value as initial closest
     return find_closest_value_in_bst_helper(tree, target, tree.value)
 
 
 def find_closest_value_in_bst_helper(tree, target, closest):
+    """Helper function to find the closest value in BST through iterative traversal.
+
+    Args:
+        tree: Current node being examined
+        target: The target value we're comparing against
+        closest: The closest value found so far
+
+    Returns:
+        The closest value to target found in the BST
+    """
     current_node = tree
 
+    # Traverse the tree while current_node is not None
     while current_node is not None:
+        # Update closest if current node's value is closer to target
         if abs(target - closest) > abs(target - current_node.value):
             closest = current_node.value
 
+        # Decide which direction to traverse based on target value
         if target < current_node.value:
+            # If target is smaller, go left (BST property: left subtree has smaller values)
             current_node = current_node.left
         elif target > current_node.value:
+            # If target is larger, go right (BST property: right subtree has larger values)
             current_node = current_node.right
         else:
+            # If we find an exact match, we can break early
             break
 
     return closest
