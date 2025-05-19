@@ -302,3 +302,67 @@ Current BST:
 Operation 11: contains(15)
 Contains 15? True
 """
+
+# =========================================================================================================================== #
+
+# Big O Analysis:
+
+"""
+Let's analyze the time and space complexity for each operation in the BST class:
+
+### 1. Insert (insert method)
+
+**Time Complexity:**
+- Average case: O(log n) - In a balanced BST, we traverse the height of the tree which is log n.
+- Worst case: O(n) - For a completely unbalanced tree (essentially a linked list), we might traverse all n nodes.
+
+**Space Complexity:**
+- O(1) - We're using iterative approach with constant space (just a few pointers).
+
+### 2. Contains (contains method)
+
+**Time Complexity:**
+- Average case: O(log n) - Height traversal in balanced BST.
+- Worst case: O(n) - For completely unbalanced tree.
+
+**Space Complexity:**
+- O(1) - Iterative approach with constant space.
+
+### 3. Remove (remove method)
+
+**Time Complexity:**
+- Average case: O(log n) - Finding the node takes O(log n), and finding the min in right subtree (if needed) also takes O(log n).
+- Worst case: O(n) - For completely unbalanced tree, both finding the node and finding min could take O(n).
+
+**Space Complexity:**
+- O(1) - Iterative approach with constant space.
+
+### 4. get_min_value (helper method)
+
+**Time Complexity:**
+- Average case: O(log n) - Traverse left children to find minimum.
+- Worst case: O(n) - If tree is left-heavy (unbalanced to the left).
+
+**Space Complexity:**
+- O(1) - Iterative approach with constant space.
+
+### Important Notes:
+
+1. These complexities assume the BST is reasonably balanced. In the worst case (completely unbalanced tree),
+all operations degrade to O(n).
+
+2. The space complexity is O(1) for all operations because we're using iterative implementations. Recursive implementations
+would have O(log n) space complexity in average case (due to call stack) and O(n) in worst case.
+
+3. The remove operation is the most complex, but its time complexity is dominated by the search operation and (in some cases)
+the get_min_value operation.
+
+### When BST is balanced:
+
+- All operations (insert, contains, remove) are O(log n) time and O(1) space.
+
+### When BST is completely unbalanced:
+
+- All operations degrade to O(n) time (but still O(1) space).
+
+"""
