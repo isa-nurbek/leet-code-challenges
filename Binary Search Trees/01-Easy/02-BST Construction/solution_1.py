@@ -308,3 +308,63 @@ Current BST:
 Operation 11: contains(15)
 Contains 15? True
 """
+
+# =========================================================================================================================== #
+
+# Big O Analysis:
+
+"""
+## Time and Space Complexity Analysis:
+
+Here's the time and space complexity analysis for each method in the BST class:
+
+### 1. `__init__` (Constructor)
+- **Time Complexity**: O(1) - Only initializes a node.
+- **Space Complexity**: O(1) - Only allocates memory for a single node.
+
+### 2. `insert(value)`
+- **Time Complexity**:  
+  - **Average Case**: O(log n) - In a balanced BST, the height is log n, so we traverse log n nodes.  
+  - **Worst Case**: O(n) - If the tree is skewed (like a linked list), we traverse all n nodes.  
+  
+- **Space Complexity**:  
+  - **Average Case**: O(log n) (recursive stack space).  
+  - **Worst Case**: O(n) (if the tree is skewed).  
+  - **Iterative Implementation**: O(1) (no extra space).  
+
+### 3. `contains(value)`
+- **Time Complexity**:  
+  - **Average Case**: O(log n) - Balanced tree height is log n.  
+  - **Worst Case**: O(n) - Skewed tree.  
+  
+- **Space Complexity**:  
+  - **Average Case**: O(log n) (recursive stack).  
+  - **Worst Case**: O(n).  
+  - **Iterative Implementation**: O(1).  
+
+### 4. `remove(value, parent)`
+- **Time Complexity**:  
+  - **Average Case**: O(log n) - Finding the node takes O(log n), and replacing it (if needed) also takes O(log n).  
+  - **Worst Case**: O(n) - Skewed tree.  
+  
+- **Space Complexity**:  
+  - **Average Case**: O(log n) (recursive stack).  
+  - **Worst Case**: O(n).  
+  - **Iterative Implementation**: O(1).  
+
+### 5. `get_min_value()`
+- **Time Complexity**:  
+  - **Average Case**: O(log n) - Traverse left until the smallest node.  
+  - **Worst Case**: O(n) - If the tree is left-skewed.  
+  
+- **Space Complexity**:  
+  - **Average Case**: O(log n) (recursive stack).  
+  - **Worst Case**: O(n).  
+  - **Iterative Implementation**: O(1).  
+
+### General Notes:
+- **Balanced BST**: All operations (insert, delete, search) are O(log n) on average.  
+- **Unbalanced BST (worst case)**: Operations degrade to O(n).  
+- **Space Complexity**: Recursive implementations use stack space proportional to tree height. Iterative versions reduce this to O(1).  
+
+"""
