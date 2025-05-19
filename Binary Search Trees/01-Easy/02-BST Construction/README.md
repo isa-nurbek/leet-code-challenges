@@ -10,7 +10,7 @@ Write a `BST` class for a Binary Search Tree. The class should support:
 
 Each `BST` node has an integer `value`, a `left` child node, and a `right` child node. A node is said to be a valid `BST` node if and only if it satisfies the `BST` property: its `value` is strictly greater than the values of every node to its left; its `value` is less than or equal to the values of every node to its right; and its children nodes are either valid `BST` nodes themselves or `None`.
 
-## Sample Input
+## Sample Usage
 
 ```plaintext
 // Assume the following BST has already been created:
@@ -42,12 +42,6 @@ remove(10):   12
      1            14
 
 contains(15): true
-```
-
-## Sample Output
-
-```plaintext
-13
 ```
 
 ## Hints
