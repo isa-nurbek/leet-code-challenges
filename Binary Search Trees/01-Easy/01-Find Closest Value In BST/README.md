@@ -45,7 +45,7 @@ Make use of the `BST` property to determine what side of any given node has valu
 <details>
 <summary><b>Hint 3</b></summary>
 
-What are the advantages and disadvantages of solving this problem iteratively as opposed to recursively?
+What are the advantages and disadvantages of solving this problem `iteratively` as opposed to `recursively`?
 
 </details>
 
