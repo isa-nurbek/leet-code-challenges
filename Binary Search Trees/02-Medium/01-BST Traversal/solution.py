@@ -80,49 +80,73 @@ def build_tree(data):
     return nodes[data["root"]]
 
 
+# Binary Tree Traversal Functions
+
+
 # O(n) time | O(n) space
+# In-order traversal: Left -> Root -> Right
 def in_order_traverse(tree, array):
     if tree is not None:
+        # First recursively traverse the left subtree
         in_order_traverse(tree.left, array)
+        # Then visit the current node (append its value)
         array.append(tree.value)
+        # Finally recursively traverse the right subtree
         in_order_traverse(tree.right, array)
 
     return array
 
 
 # O(n) time | O(n) space
+# Pre-order traversal: Root -> Left -> Right
 def pre_order_traverse(tree, array):
     if tree is not None:
+        # First visit the current node (append its value)
         array.append(tree.value)
+        # Then recursively traverse the left subtree
         pre_order_traverse(tree.left, array)
+        # Finally recursively traverse the right subtree
         pre_order_traverse(tree.right, array)
 
     return array
 
 
 # O(n) time | O(n) space
+# Post-order traversal: Left -> Right -> Root
 def post_order_traverse(tree, array):
     if tree is not None:
+        # First recursively traverse the left subtree
         post_order_traverse(tree.left, array)
+        # Then recursively traverse the right subtree
         post_order_traverse(tree.right, array)
+        # Finally visit the current node (append its value)
         array.append(tree.value)
 
     return array
 
 
-# Example tree data structure
+# Binary Tree Structure Definition
 tree_dict = {
     "nodes": [
-        {"id": "10", "left": "5", "right": "15", "value": 10},
-        {"id": "15", "left": None, "right": "22", "value": 15},
-        {"id": "22", "left": None, "right": None, "value": 22},
-        {"id": "5", "left": "2", "right": "5-2", "value": 5},
-        {"id": "5-2", "left": None, "right": None, "value": 5},
-        {"id": "2", "left": "1", "right": None, "value": 2},
-        {"id": "1", "left": None, "right": None, "value": 1},
+        {"id": "10", "left": "5", "right": "15", "value": 10},  # Root node
+        {"id": "15", "left": None, "right": "22", "value": 15},  # Right child of 10
+        {"id": "22", "left": None, "right": None, "value": 22},  # Right child of 15
+        {"id": "5", "left": "2", "right": "5-2", "value": 5},  # Left child of 10
+        {"id": "5-2", "left": None, "right": None, "value": 5},  # Right child of 5
+        {"id": "2", "left": "1", "right": None, "value": 2},  # Left child of 5
+        {"id": "1", "left": None, "right": None, "value": 1},  # Left child of 2
     ],
-    "root": "10",
+    "root": "10",  # Specifies which node is the root
 }
+
+# The tree structure represented by this dictionary:
+#        10
+#       /  \
+#      5    15
+#     / \     \
+#    2   5     22
+#   /
+#  1
 
 # Test Case:
 
