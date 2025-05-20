@@ -37,7 +37,7 @@ k = 3
 
 ## Optimal Time & Space Complexity:
 ```
-O(h + k) time | O(h) space - where `h` is the height of the tree and `k` is the input parameter.
+O(n) time | O(1) space - where `h` is the height of the tree and `k` is the input parameter.
 ```
 
 """
@@ -91,29 +91,34 @@ def find_kth_largest_value_in_bst(tree, k):
 
     while current is not None:
         if current.right is None:
+            # If no right child, process current node
             count += 1
             if count == k:
                 return current.value
+            # Move to the left child
             current = current.left
         else:
+            # Find the predecessor (in-order predecessor) in right subtree
             predecessor = current.right
             while predecessor.left is not None and predecessor.left != current:
                 predecessor = predecessor.left
 
             if predecessor.left is None:
-
+                # First time visiting - set thread/link to current node
                 predecessor.left = current
+                # Move to right child first
                 current = current.right
             else:
-
+                # We've already visited this predecessor - remove thread
                 predecessor.left = None
-
+                # Process current node (in-order visit)
                 count += 1
                 if count == k:
                     return current.value
+                # Move to left child
                 current = current.left
 
-    return None
+    return None  # In case k is larger than number of nodes
 
 
 # Example tree data structure
