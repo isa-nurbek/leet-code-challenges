@@ -10,8 +10,6 @@ Each `BST` node has an integer `value`, a `left` child node, and a `right` child
 
 A `BST` is valid if and only if all of its nodes are valid `BST` nodes.
 
-> Note that the `BST` class already has an `insert` method which you can use if you want.
-
 ## Sample Input
 
 ```plaintext
