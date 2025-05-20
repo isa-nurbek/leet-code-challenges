@@ -37,7 +37,7 @@ k = 3
 
 ## Optimal Time & Space Complexity:
 ```
-O(n) time | O(1) space - where `h` is the height of the tree and `k` is the input parameter.
+O(h + k) time | O(h) space - where `h` is the height of the tree and `k` is the input parameter.
 ```
 
 """
@@ -156,3 +156,35 @@ tree = build_tree(tree_dict)
 result = find_kth_largest_value_in_bst(tree, 3)
 
 print(result)  # Output: 17
+
+# =========================================================================================================================== #
+
+# Big O Analysis:
+
+"""
+# Time and Space Complexity Analysis:
+
+This code implements an algorithm to find the k-th largest value in a Binary Search Tree (BST) using **Morris Traversal**,
+which allows in-order traversal without recursion or a stack by temporarily modifying the tree structure.
+
+### **Time Complexity Analysis**
+
+- **Morris Traversal** visits each node **at most twice** (once to establish the temporary links and once to traverse after
+the links are removed).
+- **Total Operations**: For a BST with `n` nodes, each node is visited a constant number of times, leading to **O(n)** time complexity.
+
+### **Space Complexity Analysis**
+
+- Morris Traversal uses **O(1) extra space** (no recursion or stack is used; only a few pointers are maintained).
+- Thus, the space complexity is **O(1)**.
+
+### **Summary**
+- **Time Complexity**: **O(n)** (worst case, where we traverse all nodes).
+- **Space Complexity**: **O(1)** (constant extra space).
+
+### **Optimization Consideration**
+
+If the BST is balanced, a more efficient approach (O(h + k), where `h` is the tree height) could be achieved using reverse
+in-order traversal with a stack, but Morris Traversal ensures O(1) space at the cost of slightly higher constant factors in time.
+
+"""
