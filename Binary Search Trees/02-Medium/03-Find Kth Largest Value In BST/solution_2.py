@@ -86,26 +86,37 @@ def build_tree(data):
 # O(n) time | O(n) space
 # Iterative Stack-Based
 def find_kth_largest_value_in_bst(tree, k):
+    # Initialize an empty stack to keep track of nodes to visit
     stack = []
+    # Start with the root node of the BST
     current = tree
+    # Counter to keep track of how many largest elements we've processed
     count = 0
 
+    # Infinite loop that we'll break out of when done
     while True:
+        # Traverse as far right as possible (to find largest values first)
         while current is not None:
             stack.append(current)
             current = current.right
 
+        # If stack is empty, we've processed all nodes
         if not stack:
             break
 
+        # Pop the most recent node (which is the next largest)
         current = stack.pop()
-        count += 1
+        count += 1  # Increment our count of processed nodes
 
+        # If we've reached the k-th largest, return its value
         if count == k:
             return current.value
 
+        # Move to the left subtree (which contains values smaller than current node,
+        # but potentially larger than other nodes we've processed)
         current = current.left
 
+    # If we exit the loop without finding k elements, return None
     return None
 
 
