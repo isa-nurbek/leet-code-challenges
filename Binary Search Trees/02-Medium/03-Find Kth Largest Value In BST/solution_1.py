@@ -85,18 +85,51 @@ def build_tree(data):
 
 # O(n) time | O(n) space
 def find_kth_largest_value_in_bst(tree, k):
+    """
+    Finds the kth largest value in a Binary Search Tree (BST).
+
+    Args:
+        tree: The root node of the BST
+        k: The position of the desired value when sorted in ascending order
+           (1 would be the largest, 2 second largest, etc.)
+
+    Returns:
+        The kth largest value in the BST
+    """
+
+    # Initialize an empty list to store node values in sorted order
     sorted_node_values = []
+
+    # Perform in-order traversal to get all values in sorted (ascending) order
     in_order_traverse(tree, sorted_node_values)
 
+    # The kth largest value is at position len(sorted_node_values) - k in the sorted list
+    # (since Python lists are 0-indexed)
     return sorted_node_values[len(sorted_node_values) - k]
 
 
 def in_order_traverse(node, sorted_node_values):
+    """
+    Performs an in-order traversal of the BST and stores values in sorted order.
+
+    In-order traversal of a BST yields values in ascending order.
+
+    Args:
+        node: Current node being processed
+        sorted_node_values: List to accumulate node values in sorted order
+    """
+
+    # Base case: if node is None, return without doing anything
     if node is None:
         return
 
+    # 1. Recursively traverse the left subtree (smaller values)
     in_order_traverse(node.left, sorted_node_values)
+
+    # 2. Visit the current node (add its value to the list)
     sorted_node_values.append(node.value)
+
+    # 3. Recursively traverse the right subtree (larger values)
     in_order_traverse(node.right, sorted_node_values)
 
 
