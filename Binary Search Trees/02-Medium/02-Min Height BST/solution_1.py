@@ -16,9 +16,6 @@ is less than or equal to the values of every node to its right; and its children
 
 A `BST` is valid if and only if all of its nodes are valid `BST` nodes.
 
-> Note that the `BST` class already has an `insert` method which you can use if you want.
-
-
 ## Sample Input:
 ```
 array = [1, 2, 5, 7, 10, 13, 14, 15, 22]
