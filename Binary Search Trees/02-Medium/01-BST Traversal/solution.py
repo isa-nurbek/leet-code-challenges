@@ -166,3 +166,83 @@ print("Pre-order traversal:", pre_order)
 
 print("Post-order traversal:", post_order)
 # Post-order traversal: [1, 2, 5, 5, 22, 15, 10]
+
+# =========================================================================================================================== #
+
+# Big O Analysis:
+
+"""
+# Time and Space Complexity Analysis of Tree Traversal Algorithms
+
+## In-Order Traversal
+```
+def in_order_traverse(tree, array):
+    if tree is not None:
+        in_order_traverse(tree.left, array)
+        array.append(tree.value)
+        in_order_traverse(tree.right, array)
+    return array
+```
+
+### Time Complexity: O(n)
+- We visit each node exactly once
+- For each node, we perform constant time operations (appending to array)
+- Total time is proportional to the number of nodes in the tree
+
+### Space Complexity: O(h) (where h is the height of the tree)
+- This is due to the call stack during recursion
+- In the worst case (skewed tree), h = n → O(n)
+- In the best case (balanced tree), h = log n → O(log n)
+
+---
+
+## Pre-Order Traversal
+```
+def pre_order_traverse(tree, array):
+    if tree is not None:
+        array.append(tree.value)
+        pre_order_traverse(tree.left, array)
+        pre_order_traverse(tree.right, array)
+    return array
+```
+
+### Time Complexity: O(n)
+- Same as in-order, we visit each node exactly once
+- Constant time operations per node
+
+### Space Complexity: O(h)
+- Same recursion stack space considerations as in-order
+- Worst case: O(n) for skewed tree
+- Best case: O(log n) for balanced tree
+
+---
+
+## Post-Order Traversal
+```
+def post_order_traverse(tree, array):
+    if tree is not None:
+        post_order_traverse(tree.left, array)
+        post_order_traverse(tree.right, array)
+        array.append(tree.value)
+    return array
+```
+
+### Time Complexity: O(n)
+- Again, each node is visited exactly once
+- Constant time operations per node
+
+### Space Complexity: O(h)
+- Same recursion stack behavior as the other traversals
+- Worst case: O(n)
+- Best case: O(log n)
+
+---
+
+## Additional Notes:
+
+1. All three traversal methods have the same time and space complexity characteristics
+2. The space complexity for the output array is O(n) for all cases, but this is typically considered separate from the
+algorithm's space complexity
+3. For iterative implementations (using stacks), the space complexity remains the same (O(h)) but avoids recursion stack limits
+
+"""
