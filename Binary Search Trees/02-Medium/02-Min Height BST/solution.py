@@ -16,6 +16,9 @@ is less than or equal to the values of every node to its right; and its children
 
 A `BST` is valid if and only if all of its nodes are valid `BST` nodes.
 
+> Note that the `BST` class already has an `insert` method which you can use if you want.
+
+
 ## Sample Input:
 ```
 array = [1, 2, 5, 7, 10, 13, 14, 15, 22]
@@ -58,30 +61,45 @@ O(n) time | O(n) space - where `n` is the length of the array.
 # Binary Search Tree (BST) node class
 class BST:
     def __init__(self, value):
+        # Initialize a BST node with a given value
+        # Left and right children are initialized to None
         self.value = value
         self.left = None
         self.right = None
 
 
+# O(n) time | O(n) space
 def min_height_bst(array):
+    # Main function to construct a minimum-height BST from a sorted array
+    # It calls the helper function with the full array range (start to end indices)
     return construct_min_height_bst(array, 0, len(array) - 1)
 
 
 def construct_min_height_bst(array, start_idx, end_idx):
+    # Helper function to recursively construct the BST
+    # Base case: when start index exceeds end index, return None (no node)
     if end_idx < start_idx:
         return None
 
+    # Find the middle index to make it the root of current subtree
+    # This ensures the tree will be balanced (minimum height)
     middle_idx = (start_idx + end_idx) // 2
+
+    # Create a new BST node with the middle value
     bst = BST(array[middle_idx])
 
+    # Recursively construct the left subtree using the left half of the array
     bst.left = construct_min_height_bst(array, start_idx, middle_idx - 1)
+    # Recursively construct the right subtree using the right half of the array
     bst.right = construct_min_height_bst(array, middle_idx + 1, end_idx)
 
+    # Return the constructed node
     return bst
 
 
 # Helper function to print the tree in-order for testing
 def in_order_traversal(tree):
+    # Perform in-order traversal (left, root, right) to print values in sorted order
     if tree is not None:
         in_order_traversal(tree.left)
         print(tree.value, end=" ")
@@ -89,6 +107,7 @@ def in_order_traversal(tree):
 
 
 # Test Cases:
+
 tree1 = min_height_bst([1, 2, 5, 7, 10, 13, 14, 15, 22])
 in_order_traversal(tree1)
 print()
