@@ -168,3 +168,54 @@ tree = build_tree(tree_dict)
 result = find_kth_largest_value_in_bst(tree, 3)
 
 print(result)  # Output: 17
+
+# =========================================================================================================================== #
+
+# Big O Analysis:
+
+"""
+# Time and Space Complexity Analysis:
+
+Let's analyze the time and space complexity of the given code for finding the k-th largest value in a BST.
+
+### **Time Complexity:**
+
+1. **In-order Traversal (`in_order_traverse`):**
+   - The in-order traversal visits every node exactly once, performing an `O(1)` operation (appending the value to the list)
+   for each node.
+   - **Time: `O(N)`**, where `N` is the number of nodes in the BST.
+
+2. **Accessing the k-th largest value:**
+   - After traversal, accessing `sorted_node_values[len(sorted_node_values) - k]` is an `O(1)` operation since list indexing
+   in Python is constant time.
+
+**Total Time Complexity: `O(N)`**  
+*(Dominant term is the traversal.)*
+
+---
+
+### **Space Complexity:**
+
+1. **Recursion Stack:**
+   - In the worst case (a completely skewed BST), the recursion depth is `O(N)`.
+   - In a balanced BST, the recursion depth is `O(log N)`.
+
+2. **Storage for `sorted_node_values`:**
+   - The list stores all `N` node values, so it takes `O(N)` space.
+
+**Total Space Complexity: `O(N)`**  
+*(The `sorted_node_values` list dominates the space usage.)*
+
+### Summary:
+- **Time Complexity**: **O(n)** 
+- **Space Complexity**: **O(n)** 
+
+---
+
+### **Optimization Insight:**
+
+The current approach is not optimal for very large BSTs because it stores all node values. A better approach would be to perform
+a **reverse in-order traversal (right-root-left)** and stop early once the k-th largest element is found. This reduces the space
+complexity to `O(k)` (or `O(1)` if done iteratively with early termination) and avoids unnecessary traversals.
+
+"""
