@@ -83,7 +83,7 @@ def build_tree(data):
     return nodes[data["nodes"][0]["id"]]
 
 
-# O(n) time | O(n) space
+# O(n + k) time | O(n) space
 # Iterative Stack-Based
 def find_kth_largest_value_in_bst(tree, k):
     # Initialize an empty stack to keep track of nodes to visit
@@ -155,3 +155,48 @@ tree = build_tree(tree_dict)
 result = find_kth_largest_value_in_bst(tree, 3)
 
 print(result)  # Output: 17
+
+# =========================================================================================================================== #
+
+# Big O Analysis:
+
+"""
+# Time and Space Complexity Analysis:
+
+Let's analyze the time and space complexity of the given `find_kth_largest_value_in_bst` function.
+
+### **Time Complexity: O(h + k)**
+
+- **h**: Height of the BST.
+- **k**: The k-th largest element to find.
+
+#### **Explanation:**
+1. The algorithm performs an **in-order traversal in reverse** (right-root-left) to visit nodes in descending order.
+2. In the worst case, we may traverse **all the way down to the rightmost leaf** (O(h)) before starting to pop nodes from the stack.
+3. Then, we pop **k** nodes to reach the k-th largest element.
+4. Hence, the total time is **O(h + k)**.
+
+### **Space Complexity: O(h)**
+
+- **h**: Height of the BST (due to the stack).
+
+#### **Explanation:**
+
+1. The stack stores nodes along the **rightmost path** of the BST.
+2. In the worst case (a skewed BST), the stack can hold **all nodes** (O(n)), but in a balanced BST, it's **O(log n)**.
+3. Hence, the space complexity is **O(h)**.
+
+### **Summary:**
+- **Time Complexity:** **O(h + k)**  
+
+  - Worst case (skewed tree): **O(n + k)**  
+  - Best case (balanced tree): **O(log n + k)**  
+  
+- **Space Complexity:** **O(h)**  
+
+  - Worst case (skewed tree): **O(n)**  
+  - Best case (balanced tree): **O(log n)**  
+
+This approach efficiently finds the k-th largest element by leveraging **reverse in-order traversal** with a stack.
+
+"""
