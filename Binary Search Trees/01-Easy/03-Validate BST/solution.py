@@ -131,7 +131,6 @@ def validate_bst_helper(tree, min_value, max_value):
 
 
 # Example tree data structure
-
 tree_dict = {
     "nodes": [
         {"id": "10", "left": "5", "right": "15", "value": 10},  # Root node 10
