@@ -133,7 +133,7 @@ def find_closest_value_in_bst_helper(tree, target, closest):
 
 tree_dict = {
     "nodes": [
-        {"id": "10", "left": "5", "right": "15", "value": 10},  # Root node
+        {"id": "10", "left": "5", "right": "15", "value": 10},  # Root node 10
         {"id": "15", "left": "13", "right": "22", "value": 15},  # Right child of root
         {"id": "22", "left": None, "right": None, "value": 22},  # Right child of 15
         {"id": "13", "left": None, "right": "14", "value": 13},  # Left child of 15
@@ -143,6 +143,7 @@ tree_dict = {
         {"id": "2", "left": "1", "right": None, "value": 2},  # Left child of 5
         {"id": "1", "left": None, "right": None, "value": 1},  # Left child of 2
     ],
+    "root": "10",
 }
 
 # Test Case:
