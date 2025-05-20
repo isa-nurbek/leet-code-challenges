@@ -246,3 +246,250 @@ algorithm's space complexity
 3. For iterative implementations (using stacks), the space complexity remains the same (O(h)) but avoids recursion stack limits
 
 """
+
+# =========================================================================================================================== #
+
+# Detailed Code Explanation:
+
+"""
+This code builds a **Binary Search Tree (BST)** from a dictionary and performs **three types of depth-first traversals**:
+in-order, pre-order, and post-order.
+
+Let's break it down section by section:
+
+---
+
+### ✅ 1. **`BST` Class**
+
+```
+class BST:
+    def __init__(self, value):
+        self.value = value
+        self.left = None
+        self.right = None
+```
+
+This defines a node of a Binary Search Tree:
+
+* `value`: Holds the actual value (like 10, 5, etc.).
+* `left`: Reference to the left child (subtree with smaller values).
+* `right`: Reference to the right child (subtree with larger values).
+
+---
+
+### ✅ 2. **`build_tree(data)` Function**
+
+```
+def build_tree(data):
+    ...
+```
+
+This function **builds the tree structure** from a dictionary format. The input `data` has two parts:
+
+* `nodes`: A list of node dictionaries, each with `id`, `value`, `left`, and `right`.
+* `root`: The ID of the root node.
+
+#### 🔹 Step 1: Create Nodes
+
+```
+for node_data in data["nodes"]:
+    node = BST(node_data["value"])
+    nodes[node_data["id"]] = node
+```
+
+* Creates a `BST` object for each node.
+* Stores it in a dictionary called `nodes`, where the key is the node's ID (a string like `"10"`, `"5"`).
+
+#### 🔹 Step 2: Connect Children
+
+```
+for node_data in data["nodes"]:
+    node = nodes[node_data["id"]]
+    if node_data["left"] is not None:
+        node.left = nodes[node_data["left"]]
+    if node_data["right"] is not None:
+        node.right = nodes[node_data["right"]]
+```
+
+* Loops again through all nodes and links the left and right child references using IDs.
+
+#### 🔹 Step 3: Return Root Node
+
+```
+return nodes[data["root"]]
+```
+
+* Returns the root node, which is the entry point to the whole tree.
+
+---
+
+### ✅ 3. **Tree Traversal Functions**
+
+All three traversals are implemented using **recursion**. Each function takes:
+
+* `tree`: the current node.
+* `array`: a list where values are collected.
+
+---
+
+#### 🔹 `in_order_traverse(tree, array)`
+
+**Left → Node → Right**
+
+```
+if tree is not None:
+    in_order_traverse(tree.left, array)
+    array.append(tree.value)
+    in_order_traverse(tree.right, array)
+```
+
+* Visits left subtree first, then current node, then right subtree.
+* For BSTs, this results in **sorted order**.
+
+Example result:
+`[1, 2, 5, 5, 10, 15, 22]`
+
+---
+
+#### 🔹 `pre_order_traverse(tree, array)`
+
+**Node → Left → Right**
+
+```
+if tree is not None:
+    array.append(tree.value)
+    pre_order_traverse(tree.left, array)
+    pre_order_traverse(tree.right, array)
+```
+
+* Visits current node first, then left subtree, then right.
+
+Example result:
+`[10, 5, 2, 1, 5, 15, 22]`
+
+---
+
+#### 🔹 `post_order_traverse(tree, array)`
+
+**Left → Right → Node**
+
+```
+if tree is not None:
+    post_order_traverse(tree.left, array)
+    post_order_traverse(tree.right, array)
+    array.append(tree.value)
+```
+
+* Visits left and right subtrees first, then the node itself.
+
+Example result:
+`[1, 2, 5, 5, 22, 15, 10]`
+
+---
+
+### ✅ 4. **Tree Data Input**
+
+```
+tree_dict = {
+    "nodes": [
+        {"id": "10", "left": "5", "right": "15", "value": 10},
+        {"id": "15", "left": None, "right": "22", "value": 15},
+        {"id": "22", "left": None, "right": None, "value": 22},
+        {"id": "5", "left": "2", "right": "5-2", "value": 5},
+        {"id": "5-2", "left": None, "right": None, "value": 5},
+        {"id": "2", "left": "1", "right": None, "value": 2},
+        {"id": "1", "left": None, "right": None, "value": 1},
+    ],
+    "root": "10",
+}
+```
+
+This is a serialized form of the BST:
+
+```
+         10
+       /    \
+      5      15
+     / \       \
+    2   5       22
+   /
+  1
+```
+
+* `"5-2"` represents the second node with value `5`.
+
+---
+
+### ✅ 5. **Final Output**
+
+```
+print("In-order traversal:", in_order)
+print("Pre-order traversal:", pre_order)
+print("Post-order traversal:", post_order)
+```
+
+Expected Output:
+
+```
+In-order traversal:   [1, 2, 5, 5, 10, 15, 22]
+Pre-order traversal:  [10, 5, 2, 1, 5, 15, 22]
+Post-order traversal: [1, 2, 5, 5, 22, 15, 10]
+```
+
+---
+
+### 🧠 Summary
+
+* The code:
+
+  * Deserializes a tree structure.
+  * Constructs an actual tree of `BST` objects.
+  * Performs in-order, pre-order, and post-order traversals.
+* Useful for:
+
+  * Visualizing how traversal orders work.
+  * Understanding tree deserialization.
+  * Learning recursive tree traversal techniques.
+
+---
+
+Here's an **ASCII visualization** of the Binary Search Tree (BST) built from your `tree_dict`:
+
+```
+         10
+       /    \
+      5      15
+     / \       \
+    2   5       22
+   /
+  1
+```
+
+### 🔍 Explanation:
+
+* The root is `10`.
+* `10` has a left child `5` and right child `15`.
+* The left `5` has:
+
+  * Left child `2`
+  * Right child `5` (with id `"5-2"`, same value as left node but a different object).
+* `2` has a left child `1`.
+* `15` has a right child `22`.
+
+### 🌳 Tree with IDs (for clarity):
+
+```
+         [10]
+        /    \
+     [5]     [15]
+     / \        \
+  [2] [5-2]     [22]
+   /
+ [1]
+```
+
+Each `[ ]` contains the node’s **ID** from the dictionary.
+
+This helps distinguish between two nodes with the same value (`5` and `5-2`).
+
+"""
