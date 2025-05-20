@@ -146,6 +146,15 @@ tree_dict = {
     "root": "10",
 }
 
+# The tree structure represented by this dictionary:
+#            10
+#          /    \
+#        5       15
+#      /   \     / \
+#     2     5   13  22
+#    /           \
+#   1             14
+
 # Test Case:
 
 # Build the tree
