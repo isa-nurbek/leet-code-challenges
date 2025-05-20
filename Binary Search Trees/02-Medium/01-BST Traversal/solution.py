@@ -124,6 +124,8 @@ tree_dict = {
     "root": "10",
 }
 
+# Test Case:
+
 # Build the tree
 tree = build_tree(tree_dict)
 
@@ -131,8 +133,6 @@ tree = build_tree(tree_dict)
 in_order = in_order_traverse(tree, [])
 pre_order = pre_order_traverse(tree, [])
 post_order = post_order_traverse(tree, [])
-
-# Test Case:
 
 print("In-order traversal:", in_order)
 # In-order traversal: [1, 2, 5, 5, 10, 15, 22]
