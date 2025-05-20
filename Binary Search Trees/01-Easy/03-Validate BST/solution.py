@@ -189,3 +189,233 @@ so the space complexity is **O(N)**.
 This is an optimal solution for validating a BST.
 
 """
+
+# =========================================================================================================================== #
+
+# Detailed Code Explanation:
+
+"""
+Let’s walk through the code step by step and explain how it works in detail.
+
+## 1. **Class `BST`**
+
+```
+class BST:
+    def __init__(self, value):
+        self.value = value
+        self.left = None
+        self.right = None
+```
+
+This defines a basic **Binary Search Tree (BST)** node.
+
+* Each node stores a **value**
+* It has a reference to a **left** child and a **right** child (both initialized to `None`)
+
+This class is used to create nodes for our binary tree.
+
+---
+
+## 2. **Function `build_tree(data)`**
+
+```
+def build_tree(data):
+    if not data:
+        return None
+```
+
+This function builds the tree from a dictionary that contains node definitions.
+
+### Two-pass approach:
+
+### **Pass 1: Create all nodes**
+
+```
+    nodes = {}
+    for node_data in data["nodes"]:
+        node = BST(node_data["value"])
+        nodes[node_data["id"]] = node
+```
+
+* We loop through every node entry in `data["nodes"]` and create a `BST` instance for each.
+* Each node has a unique `"id"` used as a key to store it in the `nodes` dictionary.
+
+### **Pass 2: Link child nodes**
+
+```
+    for node_data in data["nodes"]:
+        node = nodes[node_data["id"]]
+        if node_data["left"] is not None:
+            node.left = nodes[node_data["left"]]
+        if node_data["right"] is not None:
+            node.right = nodes[node_data["right"]]
+```
+
+* Loop again over the node data.
+* For each node, if it has a left or right child ID, we use that ID to find the corresponding `BST` node from the dictionary
+and set it as a child.
+
+### **Return the root node**
+
+```
+    return nodes[data["nodes"][0]["id"]]
+```
+
+* The root is assumed to be the first node in the `nodes` list.
+
+---
+
+## 3. **Function `validate_bst(tree)`**
+
+```
+def validate_bst(tree):
+    return validate_bst_helper(tree, float("-inf"), float("inf"))
+```
+
+* This is a wrapper function that calls `validate_bst_helper`.
+* It starts with the entire possible range of values (from negative infinity to positive infinity).
+
+---
+
+## 4. **Function `validate_bst_helper(tree, min_value, max_value)`**
+
+```
+def validate_bst_helper(tree, min_value, max_value):
+    if tree is None:
+        return True
+
+    if tree.value < min_value or tree.value >= max_value:
+        return False
+
+    left_is_valid = validate_bst_helper(tree.left, min_value, tree.value)
+    return left_is_valid and validate_bst_helper(tree.right, tree.value, max_value)
+```
+
+### This is a **recursive function** that validates the BST by checking the following:
+
+1. **Base Case**: If the node is `None`, it’s valid (empty trees are valid).
+2. **Value Check**:
+
+   * The node's value must lie between `min_value` (exclusive) and `max_value` (inclusive on the left, exclusive on the right).
+   * This ensures all values in the left subtree are `< current.value`, and all values in the right are `≥ current.value`.
+3. **Recursive Calls**:
+
+   * Left subtree must be valid in range (`min_value`, `tree.value`)
+   * Right subtree must be valid in range (`tree.value`, `max_value`)
+   * Both must be true for the whole tree to be valid
+
+### Time and Space Complexity:
+
+* **Time:** O(n), where n is the number of nodes (we visit each node once)
+* **Space:** O(d), where d is the depth of the tree (space used by recursion stack)
+
+---
+
+## 5. **Example Tree**
+
+The tree is encoded as a dictionary:
+
+```
+tree_dict = {
+    "nodes": [
+        {"id": "10", "left": "5", "right": "15", "value": 10}, 
+        {"id": "15", "left": "13", "right": "22", "value": 15},
+        {"id": "22", "left": None, "right": None, "value": 22},
+        {"id": "13", "left": None, "right": "14", "value": 13},
+        {"id": "14", "left": None, "right": None, "value": 14},
+        {"id": "5", "left": "2", "right": "5-2", "value": 5},
+        {"id": "5-2", "left": None, "right": None, "value": 5},
+        {"id": "2", "left": "1", "right": None, "value": 2},
+        {"id": "1", "left": None, "right": None, "value": 1},
+    ],
+    "root": "10",
+}
+```
+
+### Let's visualize the tree:
+
+```
+        10
+       /  \
+      5    15
+     / \   / \
+    2   5 13 22
+   /
+  1
+       \
+       14
+```
+
+### Why this is still a valid BST:
+
+* Every left child is **strictly less** than its parent.
+* Every right child is **greater than or equal** to the parent.
+* Duplicate value `5` is on the **right** side of the node with value `5`, which is valid under the rule: left < node ≤ right.
+
+---
+
+## 6. **Execution and Output**
+
+```
+tree = build_tree(tree_dict)
+result = validate_bst(tree)
+print(result)  # Output: True
+```
+
+* We build the tree from the dictionary.
+* Then validate if it is a proper BST.
+* It returns `True`, which means the tree satisfies BST properties.
+
+---
+
+### Summary
+
+This code:
+
+* Constructs a binary tree from a structured dictionary.
+* Validates if the tree is a Binary Search Tree using recursive min/max constraints.
+* Returns `True` if valid, `False` otherwise.
+
+---
+
+Here's an **ASCII visualization** of the binary search tree defined by your `tree_dict`:
+
+```
+               10
+             /    \
+           5        15
+         /   \     /   \
+        2     5   13    22
+       /           \
+      1             14
+```
+
+### Node Details:
+
+* Root: `10`
+* Left Subtree:
+
+  * `5` has:
+
+    * Left child `2`, which has:
+
+      * Left child `1`
+    * Right child `5` (duplicate, id `"5-2"`)
+* Right Subtree:
+
+  * `15` has:
+
+    * Left child `13`, which has:
+
+      * Right child `14`
+    * Right child `22`
+
+### Notes:
+
+* This tree **allows duplicates**, as shown by the second node with value `5` (`id: "5-2"`) on the **right** side.
+* BST property is maintained:
+
+  * All values in the left subtree of a node are `< node.value`
+  * All values in the right subtree are `≥ node.value`
+
+"""
