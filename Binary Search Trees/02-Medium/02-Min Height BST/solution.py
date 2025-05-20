@@ -136,3 +136,54 @@ print()
 #     2   10  15  32
 #    /    / \   \   \
 #   1    7  14  22  36
+
+# =========================================================================================================================== #
+
+# Big O Analysis:
+
+"""
+# Time and Space Complexity Analysis:
+
+### Time Complexity Analysis
+
+The time complexity of constructing a minimum height BST from a sorted array using the provided algorithm is **O(n)**,
+where **n** is the number of elements in the array.
+
+#### Explanation:
+
+1. **Divide and Conquer Approach**: The algorithm recursively splits the array into two halves around the middle element.
+This middle element becomes the root of the current subtree, ensuring the BST is balanced (and thus of minimum height).
+
+2. **Visiting Each Element Once**: Each element in the array is processed exactly once to become a node in the BST.
+The work done per element is constant time (calculating the middle index and creating a node).
+
+3. **Recurrence Relation**: The recurrence relation for the algorithm is:
+   
+   T(n) = 2T(n/2) + O(1)
+   
+   This solves to **O(n)** using the Master Theorem or by recognizing that the algorithm performs a constant amount of work
+   for each of the **n** nodes.
+
+### Space Complexity Analysis
+
+The space complexity is **O(n)** for the output BST (to store all the nodes), and the additional space used by the recursion
+stack is **O(log n)** in the average case for a balanced BST.
+
+#### Explanation:
+
+1. **Output Space**: The BST itself requires **O(n)** space to store all the nodes.
+
+2. **Recursion Stack**: The recursion depth is equal to the height of the BST. Since the BST is balanced, the height is **log n**,
+leading to **O(log n)** space for the recursion stack.
+   - In the worst case (which doesn't happen here because the tree is balanced), the recursion stack could be **O(n)** for a
+   completely unbalanced tree.
+   
+3. **Total Space Complexity**: Dominated by the output BST, so **O(n)**.
+
+### Summary:
+- **Time Complexity**: **O(n)** (each element is processed once).
+- **Space Complexity**: **O(n)** (for the BST) + **O(log n)** (recursion stack) = **O(n)** overall.
+
+This is optimal for constructing a balanced BST from a sorted array.
+
+"""
