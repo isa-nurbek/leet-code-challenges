@@ -155,3 +155,37 @@ tree = build_tree(tree_dict)
 result = validate_bst(tree)
 
 print(result)  # Output: True
+
+# =========================================================================================================================== #
+
+# Big O Analysis:
+
+"""
+## Time and Space Complexity Analysis:
+
+### **Time Complexity Analysis**
+
+The time complexity of the `validate_bst` function is **O(N)**, where **N** is the number of nodes in the binary tree.
+This is because the function visits each node exactly once during the traversal. 
+
+Here's why:
+- For each node, the function performs a constant amount of work (checking the node's value against `min_value` and `max_value`).
+- The recursion explores both the left and right subtrees, but no node is visited more than once.
+
+### **Space Complexity Analysis**
+
+The space complexity of the `validate_bst` function is **O(H)**, where **H** is the height of the binary tree.
+This space is used by the call stack during the recursive traversal.
+
+Here's why:
+- In the **best case** (a perfectly balanced tree), the height is **O(log N)**, so the space complexity is **O(log N)**.
+- In the **worst case** (a completely unbalanced tree, e.g., a linked list), the height is **O(N)**,
+so the space complexity is **O(N)**.
+
+### **Summary**
+- **Time Complexity:** **O(N)** (visits every node once).
+- **Space Complexity:** **O(H)** (due to recursion stack, where **H** is the height of the tree).
+
+This is an optimal solution for validating a BST.
+
+"""
