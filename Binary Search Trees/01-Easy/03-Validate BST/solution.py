@@ -79,18 +79,54 @@ def build_tree(data):
 
 # O(n) time | O(d) space
 def validate_bst(tree):
+    """
+    Validates whether a binary tree is a valid Binary Search Tree (BST).
+
+    A BST is valid if for every node:
+    - All values in its left subtree are less than the node's value
+    - All values in its right subtree are greater than or equal to the node's value
+
+    Args:
+        tree: The root node of the binary tree to validate
+
+    Returns:
+        bool: True if the tree is a valid BST, False otherwise
+    """
+    # Start with the root node, allowing any value between -infinity and +infinity
     return validate_bst_helper(tree, float("-inf"), float("inf"))
 
 
 def validate_bst_helper(tree, min_value, max_value):
+    """
+    Helper function that recursively validates BST property with range checking.
+
+    Args:
+        tree: Current node being checked
+        min_value: The minimum value this node can have (exclusive)
+        max_value: The maximum value this node can have (inclusive)
+
+    Returns:
+        bool: True if subtree rooted at 'tree' is valid, False otherwise
+    """
+    # An empty tree is trivially valid
     if tree is None:
         return True
 
-    if tree.value < min_value or tree.value >= max_value:
+    # Check if current node's value violates BST property
+    # - Value must be > min_value (from parent's left subtree requirement)
+    # - Value must be <= max_value (from parent's right subtree requirement)
+    if tree.value <= min_value or tree.value > max_value:
         return False
 
+    # Check left subtree:
+    # - All values must be < current node's value
+    # - Must still be > the inherited min_value
     left_is_valid = validate_bst_helper(tree.left, min_value, tree.value)
 
+    # Check right subtree:
+    # - All values must be >= current node's value
+    # - Must still be < the inherited max_value
+    # Only check right subtree if left is already valid (short-circuit evaluation)
     return left_is_valid and validate_bst_helper(tree.right, tree.value, max_value)
 
 
