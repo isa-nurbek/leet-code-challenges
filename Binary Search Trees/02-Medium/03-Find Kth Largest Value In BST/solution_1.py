@@ -219,3 +219,244 @@ a **reverse in-order traversal (right-root-left)** and stop early once the k-th 
 complexity to `O(k)` (or `O(1)` if done iteratively with early termination) and avoids unnecessary traversals.
 
 """
+
+# =========================================================================================================================== #
+
+# Detailed Code Explanation:
+
+"""
+Here's a detailed explanation of the code, which constructs a **Binary Search Tree (BST)** from a dictionary and finds the
+**k-th largest value** in the BST:
+
+---
+
+## 🧱 1. `class BST`
+
+```
+class BST:
+    def __init__(self, value, left=None, right=None):
+        self.value = value
+        self.left = left
+        self.right = right
+```
+
+This defines a simple **BST node** class with:
+
+* `value`: the node’s integer value,
+* `left`: a reference to the left child,
+* `right`: a reference to the right child.
+
+---
+
+## 🌳 2. `build_tree(data)` — Build a BST from a dictionary
+
+This function constructs a **tree structure** from dictionary input.
+
+### 📥 Input Format
+
+```
+{
+    "nodes": [
+        {"id": "15", "left": "5", "right": "20", "value": 15},
+        ...
+    ],
+    "root": "15"
+}
+```
+
+Each node has:
+
+* `id`: a unique identifier (used to reference nodes)
+* `left` / `right`: child node ids
+* `value`: integer value stored at that node
+
+### 🧩 How it works:
+
+```
+def build_tree(data):
+    if not data:
+        return None
+```
+
+* Return `None` if input is empty.
+
+```
+    nodes = {}
+    for node_data in data["nodes"]:
+        node = BST(node_data["value"])
+        nodes[node_data["id"]] = node
+```
+
+* **First pass**: create all the `BST` node objects, storing them in a dictionary (`nodes`) by their `id`.
+
+```
+    for node_data in data["nodes"]:
+        node = nodes[node_data["id"]]
+
+        if node_data["left"] is not None:
+            node.left = nodes[node_data["left"]]
+
+        if node_data["right"] is not None:
+            node.right = nodes[node_data["right"]]
+```
+
+* **Second pass**: link each node’s `left` and `right` attributes using their ids.
+
+```
+    return nodes[data["nodes"][0]["id"]]
+```
+
+* Finally, return the **root node** (assumed to be the first in the list).
+
+✅ The tree is now built in memory using the `BST` class.
+
+---
+
+## 🔍 3. `find_kth_largest_value_in_bst(tree, k)`
+
+This function finds the **k-th largest** value in the BST.
+
+### Step-by-step:
+
+```
+sorted_node_values = []
+in_order_traverse(tree, sorted_node_values)
+```
+
+* Performs **in-order traversal** (left → node → right), which gives a **sorted list of values** for a BST.
+* All values are collected into the list `sorted_node_values`.
+
+```
+return sorted_node_values[len(sorted_node_values) - k]
+```
+
+* The k-th largest element is the `(len - k)`-th item in this **ascending** list.
+
+---
+
+## 🔁 4. `in_order_traverse(node, sorted_node_values)`
+
+Recursive helper for **in-order traversal**:
+
+```
+if node is None:
+    return
+```
+
+* Base case: end of branch
+
+```
+in_order_traverse(node.left, sorted_node_values)
+sorted_node_values.append(node.value)
+in_order_traverse(node.right, sorted_node_values)
+```
+
+* Traverse **left subtree**
+* Add current node’s value
+* Traverse **right subtree**
+
+➡️ For a BST, this will result in a sorted list.
+
+---
+
+## 🌲 5. Tree Visualization
+
+This is the actual structure from your `tree_dict`:
+
+```
+           15
+        /      \
+       5        20
+     /   \     /   \
+    2     5   17   22
+  /   \
+ 1     3
+```
+
+---
+
+## 🧪 6. Example: `find_kth_largest_value_in_bst(tree, 3)`
+
+After building the BST and doing in-order traversal, we get:
+
+```
+[1, 2, 3, 5, 5, 15, 17, 20, 22]
+```
+
+So:
+
+* Largest = 22
+* 2nd largest = 20
+* **3rd largest = 17** ✅
+
+Hence:
+
+```
+print(result)  # Output: 17
+```
+
+---
+
+## 🧠 Summary of Time and Space Complexity
+
+### ⏱ Time Complexity
+
+* `in_order_traverse`: visits all `n` nodes → **O(n)**
+* Accessing k-th element from list: **O(1)**
+
+➡️ **Total: O(n)**
+
+### 🗂 Space Complexity
+
+* Output list stores all values → **O(n)**
+
+---
+
+## ✅ Pros and 🔁 Possible Improvements
+
+### ✅ Pros:
+
+* Clear separation of building, traversing, and processing
+* Simple and readable logic
+
+### 🔁 Improvements:
+
+To **optimize space**, you could perform **reverse in-order traversal** (right → node → left), and stop once you reach the
+k-th largest node (no need to store the entire list).
+
+---
+
+Here's an ASCII visualization of our BST based on the `tree_dict`:
+
+```
+               15
+             /    \
+           5       20
+         /   \     /  \
+       2     5-2  17   22
+      / \
+     1   3
+```
+
+### 🔍 Explanation of Node IDs
+
+* The node labeled `5-2` is simply another node with value `5`, given a different ID in the dictionary (`"5-2"`) to distinguish
+it from the parent node with ID `"5"`.
+
+---
+
+### 📌 Full Structure with IDs and Values
+
+```
+               [15]
+             /      \
+          [5]       [20]
+         /   \      /   \
+      [2]   [5]  [17]   [22]
+     /   \
+  [1]   [3]
+```
+
+Where each `[x]` represents a node with value `x`.
+
+"""
