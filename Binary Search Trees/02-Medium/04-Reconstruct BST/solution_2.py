@@ -195,3 +195,241 @@ usually considered separate from the algorithm's auxiliary space.
   - **Best/average case (balanced BST)**: **O(log N)** (recursion stack proportional to tree height).
 
 """
+
+# =========================================================================================================================== #
+
+# Detailed Code Explanation:
+
+"""
+Let's go step by step to **understand the code**, **how it works**, and **why it reconstructs a Binary Search Tree (BST)
+correctly from a preorder traversal**.
+
+---
+
+## 🌳 Problem Summary
+
+You're given a list of integers that represents the **pre-order traversal** of a Binary Search Tree (BST). You need to reconstruct
+the **original BST** from this list.
+
+---
+
+## 📌 What is Preorder Traversal?
+
+In **preorder traversal**, nodes are visited in this order:
+
+```
+Root → Left → Right
+```
+
+So, given:
+
+```
+pre_order = [10, 4, 2, 1, 5, 17, 19, 18]
+```
+
+This means:
+
+* `10` is the **root**
+* The values that come **after** 10 and are **less than 10** belong to the **left subtree**
+* The values that are **greater than 10** belong to the **right subtree**
+
+---
+
+## 🔍 Breakdown of the Code
+
+### 1. Class Definition
+
+```
+class BST:
+    def __init__(self, value, left=None, right=None):
+        self.value = value
+        self.left = left
+        self.right = right
+```
+
+This is a basic Binary Search Tree node:
+
+* `value`: stores the node’s value.
+* `left`: reference to left child.
+* `right`: reference to right child.
+
+---
+
+### 2. `reconstruct_bst(pre_order_traversal_values)`
+
+This is the main function that reconstructs the tree from a preorder traversal list.
+
+#### Key Concepts Used:
+
+* You use an **index pointer `idx`** to iterate through the preorder list.
+* You use **boundaries** (`lower_bound` and `upper_bound`) to determine if a value fits in the current position of the BST.
+
+#### Function Structure:
+
+```
+def reconstruct_bst(pre_order_traversal_values):
+    def helper(lower_bound, upper_bound):
+        nonlocal idx
+        ...
+    idx = 0
+    return helper(float("-inf"), float("inf"))
+```
+
+The `helper` is a recursive function that:
+
+* Uses `lower_bound` and `upper_bound` to ensure the BST properties are followed.
+* Builds the left and right subtrees recursively.
+
+---
+
+## 🧠 How the `helper()` Works
+
+```
+def helper(lower_bound, upper_bound):
+    nonlocal idx
+```
+
+You keep `idx` as a **shared state** across recursive calls (using `nonlocal`).
+
+```
+    if idx >= len(pre_order_traversal_values):
+        return None
+```
+
+* Base case: If you reach the end of the list, stop.
+
+```
+    current_value = pre_order_traversal_values[idx]
+    if not (lower_bound <= current_value < upper_bound):
+        return None
+```
+
+* Each recursive call has a valid range (`lower_bound`, `upper_bound`) where the current node value must fall.
+* If the current value is out of this range, **it doesn’t belong** in this subtree, so return `None`.
+
+```
+    idx += 1
+    left_subtree = helper(lower_bound, current_value)
+    right_subtree = helper(current_value, upper_bound)
+```
+
+* Increment `idx` to move to the next node in preorder list.
+* Recursively construct the left subtree first (`left = helper(...)`)
+* Then the right subtree.
+
+```
+    return BST(current_value, left_subtree, right_subtree)
+```
+
+* Finally, return the constructed node with its left and right children.
+
+---
+
+### 3. `in_order_traversal(tree)`
+
+```
+def in_order_traversal(tree):
+    if tree is not None:
+        in_order_traversal(tree.left)
+        print(tree.value, end=" ")
+        in_order_traversal(tree.right)
+```
+
+* This prints nodes in **ascending order** (for BSTs).
+* So if the BST was constructed correctly, the output should be sorted.
+
+---
+
+## ✅ Example Input
+
+```
+pre_order = [10, 4, 2, 1, 5, 17, 19, 18]
+```
+
+This represents:
+
+```
+Preorder:
+10 → Root
+4, 2, 1, 5 → Left subtree
+17, 19, 18 → Right subtree
+```
+
+Reconstructed Tree:
+
+```
+        10
+       /  \
+      4    17
+     / \     \
+    2   5     19
+   /         /
+  1         18
+```
+
+---
+
+## 🧾 Output of `in_order_traversal(tree)`
+
+```
+1 2 4 5 10 17 18 19
+```
+
+Which confirms the BST was reconstructed correctly!
+
+---
+
+## ⏱ Time and Space Complexity
+
+### Time: **O(n)**
+
+* You visit each node **once** using a single `idx` pointer.
+
+### Space: **O(n)**
+
+* Due to recursion stack (in the worst case for skewed trees).
+* Plus, `n` nodes in the resulting BST.
+
+---
+
+## 🧠 Summary
+
+* You're reconstructing a BST from its preorder traversal using **bounds to enforce BST rules**.
+* The helper function uses **recursive depth-first construction**, and `idx` ensures you process each node **only once**
+in the correct order.
+* In-order traversal is a great way to verify correctness, as it should always print a sorted list for a valid BST.
+
+---
+
+Here's an **ASCII visualization** of the reconstructed BST from the preorder traversal:
+
+```
+pre_order = [10, 4, 2, 1, 5, 17, 19, 18]
+```
+
+---
+
+### 🌳 ASCII Tree:
+
+```
+         10
+        /  \
+       4    17
+      / \     \
+     2   5     19
+    /         /
+   1         18
+```
+
+---
+
+### 🧭 How to Read It:
+
+* Each node is **indented** to represent its depth in the tree.
+* **Left children** are placed to the left, **right children** to the right.
+* The structure respects **BST rules**:
+
+  * Left subtree contains values `< parent`
+  * Right subtree contains values `> parent`
+
+"""
