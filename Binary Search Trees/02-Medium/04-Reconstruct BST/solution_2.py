@@ -140,3 +140,58 @@ in_order_traversal(tree)  # Output: 1 2 4 5 10 17 18 19
 #     2   5    19
 #    /        /
 #   1        18
+
+# =========================================================================================================================== #
+
+# Big O Analysis:
+
+"""
+# Time and Space Complexity Analysis:
+
+### Time Complexity Analysis
+
+The time complexity of this algorithm is **O(N)**, where **N** is the number of nodes in the BST.
+
+Here's why:
+
+1. **Each node is visited exactly once**: The algorithm processes each element in the `pre_order_traversal_values` array exactly
+once. The `idx` variable ensures that no element is revisited after it's processed.
+
+2. **Constant work per node**: For each node, the algorithm performs a constant amount of work (checking bounds, incrementing `idx`,
+and making recursive calls).
+
+3. **No redundant work**: The bounds (`lower_bound` and `upper_bound`) ensure that the algorithm does not explore invalid paths,
+making the traversal efficient.
+
+Thus, the total time complexity is linear in the number of nodes.
+
+---
+
+### Space Complexity Analysis
+
+The space complexity is **O(N)** in the worst case and **O(H)** in the average case (where **H** is the height of the BST).
+
+Here's why:
+
+1. **Recursion stack space**: The algorithm uses recursion, so the maximum depth of the call stack determines the space complexity.
+   - In the **worst case** (a skewed tree, e.g., a linked list), the recursion depth is **O(N)**.
+   - In the **average case** (a balanced BST), the recursion depth is **O(log N)** (since the height of a balanced BST is logarithmic in the number of nodes).
+2. **Output space**: The space required to store the reconstructed BST is **O(N)**, but this is typically considered separate
+from the auxiliary space used by the algorithm.
+
+Thus:
+- **Worst-case space complexity (skewed tree)**: **O(N)** (due to recursion stack).
+- **Average-case space complexity (balanced BST)**: **O(log N)**.
+
+If we consider the space required for the output BST, then it is always **O(N)** (since we need to store all nodes), but this is
+usually considered separate from the algorithm's auxiliary space.
+
+---
+
+### Summary
+- **Time Complexity**: **O(N)** (linear time, each node processed once).
+- **Space Complexity**:
+  - **Worst case (skewed tree)**: **O(N)** (recursion stack).
+  - **Best/average case (balanced BST)**: **O(log N)** (recursion stack proportional to tree height).
+
+"""
