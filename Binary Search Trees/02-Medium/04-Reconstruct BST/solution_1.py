@@ -200,3 +200,208 @@ for the right subtree root in each step.
 2. Processing the pre-order traversal in reverse or with an index, incrementally building the tree.
 
 """
+
+# =========================================================================================================================== #
+
+# Detailed Code Explanation:
+
+"""
+Let's break this down step by step.
+
+---
+
+## 🔧 **Class and Function Overview**
+
+### 1. `class BST`:
+
+This is a simple class representing a **node** in a **Binary Search Tree (BST)**.
+
+```
+class BST:
+    def __init__(self, value, left=None, right=None):
+        self.value = value
+        self.left = left
+        self.right = right
+```
+
+Each node stores:
+
+* `value`: the integer stored at that node.
+* `left`: pointer/reference to the left child node.
+* `right`: pointer/reference to the right child node.
+
+---
+
+### 2. `reconstruct_bst(pre_order_traversal_values)`
+
+This is the main function that reconstructs a **Binary Search Tree (BST)** from its **pre-order traversal**.
+
+#### Pre-order Traversal Recap:
+
+* Visit **root** first
+* Then recursively visit **left subtree**
+* Then recursively visit **right subtree**
+
+---
+
+## 🧠 How the Code Works
+
+Let's go through it in detail.
+
+### Step-by-step breakdown:
+
+```
+def reconstruct_bst(pre_order_traversal_values):
+    if not pre_order_traversal_values:
+        return None
+```
+
+* If the list is empty, return `None`. Base case for recursion.
+
+---
+
+```
+    current_value = pre_order_traversal_values[0]
+```
+
+* The **first value** in the pre-order list is the **root** of the current (sub)tree.
+
+---
+
+```
+    right_subtree_root_idx = len(pre_order_traversal_values)
+
+    for idx in range(1, len(pre_order_traversal_values)):
+        value = pre_order_traversal_values[idx]
+        if value >= current_value:
+            right_subtree_root_idx = idx
+            break
+```
+
+* The rest of the list contains the **left** and **right** subtrees.
+* All values **less than `current_value`** will be in the **left subtree**.
+* The **first value ≥ `current_value`** indicates the **start of the right subtree**.
+* So, we find the **split point** between left and right subtrees.
+
+---
+
+```
+    left_subtree = reconstruct_bst(pre_order_traversal_values[1:right_subtree_root_idx])
+    right_subtree = reconstruct_bst(pre_order_traversal_values[right_subtree_root_idx:])
+```
+
+* Recursively build the **left subtree** from values between index 1 and the split point.
+* Recursively build the **right subtree** from values after the split point.
+
+---
+
+```
+    return BST(current_value, left_subtree, right_subtree)
+```
+
+* Construct and return a new `BST` node with the current value and the left/right subtrees.
+
+---
+
+### 🌳 Helper: `in_order_traversal`
+
+```
+def in_order_traversal(tree):
+    if tree is not None:
+        in_order_traversal(tree.left)
+        print(tree.value, end=" ")
+        in_order_traversal(tree.right)
+```
+
+* This function prints the values of the BST **in in-order traversal**:
+
+  * First visit left subtree
+  * Then visit root
+  * Then visit right subtree
+
+📌 For a **Binary Search Tree**, in-order traversal will always print the values in **ascending order**.
+
+---
+
+## 🧪 Test Case
+
+```
+pre_order = [10, 4, 2, 1, 5, 17, 19, 18]
+tree = reconstruct_bst(pre_order)
+in_order_traversal(tree)
+```
+
+### Tree structure being built:
+
+```
+         10
+        /  \
+       4    17
+      / \     \
+     2   5     19
+    /         /
+   1         18
+```
+
+### Output:
+
+```
+1 2 4 5 10 17 18 19
+```
+
+Correct ascending order — confirms the BST is built properly.
+
+---
+
+## ✅ Summary
+
+* **Input**: Pre-order traversal of a BST
+* **Goal**: Reconstruct the original BST
+* **Method**:
+
+  * Use recursion
+  * First value = root
+  * Find split index where right subtree starts
+  * Recurse for left and right parts
+* **Efficiency**: Runs in O(n²) worst-case due to slicing and scanning — can be improved using index bounds for better performance.
+
+---
+
+Here’s a clear **ASCII visualization** of the BST reconstructed from:
+
+```
+pre_order = [10, 4, 2, 1, 5, 17, 19, 18]
+```
+
+### 🔍 ASCII Tree Diagram:
+
+```
+         10
+        /  \
+       4    17
+      / \     \
+     2   5     19
+    /         /
+   1         18
+```
+
+### 🌿 Breakdown of Tree Structure:
+
+* `10` is the **root**.
+* `4` is on the **left** of `10`.
+* `17` is on the **right** of `10`.
+* Under `4`:
+
+  * `2` is left of `4`, and `5` is right of `4`.
+  * `1` is left of `2`.
+* Under `17`:
+
+  * `19` is right of `17`.
+  * `18` is left of `19`.
+
+This structure reflects the BST properties:
+
+* Left subtree nodes < root
+* Right subtree nodes ≥ root
+
+"""
