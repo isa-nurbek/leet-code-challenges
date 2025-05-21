@@ -146,3 +146,55 @@ print(same_bsts(array_one, array_two))  # Output: True
 #    5      12    94
 #  /       /     /
 # 2       11    81
+
+# =========================================================================================================================== #
+
+# Big O Analysis:
+
+"""
+# Time and Space Complexity Analysis:
+
+Let's analyze the time and space complexity of the `same_bsts` function.
+
+### Time Complexity:
+
+1. **Base Cases**: The base cases (checking lengths and root values) are all O(1) operations.
+2. **Splitting Arrays**: The `get_smaller` and `get_bigger_or_equal` functions both iterate over the array
+(excluding the first element) to partition the elements into left and right subtrees. This is O(n) for each call,
+where `n` is the length of the current array.
+3. **Recursive Calls**: The function makes two recursive calls, one for the left subtrees and one for the right subtrees.
+In the worst case, the array could be split unevenly (e.g., all elements are smaller or all are bigger than the root),
+leading to a depth of recursion of `n` (degenerate tree). However, on average, for balanced BSTs, the depth is log(n).
+
+- **Worst Case (Unbalanced Trees)**: O(n²)  
+  - Each level of recursion processes a subarray of size `n-1`, `n-2`, ..., `1`, leading to a total of O(n²) operations.
+- **Average Case (Balanced Trees)**: O(n log n)  
+  - The array is split roughly in half at each level, leading to log(n) levels, each doing O(n) work (for partitioning).
+
+### Space Complexity:
+
+1. **Auxiliary Arrays**: The `get_smaller` and `get_bigger_or_equal` functions create new arrays for the left and right subtrees,
+which requires O(n) space per recursive call.
+2. **Recursion Stack**: The depth of the recursion stack depends on the height of the tree.
+   - **Worst Case (Unbalanced Trees)**: O(n) space for the recursion stack.
+   - **Average Case (Balanced Trees)**: O(log n) space for the recursion stack.
+
+- **Worst Case (Unbalanced Trees)**: O(n²)  
+  - Each recursive call creates O(n) space, and there are O(n) such calls.
+- **Average Case (Balanced Trees)**: O(n log n)  
+  - Each level of recursion requires O(n) space (sum of all subarrays at that level), and there are O(log n) levels.
+
+### Final Answer:
+
+- **Time Complexity**: O(n²) in the worst case, O(n log n) on average.
+- **Space Complexity**: O(n²) in the worst case, O(n log n) on average (due to auxiliary arrays).  
+  (Can be optimized to O(n) worst-case and O(log n) average space complexity with an index-based approach.)
+
+### Optimizations:
+
+The current approach uses extra space for creating subarrays. An optimized approach could use indices to represent subarrays
+in the original array, reducing space complexity to O(d) (where `d` is the depth of recursion) for the recursion stack, without
+creating new arrays. This would make the space complexity O(n) in the worst case and O(log n) on average, while the time
+complexity remains the same.
+
+"""
