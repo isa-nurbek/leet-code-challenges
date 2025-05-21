@@ -123,3 +123,80 @@ in_order_traversal(tree)  # Output: 1 2 4 5 10 17 18 19
 #     2   5    19
 #    /        /
 #   1        18
+
+# =========================================================================================================================== #
+
+# Big O Analysis:
+
+"""
+# Time and Space Complexity Analysis:
+
+## Time Complexity Analysis
+
+The time complexity of the given `reconstruct_bst` function can be analyzed as follows:
+
+1. **Base Case**: If the input list is empty, the function returns `None` in constant time, O(1).
+2. **Recursive Case**:
+   - The function processes the first element as the root of the current subtree (O(1)).
+   - It then iterates through the remaining elements to find the first value that is greater than or equal to the root value
+   (this divides the list into left and right subtrees). In the worst case, this loop runs through all remaining elements (O(n)
+   for the current call, where n is the number of elements in the current list).
+   - The function then recursively processes the left and right subtrees.
+
+### Worst-Case Time Complexity
+
+- In the worst case, the tree is highly unbalanced (e.g., a linked list), where each recursive call processes one node and
+the rest are in the right subtree.
+For example:
+  - First call: processes root, loops through n-1 elements.
+  - Second call: processes next root, loops through n-2 elements.
+  - ...
+  - Total work: O(n + (n-1) + (n-2) + ... + 1) = O(n²).
+- Thus, the worst-case time complexity is **O(n²)**.
+
+### Best-Case Time Complexity
+
+- In the best case, the tree is perfectly balanced. At each level, the loop splits the list roughly in half:
+  - Top level: O(n) work to split.
+  - Next level: Two calls, each O(n/2) work.
+  - Next level: Four calls, each O(n/4) work.
+  - ...
+  - Total work: O(n log n), similar to the analysis of quicksort with good pivots.
+- Thus, the best-case time complexity is **O(n log n)**.
+
+### Average-Case Time Complexity
+
+- For a random BST (where the input is a random permutation of values), the average-case time complexity is **O(n log n)**,
+similar to the best case.
+
+### Space Complexity Analysis
+
+The space complexity is determined by:
+1. **Recursion Stack**: The maximum depth of the recursion stack.
+   - In the worst case (unbalanced tree), the depth is O(n).
+   - In the best case (balanced tree), the depth is O(log n).
+2. **Output BST**: The space required to store the BST is O(n) (for the nodes), which is unavoidable for the output.
+
+Thus:
+- Worst-case space complexity: **O(n)** (due to recursion stack).
+- Best-case space complexity: **O(log n)** (due to recursion stack).
+
+### Final Answer
+
+- **Time Complexity**:
+  - Worst-case: O(n²)
+  - Best-case: O(n log n)
+  - Average-case: O(n log n)
+  
+- **Space Complexity**:
+  - Worst-case: O(n)
+  - Best-case: O(log n)
+
+### Optimizing the Algorithm
+
+The current implementation has O(n²) worst-case time complexity. This can be optimized to O(n) by:
+1. Using a helper function with bounds (min and max) to track valid ranges for subtrees, eliminating the need to scan
+for the right subtree root in each step.
+2. Processing the pre-order traversal in reverse or with an index, incrementally building the tree.
+
+"""
