@@ -56,7 +56,7 @@ class BST:
         self.right = right
 
 
-# O(n²) time | O(d) space
+# O(n²) time | O(n²) space
 def same_bsts(array_one, array_two):
     """
     Determines if two arrays represent the same Binary Search Tree (BST).
