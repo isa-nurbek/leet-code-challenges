@@ -58,22 +58,59 @@ class BST:
 
 # O(n) time | O(n) space
 def reconstruct_bst(pre_order_traversal_values):
+    """
+    Reconstructs a Binary Search Tree (BST) from its pre-order traversal values.
+
+    Args:
+        pre_order_traversal_values: List of integers representing the pre-order traversal of a BST
+
+    Returns:
+        The root node of the reconstructed BST
+    """
+
     def helper(lower_bound, upper_bound):
-        nonlocal idx
+        """
+        Helper function to recursively build the BST.
+
+        Args:
+            lower_bound: The minimum value a node in this subtree can have
+            upper_bound: The maximum value a node in this subtree can have
+
+        Returns:
+            A BST node or None if no valid node can be created
+        """
+        nonlocal idx  # Use the idx variable from the outer function
+
+        # If we've processed all values, return None (base case)
         if idx >= len(pre_order_traversal_values):
             return None
 
         current_value = pre_order_traversal_values[idx]
-        if not (lower_bound <= current_value < upper_bound):
-            return None
 
+        # Check if current value is within valid BST bounds for this position
+        if not (lower_bound <= current_value < upper_bound):
+            return None  # Not a valid BST node here
+
+        # Move to next value in pre-order list since we're using this one
         idx += 1
+
+        # Recursively build left subtree with updated bounds:
+        # - Left subtree values must be greater than lower_bound
+        # - But less than current node's value
         left_subtree = helper(lower_bound, current_value)
+
+        # Recursively build right subtree with updated bounds:
+        # - Right subtree values must be greater than current node's value
+        # - But less than upper_bound
         right_subtree = helper(current_value, upper_bound)
 
+        # Create and return the current node with its subtrees
         return BST(current_value, left_subtree, right_subtree)
 
+    # Initialize index to start of pre-order list
     idx = 0
+
+    # Start the reconstruction with infinite bounds that will get refined
     return helper(float("-inf"), float("inf"))
 
 
