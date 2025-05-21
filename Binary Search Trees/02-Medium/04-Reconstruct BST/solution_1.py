@@ -58,26 +58,50 @@ class BST:
 
 # O(n²) time | O(n) space
 def reconstruct_bst(pre_order_traversal_values):
+    """
+    Reconstructs a BST from its pre-order traversal values.
+
+    Pre-order traversal visits nodes in the order: root -> left -> right.
+    The first element is always the root, followed by left subtree nodes (all < root),
+    then right subtree nodes (all >= root).
+
+    Args:
+        pre_order_traversal_values: List of values in pre-order traversal order
+
+    Returns:
+        The root node of the reconstructed BST
+    """
+    # Base case: empty list means we've reached a leaf node's child
     if not pre_order_traversal_values:
         return None
 
+    # The first value in pre-order is always the root of current subtree
     current_value = pre_order_traversal_values[0]
+
+    # Initialize the right subtree start index as end of list (case where no right subtree exists)
     right_subtree_root_idx = len(pre_order_traversal_values)
 
+    # Find the first value >= current_value (marks start of right subtree)
     for idx in range(1, len(pre_order_traversal_values)):
         value = pre_order_traversal_values[idx]
         if value >= current_value:
             right_subtree_root_idx = idx
-            break  # This break is correct; we want the first occurrence
+            break  # Found the divider between left and right subtrees
 
+    # Recursively reconstruct left subtree (values between current root and right subtree start)
     left_subtree = reconstruct_bst(pre_order_traversal_values[1:right_subtree_root_idx])
+    # Recursively reconstruct right subtree (remaining values after left subtree ends)
     right_subtree = reconstruct_bst(pre_order_traversal_values[right_subtree_root_idx:])
 
+    # Create and return current node with its left and right subtrees
     return BST(current_value, left_subtree, right_subtree)
 
 
-# Helper function to print the tree in-order for testing
 def in_order_traversal(tree):
+    """
+    Performs in-order traversal (left -> root -> right) and prints node values.
+    For a BST, this should print values in sorted order.
+    """
     if tree is not None:
         in_order_traversal(tree.left)
         print(tree.value, end=" ")
@@ -89,10 +113,9 @@ def in_order_traversal(tree):
 pre_order = [10, 4, 2, 1, 5, 17, 19, 18]
 tree = reconstruct_bst(pre_order)
 
-in_order_traversal(tree)
+in_order_traversal(tree)  # Output: 1 2 4 5 10 17 18 19
 
-#  Output: 1 2 4 5 10 17 18 19
-
+# Visual representation of the reconstructed tree:
 #         10
 #        /  \
 #       4    17
