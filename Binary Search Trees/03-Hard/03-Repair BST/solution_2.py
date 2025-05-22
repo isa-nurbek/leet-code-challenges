@@ -126,27 +126,40 @@ def print_tree(root):
 
 # O(n) time | O(h) space
 def repair_bst(tree):
+    # Initialize pointers to track the two nodes that are swapped
+    # and the previous node during in-order traversal
     node_one = node_two = previous_node = None
 
+    # Use a stack for iterative in-order traversal
     stack = []
     current_node = tree
 
+    # Perform in-order traversal of the BST
     while current_node is not None or len(stack) > 0:
+        # Go to the leftmost node (standard in-order traversal)
         while current_node is not None:
             stack.append(current_node)
             current_node = current_node.left
 
+        # Current node is now the leftmost node not yet processed
         current_node = stack.pop()
 
+        # Check if current node's value is less than previous node's value
+        # (which violates BST property)
         if previous_node is not None and previous_node.value > current_node.value:
+            # If this is the first violation, set node_one to previous_node
             if node_one is None:
                 node_one = previous_node
 
+            # Always update node_two to current_node to handle cases where
+            # the swapped nodes are adjacent or not
             node_two = current_node
 
+        # Move to the next node in in-order sequence
         previous_node = current_node
         current_node = current_node.right
 
+    # After finding the two swapped nodes, swap their values back
     node_one.value, node_two.value = node_two.value, node_one.value
 
     return tree
