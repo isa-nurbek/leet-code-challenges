@@ -160,3 +160,44 @@ print(validate_three_nodes(node_one, node_two, node_three))
 #     1     4 6     8
 #    /     /
 #   0     3
+
+# =========================================================================================================================== #
+
+# Big O Analysis:
+
+"""
+# Time and Space Complexity Analysis:
+
+### Time Complexity:
+
+1. **`is_descendant(node, target)` function**:
+   - This function performs a search for the `target` node starting from the given `node`.
+   - In the worst case, it traverses a path from the root to a leaf in the BST (or until it finds the target).
+   - The time complexity is `O(h)`, where `h` is the height of the tree. 
+     - For a balanced BST, `h = O(log n)` (where `n` is the number of nodes).
+     - For a skewed BST (worst case), `h = O(n)`.
+
+2. **`validate_three_nodes(node_one, node_two, node_three)` function**:
+   - This function calls `is_descendant` up to 4 times (2 in the first case and 2 in the second case).
+   - Each call to `is_descendant` is `O(h)`, so the total time complexity is `O(h)` (since constants are dropped in Big-O notation).
+
+### Space Complexity:
+
+1. **`is_descendant(node, target)` function**:
+   - This is a recursive function, and the maximum depth of recursion is equal to the height of the tree (`h`).
+   - Thus, the space complexity is `O(h)` due to the recursion stack.
+     - For a balanced BST, this is `O(log n)`.
+     - For a skewed BST, this is `O(n)`.
+
+2. **`validate_three_nodes(node_one, node_two, node_three)` function**:
+   - The space complexity is determined by the deepest recursion stack in the `is_descendant` calls, which is `O(h)`.
+
+### Summary:
+- **Time Complexity**: `O(h)` (where `h` is the height of the BST).
+- **Space Complexity**: `O(h)` (due to recursion stack).
+
+### Notes:
+- If the BST is balanced, `h = O(log n)`, so both time and space complexity become `O(log n)`.
+- If the BST is skewed (e.g., a linked list), `h = O(n)`, so both time and space complexity become `O(n)`.
+
+"""
