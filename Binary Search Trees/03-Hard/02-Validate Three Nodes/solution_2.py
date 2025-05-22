@@ -178,3 +178,39 @@ print(validate_three_nodes(node_one, node_two, node_three))
 #     1     4 6     8
 #    /     /
 #   0     3
+
+# =========================================================================================================================== #
+
+# Big O Analysis:
+
+"""
+# Time and Space Complexity Analysis:
+
+### Time Complexity:
+
+1. **`is_descendant(node, target)` function**:
+   - This function traverses from `node` to `target` in a BST.
+   - In the worst case, this is an O(h) operation, where `h` is the height of the tree. This is because we might traverse from
+   the root to a leaf (or vice versa) in the worst case.
+
+2. **`validate_three_nodes(node_one, node_two, node_three)` function**:
+   - This function calls `is_descendant` up to 2 times (in the worst case).
+   - The first call (`is_descendant(node_two, node_one)`) is O(h).
+   - If the first condition is true, it calls `is_descendant(node_three, node_two)`, which is another O(h) operation.
+   - Similarly, if the second condition is checked, it calls `is_descendant` twice again (each O(h)).
+   - Thus, the total time complexity is **O(h)** (since we perform a constant number of O(h) operations).
+
+### Space Complexity:
+
+- Both functions use **constant extra space** (no recursion, no additional data structures). The traversal is done iteratively.
+- Thus, the space complexity is **O(1)**.
+
+### Summary:
+- **Time Complexity:** O(h) (where h is the height of the BST).
+- **Space Complexity:** O(1).
+
+### Notes:
+- In a balanced BST, `h = O(log n)`, where `n` is the number of nodes.
+- In the worst case (unbalanced BST, like a linked list), `h = O(n)`.
+
+"""
