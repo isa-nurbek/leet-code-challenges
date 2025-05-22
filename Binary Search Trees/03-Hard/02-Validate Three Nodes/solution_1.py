@@ -201,3 +201,226 @@ print(validate_three_nodes(node_one, node_two, node_three))
 - If the BST is skewed (e.g., a linked list), `h = O(n)`, so both time and space complexity become `O(n)`.
 
 """
+
+# =========================================================================================================================== #
+
+# Detailed Code Explanation:
+
+"""
+Let's walk through this code **step by step** to fully understand what's happening, both in terms of **building the binary search
+tree (BST)** and the **logic of the `validate_three_nodes` function**.
+
+---
+
+## 🧱 PART 1: Binary Search Tree (BST) Class
+
+```
+class BST:
+    def __init__(self, value, left=None, right=None):
+        self.value = value
+        self.left = left
+        self.right = right
+```
+
+This class represents a **node in a binary search tree**.
+
+* Each node has:
+
+  * `value`: The actual data (integer).
+  * `left`: A reference to the left child (if any).
+  * `right`: A reference to the right child (if any).
+
+---
+
+## 🌲 PART 2: Tree Construction (`build_tree` function)
+
+This function takes in a dictionary (`tree_dict`) and constructs a **tree of BST nodes**.
+
+### Sample Input Structure:
+
+```
+tree_dict = {
+    "nodes": [
+        {"id": "0", "left": None, "right": None, "value": 0},
+        ...
+    ],
+    "root": "5"
+}
+```
+
+Each node is represented as a dictionary with:
+
+* `id`: A unique string to identify the node.
+* `left` and `right`: References to the ids of the left and right children.
+* `value`: The actual integer value stored in the node.
+
+### Tree Building Steps:
+
+```
+nodes = {}
+for node_data in data["nodes"]:
+    node = BST(node_data["value"])
+    nodes[node_data["id"]] = node
+```
+
+* First loop: Creates all `BST` nodes and stores them in a dictionary using their IDs as keys.
+
+```
+for node_data in data["nodes"]:
+    node = nodes[node_data["id"]]
+    if node_data["left"] is not None:
+        node.left = nodes[node_data["left"]]
+    if node_data["right"] is not None:
+        node.right = nodes[node_data["right"]]
+```
+
+* Second loop: Sets the `left` and `right` pointers using the node IDs.
+
+```
+return nodes[data["root"]]
+```
+
+* Finally, returns the root node (ID `"5"`).
+
+---
+
+## 🔍 PART 3: `validate_three_nodes` Function
+
+### Purpose:
+
+To determine if **`node_two` is between `node_one` and `node_three` in the BST path**.
+
+There are two valid conditions:
+
+1. `node_two` is a descendant of `node_one`, **and** `node_three` is a descendant of `node_two`.
+2. `node_two` is a descendant of `node_three`, **and** `node_one` is a descendant of `node_two`.
+
+```
+def validate_three_nodes(node_one, node_two, node_three):
+    if is_descendant(node_two, node_one):
+        return is_descendant(node_three, node_two)
+
+    if is_descendant(node_two, node_three):
+        return is_descendant(node_one, node_two)
+
+    return False
+```
+
+### Example:
+
+If the order is: 5 ➝ 2 ➝ 3, then:
+
+* `2` must be a descendant of `5`
+* `3` must be a descendant of `2`
+
+---
+
+## 🌿 PART 4: `is_descendant` Function
+
+```
+def is_descendant(node, target):
+    if node is None:
+        return False
+    if node is target:
+        return True
+    return (
+        is_descendant(node.left, target)
+        if target.value < node.value
+        else is_descendant(node.right, target)
+    )
+```
+
+This function **checks if `target` is a descendant of `node`** by traversing the BST.
+
+### How it works:
+
+* If `node` is `None`, return `False`.
+* If `node` is exactly the `target`, return `True`.
+* Otherwise, go left or right depending on value comparison (BST property).
+
+---
+
+## ✅ Final Example Walkthrough
+
+```
+node_one = root  # Node with value 5
+node_two = root.left  # Node with value 2
+node_three = root.left.right.left  # Node with value 3
+```
+
+### Check:
+
+* Is 2 a descendant of 5? ✅ Yes
+* Is 3 a descendant of 2? ✅ Yes
+
+So the function returns `True`.
+
+---
+
+## 📊 Final Tree Structure
+
+```
+          5
+        /   \
+       2     7
+      / \   / \
+     1   4 6   8
+    /   /
+   0   3
+```
+
+---
+
+## ✅ Summary
+
+* **Tree is built** using a list of node dictionaries.
+* **`validate_three_nodes`** checks if one node lies between two others in the tree, following the BST path.
+* **`is_descendant`** is a helper to determine if one node is reachable from another through left/right child pointers in the BST.
+
+---
+
+Here's an **ASCII visualization** of the binary search tree defined by your `tree_dict`:
+
+```
+           5
+         /   \
+        2     7
+       / \   / \
+      1   4 6   8
+     /   /
+    0   3
+```
+
+### Explanation:
+
+* **Root (5)**:
+
+  * Left child: **2**
+
+    * Left child: **1**
+
+      * Left child: **0**
+    * Right child: **4**
+
+      * Left child: **3**
+  * Right child: **7**
+
+    * Left child: **6**
+    * Right child: **8**
+
+---
+
+### Nodes for Test Case:
+
+We tested:
+
+```
+validate_three_nodes(node_one=5, node_two=2, node_three=3)
+```
+
+From the tree:
+
+* `5 ➝ 2 ➝ 4 ➝ 3` is the path.
+* So, 2 is a descendant of 5, and 3 is a descendant of 2 → ✅ `True`
+
+"""
