@@ -228,3 +228,44 @@ Output Tree:
   3   8   12     22 
 2  None None 14 None None None None 
 """
+
+# =========================================================================================================================== #
+
+# Big O Analysis:
+
+"""
+# Time and Space Complexity Analysis:
+
+### Time Complexity Analysis
+
+The time complexity of the `repair_bst` function is determined by the in-order traversal of the binary search tree (BST). 
+
+1. **In-order Traversal**: The function performs an in-order traversal of the entire BST. In-order traversal visits each node
+exactly once. For a BST with `n` nodes, this traversal takes `O(n)` time.
+
+2. **Swapping Values**: After the traversal, the function swaps the values of two nodes if they are found. This operation
+takes `O(1)` time since it involves only a few assignments.
+
+Thus, the overall time complexity of the function is **O(n)**, where `n` is the number of nodes in the BST.
+
+### Space Complexity Analysis
+
+The space complexity is determined by the space used during the in-order traversal, which is primarily due to the recursion stack.
+
+1. **Recursion Stack**: The in-order traversal is implemented recursively. In the worst case, the maximum depth of the recursion
+stack is equal to the height of the BST. 
+   - For a balanced BST, the height is `O(log n)`, so the space complexity is `O(log n)`.
+   - For a skewed BST (e.g., a tree that degenerates into a linked list), the height is `O(n)`, so the space complexity is `O(n)`.
+
+2. **Additional Space**: The function uses a few additional variables (`node_one`, `node_two`, `previous_node`), but these
+occupy `O(1)` space regardless of the input size.
+
+Thus, the space complexity is:
+- **O(log n)** for a balanced BST.
+- **O(n)** for a skewed BST.
+
+### Summary
+- **Time Complexity**: O(n)
+- **Space Complexity**: O(log n) (balanced BST) or O(n) (skewed BST)
+
+"""
