@@ -279,3 +279,266 @@ helps identify these nodes because in a correct BST, the in-order traversal shou
 - The swap operation is efficient (O(1)) and doesn't affect the overall time complexity.
 
 """
+
+# =========================================================================================================================== #
+
+# Detailed Code Explanation:
+
+"""
+Let's break down our entire code in **clear parts** and explain each section's logic and role in the full flow of:
+
+* **Building a tree from input data**
+* **Detecting and repairing the binary search tree (BST)**
+* **Printing the BST in a structured way**
+
+---
+
+## 🔷 1. Class Definition: `BST`
+
+```
+class BST:
+    def __init__(self, value, left=None, right=None):
+        self.value = value
+        self.left = left
+        self.right = right
+```
+
+### ✅ Purpose:
+
+This defines the **binary search tree node class**. Each node holds:
+
+* a `value`
+* a pointer to the `left` child
+* a pointer to the `right` child
+
+---
+
+## 🔷 2. Function: `build_tree(data)`
+
+```
+def build_tree(data):
+    ...
+```
+
+### ✅ Purpose:
+
+Builds a tree from a **dictionary format** (with nodes and root ID).
+
+### 🔁 Steps:
+
+1. **Create all nodes (without connecting them)**:
+
+   ```
+   for node_data in data["nodes"]:
+       node = BST(node_data["value"])
+       nodes[node_data["id"]] = node
+   ```
+
+2. **Link each node to its left and right children**:
+
+   ```
+   for node_data in data["nodes"]:
+       node = nodes[node_data["id"]]
+       if node_data["left"] is not None:
+           node.left = nodes[node_data["left"]]
+       if node_data["right"] is not None:
+           node.right = nodes[node_data["right"]]
+   ```
+
+3. **Return the root node** using the `root` ID:
+
+   ```
+   return nodes[data["root"]]
+   ```
+
+---
+
+## 🔷 3. Function: `print_tree(root)`
+
+```
+def print_tree(root):
+    ...
+```
+
+### ✅ Purpose:
+
+Prints the BST level-by-level (breadth-first), making it easier to visualize tree structure.
+
+### 🔁 Steps:
+
+1. **Breadth-first traversal using a queue (`deque`)**:
+
+   * Store each level's values (`current_level`)
+   * For each node, enqueue its `left` and `right` children
+   * Append `"None"` if a child is missing
+
+2. **Pretty-print each level** with spacing:
+
+   * Space depends on the level depth
+   * Example output:
+
+     ```
+           10
+       7      20
+     3  12   8  22
+     ...
+     ```
+
+---
+
+## 🔷 4. Function: `repair_bst(tree)`
+
+```
+def repair_bst(tree):
+    ...
+```
+
+### ✅ Purpose:
+
+Fixes a **corrupted BST** in which two nodes were accidentally swapped.
+
+### ✅ Constraints:
+
+* Time: O(n)
+* Space: O(h) — where `h` is height of the tree
+
+---
+
+### 💡 Logic:
+
+In a **correct BST**, an **in-order traversal** gives sorted values.
+So, if two values are swapped, the in-order traversal will **violate the ascending order rule** **once or twice**.
+
+### 🔁 Steps:
+
+1. **Use in-order traversal (left → root → right)** with a manual stack:
+
+   ```
+   while current_node is not None or len(stack) > 0:
+   ```
+
+2. **Track nodes** where order is violated:
+
+   ```
+   if previous_node is not None and previous_node.value > current_node.value:
+       if node_one is None:
+           node_one = previous_node  # First wrong node
+       node_two = current_node      # Second wrong node (can be updated)
+   ```
+
+3. **After traversal, swap values of node_one and node_two**:
+
+   ```
+   node_one.value, node_two.value = node_two.value, node_one.value
+   ```
+
+---
+
+## 🔷 5. Tree Data and Execution
+
+```
+input_data = {
+    ...
+}
+```
+
+The input dictionary describes the tree structure with node IDs and pointers to child node IDs.
+
+In the example:
+
+* Node `12` and `8` are wrongly placed.
+* So, the in-order traversal becomes:
+
+  ```
+  [2, 3, 7, 12, 10, 8, 20, 14, 22] ❌
+  ```
+
+After `repair_bst()` is applied, it becomes:
+
+```
+[2, 3, 7, 8, 10, 12, 20, 14, 22] ✅
+
+(Note: 14 might still be in wrong place, but only 2 nodes are assumed swapped)
+```
+
+---
+
+## 🔚 Summary of Flow
+
+```
+1. Input dictionary ➝ build_tree() ➝ BST structure created
+2. print_tree() ➝ Shows initial corrupted BST
+3. repair_bst() ➝ Fixes the two swapped nodes in-place
+4. print_tree() again ➝ Shows repaired BST
+```
+
+---
+
+## ✅ Output Before and After
+
+### Before Repair:
+
+```
+        10
+    7         20
+  3   12   8     22
+2  None None 14 None None None None
+```
+
+### After Repair:
+
+```
+        10
+    7         20
+  3   8   12     22
+2  None None 14 None None None None
+```
+
+---
+
+Here's an **ASCII visualization** of the Binary Search Tree before and after running `repair_bst`.
+
+---
+
+## 🌳 Input Tree (Before Repair)
+
+```
+              10
+           /      \
+         7         20
+       /   \     /    \
+     3     12   8     22
+    /             \
+   2              14
+```
+
+### 🔎 What's wrong?
+
+* `12` (right child of 7) and `8` (left child of 20) are **swapped**.
+* In a valid BST, all left-side nodes should be **less than** their parents, and right-side nodes **greater than**.
+* `12` is greater than `10` but is placed in the left subtree.
+* `8` is less than `10` but is placed in the right subtree.
+
+---
+
+## 🔧 Repaired Tree (After `repair_bst()`)
+
+```
+              10
+           /      \
+         7         20
+       /   \     /    \
+     3     8   12     22
+    /             \
+   2              14
+```
+
+### ✅ What's fixed?
+
+* Now:
+
+  * `8` is the right child of 7 (makes sense as `8 > 7`).
+  * `12` is the left child of 20 (makes sense as `12 < 20`).
+* This is now a **valid BST**.
+
+"""
