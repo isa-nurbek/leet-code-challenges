@@ -228,3 +228,54 @@ Output Tree:
   3   8   12     22 
 2  None None 14 None None None None 
 """
+
+# =========================================================================================================================== #
+
+# Big O Analysis:
+
+"""
+# Time and Space Complexity Analysis:
+
+### Time Complexity Analysis
+
+The given function `repair_bst` is designed to identify and swap two misplaced nodes in a Binary Search Tree (BST) to restore
+its correct structure. Here's the breakdown of the time complexity:
+
+1. **Traversal of the BST**: The algorithm performs an in-order traversal of the BST using an iterative approach with a stack. 
+   - In-order traversal visits each node exactly once.
+   - For each node, operations like pushing to the stack, popping from the stack, and comparing values are O(1) operations.
+   - Therefore, the traversal itself is O(N), where N is the number of nodes in the tree.
+
+2. **Identifying the misplaced nodes**: During the traversal, the algorithm checks if the current node's value is less than the
+previous node's value (which violates the BST property). This check is done in O(1) time for each node.
+   - The first violation is stored in `node_one`, and the second violation is stored in `node_two`.
+   - This process doesn't add any additional time complexity beyond the traversal.
+
+3. **Swapping the values**: Once the two misplaced nodes are identified, their values are swapped in O(1) time.
+
+**Overall Time Complexity**: The dominant factor is the in-order traversal, which is O(N). Thus, the time complexity is **O(N)**.
+
+### Space Complexity Analysis
+
+The space complexity is determined by the additional data structures used during the execution:
+
+1. **Stack**: The iterative in-order traversal uses a stack to keep track of nodes.
+   - In the worst case (a skewed tree), the stack can hold all nodes at once (e.g., for a left-skewed tree, all nodes are pushed
+   to the stack before starting to pop).
+   - Thus, the stack can grow up to O(N) in size.
+
+2. **Other variables**: The variables `node_one`, `node_two`, `previous_node`, and `current_node` use O(1) space.
+
+**Overall Space Complexity**: The stack dominates the space usage, so the space complexity is **O(N)** in the worst case. In
+the best case (a balanced tree), the space complexity would be O(log N), but we typically consider the worst case for analysis.
+
+### Summary
+- **Time Complexity**: O(N)
+- **Space Complexity**: O(N) (worst case, due to the stack)
+
+### Additional Notes
+- The algorithm correctly identifies the two swapped nodes in a BST where exactly two nodes are misplaced. The in-order traversal
+helps identify these nodes because in a correct BST, the in-order traversal should yield a strictly increasing sequence.
+- The swap operation is efficient (O(1)) and doesn't affect the overall time complexity.
+
+"""
