@@ -59,20 +59,24 @@ O(d) time | O(1) space - where `d` is the distance between `node_one` and `node_
 # Binary Search Tree (BST) node class
 class BST:
     def __init__(self, value, left=None, right=None):
-        self.value = value
-        self.left = left
-        self.right = right
+        # Binary Search Tree node constructor
+        self.value = value  # The value stored in the node
+        self.left = left  # Left child node
+        self.right = right  # Right child node
 
 
 def build_tree(data):
+    # Builds a BST from dictionary representation
     if not data:
-        return None
+        return None  # Empty tree if no data
 
+    # Create all nodes first and store them in a dictionary by their IDs
     nodes = {}
     for node_data in data["nodes"]:
         node = BST(node_data["value"])
         nodes[node_data["id"]] = node
 
+    # Connect the nodes by setting left and right children based on the IDs
     for node_data in data["nodes"]:
         node = nodes[node_data["id"]]
         if node_data["left"] is not None:
@@ -80,24 +84,38 @@ def build_tree(data):
         if node_data["right"] is not None:
             node.right = nodes[node_data["right"]]
 
+    # Return the root node of the tree
     return nodes[data["root"]]
 
 
+# O(h) time | O(h) space
 def validate_three_nodes(node_one, node_two, node_three):
+    # Validates if one of these conditions is true:
+    # 1. node_one is ancestor of node_two, and node_two is ancestor of node_three
+    # 2. node_three is ancestor of node_two, and node_two is ancestor of node_one
+
+    # Check if node_two is descendant of node_one and node_three is descendant of node_two
     if is_descendant(node_two, node_one):
         return is_descendant(node_three, node_two)
 
+    # Check if node_two is descendant of node_three and node_one is descendant of node_two
     if is_descendant(node_two, node_three):
         return is_descendant(node_one, node_two)
 
+    # If neither condition is met, return False
     return False
 
 
 def is_descendant(node, target):
+    # Checks if target is a descendant of node in the BST
     if node is None:
-        return False
+        return False  # Reached leaf node, target not found
     if node is target:
-        return True
+        return True  # Found the target node
+
+    # Recursively search left or right subtree based on BST properties
+    # If target value is less than current node's value, search left subtree
+    # Otherwise, search right subtree
     return (
         is_descendant(node.left, target)
         if target.value < node.value
@@ -105,6 +123,7 @@ def is_descendant(node, target):
     )
 
 
+# Tree representation as a dictionary
 tree_dict = {
     "nodes": [
         {"id": "0", "left": None, "right": None, "value": 0},
@@ -117,20 +136,23 @@ tree_dict = {
         {"id": "7", "left": "6", "right": "8", "value": 7},
         {"id": "8", "left": None, "right": None, "value": 8},
     ],
-    "root": "5",
+    "root": "5",  # Root node ID
 }
 
 
+# Build the tree from the dictionary
 root = build_tree(tree_dict)
 
 # Test Case: validate_three_nodes(5, 2, 3)
-node_one = root  # 5
+
+node_one = root  # 5 (root node)
 node_two = root.left  # 2
 node_three = root.left.right.left  # 3
 
 print(validate_three_nodes(node_one, node_two, node_three))
 # Output: True
 
+# Visual representation of the tree:
 #            5
 #         /     \
 #        2       7
