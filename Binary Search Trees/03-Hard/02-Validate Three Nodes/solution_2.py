@@ -90,19 +90,54 @@ def build_tree(data):
 
 # O(h) time | O(1) space
 def validate_three_nodes(node_one, node_two, node_three):
+    """
+    Validates if one of two relationships exists between three nodes in a BST:
+    1. node_one is ancestor of node_two, and node_two is ancestor of node_three
+    2. node_three is ancestor of node_two, and node_two is ancestor of node_one
+
+    Args:
+        node_one: First node in BST
+        node_two: Second node in BST
+        node_three: Third node in BST
+
+    Returns:
+        True if either of the two relationships exists, False otherwise
+    """
+    # Check if node_two is a descendant of node_one
     if is_descendant(node_two, node_one):
+        # If yes, check if node_three is a descendant of node_two
+        # This validates relationship 1: node_one -> node_two -> node_three
         return is_descendant(node_three, node_two)
 
+    # Check if node_two is a descendant of node_three
     if is_descendant(node_two, node_three):
+        # If yes, check if node_one is a descendant of node_two
+        # This validates relationship 2: node_three -> node_two -> node_one
         return is_descendant(node_one, node_two)
 
+    # If neither relationship exists, return False
     return False
 
 
 def is_descendant(node, target):
+    """
+    Checks if target node is an ancestor of given node in a BST (if node is descendant of target)
+
+    Args:
+        node: The potential descendant node to start searching from
+        target: The potential ancestor node we're looking for
+
+    Returns:
+        True if target is ancestor of node (node is descendant of target), False otherwise
+    """
+    # Traverse from node upwards towards root looking for target
     while node is not None and node is not target:
+        # BST property: if target value is less than current node value,
+        # search in left subtree, otherwise search right subtree
         node = node.left if target.value < node.value else node.right
 
+    # If we found the target, return True (node is descendant)
+    # If we hit None, return False (target is not ancestor)
     return node is target
 
 
