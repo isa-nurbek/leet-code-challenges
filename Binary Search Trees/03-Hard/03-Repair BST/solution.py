@@ -54,19 +54,32 @@ from collections import deque
 
 
 class BST:
+    """Binary Search Tree node class."""
+
     def __init__(self, value, left=None, right=None):
         self.value = value
         self.left = left
         self.right = right
 
 
+# Function to build a BST from dictionary data
 def build_tree(data):
+    """Builds a BST from dictionary data.
+
+    Args:
+        data: Dictionary containing "nodes" list and "root" id
+
+    Returns:
+        The root node of the constructed BST
+    """
     if not data:
         return None
     nodes = {}
+    # First pass: create all nodes without connections
     for node_data in data["nodes"]:
         node = BST(node_data["value"])
         nodes[node_data["id"]] = node
+    # Second pass: connect child nodes
     for node_data in data["nodes"]:
         node = nodes[node_data["id"]]
         if node_data["left"] is not None:
@@ -76,12 +89,19 @@ def build_tree(data):
     return nodes[data["root"]]
 
 
+# Function to print a BST from dictionary data
 def print_tree(root):
+    """Prints the BST in a tree-like structure.
+
+    Args:
+        root: Root node of the BST to print
+    """
     if not root:
         print("Empty tree")
         return
     q = deque([root])
     levels = []
+    # Level-order traversal to collect nodes by level
     while q:
         level_size = len(q)
         current_level = []
@@ -95,30 +115,51 @@ def print_tree(root):
                 current_level.append("None")
         levels.append(current_level)
 
-    # Print tree structure
+    # Print tree structure with proper spacing
     for i, level in enumerate(levels):
+        # Calculate spacing based on tree depth
         print(" " * (2 ** (len(levels) - i - 1) - 1), end="")
         for _, val in enumerate(level):
             print(val, end=" " * (2 ** (len(levels) - i) - 1))
         print()
 
 
+# O(n) time | O(h) space
 def repair_bst(tree):
+    """Repairs a BST where exactly two nodes have been swapped.
+
+    Args:
+        tree: Root node of the BST to repair
+
+    Returns:
+        The repaired BST (modified in-place)
+    """
     node_one = node_two = previous_node = None
 
     def in_order_traversal(node):
+        """Performs in-order traversal to find swapped nodes."""
         nonlocal node_one, node_two, previous_node
         if node is None:
             return
+        # Traverse left subtree
         in_order_traversal(node.left)
+
+        # Check if current node is out of order
         if previous_node is not None and previous_node.value > node.value:
+            # First violation
             if node_one is None:
                 node_one = previous_node
+            # Second violation (or adjacent nodes in first violation)
             node_two = node
         previous_node = node
+
+        # Traverse right subtree
         in_order_traversal(node.right)
 
+    # Find the two nodes that need to be swapped
     in_order_traversal(tree)
+
+    # Swap the values of the two nodes
     if node_one and node_two:
         node_one.value, node_two.value = node_two.value, node_one.value
     return tree
@@ -140,19 +181,37 @@ input_data = {
     "root": "1",
 }
 
+# Visual representation of input tree:
+#            10
+#         /     \
+#        7       20
+#      /   \    /  \
+#    3     12  8   22
+#   /           \
+# 2              14
+
 # Test Case:
 
 # Build and print input tree
-input_tree = build_tree(input_data)
 print("Input Tree:")
+input_tree = build_tree(input_data)
 print_tree(input_tree)
 
-# Repair BST
+# Repair BST by finding and swapping the two incorrect nodes
 output_tree = repair_bst(input_tree)
 
 # Print output tree
 print("\nOutput Tree:")
 print_tree(output_tree)
+
+# Visual representation of output tree:
+#           10
+#         /     \
+#        7       20
+#      /   \    /  \
+#    3      8  12   22
+#   /           \
+# 2              14
 
 # Output:
 
