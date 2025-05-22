@@ -160,3 +160,59 @@ print(same_bsts(array_one, array_two))  # Output: True
 #    5      12    94
 #  /       /     /
 # 2       11    81
+
+# =========================================================================================================================== #
+
+# Big O Analysis:
+
+"""
+# Time and Space Complexity Analysis:
+
+### Time Complexity Analysis
+
+Let's analyze the time and space complexity of the given same_bsts function.
+
+1. **Initial Check**: The initial length check `if len(array_one) != len(array_two)` is an O(1) operation.
+
+2. **Helper Function `_same_bsts_helper`**:
+   - The helper function is called recursively for each node in the BST.
+   - For each node, we perform two searches:
+     - `_find_next_smaller`: This function scans the array from `start_idx + 1` to the end to find the first element that is
+     smaller than `array[start_idx]` and >= `min_val`. In the worst case, this is O(n) for each call.
+     - `_find_next_larger_or_equal`: Similarly, this scans the array from `start_idx + 1` to the end to find the first element
+     that is >= `array[start_idx]` and <= `max_val`. This is also O(n) for each call.
+   - These searches are performed for each node in the BST, and in the worst case, the BST could be a degenerate tree
+   (a linked list), leading to O(n) recursive calls.
+   - Therefore, the total time complexity is O(n²) in the worst case.
+
+3. **Best Case**: If the BST is balanced, the depth of recursion is O(log n), and the total time complexity would be O(n log n),
+since at each level of the tree, we process O(n) elements in total across all nodes at that level.
+
+### Space Complexity Analysis
+
+1. **Recursion Stack**:
+   - The space complexity is determined by the depth of the recursion stack.
+   - In the worst case (degenerate tree), the recursion depth is O(n), leading to O(n) space.
+   - In the best case (balanced tree), the recursion depth is O(log n), leading to O(log n) space.
+
+2. **Additional Space**:
+   - No additional data structures are used that grow with the input size, so the space complexity is dominated by the recursion stack.
+
+### Summary
+
+- **Time Complexity**:
+  - Worst Case: O(n²) (degenerate tree)
+  - Best Case: O(n log n) (balanced tree)
+  
+- **Space Complexity**:
+  - Worst Case: O(n) (degenerate tree)
+  - Best Case: O(log n) (balanced tree)
+
+### Optimizations
+
+The current approach is correct but can be optimized to O(n) time by avoiding repeated scans of the array. One way to do this is by
+using pointers or iterators to track the current position in the array for each subtree, but this would require a more sophisticated
+approach or preprocessing (e.g., building the BST and comparing directly). However, the current approach is straightforward and
+works for the problem constraints where the arrays are small to moderate in size.
+
+"""
