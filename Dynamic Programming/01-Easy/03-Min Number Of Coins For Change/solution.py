@@ -40,16 +40,27 @@ O(n * d) time | O(n) space - where `n` is the target amount and `d` is the numbe
 
 # O(n * d) time | O(n) space
 def min_number_of_coins_for_change(n, denoms):
+    # Initialize a list to store the minimum number of coins needed for each amount from 0 to n
+    # We use infinity as the initial value to represent that those amounts are initially unreachable
     num_of_coins = [float("inf") for amount in range(n + 1)]
+
+    # Base case: 0 coins are needed to make change for 0 amount
     num_of_coins[0] = 0
 
+    # Iterate through each coin denomination
     for denom in denoms:
+        # For each denomination, iterate through all amounts from 0 to n
         for amount in range(len(num_of_coins)):
+            # If the current denomination can be used to make change for the current amount
             if denom <= amount:
+                # Update the minimum number of coins needed for this amount by either:
+                # - Keeping the existing minimum, or
+                # - Using one of the current denomination plus the minimum for (amount - denom)
                 num_of_coins[amount] = min(
                     num_of_coins[amount], num_of_coins[amount - denom] + 1
                 )
 
+    # Return the result for amount n, or -1 if it's not possible to make change
     return num_of_coins[n] if num_of_coins[n] != float("inf") else -1
 
 
