@@ -87,3 +87,54 @@ print(levenshtein_distance("", ""))
 
 print(levenshtein_distance("cereal", "saturdzz"))
 # Output: 7
+
+# =========================================================================================================================== #
+
+# Big O Analysis:
+
+"""
+# Time and Space Complexity Analysis:
+
+## Time Complexity Analysis
+
+The time complexity of the given Levenshtein distance algorithm is **O(m * n)**, where:
+- `m` is the length of `str_1` (the longer string, due to the initial swap if necessary),
+- `n` is the length of `str_2` (the shorter string).
+
+### Explanation:
+1. The outer loop runs `n` times (for each character in `str_2`).
+2. The inner loop runs `m` times (for each character in `str_1`).
+3. Inside the inner loop, the operations (comparisons, min calculations, and assignments) are all **O(1)**.
+4. Thus, the total time is proportional to `m * n`.
+
+## Space Complexity Analysis
+
+The space complexity is **O(m)**, where `m` is the length of the longer string (`str_1`).
+
+### Explanation:
+1. The algorithm uses a 1D array `dp` of size `m + 1` (initialized as `list(range(m + 1))`).
+2. It also uses a few extra variables (`prev_diagonal`, `temp`), but these are **O(1)** and do not depend on input size.
+3. The space is dominated by the `dp` array, so it is **O(m)**.
+
+### Summary:
+- **Time Complexity:** O(m * n) 
+- **Space Complexity:** O(m) 
+
+### Why not O(m * n)?
+
+A naive implementation of Levenshtein distance might use a 2D `dp` table, which would require **O(m * n)** space. However, this
+implementation optimizes space by observing that only the previous row (or column) is needed at any step, so it uses a 1D array
+and tracks the diagonal value manually.
+
+### Key Observations:
+
+- The initial swap ensures we always use the shorter string for the outer loop, but the time complexity remains **O(m * n)**
+(no asymptotic improvement, though practical speed may vary slightly).
+- The space optimization to **O(m)** is significant, especially for long strings.
+
+### Example:
+For two strings of lengths 5 and 3:
+- Time: 5 * 3 = 15 operations.
+- Space: Array of size 5 + 1 = 6.
+
+"""
