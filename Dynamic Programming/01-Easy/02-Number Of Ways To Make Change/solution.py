@@ -25,7 +25,7 @@ denoms = [1, 5]
 
 ## Optimal Time & Space Complexity:
 ```
-O(nd) time | O(n) space - where `n` is the target amount and `d` is the number of coin denominations.
+O(n * d) time | O(n) space - where `n` is the target amount and `d` is the number of coin denominations.
 ```
 
 """
@@ -35,7 +35,7 @@ O(nd) time | O(n) space - where `n` is the target amount and `d` is the number o
 # Solution:
 
 
-# O(nd) time | O(n) space
+# O(n * d) time | O(n) space
 def number_of_ways_to_make_change(n, denoms):
     ways = [0 for amount in range(n + 1)]
     ways[0] = 1
