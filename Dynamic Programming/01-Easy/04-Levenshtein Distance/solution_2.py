@@ -135,3 +135,229 @@ Since we ensure `m ≥ n` (by swapping `str_1` and `str_2` if necessary), the sp
 - **Space Complexity:** O(min(m, n)) 
 
 """
+
+# =========================================================================================================================== #
+
+# Detailed Code Explanation:
+
+"""
+This function computes the **Levenshtein distance** between two strings. The **Levenshtein distance** is a metric that measures
+how many **single-character edits** (insertions, deletions, or substitutions) are required to change one string into another.
+
+---
+
+### ✅ **Function Definition**
+
+```
+def levenshtein_distance(str_1, str_2):
+```
+
+This defines a function that takes two strings as input: `str_1` and `str_2`.
+
+---
+
+### 🔁 **Step 1: Ensure str_1 is the longer string**
+
+```
+    if len(str_1) < len(str_2):
+        return levenshtein_distance(str_2, str_1)
+```
+
+* This ensures that `str_1` is **not shorter than** `str_2`.
+* Why? To **optimize memory usage** by keeping the number of columns smaller in the dynamic programming table (fewer elements per row).
+
+---
+
+### 📏 **Step 2: Lengths**
+
+```
+    m = len(str_1)
+    n = len(str_2)
+```
+
+`m` is the length of the longer string. `n` is the shorter one.
+
+---
+
+### 📐 **Step 3: Initialize previous row**
+
+```
+    prev_row = list(range(m + 1))
+```
+
+* This represents the distance from an **empty prefix of `str_2`** to **each prefix of `str_1`**.
+* For example, to convert "" into "abc", you need 3 insertions. So this row would look like `[0, 1, 2, 3]`.
+
+---
+
+### 🔄 **Step 4: Loop over str_2 characters (outer loop)**
+
+```
+    for i in range(1, n + 1):
+        curr_row = [i] + [0] * m
+```
+
+* We're building the current row of the DP table.
+* `curr_row[0] = i` because converting the first `i` characters of `str_2` to an empty string takes `i` deletions.
+
+---
+
+### 🔁 **Step 5: Loop over str_1 characters (inner loop)**
+
+```
+    for j in range(1, m + 1):
+        if str_1[j - 1] == str_2[i - 1]:
+            curr_row[j] = prev_row[j - 1]
+        else:
+            curr_row[j] = 1 + min(
+                prev_row[j - 1],   # substitution
+                prev_row[j],       # deletion
+                curr_row[j - 1]    # insertion
+            )
+```
+
+* If the characters match (`str_1[j-1] == str_2[i-1]`), no operation is needed → cost is same as top-left (`prev_row[j - 1]`).
+* Otherwise, we compute the minimum cost of:
+
+  * Substitution (`prev_row[j - 1]`)
+  * Deletion from `str_2` (`prev_row[j]`)
+  * Insertion into `str_2` (`curr_row[j - 1]`)
+* We add 1 to that minimum, because one operation was needed.
+
+---
+
+### 🔄 **Step 6: Update prev_row**
+
+```
+    prev_row = curr_row
+```
+
+* Move to the next row. What was current becomes previous.
+
+---
+
+### ✅ **Step 7: Return final answer**
+
+```
+    return prev_row[m]
+```
+
+* This is the cost to convert full `str_2` into full `str_1`.
+
+---
+
+### 📌 **Example: `levenshtein_distance("abc", "yabd")`**
+
+|   |   | a | b | c |
+| - | - | - | - | - |
+|   | 0 | 1 | 2 | 3 |
+| y | 1 | 1 | 2 | 3 |
+| a | 2 | 1 | 2 | 3 |
+| b | 3 | 2 | 1 | 2 |
+| d | 4 | 3 | 2 | 2 |
+
+Answer: **2**
+
+---
+
+### ✅ Test Case Explanation
+
+```
+print(levenshtein_distance("abc", "yabd"))  # Output: 2
+```
+
+* "abc" → "yabd"
+* Edit 1: insert `y`
+* Edit 2: change `c` to `d`
+
+```
+print(levenshtein_distance("", ""))  # Output: 0
+```
+
+* No change needed.
+
+```
+print(levenshtein_distance("cereal", "saturdzz"))  # Output: 7
+```
+
+* Many edits needed → substitution, insertions, etc.
+
+---
+
+Let's walk through a **visual ASCII representation** of the **Levenshtein distance matrix** for this example:
+
+```
+levenshtein_distance("abc", "yabd")
+```
+
+---
+
+### 🧠 Strings:
+
+* `str_1 = "abc"` (columns)
+* `str_2 = "yabd"` (rows)
+
+We’ll build a matrix where each cell `[i][j]` contains the **Levenshtein distance** between:
+
+* the first `i` characters of `"yabd"` and
+* the first `j` characters of `"abc"`
+
+---
+
+### 📐 Initialization:
+
+We start by filling in the base cases (empty prefixes).
+
+```
+      ""  a  b  c
+   +---------------
+"" |  0  1  2  3
+y  |  1
+a  |  2
+b  |  3
+d  |  4
+```
+
+---
+
+### 🛠 Step-by-step Matrix Fill:
+
+We fill this matrix using the logic:
+
+* If characters match: take diagonal value.
+* Else: min(diagonal, left, top) + 1
+
+```
+      ""  a  b  c
+   +---------------
+"" |  0  1  2  3
+y  |  1  1  2  3
+a  |  2  1  2  3
+b  |  3  2  1  2
+d  |  4  3  2  2  ← answer: 2
+```
+
+---
+
+### 🔍 Matrix Explanation:
+
+Each number means: minimum operations needed to convert that substring of `"yabd"` into that of `"abc"`.
+
+For example:
+
+* To convert `"yab"` to `"abc"` takes 2 edits:
+
+  * Substitute `'y'` → `'a'`
+  * Keep `'a'`
+  * Keep `'b'`
+  * Substitute `'c'` → `'d'`
+
+---
+
+### ✅ Final Result:
+
+```
+levenshtein_distance("abc", "yabd") == 2
+```
+
+"""
