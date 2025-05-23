@@ -82,3 +82,40 @@ print(max_subset_sum_no_adjacent([]))
 
 print(max_subset_sum_no_adjacent([30, 25, 50, 55, 100]))
 # Output: 180
+
+# =========================================================================================================================== #
+
+# Big O Analysis:
+
+"""
+# Time and Space Complexity Analysis:
+
+Let's analyze the time and space complexity of the given `max_subset_sum_no_adjacent` function.
+
+### **Time Complexity**
+
+The function iterates through the input array once, starting from index 2 to the end. For each element, it performs a
+constant amount of work (comparisons and assignments). 
+
+- **Number of iterations**: `n - 2` (where `n` is the length of the array).
+- **Work per iteration**: O(1) (just a few comparisons and assignments).
+
+Thus, the **time complexity is O(n)** (linear time).
+
+### **Space Complexity**
+
+The function uses a few extra variables (`second_prev`, `first_prev`, and `current`) to keep track of the maximum sums
+at different positions. 
+
+- **Extra space used**: O(1) (constant space, no additional data structures like arrays or hash tables are used).
+
+Thus, the **space complexity is O(1)** (constant space).
+
+### **Summary**
+- **Time Complexity**: **O(n)**
+- **Space Complexity**: **O(1)**
+
+This is an optimal solution for the problem of finding the maximum subset sum with no adjacent elements, using
+dynamic programming with constant space optimization.
+
+"""
