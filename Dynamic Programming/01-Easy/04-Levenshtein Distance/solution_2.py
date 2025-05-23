@@ -89,3 +89,49 @@ print(levenshtein_distance("", ""))
 
 print(levenshtein_distance("cereal", "saturdzz"))
 # Output: 7
+
+# =========================================================================================================================== #
+
+# Big O Analysis:
+
+"""
+# Time and Space Complexity Analysis:
+
+## **1. Time Complexity:**
+
+The algorithm computes the Levenshtein distance using dynamic programming with **two nested loops**:
+- **Outer loop**: Runs `n` times (where `n = len(str_2)`).
+- **Inner loop**: Runs `m` times (where `m = len(str_1)`).
+
+**Operations per cell `(i, j)`**:
+1. **Character comparison** (`str_1[j-1] == str_2[i-1]`): O(1)
+2. **Minimum of 3 values** (`prev_row[j-1]`, `prev_row[j]`, `curr_row[j-1]`): O(1)
+
+**Total Time Complexity**:
+
+    O(n * m)
+
+- If m ≈ n, this simplifies to O(n²).
+
+---
+
+## **2. Space Complexity:**
+
+The algorithm optimizes space by **only storing two rows** (`prev_row` and `curr_row`) instead of a full 2D table.
+
+- **`prev_row`**: Size `m + 1` (stores the previous row of DP values).
+- **`curr_row`**: Size `m + 1` (stores the current row being computed).
+
+**Total Space Used**:
+
+    O(2 * (m + 1)) ≈ O(m)
+
+Since we ensure `m ≥ n` (by swapping `str_1` and `str_2` if necessary), the space complexity is: O(min(m, n))
+
+---
+
+### Summary:
+- **Time Complexity:** O(m * n) 
+- **Space Complexity:** O(min(m, n)) 
+
+"""
