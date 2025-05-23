@@ -74,3 +74,44 @@ print(min_number_of_coins_for_change(0, [1, 2, 3]))
 
 print(min_number_of_coins_for_change(9, [3, 4, 5]))
 # Output: 2
+
+# =========================================================================================================================== #
+
+# Big O Analysis:
+
+"""
+# Time and Space Complexity Analysis:
+
+Let's analyze the time and space complexity of the given `min_number_of_coins_for_change` function.
+
+### **Time Complexity:**
+
+The time complexity is determined by the nested loops in the function:
+1. The outer loop iterates over each denomination in `denoms`.
+2. The inner loop iterates over each amount from `0` to `n`.
+
+- Let `m` = number of denominations (`len(denoms)`).
+- Let `n` = the target amount.
+
+Since the inner loop runs for each denomination, the total time complexity is: O(m * n)
+
+### **Space Complexity:**
+
+The function uses an array `num_of_coins` of size `n + 1` to store intermediate results.
+
+Thus, the space complexity is: O(n)
+
+### **Summary:**
+- **Time Complexity:** O(m * n)
+- **Space Complexity:** O(n)
+
+### **Explanation:**
+- The algorithm is a classic **Dynamic Programming (DP)** approach to the **Unbounded Knapsack Problem** (Coin Change problem).
+- The DP table (`num_of_coins`) keeps track of the minimum coins needed for each amount up to `n`.
+- For each denomination, we update the DP table by considering whether using that denomination leads to a better (smaller)
+coin count for a given amount.
+
+This approach efficiently computes the minimum coins required while avoiding the exponential time complexity of a brute-force
+recursive solution.
+
+"""
