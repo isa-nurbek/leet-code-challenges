@@ -79,3 +79,50 @@ print(number_of_ways_to_make_change(0, [2, 3, 4, 7]))
 
 print(number_of_ways_to_make_change(10, [1, 5, 10, 25]))
 # Output: 4
+
+# =========================================================================================================================== #
+
+# Big O Analysis:
+
+"""
+# Time and Space Complexity Analysis:
+
+### **Space Complexity:**
+
+- The function uses an array `ways` of size `n + 1` to store intermediate results.
+- No other significant additional space is used.
+- Thus, the **space complexity is `O(n)`**, where `n` is the target amount.
+
+### **Time Complexity:**
+
+1. **Initialization:**
+   - `ways = [0 for amount in range(n + 1)]` takes `O(n)` time.
+   - `ways[0] = 1` is a constant-time operation.
+
+2. **Nested Loops:**
+   - The outer loop runs once for each denomination in `denoms`. Let `d` be the number of denominations (`d = len(denoms)`).
+   - The inner loop runs for each `amount` from `1` to `n` (i.e., `n` iterations).
+   - Inside the inner loop, the operation `ways[amount] += ways[amount - denom]` is `O(1)`.
+
+Thus, the total time complexity is:
+- **`O(d * n)`**, where:
+  - `d` = number of denominations.
+  - `n` = target amount.
+
+### **Final Complexity:**
+
+- **Time Complexity:** `O(d * n)`
+- **Space Complexity:** `O(n)`
+
+### **Explanation of the Approach:**
+
+The dynamic programming approach works by:
+1. **Initializing** `ways[0] = 1` because there is exactly 1 way to make change for `0` (using no coins).
+2. **Iterating over each denomination** and updating the `ways` array:
+   - For each `denom`, and for each `amount` from `1` to `n`, if `denom <= amount`, then the number of ways to make `amount` is
+   increased by `ways[amount - denom]` (since we can add `denom` to all those ways).
+3. **Returning** `ways[n]`, which now contains the total number of ways to make change for `n`.
+
+This approach efficiently computes the solution by breaking the problem into smaller subproblems.
+
+"""
