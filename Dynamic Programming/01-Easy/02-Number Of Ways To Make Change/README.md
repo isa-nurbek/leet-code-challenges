@@ -38,4 +38,4 @@ Build up the array mentioned in `Hint #1` one coin denomination at a time. In ot
 
 ## Optimal Time & Space Complexity
 
-`O(nd)` time | `O(n)` space - where `n` is the target amount and `d` is the number of coin denominations.
+`O(n * d)` time | `O(n)` space - where `n` is the target amount and `d` is the number of coin denominations.
