@@ -72,3 +72,57 @@ print(max_subset_sum_no_adjacent([]))
 
 print(max_subset_sum_no_adjacent([30, 25, 50, 55, 100]))
 # Output: 180
+
+# =========================================================================================================================== #
+
+# Big O Analysis:
+
+"""
+# Time and Space Complexity Analysis:
+
+Let's analyze the time and space complexity of the given `max_subset_sum_no_adjacent` function.
+
+### **Time Complexity:**
+
+1. **Initial Checks:**
+   - The first two conditions (checking for empty array or single-element array) are O(1) operations.
+   
+2. **Initialization:**
+   - Creating the `max_sums` array as a copy of the input array takes O(n) time, where n is the length of the input array.
+
+3. **Loop:**
+   - The loop runs from `i = 2` to `i = len(array) - 1`, which is O(n) iterations.
+   - Inside the loop, each iteration involves a constant-time operation (a `max` comparison and an addition).
+
+Thus, the **total time complexity is O(n)**.
+
+---
+
+### **Space Complexity:**
+
+1. **Auxiliary Array (`max_sums`):**
+   - The `max_sums` array is created with the same size as the input array, so it takes O(n) space.
+
+2. **Other Variables:**
+   - The rest of the variables (`i` in the loop) use constant space (O(1)).
+
+Thus, the **total space complexity is O(n)**.
+
+---
+
+### Final Complexity Analysis:
+
+| Time Complexity | Space Complexity  |
+|-----------------|-------------------|
+| O(n)            | O(n)              |
+
+---
+
+### Optimization Note:
+
+The space complexity can be optimized to **O(1)** by realizing that we only need to keep track of the last two values
+(`max_sums[i-1]` and `max_sums[i-2]`) at any point in the iteration, instead of storing the entire `max_sums` array.
+
+The given solution is already optimal in terms of time, but space can be improved further.
+
+"""
