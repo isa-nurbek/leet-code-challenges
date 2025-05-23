@@ -37,14 +37,35 @@ O(n * d) time | O(n) space - where `n` is the target amount and `d` is the numbe
 
 # O(n * d) time | O(n) space
 def number_of_ways_to_make_change(n, denoms):
+    """
+    Calculate the number of ways to make change for a given amount using dynamic programming.
+
+    Args:
+    n (int): The target amount to make change for
+    denoms (list): List of available coin denominations
+
+    Returns:
+    int: Number of ways to make change for amount n using given denominations
+    """
+
+    # Initialize a DP array where ways[amount] will store the number of ways
+    # to make change for that amount. We include 0 to n amounts.
     ways = [0 for amount in range(n + 1)]
+
+    # Base case: There's exactly 1 way to make change for amount 0 - by using no coins
     ways[0] = 1
 
+    # Iterate through each coin denomination
     for denom in denoms:
+        # For each denomination, update the ways array for all amounts from 1 to n
         for amount in range(1, n + 1):
+            # If the current denomination can be used for this amount
             if denom <= amount:
+                # The number of ways to make 'amount' is increased by the number of ways
+                # to make (amount - denom), since we can add this coin to those combinations
                 ways[amount] += ways[amount - denom]
 
+    # Return the number of ways to make change for the target amount n
     return ways[n]
 
 
