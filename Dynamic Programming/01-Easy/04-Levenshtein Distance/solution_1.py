@@ -86,3 +86,50 @@ print(levenshtein_distance("", ""))
 
 print(levenshtein_distance("cereal", "saturdzz"))
 # Output: 7
+
+# =========================================================================================================================== #
+
+# Big O Analysis:
+
+"""
+# Time and Space Complexity Analysis:
+
+### Time Complexity:
+
+The algorithm uses a dynamic programming approach with a 2D table (`edits`) of size `(len(str_2) + 1) × (len(str_1) + 1)`.
+
+- The outer loop runs `len(str_2) + 1` times (rows).
+- The inner loop runs `len(str_1) + 1` times (columns).
+
+For each cell `(i, j)`, the computation involves:
+1. A constant-time check (`if str_2[i - 1] == str_1[j - 1]`).
+2. Either a constant-time assignment (`edits[i][j] = edits[i - 1][j - 1]`) or a constant-time `min` operation over 3 values.
+
+Thus, the total time complexity is:
+
+    O((m + 1) * (n + 1)) = O(m * n)
+
+where:
+- m = len(str_2)
+- n = len(str_1)
+
+### Space Complexity:
+
+The algorithm constructs a 2D table (`edits`) of size `(m + 1) × (n + 1)`, where:
+- m = len(str_2)
+- n = len(str_1)
+
+Thus, the space complexity is: O(m * n)
+
+### Summary:
+- **Time Complexity:** O(m * n) 
+- **Space Complexity:** O(m * n) 
+
+Where `m` and `n` are the lengths of `str_2` and `str_1`, respectively.
+
+### Optimization Note:
+
+The space complexity can be optimized to O(min(m, n)) by using two 1D arrays instead of a full 2D table, since we only need the
+previous row to compute the current row.
+
+"""
