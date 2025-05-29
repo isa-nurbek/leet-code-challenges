@@ -35,7 +35,7 @@ height = 3
 <details>
 <summary><b>Hint 1</b></summary>
 
-Think recursively. How many positions in the graph can access the bottom right corner of the graph? In other words, what positions do you need to reach before you can reach the bottom right corner?
+Think `recursively`. How many positions in the graph can access the bottom right corner of the graph? In other words, what positions do you need to reach before you can reach the bottom right corner?
 
 </details>
 
@@ -49,7 +49,7 @@ The number of ways to reach any position in the graph is equal to the number of 
 <details>
 <summary><b>Hint 3</b></summary>
 
-Using the information in Hints #1 and #2, can you come up with an efficient way to solve this problem that doesn't repeatedly perform the same work? What does a dynamic-programming implementation look like?
+Using the information in `Hints #1` and `#2`, can you come up with an efficient way to solve this problem that doesn't repeatedly perform the same work? What does a `dynamic-programming` implementation look like?
 
 </details>
 
