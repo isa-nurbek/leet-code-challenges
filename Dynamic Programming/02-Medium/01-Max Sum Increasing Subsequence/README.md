@@ -30,10 +30,10 @@ Try building an array of the same length as the input array. At each index in th
 <details>
 <summary><b>Hint 2</b></summary>
 
-Can you efficiently keep track of potential sequences in another array? Instead of storing entire sequences, try storing the indices of previous numbers. For example, at index 3 in this other array, store the index of the before-last number in the max-sum increasing subsequence ending with the number at index 3.
+Can you efficiently keep track of potential sequences in another array? Instead of storing entire sequences, try storing the indices of previous numbers. For example, at `index 3` in this other array, store the index of the before-last number in the max-sum increasing subsequence ending with the number at `index 3`.
 
 </details>
 
 ## Optimal Time & Space Complexity
 
-`O(n^2)` time | `O(n)` space - where `n` is the length of the input array.
+`O(n²)` time | `O(n)` space - where `n` is the length of the input array.
