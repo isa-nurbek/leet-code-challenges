@@ -17,3 +17,23 @@ array = [10, 70, 20, 30, 50, 11, 30]
 ```plaintext
 [110, [10, 20, 30, 50]] // The subsequence [10, 20, 30, 50] is strictly increasing and yields the greatest sum: 110.
 ```
+
+## Hints
+
+<details>
+<summary><b>Hint 1</b></summary>
+
+Try building an array of the same length as the input array. At each index in this new array, store the maximum sum that can be generated from an increasing subsequence ending with the number found at that index in the input array.
+
+</details>
+
+<details>
+<summary><b>Hint 2</b></summary>
+
+Can you efficiently keep track of potential sequences in another array? Instead of storing entire sequences, try storing the indices of previous numbers. For example, at index 3 in this other array, store the index of the before-last number in the max-sum increasing subsequence ending with the number at index 3.
+
+</details>
+
+## Optimal Time & Space Complexity
+
+`O(n^2)` time | `O(n)` space - where `n` is the length of the input array.
