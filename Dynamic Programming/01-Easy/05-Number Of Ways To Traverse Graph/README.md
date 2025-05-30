@@ -1,8 +1,8 @@
 # Number Of Ways To Traverse Graph
 
-You're given two positive integers representing the width and height of a grid-shaped, rectangular graph. Write a function that returns the number of ways to reach the bottom right corner of the graph when starting at the top left corner. Each move you take must either go down or right. In other words, you can never move up or left in the graph.
+You're given two positive integers representing the `width` and `height` of a grid-shaped, rectangular graph. Write a function that returns the number of ways to reach the bottom right corner of the graph when starting at the top left corner. Each move you take must either go down or right. In other words, you can never move up or left in the graph.
 
-For example, given the graph illustrated below, with width = 2 and height = 3, there are three ways to reach the bottom right corner when starting at the top left corner:
+For example, given the graph illustrated below, with `width = 2` and `height = 3`, there are three ways to reach the bottom right corner when starting at the top left corner:
 
 ```plaintext
  _ _
@@ -15,7 +15,7 @@ For example, given the graph illustrated below, with width = 2 and height = 3, t
 2. Right, Down, Down
 3. Down, Right, Down
 
-Note: you may assume that width * height >= 2. In other words, the graph will never be a 1x1 grid.
+> Note: you may assume that `width * height >= 2`. In other words, the graph will never be a `1x1 grid`.
 
 ## Sample Input
 
@@ -35,7 +35,7 @@ height = 3
 <details>
 <summary><b>Hint 1</b></summary>
 
-Think recursively. How many positions in the graph can access the bottom right corner of the graph? In other words, what positions do you need to reach before you can reach the bottom right corner?
+Think `recursively`. How many positions in the graph can access the bottom right corner of the graph? In other words, what positions do you need to reach before you can reach the bottom right corner?
 
 </details>
 
@@ -49,7 +49,7 @@ The number of ways to reach any position in the graph is equal to the number of 
 <details>
 <summary><b>Hint 3</b></summary>
 
-Using the information in Hints #1 and #2, can you come up with an efficient way to solve this problem that doesn't repeatedly perform the same work? What does a dynamic-programming implementation look like?
+Using the information in `Hints #1` and `#2`, can you come up with an efficient way to solve this problem that doesn't repeatedly perform the same work? What does a `dynamic-programming` implementation look like?
 
 </details>
 
