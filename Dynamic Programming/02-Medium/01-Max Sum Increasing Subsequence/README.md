@@ -17,7 +17,9 @@ array = [10, 70, 20, 30, 50, 11, 30]
 ## Sample Output
 
 ```plaintext
-[110, [10, 20, 30, 50]] // The subsequence [10, 20, 30, 50] is strictly increasing and yields the greatest sum: 110.
+[110, [10, 20, 30, 50]]
+
+// The subsequence [10, 20, 30, 50] is strictly increasing and yields the greatest sum: 110.
 ```
 
 ## Hints
