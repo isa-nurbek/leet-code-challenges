@@ -48,7 +48,7 @@ O(n + m) time | O(1) space - where `n` is the width of the graph and `m` is the 
 # Solution:
 
 
-# O(n * m) time | O(n * m) space
+# O(w * h) time | O(w * h) space
 # Dynamic Programming (Bottom-Up DP)
 def number_of_ways_to_traverse_graph(width, height):
     # Create a dynamic programming (DP) table with dimensions (width+1) x (height+1)
