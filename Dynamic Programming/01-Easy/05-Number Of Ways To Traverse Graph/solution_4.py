@@ -81,3 +81,49 @@ print(number_of_ways_to_traverse_graph(3, 2))
 
 print(number_of_ways_to_traverse_graph(2, 2))
 # Output: 2
+
+# =========================================================================================================================== #
+
+# Big O Analysis:
+
+"""
+# Time and Space Complexity Analysis:
+
+## **Time Complexity Analysis**
+
+- The outer loop runs from `w = 2` to `width`, which is `O(width)` iterations.
+- The inner loop runs from `h = 2` to `height`, which is `O(height)` iterations per outer loop iteration.
+- Thus, the total time complexity is `O(width * height)`.
+
+## **Space Complexity Analysis**
+
+- The `dp` array is of size `height + 1`, so the space complexity is `O(height)`.
+- This is efficient compared to a 2D DP table which would require `O(width * height)` space.
+
+### **Final Answer**
+The given DP solution has:
+- **Time Complexity**: `O(width * height)`.
+- **Space Complexity**: `O(height)`. 
+
+This is efficient for moderate grid sizes. For very large grids, the combinatorics approach would be more efficient.
+
+---
+
+### **Alternative Approach (Combinatorics)**
+
+This problem can also be solved using combinatorics:
+- To go from `(0,0)` to `(width-1, height-1)`, you need to make `(width-1)` right moves and `(height-1)` down moves.
+- The total number of moves is `(width-1 + height-1) = (width + height - 2)`.
+- The number of ways is the number of ways to choose `(width-1)` right moves (or equivalently `(height-1)` down moves)
+out of these total moves.
+- Thus, the answer is `C(width + height - 2, width - 1)` or `C(width + height - 2, height - 1)`.
+
+For the example `width = 4`, `height = 3`:
+- Total moves = `4 + 3 - 2 = 5`.
+- Ways = `C(5, 3) = 10` or `C(5, 2) = 10`.
+
+This approach has:
+- Time complexity: `O(width + height)` (assuming binomial coefficient computation is optimized).
+- Space complexity: `O(1)`.
+
+"""
