@@ -24,7 +24,7 @@ str_2 = "yabd"
 
 ## Optimal Time & Space Complexity:
 ```
-O(nm) time | O(min(n, m)) space - where `n` and `m` are the lengths of the two input strings.
+O(n * m) time | O(min(n, m)) space - where `n` and `m` are the lengths of the two input strings.
 ```
 
 """
