@@ -50,9 +50,31 @@ O(n + m) time | O(1) space - where `n` is the width of the graph and `m` is the 
 
 # O(2^(n + m)) time | O(n + m) space
 def number_of_ways_to_traverse_graph(width, height):
+    """
+    Calculate the number of unique ways to traverse a grid from top-left to bottom-right
+    when you can only move right or down.
+
+    Args:
+        width (int): The width of the grid (number of columns)
+        height (int): The height of the grid (number of rows)
+
+    Returns:
+        int: The number of unique paths from top-left to bottom-right
+
+    Approach:
+        This uses a recursive solution with base case and recurrence relation:
+        - Base case: If grid is 1x1 (single cell) or a single row/column, there's only 1 way
+        - Recursive case: Paths to current cell = paths from above + paths from left
+    """
+
+    # Base case: if grid is single row or single column, only one path exists
     if width == 1 or height == 1:
         return 1
 
+    # Recursive case:
+    # Number of ways to reach current cell equals:
+    #   ways to reach cell above (same column, row-1) +
+    #   ways to reach cell to left (column-1, same row)
     return number_of_ways_to_traverse_graph(
         width - 1, height
     ) + number_of_ways_to_traverse_graph(width, height - 1)
