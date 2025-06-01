@@ -127,3 +127,212 @@ This problem can also be solved using combinatorics:
 - To go from `(0, 0)` to `(width-1, height-1)`, you need to make exactly `(width - 1)` right moves and `(height - 1)` down moves.
 
 """
+
+# =========================================================================================================================== #
+
+# Detailed Code Explanation:
+
+"""
+This function calculates the **number of unique ways to traverse a grid** (or graph) from the **top-left corner to the bottom-right
+corner**, where you can only move **right** or **down** at each step.
+
+---
+
+### 🧠 **Understanding the Problem**
+
+Given a grid of size `width x height`:
+
+* Start at the top-left cell `(1, 1)`.
+* Your goal is to reach the bottom-right cell `(width, height)`.
+* You can only move:
+
+  * **Right** (→)
+  * **Down** (↓)
+
+This is a classic **Dynamic Programming** problem that counts the number of unique paths in a grid.
+
+---
+
+### 🔍 **Breakdown of the Code**
+
+```
+def number_of_ways_to_traverse_graph(width, height):
+    dp = [[0 for _ in range(height + 1)] for _ in range(width + 1)]
+```
+
+* We initialize a 2D list `dp` of size `(width + 1) x (height + 1)` filled with zeros.
+* `dp[w][h]` will store the **number of ways to reach cell (w, h)** from (1,1).
+
+Why `+1`?
+
+> To make the grid 1-indexed. This avoids dealing with index 0, making the logic cleaner.
+
+---
+
+```
+    for w in range(1, width + 1):
+        for h in range(1, height + 1):
+```
+
+* Iterate through every cell in the grid from `(1,1)` to `(width, height)`.
+
+```
+    if w == 1 or h == 1:
+        dp[w][h] = 1
+```
+
+* If we're on the **first row** or **first column**, there's only **1 way** to reach that cell:
+
+  * Move right all the way (if on row 1)
+  * Move down all the way (if on column 1)
+
+```
+    else:
+        dp[w][h] = dp[w - 1][h] + dp[w][h - 1]
+```
+
+* For other cells:
+
+  * Number of ways to get to `(w, h)` = **from the left cell** `(w-1, h)` **+ from the top cell** `(w, h-1)`
+
+This is the key dynamic programming idea:
+**Each cell's solution is built using smaller sub-problems.**
+
+---
+
+### 🔁 **How It Works With Example**
+
+#### `number_of_ways_to_traverse_graph(3, 2)`
+
+Grid size: 3 (width) x 2 (height)
+Grid cells:
+
+```
+(1,1) (1,2)
+(2,1) (2,2)
+(3,1) (3,2)
+```
+
+We fill the `dp` table like this:
+
+| w\h | 1 | 2 |
+| --- | - | - |
+| 1   | 1 | 1 |
+| 2   | 1 | 2 |
+| 3   | 1 | 3 |
+
+→ **Answer = 3**
+
+---
+
+### ✅ **Test Case Outputs**
+
+```
+print(number_of_ways_to_traverse_graph(4, 3))  # Output: 10
+```
+
+10 unique paths in a 4x3 grid.
+
+```
+print(number_of_ways_to_traverse_graph(3, 2))  # Output: 3
+```
+
+3 unique paths in a 3x2 grid.
+
+```
+print(number_of_ways_to_traverse_graph(2, 2))  # Output: 2
+```
+
+2 unique paths in a 2x2 grid.
+
+---
+
+### ⏱️ **Time & Space Complexity**
+
+* **Time Complexity:** `O(width * height)`
+* **Space Complexity:** `O(width * height)` for the 2D `dp` array
+
+We could optimize space to `O(min(width, height))` using a 1D array if needed.
+
+---
+
+### 🧮 **Alternative (Mathematical) Solution**
+
+The number of unique paths is a **combinatorics problem**:
+
+> To move from (1,1) to (W,H), you need `(W-1)` right moves and `(H-1)` down moves
+> So total moves = `(W-1 + H-1)`
+> Choose `(W-1)` or `(H-1)` from that:
+
+Paths} = (width + height - 2)}{(width - 1)}
+
+This approach is faster for large grids and uses constant space.
+
+---
+
+Let's visualize the path traversal in an ASCII grid.
+
+We'll use:
+
+* `S` = Start (top-left)
+* `E` = End (bottom-right)
+* `.` = Open cell
+* Arrows (`→`, `↓`) to represent possible movements
+
+We'll take `width = 4`, `height = 3` as an example. The grid is 4 columns wide and 3 rows high.
+
+---
+
+### 📦 Grid Layout (4 × 3)
+
+```
+S  .  .  .
+↓  ↓  ↓  ↓
+.  .  .  .
+↓  ↓  ↓  ↓
+.  .  .  E
+```
+
+---
+
+### 🧠 Idea
+
+You can move only:
+
+* **Right (`→`)**
+* **Down (`↓`)**
+
+To get from `S` to `E`, you need:
+
+* 3 right moves (to go from column 1 to 4)
+* 2 down moves (to go from row 1 to 3)
+
+So any path is a sequence of 3 R's and 2 D's.
+
+---
+
+### 📋 Possible Paths Count (Width = 4, Height = 3)
+
+* Total moves = 3 (right) + 2 (down) = 5 moves
+* Choose 2 downs (or 3 rights) from 5 steps:
+
+{5}{2} = 10 { unique paths}
+
+---
+
+### 🛤️ A Few Path Examples (R = Right, D = Down):
+
+1. `→ → → ↓ ↓`
+2. `→ → ↓ → ↓`
+3. `→ ↓ → → ↓`
+4. `→ ↓ → ↓ →`
+5. `↓ → → → ↓`
+6. `↓ → → ↓ →`
+7. `↓ → ↓ → →`
+8. `→ ↓ ↓ → →`
+9. `↓ ↓ → → →`
+10. `→ ↓ ↓ → →`
+
+Each one represents a different sequence to reach the end.
+
+"""
