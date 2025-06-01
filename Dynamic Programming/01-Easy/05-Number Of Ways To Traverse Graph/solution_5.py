@@ -93,3 +93,30 @@ print(number_of_ways_to_traverse_graph(3, 2))
 
 print(number_of_ways_to_traverse_graph(2, 2))
 # Output: 2
+
+# =========================================================================================================================== #
+
+# Big O Analysis:
+
+"""
+# Time and Space Complexity Analysis:
+
+## **Time Complexity**
+
+- **Binomial Coefficient Calculation**: The `math.comb` function in Python computes the binomial coefficient efficiently.
+The time complexity of calculating `C(n, k)` is `O(n)` due to the multiplicative approach used to compute the factorials or
+using multiplicative formula for combinations.
+  - Here, `n = width + height - 2`, so the time complexity is `O(width + height)`.
+
+### **Space Complexity**
+
+- **Auxiliary Space**: The calculation of the binomial coefficient does not require additional space proportional to the input size.
+It uses a constant amount of space for intermediate calculations. Thus, the space complexity is `O(1)`.
+
+### **Summary**
+- **Time Complexity**: `O(width + height)`
+- **Space Complexity**: `O(1)`
+
+This approach efficiently leverages combinatorial mathematics to solve the problem with optimal time and space complexity.
+
+"""
