@@ -83,3 +83,47 @@ print(number_of_ways_to_traverse_graph(3, 2))
 
 print(number_of_ways_to_traverse_graph(2, 2))
 # Output: 2
+
+# =========================================================================================================================== #
+
+# Big O Analysis:
+
+"""
+# Time and Space Complexity Analysis:
+
+## **Time Complexity**
+
+- **Initialization**: 
+  - The DP table is initialized in O((width + 1) * (height + 1)) = O(width * height) time.
+- **Filling the DP Table**:
+  - The nested loops iterate over each cell in the `width x height` grid.
+  - Each cell's computation is O(1) (just a lookup and addition).
+  - Thus, the total time is O(width * height).
+
+
+## **Space Complexity**
+
+- **DP Table Storage**:
+  - The DP table consumes O(width * height) space.
+- **No Additional Space**:
+  - Only the DP table is used, and no extra data structures are needed.
+  - Thus, the total space is O(width * height).
+
+### **Final Answer**
+- **Time Complexity**: O(width * height).
+- **Space Complexity**: O(width * height).
+
+### **Optimization (Space)**
+
+If we observe, at any point, we only need the **current row and the previous row** (or current column and previous column) to
+compute the next value. Thus, we can reduce the space complexity to O(min(width, height)) by using a 1D DP array and updating
+it iteratively.
+
+However, the given solution uses the full 2D DP table, so the space remains O(width * height).
+
+### **Alternative Approach (Combinatorics)**
+
+This problem can also be solved using combinatorics:
+- To go from `(0, 0)` to `(width-1, height-1)`, you need to make exactly `(width - 1)` right moves and `(height - 1)` down moves.
+
+"""
