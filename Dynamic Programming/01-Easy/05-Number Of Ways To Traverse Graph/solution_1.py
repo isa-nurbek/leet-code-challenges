@@ -90,3 +90,93 @@ print(number_of_ways_to_traverse_graph(3, 2))
 
 print(number_of_ways_to_traverse_graph(2, 2))
 # Output: 2
+
+# =========================================================================================================================== #
+
+# Big O Analysis:
+
+"""
+# Time and Space Complexity Analysis:
+
+### **Problem Understanding**
+
+The given function `number_of_ways_to_traverse_graph(width, height)` calculates the number of unique paths from the top-left
+corner to the bottom-right corner of a 2D grid with dimensions `width x height`. Movement is restricted to either right or
+down at any point in the grid.
+
+### **Base Case**
+
+The base case is straightforward:
+- If either `width` or `height` is 1, there's only **one way** to traverse the grid.
+This is because:
+  - If `width = 1`, the grid is a single column; you can only move down.
+  - If `height = 1`, the grid is a single row; you can only move right.
+
+### **Recursive Case**
+
+For grids larger than 1x1, the number of ways to traverse is the sum of:
+1. The number of ways to traverse a grid of `(width - 1) x height` (move right first).
+2. The number of ways to traverse a grid of `width x (height - 1)` (move down first).
+
+This mirrors the combinatorial approach where the total paths are the sum of paths from the two possible immediate next steps.
+
+---
+
+### **Time Complexity Analysis**
+
+#### **Recursive Tree Structure**
+The recursion forms a binary tree where each node represents a subproblem:
+- Root: `(width, height)`
+- Left child: `(width - 1, height)`
+- Right child: `(width, height - 1)`
+- Leaves: Nodes where either `width = 1` or `height = 1`.
+
+#### **Tree Depth**
+The maximum depth of the tree is `(width + height - 2)`, because:
+- Each level reduces either `width` or `height` by 1.
+- The base case is reached when either `width` or `height` becomes 1.
+
+#### **Number of Nodes**
+The recursion tree is a full binary tree (each node has 0 or 2 children) with:
+- Total nodes = 2^(depth + 1) - 1.
+- Since depth is `(width + height - 2)`, the number of nodes is O(2^(width + height)).
+
+However, this is a loose upper bound because many subproblems are repeated (e.g., `(width-1, height-1)` is computed in both branches).
+
+#### **Tight Bound Using Combinatorics**
+The exact number of unique subproblems is (width * height), since the recursion can be memoized into a 2D table.
+Without memoization, the time complexity is exponential due to redundant calculations.
+
+The exact time complexity is O({w + h - 2} / {w - 1}), which is the number of paths in the recursion tree (equivalent to the
+answer itself). This is because the recursion explores all possible paths, and the answer is the binomial coefficient
+({w + h - 2} / {w - 1}).
+
+But in Big-O terms, this is O(2^(w + h)), as the binomial coefficient grows exponentially.
+
+---
+
+### **Space Complexity Analysis**
+
+#### **Recursion Call Stack**
+The maximum depth of the call stack is O(width + height), as each recursive call reduces either `width` or `height` by 1.
+
+#### **Auxiliary Space**
+No additional data structures are used, so the space complexity is dominated by the call stack: O(width + height)
+
+---
+
+### **Final Answer**
+- **Time Complexity (Current Implementation):** O(2^(w + h)) (exponential).
+- **Space Complexity (Current Implementation):** O(width + height) (call stack depth).
+
+---
+
+### **Optimization with Memoization or DP**
+The current implementation is inefficient due to repeated work.
+
+Two optimizations are possible:
+
+1. Memoization (Top-Down DP)
+2. Combinatorial Formula
+
+"""
