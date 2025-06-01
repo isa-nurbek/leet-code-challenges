@@ -48,7 +48,7 @@ O(n + m) time | O(1) space - where `n` is the width of the graph and `m` is the 
 # Solution:
 
 
-# O(2^(n + m)) time | O(n + m) space
+# O(2^(w + h)) time | O(w + h) space
 def number_of_ways_to_traverse_graph(width, height):
     """
     Calculate the number of unique ways to traverse a grid from top-left to bottom-right
