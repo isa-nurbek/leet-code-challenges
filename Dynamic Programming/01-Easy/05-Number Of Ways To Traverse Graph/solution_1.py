@@ -180,3 +180,192 @@ Two optimizations are possible:
 2. Combinatorial Formula
 
 """
+
+# =========================================================================================================================== #
+
+# Detailed Code Explanation:
+
+"""
+This function calculates the **number of ways to traverse a grid** from the top-left corner to the bottom-right corner,
+moving **only right or down**.
+
+---
+
+## 🔢 Problem Explanation
+
+You're given a `width` and `height` of a grid. The task is to determine **how many unique paths** exist from the **top-left**
+corner `(0, 0)` to the **bottom-right** corner `(width - 1, height - 1)` if you can **only move right or down** at any step.
+
+For example:
+
+```
+A 4x3 grid looks like this:
+
+Start → → →
+↓
+↓
+End
+
+You can only go → or ↓
+
+```
+
+---
+
+## 🧠 Function Breakdown
+
+```
+def number_of_ways_to_traverse_graph(width, height):
+    if width == 1 or height == 1:
+        return 1
+```
+
+This is the **base case** for the recursion.
+
+* If `width == 1`, it means there's only **1 column left** — you can only go down.
+* If `height == 1`, it means there's only **1 row left** — you can only go right.
+* In either case, there is **only one way** to finish the path.
+
+---
+
+```
+    return number_of_ways_to_traverse_graph(
+        width - 1, height
+    ) + number_of_ways_to_traverse_graph(width, height - 1)
+```
+
+This is the **recursive step**:
+
+* You have two choices:
+
+  * Move **right** → this reduces the `width` by 1.
+  * Move **down** ↓ this reduces the `height` by 1.
+* So, the **total number of paths** from a cell is the **sum of paths** from:
+
+  * the cell to the **right** (`width - 1`)
+  * the cell **below** (`height - 1`)
+
+---
+
+## 🧪 Test Case Walkthrough
+
+### `number_of_ways_to_traverse_graph(2, 2)`
+
+```
+Paths from (0, 0) to (1, 1):
+1. Right → Down
+2. Down → Right
+
+Answer: 2
+```
+
+---
+
+### `number_of_ways_to_traverse_graph(3, 2)`
+
+```
+Grid:
+Start → → 
+↓    ↓
+End
+
+Paths:
+1. → → ↓
+2. → ↓ →
+3. ↓ → →
+
+Answer: 3
+```
+
+---
+
+### `number_of_ways_to_traverse_graph(4, 3)`
+
+```
+Total moves = (width - 1) + (height - 1) = 3 + 2 = 5 moves.
+From those 5 moves, choose any 2 to be down (or 3 to be right):
+
+C(5,2) = 10
+
+Answer: 10
+```
+
+---
+
+## ✅ Summary
+
+* The code explores all paths recursively.
+* Moves are only **right** or **down**.
+* Time complexity is exponential without memoization.
+* It’s elegant for small inputs but inefficient for large grids unless optimized.
+
+---
+
+Let's visualize the grid traversal problem in **ASCII** art.
+
+We'll go through three examples:
+
+---
+
+### 📦 Example 1: `number_of_ways_to_traverse_graph(2, 2)`
+
+```
+Grid:
+(0,0) --→-- (0,1)
+  |          |
+  ↓          ↓
+(1,0) --→-- (1,1)
+
+Paths:
+1. → ↓
+2. ↓ →
+```
+
+---
+
+### 📦 Example 2: `number_of_ways_to_traverse_graph(3, 2)`
+
+```
+Grid:
+(0,0) --→-- (0,1) --→-- (0,2)
+  |          |           |
+  ↓          ↓           ↓
+(1,0) --→-- (1,1) --→-- (1,2)
+
+Paths:
+1. → → ↓
+2. → ↓ →
+3. ↓ → →
+```
+
+---
+
+### 📦 Example 3: `number_of_ways_to_traverse_graph(4, 3)`
+
+```
+Grid:
+(0,0) --→-- (0,1) --→-- (0,2) --→-- (0,3)
+  |          |           |           |
+  ↓          ↓           ↓           ↓
+(1,0) --→-- (1,1) --→-- (1,2) --→-- (1,3)
+  |          |           |           |
+  ↓          ↓           ↓           ↓
+(2,0) --→-- (2,1) --→-- (2,2) --→-- (2,3)
+
+Start = (0,0)
+End   = (2,3)
+
+Each path is 5 moves (3 rights, 2 downs)
+Total unique paths = 10
+```
+
+---
+
+### 💡 Visualization Notes:
+
+* Arrows `→` and `↓` represent allowed moves.
+* Movement is only allowed **right** or **down**.
+* The number of unique paths corresponds to how many different **sequences of "right" and "down" moves** can get you from
+top-left to bottom-right.
+
+"""
