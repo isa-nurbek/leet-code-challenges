@@ -51,20 +51,52 @@ O(n + m) time | O(1) space - where `n` is the width of the graph and `m` is the 
 # O(n * m) time | O(n * m) space
 # Memoization (Top-Down DP)
 def number_of_ways_to_traverse_graph(width, height):
+    """
+    Calculates the number of unique ways to traverse a grid from top-left to bottom-right
+    when you can only move right or down.
+
+    Args:
+        width (int): The width of the grid (number of columns)
+        height (int): The height of the grid (number of rows)
+
+    Returns:
+        int: The number of unique paths from top-left to bottom-right
+    """
+
+    # Create a memoization table initialized with -1
+    # The table has dimensions (width+1) x (height+1) to account for all subproblems
     memo = [[-1 for _ in range(height + 1)] for _ in range(width + 1)]
 
+    # Call the helper function with the memo table
     return helper(width, height, memo)
 
 
 def helper(w, h, memo):
+    """
+    Recursive helper function that uses memoization to count paths efficiently.
+
+    Args:
+        w (int): Current width (subproblem width)
+        h (int): Current height (subproblem height)
+        memo (list): Memoization table to store computed results
+
+    Returns:
+        int: Number of paths for the given w x h grid
+    """
+
+    # Base case: If grid is single row or single column, there's only 1 path
     if w == 1 or h == 1:
         return 1
 
+    # If we've already computed this subproblem, return the stored result
     if memo[w][h] != -1:
         return memo[w][h]
 
+    # Recursive case:
+    # Number of paths to (w,h) = paths coming from left (w-1,h) + paths coming from above (w,h-1)
     memo[w][h] = helper(w - 1, h, memo) + helper(w, h - 1, memo)
 
+    # Return the computed and stored result
     return memo[w][h]
 
 
