@@ -110,3 +110,35 @@ print(number_of_ways_to_traverse_graph(3, 2))
 
 print(number_of_ways_to_traverse_graph(2, 2))
 # Output: 2
+
+# =========================================================================================================================== #
+
+# Big O Analysis:
+
+"""
+# Time and Space Complexity Analysis:
+
+## **Time Complexity Analysis**
+
+- **Without Memoization**: The naive recursive approach would have an exponential time complexity of O(2^(w+h)) because each
+call branches into two subproblems.
+- **With Memoization**: Each subproblem `(w, h)` is computed only once. There are O(w * h) unique subproblems.
+  - Each subproblem computation involves a constant amount of work (addition and memo lookups).
+  - Thus, the time complexity is O(w * h).
+
+## **Space Complexity Analysis**
+
+- **Memoization Table**: The `memo` table has dimensions `(w+1) x (h+1)`, leading to O(w * h) space.
+- **Recursion Stack**: In the worst case, the recursion depth is O(w + h) (e.g., when computing `(w, h)`, the stack goes
+up to `(1, 1)`).
+- **Total Space Complexity**: O(w * h + w + h) = O(w * h) (since (w * h) dominates).
+
+
+### **Final Answer**
+- **Time Complexity**: O(w * h).
+- **Space Complexity**: O(w * h).
+
+The DP with memoization approach efficiently computes the result by avoiding redundant calculations, leading to polynomial
+time and space complexity.
+
+"""
