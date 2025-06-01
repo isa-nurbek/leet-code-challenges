@@ -51,12 +51,23 @@ O(n + m) time | O(1) space - where `n` is the width of the graph and `m` is the 
 # O(w * h) time | O(h) space
 # Space-Optimized DP (Using 1D Array)
 def number_of_ways_to_traverse_graph(width, height):
+    # Initialize a dynamic programming (DP) array where each index represents a row
+    # The initial value of 1 for all positions represents:
+    # - For the first column (width=1), there's only 1 way to reach any cell (only moving down)
     dp = [1] * (height + 1)
 
+    # Start from width = 2 since width=1 case is already handled by initialization
     for w in range(2, width + 1):
+        # For each subsequent height starting from 2 (since height=1 is already handled)
         for h in range(2, height + 1):
+            # Update the current cell's value by adding:
+            # - The value from the left (which is dp[h] from previous iteration)
+            # - The value from above (which is dp[h-1])
+            # This works because we're reusing the same array to save space
             dp[h] += dp[h - 1]
 
+    # The final value in our DP array represents the number of unique paths
+    # from top-left to bottom-right in a grid of size width x height
     return dp[height]
 
 
