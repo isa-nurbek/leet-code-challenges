@@ -53,7 +53,34 @@ import math
 # O(w + h) time | O(1) space
 # Combinatorial Optimization (Mathematical Formula)
 def number_of_ways_to_traverse_graph(width, height):
+    """
+    Calculate the number of unique paths from top-left to bottom-right in a grid,
+    moving only right or down.
+
+    This is a combinatorial problem that can be solved using binomial coefficients.
+    In a grid of size (width x height), the number of unique paths is equal to
+    the number of combinations of (width + height - 2) moves taken (width - 1) at a time
+    (or equivalently (height - 1) at a time).
+
+    Args:
+        width (int): The width of the grid (number of columns)
+        height (int): The height of the grid (number of rows)
+
+    Returns:
+        int: The number of unique paths from top-left to bottom-right
+    """
     return math.comb(width + height - 2, width - 1)
+    # math.comb(n, k) calculates the binomial coefficient "n choose k"
+    # which is equal to n! / (k! * (n - k)!)
+
+    # Explanation of parameters:
+    # width + height - 2: Total moves needed (right + down)
+    # width - 1: Number of right moves needed (could also use height - 1 for down moves)
+    #
+    # For example, in a 3x4 grid:
+    # Total moves = (3 + 4 - 2) = 5
+    # Right moves = (3 - 1) = 2
+    # The calculation becomes "5 choose 2" = 10 unique paths
 
 
 # Test Cases:
