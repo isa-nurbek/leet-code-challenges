@@ -51,15 +51,25 @@ O(n + m) time | O(1) space - where `n` is the width of the graph and `m` is the 
 # O(n * m) time | O(n * m) space
 # Dynamic Programming (Bottom-Up DP)
 def number_of_ways_to_traverse_graph(width, height):
+    # Create a dynamic programming (DP) table with dimensions (width+1) x (height+1)
+    # This table will store the number of ways to reach each position
     dp = [[0 for _ in range(height + 1)] for _ in range(width + 1)]
 
+    # Iterate through each position in the grid
     for w in range(1, width + 1):
         for h in range(1, height + 1):
+            # Base case: If we're in the first row or first column,
+            # there's only 1 way to get there (all right moves or all down moves)
             if w == 1 or h == 1:
                 dp[w][h] = 1
             else:
+                # For any other position, the number of ways to reach it is the sum of:
+                # 1. The number of ways to reach the position above it (coming from top)
+                # 2. The number of ways to reach the position to its left (coming from left)
                 dp[w][h] = dp[w - 1][h] + dp[w][h - 1]
 
+    # The bottom-right corner will contain the total number of ways
+    # to traverse the entire grid
     return dp[width][height]
 
 
