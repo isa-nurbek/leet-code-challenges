@@ -133,3 +133,183 @@ Thus, the **space complexity is O(1)**.
 This approach efficiently computes the trapped water in linear time without extra space.
 
 """
+
+# =========================================================================================================================== #
+
+# Detailed Code Explanation:
+
+"""
+Let’s go through the `water_area` function in detail.
+
+---
+
+## **Problem: Trapping Rain Water**
+
+You are given a list of integers called `heights`, where each integer represents the height of a vertical bar.
+The goal is to compute how much **water** can be **trapped** between the bars after it rains.
+
+---
+
+## **Approach: Two-Pointer Technique**
+
+The function uses a **two-pointer approach** to efficiently compute the water that can be trapped, in O(n) time and O(1) space.
+
+---
+
+## **Code Explanation**
+
+```
+def water_area(heights):
+    if not heights:
+        return 0
+```
+
+* **Base case**: If the list is empty, no water can be trapped.
+
+---
+
+```
+    left = 0
+    right = len(heights) - 1
+
+    left_max = heights[left]
+    right_max = heights[right]
+
+    water = 0
+```
+
+* `left` and `right` are two pointers starting from **both ends** of the array.
+* `left_max` keeps track of the **maximum height** seen so far from the **left**.
+* `right_max` keeps track of the **maximum height** seen so far from the **right**.
+* `water` accumulates the total amount of water trapped.
+
+---
+
+```
+    while left < right:
+        if heights[left] < heights[right]:
+            left += 1
+            left_max = max(left_max, heights[left])
+            water += left_max - heights[left]
+        else:
+            right -= 1
+            right_max = max(right_max, heights[right])
+            water += right_max - heights[right]
+```
+
+This loop runs until the two pointers meet.
+
+### How it works:
+
+1. At each step, compare `heights[left]` and `heights[right]`.
+2. Whichever is **smaller**, we move that pointer inward, because **trapping water is limited by the shorter side**.
+3. Update the respective `left_max` or `right_max`:
+
+   * If current height is **less than** the max seen so far → water can be trapped.
+   * The amount trapped at that index is `max_so_far - current_height`.
+
+Example walk-through for `[0, 8, 0, 0, 5, 0, 0, 10, 0, 0, 1, 1, 0, 3]`:
+
+* Between height 8 (index 1) and height 10 (index 7), there are dips (lower bars).
+* Water fills up to the **minimum** of the surrounding taller bars.
+* The algorithm walks from both sides and accumulates the trapped water step-by-step.
+
+---
+
+```
+    return water
+```
+
+* Final result: total trapped water.
+
+---
+
+## **Test Case Analysis**
+
+```
+print(water_area([0, 8, 0, 0, 5, 0, 0, 10, 0, 0, 1, 1, 0, 3]))
+# Output: 48
+```
+
+* Large bars on both sides (8 and 10), lots of dips in between → 48 units of water.
+
+```
+print(water_area([]))
+# Output: 0
+```
+
+* No bars → no water trapped.
+
+```
+print(water_area([1, 8, 6, 2, 5, 4, 8, 3, 7]))
+# Output: 19
+```
+
+---
+
+## **Time & Space Complexity**
+
+* **Time:** O(n) — Each bar is visited once.
+* **Space:** O(1) — Constant space used (no extra arrays).
+
+---
+
+Let's visualize the main test case:
+
+```
+heights = [0, 8, 0, 0, 5, 0, 0, 10, 0, 0, 1, 1, 0, 3]
+```
+
+We'll show:
+
+* Bars as `█`
+* Water as `~`
+* Empty space as a blank
+
+---
+
+### **Step 1: Find max height**
+
+* The tallest bar is `10`, so we'll draw 10 levels top-down.
+
+---
+
+### **Step 2: Build Visualization**
+
+```
+Level 10:            █          
+Level  9:            █          
+Level  8:   █        █          
+Level  7:   █        █          
+Level  6:   █        █          
+Level  5:   █   █    █          
+Level  4:   █   █    █       ~  
+Level  3:   █   █    █     ~ █  
+Level  2:   █   █    █   ~ ~ █  
+Level  1:   █   █ █  █ ~ ~ █ █  
+          ----------------------
+Index:     0 1 2 3 4 5 6 7 8 9 10 11 12 13
+Heights:   0 8 0 0 5 0 0 10 0 0  1  1  0  3
+```
+
+### Legend:
+
+* `█` = bar (height)
+* `~` = water
+* ` ` = empty space
+
+---
+
+### **How water is trapped**
+
+Water collects between:
+
+* `8` (index 1) and `10` (index 7)
+* Also small pools between smaller peaks toward the end
+
+For example:
+
+* Between `1` and `3` at the end, water collects at index 12
+* Deep pool between `8` (index 1) and `10` (index 7)
+
+"""
