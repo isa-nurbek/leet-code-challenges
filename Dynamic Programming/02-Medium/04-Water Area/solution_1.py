@@ -95,3 +95,44 @@ print(water_area([]))
 
 print(water_area([1, 8, 6, 2, 5, 4, 8, 3, 7]))
 # Output: 19
+
+# =========================================================================================================================== #
+
+# Big O Analysis:
+
+"""
+# Time and Space Complexity Analysis:
+
+Let's analyze the time and space complexity of the `water_area` function step by step.
+
+## **Time Complexity:**
+
+The function consists of two main loops:
+1. **First Loop (Left to Right):**  
+   - Iterates through the `heights` array once to compute the left maximum for each position.
+   - This loop runs in **O(n)** time, where `n` is the number of elements in `heights`.
+
+2. **Second Loop (Right to Left):**  
+   - Iterates through the `heights` array again to compute the right maximum and determine the water trapped at each position.
+   - This loop also runs in **O(n)** time.
+
+Since the loops run sequentially (not nested), the **total time complexity is O(n) + O(n) = O(n)**.
+
+---
+
+## **Space Complexity:**
+
+- The function uses an auxiliary array `maxes` of the same size as `heights` to store intermediate results.
+- Thus, the **space complexity is O(n)** (due to the `maxes` array).
+- The rest of the variables (`left_max`, `right_max`, etc.) use constant space O(1), but they don't dominate the space complexity.
+
+---
+
+### **Summary:**
+- **Time Complexity:** **O(n)**  
+- **Space Complexity:** **O(n)**  
+
+This is an efficient solution for the "Trapping Rain Water" problem, as it computes the result in linear time with linear extra
+space. There are optimizations possible to reduce space to **O(1)**, but this implementation is clear and straightforward.
+
+"""
