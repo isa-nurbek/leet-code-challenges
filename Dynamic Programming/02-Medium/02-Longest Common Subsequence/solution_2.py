@@ -37,7 +37,7 @@ O(n * m) time | O(n * m) space - where `n` and `m` are the lengths of the two in
 # Solution:
 
 
-# O(m * n) time | O(n) space
+# O(m * n) time | O(m * n) space
 def longest_common_subsequence(str_1, str_2):
     # Get lengths of both input strings
     m, n = len(str_1), len(str_2)
@@ -89,3 +89,61 @@ print(longest_common_subsequence("", "ABCDEFG"))
 
 print(longest_common_subsequence("ABCDEFG", "APPLES"))
 # Output: ['A', 'E']
+
+# =========================================================================================================================== #
+
+# Big O Analysis:
+
+"""
+# Time and Space Complexity Analysis:
+
+## Time Complexity Analysis
+
+The time complexity of the `longest_common_subsequence` function can be broken down into two main parts:
+
+1. **Building the DP Table**:
+   - The DP table has dimensions `(m + 1) x (n + 1)`, where `m` and `n` are the lengths of `str_1` and `str_2`, respectively.
+   - We fill each cell of the DP table exactly once (except the first row and first column, which are initialized to 0).
+   - Filling each cell involves a constant amount of work (comparison and possibly a `max` operation).
+   - Thus, the time to build the DP table is `O(m * n)`.
+
+2. **Backtracking to Build the LCS String**:
+   - During backtracking, we start at `(m, n)` and move towards `(0, 0)`.
+   - In the worst case, we might move up or left at each step until we reach the top or left edge of the table.
+   - The maximum number of steps is `m + n` (since we decrement `i` or `j` at each step).
+   - Each step involves a constant amount of work (comparison and possibly appending to the `lcs` list).
+   - Thus, the backtracking step is `O(m + n)`.
+
+Combining these, the overall time complexity is: O(m * n) + O(m + n) = O(m * n) (since `O(m * n)` dominates
+`O(m + n)` for large `m` and `n`).
+
+## Space Complexity Analysis
+
+The space complexity is determined by the space needed to store the DP table and the auxiliary data structures:
+
+1. **DP Table**:
+   - The DP table has dimensions `(m + 1) x (n + 1)`, so it requires `O(m * n)` space.
+
+2. **LCS List**:
+   - The `lcs` list stores the characters of the LCS, which is at most `min(m, n)` in length.
+   - Thus, the space for `lcs` is `O(min(m, n))`.
+
+3. **Other Variables**:
+   - Variables like `i`, `j`, `m`, `n`, etc., use constant space (`O(1)`).
+
+Thus, the dominant term is the DP table, giving an overall space complexity of: O(m * n)
+
+### Summary
+
+- **Time Complexity**: `O(m * n)`
+- **Space Complexity**: `O(m * n)`
+
+### Additional Notes
+
+- The space complexity can be optimized to `O(min(m, n))` by observing that we only need the current and previous rows of the DP
+table at any point in time (using a rolling array technique). However, the backtracking step would still require additional space
+to reconstruct the LCS.
+- The `O(m + n)` backtracking step does not affect the overall time complexity because it is dominated by `O(m * n)`. Similarly,
+the space for `lcs` is dominated by the DP table unless you optimize the DP table space.
+
+"""
