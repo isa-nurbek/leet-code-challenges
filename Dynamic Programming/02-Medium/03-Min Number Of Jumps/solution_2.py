@@ -37,20 +37,27 @@ O(n) time | O(1) space - where `n` is the length of the input array.
 
 # O(n) time | O(1) space
 def min_number_of_jumps(array):
+    # If the array has 0 or 1 elements, no jumps are needed
     if len(array) <= 1:
         return 0
 
-    jumps = 0
-    max_reach = array[0]
-    current_end = array[0]
+    jumps = 0  # Counts the number of jumps made
+    max_reach = array[0]  # The farthest index that can be reached with current jumps
+    current_end = array[0]  # The end of the current jump's range
 
+    # Iterate through the array (excluding the last element)
     for i in range(1, len(array) - 1):
+        # Update the maximum reachable index from the current position
         max_reach = max(max_reach, i + array[i])
 
+        # When we reach the end of the current jump's range,
+        # we need to make another jump
         if i == current_end:
             jumps += 1
+            # The new jump's range extends to the max_reach
             current_end = max_reach
 
+    # We need one more jump to reach the end from the last position
     return jumps + 1
 
 
