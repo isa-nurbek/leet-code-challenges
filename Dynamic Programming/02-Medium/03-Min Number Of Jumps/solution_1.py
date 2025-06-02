@@ -37,14 +37,24 @@ O(n) time | O(1) space - where `n` is the length of the input array.
 
 # O(n²) time | O(n) space
 def min_number_of_jumps(array):
+    # Initialize a jumps array to store the minimum number of jumps needed to reach each position
+    # Start with infinity for all positions except the first one (which takes 0 jumps to reach)
     jumps = [float("inf") for x in array]
-    jumps[0] = 0
+    jumps[0] = 0  # Base case: no jumps needed to reach first element
 
+    # Iterate through each position in the array starting from the second element
     for i in range(1, len(array)):
+        # For each position i, check all previous positions j (0 to i-1)
         for j in range(0, i):
+            # Check if from position j, we can jump to position i
+            # This is possible if the value at j (array[j]) is >= the distance between j and i
             if array[j] >= i - j:
+                # If we can jump from j to i, update jumps[i] to be the minimum between:
+                # - its current value
+                # - jumps[j] + 1 (jumps to reach j plus this one jump)
                 jumps[i] = min(jumps[j] + 1, jumps[i])
 
+    # The last element of jumps array contains the minimum jumps needed to reach the end
     return jumps[-1]
 
 
