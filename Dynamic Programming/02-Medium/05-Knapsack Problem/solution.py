@@ -150,3 +150,221 @@ but not polynomial in terms of the input size (since encoding `capacity` takes o
 - If `capacity` is large (e.g., exponential in `n`), this solution becomes impractical.
 
 """
+
+# =========================================================================================================================== #
+
+# Detailed Code Explanation:
+
+"""
+This code implements the **0/1 Knapsack Problem** using **dynamic programming**.
+Let’s walk through the function and explain what each part does.
+
+---
+
+### 📦 **Problem Definition: 0/1 Knapsack**
+
+You're given:
+
+* A list of `items`, where each item is a pair `[value, weight]`.
+* A `capacity` which is the maximum total weight the knapsack can carry.
+
+Goal:
+
+* Maximize the total value of selected items **without exceeding the knapsack capacity**.
+* You can either **include or exclude** each item (you cannot take part of an item).
+
+---
+
+### ✅ **Function Signature**
+
+```
+def knapsack_problem(items, capacity):
+```
+
+* `items`: List of `[value, weight]` pairs.
+* `capacity`: Maximum weight the knapsack can hold.
+
+---
+
+### 🧱 Step 1: Create a DP Table
+
+```
+n = len(items)
+dp = [[0 for _ in range(capacity + 1)] for _ in range(n + 1)]
+```
+
+* `dp[i][w]` will store the **maximum value** we can achieve using the first `i` items with capacity `w`.
+* `n + 1` rows: from 0 items to `n` items.
+* `capacity + 1` columns: from capacity 0 up to `capacity`.
+
+---
+
+### 🔄 Step 2: Fill the DP Table
+
+```
+for i in range(1, n + 1):
+    value, weight = items[i - 1]
+    for w in range(capacity + 1):
+        if weight <= w:
+            dp[i][w] = max(dp[i - 1][w], dp[i - 1][w - weight] + value)
+        else:
+            dp[i][w] = dp[i - 1][w]
+```
+
+* For each item `i` and each possible capacity `w`:
+
+  * If we can include this item (`weight <= w`):
+
+    * Take the **maximum** between:
+
+      * Not including it: `dp[i-1][w]`
+      * Including it: `dp[i-1][w - weight] + value`
+  * If we **can’t include** it: just take the previous value `dp[i-1][w]`.
+
+---
+
+### 🎯 Step 3: Extract the Maximum Value
+
+```
+max_value = dp[n][capacity]
+```
+
+* After filling the table, `dp[n][capacity]` contains the **maximum total value**.
+
+---
+
+### 🧩 Step 4: Trace Back the Selected Items
+
+```
+w = capacity
+selected_items = []
+
+for i in range(n, 0, -1):
+    if dp[i][w] != dp[i - 1][w]:
+        selected_items.append(i - 1)
+        w -= items[i - 1][1]
+```
+
+* We walk **backwards** from `dp[n][capacity]` to see **which items were included**.
+* If `dp[i][w] != dp[i-1][w]`, that means item `i-1` **was included**.
+* We add it to `selected_items`, and reduce capacity `w` accordingly.
+
+---
+
+### 🔁 Step 5: Reverse the Selected Items
+
+```
+selected_items.reverse()
+```
+
+* Items were collected in reverse order during tracing, so we reverse them.
+
+---
+
+### 📤 Return the Result
+
+```
+return [max_value, selected_items]
+```
+
+---
+
+### 🧪 Example Walkthrough
+
+#### Test Case 1:
+
+```
+knapsack_problem([[1, 2], [4, 3], [5, 6], [6, 7]], 10)
+```
+
+* Items:
+  0: value 1, weight 2
+  1: value 4, weight 3
+  2: value 5, weight 6
+  3: value 6, weight 7
+* Capacity = 10
+
+**Best combination**:
+
+* Item 1 (value 4, weight 3)
+* Item 3 (value 6, weight 7)
+  → Total weight = 10, Total value = 10
+
+Output: `[10, [1, 3]]`
+
+---
+
+### ✅ Summary
+
+| Step                  | Purpose                                       |
+| --------------------- | --------------------------------------------- |
+| Initialize `dp` table | Store max values for subproblems              |
+| Fill DP table         | Bottom-up dynamic programming                 |
+| Traceback             | Identify which items contributed to max value |
+| Return result         | Return max value and list of item indices     |
+
+---
+
+Here's an **ASCII visualization** of the dynamic programming table (`dp`) for the first test case:
+
+---
+
+### 🧪 Test Case:
+
+```
+items = [[1, 2], [4, 3], [5, 6], [6, 7]]
+capacity = 10
+```
+
+We have 4 items:
+
+| Item Index | Value | Weight |
+| ---------- | ----- | ------ |
+| 0          | 1     | 2      |
+| 1          | 4     | 3      |
+| 2          | 5     | 6      |
+| 3          | 6     | 7      |
+
+We’ll build a `dp` table of size `(4+1) x (10+1)` = `5 x 11`.
+
+---
+
+### 🧱 DP Table (`dp[i][w]` = max value using first `i` items and capacity `w`)
+
+| i\w | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 |
+| --- | - | - | - | - | - | - | - | - | - | - | -- |
+| 0   | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0  |
+| 1   | 0 | 0 | 1 | 1 | 1 | 1 | 1 | 1 | 1 | 1 | 1  |
+| 2   | 0 | 0 | 1 | 4 | 4 | 5 | 5 | 5 | 5 | 5 | 5  |
+| 3   | 0 | 0 | 1 | 4 | 4 | 5 | 5 | 6 | 6 | 9 | 10 |
+| 4   | 0 | 0 | 1 | 4 | 4 | 5 | 5 | 6 | 6 | 9 | 10 |
+
+---
+
+### 📌 Legend:
+
+* Row `i` = using first `i` items.
+* Column `w` = capacity `w`.
+* Each cell = max value achievable with first `i` items and capacity `w`.
+
+---
+
+### 🔍 Traceback:
+
+We start from `dp[4][10] = 10`. Compare to `dp[3][10]`:
+
+* `dp[4][10] == dp[3][10]` → Item 3 **not** included
+
+Go to `dp[3][10] = 10`, compare to `dp[2][10] = 5` → **Item 3 (index 3) included**
+
+→ Subtract its weight: `w = 10 - 7 = 3`
+
+Now `dp[2][3] = 4` vs `dp[1][3] = 1` → **Item 1 (index 1) included**
+
+→ Subtract weight: `w = 3 - 3 = 0`
+
+We stop at 0.
+
+✅ **Selected Items: [1, 3]**, Total value = **10**
+
+"""
