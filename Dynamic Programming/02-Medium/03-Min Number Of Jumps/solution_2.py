@@ -71,3 +71,29 @@ print(min_number_of_jumps([2, 1, 2, 3, 1]))
 
 print(min_number_of_jumps([1]))
 # Output: 0
+
+# =========================================================================================================================== #
+
+# Big O Analysis:
+
+"""
+# Time and Space Complexity Analysis:
+
+Let's analyze the time and space complexity of the given `min_number_of_jumps` function.
+
+## **Time Complexity: O(n)**
+
+- The function iterates through the `array` once with a single loop from index `1` to `len(array) - 2`.
+This results in **O(n)** time, where `n` is the length of the array.
+- Inside the loop, each operation (comparison, arithmetic, assignment) is **O(1)**, so the overall complexity remains linear.
+
+## **Space Complexity: O(1)**
+
+- The function uses a constant amount of extra space (`jumps`, `max_reach`, `current_end`), regardless of input size.
+Thus, the space complexity is **O(1)** (constant space).
+
+### Summary:
+- **Time Complexity**: O(n)
+- **Space Complexity**: O(1)
+
+"""
