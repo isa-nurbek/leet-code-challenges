@@ -85,3 +85,55 @@ print(longest_common_subsequence("", "ABCDEFG"))
 
 print(longest_common_subsequence("ABCDEFG", "APPLES"))
 # Output: ['A', 'E']
+
+# =========================================================================================================================== #
+
+# Big O Analysis:
+
+"""
+# Time and Space Complexity Analysis:
+
+### Time Complexity:
+
+The function uses dynamic programming to fill a 2D table `lcs` of size `(len(str_2) + 1) × (len(str_1) + 1)`. 
+
+- The outer loop runs `len(str_2)` times (from `1` to `len(str_2)`).
+- The inner loop runs `len(str_1)` times (from `1` to `len(str_1)`).
+- Inside the inner loop, the operations are:
+  - Comparing characters (`str_2[i - 1] == str_1[j - 1]`), which is `O(1)`.
+  - Concatenating lists (`lcs[i - 1][j - 1] + [str_2[i - 1]]`), which is `O(k)` where `k` is the length of the LCS up to that point.
+  - Comparing lengths of two lists (`max(lcs[i - 1][j], lcs[i][j - 1], key=len)`), which is `O(1)`.
+
+In the worst case (when the two strings are identical), the LCS grows linearly with the length of the strings, so the concatenation
+operation (`lcs[i - 1][j - 1] + [str_2[i - 1]]`) could take up to `O(min(m, n))` time, where `m` and `n` are the lengths of
+`str_2` and `str_1`, respectively.
+
+Thus, the total time complexity is:
+- Best case (when the two strings share no common characters): `O(m * n)`, since the concatenation is `O(1)` (empty list).
+- Worst case (when the two strings are identical): `O(m * n * min(m, n))`, because the concatenation can be up to
+`O(min(m, n))` for each cell.
+
+### Space Complexity:
+
+The space complexity is dominated by the `lcs` table, which has dimensions `(m + 1) × (n + 1)`, where `m = len(str_2)` and
+`n = len(str_1)`. 
+
+Each cell in the table stores a list representing the LCS up to that point. In the worst case (when the two strings are identical),
+the LCS stored in the last cell will be of length `min(m, n)`. However, since the table is filled row by row, and each row depends
+only on the previous row, you could optimize the space complexity to `O(min(m, n) * n)` or `O(min(m, n) * m)` by keeping only two
+rows (current and previous) at a time. However, the given implementation does not do this, so the space complexity is:
+
+- `O(m * n * min(m, n))`, because each of the `m * n` cells could store a list of size up to `min(m, n)`.
+
+### Summary:
+- **Time Complexity**: 
+  - Best case: `O(m * n)` (no common subsequence).
+  - Worst case: `O(m * n * min(m, n))` (strings are identical).
+  
+- **Space Complexity**: `O(m * n * min(m, n))`.
+
+### Note:
+The implementation can be optimized to use `O(min(m, n))` space by only storing the length of the LCS and reconstructing the
+sequence afterward, but the given implementation explicitly builds the LCS strings at each step, leading to higher space usage.
+
+"""
