@@ -68,3 +68,42 @@ print(min_number_of_jumps([2, 1, 2, 3, 1]))
 
 print(min_number_of_jumps([1]))
 # Output: 0
+
+# =========================================================================================================================== #
+
+# Big O Analysis:
+
+"""
+# Time and Space Complexity Analysis:
+
+Let's analyze the time and space complexity of the given `min_number_of_jumps` function.
+
+## Time Complexity:
+
+1. **Initialization**: The `jumps` array is initialized in O(n) time, where n is the length of the input array.
+2. **Nested Loops**:
+   - The outer loop runs from `i = 1` to `i = n-1` (n-1 iterations).
+   - The inner loop runs from `j = 0` to `j = i-1` (i iterations for each i).
+   - For each `i`, the inner loop runs `i` times.
+   So, the total number of operations is roughly `1 + 2 + 3 + ... + (n-1) = (n-1)*n/2 = O(n²)`.
+3. **Operations Inside Inner Loop**:
+   - The `if` condition and the `min` operation are O(1) per iteration.
+
+Thus, the **total time complexity is O(n²)**.
+
+## Space Complexity:
+
+1. The `jumps` array uses O(n) additional space.
+2. No other significant space is used (only a few variables like `i`, `j`).
+
+Thus, the **space complexity is O(n)**.
+
+### Summary:
+- **Time Complexity**: O(n²) (due to nested loops).
+- **Space Complexity**: O(n) (for the `jumps` array).
+
+### Note:
+This is a dynamic programming approach with a quadratic time complexity. There is a more efficient O(n) greedy solution for this
+problem, but this implementation follows the DP approach.
+
+"""
