@@ -45,28 +45,52 @@ O(n * c) time | O(n * c) space - where `n` is the number of items and `c` is the
 
 # O(n * c) time | O(n * c) space
 def knapsack_problem(items, capacity):
+    """
+    Solves the 0/1 knapsack problem using dynamic programming.
+
+    Args:
+        items: List of tuples where each tuple represents (value, weight) of an item
+        capacity: Maximum weight capacity of the knapsack
+
+    Returns:
+        List containing [max_value, selected_items] where:
+            max_value: Maximum achievable value
+            selected_items: Indices of selected items in the original list
+    """
+
     n = len(items)
+    # Create a DP table with (n+1) rows (items) and (capacity+1) columns (weights)
+    # dp[i][w] will store the max value for first i items with capacity w
     dp = [[0 for _ in range(capacity + 1)] for _ in range(n + 1)]
 
+    # Build DP table bottom-up
     for i in range(1, n + 1):
-        value, weight = items[i - 1]
+        value, weight = items[i - 1]  # Current item's value and weight
 
         for w in range(capacity + 1):
             if weight <= w:
+                # If current item can fit, choose max between:
+                # 1. Not taking the item (previous value for same weight)
+                # 2. Taking the item (value + best value for remaining weight)
                 dp[i][w] = max(dp[i - 1][w], dp[i - 1][w - weight] + value)
             else:
+                # If item doesn't fit, carry forward previous value
                 dp[i][w] = dp[i - 1][w]
 
+    # The maximum value is in the bottom-right cell of the table
     max_value = dp[n][capacity]
 
+    # Backtrack to find which items were selected
     w = capacity
     selected_items = []
 
     for i in range(n, 0, -1):
+        # If the value changed from the row above, this item was selected
         if dp[i][w] != dp[i - 1][w]:
-            selected_items.append(i - 1)
-            w -= items[i - 1][1]
+            selected_items.append(i - 1)  # Add item index (converting to 0-based)
+            w -= items[i - 1][1]  # Reduce remaining capacity by item's weight
 
+    # Reverse to maintain original order (since we backtracked)
     selected_items.reverse()
 
     return [max_value, selected_items]
