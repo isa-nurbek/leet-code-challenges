@@ -96,3 +96,40 @@ print(water_area([]))
 
 print(water_area([1, 8, 6, 2, 5, 4, 8, 3, 7]))
 # Output: 19
+
+# =========================================================================================================================== #
+
+# Big O Analysis:
+
+"""
+# Time and Space Complexity Analysis:
+
+## **Time Complexity Analysis**
+
+The algorithm uses a **two-pointer approach**:
+- **Initialization**: Setting `left`, `right`, `left_max`, and `right_max` takes O(1) time.
+- **Main Loop**: The loop runs while `left < right`, and in each iteration, either `left` is incremented or `right` is decremented.
+This means the loop runs at most O(n) times (where `n` is the length of the input array `heights`).
+
+- **Operations Inside the Loop**:
+  - Comparing `heights[left]` and `heights[right]` is O(1).
+  - Updating `left_max`/`right_max` is O(1) (using `max`).
+  - Calculating and adding to `water` is O(1).
+
+Thus, the **time complexity is O(n)**, where `n` is the number of elements in `heights`.
+
+## **Space Complexity Analysis**
+
+The algorithm uses **constant extra space**:
+- Variables: `left`, `right`, `left_max`, `right_max`, `water` (all O(1)).
+- No additional data structures (like arrays or stacks) are used.
+
+Thus, the **space complexity is O(1)**.
+
+### **Final Answer**
+- **Time Complexity**: O(n)
+- **Space Complexity**: O(1)
+
+This approach efficiently computes the trapped water in linear time without extra space.
+
+"""
