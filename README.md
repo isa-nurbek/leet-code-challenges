@@ -1,7 +1,5 @@
 # 🧠 LeetCode & AlgoExpert Solutions Repository
 
-[![Maintainability](https://api.codeclimate.com/v1/badges/74d1c3aa9471f0d344c2/maintainability)](https://codeclimate.com/github/isa-nurbek/leet-code-challenges/maintainability)
-
 Welcome to my **LeetCode** and **AlgoExpert** solutions repository! 🎯 This project is a personal collection of algorithmic problem-solving solutions aimed at strengthening my coding skills, preparing for technical interviews, and deepening my understanding of data structures and algorithms.
 
 ## 📌 Purpose
@@ -68,7 +66,6 @@ Each problem typically includes:
 - **IDE/Editor:** Visual Studio Code  
 - **Platforms:** LeetCode, AlgoExpert  
 - **Version Control:** Git & GitHub  
-- **Code Quality:** [CodeClimate](https://codeclimate.com/github/isa-nurbek/leet-code-challenges/maintainability)
 
 ## 🚀 Goals
 
