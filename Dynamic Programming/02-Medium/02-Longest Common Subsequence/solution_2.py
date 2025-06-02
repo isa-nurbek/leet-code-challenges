@@ -147,3 +147,225 @@ to reconstruct the LCS.
 the space for `lcs` is dominated by the DP table unless you optimize the DP table space.
 
 """
+
+# =========================================================================================================================== #
+
+# Detailed Code Explanation:
+
+"""
+Let's go through the function `longest_common_subsequence` step by step and understand how it works, including how it computes
+and builds the longest common subsequence (LCS) of two strings.
+
+---
+
+### 🔍 **What is LCS (Longest Common Subsequence)?**
+
+* A **subsequence** is a sequence that appears in the same relative order but **not necessarily contiguously**.
+* The **longest common subsequence** is the longest sequence that appears in **both strings** in the same order.
+
+For example:
+
+* LCS of `"ZXVVYZW"` and `"XKYKZPW"` is `"XYZW"`.
+
+---
+
+## 📘 Function Breakdown
+
+```
+def longest_common_subsequence(str_1, str_2):
+```
+
+* The function takes two strings `str_1` and `str_2`.
+
+---
+
+### 🔹 Step 1: Create the DP Table
+
+```
+m, n = len(str_1), len(str_2)
+dp = [[0] * (n + 1) for _ in range(m + 1)]
+```
+
+* `m` and `n` store the lengths of the two input strings.
+* `dp[i][j]` will represent the **length of the LCS** of `str_1[:i]` and `str_2[:j]`.
+* The DP table has `(m+1)` rows and `(n+1)` columns to handle base cases (empty string comparisons).
+
+---
+
+### 🔹 Step 2: Fill the DP Table
+
+```
+for i in range(1, m + 1):
+    for j in range(1, n + 1):
+        if str_1[i - 1] == str_2[j - 1]:
+            dp[i][j] = dp[i - 1][j - 1] + 1
+        else:
+            dp[i][j] = max(dp[i - 1][j], dp[i][j - 1])
+```
+
+* This double loop goes through every character in `str_1` and `str_2`.
+* If characters match: `str_1[i-1] == str_2[j-1]`
+
+  * Then the LCS length is 1 + LCS of the previous substring.
+  * So `dp[i][j] = dp[i-1][j-1] + 1`.
+* Else:
+
+  * Take the **maximum** LCS length by skipping either one character from `str_1` or `str_2`.
+  * So `dp[i][j] = max(dp[i-1][j], dp[i][j-1])`.
+
+✅ At the end of this step, `dp[m][n]` will contain the length of the LCS.
+
+---
+
+### 🔹 Step 3: Backtrack to Build the LCS
+
+```
+lcs = []
+i, j = m, n
+while i > 0 and j > 0:
+    if str_1[i - 1] == str_2[j - 1]:
+        lcs.append(str_1[i - 1])
+        i -= 1
+        j -= 1
+    elif dp[i - 1][j] > dp[i][j - 1]:
+        i -= 1
+    else:
+        j -= 1
+```
+
+* Start from the bottom-right corner of the `dp` table.
+* If characters match, it **must be part of the LCS**:
+
+  * Add to `lcs`, move diagonally up-left.
+* If not matching:
+
+  * Move in the direction of the **larger value** (either left or up), because that path led to a longer subsequence.
+
+---
+
+### 🔹 Step 4: Return Result
+
+```
+return lcs[::-1]
+```
+
+* Since we backtracked from the end, we reverse the `lcs` list before returning it.
+
+---
+
+## ✅ Test Case Walkthrough
+
+### Example:
+
+```
+print(longest_common_subsequence("ZXVVYZW", "XKYKZPW"))
+```
+
+Step-by-step:
+
+* DP table is filled based on character matches.
+* After filling, `dp[7][7]` contains the length of LCS = 4.
+* Backtracking gives: `['W', 'Z', 'Y', 'X']` → reversed → `['X', 'Y', 'Z', 'W']`.
+
+---
+
+## 🧪 Other Test Cases:
+
+```
+print(longest_common_subsequence("", "ABCDEFG"))
+# Output: [] → empty string has no common characters
+```
+
+```
+print(longest_common_subsequence("ABCDEFG", "APPLES"))
+# Output: ['A', 'E'] → only 'A' and 'E' appear in the same order
+```
+
+---
+
+## ✅ Summary
+
+* Uses **Dynamic Programming (DP)** to compute the length of the LCS efficiently.
+* Time Complexity: **O(m * n)** where `m` and `n` are the lengths of the input strings.
+* Space Complexity: **O(m * n)** for the DP table.
+* Then **backtracks** to build the actual LCS.
+
+---
+
+Let's walk through the example:
+
+```
+longest_common_subsequence("ZXVVYZW", "XKYKZPW")
+```
+
+We’ll visualize the **DP table** in ASCII after it's fully built and also show **how backtracking finds the LCS**.
+
+---
+
+### 🧩 Inputs:
+
+* `str_1 = "ZXVVYZW"` (length = 7)
+* `str_2 = "XKYKZPW"` (length = 7)
+
+---
+
+### 📐 DP Table Layout:
+
+We'll build a table where:
+
+* Rows are characters from `str_1` ("Z X V V Y Z W")
+* Columns are characters from `str_2` ("X K Y K Z P W")
+* The top-left cell represents the empty prefixes.
+
+Each cell contains the LCS length up to that point.
+
+---
+
+### 🧮 Final DP Table (after filling):
+
+```
+      ""  X  K  Y  K  Z  P  W
+   +---------------------------
+"" |  0  0  0  0  0  0  0  0
+Z  |  0  0  0  0  0  1  1  1
+X  |  0  1  1  1  1  1  1  1
+V  |  0  1  1  1  1  1  1  1
+V  |  0  1  1  1  1  1  1  1
+Y  |  0  1  1  2  2  2  2  2
+Z  |  0  1  1  2  2  3  3  3
+W  |  0  1  1  2  2  3  3  4
+```
+
+🟢 `dp[7][7] = 4` → The length of the LCS is **4**.
+
+---
+
+### 🔄 Backtracking Path
+
+Start from bottom-right: `(7,7)`
+Follow arrows:
+
+```
+dp[7][7] = 4 → W == W → add 'W' ← ↖
+dp[6][6] = 3 → Z == Z → add 'Z' ← ↖
+dp[5][5] = 2 → Y == Y → add 'Y' ← ↖
+dp[4][4] = 1 → no match, go up ← ↑
+dp[3][4] = 1 → no match, go up ← ↑
+dp[2][4] = 1 → no match, go left ← ←
+dp[2][3] = 1 → no match, go left ← ←
+dp[2][2] = 1 → no match, go left ← ←
+dp[2][1] = 1 → X == X → add 'X' ← ↖
+```
+
+✔ Found characters in reverse: `['W', 'Z', 'Y', 'X']`
+✔ Reverse it to get the final LCS: `['X', 'Y', 'Z', 'W']`
+
+---
+
+### ✅ Final Answer:
+
+```
+LCS: ['X', 'Y', 'Z', 'W']
+```
+
+"""
