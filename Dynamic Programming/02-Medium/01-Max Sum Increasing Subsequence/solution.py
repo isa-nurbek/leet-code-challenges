@@ -116,3 +116,51 @@ print(max_sum_increasing_subsequence([-5, -4, -3, -2, -1]))
 
 print(max_sum_increasing_subsequence([8, 12, 2, 3, 15, 5, 7]))
 # Output: [35, [8, 12, 15]]
+
+# =========================================================================================================================== #
+
+# Big O Analysis:
+
+"""
+# Time and Space Complexity Analysis:
+
+### **Time Complexity:**
+
+1. **Initialization:**
+   - `sequences = [None for x in array]` → O(n)
+   - `sums = [num for num in array]` → O(n)
+
+2. **Main Logic (Nested Loop):**
+   - The outer loop runs `n` times (`for i in range(len(array))`).
+   - The inner loop runs up to `i` times (`for j in range(0, i)`).
+   - In the worst case, this results in: O(n²)
+   - The operations inside the inner loop (`if` condition, updates) are O(1).
+
+3. **Building the Sequence:**
+   - `build_sequence` runs in O(n) time in the worst case (if the entire array is the increasing subsequence).
+
+**Total Time Complexity:** O(n) + O(n²) + O(n) = O(n²)
+
+---
+
+### **Space Complexity:**
+
+1. **Auxiliary Arrays:**
+   - `sequences` → O(n)
+   - `sums` → O(n)
+
+2. **Output Sequence:**
+   - The `build_sequence` function constructs a subsequence, which in the worst case could be O(n) (entire array).
+
+**Total Space Complexity:** O(n) + O(n) + O(n) = O(n)
+
+---
+
+### **Summary:**
+- **Time Complexity:** O(n²)
+- **Space Complexity:** O(n)
+
+This is optimal for the problem using dynamic programming. There is no known O(n log n) time solution for the **maximum sum**
+increasing subsequence (unlike the standard **longest increasing subsequence** problem, which can be solved in O(n log n).
+
+"""
