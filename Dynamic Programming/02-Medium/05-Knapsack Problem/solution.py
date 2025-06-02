@@ -106,3 +106,47 @@ print(knapsack_problem([[2, 1], [70, 70], [30, 30], [69, 69], [100, 100]], 100))
 
 print(knapsack_problem([[1, 2], [70, 70], [30, 30], [69, 69], [100, 100]], 0))
 # Output: [0, []]
+
+# =========================================================================================================================== #
+
+# Big O Analysis:
+
+"""
+# Time and Space Complexity Analysis:
+
+Let's analyze the time and space complexity of the given knapsack problem solution:
+
+## Time Complexity:
+
+1. **Initialization of DP table**: Creating a 2D array of size (n+1) x (capacity+1) takes O(n * capacity) time.
+2. **Filling the DP table**:
+   - Outer loop runs `n` times (for each item)
+   - Inner loop runs `capacity + 1` times (for each possible weight from 0 to capacity)
+   - Inside the inner loop, we do constant-time operations (comparisons and max calculation)
+   - Total for this part: O(n * capacity)
+3. **Backtracking to find selected items**:
+   - We iterate through the `n` items once in reverse
+   - Each iteration does constant-time work
+   - Total for this part: O(n)
+
+**Overall Time Complexity**: O(n * capacity) (the dominant term)
+
+## Space Complexity:
+
+1. **DP table storage**: The 2D array consumes O(n * capacity) space.
+2. **Selected items list**: This requires O(n) space in the worst case (if all items are selected), but this is dominated by
+the DP table.
+
+**Overall Space Complexity**: O(n * capacity)
+
+### **Final Answer**
+- **Time Complexity**: O(n * capacity)
+- **Space Complexity**: O(n * capacity)
+
+### Notes:
+- This is the standard dynamic programming solution for the 0/1 knapsack problem with pseudo-polynomial time complexity.
+- The complexity is called "pseudo-polynomial" because it's polynomial in terms of the numerical value of `capacity`,
+but not polynomial in terms of the input size (since encoding `capacity` takes only log(capacity) bits).
+- If `capacity` is large (e.g., exponential in `n`), this solution becomes impractical.
+
+"""
