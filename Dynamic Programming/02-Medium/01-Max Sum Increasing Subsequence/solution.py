@@ -41,33 +41,68 @@ O(n²) time | O(n) space - where `n` is the length of the input array.
 
 # O(n²) time | O(n) space
 def max_sum_increasing_subsequence(array):
-    sequences = [None for x in array]
-    sums = [num for num in array]
+    """
+    Finds the maximum sum increasing subsequence in the given array.
+    An increasing subsequence is a sequence of elements where each element is greater than the previous.
+    Among all such subsequences, this function returns the one with the maximum sum.
 
-    max_sum_idx = 0
+    Args:
+        array: List of numbers to process
+
+    Returns:
+        A list where first element is the maximum sum, and second element is the subsequence as a list
+    """
+
+    # Initialize sequences array to keep track of previous indices
+    # sequences[i] stores the index of the previous element in the optimal subsequence ending at i
+    sequences = [None for x in array]
+
+    # Initialize sums array to store maximum sums up to each index
+    # sums[i] stores the maximum sum of increasing subsequence ending at array[i]
+    sums = [num for num in array]  # Start with each element itself as base case
+
+    max_sum_idx = 0  # Tracks index of maximum sum found so far
+
     for i in range(len(array)):
         current_num = array[i]
 
+        # Compare with all previous elements to find increasing subsequences
         for j in range(0, i):
             other_num = array[j]
 
+            # If previous element is smaller and including it gives better sum
             if other_num < current_num and sums[j] + current_num >= sums[i]:
-                sums[i] = sums[j] + current_num
-                sequences[i] = j
+                sums[i] = sums[j] + current_num  # Update maximum sum for current index
+                sequences[i] = j  # Record that the best sequence comes from j
 
+        # Update overall maximum sum index if current sum is larger
         if sums[i] >= sums[max_sum_idx]:
             max_sum_idx = i
 
+    # Return both the maximum sum and the corresponding sequence
     return [sums[max_sum_idx], build_sequence(array, sequences, max_sum_idx)]
 
 
 def build_sequence(array, sequences, current_idx):
+    """
+    Helper function to reconstruct the sequence from the sequences array.
+
+    Args:
+        array: Original input array
+        sequences: Array tracking previous indices in optimal subsequences
+        current_idx: Index where the maximum sum subsequence ends
+
+    Returns:
+        The reconstructed subsequence in correct order
+    """
     sequence = []
 
+    # Backtrack from current_idx following the sequence chain
     while current_idx is not None:
         sequence.append(array[current_idx])
-        current_idx = sequences[current_idx]
+        current_idx = sequences[current_idx]  # Move to previous element in sequence
 
+    # Reverse to get the correct order (from start to end)
     return list(reversed(sequence))
 
 
