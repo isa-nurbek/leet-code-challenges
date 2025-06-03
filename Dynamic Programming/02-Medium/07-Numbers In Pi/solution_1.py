@@ -158,3 +158,259 @@ The space complexity is determined by the following components:
 - **Space Complexity**: O(m + n), due to the cache and the set of numbers.
 
 """
+
+# =========================================================================================================================== #
+
+# Detailed Code Explanation:
+
+"""
+Let's go through the code **step by step** to understand how it works.
+
+---
+
+### 🔍 **Goal:**
+
+You are given:
+
+* A string `pi` (representing digits of π),
+* A list of strings `numbers` (substrings allowed to be used).
+
+The goal is:
+
+> To split the string `pi` into a sequence of numbers from the list `numbers`, using as **few splits as possible**, and
+return the number of **spaces (splits)** needed.
+
+---
+
+### 🧠 High-Level Idea:
+
+The function finds a **minimal way to segment the `pi` string** using only substrings from the `numbers` list.
+
+* If it's **not possible**, return `-1`.
+* If it is, return the **minimum number of splits** needed.
+
+---
+
+### 🔁 Function Breakdown
+
+#### 1. **Top-Level Function**
+
+```
+def numbersInPi(pi, numbers):
+    numbersTable = {number for number in numbers}
+    minSpaces = getMinSpaces(pi, numbersTable, 0, {})
+    return minSpaces if minSpaces != float("inf") else -1
+```
+
+* Converts the list `numbers` into a **set** `numbersTable` for **O(1) lookup time**.
+* Calls a recursive helper `getMinSpaces` starting at index `0`.
+* If a solution is found (`minSpaces != inf`), return it. Otherwise, return `-1`.
+
+---
+
+#### 2. **Recursive Function**
+
+```
+def getMinSpaces(pi, numbersTable, idx, cache):
+```
+
+##### 🔹 Parameters:
+
+* `pi`: The full pi string.
+* `numbersTable`: Set of valid numbers.
+* `idx`: Current position in `pi`.
+* `cache`: Memoization dictionary to store results for subproblems.
+
+---
+
+#### ✅ Base Case
+
+```
+    if idx == len(pi):
+        return -1
+```
+
+* If you've reached the **end of the string**, you don’t need more spaces.
+* Returns `-1` because the final split **doesn't count as a space** (a common trick in this kind of problem).
+
+---
+
+#### ♻️ Memoization
+
+```
+    if idx in cache:
+        return cache[idx]
+```
+
+* If you’ve already computed the answer for this index, return it to avoid recomputation.
+
+---
+
+#### 🔄 Loop to Try Prefixes
+
+```
+    minSpaces = float("inf")
+    for i in range(idx, len(pi)):
+        prefix = pi[idx : i + 1]
+        if prefix in numbersTable:
+            spacesInSuffix = getMinSpaces(pi, numbersTable, i + 1, cache)
+            minSpaces = min(minSpaces, spacesInSuffix + 1)
+```
+
+* Loop through all substrings starting at `idx`.
+* If the current `prefix` is a valid number:
+
+  * Recursively compute `spacesInSuffix` for the rest of the string.
+  * Add `1` to account for the current split.
+  * Track the **minimum number of splits** found.
+
+---
+
+#### 🧠 Store in Cache
+
+```
+    cache[idx] = minSpaces
+```
+
+* Store the result before returning it to **speed up future calls**.
+
+---
+
+#### 🔚 Return Result
+
+```
+    return minSpaces
+```
+
+---
+
+### 🧪 Test Case:
+
+```
+pi = "3141592653589793238462643383279"
+numbers = [
+    "314159265358979323846",
+    "26433",
+    "8",
+    "3279",
+    "314159265",
+    "35897932384626433832",
+    "79",
+]
+```
+
+Let’s break down how it finds a result of **2**:
+
+One optimal segmentation:
+
+1. `"314159265"` (from numbers)
+2. `"35897932384626433832"` (from numbers)
+3. `"79"` (from numbers)
+
+This makes **2 splits**: after the 1st and 2nd segments.
+
+---
+
+### 🔁 Time Complexity
+
+* Worst-case: exponential due to many ways to split.
+* But thanks to **memoization**, it's brought down to:
+
+  * **O(n²)** where `n = len(pi)` (all possible substrings),
+  * And each state is cached.
+
+---
+
+### ✅ Summary:
+
+This code:
+
+* Tries every valid split of the string,
+* Uses memoization to avoid recomputation,
+* Minimizes the number of splits (spaces),
+* Returns `-1` if no valid split is possible.
+
+---
+
+Let's visualize the **recursive exploration and optimal split** of the string `pi = "3141592653589793238462643383279"` with
+the given list of valid `numbers`.
+
+We want to split `pi` into substrings that are in the list, using the **fewest number of spaces**.
+
+---
+
+### 🧪 Given:
+
+```
+pi:      3141592653589793238462643383279
+numbers: {
+    "314159265358979323846",
+    "26433",
+    "8",
+    "3279",
+    "314159265",
+    "35897932384626433832",
+    "79"
+}
+```
+
+---
+
+### ✅ ASCII Visualization of Optimal Path:
+
+```
+3141592653589793238462643383279
+|         |                     |
+314159265 35897932384626433832 79
+```
+
+### ➕ Explanation:
+
+* `314159265` — in numbers ✅
+* `35897932384626433832` — in numbers ✅
+* `79` — in numbers ✅
+
+We insert **2 spaces**, which results in **3 substrings**, and that's the minimum possible.
+
+---
+
+### 🔁 How recursion explores:
+
+The recursive function tries to match prefixes from left to right, like this:
+
+```
+idx = 0
+Try: 3        ❌ Not in list
+Try: 31       ❌
+Try: 314      ❌
+...
+Try: 314159265 ✅ → Recurse on idx = 9
+
+    idx = 9
+    Try: 3            ❌
+    Try: 35           ❌
+    ...
+    Try: 35897932384626433832 ✅ → Recurse on idx = 30
+
+        idx = 30
+        Try: 7     ❌
+        Try: 79    ✅ → Recurse on idx = 32
+
+            idx = 32 → End of string, return -1 (no space needed here)
+```
+
+Then unwind:
+
+```
+spacesInSuffix = -1 → +1 → +1 → total = 2 spaces
+```
+
+---
+
+### 🧠 Final Result:
+
+```
+print(numbersInPi(pi, numbers))  # Output: 2
+```
+
+"""
