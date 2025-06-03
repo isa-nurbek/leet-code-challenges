@@ -110,3 +110,56 @@ print(disk_stacking([[2, 1, 2], [3, 2, 3], [2, 2, 8]]))
 
 print(disk_stacking([[2, 1, 2]]))
 # Output: [[2, 1, 2]]
+
+# =========================================================================================================================== #
+
+# Big O Analysis:
+
+"""
+# Time and Space Complexity Analysis:
+
+Let's analyze the time and space complexity of the `disk_stacking` algorithm.
+
+### Time Complexity:
+
+1. **Sorting the Disks**:  
+   The algorithm starts by sorting the disks based on their height (third dimension).
+   Sorting `n` disks takes **O(n log n)** time.
+
+2. **Initialization**:  
+   Initializing the `heights` and `sequences` arrays takes **O(n)** time.
+
+3. **Nested Loop for Dynamic Programming**:  
+   - The outer loop runs from `i = 1` to `n-1` → **O(n)** iterations.  
+   - The inner loop runs from `j = 0` to `i-1` → in the worst case, **O(n)** iterations per outer loop.  
+   - Inside the inner loop, `are_valid_dimensions` is called, which is an **O(1)** operation.  
+   - Thus, the nested loops contribute **O(n²)** time.
+
+4. **Building the Sequence**:  
+   The `build_sequence` function constructs the result by backtracking, which takes **O(n)** time in the worst case
+   (if the sequence includes all disks).
+
+**Total Time Complexity** = **O(n log n) + O(n) + O(n²) + O(n)** = **O(n²)** (since **O(n²)** dominates).
+
+---
+
+### Space Complexity:
+
+1. **Storage for `heights` and `sequences`**:  
+   Both arrays are of size `n` → **O(n)** space.
+
+2. **Output Sequence Storage**:  
+   The `build_sequence` function returns a list that could, in the worst case, contain all `n` disks → **O(n)** space.
+
+**Total Space Complexity** = **O(n)** (for `heights`, `sequences`, and the output sequence).
+
+---
+
+### Summary:
+- **Time Complexity**: **O(n²)**  
+- **Space Complexity**: **O(n)**  
+
+The dominant factor is the nested loop in the dynamic programming step, making this an **O(n²)** algorithm.
+The space complexity is linear due to the storage required for the DP arrays and the output sequence.
+
+"""
