@@ -100,3 +100,61 @@ numbers = [
 
 print(numbersInPi(pi, numbers))
 # Output: 2
+
+# =========================================================================================================================== #
+
+# Big O Analysis:
+
+"""
+# Time and Space Complexity Analysis:
+
+## Time Complexity Analysis
+
+The time complexity of the given algorithm can be analyzed as follows:
+
+1. **Initial Setup**: Converting the `numbers` list into a set (`numbersTable`) takes O(n) time, where n is the number
+of elements in `numbers`. This is because set insertion is O(1) on average for each element.
+
+2. **Recursive Function (`getMinSpaces`)**:
+   - The function is called recursively for each index in the string `pi` (length m), and the results are memoized using
+   `cache` to avoid redundant calculations.
+   - For each index `idx`, the function checks all possible prefixes starting at `idx` (i.e., `pi[idx : i + 1]` for `i` from
+   `idx` to `m-1`). This leads to O(m) operations per call in the worst case (when no early termination occurs).
+   - With memoization, each of the m indices is computed only once, and each computation involves O(m) work (checking all
+   possible prefixes). Thus, the total time for the recursive part is O(m²).
+
+3. **Overall Time Complexity**: 
+   - The dominant term is O(m²) from the recursive function, and the O(n) from the set creation is negligible if n is small
+   compared to m².
+   - Thus, the total time complexity is **O(m² + n)**, where m is the length of `pi` and n is the number of elements in `numbers`.
+
+### Space Complexity Analysis
+
+The space complexity is determined by the following components:
+
+1. **Set (`numbersTable`)**: This requires O(n) space to store all the numbers in the input list.
+
+2. **Memoization Cache (`cache`)**: 
+   - The cache stores results for each index in `pi`, so it can grow up to O(m) in the worst case (one entry per index).
+   - Each cache entry stores an integer (the minimum spaces), so the space per entry is O(1).
+
+3. **Recursive Call Stack**:
+   - In the worst case (without memoization), the recursion depth could be O(m) (e.g., when no valid splits are found,
+   and the function recurses until `idx == len(pi)`).
+   - With memoization, the recursion depth is effectively limited by the cache, so the stack space is O(m).
+
+4. **Additional Space**:
+   - The slicing operation (`pi[idx : i + 1]`) creates substrings of `pi`. In Python, strings are immutable, and slicing creates
+   new string objects. In the worst case, this could involve O(m²) space (e.g., if all possible substrings are stored temporarily).
+   However, in practice, these substrings are short-lived and garbage-collected, so the peak additional space is O(m)
+   (for the current prefix being checked).
+
+5. **Overall Space Complexity**:
+   - The dominant terms are the set O(n) and the cache O(m).
+   - Thus, the total space complexity is **O(m + n)**.
+
+### Summary
+- **Time Complexity**: O(m² + n), where m is the length of `pi` and n is the number of elements in `numbers`.
+- **Space Complexity**: O(m + n), due to the cache and the set of numbers.
+
+"""
